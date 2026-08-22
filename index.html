@@ -4,209 +4,233 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
-<title>金满堂 · Result Notice</title>
+
+<title>金满堂 · 管理中心</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  background:radial-gradient(circle at top,#1b1409 0,#0b0b0c 40%,#070708 100%);
+  background:
+  radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
   color:#f7f0df;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif
 }
 
 .wrap{
-  max-width:520px;
+  max-width:540px;
   margin:auto;
   min-height:100vh;
-  padding:20px 15px 44px
-}
-
-.head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px
+  padding:24px 15px 50px
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-width:0
+  text-align:center;
+  margin-bottom:22px
 }
 
 .mark{
-  width:48px;
-  height:48px;
-  flex:none;
+  width:62px;
+  height:62px;
   border-radius:50%;
   display:grid;
   place-items:center;
+  margin:0 auto 10px;
+  font-size:23px;
   font-weight:900;
-  color:#f0d486;
-  border:1px solid #aa7a23;
-  background:linear-gradient(145deg,#2b1d08,#0e0d0a);
-  box-shadow:0 0 20px rgba(214,168,63,.15)
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:linear-gradient(145deg,#382506,#100d08);
+  box-shadow:
+  0 0 25px rgba(235,185,62,.20),
+  inset 0 0 15px rgba(255,215,110,.06)
 }
 
 .cn{
   font-weight:900;
-  font-size:20px;
-  letter-spacing:3px;
+  font-size:23px;
+  letter-spacing:4px;
   color:#f3d889
 }
 
 .en{
   font-size:10px;
-  letter-spacing:2px;
-  color:#9b8d68;
-  margin-top:2px
-}
-
-.thai{
-  font-size:10px;
-  color:#bba974;
-  margin-top:2px
-}
-
-.langbox{
-  flex:none
-}
-
-select{
-  appearance:none;
-  -webkit-appearance:none;
-  border:1px solid rgba(214,168,63,.35);
-  background:#111112;
-  color:#e9d49a;
-  border-radius:12px;
-  padding:9px 30px 9px 10px;
-  font-size:12px;
-  outline:none
+  letter-spacing:2.5px;
+  color:#9f916d;
+  margin-top:4px
 }
 
 .card{
-  background:linear-gradient(180deg,rgba(21,21,21,.98),rgba(12,12,13,.98));
-  border:1px solid rgba(214,168,63,.3);
+  background:linear-gradient(180deg,rgba(22,22,22,.98),rgba(11,11,12,.98));
+  border:1px solid rgba(214,168,63,.30);
   border-radius:24px;
-  padding:23px;
-  box-shadow:0 24px 65px rgba(0,0,0,.4)
+  padding:21px;
+  margin-bottom:16px;
+  box-shadow:0 22px 60px rgba(0,0,0,.38)
 }
 
-.label{
-  text-align:center;
-  font-size:12px;
-  color:#b7a879;
-  letter-spacing:1.2px
-}
-
-.number{
-  font-size:94px;
-  line-height:1;
-  text-align:center;
-  font-weight:950;
-  letter-spacing:8px;
-  margin:18px 0 8px;
-  background:linear-gradient(180deg,#fff0b2,#e7bd55 55%,#a8731e);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent
-}
-
-.state{
-  text-align:center;
-  color:#bcb3a0;
-  font-size:13px;
-  min-height:20px
-}
-
-.meta{
-  margin-top:23px;
-  border-top:1px solid rgba(255,255,255,.07)
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
-  padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  font-size:13px
-}
-
-.row span:first-child{
-  color:#8f8a80
-}
-
-.row span:last-child{
-  font-weight:700;
-  color:#efe0b2;
-  text-align:right
-}
-
-.hist{
-  margin-top:22px
-}
-
-.hist h3{
+.title{
   font-size:14px;
-  color:#d7bf7b;
-  margin:0 0 10px
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#111112;
-  border:1px solid rgba(255,255,255,.06);
-  padding:12px 13px;
-  border-radius:13px;
-  margin-bottom:8px
-}
-
-.item .n{
-  font-size:25px;
   font-weight:900;
-  color:#e8c86e
+  color:#dfc575;
+  margin-bottom:16px;
+  letter-spacing:.8px
 }
 
-.item .d{
-  font-size:11px;
-  color:#8e897f;
-  text-align:right
+input,
+textarea{
+  width:100%;
+  border:1px solid rgba(214,168,63,.24);
+  background:#101011;
+  color:#fff;
+  border-radius:13px;
+  padding:14px;
+  font-size:15px;
+  outline:none;
+  margin-bottom:12px
 }
 
-.empty{
-  color:#77736b;
+textarea{
+  resize:vertical;
+  min-height:105px;
+  line-height:1.6
+}
+
+input:focus,
+textarea:focus{
+  border-color:#d8ad4e;
+  box-shadow:0 0 0 2px rgba(216,173,78,.08)
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+  background:linear-gradient(180deg,#f1d784,#b47d20);
+  color:#171109
+}
+
+button.secondary{
+  margin-top:10px;
+  background:#171718;
+  color:#d9c37c;
+  border:1px solid rgba(214,168,63,.22)
+}
+
+.msg{
+  text-align:center;
+  min-height:20px;
+  margin-top:12px;
+  color:#aaa18d;
+  font-size:12px
+}
+
+.hidden{
+  display:none
+}
+
+.current{
+  text-align:center;
+  padding:17px;
+  margin-bottom:16px;
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:15px
+}
+
+.current small{
+  display:block;
+  color:#8d887c;
+  margin-bottom:5px
+}
+
+.current strong{
+  font-size:48px;
+  color:#ebca68
+}
+
+.settingLabel{
+  display:block;
+  color:#9c9588;
   font-size:12px;
-  padding:12px 0;
-  text-align:center
+  margin:4px 2px 7px
+}
+
+.switchRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px 14px;
+  margin-bottom:13px
+}
+
+.switchText{
+  font-size:13px;
+  color:#e7ddc6
+}
+
+.switch{
+  position:relative;
+  width:48px;
+  height:27px
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0;
+  margin:0
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#343436;
+  border-radius:99px;
+  transition:.25s
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:21px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#aaa;
+  transition:.25s
+}
+
+.switch input:checked + .slider{
+  background:#b9872f
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(21px);
+  background:#fff0bd
+}
+
+.note{
+  color:#777268;
+  font-size:11px;
+  line-height:1.55;
+  margin:-3px 2px 12px
 }
 
 .foot{
   text-align:center;
-  color:#77736b;
-  font-size:11px;
-  margin-top:22px;
-  padding-top:16px;
-  border-top:1px solid rgba(255,255,255,.06)
-}
-
-.dot{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#4bc58a;
-  margin-right:6px
-}
-
-.err{
-  color:#dba0a0
+  color:#706b62;
+  font-size:10px;
+  margin-top:25px
 }
 </style>
 </head>
@@ -215,82 +239,157 @@ select{
 
 <div class="wrap">
 
-  <div class="head">
+  <div class="brand">
+    <div class="mark">金</div>
+    <div class="cn">金满堂</div>
+    <div class="en">JIN MANTANG · MANAGEMENT</div>
+  </div>
 
-    <div class="brand">
-      <div class="mark">金</div>
 
-      <div>
-        <div class="cn">金满堂</div>
-        <div class="en">JIN MANTANG</div>
-        <div class="thai">ประเทศไทย 2D · RESULT NOTICE</div>
-      </div>
+  <!-- 登录 -->
+  <div class="card" id="loginBox">
+
+    <div class="title">
+      管理员登录
     </div>
 
-    <div class="langbox">
-      <select id="language" onchange="changeLanguage(this.value)">
-        <option value="zh">🇨🇳 中文</option>
-        <option value="th">🇹🇭 ไทย</option>
-        <option value="my">🇲🇲 မြန်မာ</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="ms">🇲🇾 Bahasa Melayu</option>
-        <option value="vi">🇻🇳 Tiếng Việt</option>
-        <option value="id">🇮🇩 Bahasa Indonesia</option>
-      </select>
+    <input
+      id="email"
+      type="email"
+      placeholder="管理员邮箱"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="管理员密码"
+    >
+
+    <button onclick="signIn()">
+      登录管理中心
+    </button>
+
+    <div
+      class="msg"
+      id="loginMsg">
     </div>
 
   </div>
 
-  <main class="card">
 
-    <div class="label" id="latestLabel">
-      最新数字公告 · LATEST RESULT
-    </div>
+  <!-- 管理区 -->
+  <div id="adminBox" class="hidden">
 
-    <div class="number" id="latest">--</div>
 
-    <div class="state" id="state">
-      正在连接...
-    </div>
+    <!-- 开奖 -->
+    <div class="card">
 
-    <div class="meta">
-
-      <div class="row">
-        <span id="publishLabel">发布时间</span>
-        <span id="time">—</span>
+      <div class="title">
+        开奖结果管理
       </div>
 
-      <div class="row">
-        <span id="timezoneLabel">时区</span>
-        <span id="timezoneValue">Myanmar Time (MMT)</span>
+      <div class="current">
+        <small>当前最新数字</small>
+        <strong id="currentResult">--</strong>
       </div>
 
-      <div class="row">
-        <span id="rangeLabel">历史范围</span>
-        <span id="rangeValue">最近 14 天</span>
+      <input
+        id="resultInput"
+        inputmode="numeric"
+        maxlength="2"
+        placeholder="输入 00 - 99"
+      >
+
+      <button onclick="publishResult()">
+        发布最新数字
+      </button>
+
+      <div
+        class="msg"
+        id="publishMsg">
       </div>
 
     </div>
 
-    <section class="hist">
 
-      <h3 id="historyTitle">
-        历史公告 · HISTORY
-      </h3>
+    <!-- 网站设置 -->
+    <div class="card">
 
-      <div id="history">
-        <div class="empty" id="loadingHistory">
-          正在读取...
+      <div class="title">
+        网站内容管理
+      </div>
+
+
+      <label class="settingLabel">
+        Telegram 频道链接
+      </label>
+
+      <input
+        id="telegramUrl"
+        type="url"
+        placeholder="例如：https://t.me/yourchannel"
+      >
+
+      <div class="note">
+        留空后，客户页面将不会显示 Telegram 频道入口。
+      </div>
+
+
+      <label class="settingLabel">
+        网站公告
+      </label>
+
+      <textarea
+        id="announcementText"
+        placeholder="例如：欢迎来到金满堂，最新公告将在这里显示。"
+      ></textarea>
+
+
+      <div class="switchRow">
+
+        <div class="switchText">
+          显示滚动公告
         </div>
+
+        <label class="switch">
+          <input
+            id="announcementEnabled"
+            type="checkbox"
+          >
+          <span class="slider"></span>
+        </label>
+
       </div>
 
-    </section>
 
-    <div class="foot" id="footerText">
-      © 2022 JIN MANTANG · 泰国 2D
+      <button onclick="saveSettings()">
+        更新网站设置
+      </button>
+
+      <div
+        class="msg"
+        id="settingsMsg">
+      </div>
+
     </div>
 
-  </main>
+
+    <div class="card">
+
+      <button
+        class="secondary"
+        onclick="logout()">
+        退出管理员账号
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="foot">
+    © 2022 JIN MANTANG · ADMIN SYSTEM
+  </div>
 
 </div>
 
@@ -303,253 +402,122 @@ const BASE =
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
-
-const T = {
-
-zh:{
-latest:'最新数字公告 · LATEST RESULT',
-connecting:'正在连接...',
-connected:'已连接 · 最新结果已同步',
-waiting:'已连接 · 等待发布',
-publish:'发布时间',
-timezone:'时区',
-timezoneValue:'Myanmar Time (MMT)',
-range:'历史范围',
-rangeValue:'最近 14 天',
-history:'历史公告 · HISTORY',
-loading:'正在读取...',
-empty:'最近 14 天暂无公告',
-failed:'连接失败，请稍后刷新',
-historyFailed:'暂时无法读取记录',
-footer:'© 2022 JIN MANTANG · 泰国 2D'
-},
-
-th:{
-latest:'ประกาศผลล่าสุด · LATEST RESULT',
-connecting:'กำลังเชื่อมต่อ...',
-connected:'เชื่อมต่อแล้ว · อัปเดตผลล่าสุดแล้ว',
-waiting:'เชื่อมต่อแล้ว · รอประกาศผล',
-publish:'เวลาประกาศ',
-timezone:'เขตเวลา',
-timezoneValue:'เวลาประเทศเมียนมา (MMT)',
-range:'ช่วงประวัติ',
-rangeValue:'14 วันที่ผ่านมา',
-history:'ประวัติผล · HISTORY',
-loading:'กำลังโหลด...',
-empty:'ไม่มีผลในช่วง 14 วันที่ผ่านมา',
-failed:'เชื่อมต่อไม่สำเร็จ กรุณาลองใหม่',
-historyFailed:'ไม่สามารถโหลดประวัติได้',
-footer:'© 2022 JIN MANTANG · ไทย 2D'
-},
-
-my:{
-latest:'နောက်ဆုံးဂဏန်းကြေညာချက် · LATEST RESULT',
-connecting:'ချိတ်ဆက်နေသည်...',
-connected:'ချိတ်ဆက်ပြီး · နောက်ဆုံးရလဒ် အပ်ဒိတ်ဖြစ်ပြီး',
-waiting:'ချိတ်ဆက်ပြီး · ထုတ်ပြန်ချက်ကို စောင့်နေသည်',
-publish:'ထုတ်ပြန်ချိန်',
-timezone:'အချိန်ဇုန်',
-timezoneValue:'မြန်မာစံတော်ချိန် (MMT)',
-range:'မှတ်တမ်းအကွာအဝေး',
-rangeValue:'နောက်ဆုံး ၁၄ ရက်',
-history:'မှတ်တမ်း · HISTORY',
-loading:'ဖတ်နေသည်...',
-empty:'နောက်ဆုံး ၁၄ ရက်အတွင်း မှတ်တမ်းမရှိပါ',
-failed:'ချိတ်ဆက်မှု မအောင်မြင်ပါ',
-historyFailed:'မှတ်တမ်းကို ယာယီဖတ်မရပါ',
-footer:'© 2022 JIN MANTANG · Thailand 2D'
-},
-
-en:{
-latest:'LATEST RESULT',
-connecting:'Connecting...',
-connected:'Connected · Latest result synced',
-waiting:'Connected · Waiting for result',
-publish:'Published time',
-timezone:'Time zone',
-timezoneValue:'Myanmar Time (MMT)',
-range:'History range',
-rangeValue:'Last 14 days',
-history:'RESULT HISTORY',
-loading:'Loading...',
-empty:'No results in the last 14 days',
-failed:'Connection failed. Please refresh later.',
-historyFailed:'Unable to load history',
-footer:'© 2022 JIN MANTANG · THAILAND 2D'
-},
-
-ms:{
-latest:'KEPUTUSAN TERKINI · LATEST RESULT',
-connecting:'Sedang menyambung...',
-connected:'Disambungkan · Keputusan terkini telah diselaraskan',
-waiting:'Disambungkan · Menunggu keputusan',
-publish:'Waktu diumumkan',
-timezone:'Zon masa',
-timezoneValue:'Waktu Myanmar (MMT)',
-range:'Julat sejarah',
-rangeValue:'14 hari terakhir',
-history:'SEJARAH KEPUTUSAN',
-loading:'Sedang memuatkan...',
-empty:'Tiada keputusan dalam 14 hari terakhir',
-failed:'Sambungan gagal. Sila cuba lagi.',
-historyFailed:'Tidak dapat memuatkan sejarah',
-footer:'© 2022 JIN MANTANG · THAILAND 2D'
-},
-
-vi:{
-latest:'KẾT QUẢ MỚI NHẤT · LATEST RESULT',
-connecting:'Đang kết nối...',
-connected:'Đã kết nối · Kết quả mới nhất đã được đồng bộ',
-waiting:'Đã kết nối · Đang chờ kết quả',
-publish:'Thời gian công bố',
-timezone:'Múi giờ',
-timezoneValue:'Giờ Myanmar (MMT)',
-range:'Phạm vi lịch sử',
-rangeValue:'14 ngày gần nhất',
-history:'LỊCH SỬ KẾT QUẢ',
-loading:'Đang tải...',
-empty:'Không có kết quả trong 14 ngày gần nhất',
-failed:'Kết nối thất bại. Vui lòng thử lại.',
-historyFailed:'Không thể tải lịch sử',
-footer:'© 2022 JIN MANTANG · THAILAND 2D'
-},
-
-id:{
-latest:'HASIL TERBARU · LATEST RESULT',
-connecting:'Sedang menghubungkan...',
-connected:'Terhubung · Hasil terbaru telah disinkronkan',
-waiting:'Terhubung · Menunggu hasil',
-publish:'Waktu publikasi',
-timezone:'Zona waktu',
-timezoneValue:'Waktu Myanmar (MMT)',
-range:'Rentang riwayat',
-rangeValue:'14 hari terakhir',
-history:'RIWAYAT HASIL',
-loading:'Sedang memuat...',
-empty:'Tidak ada hasil dalam 14 hari terakhir',
-failed:'Koneksi gagal. Silakan coba lagi.',
-historyFailed:'Tidak dapat memuat riwayat',
-footer:'© 2022 JIN MANTANG · THAILAND 2D'
-}
-
-};
+let token =
+sessionStorage.getItem('jmt_access_token') || '';
 
 
-let currentLang =
-localStorage.getItem('jmt_lang') || 'zh';
+async function signIn(){
 
+  const email =
+  document.getElementById('email').value.trim();
 
-function changeLanguage(lang){
+  const password =
+  document.getElementById('password').value;
 
-  currentLang = lang;
+  const msg =
+  document.getElementById('loginMsg');
 
-  localStorage.setItem(
-    'jmt_lang',
-    lang
-  );
+  if(!email || !password){
 
-  applyLanguage();
+    msg.textContent =
+    '请输入管理员邮箱和密码';
 
-  loadResults();
-}
+    return;
+  }
 
+  msg.textContent =
+  '正在登录...';
 
-function applyLanguage(){
-
-  const t = T[currentLang] || T.zh;
-
-  document.documentElement.lang = currentLang;
-
-  document.getElementById(
-    'language'
-  ).value = currentLang;
-
-  document.getElementById(
-    'latestLabel'
-  ).textContent = t.latest;
-
-  document.getElementById(
-    'publishLabel'
-  ).textContent = t.publish;
-
-  document.getElementById(
-    'timezoneLabel'
-  ).textContent = t.timezone;
-
-  document.getElementById(
-    'timezoneValue'
-  ).textContent = t.timezoneValue;
-
-  document.getElementById(
-    'rangeLabel'
-  ).textContent = t.range;
-
-  document.getElementById(
-    'rangeValue'
-  ).textContent = t.rangeValue;
-
-  document.getElementById(
-    'historyTitle'
-  ).textContent = t.history;
-
-  document.getElementById(
-    'footerText'
-  ).textContent = t.footer;
-
-}
-
-
-function formatMMT(iso){
-
-  const d = new Date(iso);
-
-  return new Intl.DateTimeFormat(
-    currentLang === 'zh' ? 'zh-CN' :
-    currentLang === 'th' ? 'th-TH' :
-    currentLang === 'my' ? 'my-MM' :
-    currentLang === 'ms' ? 'ms-MY' :
-    currentLang === 'vi' ? 'vi-VN' :
-    currentLang === 'id' ? 'id-ID' :
-    'en-GB',
-    {
-      timeZone:'Asia/Yangon',
-      year:'numeric',
-      month:'2-digit',
-      day:'2-digit',
-      hour:'2-digit',
-      minute:'2-digit',
-      second:'2-digit',
-      hour12:false
-    }
-  ).format(d) + ' MMT';
-
-}
-
-
-async function loadResults(){
-
-  const t = T[currentLang] || T.zh;
-
-  const state =
-  document.getElementById('state');
-
-  state.textContent = t.connecting;
 
   try{
 
-    const cutoff =
-    new Date(
-      Date.now() -
-      14*24*60*60*1000
-    ).toISOString();
+    const r = await fetch(
+      BASE + '/auth/v1/token?grant_type=password',
+      {
+        method:'POST',
+
+        headers:{
+          apikey:KEY,
+          'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+          email,
+          password
+        })
+      }
+    );
+
+
+    const d =
+    await r.json();
+
+
+    if(!r.ok || !d.access_token){
+
+      throw new Error(
+        d.error_description ||
+        d.msg ||
+        '登录失败'
+      );
+
+    }
+
+
+    token =
+    d.access_token;
+
+
+    sessionStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+
+    showAdmin();
+
+    loadCurrent();
+
+    loadSettings();
+
+
+  }catch(e){
+
+    msg.textContent =
+    '登录失败，请检查邮箱和密码';
+
+  }
+
+}
+
+
+
+function showAdmin(){
+
+  document.getElementById(
+    'loginBox'
+  ).classList.add('hidden');
+
+
+  document.getElementById(
+    'adminBox'
+  ).classList.remove('hidden');
+
+}
+
+
+
+async function loadCurrent(){
+
+  try{
 
     const url =
     BASE +
-    '/rest/v1/results?select=id,result_number,published_at&published_at=gte.' +
-    encodeURIComponent(cutoff) +
-    '&order=published_at.desc&limit=100';
+    '/rest/v1/results?select=result_number,published_at&order=published_at.desc&limit=1';
 
-    const r = await fetch(
+
+    const r =
+    await fetch(
       url,
       {
         headers:{
@@ -559,104 +527,348 @@ async function loadResults(){
       }
     );
 
-    if(!r.ok){
-      throw new Error(
-        'HTTP ' + r.status
-      );
-    }
 
     const rows =
     await r.json();
 
-    const latest =
-    rows[0];
 
     document.getElementById(
-      'latest'
+      'currentResult'
     ).textContent =
-    latest
-    ? latest.result_number
+    rows.length
+    ? rows[0].result_number
     : '--';
-
-    document.getElementById(
-      'time'
-    ).textContent =
-    latest
-    ? formatMMT(latest.published_at)
-    : '—';
-
-    state.innerHTML =
-    latest
-    ? '<span class="dot"></span>' + t.connected
-    : '<span class="dot"></span>' + t.waiting;
-
-
-    const box =
-    document.getElementById('history');
-
-    box.innerHTML = '';
-
-
-    if(!rows.length){
-
-      box.innerHTML =
-      '<div class="empty">' +
-      t.empty +
-      '</div>';
-
-      return;
-
-    }
-
-
-    rows.forEach(x => {
-
-      const el =
-      document.createElement('div');
-
-      el.className =
-      'item';
-
-      el.innerHTML =
-      '<div class="n">' +
-      x.result_number +
-      '</div>' +
-      '<div class="d">' +
-      formatMMT(x.published_at) +
-      '</div>';
-
-      box.appendChild(el);
-
-    });
 
 
   }catch(e){
 
-    state.innerHTML =
-    '<span class="err">' +
-    t.failed +
-    '</span>';
-
     document.getElementById(
-      'history'
-    ).innerHTML =
-    '<div class="empty">' +
-    t.historyFailed +
-    '</div>';
+      'currentResult'
+    ).textContent = '--';
 
   }
 
 }
 
 
-applyLanguage();
 
-loadResults();
+async function publishResult(){
 
-setInterval(
-  loadResults,
-  30000
-);
+  const input =
+  document.getElementById('resultInput');
+
+  const msg =
+  document.getElementById('publishMsg');
+
+  let n =
+  input.value.trim();
+
+
+  if(!/^\d{1,2}$/.test(n)){
+
+    msg.textContent =
+    '请输入 00 到 99 的数字';
+
+    return;
+
+  }
+
+
+  n =
+  n.padStart(2,'0');
+
+
+  msg.textContent =
+  '正在发布...';
+
+
+  try{
+
+    const r =
+    await fetch(
+      BASE + '/rest/v1/results',
+      {
+        method:'POST',
+
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer ' + token,
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
+        },
+
+        body:JSON.stringify({
+          result_number:n
+        })
+      }
+    );
+
+
+    if(r.status === 401 ||
+       r.status === 403){
+
+      sessionStorage.removeItem(
+        'jmt_access_token'
+      );
+
+      throw new Error(
+        '登录已过期'
+      );
+
+    }
+
+
+    if(!r.ok){
+
+      throw new Error(
+        '发布失败 HTTP ' +
+        r.status
+      );
+
+    }
+
+
+    document.getElementById(
+      'currentResult'
+    ).textContent = n;
+
+
+    input.value = '';
+
+
+    msg.textContent =
+    '发布成功：' + n;
+
+
+  }catch(e){
+
+    msg.textContent =
+    '发布失败，请重新登录后再试';
+
+  }
+
+}
+
+
+
+async function loadSettings(){
+
+  try{
+
+    const url =
+    BASE +
+    '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled';
+
+
+    const r =
+    await fetch(
+      url,
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer ' + KEY
+        }
+      }
+    );
+
+
+    if(!r.ok){
+      throw new Error();
+    }
+
+
+    const rows =
+    await r.json();
+
+
+    if(!rows.length){
+      return;
+    }
+
+
+    const s =
+    rows[0];
+
+
+    document.getElementById(
+      'telegramUrl'
+    ).value =
+    s.telegram_url || '';
+
+
+    document.getElementById(
+      'announcementText'
+    ).value =
+    s.announcement_text || '';
+
+
+    document.getElementById(
+      'announcementEnabled'
+    ).checked =
+    !!s.announcement_enabled;
+
+
+  }catch(e){
+
+    document.getElementById(
+      'settingsMsg'
+    ).textContent =
+    '暂时无法读取网站设置';
+
+  }
+
+}
+
+
+
+async function saveSettings(){
+
+  const msg =
+  document.getElementById('settingsMsg');
+
+
+  const telegram =
+  document.getElementById(
+    'telegramUrl'
+  ).value.trim();
+
+
+  const announcement =
+  document.getElementById(
+    'announcementText'
+  ).value.trim();
+
+
+  const enabled =
+  document.getElementById(
+    'announcementEnabled'
+  ).checked;
+
+
+  if(telegram){
+
+    try{
+
+      const u =
+      new URL(telegram);
+
+      if(
+        u.protocol !== 'https:' &&
+        u.protocol !== 'http:'
+      ){
+        throw new Error();
+      }
+
+    }catch(e){
+
+      msg.textContent =
+      'Telegram 链接格式不正确';
+
+      return;
+    }
+
+  }
+
+
+  msg.textContent =
+  '正在更新网站...';
+
+
+  try{
+
+    const r =
+    await fetch(
+      BASE +
+      '/rest/v1/site_settings?id=eq.1',
+      {
+        method:'PATCH',
+
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer ' + token,
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
+        },
+
+        body:JSON.stringify({
+
+          telegram_url:
+          telegram,
+
+          announcement_text:
+          announcement,
+
+          announcement_enabled:
+          enabled,
+
+          updated_at:
+          new Date().toISOString()
+
+        })
+      }
+    );
+
+
+    if(r.status === 401 ||
+       r.status === 403){
+
+      sessionStorage.removeItem(
+        'jmt_access_token'
+      );
+
+      throw new Error(
+        '登录已过期'
+      );
+
+    }
+
+
+    if(!r.ok){
+
+      throw new Error(
+        '更新失败 HTTP ' +
+        r.status
+      );
+
+    }
+
+
+    msg.textContent =
+    '✓ 网站设置更新成功';
+
+
+  }catch(e){
+
+    msg.textContent =
+    '更新失败，请重新登录后再试';
+
+  }
+
+}
+
+
+
+function logout(){
+
+  sessionStorage.removeItem(
+    'jmt_access_token'
+  );
+
+  location.reload();
+
+}
+
+
+
+if(token){
+
+  showAdmin();
+
+  loadCurrent();
+
+  loadSettings();
+
+}
 
 </script>
 
