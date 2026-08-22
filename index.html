@@ -10,14 +10,11 @@
 
 <style>
 
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  background:
-  radial-gradient(circle at top,#211707 0,#0b0b0c 40%,#070708 100%);
+  background:radial-gradient(circle at top,#211707 0,#0b0b0c 40%,#070708 100%);
   color:#f7f0df;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif
 }
@@ -36,7 +33,7 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
+  gap:10px;
   margin-bottom:14px
 }
 
@@ -48,19 +45,25 @@ body{
 }
 
 .mark{
-  width:50px;
-  height:50px;
+  width:58px;
+  height:58px;
   flex:none;
-  border-radius:50%;
+  border-radius:15px;
+  overflow:hidden;
   display:grid;
   place-items:center;
   font-weight:900;
   color:#f0d486;
-  border:1px solid #aa7a23;
-  background:
-  linear-gradient(145deg,#382506,#0e0d0a);
-  box-shadow:
-  0 0 22px rgba(214,168,63,.18)
+  border:1px solid rgba(214,168,63,.45);
+  background:linear-gradient(145deg,#382506,#0e0d0a);
+  box-shadow:0 0 25px rgba(214,168,63,.20)
+}
+
+.mark img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block
 }
 
 .cn{
@@ -111,8 +114,7 @@ select{
   margin-bottom:10px;
   border-radius:13px;
   border:1px solid rgba(214,168,63,.28);
-  background:
-  linear-gradient(90deg,#17120a,#111112,#17120a);
+  background:linear-gradient(90deg,#17120a,#111112,#17120a);
   box-shadow:0 8px 25px rgba(0,0,0,.20)
 }
 
@@ -125,8 +127,7 @@ select{
   display:flex;
   align-items:center;
   padding:0 12px;
-  background:
-  linear-gradient(90deg,#3a2608,#271a07);
+  background:linear-gradient(90deg,#3a2608,#271a07);
   color:#f0d486;
   font-size:11px;
   font-weight:900;
@@ -155,12 +156,8 @@ select{
 }
 
 @keyframes scrollNotice{
-  0%{
-    transform:translateX(0)
-  }
-  100%{
-    transform:translateX(-100%)
-  }
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-100%)}
 }
 
 
@@ -180,10 +177,8 @@ select{
   border:1px solid rgba(214,168,63,.30);
   border-radius:15px;
   padding:13px 14px;
-  background:
-  linear-gradient(135deg,#171716,#111112);
-  box-shadow:
-  0 10px 30px rgba(0,0,0,.25)
+  background:linear-gradient(135deg,#171716,#111112);
+  box-shadow:0 10px 30px rgba(0,0,0,.25)
 }
 
 .telegramLeft{
@@ -201,8 +196,7 @@ select{
   place-items:center;
   flex:none;
   font-size:18px;
-  background:
-  linear-gradient(145deg,#2d230f,#15130e);
+  background:linear-gradient(145deg,#2d230f,#15130e);
   border:1px solid rgba(235,195,91,.30)
 }
 
@@ -224,16 +218,14 @@ select{
 }
 
 
-/* 开奖卡片 */
+/* 开奖 */
 
 .card{
-  background:
-  linear-gradient(180deg,rgba(21,21,21,.98),rgba(12,12,13,.98));
+  background:linear-gradient(180deg,rgba(21,21,21,.98),rgba(12,12,13,.98));
   border:1px solid rgba(214,168,63,.30);
   border-radius:24px;
   padding:23px;
-  box-shadow:
-  0 24px 65px rgba(0,0,0,.40)
+  box-shadow:0 24px 65px rgba(0,0,0,.40)
 }
 
 .label{
@@ -250,8 +242,7 @@ select{
   font-weight:950;
   letter-spacing:8px;
   margin:18px 0 8px;
-  background:
-  linear-gradient(180deg,#fff0b2,#e7bd55 55%,#a8731e);
+  background:linear-gradient(180deg,#fff0b2,#e7bd55 55%,#a8731e);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent
@@ -362,253 +353,201 @@ select{
 <div class="wrap">
 
 
-  <!-- 顶部品牌 -->
+<div class="head">
 
-  <div class="head">
+  <div class="brand">
 
-    <div class="brand">
+    <div class="mark" id="siteLogo">
+      金
+    </div>
 
-      <div class="mark">
-        金
+    <div>
+
+      <div class="cn">
+        金满堂
+      </div>
+
+      <div class="en">
+        JIN MANTANG
+      </div>
+
+      <div class="thai">
+        ประเทศไทย 2D · RESULT NOTICE
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="langbox">
+
+    <select
+      id="language"
+      onchange="changeLanguage(this.value)"
+    >
+
+      <option value="zh">🇨🇳 中文</option>
+      <option value="th">🇹🇭 ไทย</option>
+      <option value="my">🇲🇲 မြန်မာ</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="ms">🇲🇾 Bahasa Melayu</option>
+      <option value="vi">🇻🇳 Tiếng Việt</option>
+      <option value="id">🇮🇩 Bahasa Indonesia</option>
+
+    </select>
+
+  </div>
+
+</div>
+
+
+
+<div
+  class="noticeWrap"
+  id="noticeWrap"
+>
+
+  <div
+    class="noticeLabel"
+    id="noticeLabel"
+  >
+    📢 公告
+  </div>
+
+  <div class="noticeViewport">
+
+    <div
+      class="noticeTrack"
+      id="noticeText"
+    ></div>
+
+  </div>
+
+</div>
+
+
+
+<div
+  class="telegramBox"
+  id="telegramBox"
+>
+
+  <a
+    class="telegramBtn"
+    id="telegramLink"
+    href="#"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+
+    <div class="telegramLeft">
+
+      <div class="telegramIcon">
+        ✈️
       </div>
 
       <div>
 
-        <div class="cn">
-          金满堂
+        <div
+          class="telegramTitle"
+          id="telegramTitle"
+        >
+          官方 Telegram 频道
         </div>
 
-        <div class="en">
-          JIN MANTANG
-        </div>
-
-        <div class="thai">
-          ประเทศไทย 2D · RESULT NOTICE
+        <div
+          class="telegramSub"
+          id="telegramSub"
+        >
+          点击进入官方频道
         </div>
 
       </div>
 
     </div>
 
-
-    <div class="langbox">
-
-      <select
-        id="language"
-        onchange="changeLanguage(this.value)"
-      >
-
-        <option value="zh">
-          🇨🇳 中文
-        </option>
-
-        <option value="th">
-          🇹🇭 ไทย
-        </option>
-
-        <option value="my">
-          🇲🇲 မြန်မာ
-        </option>
-
-        <option value="en">
-          🇬🇧 English
-        </option>
-
-        <option value="ms">
-          🇲🇾 Bahasa Melayu
-        </option>
-
-        <option value="vi">
-          🇻🇳 Tiếng Việt
-        </option>
-
-        <option value="id">
-          🇮🇩 Bahasa Indonesia
-        </option>
-
-      </select>
-
+    <div class="telegramArrow">
+      ›
     </div>
 
-  </div>
+  </a>
+
+</div>
 
 
 
-  <!-- 自动滚动公告 -->
+<main class="card">
 
   <div
-    class="noticeWrap"
-    id="noticeWrap"
+    class="label"
+    id="latestLabel"
   >
-
-    <div
-      class="noticeLabel"
-      id="noticeLabel"
-    >
-      📢 公告
-    </div>
-
-    <div class="noticeViewport">
-
-      <div
-        class="noticeTrack"
-        id="noticeText"
-      ></div>
-
-    </div>
-
+    最新数字公告 · LATEST RESULT
   </div>
 
-
-
-  <!-- Telegram -->
 
   <div
-    class="telegramBox"
-    id="telegramBox"
+    class="number"
+    id="latest"
   >
+    --
+  </div>
 
-    <a
-      class="telegramBtn"
-      id="telegramLink"
-      href="#"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
 
-      <div class="telegramLeft">
+  <div
+    class="state"
+    id="state"
+  >
+    正在连接...
+  </div>
 
-        <div class="telegramIcon">
-          ✈️
-        </div>
 
-        <div>
+  <div class="meta">
 
-          <div
-            class="telegramTitle"
-            id="telegramTitle"
-          >
-            官方 Telegram 频道
-          </div>
+    <div class="row">
+      <span id="publishLabel">发布时间</span>
+      <span id="time">—</span>
+    </div>
 
-          <div
-            class="telegramSub"
-            id="telegramSub"
-          >
-            点击进入官方频道
-          </div>
+    <div class="row">
+      <span id="timezoneLabel">时区</span>
+      <span id="timezoneValue">Myanmar Time (MMT)</span>
+    </div>
 
-        </div>
-
-      </div>
-
-      <div class="telegramArrow">
-        ›
-      </div>
-
-    </a>
+    <div class="row">
+      <span id="rangeLabel">历史范围</span>
+      <span id="rangeValue">最近 14 天</span>
+    </div>
 
   </div>
 
 
+  <section class="hist">
 
-  <!-- 开奖 -->
+    <h3 id="historyTitle">
+      历史公告 · HISTORY
+    </h3>
 
-  <main class="card">
+    <div id="history">
 
-    <div
-      class="label"
-      id="latestLabel"
-    >
-      最新数字公告 · LATEST RESULT
-    </div>
-
-
-    <div
-      class="number"
-      id="latest"
-    >
-      --
-    </div>
-
-
-    <div
-      class="state"
-      id="state"
-    >
-      正在连接...
-    </div>
-
-
-    <div class="meta">
-
-      <div class="row">
-
-        <span id="publishLabel">
-          发布时间
-        </span>
-
-        <span id="time">
-          —
-        </span>
-
-      </div>
-
-
-      <div class="row">
-
-        <span id="timezoneLabel">
-          时区
-        </span>
-
-        <span id="timezoneValue">
-          Myanmar Time (MMT)
-        </span>
-
-      </div>
-
-
-      <div class="row">
-
-        <span id="rangeLabel">
-          历史范围
-        </span>
-
-        <span id="rangeValue">
-          最近 14 天
-        </span>
-
+      <div class="empty">
+        正在读取...
       </div>
 
     </div>
 
+  </section>
 
 
-    <section class="hist">
+  <div
+    class="foot"
+    id="footerText"
+  >
+    © 2022 JIN MANTANG · 泰国 2D
+  </div>
 
-      <h3 id="historyTitle">
-        历史公告 · HISTORY
-      </h3>
-
-      <div id="history">
-
-        <div class="empty">
-          正在读取...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <div
-      class="foot"
-      id="footerText"
-    >
-      © 2022 JIN MANTANG · 泰国 2D
-    </div>
-
-  </main>
+</main>
 
 </div>
 
@@ -646,7 +585,6 @@ telegramSub:'点击进入官方频道',
 footer:'© 2022 JIN MANTANG · 泰国 2D'
 },
 
-
 th:{
 latest:'ประกาศผลล่าสุด · LATEST RESULT',
 connecting:'กำลังเชื่อมต่อ...',
@@ -666,7 +604,6 @@ telegram:'ช่อง Telegram อย่างเป็นทางการ',
 telegramSub:'แตะเพื่อเข้าสู่ช่องทางการ',
 footer:'© 2022 JIN MANTANG · ไทย 2D'
 },
-
 
 my:{
 latest:'နောက်ဆုံးဂဏန်းကြေညာချက် · LATEST RESULT',
@@ -688,7 +625,6 @@ telegramSub:'တရားဝင် Channel သို့ ဝင်ရန်နှ
 footer:'© 2022 JIN MANTANG · Thailand 2D'
 },
 
-
 en:{
 latest:'LATEST RESULT',
 connecting:'Connecting...',
@@ -708,7 +644,6 @@ telegram:'Official Telegram Channel',
 telegramSub:'Tap to join the official channel',
 footer:'© 2022 JIN MANTANG · THAILAND 2D'
 },
-
 
 ms:{
 latest:'KEPUTUSAN TERKINI · LATEST RESULT',
@@ -730,7 +665,6 @@ telegramSub:'Tekan untuk masuk ke saluran rasmi',
 footer:'© 2022 JIN MANTANG · THAILAND 2D'
 },
 
-
 vi:{
 latest:'KẾT QUẢ MỚI NHẤT · LATEST RESULT',
 connecting:'Đang kết nối...',
@@ -750,7 +684,6 @@ telegram:'Kênh Telegram chính thức',
 telegramSub:'Nhấn để vào kênh chính thức',
 footer:'© 2022 JIN MANTANG · THAILAND 2D'
 },
-
 
 id:{
 latest:'HASIL TERBARU · LATEST RESULT',
@@ -779,17 +712,20 @@ footer:'© 2022 JIN MANTANG · THAILAND 2D'
 let currentLang =
 localStorage.getItem('jmt_lang') || 'zh';
 
+
 let siteSettings = {
   telegram_url:'',
   announcement_text:'',
-  announcement_enabled:false
+  announcement_enabled:false,
+  logo_data_url:''
 };
 
 
 
 function changeLanguage(lang){
 
-  currentLang = lang;
+  currentLang =
+  lang;
 
   localStorage.setItem(
     'jmt_lang',
@@ -809,76 +745,63 @@ function applyLanguage(){
   const t =
   T[currentLang] || T.zh;
 
-
   document.documentElement.lang =
   currentLang;
-
 
   document.getElementById(
     'language'
   ).value =
   currentLang;
 
-
   document.getElementById(
     'latestLabel'
   ).textContent =
   t.latest;
-
 
   document.getElementById(
     'publishLabel'
   ).textContent =
   t.publish;
 
-
   document.getElementById(
     'timezoneLabel'
   ).textContent =
   t.timezone;
-
 
   document.getElementById(
     'timezoneValue'
   ).textContent =
   t.timezoneValue;
 
-
   document.getElementById(
     'rangeLabel'
   ).textContent =
   t.range;
-
 
   document.getElementById(
     'rangeValue'
   ).textContent =
   t.rangeValue;
 
-
   document.getElementById(
     'historyTitle'
   ).textContent =
   t.history;
-
 
   document.getElementById(
     'noticeLabel'
   ).textContent =
   t.notice;
 
-
   document.getElementById(
     'telegramTitle'
   ).textContent =
   t.telegram;
 
-
   document.getElementById(
     'telegramSub'
   ).textContent =
   t.telegramSub;
-
 
   document.getElementById(
     'footerText'
@@ -894,28 +817,20 @@ function formatMMT(iso){
   const d =
   new Date(iso);
 
-
   const locale =
   currentLang === 'zh'
   ? 'zh-CN'
-
   : currentLang === 'th'
   ? 'th-TH'
-
   : currentLang === 'my'
   ? 'my-MM'
-
   : currentLang === 'ms'
   ? 'ms-MY'
-
   : currentLang === 'vi'
   ? 'vi-VN'
-
   : currentLang === 'id'
   ? 'id-ID'
-
   : 'en-GB';
-
 
   return new Intl.DateTimeFormat(
     locale,
@@ -935,20 +850,14 @@ function formatMMT(iso){
 
 
 
-/* 读取后台网站设置 */
-
 async function loadSiteSettings(){
 
   try{
 
-    const url =
-    BASE +
-    '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled,updated_at';
-
-
     const r =
     await fetch(
-      url,
+      BASE +
+      '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled,logo_data_url,updated_at',
       {
         headers:{
           apikey:KEY,
@@ -957,27 +866,21 @@ async function loadSiteSettings(){
       }
     );
 
-
     if(!r.ok){
       throw new Error();
     }
 
-
     const rows =
     await r.json();
-
 
     if(!rows.length){
       return;
     }
 
-
     siteSettings =
     rows[0];
 
-
     renderSiteSettings();
-
 
   }catch(e){
 
@@ -991,33 +894,58 @@ async function loadSiteSettings(){
 
 
 
-/* 显示公告和 Telegram */
-
 function renderSiteSettings(){
+
+  const logo =
+  document.getElementById(
+    'siteLogo'
+  );
+
+  const logoData =
+  (
+    siteSettings.logo_data_url
+    || ''
+  ).trim();
+
+
+  if(logoData){
+
+    logo.innerHTML =
+    '';
+
+    const img =
+    document.createElement(
+      'img'
+    );
+
+    img.src =
+    logoData;
+
+    img.alt =
+    'JIN MANTANG';
+
+    logo.appendChild(
+      img
+    );
+
+  }else{
+
+    logo.innerHTML =
+    '金';
+
+  }
+
+
 
   const noticeWrap =
   document.getElementById(
     'noticeWrap'
   );
 
-
   const noticeText =
   document.getElementById(
     'noticeText'
   );
-
-
-  const telegramBox =
-  document.getElementById(
-    'telegramBox'
-  );
-
-
-  const telegramLink =
-  document.getElementById(
-    'telegramLink'
-  );
-
 
   const announcement =
   (
@@ -1047,6 +975,16 @@ function renderSiteSettings(){
 
 
 
+  const telegramBox =
+  document.getElementById(
+    'telegramBox'
+  );
+
+  const telegramLink =
+  document.getElementById(
+    'telegramLink'
+  );
+
   const telegram =
   (
     siteSettings.telegram_url
@@ -1060,7 +998,6 @@ function renderSiteSettings(){
 
       const u =
       new URL(telegram);
-
 
       if(
         u.protocol === 'https:'
@@ -1099,19 +1036,15 @@ function renderSiteSettings(){
 
 
 
-/* 读取开奖号码 */
-
 async function loadResults(){
 
   const t =
   T[currentLang] || T.zh;
 
-
   const state =
   document.getElementById(
     'state'
   );
-
 
   state.textContent =
   t.connecting;
@@ -1160,7 +1093,6 @@ async function loadResults(){
     const rows =
     await r.json();
 
-
     const latest =
     rows[0];
 
@@ -1198,7 +1130,6 @@ async function loadResults(){
     document.getElementById(
       'history'
     );
-
 
     box.innerHTML =
     '';
@@ -1273,7 +1204,6 @@ async function loadResults(){
     });
 
 
-
   }catch(e){
 
     state.innerHTML =
@@ -1288,7 +1218,6 @@ async function loadResults(){
     document.getElementById(
       'history'
     );
-
 
     box.innerHTML =
     '';
@@ -1321,8 +1250,6 @@ loadSiteSettings();
 
 loadResults();
 
-
-/* 每 30 秒自动同步 */
 
 setInterval(
   loadResults,
