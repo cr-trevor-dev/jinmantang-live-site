@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
+<title>金满堂 · 期数模拟</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
+  color:#f7f0df;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  min-height:100vh;
+  padding:20px 14px 50px
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:20px
+}
+
+.mark{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 9px;
+  font-size:22px;
+  font-weight:900;
+  color:#f4d77d;
+  border:1px solid #b98a2c;
+  background:#191208
+}
+
+.cn{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#f1d47b
+}
+
+.en{
+  margin-top:4px;
+  font-size:10px;
+  color:#998b68;
+  letter-spacing:2px
+}
+
+.card{
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.3);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px
+}
+
+.title{
+  font-size:14px;
+  font-weight:900;
+  color:#dec372;
+  margin-bottom:14px
+}
+
+.hidden{display:none}
+
+input,select{
+  width:100%;
+  padding:13px;
+  border-radius:11px;
+  border:1px solid rgba(214,168,63,.25);
+  background:#101011;
+  color:#fff;
+  outline:none;
+  font-size:15px
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  margin-top:10px;
+  font-weight:900;
+  font-size:14px;
+  background:linear-gradient(180deg,#efd47c,#b87e1e);
+  color:#171109;
+  cursor:pointer
+}
+
+.secondary{
+  background:#171718;
+  color:#dac477;
+  border:1px solid rgba(214,168,63,.23)
+}
+
+.msg{
+  text-align:center;
+  min-height:18px;
+  margin-top:9px;
+  font-size:12px;
+  color:#9b9485
+}
+
+.row2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px
+}
+
+.sum{
+  border:1px solid rgba(255,255,255,.06);
+  background:#101011;
+  border-radius:13px;
+  padding:13px
+}
+
+.sum small{
+  display:block;
+  color:#807b72;
+  font-size:10px;
+  margin-bottom:6px
+}
+
+.sum strong{
+  font-size:20px;
+  color:#e7cb74
+}
+
+.numberGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px
+}
+
+.numBox{
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:11px;
+  padding:9px
+}
+
+.numLabel{
+  font-size:17px;
+  font-weight:900;
+  color:#dec16a;
+  margin-bottom:6px
+}
+
+.numBox input{
+  padding:9px;
+  font-size:13px
+}
+
+.resultBox{
+  margin-top:12px;
+  padding:15px;
+  border-radius:14px;
+  background:#0f0f10;
+  border:1px solid rgba(214,168,63,.18)
+}
+
+.resultLine{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:13px
+}
+
+.resultLine:last-child{
+  border-bottom:0
+}
+
+.resultLine span:first-child{
+  color:#918b80
+}
+
+.resultLine strong{
+  color:#efdda5;
+  text-align:right
+}
+
+.positive{color:#71cf98!important}
+.negative{color:#df8d8d!important}
+
+.note{
+  color:#777166;
+  font-size:11px;
+  line-height:1.55;
+  margin-top:10px
+}
+
+.foot{
+  text-align:center;
+  color:#6f6a61;
+  font-size:10px;
+  margin-top:22px
+}
+
+@media(max-width:420px){
+  .numberGrid{
+    grid-template-columns:repeat(2,1fr)
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+    <div class="mark">金</div>
+    <div class="cn">金满堂</div>
+    <div class="en">ROUND POINT SIMULATOR</div>
+  </div>
+
+
+  <div class="card" id="loginBox">
+
+    <div class="title">管理员登录</div>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="管理员邮箱"
+    >
+
+    <div style="height:9px"></div>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="管理员密码"
+    >
+
+    <button onclick="signIn()">
+      登录
+    </button>
+
+    <div class="msg" id="loginMsg"></div>
+
+  </div>
+
+
+  <div id="appBox" class="hidden">
+
+
+    <div class="card">
+
+      <div class="title">
+        本期期数设置
+      </div>
+
+      <div class="row2">
+
+        <div>
+          <select id="roundType">
+            <option value="1030">
+              上午期 · 10:30
+            </option>
+            <option value="1530">
+              下午期 · 15:30
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <select id="agentRate">
+            <option value="20">代理 20%</option>
+            <option value="21">代理 21%</option>
+            <option value="22">代理 22%</option>
+            <option value="23">代理 23%</option>
+            <option value="24">代理 24%</option>
+            <option value="25">代理 25%</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="note">
+        本页只用于积分模拟与结算计算。开奖号码请独立产生后再输入。
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        01–99 本期积分汇总
+      </div>
+
+      <div class="numberGrid" id="numberGrid"></div>
+
+      <button onclick="calculateTotals()">
+        更新本期汇总
+      </button>
+
+      <button class="secondary" onclick="saveDraft()">
+        保存本期草稿
+      </button>
+
+      <button class="secondary" onclick="loadDraft()">
+        读取本期草稿
+      </button>
+
+      <button class="secondary" onclick="clearAll()">
+        清空全部积分
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        本期汇总
+      </div>
+
+      <div class="summary">
+
+        <div class="sum">
+          <small>号码数量</small>
+          <strong>99</strong>
+        </div>
+
+        <div class="sum">
+          <small>固定倍数</small>
+          <strong>80×</strong>
+        </div>
+
+        <div class="sum">
+          <small>本期总积分</small>
+          <strong id="totalPoints">0</strong>
+        </div>
+
+        <div class="sum">
+          <small>当前代理比例</small>
+          <strong id="rateDisplay">20%</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        独立结果结算模拟
+      </div>
+
+      <input
+        id="winningNumber"
+        inputmode="numeric"
+        maxlength="2"
+        placeholder="输入独立产生的结果号码 01 - 99"
+      >
+
+      <button onclick="settleRound()">
+        计算本期结算
+      </button>
+
+
+      <div class="resultBox">
+
+        <div class="resultLine">
+          <span>结果号码</span>
+          <strong id="rNumber">—</strong>
+        </div>
+
+        <div class="resultLine">
+          <span>该号码累计积分</span>
+          <strong id="winningStake">0</strong>
+        </div>
+
+        <div class="resultLine">
+          <span>玩家 80× 应得积分</span>
+          <strong id="playerPayout">0</strong>
+        </div>
+
+        <div class="resultLine">
+          <span>赔付后剩余</span>
+          <strong id="surplus">0</strong>
+        </div>
+
+        <div class="resultLine">
+          <span>代理比例</span>
+          <strong id="agentRateResult">20%</strong>
+        </div>
+
+        <div class="resultLine">
+          <span>代理应得</span>
+          <strong id="agentAmount">0</strong>
+        </div>
+
+        <div class="resultLine">
+          <span>平台最后剩余</span>
+          <strong id="platformAmount">0</strong>
+        </div>
+
+      </div>
+
+      <div class="note">
+        计算顺序：先计算玩家 80× 奖励；若仍有正余额，再按选择的代理比例计算代理份额；剩余为平台模拟余额。
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <button
+        class="secondary"
+        onclick="goAdmin()"
+      >
+        ← 返回 Admin 首页
+      </button>
+
+      <button
+        class="secondary"
+        onclick="logout()"
+      >
+        退出登录
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="foot">
+    © 2022 JIN MANTANG · POINT SIMULATION
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE =
+'https://veserwfjxglxieehfggy.supabase.co';
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+let token =
+sessionStorage.getItem('jmt_access_token') || '';
+
+
+function buildGrid(){
+
+  const grid =
+  document.getElementById('numberGrid');
+
+  grid.innerHTML = '';
+
+  for(let i=1;i<=99;i++){
+
+    const n =
+    String(i).padStart(2,'0');
+
+    const box =
+    document.createElement('div');
+
+    box.className =
+    'numBox';
+
+    box.innerHTML =
+    '<div class="numLabel">' +
+    n +
+    '</div>' +
+    '<input id="n' +
+    n +
+    '" type="number" min="0" step="1" placeholder="0">';
+
+    grid.appendChild(box);
+
+  }
+
+}
+
+
+async function signIn(){
+
+  const email =
+  document.getElementById('email').value.trim();
+
+  const password =
+  document.getElementById('password').value;
+
+  const msg =
+  document.getElementById('loginMsg');
+
+  if(!email || !password){
+
+    msg.textContent =
+    '请输入邮箱和密码';
+
+    return;
+  }
+
+  msg.textContent =
+  '正在登录...';
+
+  try{
+
+    const r =
+    await fetch(
+      BASE + '/auth/v1/token?grant_type=password',
+      {
+        method:'POST',
+        headers:{
+          apikey:KEY,
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          email,
+          password
+        })
+      }
+    );
+
+    const d =
+    await r.json();
+
+    if(!r.ok || !d.access_token){
+      throw new Error();
+    }
+
+    token =
+    d.access_token;
+
+    sessionStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+    showApp();
+
+  }catch(e){
+
+    msg.textContent =
+    '登录失败，请检查邮箱和密码';
+
+  }
+
+}
+
+
+function showApp(){
+
+  document.getElementById(
+    'loginBox'
+  ).classList.add('hidden');
+
+  document.getElementById(
+    'appBox'
+  ).classList.remove('hidden');
+
+}
+
+
+function getValue(n){
+
+  const el =
+  document.getElementById(
+    'n' + n
+  );
+
+  const v =
+  Number(el.value || 0);
+
+  return isFinite(v) && v > 0
+  ? v
+  : 0;
+
+}
+
+
+function calculateTotals(){
+
+  let total = 0;
+
+  for(let i=1;i<=99;i++){
+
+    const n =
+    String(i).padStart(2,'0');
+
+    total +=
+    getValue(n);
+
+  }
+
+  document.getElementById(
+    'totalPoints'
+  ).textContent =
+  formatNum(total);
+
+  document.getElementById(
+    'rateDisplay'
+  ).textContent =
+  document.getElementById(
+    'agentRate'
+  ).value + '%';
+
+  return total;
+
+}
+
+
+function settleRound(){
+
+  const raw =
+  document.getElementById(
+    'winningNumber'
+  ).value.trim();
+
+  if(!/^\d{1,2}$/.test(raw)){
+
+    alert(
+      '请输入 01 到 99 的结果号码'
+    );
+
+    return;
+  }
+
+  const number =
+  String(
+    Number(raw)
+  ).padStart(2,'0');
+
+  const numeric =
+  Number(number);
+
+  if(
+    numeric < 1 ||
+    numeric > 99
+  ){
+
+    alert(
+      '请输入 01 到 99'
+    );
+
+    return;
+  }
+
+
+  const total =
+  calculateTotals();
+
+  const stake =
+  getValue(number);
+
+  const payout =
+  stake * 80;
+
+  const surplus =
+  total - payout;
+
+  const rate =
+  Number(
+    document.getElementById(
+      'agentRate'
+    ).value
+  ) / 100;
+
+
+  let agent = 0;
+
+  let platform =
+  surplus;
+
+
+  if(surplus > 0){
+
+    agent =
+    surplus * rate;
+
+    platform =
+    surplus - agent;
+
+  }
+
+
+  document.getElementById(
+    'rNumber'
+  ).textContent =
+  number;
+
+  document.getElementById(
+    'winningStake'
+  ).textContent =
+  formatNum(stake);
+
+  document.getElementById(
+    'playerPayout'
+  ).textContent =
+  formatNum(payout);
+
+  document.getElementById(
+    'surplus'
+  ).textContent =
+  formatNum(surplus);
+
+  document.getElementById(
+    'agentRateResult'
+  ).textContent =
+  Math.round(rate * 100) + '%';
+
+  document.getElementById(
+    'agentAmount'
+  ).textContent =
+  formatNum(agent);
+
+  const p =
+  document.getElementById(
+    'platformAmount'
+  );
+
+  p.textContent =
+  formatNum(platform);
+
+  p.className =
+  platform >= 0
+  ? 'positive'
+  : 'negative';
+
+}
+
+
+function saveDraft(){
+
+  const data = {
+    round:
+    document.getElementById(
+      'roundType'
+    ).value,
+
+    rate:
+    document.getElementById(
+      'agentRate'
+    ).value,
+
+    values:{}
+  };
+
+
+  for(let i=1;i<=99;i++){
+
+    const n =
+    String(i).padStart(2,'0');
+
+    data.values[n] =
+    document.getElementById(
+      'n' + n
+    ).value || '';
+
+  }
+
+
+  localStorage.setItem(
+    'jmt_simulator_draft',
+    JSON.stringify(data)
+  );
+
+  alert('本期草稿已保存');
+
+}
+
+
+function loadDraft(){
+
+  const raw =
+  localStorage.getItem(
+    'jmt_simulator_draft'
+  );
+
+  if(!raw){
+
+    alert('没有找到已保存的草稿');
+
+    return;
+  }
+
+
+  try{
+
+    const data =
+    JSON.parse(raw);
+
+    if(data.round){
+
+      document.getElementById(
+        'roundType'
+      ).value =
+      data.round;
+
+    }
+
+    if(data.rate){
+
+      document.getElementById(
+        'agentRate'
+      ).value =
+      data.rate;
+
+    }
+
+    if(data.values){
+
+      for(let i=1;i<=99;i++){
+
+        const n =
+        String(i).padStart(2,'0');
+
+        document.getElementById(
+          'n' + n
+        ).value =
+        data.values[n] || '';
+
+      }
+
+    }
+
+    calculateTotals();
+
+    alert('草稿已读取');
+
+  }catch(e){
+
+    alert('草稿读取失败');
+
+  }
+
+}
+
+
+function clearAll(){
+
+  if(
+    !confirm(
+      '确定清空 01–99 的全部积分吗？'
+    )
+  ){
+    return;
+  }
+
+  for(let i=1;i<=99;i++){
+
+    const n =
+    String(i).padStart(2,'0');
+
+    document.getElementById(
+      'n' + n
+    ).value = '';
+
+  }
+
+  document.getElementById(
+    'winningNumber'
+  ).value = '';
+
+  calculateTotals();
+
+}
+
+
+function formatNum(v){
+
+  return Number(v).toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function goAdmin(){
+
+  location.href =
+  '/admin/';
+
+}
+
+
+function logout(){
+
+  sessionStorage.removeItem(
+    'jmt_access_token'
+  );
+
+  location.reload();
+
+}
+
+
+buildGrid();
+
+
+document.getElementById(
+  'agentRate'
+).addEventListener(
+  'change',
+  calculateTotals
+);
+
+
+if(token){
+
+  showApp();
+
+}
+
+</script>
+
+</body>
+</html>
