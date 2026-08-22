@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
-<title>金满堂 · 期数模拟</title>
+<title>金满堂 · 期数积分模拟</title>
 
 <style>
 *{box-sizing:border-box}
@@ -203,7 +203,7 @@ button{
 .note{
   color:#777166;
   font-size:11px;
-  line-height:1.55;
+  line-height:1.6;
   margin-top:10px
 }
 
@@ -237,23 +237,13 @@ button{
 
     <div class="title">管理员登录</div>
 
-    <input
-      id="email"
-      type="email"
-      placeholder="管理员邮箱"
-    >
+    <input id="email" type="email" placeholder="管理员邮箱">
 
     <div style="height:9px"></div>
 
-    <input
-      id="password"
-      type="password"
-      placeholder="管理员密码"
-    >
+    <input id="password" type="password" placeholder="管理员密码">
 
-    <button onclick="signIn()">
-      登录
-    </button>
+    <button onclick="signIn()">登录</button>
 
     <div class="msg" id="loginMsg"></div>
 
@@ -265,38 +255,28 @@ button{
 
     <div class="card">
 
-      <div class="title">
-        本期期数设置
-      </div>
+      <div class="title">本期期数设置</div>
 
       <div class="row2">
 
-        <div>
-          <select id="roundType">
-            <option value="1030">
-              上午期 · 10:30
-            </option>
-            <option value="1530">
-              下午期 · 15:30
-            </option>
-          </select>
-        </div>
+        <select id="roundType">
+          <option value="1030">上午期 · 10:30</option>
+          <option value="1530">下午期 · 15:30</option>
+        </select>
 
-        <div>
-          <select id="agentRate">
-            <option value="20">代理 20%</option>
-            <option value="21">代理 21%</option>
-            <option value="22">代理 22%</option>
-            <option value="23">代理 23%</option>
-            <option value="24">代理 24%</option>
-            <option value="25">代理 25%</option>
-          </select>
-        </div>
+        <select id="agentRate">
+          <option value="20">代理 20%</option>
+          <option value="21">代理 21%</option>
+          <option value="22">代理 22%</option>
+          <option value="23">代理 23%</option>
+          <option value="24">代理 24%</option>
+          <option value="25">代理 25%</option>
+        </select>
 
       </div>
 
       <div class="note">
-        本页只用于积分模拟与结算计算。开奖号码请独立产生后再输入。
+        本页用于积分模拟与结算。结果号码应独立产生后再输入。
       </div>
 
     </div>
@@ -304,9 +284,7 @@ button{
 
     <div class="card">
 
-      <div class="title">
-        01–99 本期积分汇总
-      </div>
+      <div class="title">00–99 本期积分汇总</div>
 
       <div class="numberGrid" id="numberGrid"></div>
 
@@ -331,15 +309,13 @@ button{
 
     <div class="card">
 
-      <div class="title">
-        本期汇总
-      </div>
+      <div class="title">本期汇总</div>
 
       <div class="summary">
 
         <div class="sum">
           <small>号码数量</small>
-          <strong>99</strong>
+          <strong>100</strong>
         </div>
 
         <div class="sum">
@@ -364,15 +340,13 @@ button{
 
     <div class="card">
 
-      <div class="title">
-        独立结果结算模拟
-      </div>
+      <div class="title">独立结果结算模拟</div>
 
       <input
         id="winningNumber"
         inputmode="numeric"
         maxlength="2"
-        placeholder="输入独立产生的结果号码 01 - 99"
+        placeholder="输入独立产生的结果号码 00 - 99"
       >
 
       <button onclick="settleRound()">
@@ -398,8 +372,8 @@ button{
         </div>
 
         <div class="resultLine">
-          <span>赔付后剩余</span>
-          <strong id="surplus">0</strong>
+          <span>未中奖积分</span>
+          <strong id="losingPoints">0</strong>
         </div>
 
         <div class="resultLine">
@@ -408,19 +382,19 @@ button{
         </div>
 
         <div class="resultLine">
-          <span>代理应得</span>
+          <span>代理应得积分</span>
           <strong id="agentAmount">0</strong>
         </div>
 
         <div class="resultLine">
-          <span>平台最后剩余</span>
+          <span>平台最后余额</span>
           <strong id="platformAmount">0</strong>
         </div>
 
       </div>
 
       <div class="note">
-        计算顺序：先计算玩家 80× 奖励；若仍有正余额，再按选择的代理比例计算代理份额；剩余为平台模拟余额。
+        模拟规则：玩家奖励按结果号码积分 × 80；代理积分按未中奖积分 × 所选比例计算；最后余额不足时，平台余额会直接显示负数。
       </div>
 
     </div>
@@ -428,17 +402,11 @@ button{
 
     <div class="card">
 
-      <button
-        class="secondary"
-        onclick="goAdmin()"
-      >
+      <button class="secondary" onclick="goAdmin()">
         ← 返回 Admin 首页
       </button>
 
-      <button
-        class="secondary"
-        onclick="logout()"
-      >
+      <button class="secondary" onclick="logout()">
         退出登录
       </button>
 
@@ -473,7 +441,7 @@ function buildGrid(){
 
   grid.innerHTML = '';
 
-  for(let i=1;i<=99;i++){
+  for(let i=0;i<=99;i++){
 
     const n =
     String(i).padStart(2,'0');
@@ -516,6 +484,7 @@ async function signIn(){
     '请输入邮箱和密码';
 
     return;
+
   }
 
   msg.textContent =
@@ -528,10 +497,12 @@ async function signIn(){
       BASE + '/auth/v1/token?grant_type=password',
       {
         method:'POST',
+
         headers:{
           apikey:KEY,
           'Content-Type':'application/json'
         },
+
         body:JSON.stringify({
           email,
           password
@@ -582,9 +553,7 @@ function showApp(){
 function getValue(n){
 
   const el =
-  document.getElementById(
-    'n' + n
-  );
+  document.getElementById('n' + n);
 
   const v =
   Number(el.value || 0);
@@ -600,7 +569,7 @@ function calculateTotals(){
 
   let total = 0;
 
-  for(let i=1;i<=99;i++){
+  for(let i=0;i<=99;i++){
 
     const n =
     String(i).padStart(2,'0');
@@ -636,31 +605,24 @@ function settleRound(){
 
   if(!/^\d{1,2}$/.test(raw)){
 
-    alert(
-      '请输入 01 到 99 的结果号码'
-    );
+    alert('请输入 00 到 99');
 
     return;
+
   }
 
   const number =
-  String(
-    Number(raw)
-  ).padStart(2,'0');
+  String(Number(raw)).padStart(2,'0');
 
   const numeric =
   Number(number);
 
-  if(
-    numeric < 1 ||
-    numeric > 99
-  ){
+  if(numeric < 0 || numeric > 99){
 
-    alert(
-      '请输入 01 到 99'
-    );
+    alert('请输入 00 到 99');
 
     return;
+
   }
 
 
@@ -673,8 +635,11 @@ function settleRound(){
   const payout =
   stake * 80;
 
-  const surplus =
-  total - payout;
+  const losingPoints =
+  Math.max(
+    total - stake,
+    0
+  );
 
   const rate =
   Number(
@@ -683,22 +648,11 @@ function settleRound(){
     ).value
   ) / 100;
 
+  const agent =
+  losingPoints * rate;
 
-  let agent = 0;
-
-  let platform =
-  surplus;
-
-
-  if(surplus > 0){
-
-    agent =
-    surplus * rate;
-
-    platform =
-    surplus - agent;
-
-  }
+  const platform =
+  total - payout - agent;
 
 
   document.getElementById(
@@ -717,9 +671,9 @@ function settleRound(){
   formatNum(payout);
 
   document.getElementById(
-    'surplus'
+    'losingPoints'
   ).textContent =
-  formatNum(surplus);
+  formatNum(losingPoints);
 
   document.getElementById(
     'agentRateResult'
@@ -763,8 +717,7 @@ function saveDraft(){
     values:{}
   };
 
-
-  for(let i=1;i<=99;i++){
+  for(let i=0;i<=99;i++){
 
     const n =
     String(i).padStart(2,'0');
@@ -775,7 +728,6 @@ function saveDraft(){
     ).value || '';
 
   }
-
 
   localStorage.setItem(
     'jmt_simulator_draft',
@@ -799,8 +751,8 @@ function loadDraft(){
     alert('没有找到已保存的草稿');
 
     return;
-  }
 
+  }
 
   try{
 
@@ -827,7 +779,7 @@ function loadDraft(){
 
     if(data.values){
 
-      for(let i=1;i<=99;i++){
+      for(let i=0;i<=99;i++){
 
         const n =
         String(i).padStart(2,'0');
@@ -856,15 +808,11 @@ function loadDraft(){
 
 function clearAll(){
 
-  if(
-    !confirm(
-      '确定清空 01–99 的全部积分吗？'
-    )
-  ){
+  if(!confirm('确定清空 00–99 的全部积分吗？')){
     return;
   }
 
-  for(let i=1;i<=99;i++){
+  for(let i=0;i<=99;i++){
 
     const n =
     String(i).padStart(2,'0');
@@ -927,9 +875,7 @@ document.getElementById(
 
 
 if(token){
-
   showApp();
-
 }
 
 </script>
