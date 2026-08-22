@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
-<title>金满堂 · 期数积分模拟</title>
+<title>金满堂 · 全号码风险模拟</title>
 
 <style>
 *{box-sizing:border-box}
@@ -17,7 +17,7 @@ body{
 }
 
 .wrap{
-  max-width:760px;
+  max-width:850px;
   margin:auto;
   min-height:100vh;
   padding:20px 14px 50px
@@ -144,7 +144,7 @@ button{
 
 .numberGrid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:8px
 }
 
@@ -165,6 +165,61 @@ button{
 .numBox input{
   padding:9px;
   font-size:13px
+}
+
+.tableWrap{
+  overflow-x:auto;
+  border:1px solid rgba(214,168,63,.2);
+  border-radius:14px
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+  background:#0f0f10
+}
+
+th{
+  padding:11px 8px;
+  text-align:right;
+  font-size:11px;
+  color:#bfa867;
+  background:#171510;
+  border-bottom:1px solid rgba(214,168,63,.2);
+  white-space:nowrap
+}
+
+th:first-child{text-align:left}
+
+td{
+  padding:11px 8px;
+  text-align:right;
+  font-size:12px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  color:#d3cbb9;
+  white-space:nowrap
+}
+
+td:first-child{
+  text-align:left;
+  color:#edce6e;
+  font-size:16px;
+  font-weight:900
+}
+
+.good{
+  color:#71cf98!important;
+  font-weight:800
+}
+
+.bad{
+  color:#e58d8d!important;
+  font-weight:800
+}
+
+.zero{
+  color:#7e786d!important
 }
 
 .resultBox{
@@ -197,9 +252,6 @@ button{
   text-align:right
 }
 
-.positive{color:#71cf98!important}
-.negative{color:#df8d8d!important}
-
 .note{
   color:#777166;
   font-size:11px;
@@ -214,7 +266,7 @@ button{
   margin-top:22px
 }
 
-@media(max-width:420px){
+@media(max-width:520px){
   .numberGrid{
     grid-template-columns:repeat(2,1fr)
   }
@@ -229,7 +281,7 @@ button{
   <div class="brand">
     <div class="mark">金</div>
     <div class="cn">金满堂</div>
-    <div class="en">ROUND POINT SIMULATOR</div>
+    <div class="en">ROUND RISK SIMULATOR</div>
   </div>
 
 
@@ -276,7 +328,7 @@ button{
       </div>
 
       <div class="note">
-        本页用于积分模拟与结算。结果号码应独立产生后再输入。
+        固定奖励倍数：80×。代理积分按未中奖部分 × 所选代理比例计算。
       </div>
 
     </div>
@@ -284,12 +336,12 @@ button{
 
     <div class="card">
 
-      <div class="title">00–99 本期积分汇总</div>
+      <div class="title">00–99 本期积分输入</div>
 
       <div class="numberGrid" id="numberGrid"></div>
 
-      <button onclick="calculateTotals()">
-        更新本期汇总
+      <button onclick="generateRiskTable()">
+        生成全号码风险表
       </button>
 
       <button class="secondary" onclick="saveDraft()">
@@ -333,6 +385,16 @@ button{
           <strong id="rateDisplay">20%</strong>
         </div>
 
+        <div class="sum">
+          <small>最高单号积分</small>
+          <strong id="highestStake">0</strong>
+        </div>
+
+        <div class="sum">
+          <small>最坏情况额外准备</small>
+          <strong id="maxReserve">0</strong>
+        </div>
+
       </div>
 
     </div>
@@ -340,7 +402,48 @@ button{
 
     <div class="card">
 
-      <div class="title">独立结果结算模拟</div>
+      <div class="title">00–99 全号码风险结算表</div>
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>号码</th>
+              <th>该号积分</th>
+              <th>玩家80×</th>
+              <th>未中奖积分</th>
+              <th>代理应得</th>
+              <th>平台余额</th>
+              <th>额外准备</th>
+            </tr>
+          </thead>
+
+          <tbody id="riskBody">
+
+            <tr>
+              <td colspan="7" style="text-align:center;color:#777">
+                输入积分后点击「生成全号码风险表」
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div class="note">
+        表格固定按 00–99 顺序显示，仅用于查看每个独立结果下的模拟结算，不会自动推荐结果号码。
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">实际独立结果结算</div>
 
       <input
         id="winningNumber"
@@ -349,8 +452,8 @@ button{
         placeholder="输入独立产生的结果号码 00 - 99"
       >
 
-      <button onclick="settleRound()">
-        计算本期结算
+      <button onclick="settleActual()">
+        计算实际结果
       </button>
 
 
@@ -358,43 +461,34 @@ button{
 
         <div class="resultLine">
           <span>结果号码</span>
-          <strong id="rNumber">—</strong>
+          <strong id="actualNumber">—</strong>
         </div>
 
         <div class="resultLine">
-          <span>该号码累计积分</span>
-          <strong id="winningStake">0</strong>
+          <span>该号码积分</span>
+          <strong id="actualStake">0</strong>
         </div>
 
         <div class="resultLine">
-          <span>玩家 80× 应得积分</span>
-          <strong id="playerPayout">0</strong>
+          <span>玩家80×应得</span>
+          <strong id="actualPayout">0</strong>
         </div>
 
         <div class="resultLine">
-          <span>未中奖积分</span>
-          <strong id="losingPoints">0</strong>
-        </div>
-
-        <div class="resultLine">
-          <span>代理比例</span>
-          <strong id="agentRateResult">20%</strong>
-        </div>
-
-        <div class="resultLine">
-          <span>代理应得积分</span>
-          <strong id="agentAmount">0</strong>
+          <span>代理应得</span>
+          <strong id="actualAgent">0</strong>
         </div>
 
         <div class="resultLine">
           <span>平台最后余额</span>
-          <strong id="platformAmount">0</strong>
+          <strong id="actualPlatform">0</strong>
         </div>
 
-      </div>
+        <div class="resultLine">
+          <span>需要额外准备</span>
+          <strong id="actualReserve">0</strong>
+        </div>
 
-      <div class="note">
-        模拟规则：玩家奖励按结果号码积分 × 80；代理积分按未中奖积分 × 所选比例计算；最后余额不足时，平台余额会直接显示负数。
       </div>
 
     </div>
@@ -402,7 +496,7 @@ button{
 
     <div class="card">
 
-      <button class="secondary" onclick="goAdmin()">
+      <button class="secondary" onclick="location.href='/admin/'">
         ← 返回 Admin 首页
       </button>
 
@@ -416,7 +510,7 @@ button{
 
 
   <div class="foot">
-    © 2022 JIN MANTANG · POINT SIMULATION
+    © 2022 JIN MANTANG · RISK SIMULATION
   </div>
 
 </div>
@@ -484,7 +578,6 @@ async function signIn(){
     '请输入邮箱和密码';
 
     return;
-
   }
 
   msg.textContent =
@@ -555,6 +648,10 @@ function getValue(n){
   const el =
   document.getElementById('n' + n);
 
+  if(!el){
+    return 0;
+  }
+
   const v =
   Number(el.value || 0);
 
@@ -565,7 +662,7 @@ function getValue(n){
 }
 
 
-function calculateTotals(){
+function getTotal(){
 
   let total = 0;
 
@@ -579,6 +676,55 @@ function calculateTotals(){
 
   }
 
+  return total;
+
+}
+
+
+function getOutcome(number,total,rate){
+
+  const stake =
+  getValue(number);
+
+  const payout =
+  stake * 80;
+
+  const losingPoints =
+  Math.max(total - stake,0);
+
+  const agent =
+  losingPoints * rate;
+
+  const platform =
+  total - payout - agent;
+
+  const reserve =
+  Math.max(-platform,0);
+
+  return {
+    stake,
+    payout,
+    losingPoints,
+    agent,
+    platform,
+    reserve
+  };
+
+}
+
+
+function generateRiskTable(){
+
+  const total =
+  getTotal();
+
+  const rate =
+  Number(
+    document.getElementById(
+      'agentRate'
+    ).value
+  ) / 100;
+
   document.getElementById(
     'totalPoints'
   ).textContent =
@@ -587,21 +733,117 @@ function calculateTotals(){
   document.getElementById(
     'rateDisplay'
   ).textContent =
-  document.getElementById(
-    'agentRate'
-  ).value + '%';
+  Math.round(rate * 100) + '%';
 
-  return total;
+
+  let highestStake = 0;
+
+  let maxReserve = 0;
+
+  const body =
+  document.getElementById(
+    'riskBody'
+  );
+
+  body.innerHTML = '';
+
+
+  for(let i=0;i<=99;i++){
+
+    const n =
+    String(i).padStart(2,'0');
+
+    const o =
+    getOutcome(
+      n,
+      total,
+      rate
+    );
+
+
+    if(o.stake > highestStake){
+      highestStake =
+      o.stake;
+    }
+
+    if(o.reserve > maxReserve){
+      maxReserve =
+      o.reserve;
+    }
+
+
+    const tr =
+    document.createElement('tr');
+
+
+    tr.innerHTML =
+    '<td>' + n + '</td>' +
+
+    '<td>' +
+    formatNum(o.stake) +
+    '</td>' +
+
+    '<td>' +
+    formatNum(o.payout) +
+    '</td>' +
+
+    '<td>' +
+    formatNum(o.losingPoints) +
+    '</td>' +
+
+    '<td>' +
+    formatNum(o.agent) +
+    '</td>' +
+
+    '<td class="' +
+    (
+      o.platform > 0
+      ? 'good'
+      : o.platform < 0
+      ? 'bad'
+      : 'zero'
+    )
+    + '">' +
+    formatNum(o.platform) +
+    '</td>' +
+
+    '<td class="' +
+    (
+      o.reserve > 0
+      ? 'bad'
+      : 'good'
+    )
+    + '">' +
+    formatNum(o.reserve) +
+    '</td>';
+
+
+    body.appendChild(tr);
+
+  }
+
+
+  document.getElementById(
+    'highestStake'
+  ).textContent =
+  formatNum(highestStake);
+
+
+  document.getElementById(
+    'maxReserve'
+  ).textContent =
+  formatNum(maxReserve);
 
 }
 
 
-function settleRound(){
+function settleActual(){
 
   const raw =
   document.getElementById(
     'winningNumber'
   ).value.trim();
+
 
   if(!/^\d{1,2}$/.test(raw)){
 
@@ -611,11 +853,16 @@ function settleRound(){
 
   }
 
+
   const number =
-  String(Number(raw)).padStart(2,'0');
+  String(
+    Number(raw)
+  ).padStart(2,'0');
+
 
   const numeric =
   Number(number);
+
 
   if(numeric < 0 || numeric > 99){
 
@@ -627,19 +874,8 @@ function settleRound(){
 
 
   const total =
-  calculateTotals();
+  getTotal();
 
-  const stake =
-  getValue(number);
-
-  const payout =
-  stake * 80;
-
-  const losingPoints =
-  Math.max(
-    total - stake,
-    0
-  );
 
   const rate =
   Number(
@@ -648,55 +884,65 @@ function settleRound(){
     ).value
   ) / 100;
 
-  const agent =
-  losingPoints * rate;
 
-  const platform =
-  total - payout - agent;
+  const o =
+  getOutcome(
+    number,
+    total,
+    rate
+  );
 
 
   document.getElementById(
-    'rNumber'
+    'actualNumber'
   ).textContent =
   number;
 
-  document.getElementById(
-    'winningStake'
-  ).textContent =
-  formatNum(stake);
 
   document.getElementById(
-    'playerPayout'
+    'actualStake'
   ).textContent =
-  formatNum(payout);
+  formatNum(o.stake);
+
 
   document.getElementById(
-    'losingPoints'
+    'actualPayout'
   ).textContent =
-  formatNum(losingPoints);
+  formatNum(o.payout);
+
 
   document.getElementById(
-    'agentRateResult'
+    'actualAgent'
   ).textContent =
-  Math.round(rate * 100) + '%';
+  formatNum(o.agent);
 
-  document.getElementById(
-    'agentAmount'
-  ).textContent =
-  formatNum(agent);
 
-  const p =
+  const platformEl =
   document.getElementById(
-    'platformAmount'
+    'actualPlatform'
   );
 
-  p.textContent =
-  formatNum(platform);
+  platformEl.textContent =
+  formatNum(o.platform);
 
-  p.className =
-  platform >= 0
-  ? 'positive'
-  : 'negative';
+  platformEl.className =
+  o.platform >= 0
+  ? 'good'
+  : 'bad';
+
+
+  const reserveEl =
+  document.getElementById(
+    'actualReserve'
+  );
+
+  reserveEl.textContent =
+  formatNum(o.reserve);
+
+  reserveEl.className =
+  o.reserve > 0
+  ? 'bad'
+  : 'good';
 
 }
 
@@ -704,6 +950,7 @@ function settleRound(){
 function saveDraft(){
 
   const data = {
+
     round:
     document.getElementById(
       'roundType'
@@ -715,7 +962,9 @@ function saveDraft(){
     ).value,
 
     values:{}
+
   };
+
 
   for(let i=0;i<=99;i++){
 
@@ -729,10 +978,12 @@ function saveDraft(){
 
   }
 
+
   localStorage.setItem(
-    'jmt_simulator_draft',
+    'jmt_risk_draft',
     JSON.stringify(data)
   );
+
 
   alert('本期草稿已保存');
 
@@ -743,59 +994,58 @@ function loadDraft(){
 
   const raw =
   localStorage.getItem(
-    'jmt_simulator_draft'
+    'jmt_risk_draft'
   );
+
 
   if(!raw){
 
-    alert('没有找到已保存的草稿');
+    alert('没有找到草稿');
 
     return;
 
   }
+
 
   try{
 
     const data =
     JSON.parse(raw);
 
-    if(data.round){
+
+    document.getElementById(
+      'roundType'
+    ).value =
+    data.round || '1030';
+
+
+    document.getElementById(
+      'agentRate'
+    ).value =
+    data.rate || '20';
+
+
+    for(let i=0;i<=99;i++){
+
+      const n =
+      String(i).padStart(2,'0');
 
       document.getElementById(
-        'roundType'
+        'n' + n
       ).value =
-      data.round;
+      data.values &&
+      data.values[n]
+      ? data.values[n]
+      : '';
 
     }
 
-    if(data.rate){
 
-      document.getElementById(
-        'agentRate'
-      ).value =
-      data.rate;
+    generateRiskTable();
 
-    }
-
-    if(data.values){
-
-      for(let i=0;i<=99;i++){
-
-        const n =
-        String(i).padStart(2,'0');
-
-        document.getElementById(
-          'n' + n
-        ).value =
-        data.values[n] || '';
-
-      }
-
-    }
-
-    calculateTotals();
 
     alert('草稿已读取');
+
 
   }catch(e){
 
@@ -808,9 +1058,14 @@ function loadDraft(){
 
 function clearAll(){
 
-  if(!confirm('确定清空 00–99 的全部积分吗？')){
+  if(
+    !confirm(
+      '确定清空 00–99 全部积分吗？'
+    )
+  ){
     return;
   }
+
 
   for(let i=0;i<=99;i++){
 
@@ -823,11 +1078,13 @@ function clearAll(){
 
   }
 
+
   document.getElementById(
     'winningNumber'
   ).value = '';
 
-  calculateTotals();
+
+  generateRiskTable();
 
 }
 
@@ -840,14 +1097,6 @@ function formatNum(v){
       maximumFractionDigits:2
     }
   );
-
-}
-
-
-function goAdmin(){
-
-  location.href =
-  '/admin/';
 
 }
 
@@ -870,7 +1119,7 @@ document.getElementById(
   'agentRate'
 ).addEventListener(
   'change',
-  calculateTotals
+  generateRiskTable
 );
 
 
