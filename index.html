@@ -5,43 +5,221 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
 <title>金满堂 · Result Notice</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#1b1409 0,#0b0b0c 40%,#070708 100%);color:#f7f0df;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}
-.wrap{max-width:520px;margin:auto;min-height:100vh;padding:20px 15px 44px}
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:11px}
-.mark{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#f0d486;border:1px solid #aa7a23;background:linear-gradient(145deg,#2b1d08,#0e0d0a);box-shadow:0 0 20px rgba(214,168,63,.15)}
-.cn{font-weight:900;font-size:20px;letter-spacing:3px;color:#f3d889}
-.en{font-size:10px;letter-spacing:2px;color:#9b8d68;margin-top:2px}
-.thai{font-size:10px;color:#bba974;margin-top:2px}
-.flag{font-size:26px}
-.card{background:linear-gradient(180deg,rgba(21,21,21,.98),rgba(12,12,13,.98));border:1px solid rgba(214,168,63,.3);border-radius:24px;padding:23px;box-shadow:0 24px 65px rgba(0,0,0,.4)}
-.label{text-align:center;font-size:12px;color:#b7a879;letter-spacing:1.5px}
-.number{font-size:94px;line-height:1;text-align:center;font-weight:950;letter-spacing:8px;margin:18px 0 8px;background:linear-gradient(180deg,#fff0b2,#e7bd55 55%,#a8731e);-webkit-background-clip:text;background-clip:text;color:transparent}
-.state{text-align:center;color:#bcb3a0;font-size:13px;min-height:20px}
-.meta{margin-top:23px;border-top:1px solid rgba(255,255,255,.07)}
-.row{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}
-.row span:first-child{color:#8f8a80}
-.row span:last-child{font-weight:700;color:#efe0b2;text-align:right}
-.hist{margin-top:22px}
-.hist h3{font-size:14px;color:#d7bf7b;margin:0 0 10px}
-.item{display:flex;justify-content:space-between;align-items:center;background:#111112;border:1px solid rgba(255,255,255,.06);padding:12px 13px;border-radius:13px;margin-bottom:8px}
-.item .n{font-size:25px;font-weight:900;color:#e8c86e}
-.item .d{font-size:11px;color:#8e897f;text-align:right}
-.empty{color:#77736b;font-size:12px;padding:12px 0;text-align:center}
-.foot{text-align:center;color:#77736b;font-size:11px;margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06)}
-.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4bc58a;margin-right:6px}
-.err{color:#dba0a0}
+
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#1b1409 0,#0b0b0c 40%,#070708 100%);
+  color:#f7f0df;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif
+}
+
+.wrap{
+  max-width:520px;
+  margin:auto;
+  min-height:100vh;
+  padding:20px 15px 44px
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0
+}
+
+.mark{
+  width:48px;
+  height:48px;
+  flex:none;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:#f0d486;
+  border:1px solid #aa7a23;
+  background:linear-gradient(145deg,#2b1d08,#0e0d0a);
+  box-shadow:0 0 20px rgba(214,168,63,.15)
+}
+
+.cn{
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:3px;
+  color:#f3d889
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#9b8d68;
+  margin-top:2px
+}
+
+.thai{
+  font-size:10px;
+  color:#bba974;
+  margin-top:2px
+}
+
+.langbox{
+  flex:none
+}
+
+select{
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid rgba(214,168,63,.35);
+  background:#111112;
+  color:#e9d49a;
+  border-radius:12px;
+  padding:9px 30px 9px 10px;
+  font-size:12px;
+  outline:none
+}
+
+.card{
+  background:linear-gradient(180deg,rgba(21,21,21,.98),rgba(12,12,13,.98));
+  border:1px solid rgba(214,168,63,.3);
+  border-radius:24px;
+  padding:23px;
+  box-shadow:0 24px 65px rgba(0,0,0,.4)
+}
+
+.label{
+  text-align:center;
+  font-size:12px;
+  color:#b7a879;
+  letter-spacing:1.2px
+}
+
+.number{
+  font-size:94px;
+  line-height:1;
+  text-align:center;
+  font-weight:950;
+  letter-spacing:8px;
+  margin:18px 0 8px;
+  background:linear-gradient(180deg,#fff0b2,#e7bd55 55%,#a8731e);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent
+}
+
+.state{
+  text-align:center;
+  color:#bcb3a0;
+  font-size:13px;
+  min-height:20px
+}
+
+.meta{
+  margin-top:23px;
+  border-top:1px solid rgba(255,255,255,.07)
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-size:13px
+}
+
+.row span:first-child{
+  color:#8f8a80
+}
+
+.row span:last-child{
+  font-weight:700;
+  color:#efe0b2;
+  text-align:right
+}
+
+.hist{
+  margin-top:22px
+}
+
+.hist h3{
+  font-size:14px;
+  color:#d7bf7b;
+  margin:0 0 10px
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#111112;
+  border:1px solid rgba(255,255,255,.06);
+  padding:12px 13px;
+  border-radius:13px;
+  margin-bottom:8px
+}
+
+.item .n{
+  font-size:25px;
+  font-weight:900;
+  color:#e8c86e
+}
+
+.item .d{
+  font-size:11px;
+  color:#8e897f;
+  text-align:right
+}
+
+.empty{
+  color:#77736b;
+  font-size:12px;
+  padding:12px 0;
+  text-align:center
+}
+
+.foot{
+  text-align:center;
+  color:#77736b;
+  font-size:11px;
+  margin-top:22px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.06)
+}
+
+.dot{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#4bc58a;
+  margin-right:6px
+}
+
+.err{
+  color:#dba0a0
+}
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
 
   <div class="head">
+
     <div class="brand">
       <div class="mark">金</div>
+
       <div>
         <div class="cn">金满堂</div>
         <div class="en">JIN MANTANG</div>
@@ -49,47 +227,66 @@ body{margin:0;background:radial-gradient(circle at top,#1b1409 0,#0b0b0c 40%,#07
       </div>
     </div>
 
-    <div class="flag">🇹🇭</div>
+    <div class="langbox">
+      <select id="language" onchange="changeLanguage(this.value)">
+        <option value="zh">🇨🇳 中文</option>
+        <option value="th">🇹🇭 ไทย</option>
+        <option value="my">🇲🇲 မြန်မာ</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="ms">🇲🇾 Bahasa Melayu</option>
+        <option value="vi">🇻🇳 Tiếng Việt</option>
+        <option value="id">🇮🇩 Bahasa Indonesia</option>
+      </select>
+    </div>
+
   </div>
 
   <main class="card">
 
-    <div class="label">最新数字公告 · LATEST RESULT</div>
+    <div class="label" id="latestLabel">
+      最新数字公告 · LATEST RESULT
+    </div>
 
     <div class="number" id="latest">--</div>
 
-    <div class="state" id="state">正在连接...</div>
+    <div class="state" id="state">
+      正在连接...
+    </div>
 
     <div class="meta">
 
       <div class="row">
-        <span>发布时间</span>
+        <span id="publishLabel">发布时间</span>
         <span id="time">—</span>
       </div>
 
       <div class="row">
-        <span>时区</span>
-        <span>Myanmar Time (MMT)</span>
+        <span id="timezoneLabel">时区</span>
+        <span id="timezoneValue">Myanmar Time (MMT)</span>
       </div>
 
       <div class="row">
-        <span>历史范围</span>
-        <span>最近 14 天</span>
+        <span id="rangeLabel">历史范围</span>
+        <span id="rangeValue">最近 14 天</span>
       </div>
 
     </div>
 
     <section class="hist">
 
-      <h3>历史公告 · HISTORY</h3>
+      <h3 id="historyTitle">
+        历史公告 · HISTORY
+      </h3>
 
       <div id="history">
-        <div class="empty">正在读取...</div>
+        <div class="empty" id="loadingHistory">
+          正在读取...
+        </div>
       </div>
 
     </section>
 
-    <div class="foot">
+    <div class="foot" id="footerText">
       © 2022 JIN MANTANG · 泰国 2D
     </div>
 
@@ -97,131 +294,369 @@ body{margin:0;background:radial-gradient(circle at top,#1b1409 0,#0b0b0c 40%,#07
 
 </div>
 
+
 <script>
 
-const BASE = 'https://veserwfjxglxieehfggy.supabase.co';
+const BASE =
+'https://veserwfjxglxieehfggy.supabase.co';
 
-const KEY = 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
-function formatMMT(iso) {
 
-  const d = new Date(iso);
+const T = {
 
-  return new Intl.DateTimeFormat('zh-CN', {
+zh:{
+latest:'最新数字公告 · LATEST RESULT',
+connecting:'正在连接...',
+connected:'已连接 · 最新结果已同步',
+waiting:'已连接 · 等待发布',
+publish:'发布时间',
+timezone:'时区',
+timezoneValue:'Myanmar Time (MMT)',
+range:'历史范围',
+rangeValue:'最近 14 天',
+history:'历史公告 · HISTORY',
+loading:'正在读取...',
+empty:'最近 14 天暂无公告',
+failed:'连接失败，请稍后刷新',
+historyFailed:'暂时无法读取记录',
+footer:'© 2022 JIN MANTANG · 泰国 2D'
+},
 
-    timeZone:'Asia/Yangon',
+th:{
+latest:'ประกาศผลล่าสุด · LATEST RESULT',
+connecting:'กำลังเชื่อมต่อ...',
+connected:'เชื่อมต่อแล้ว · อัปเดตผลล่าสุดแล้ว',
+waiting:'เชื่อมต่อแล้ว · รอประกาศผล',
+publish:'เวลาประกาศ',
+timezone:'เขตเวลา',
+timezoneValue:'เวลาประเทศเมียนมา (MMT)',
+range:'ช่วงประวัติ',
+rangeValue:'14 วันที่ผ่านมา',
+history:'ประวัติผล · HISTORY',
+loading:'กำลังโหลด...',
+empty:'ไม่มีผลในช่วง 14 วันที่ผ่านมา',
+failed:'เชื่อมต่อไม่สำเร็จ กรุณาลองใหม่',
+historyFailed:'ไม่สามารถโหลดประวัติได้',
+footer:'© 2022 JIN MANTANG · ไทย 2D'
+},
 
-    year:'numeric',
+my:{
+latest:'နောက်ဆုံးဂဏန်းကြေညာချက် · LATEST RESULT',
+connecting:'ချိတ်ဆက်နေသည်...',
+connected:'ချိတ်ဆက်ပြီး · နောက်ဆုံးရလဒ် အပ်ဒိတ်ဖြစ်ပြီး',
+waiting:'ချိတ်ဆက်ပြီး · ထုတ်ပြန်ချက်ကို စောင့်နေသည်',
+publish:'ထုတ်ပြန်ချိန်',
+timezone:'အချိန်ဇုန်',
+timezoneValue:'မြန်မာစံတော်ချိန် (MMT)',
+range:'မှတ်တမ်းအကွာအဝေး',
+rangeValue:'နောက်ဆုံး ၁၄ ရက်',
+history:'မှတ်တမ်း · HISTORY',
+loading:'ဖတ်နေသည်...',
+empty:'နောက်ဆုံး ၁၄ ရက်အတွင်း မှတ်တမ်းမရှိပါ',
+failed:'ချိတ်ဆက်မှု မအောင်မြင်ပါ',
+historyFailed:'မှတ်တမ်းကို ယာယီဖတ်မရပါ',
+footer:'© 2022 JIN MANTANG · Thailand 2D'
+},
 
-    month:'2-digit',
+en:{
+latest:'LATEST RESULT',
+connecting:'Connecting...',
+connected:'Connected · Latest result synced',
+waiting:'Connected · Waiting for result',
+publish:'Published time',
+timezone:'Time zone',
+timezoneValue:'Myanmar Time (MMT)',
+range:'History range',
+rangeValue:'Last 14 days',
+history:'RESULT HISTORY',
+loading:'Loading...',
+empty:'No results in the last 14 days',
+failed:'Connection failed. Please refresh later.',
+historyFailed:'Unable to load history',
+footer:'© 2022 JIN MANTANG · THAILAND 2D'
+},
 
-    day:'2-digit',
+ms:{
+latest:'KEPUTUSAN TERKINI · LATEST RESULT',
+connecting:'Sedang menyambung...',
+connected:'Disambungkan · Keputusan terkini telah diselaraskan',
+waiting:'Disambungkan · Menunggu keputusan',
+publish:'Waktu diumumkan',
+timezone:'Zon masa',
+timezoneValue:'Waktu Myanmar (MMT)',
+range:'Julat sejarah',
+rangeValue:'14 hari terakhir',
+history:'SEJARAH KEPUTUSAN',
+loading:'Sedang memuatkan...',
+empty:'Tiada keputusan dalam 14 hari terakhir',
+failed:'Sambungan gagal. Sila cuba lagi.',
+historyFailed:'Tidak dapat memuatkan sejarah',
+footer:'© 2022 JIN MANTANG · THAILAND 2D'
+},
 
-    hour:'2-digit',
+vi:{
+latest:'KẾT QUẢ MỚI NHẤT · LATEST RESULT',
+connecting:'Đang kết nối...',
+connected:'Đã kết nối · Kết quả mới nhất đã được đồng bộ',
+waiting:'Đã kết nối · Đang chờ kết quả',
+publish:'Thời gian công bố',
+timezone:'Múi giờ',
+timezoneValue:'Giờ Myanmar (MMT)',
+range:'Phạm vi lịch sử',
+rangeValue:'14 ngày gần nhất',
+history:'LỊCH SỬ KẾT QUẢ',
+loading:'Đang tải...',
+empty:'Không có kết quả trong 14 ngày gần nhất',
+failed:'Kết nối thất bại. Vui lòng thử lại.',
+historyFailed:'Không thể tải lịch sử',
+footer:'© 2022 JIN MANTANG · THAILAND 2D'
+},
 
-    minute:'2-digit',
+id:{
+latest:'HASIL TERBARU · LATEST RESULT',
+connecting:'Sedang menghubungkan...',
+connected:'Terhubung · Hasil terbaru telah disinkronkan',
+waiting:'Terhubung · Menunggu hasil',
+publish:'Waktu publikasi',
+timezone:'Zona waktu',
+timezoneValue:'Waktu Myanmar (MMT)',
+range:'Rentang riwayat',
+rangeValue:'14 hari terakhir',
+history:'RIWAYAT HASIL',
+loading:'Sedang memuat...',
+empty:'Tidak ada hasil dalam 14 hari terakhir',
+failed:'Koneksi gagal. Silakan coba lagi.',
+historyFailed:'Tidak dapat memuat riwayat',
+footer:'© 2022 JIN MANTANG · THAILAND 2D'
+}
 
-    second:'2-digit',
+};
 
-    hour12:false
 
-  }).format(d) + ' MMT';
+let currentLang =
+localStorage.getItem('jmt_lang') || 'zh';
+
+
+function changeLanguage(lang){
+
+  currentLang = lang;
+
+  localStorage.setItem(
+    'jmt_lang',
+    lang
+  );
+
+  applyLanguage();
+
+  loadResults();
+}
+
+
+function applyLanguage(){
+
+  const t = T[currentLang] || T.zh;
+
+  document.documentElement.lang = currentLang;
+
+  document.getElementById(
+    'language'
+  ).value = currentLang;
+
+  document.getElementById(
+    'latestLabel'
+  ).textContent = t.latest;
+
+  document.getElementById(
+    'publishLabel'
+  ).textContent = t.publish;
+
+  document.getElementById(
+    'timezoneLabel'
+  ).textContent = t.timezone;
+
+  document.getElementById(
+    'timezoneValue'
+  ).textContent = t.timezoneValue;
+
+  document.getElementById(
+    'rangeLabel'
+  ).textContent = t.range;
+
+  document.getElementById(
+    'rangeValue'
+  ).textContent = t.rangeValue;
+
+  document.getElementById(
+    'historyTitle'
+  ).textContent = t.history;
+
+  document.getElementById(
+    'footerText'
+  ).textContent = t.footer;
 
 }
 
-async function loadResults() {
 
-  const state = document.getElementById('state');
+function formatMMT(iso){
 
-  try {
+  const d = new Date(iso);
 
-    const cutoff = new Date(
-      Date.now() - 14*24*60*60*1000
+  return new Intl.DateTimeFormat(
+    currentLang === 'zh' ? 'zh-CN' :
+    currentLang === 'th' ? 'th-TH' :
+    currentLang === 'my' ? 'my-MM' :
+    currentLang === 'ms' ? 'ms-MY' :
+    currentLang === 'vi' ? 'vi-VN' :
+    currentLang === 'id' ? 'id-ID' :
+    'en-GB',
+    {
+      timeZone:'Asia/Yangon',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+      hour12:false
+    }
+  ).format(d) + ' MMT';
+
+}
+
+
+async function loadResults(){
+
+  const t = T[currentLang] || T.zh;
+
+  const state =
+  document.getElementById('state');
+
+  state.textContent = t.connecting;
+
+  try{
+
+    const cutoff =
+    new Date(
+      Date.now() -
+      14*24*60*60*1000
     ).toISOString();
 
     const url =
-      BASE +
-      '/rest/v1/results?select=id,result_number,published_at&published_at=gte.' +
-      encodeURIComponent(cutoff) +
-      '&order=published_at.desc&limit=100';
+    BASE +
+    '/rest/v1/results?select=id,result_number,published_at&published_at=gte.' +
+    encodeURIComponent(cutoff) +
+    '&order=published_at.desc&limit=100';
 
-    const r = await fetch(url, {
-
-      headers: {
-
-        apikey: KEY,
-
-        Authorization: 'Bearer ' + KEY
-
+    const r = await fetch(
+      url,
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer ' + KEY
+        }
       }
+    );
 
-    });
+    if(!r.ok){
+      throw new Error(
+        'HTTP ' + r.status
+      );
+    }
 
-    if (!r.ok)
-      throw new Error('HTTP ' + r.status);
+    const rows =
+    await r.json();
 
-    const rows = await r.json();
+    const latest =
+    rows[0];
 
-    const latest = rows[0];
+    document.getElementById(
+      'latest'
+    ).textContent =
+    latest
+    ? latest.result_number
+    : '--';
 
-    document.getElementById('latest').textContent =
-      latest ? latest.result_number : '--';
-
-    document.getElementById('time').textContent =
-      latest ? formatMMT(latest.published_at) : '—';
+    document.getElementById(
+      'time'
+    ).textContent =
+    latest
+    ? formatMMT(latest.published_at)
+    : '—';
 
     state.innerHTML =
-      latest
-      ? '<span class="dot"></span>已连接 · 最新结果已同步'
-      : '<span class="dot"></span>已连接 · 等待发布';
+    latest
+    ? '<span class="dot"></span>' + t.connected
+    : '<span class="dot"></span>' + t.waiting;
+
 
     const box =
-      document.getElementById('history');
+    document.getElementById('history');
 
     box.innerHTML = '';
 
-    if (!rows.length) {
+
+    if(!rows.length){
 
       box.innerHTML =
-        '<div class="empty">最近 14 天暂无公告</div>';
+      '<div class="empty">' +
+      t.empty +
+      '</div>';
 
       return;
 
     }
 
+
     rows.forEach(x => {
 
       const el =
-        document.createElement('div');
+      document.createElement('div');
 
-      el.className = 'item';
+      el.className =
+      'item';
 
       el.innerHTML =
-        '<div class="n">' +
-        x.result_number +
-        '</div><div class="d">' +
-        formatMMT(x.published_at) +
-        '</div>';
+      '<div class="n">' +
+      x.result_number +
+      '</div>' +
+      '<div class="d">' +
+      formatMMT(x.published_at) +
+      '</div>';
 
       box.appendChild(el);
 
     });
 
-  } catch (e) {
+
+  }catch(e){
 
     state.innerHTML =
-      '<span class="err">连接失败，请稍后刷新</span>';
+    '<span class="err">' +
+    t.failed +
+    '</span>';
 
-    document.getElementById('history').innerHTML =
-      '<div class="empty">暂时无法读取记录</div>';
+    document.getElementById(
+      'history'
+    ).innerHTML =
+    '<div class="empty">' +
+    t.historyFailed +
+    '</div>';
 
   }
 
 }
 
+
+applyLanguage();
+
 loadResults();
 
-setInterval(loadResults,30000);
+setInterval(
+  loadResults,
+  30000
+);
 
 </script>
 
