@@ -1,19 +1,42 @@
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta name="theme-color" content="#09090a">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
 <title>金满堂 · 代理管理</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box
+}
 
 body{
   margin:0;
-  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 40%,
+    #070708 100%
+  );
   color:#f5edd9;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif
 }
 
 .wrap{
@@ -44,8 +67,15 @@ body{
 }
 
 .card{
-  background:linear-gradient(180deg,#151515,#0d0d0e);
-  border:1px solid rgba(214,168,63,.28);
+  background:
+  linear-gradient(
+    180deg,
+    #151515,
+    #0d0d0e
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.28);
   border-radius:18px;
   padding:16px;
   margin-bottom:14px
@@ -63,7 +93,9 @@ select{
   width:100%;
   background:#101011;
   color:#fff;
-  border:1px solid rgba(214,168,63,.22);
+  border:
+  1px solid
+  rgba(214,168,63,.22);
   border-radius:11px;
   padding:12px;
   outline:none;
@@ -84,20 +116,29 @@ button:disabled{
 }
 
 .gold{
-  background:linear-gradient(180deg,#efd47c,#b87e1e);
+  background:
+  linear-gradient(
+    180deg,
+    #efd47c,
+    #b87e1e
+  );
   color:#171109
 }
 
 .dark{
   background:#191919;
   color:#d9c77d;
-  border:1px solid rgba(214,168,63,.2)
+  border:
+  1px solid
+  rgba(214,168,63,.2)
 }
 
 .red{
   background:#351616;
   color:#e9a0a0;
-  border:1px solid rgba(220,90,90,.25)
+  border:
+  1px solid
+  rgba(220,90,90,.25)
 }
 
 .formGrid{
@@ -108,7 +149,8 @@ button:disabled{
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+  repeat(3,1fr);
   gap:8px
 }
 
@@ -116,7 +158,9 @@ button:disabled{
   background:#101011;
   border-radius:12px;
   padding:13px;
-  border:1px solid rgba(255,255,255,.05)
+  border:
+  1px solid
+  rgba(255,255,255,.05)
 }
 
 .stat small{
@@ -134,7 +178,9 @@ button:disabled{
 
 .agent{
   background:#101011;
-  border:1px solid rgba(255,255,255,.06);
+  border:
+  1px solid
+  rgba(255,255,255,.06);
   border-radius:14px;
   padding:14px;
   margin-bottom:9px
@@ -167,24 +213,25 @@ button:disabled{
   white-space:nowrap
 }
 
-.active{
+.badge.active{
   background:#153124;
   color:#76d6a0
 }
 
-.suspended{
+.badge.suspended{
   background:#352d13;
   color:#e0c46c
 }
 
-.blocked{
+.badge.blocked{
   background:#371717;
   color:#e79292
 }
 
 .actions{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:
+  1fr 1fr 1fr;
   gap:7px;
   margin-top:12px
 }
@@ -200,15 +247,16 @@ button:disabled{
   font-size:12px;
   min-height:18px;
   margin-top:10px;
-  line-height:1.5
+  line-height:1.5;
+  word-break:break-word
 }
 
 .success{
-  color:#76d6a0
+  color:#76d6a0!important
 }
 
 .error{
-  color:#e79292
+  color:#e79292!important
 }
 
 .empty{
@@ -220,7 +268,8 @@ button:disabled{
 
 .divider{
   height:1px;
-  background:rgba(255,255,255,.06);
+  background:
+  rgba(255,255,255,.06);
   margin:15px 0
 }
 
@@ -233,7 +282,9 @@ button:disabled{
 
 .sessionBox{
   background:#101011;
-  border:1px solid rgba(214,168,63,.16);
+  border:
+  1px solid
+  rgba(214,168,63,.16);
   border-radius:13px;
   padding:12px;
   font-size:11px;
@@ -244,6 +295,16 @@ button:disabled{
 
 .sessionBox strong{
   color:#76d6a0
+}
+
+.searchRow{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px
+}
+
+.searchRow button{
+  min-width:85px
 }
 
 @media(max-width:550px){
@@ -261,16 +322,20 @@ button:disabled{
   }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
 <div class="wrap">
 
+
   <div class="header">
 
     <div>
+
       <div class="logo">
         金满堂 · 代理管理
       </div>
@@ -278,22 +343,29 @@ button:disabled{
       <div class="sub">
         ADMIN / AGENTS
       </div>
+
     </div>
+
 
     <button
       class="dark"
       onclick="location.href='/admin/'">
+
       返回总后台
+
     </button>
 
   </div>
 
 
   <div class="sessionBox">
+
     管理员状态：
+
     <strong id="adminSessionState">
       正在验证...
     </strong>
+
   </div>
 
 
@@ -303,21 +375,28 @@ button:disabled{
       ＋ 创建新代理
     </div>
 
+
     <div class="formGrid">
+
 
       <input
         id="newName"
         placeholder="代理名称，例如：小林代理">
 
+
       <input
         id="newEmail"
         type="email"
+        autocomplete="off"
         placeholder="代理登录邮箱">
+
 
       <input
         id="newPassword"
         type="password"
+        autocomplete="new-password"
         placeholder="初始密码，至少8位">
+
 
       <input
         id="newRate"
@@ -328,7 +407,9 @@ button:disabled{
         value="20"
         placeholder="代理比例 %">
 
+
     </div>
+
 
     <button
       id="createBtn"
@@ -340,15 +421,20 @@ button:disabled{
 
     </button>
 
+
     <div
       class="msg"
       id="createMsg">
     </div>
 
+
     <div class="hint">
 
-      创建成功后，代理可以使用这里设置的邮箱和密码登录代理中心。
-      每位代理的比例可以单独设置，范围为 0%–40%。
+      创建成功后，代理可以使用这里设置的邮箱和密码登录 Agent Center。
+
+      <br>
+
+      每个代理可以单独设置比例，范围为 0%–40%。
 
     </div>
 
@@ -361,22 +447,48 @@ button:disabled{
       代理概况
     </div>
 
+
     <div class="stats">
 
-      <div class="stat">
-        <small>代理总数</small>
-        <strong id="totalAgents">0</strong>
-      </div>
 
       <div class="stat">
-        <small>正常</small>
-        <strong id="activeAgents">0</strong>
+
+        <small>
+          代理总数
+        </small>
+
+        <strong id="totalAgents">
+          0
+        </strong>
+
       </div>
 
+
       <div class="stat">
-        <small>暂停 / 限制</small>
-        <strong id="inactiveAgents">0</strong>
+
+        <small>
+          正常
+        </small>
+
+        <strong id="activeAgents">
+          0
+        </strong>
+
       </div>
+
+
+      <div class="stat">
+
+        <small>
+          暂停 / 限制
+        </small>
+
+        <strong id="inactiveAgents">
+          0
+        </strong>
+
+      </div>
+
 
     </div>
 
@@ -389,16 +501,34 @@ button:disabled{
       搜索代理
     </div>
 
-    <input
-      id="searchInput"
-      placeholder="输入代理名字搜索"
-      oninput="renderAgents()">
 
-    <div class="divider"></div>
+    <div class="searchRow">
+
+      <input
+        id="searchInput"
+        placeholder="输入代理名字搜索"
+        oninput="renderAgents()">
+
+
+      <button
+        class="dark"
+        onclick="loadAgents(true)">
+
+        刷新
+
+      </button>
+
+    </div>
+
+
+    <div class="divider">
+    </div>
+
 
     <div class="title">
       代理列表
     </div>
+
 
     <div id="agentList">
 
@@ -407,6 +537,7 @@ button:disabled{
       </div>
 
     </div>
+
 
     <div
       class="msg"
@@ -422,13 +553,18 @@ button:disabled{
       修改代理比例
     </div>
 
+
     <div class="formGrid">
 
+
       <select id="agentSelect">
+
         <option value="">
           选择代理
         </option>
+
       </select>
+
 
       <input
         id="rateInput"
@@ -438,7 +574,9 @@ button:disabled{
         step="0.5"
         placeholder="新比例 %">
 
+
     </div>
+
 
     <button
       class="gold"
@@ -448,6 +586,7 @@ button:disabled{
       保存代理比例
 
     </button>
+
 
     <div
       class="msg"
@@ -470,6 +609,7 @@ button:disabled{
 
   </div>
 
+
 </div>
 
 
@@ -478,19 +618,10 @@ button:disabled{
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
 
+
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
-
-/*
-  重要：
-  Admin 首页会同时保存 localStorage + sessionStorage。
-
-  这里必须两个都读取。
-
-  localStorage 放前面，
-  避免 Safari 页面跳转后 sessionStorage 丢失。
-*/
 
 let token =
 
@@ -506,29 +637,20 @@ sessionStorage.getItem(
 
 ||
 
-localStorage.getItem(
-  'jmt_token'
-)
-
-||
-
-sessionStorage.getItem(
-  'jmt_token'
-)
-
-||
-
 '';
 
 
-let agents = [];
+let agents =
+[];
 
-let adminUser = null;
+
+let adminUser =
+null;
 
 
-/* =========================
+/* =====================================
    API
-========================= */
+===================================== */
 
 async function api(
   path,
@@ -536,34 +658,25 @@ async function api(
 ){
 
   return fetch(
-
     BASE+path,
-
     {
-
       ...options,
 
       headers:{
-
         apikey:KEY,
-
         Authorization:
         'Bearer '+token,
-
         ...(options.headers || {})
-
       }
-
     }
-
   );
 
 }
 
 
-/* =========================
-   VERIFY ADMIN
-========================= */
+/* =====================================
+   ADMIN VERIFY
+===================================== */
 
 async function verifyAdmin(){
 
@@ -586,40 +699,66 @@ async function verifyAdmin(){
 
   try{
 
-    /*
-      这里只验证 Supabase 登录 token。
-
-      Admin 首页本身已经负责管理员身份验证。
-
-      不在这里额外用错误字段
-      查询 admin_users，
-      避免误判后自动踢出。
-    */
-
-    const r =
+    const userRes =
     await api(
       '/auth/v1/user'
     );
 
 
-    if(!r.ok){
+    if(!userRes.ok){
 
-      throw new Error();
+      throw new Error(
+        'LOGIN_EXPIRED'
+      );
+
+    }
+
+
+    const user =
+    await userRes.json();
+
+
+    const adminRes =
+    await api(
+      '/rest/v1/admin_users'+
+      '?auth_user_id=eq.'+
+      encodeURIComponent(
+        user.id
+      )+
+      '&select=auth_user_id'+
+      '&limit=1'
+    );
+
+
+    if(!adminRes.ok){
+
+      throw new Error(
+        'ADMIN_CHECK_FAILED'
+      );
+
+    }
+
+
+    const admins =
+    await adminRes.json();
+
+
+    if(!admins.length){
+
+      throw new Error(
+        'NOT_ADMIN'
+      );
 
     }
 
 
     adminUser =
-    await r.json();
-
-
-    state.textContent =
-    '已登录';
+    user;
 
 
     /*
-      重新同步两个 Storage，
-      防止 Safari 页面跳转导致其中一个丢失。
+      两个 Storage 同步，
+      避免 iPhone/Safari 页面跳转以后丢失状态。
     */
 
     localStorage.setItem(
@@ -632,6 +771,10 @@ async function verifyAdmin(){
       'jmt_access_token',
       token
     );
+
+
+    state.textContent =
+    '已登录';
 
 
     return true;
@@ -650,9 +793,9 @@ async function verifyAdmin(){
 }
 
 
-/* =========================
+/* =====================================
    CREATE AGENT
-========================= */
+===================================== */
 
 async function createAgent(){
 
@@ -700,12 +843,13 @@ async function createAgent(){
 
   if(!name){
 
+    msg.className =
+    'msg error';
+
+
     msg.textContent =
     '请输入代理名称';
 
-    msg.classList.add(
-      'error'
-    );
 
     return;
 
@@ -718,26 +862,13 @@ async function createAgent(){
     !email.includes('@')
   ){
 
+    msg.className =
+    'msg error';
+
+
     msg.textContent =
     '请输入正确的登录邮箱';
 
-    msg.classList.add(
-      'error'
-    );
-
-    return;
-
-  }
-
-
-  if(password.length < 8){
-
-    msg.textContent =
-    '初始密码至少需要8位';
-
-    msg.classList.add(
-      'error'
-    );
 
     return;
 
@@ -745,19 +876,55 @@ async function createAgent(){
 
 
   if(
-    !Number.isFinite(rate)
+    password.length < 8
+  ){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '初始密码至少需要8位';
+
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(
+      rate
+    )
     ||
     rate < 0
     ||
     rate > 40
   ){
 
-    msg.textContent =
-    '代理比例必须在0%–40%之间';
+    msg.className =
+    'msg error';
 
-    msg.classList.add(
-      'error'
-    );
+
+    msg.textContent =
+    '代理比例必须在 0%–40% 之间';
+
+
+    return;
+
+  }
+
+
+  const ok =
+  confirm(
+    '确定创建这个代理？\n\n'+
+    '代理名称：'+name+
+    '\n登录邮箱：'+email+
+    '\n代理比例：'+rate+'%'
+  );
+
+
+  if(!ok){
 
     return;
 
@@ -774,30 +941,40 @@ async function createAgent(){
 
   try{
 
+    /*
+      再确认管理员身份。
+    */
+
+    const adminOK =
+    await verifyAdmin();
+
+
+    if(!adminOK){
+
+      throw new Error(
+        '管理员登录已失效'
+      );
+
+    }
+
+
     const r =
     await fetch(
-
       BASE+
       '/functions/v1/create-agent',
-
       {
-
         method:'POST',
 
         headers:{
-
           apikey:KEY,
-
           Authorization:
           'Bearer '+token,
-
           'Content-Type':
           'application/json'
-
         },
 
-        body:JSON.stringify({
-
+        body:
+        JSON.stringify({
           display_name:
           name,
 
@@ -809,25 +986,34 @@ async function createAgent(){
 
           commission_rate:
           rate
-
         })
-
       }
-
     );
 
 
-    let d = {};
+    const text =
+    await r.text();
+
+
+    let data =
+    {};
 
 
     try{
 
-      d =
-      await r.json();
+      data =
+      text
+      ?
+      JSON.parse(
+        text
+      )
+      :
+      {};
 
     }catch(e){
 
-      d = {};
+      data =
+      {};
 
     }
 
@@ -835,7 +1021,11 @@ async function createAgent(){
     if(!r.ok){
 
       throw new Error(
-        d.error
+        data.error
+        ||
+        data.message
+        ||
+        text
         ||
         '创建失败'
       );
@@ -848,7 +1038,6 @@ async function createAgent(){
 
 
     msg.textContent =
-
     '✓ 代理「'+
     name+
     '」创建成功';
@@ -878,7 +1067,9 @@ async function createAgent(){
     '20';
 
 
-    await loadAgents();
+    await loadAgents(
+      false
+    );
 
 
   }catch(e){
@@ -888,9 +1079,12 @@ async function createAgent(){
 
 
     msg.textContent =
-    e.message
-    ||
-    '创建代理失败';
+    '创建失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
 
 
   }finally{
@@ -903,11 +1097,13 @@ async function createAgent(){
 }
 
 
-/* =========================
+/* =====================================
    LOAD AGENTS
-========================= */
+===================================== */
 
-async function loadAgents(){
+async function loadAgents(
+  showMessage=false
+){
 
   const msg =
   document.getElementById(
@@ -919,23 +1115,29 @@ async function loadAgents(){
   'msg';
 
 
+  if(showMessage){
+
+    msg.textContent =
+    '正在读取最新代理资料...';
+
+  }
+
+
   try{
 
     const r =
     await api(
-
       '/rest/v1/agents'+
       '?select=id,display_name,commission_rate,status,created_at'+
       '&order=created_at.desc'
-
     );
 
 
+    const text =
+    await r.text();
+
+
     if(!r.ok){
-
-      const text =
-      await r.text();
-
 
       throw new Error(
         text
@@ -946,29 +1148,96 @@ async function loadAgents(){
     }
 
 
+    let rows =
+    [];
+
+
+    try{
+
+      rows =
+      text
+      ?
+      JSON.parse(
+        text
+      )
+      :
+      [];
+
+    }catch(e){
+
+      rows =
+      [];
+
+    }
+
+
+    if(
+      !Array.isArray(
+        rows
+      )
+    ){
+
+      throw new Error(
+        '代理数据格式错误'
+      );
+
+    }
+
+
     agents =
-    await r.json();
+    rows;
 
 
     renderAgents();
 
+
     updateStats();
+
 
     buildSelect();
 
 
-    msg.textContent =
-    '';
+    if(showMessage){
+
+      msg.className =
+      'msg success';
+
+
+      msg.textContent =
+      '✓ 已读取最新代理资料';
+
+
+      setTimeout(
+        ()=>{
+
+          if(
+            msg.textContent ===
+            '✓ 已读取最新代理资料'
+          ){
+
+            msg.textContent =
+            '';
+
+          }
+
+        },
+        1800
+      );
+
+    }else{
+
+      msg.textContent =
+      '';
+
+    }
 
 
   }catch(e){
 
     /*
-      重要：
-      读取代理失败时不再自动跳回 Admin。
-
-      这样即使 Supabase RLS 有问题，
-      页面也不会“进去一下就退出”。
+      重点：
+      代理资料读取失败时，
+      页面不会自动跳回 Admin。
     */
 
     msg.className =
@@ -976,15 +1245,19 @@ async function loadAgents(){
 
 
     msg.textContent =
-    '无法读取代理资料，但管理员页面不会自动退出。';
+    '代理资料读取失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
 
 
     document.getElementById(
       'agentList'
     ).innerHTML =
-
     '<div class="empty">'+
-    '代理资料读取失败'+
+    '代理资料暂时无法读取'+
     '</div>';
 
   }
@@ -992,9 +1265,9 @@ async function loadAgents(){
 }
 
 
-/* =========================
-   RENDER
-========================= */
+/* =====================================
+   RENDER AGENTS
+===================================== */
 
 function renderAgents(){
 
@@ -1015,8 +1288,7 @@ function renderAgents(){
 
   const list =
   agents.filter(
-    a=>
-
+    a =>
     String(
       a.display_name || ''
     )
@@ -1024,7 +1296,6 @@ function renderAgents(){
     .includes(
       keyword
     )
-
   );
 
 
@@ -1032,7 +1303,13 @@ function renderAgents(){
 
     box.innerHTML =
     '<div class="empty">'+
-    '没有找到代理'+
+    (
+      agents.length
+      ?
+      '没有找到符合搜索条件的代理'
+      :
+      '目前没有代理'
+    )+
     '</div>';
 
 
@@ -1042,38 +1319,32 @@ function renderAgents(){
 
 
   box.innerHTML =
-
   list.map(
     a=>{
 
+
       const statusText =
+      statusName(
+        a.status
+      );
 
-      a.status === 'active'
 
-      ?
-
-      '正常'
-
-      :
-
-      a.status === 'suspended'
-
-      ?
-
-      '已暂停'
-
-      :
-
-      '已限制';
+      const rate =
+      normalizeRate(
+        a.commission_rate
+      );
 
 
       return `
 
       <div class="agent">
 
+
         <div class="agentTop">
 
+
           <div>
+
 
             <div class="name">
 
@@ -1089,38 +1360,42 @@ function renderAgents(){
             <div class="meta">
 
               当前比例：
-
-              ${Number(
-                a.commission_rate || 0
-              )}%
+              ${formatRate(rate)}%
 
               <br>
 
               创建时间：
-
-              ${formatDate(
-                a.created_at
+              ${escapeHtml(
+                formatDate(
+                  a.created_at
+                )
               )}
 
             </div>
 
-          </div>
-
-
-          <div class="badge ${a.status}">
-
-            ${statusText}
 
           </div>
+
+
+          <div
+            class="badge ${escapeHtml(a.status || 'blocked')}">
+
+            ${escapeHtml(
+              statusText
+            )}
+
+          </div>
+
 
         </div>
 
 
         <div class="actions">
 
+
           <button
             class="dark"
-            onclick="chooseAgent('${a.id}')">
+            onclick="chooseAgent('${escapeJs(a.id)}')">
 
             修改比例
 
@@ -1130,7 +1405,7 @@ function renderAgents(){
           <button
             class="dark"
             onclick="setStatus(
-              '${a.id}',
+              '${escapeJs(a.id)}',
               '${
                 a.status === 'suspended'
                 ?
@@ -1154,7 +1429,7 @@ function renderAgents(){
           <button
             class="red"
             onclick="setStatus(
-              '${a.id}',
+              '${escapeJs(a.id)}',
               '${
                 a.status === 'blocked'
                 ?
@@ -1174,22 +1449,24 @@ function renderAgents(){
 
           </button>
 
+
         </div>
+
 
       </div>
 
       `;
 
     }
-
-  ).join('');
+  )
+  .join('');
 
 }
 
 
-/* =========================
+/* =====================================
    STATS
-========================= */
+===================================== */
 
 function updateStats(){
 
@@ -1199,7 +1476,7 @@ function updateStats(){
 
   const active =
   agents.filter(
-    a=>
+    a =>
     a.status ===
     'active'
   ).length;
@@ -1225,9 +1502,9 @@ function updateStats(){
 }
 
 
-/* =========================
+/* =====================================
    SELECT
-========================= */
+===================================== */
 
 function buildSelect(){
 
@@ -1235,6 +1512,10 @@ function buildSelect(){
   document.getElementById(
     'agentSelect'
   );
+
+
+  const oldValue =
+  select.value;
 
 
   select.innerHTML =
@@ -1257,25 +1538,20 @@ function buildSelect(){
 
 
       option.textContent =
-
       (
         a.display_name
         ||
         '未命名代理'
       )
-
       +
-
       ' · '
-
       +
-
-      Number(
-        a.commission_rate || 0
+      formatRate(
+        normalizeRate(
+          a.commission_rate
+        )
       )
-
       +
-
       '%';
 
 
@@ -1284,23 +1560,44 @@ function buildSelect(){
       );
 
     }
-
   );
+
+
+  if(
+    agents.some(
+      a =>
+      a.id ===
+      oldValue
+    )
+  ){
+
+    select.value =
+    oldValue;
+
+  }
 
 }
 
 
-function chooseAgent(id){
+/* =====================================
+   CHOOSE AGENT
+===================================== */
+
+function chooseAgent(
+  id
+){
 
   const a =
   agents.find(
-    x=>
+    x =>
     x.id === id
   );
 
 
   if(!a){
+
     return;
+
   }
 
 
@@ -1313,27 +1610,24 @@ function chooseAgent(id){
   document.getElementById(
     'rateInput'
   ).value =
-  Number(
-    a.commission_rate || 0
+  normalizeRate(
+    a.commission_rate
   );
 
 
   document.getElementById(
     'rateInput'
   ).scrollIntoView({
-
     behavior:'smooth',
-
     block:'center'
-
   });
 
 }
 
 
-/* =========================
-   RATE
-========================= */
+/* =====================================
+   UPDATE RATE
+===================================== */
 
 async function updateRate(){
 
@@ -1363,12 +1657,13 @@ async function updateRate(){
 
   if(!id){
 
+    msg.className =
+    'msg error';
+
+
     msg.textContent =
     '请先选择代理';
 
-    msg.classList.add(
-      'error'
-    );
 
     return;
 
@@ -1376,19 +1671,65 @@ async function updateRate(){
 
 
   if(
-    !Number.isFinite(rate)
+    !Number.isFinite(
+      rate
+    )
     ||
     rate < 0
     ||
     rate > 40
   ){
 
-    msg.textContent =
-    '请输入0%–40%';
+    msg.className =
+    'msg error';
 
-    msg.classList.add(
-      'error'
-    );
+
+    msg.textContent =
+    '请输入 0%–40%';
+
+
+    return;
+
+  }
+
+
+  const agent =
+  agents.find(
+    a =>
+    a.id === id
+  );
+
+
+  if(!agent){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '没有找到该代理';
+
+
+    return;
+
+  }
+
+
+  const ok =
+  confirm(
+    '确定修改代理比例？\n\n'+
+    (
+      agent.display_name
+      ||
+      '未命名代理'
+    )+
+    '\n\n新比例：'+
+    rate+
+    '%'
+  );
+
+
+  if(!ok){
 
     return;
 
@@ -1403,42 +1744,80 @@ async function updateRate(){
 
     const r =
     await api(
-
       '/rest/v1/agents'+
       '?id=eq.'+
       encodeURIComponent(
         id
       ),
-
       {
-
         method:'PATCH',
 
         headers:{
-
           'Content-Type':
           'application/json',
 
           Prefer:
-          'return=minimal'
-
+          'return=representation'
         },
 
-        body:JSON.stringify({
-
+        body:
+        JSON.stringify({
           commission_rate:
           rate
-
         })
-
       }
-
     );
+
+
+    const text =
+    await r.text();
 
 
     if(!r.ok){
 
-      throw new Error();
+      throw new Error(
+        text
+        ||
+        '保存失败'
+      );
+
+    }
+
+
+    let rows =
+    [];
+
+
+    try{
+
+      rows =
+      text
+      ?
+      JSON.parse(
+        text
+      )
+      :
+      [];
+
+    }catch(e){
+
+      rows =
+      [];
+
+    }
+
+
+    if(
+      !Array.isArray(
+        rows
+      )
+      ||
+      !rows.length
+    ){
+
+      throw new Error(
+        '数据库没有确认比例修改'
+      );
 
     }
 
@@ -1448,10 +1827,26 @@ async function updateRate(){
 
 
     msg.textContent =
-    '✓ 比例已保存';
+    '✓ 代理比例已保存：'+
+    rate+
+    '%';
 
 
-    await loadAgents();
+    await loadAgents(
+      false
+    );
+
+
+    document.getElementById(
+      'agentSelect'
+    ).value =
+    id;
+
+
+    document.getElementById(
+      'rateInput'
+    ).value =
+    rate;
 
 
   }catch(e){
@@ -1461,45 +1856,95 @@ async function updateRate(){
 
 
     msg.textContent =
-    '保存失败';
+    '保存失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
 
   }
 
 }
 
 
-/* =========================
+/* =====================================
    STATUS
-========================= */
+===================================== */
 
 async function setStatus(
   id,
   status
 ){
 
-  const text =
-
-  status === 'blocked'
-
-  ?
-
-  '确定限制这个代理吗？限制后该代理将不能正常提交。'
-
-  :
-
-  status === 'suspended'
-
-  ?
-
-  '确定暂停这个代理吗？'
-
-  :
-
-  '确定恢复这个代理吗？';
+  const agent =
+  agents.find(
+    a =>
+    a.id === id
+  );
 
 
-  if(!confirm(text)){
+  if(!agent){
+
+    alert(
+      '没有找到该代理'
+    );
+
+
     return;
+
+  }
+
+
+  let action =
+  '';
+
+
+  if(
+    status ===
+    'blocked'
+  ){
+
+    action =
+    '限制';
+
+  }
+
+  else if(
+    status ===
+    'suspended'
+  ){
+
+    action =
+    '暂停';
+
+  }
+
+  else{
+
+    action =
+    '恢复';
+
+  }
+
+
+  const ok =
+  confirm(
+    '确定'+
+    action+
+    '这个代理？\n\n'+
+    (
+      agent.display_name
+      ||
+      '未命名代理'
+    )
+  );
+
+
+  if(!ok){
+
+    return;
+
   }
 
 
@@ -1507,53 +1952,101 @@ async function setStatus(
 
     const r =
     await api(
-
       '/rest/v1/agents'+
       '?id=eq.'+
       encodeURIComponent(
         id
       ),
-
       {
-
         method:'PATCH',
 
         headers:{
-
           'Content-Type':
           'application/json',
 
           Prefer:
-          'return=minimal'
-
+          'return=representation'
         },
 
-        body:JSON.stringify({
-
+        body:
+        JSON.stringify({
           status:
           status
-
         })
-
       }
-
     );
+
+
+    const text =
+    await r.text();
 
 
     if(!r.ok){
 
-      throw new Error();
+      throw new Error(
+        text
+        ||
+        '操作失败'
+      );
 
     }
 
 
-    await loadAgents();
+    let rows =
+    [];
+
+
+    try{
+
+      rows =
+      text
+      ?
+      JSON.parse(
+        text
+      )
+      :
+      [];
+
+    }catch(e){
+
+      rows =
+      [];
+
+    }
+
+
+    if(
+      !Array.isArray(
+        rows
+      )
+      ||
+      !rows.length
+      ||
+      rows[0].status !==
+      status
+    ){
+
+      throw new Error(
+        '数据库没有确认状态修改'
+      );
+
+    }
+
+
+    await loadAgents(
+      false
+    );
 
 
   }catch(e){
 
     alert(
-      '操作失败'
+      '操作失败：'+
+      (
+        e.message
+        ||
+        '未知错误'
+      )
     );
 
   }
@@ -1561,49 +2054,168 @@ async function setStatus(
 }
 
 
-/* =========================
-   FORMAT
-========================= */
+/* =====================================
+   RATE NORMALIZE
+===================================== */
 
-function formatDate(value){
+function normalizeRate(
+  value
+){
 
-  if(!value){
-    return '—';
+  let rate =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(
+      rate
+    )
+  ){
+
+    rate = 0;
+
   }
 
 
-  return new Intl
-  .DateTimeFormat(
+  /*
+    兼容：
+    20 = 20%
+    0.2 = 20%
+  */
+
+  if(
+    rate > 0
+    &&
+    rate <= 1
+  ){
+
+    rate *= 100;
+
+  }
+
+
+  return rate;
+
+}
+
+
+/* =====================================
+   STATUS NAME
+===================================== */
+
+function statusName(
+  status
+){
+
+  if(
+    status ===
+    'active'
+  ){
+
+    return '正常';
+
+  }
+
+
+  if(
+    status ===
+    'suspended'
+  ){
+
+    return '已暂停';
+
+  }
+
+
+  if(
+    status ===
+    'blocked'
+  ){
+
+    return '已限制';
+
+  }
+
+
+  return status || '未知';
+
+}
+
+
+/* =====================================
+   DATE
+===================================== */
+
+function formatDate(
+  value
+){
+
+  if(!value){
+
+    return '—';
+
+  }
+
+
+  return new Intl.DateTimeFormat(
     'zh-CN',
     {
-
       timeZone:
       'Asia/Yangon',
 
       year:'numeric',
-
       month:'2-digit',
-
       day:'2-digit',
 
       hour:'2-digit',
-
       minute:'2-digit',
 
       hour12:false
-
     }
+  ).format(
+    new Date(
+      value
+    )
   )
-  .format(
-    new Date(value)
+  +
+  ' MMT';
+
+}
+
+
+/* =====================================
+   RATE FORMAT
+===================================== */
+
+function formatRate(
+  value
+){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
   );
 
 }
 
 
-function escapeHtml(text){
+/* =====================================
+   HTML ESCAPE
+===================================== */
 
-  return String(text)
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ''
+  )
 
   .replaceAll(
     '&',
@@ -1633,9 +2245,64 @@ function escapeHtml(text){
 }
 
 
-/* =========================
+/* =====================================
+   JS STRING ESCAPE
+===================================== */
+
+function escapeJs(
+  value
+){
+
+  return String(
+    value ?? ''
+  )
+  .replaceAll(
+    '\\',
+    '\\\\'
+  )
+  .replaceAll(
+    "'",
+    "\\'"
+  );
+
+}
+
+
+/* =====================================
+   CLEAR SESSION
+===================================== */
+
+function clearAdminSession(){
+
+  localStorage.removeItem(
+    'jmt_access_token'
+  );
+
+
+  sessionStorage.removeItem(
+    'jmt_access_token'
+  );
+
+
+  localStorage.removeItem(
+    'jmt_token'
+  );
+
+
+  sessionStorage.removeItem(
+    'jmt_token'
+  );
+
+
+  token =
+  '';
+
+}
+
+
+/* =====================================
    START
-========================= */
+===================================== */
 
 async function startPage(){
 
@@ -1645,20 +2312,7 @@ async function startPage(){
 
   if(!ok){
 
-    /*
-      只有真正没有 token / token 失效
-      才回 Admin。
-
-      不再因为 agent 数据读取失败而跳走。
-    */
-
-    localStorage.removeItem(
-      'jmt_access_token'
-    );
-
-    sessionStorage.removeItem(
-      'jmt_access_token'
-    );
+    clearAdminSession();
 
 
     location.href =
@@ -1670,7 +2324,9 @@ async function startPage(){
   }
 
 
-  await loadAgents();
+  await loadAgents(
+    false
+  );
 
 }
 
@@ -1680,4 +2336,5 @@ startPage();
 </script>
 
 </body>
+
 </html>
