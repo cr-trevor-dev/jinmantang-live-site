@@ -8,63 +8,133 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   background:radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
   color:#f7f0df;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
+
 .wrap{
   max-width:650px;
   margin:auto;
   min-height:100vh;
   padding:24px 15px 55px
 }
-.brand{text-align:center;margin-bottom:22px}
-.mark{
-  width:72px;height:72px;border-radius:50%;
-  display:grid;place-items:center;margin:0 auto 10px;
-  overflow:hidden;font-size:24px;font-weight:900;
-  color:#f6da86;border:1px solid #b98a2c;
-  background:linear-gradient(145deg,#382506,#100d08)
+
+.brand{
+  text-align:center;
+  margin-bottom:22px
 }
-.mark img{width:100%;height:100%;object-fit:cover}
-.cn{font-weight:900;font-size:25px;letter-spacing:4px;color:#f3d889}
-.en{font-size:10px;letter-spacing:3px;color:#9f916d;margin-top:5px}
+
+.mark{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  overflow:hidden;
+  font-size:24px;
+  font-weight:900;
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:linear-gradient(145deg,#382506,#100d08);
+  box-shadow:0 0 28px rgba(235,185,62,.22)
+}
+
+.mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px
+}
 
 .card{
   background:linear-gradient(180deg,rgba(22,22,22,.98),rgba(11,11,12,.98));
   border:1px solid rgba(214,168,63,.30);
-  border-radius:24px;padding:20px;margin-bottom:16px
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 22px 60px rgba(0,0,0,.32)
 }
-.title{font-size:15px;font-weight:900;color:#dfc575;margin-bottom:16px}
 
-input,textarea{
-  width:100%;border:1px solid rgba(214,168,63,.24);
-  background:#101011;color:#fff;border-radius:13px;
-  padding:14px;font-size:15px;outline:none;margin-bottom:12px
+.title{
+  font-size:15px;
+  font-weight:900;
+  color:#dfc575;
+  margin-bottom:16px
 }
-textarea{min-height:105px;resize:vertical;line-height:1.6}
+
+input,
+textarea{
+  width:100%;
+  border:1px solid rgba(214,168,63,.24);
+  background:#101011;
+  color:#fff;
+  border-radius:13px;
+  padding:14px;
+  font-size:15px;
+  outline:none;
+  margin-bottom:12px
+}
+
+textarea{
+  min-height:105px;
+  resize:vertical;
+  line-height:1.6
+}
 
 button{
-  width:100%;border:0;border-radius:13px;padding:14px;
-  font-size:15px;font-weight:900;cursor:pointer;
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
   background:linear-gradient(180deg,#f1d784,#b47d20);
   color:#171109
 }
+
 button.secondary{
-  margin-top:10px;background:#171718;color:#d9c37c;
+  margin-top:10px;
+  background:#171718;
+  color:#d9c37c;
   border:1px solid rgba(214,168,63,.22)
 }
+
 button.danger{
-  margin-top:9px;background:#1b1717;color:#cfa7a7;
+  margin-top:9px;
+  background:#1b1717;
+  color:#cfa7a7;
   border:1px solid rgba(180,100,100,.20)
 }
 
-.hidden{display:none!important}
+.hidden{
+  display:none!important
+}
+
 .msg{
-  text-align:center;min-height:18px;margin-top:10px;
-  color:#aaa18d;font-size:12px
+  text-align:center;
+  min-height:18px;
+  margin-top:10px;
+  color:#aaa18d;
+  font-size:12px
 }
 
 .summaryGrid{
@@ -72,88 +142,220 @@ button.danger{
   grid-template-columns:1fr 1fr;
   gap:9px
 }
+
 .summaryBox{
   background:#101011;
   border:1px solid rgba(255,255,255,.06);
   border-radius:15px;
   padding:14px
 }
+
 .summaryBox small{
-  display:block;color:#817a6d;font-size:10px;margin-bottom:7px
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:7px
 }
+
 .summaryBox strong{
-  display:block;color:#ebcd72;font-size:19px;line-height:1.35
+  display:block;
+  color:#ebcd72;
+  font-size:19px;
+  line-height:1.35
 }
-.green{color:#72d39d!important}
-.redText{color:#e89191!important}
-.refreshLine{text-align:center;color:#746e62;font-size:10px;margin-top:12px}
+
+.green{
+  color:#72d39d!important
+}
+
+.redText{
+  color:#e89191!important
+}
+
+.refreshLine{
+  text-align:center;
+  color:#746e62;
+  font-size:10px;
+  margin-top:12px
+}
 
 .menuGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px
 }
+
 .menu{
-  display:block;text-decoration:none;background:#101011;
+  display:block;
+  text-decoration:none;
+  background:#101011;
   border:1px solid rgba(214,168,63,.20);
-  border-radius:16px;padding:17px 14px;min-height:112px
+  border-radius:16px;
+  padding:17px 14px;
+  min-height:112px
 }
-.menuIcon{font-size:26px;margin-bottom:10px}
-.menuTitle{color:#ecd176;font-weight:900;font-size:15px}
-.menuSub{color:#777166;font-size:10px;line-height:1.55;margin-top:6px}
+
+.menu:active{
+  transform:scale(.98)
+}
+
+.menuIcon{
+  font-size:26px;
+  margin-bottom:10px
+}
+
+.menuTitle{
+  color:#ecd176;
+  font-weight:900;
+  font-size:15px
+}
+
+.menuSub{
+  color:#777166;
+  font-size:10px;
+  line-height:1.55;
+  margin-top:6px
+}
 
 .current{
-  text-align:center;padding:17px;margin-bottom:16px;
-  background:#101011;border:1px solid rgba(255,255,255,.06);
+  text-align:center;
+  padding:17px;
+  margin-bottom:16px;
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
   border-radius:15px
 }
-.current small{display:block;color:#8d887c;margin-bottom:5px}
-.current strong{font-size:48px;color:#ebca68}
+
+.current small{
+  display:block;
+  color:#8d887c;
+  margin-bottom:5px
+}
+
+.current strong{
+  font-size:48px;
+  color:#ebca68
+}
 
 .settingLabel{
-  display:block;color:#9c9588;font-size:12px;margin:4px 2px 7px
+  display:block;
+  color:#9c9588;
+  font-size:12px;
+  margin:4px 2px 7px
 }
+
 .note{
-  color:#777268;font-size:11px;line-height:1.55;margin:-3px 2px 12px
+  color:#777268;
+  font-size:11px;
+  line-height:1.55;
+  margin:-3px 2px 12px
 }
+
 .logoPreviewWrap{
-  display:flex;align-items:center;gap:15px;background:#101011;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:#101011;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:15px;padding:14px;margin-bottom:12px
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:12px
 }
+
 .logoPreview{
-  width:82px;height:82px;border-radius:50%;overflow:hidden;flex:none;
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  overflow:hidden;
+  flex:none;
   border:1px solid rgba(214,168,63,.35);
-  background:#17130c;display:grid;place-items:center;
-  color:#d7ba63;font-weight:900
+  background:#17130c;
+  display:grid;
+  place-items:center;
+  color:#d7ba63;
+  font-weight:900
 }
-.logoPreview img{width:100%;height:100%;object-fit:cover}
-.logoInfo{color:#928b7e;font-size:12px;line-height:1.6}
+
+.logoPreview img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.logoInfo{
+  color:#928b7e;
+  font-size:12px;
+  line-height:1.6
+}
 
 .switchRow{
-  display:flex;align-items:center;justify-content:space-between;
-  background:#101011;border:1px solid rgba(255,255,255,.06);
-  border-radius:13px;padding:13px 14px;margin-bottom:13px
-}
-.switchText{font-size:13px;color:#e7ddc6}
-.switch{position:relative;width:48px;height:27px}
-.switch input{opacity:0;width:0;height:0}
-.slider{
-  position:absolute;inset:0;background:#343436;border-radius:99px
-}
-.slider:before{
-  content:"";position:absolute;width:21px;height:21px;
-  left:3px;top:3px;border-radius:50%;background:#aaa
-}
-.switch input:checked + .slider{background:#b9872f}
-.switch input:checked + .slider:before{
-  transform:translateX(21px);background:#fff0bd
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px 14px;
+  margin-bottom:13px
 }
 
-.foot{text-align:center;color:#706b62;font-size:10px;margin-top:25px}
+.switchText{
+  font-size:13px;
+  color:#e7ddc6
+}
+
+.switch{
+  position:relative;
+  width:48px;
+  height:27px
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#343436;
+  border-radius:99px;
+  transition:.25s
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:21px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#aaa;
+  transition:.25s
+}
+
+.switch input:checked + .slider{
+  background:#b9872f
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(21px);
+  background:#fff0bd
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
+  font-size:10px;
+  margin-top:25px
+}
 
 @media(max-width:380px){
-  .menuGrid{grid-template-columns:1fr}
+  .menuGrid{
+    grid-template-columns:1fr
+  }
 }
 </style>
 </head>
@@ -168,14 +370,24 @@ button.danger{
     <div class="en">JIN MANTANG · MANAGEMENT</div>
   </div>
 
+
   <div class="card" id="loginBox">
 
     <div class="title">管理员登录</div>
 
-    <input id="email" type="email" placeholder="管理员邮箱">
-    <input id="password" type="password" placeholder="管理员密码">
+    <input
+      id="email"
+      type="email"
+      placeholder="管理员邮箱">
 
-    <button onclick="signIn()">登录管理中心</button>
+    <input
+      id="password"
+      type="password"
+      placeholder="管理员密码">
+
+    <button onclick="signIn()">
+      登录管理中心
+    </button>
 
     <div class="msg" id="loginMsg"></div>
 
@@ -186,7 +398,9 @@ button.danger{
 
     <div class="card">
 
-      <div class="title">当前运营概况</div>
+      <div class="title">
+        当前运营概况
+      </div>
 
       <div class="summaryGrid">
 
@@ -241,38 +455,84 @@ button.danger{
 
     <div class="card">
 
-      <div class="title">管理中心</div>
+      <div class="title">
+        管理中心
+      </div>
 
       <div class="menuGrid">
 
         <a class="menu" href="/admin/agents/">
+
           <div class="menuIcon">👥</div>
-          <div class="menuTitle">代理管理</div>
-          <div class="menuSub">创建代理、搜索、比例、暂停、限制</div>
+
+          <div class="menuTitle">
+            代理管理
+          </div>
+
+          <div class="menuSub">
+            创建代理、搜索、比例、暂停、限制
+          </div>
+
         </a>
+
 
         <a class="menu" href="/admin/simulator.html">
+
           <div class="menuIcon">📊</div>
-          <div class="menuTitle">本期汇总</div>
-          <div class="menuSub">查看当前期所有代理提交与 00–99 汇总</div>
+
+          <div class="menuTitle">
+            本期汇总
+          </div>
+
+          <div class="menuSub">
+            查看当前期所有代理提交与 00–99 汇总
+          </div>
+
         </a>
 
-        <a class="menu" href="/history/">
+
+        <a class="menu" href="/history/index.html">
+
           <div class="menuIcon">📚</div>
-          <div class="menuTitle">历史期数</div>
-          <div class="menuSub">查询以前每一期与代理历史明细</div>
+
+          <div class="menuTitle">
+            历史期数
+          </div>
+
+          <div class="menuSub">
+            查询以前每一期与代理历史明细
+          </div>
+
         </a>
+
 
         <a class="menu" href="#resultManagement">
+
           <div class="menuIcon">🎯</div>
-          <div class="menuTitle">数字发布</div>
-          <div class="menuSub">发布最新公开结果</div>
+
+          <div class="menuTitle">
+            数字发布
+          </div>
+
+          <div class="menuSub">
+            发布最新公开结果
+          </div>
+
         </a>
 
+
         <a class="menu" href="#siteSettings">
+
           <div class="menuIcon">⚙️</div>
-          <div class="menuTitle">网站设置</div>
-          <div class="menuSub">Logo、Telegram、公告</div>
+
+          <div class="menuTitle">
+            网站设置
+          </div>
+
+          <div class="menuSub">
+            Logo、Telegram、公告
+          </div>
+
         </a>
 
       </div>
@@ -282,11 +542,20 @@ button.danger{
 
     <div class="card" id="resultManagement">
 
-      <div class="title">数字发布管理</div>
+      <div class="title">
+        数字发布管理
+      </div>
 
       <div class="current">
-        <small>当前最新数字</small>
-        <strong id="currentResult">--</strong>
+
+        <small>
+          当前最新数字
+        </small>
+
+        <strong id="currentResult">
+          --
+        </strong>
+
       </div>
 
       <input
@@ -306,11 +575,15 @@ button.danger{
 
     <div class="card">
 
-      <div class="title">网站 Logo 管理</div>
+      <div class="title">
+        网站 Logo 管理
+      </div>
 
       <div class="logoPreviewWrap">
 
-        <div class="logoPreview" id="logoPreview">金</div>
+        <div class="logoPreview" id="logoPreview">
+          金
+        </div>
 
         <div class="logoInfo">
           选择你的 Logo 图片。
@@ -320,7 +593,9 @@ button.danger{
 
       </div>
 
-      <label class="settingLabel">选择 Logo 图片</label>
+      <label class="settingLabel">
+        选择 Logo 图片
+      </label>
 
       <input
         id="logoFile"
@@ -336,7 +611,9 @@ button.danger{
         更新网站 Logo
       </button>
 
-      <button class="danger" onclick="removeLogo()">
+      <button
+        class="danger"
+        onclick="removeLogo()">
         恢复文字「金」
       </button>
 
@@ -347,7 +624,9 @@ button.danger{
 
     <div class="card" id="siteSettings">
 
-      <div class="title">网站内容管理</div>
+      <div class="title">
+        网站内容管理
+      </div>
 
       <label class="settingLabel">
         Telegram 频道链接
@@ -377,8 +656,13 @@ button.danger{
         </div>
 
         <label class="switch">
-          <input id="announcementEnabled" type="checkbox">
+
+          <input
+            id="announcementEnabled"
+            type="checkbox">
+
           <span class="slider"></span>
+
         </label>
 
       </div>
@@ -393,9 +677,13 @@ button.danger{
 
 
     <div class="card">
-      <button class="secondary" onclick="logout()">
+
+      <button
+        class="secondary"
+        onclick="logout()">
         退出管理员账号
       </button>
+
     </div>
 
   </div>
@@ -423,6 +711,7 @@ localStorage.getItem('jmt_access_token')
 sessionStorage.getItem('jmt_access_token')
 ||
 '';
+
 
 let pendingLogo='';
 let currentRound=null;
@@ -495,7 +784,9 @@ async function signIn(){
 
 
     if(!r.ok || !d.access_token){
+
       throw new Error();
+
     }
 
 
@@ -543,7 +834,9 @@ async function verifySession(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
@@ -566,6 +859,7 @@ function showAdmin(){
   document.getElementById(
     'loginBox'
   ).classList.add('hidden');
+
 
   document.getElementById(
     'adminBox'
@@ -599,7 +893,9 @@ async function loadDashboardSummary(){
 
 
     if(!rr.ok){
+
       throw new Error();
+
     }
 
 
@@ -608,7 +904,9 @@ async function loadDashboardSummary(){
 
 
     currentRound=
-    rounds.find(x=>x.status==='open')
+    rounds.find(
+      x=>x.status==='open'
+    )
     ||
     rounds[0]
     ||
@@ -627,9 +925,11 @@ async function loadDashboardSummary(){
     const period=
     currentRound.round_code==='1530'
     ? '下午 15:30'
-    : currentRound.round_code==='1030'
+    :
+    currentRound.round_code==='1030'
     ? '上午 10:30'
-    : currentRound.round_code;
+    :
+    currentRound.round_code;
 
 
     document.getElementById(
@@ -673,7 +973,9 @@ async function loadDashboardSummary(){
 
 
     if(!ar.ok){
+
       throw new Error();
+
     }
 
 
@@ -683,7 +985,9 @@ async function loadDashboardSummary(){
 
     const activeAgentIds=
     new Set(
-      activeAgents.map(a=>a.id)
+      activeAgents.map(
+        a=>a.id
+      )
     );
 
 
@@ -701,13 +1005,17 @@ async function loadDashboardSummary(){
     await api(
       '/rest/v1/agent_submissions'+
       '?round_id=eq.'+
-      encodeURIComponent(currentRound.id)+
+      encodeURIComponent(
+        currentRound.id
+      )+
       '&select=agent_id,points'
     );
 
 
     if(!sr.ok){
+
       throw new Error();
+
     }
 
 
@@ -724,7 +1032,10 @@ async function loadDashboardSummary(){
     rows.forEach(row=>{
 
       const points=
-      Number(row.points || 0);
+      Number(
+        row.points || 0
+      );
+
 
       total+=points;
 
@@ -732,7 +1043,9 @@ async function loadDashboardSummary(){
       if(
         points>0
         &&
-        activeAgentIds.has(row.agent_id)
+        activeAgentIds.has(
+          row.agent_id
+        )
       ){
 
         submittedSet.add(
@@ -751,7 +1064,8 @@ async function loadDashboardSummary(){
     const missingCount=
     Math.max(
       0,
-      activeTotal-submittedCount
+      activeTotal-
+      submittedCount
     );
 
 
@@ -778,7 +1092,9 @@ async function loadDashboardSummary(){
     document.getElementById(
       'summaryTotal'
     ).textContent=
-    formatNumber(total);
+    formatNumber(
+      total
+    );
 
 
   }catch(e){
@@ -795,13 +1111,40 @@ async function loadDashboardSummary(){
 
 function renderNoRound(){
 
-  document.getElementById('summaryRound').textContent='暂无开放期';
-  document.getElementById('summaryStatus').textContent='—';
-  document.getElementById('summaryAgentTotal').textContent='0';
-  document.getElementById('summaryAgents').textContent='0';
-  document.getElementById('summaryMissing').textContent='0';
-  document.getElementById('summaryTotal').textContent='0';
-  document.getElementById('summaryDeadline').textContent='—';
+  document.getElementById(
+    'summaryRound'
+  ).textContent=
+  '暂无开放期';
+
+  document.getElementById(
+    'summaryStatus'
+  ).textContent=
+  '—';
+
+  document.getElementById(
+    'summaryAgentTotal'
+  ).textContent=
+  '0';
+
+  document.getElementById(
+    'summaryAgents'
+  ).textContent=
+  '0';
+
+  document.getElementById(
+    'summaryMissing'
+  ).textContent=
+  '0';
+
+  document.getElementById(
+    'summaryTotal'
+  ).textContent=
+  '0';
+
+  document.getElementById(
+    'summaryDeadline'
+  ).textContent=
+  '—';
 
 }
 
@@ -824,7 +1167,9 @@ async function loadCurrent(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
@@ -844,7 +1189,8 @@ async function loadCurrent(){
 
     document.getElementById(
       'currentResult'
-    ).textContent='--';
+    ).textContent=
+    '--';
 
   }
 
@@ -854,10 +1200,14 @@ async function loadCurrent(){
 async function publishResult(){
 
   const input=
-  document.getElementById('resultInput');
+  document.getElementById(
+    'resultInput'
+  );
 
   const msg=
-  document.getElementById('publishMsg');
+  document.getElementById(
+    'publishMsg'
+  );
 
 
   let n=
@@ -875,7 +1225,10 @@ async function publishResult(){
 
 
   n=
-  n.padStart(2,'0');
+  n.padStart(
+    2,
+    '0'
+  );
 
 
   msg.textContent=
@@ -901,13 +1254,16 @@ async function publishResult(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
     document.getElementById(
       'currentResult'
-    ).textContent=n;
+    ).textContent=
+    n;
 
 
     input.value='';
@@ -945,7 +1301,9 @@ async function loadSettings(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
@@ -954,7 +1312,9 @@ async function loadSettings(){
 
 
     if(!rows.length){
+
       return;
+
     }
 
 
@@ -985,6 +1345,7 @@ async function loadSettings(){
       pendingLogo=
       s.logo_data_url;
 
+
       showLogoPreview(
         s.logo_data_url
       );
@@ -1012,11 +1373,15 @@ function handleLogoFile(input){
 
 
   const msg=
-  document.getElementById('logoMsg');
+  document.getElementById(
+    'logoMsg'
+  );
 
 
   if(!file){
+
     return;
+
   }
 
 
@@ -1038,29 +1403,38 @@ function handleLogoFile(input){
   new FileReader();
 
 
-  reader.onload=function(e){
+  reader.onload=
+  function(e){
 
     const img=
     new Image();
 
 
-    img.onload=function(){
+    img.onload=
+    function(){
 
-      const maxSize=420;
+      const maxSize=
+      420;
 
-      let w=img.width;
-      let h=img.height;
+
+      let w=
+      img.width;
+
+      let h=
+      img.height;
 
 
       if(w>h){
 
         if(w>maxSize){
 
-          h=Math.round(
+          h=
+          Math.round(
             h*maxSize/w
           );
 
-          w=maxSize;
+          w=
+          maxSize;
 
         }
 
@@ -1068,11 +1442,13 @@ function handleLogoFile(input){
 
         if(h>maxSize){
 
-          w=Math.round(
+          w=
+          Math.round(
             w*maxSize/h
           );
 
-          h=maxSize;
+          h=
+          maxSize;
 
         }
 
@@ -1080,14 +1456,22 @@ function handleLogoFile(input){
 
 
       const canvas=
-      document.createElement('canvas');
+      document.createElement(
+        'canvas'
+      );
 
-      canvas.width=w;
-      canvas.height=h;
+
+      canvas.width=
+      w;
+
+      canvas.height=
+      h;
 
 
       const ctx=
-      canvas.getContext('2d');
+      canvas.getContext(
+        '2d'
+      );
 
 
       ctx.drawImage(
@@ -1123,7 +1507,9 @@ function handleLogoFile(input){
   };
 
 
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(
+    file
+  );
 
 }
 
@@ -1131,30 +1517,49 @@ function handleLogoFile(input){
 function showLogoPreview(src){
 
   const preview=
-  document.getElementById('logoPreview');
+  document.getElementById(
+    'logoPreview'
+  );
 
   const top=
-  document.getElementById('topMark');
+  document.getElementById(
+    'topMark'
+  );
 
 
   preview.innerHTML='';
+
   top.innerHTML='';
 
 
   const img1=
-  document.createElement('img');
+  document.createElement(
+    'img'
+  );
 
-  img1.src=src;
 
-  preview.appendChild(img1);
+  img1.src=
+  src;
+
+
+  preview.appendChild(
+    img1
+  );
 
 
   const img2=
-  document.createElement('img');
+  document.createElement(
+    'img'
+  );
 
-  img2.src=src;
 
-  top.appendChild(img2);
+  img2.src=
+  src;
+
+
+  top.appendChild(
+    img2
+  );
 
 }
 
@@ -1162,7 +1567,9 @@ function showLogoPreview(src){
 async function saveLogo(){
 
   const msg=
-  document.getElementById('logoMsg');
+  document.getElementById(
+    'logoMsg'
+  );
 
 
   if(!pendingLogo){
@@ -1199,7 +1606,9 @@ async function saveLogo(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
@@ -1220,7 +1629,9 @@ async function saveLogo(){
 async function removeLogo(){
 
   const msg=
-  document.getElementById('logoMsg');
+  document.getElementById(
+    'logoMsg'
+  );
 
 
   try{
@@ -1242,15 +1653,32 @@ async function removeLogo(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
     pendingLogo='';
 
-    document.getElementById('logoPreview').innerHTML='金';
-    document.getElementById('topMark').innerHTML='金';
-    document.getElementById('logoFile').value='';
+
+    document.getElementById(
+      'logoPreview'
+    ).innerHTML=
+    '金';
+
+
+    document.getElementById(
+      'topMark'
+    ).innerHTML=
+    '金';
+
+
+    document.getElementById(
+      'logoFile'
+    ).value=
+    '';
+
 
     msg.textContent=
     '✓ 已恢复文字「金」';
@@ -1269,17 +1697,22 @@ async function removeLogo(){
 async function saveSettings(){
 
   const msg=
-  document.getElementById('settingsMsg');
+  document.getElementById(
+    'settingsMsg'
+  );
+
 
   const telegram=
   document.getElementById(
     'telegramUrl'
   ).value.trim();
 
+
   const announcement=
   document.getElementById(
     'announcementText'
   ).value.trim();
+
 
   const enabled=
   document.getElementById(
@@ -1292,7 +1725,9 @@ async function saveSettings(){
     try{
 
       const u=
-      new URL(telegram);
+      new URL(
+        telegram
+      );
 
 
       if(
@@ -1343,7 +1778,9 @@ async function saveSettings(){
 
 
     if(!r.ok){
+
       throw new Error();
+
     }
 
 
@@ -1375,7 +1812,9 @@ function updateClock(){
       second:'2-digit',
       hour12:false
     }
-  ).format(new Date());
+  ).format(
+    new Date()
+  );
 
 }
 
@@ -1383,7 +1822,9 @@ function updateClock(){
 function formatMMTShort(value){
 
   if(!value){
+
     return '—';
+
   }
 
 
@@ -1443,6 +1884,7 @@ function logout(){
 
 
 updateClock();
+
 
 setInterval(
   updateClock,
