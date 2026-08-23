@@ -18,7 +18,7 @@
 <style>
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
@@ -36,13 +36,13 @@ body{
   BlinkMacSystemFont,
   "Segoe UI",
   Arial,
-  sans-serif
+  sans-serif;
 }
 
 .wrap{
   max-width:900px;
   margin:auto;
-  padding:22px 14px 60px
+  padding:22px 14px 60px;
 }
 
 .header{
@@ -50,20 +50,20 @@ body{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .logoTitle{
   color:#efd477;
   font-size:22px;
-  font-weight:900
+  font-weight:900;
 }
 
 .sub{
   color:#827966;
   font-size:10px;
   letter-spacing:2px;
-  margin-top:4px
+  margin-top:4px;
 }
 
 .card{
@@ -81,14 +81,14 @@ body{
   margin-bottom:14px;
   box-shadow:
   0 18px 50px
-  rgba(0,0,0,.22)
+  rgba(0,0,0,.22);
 }
 
 .title{
   color:#dfc575;
   font-size:15px;
   font-weight:900;
-  margin-bottom:14px
+  margin-bottom:14px;
 }
 
 button{
@@ -96,16 +96,11 @@ button{
   border-radius:11px;
   padding:11px 14px;
   font-weight:900;
-  cursor:pointer
-}
-
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed
+  cursor:pointer;
 }
 
 button:active{
-  transform:scale(.98)
+  transform:scale(.98);
 }
 
 .dark{
@@ -113,7 +108,7 @@ button:active{
   color:#dbc67d;
   border:
   1px solid
-  rgba(214,168,63,.22)
+  rgba(214,168,63,.22);
 }
 
 .gold{
@@ -123,41 +118,25 @@ button:active{
     #efd47c,
     #b87e1e
   );
-  color:#161008
+  color:#161008;
 }
 
 .green{
-  color:#71d49d!important
+  color:#71d49d !important;
 }
 
 .red{
-  color:#e88d8d!important
+  color:#e88d8d !important;
 }
 
 .goldText{
-  color:#efd477!important
-}
-
-.sessionBox{
-  background:#101011;
-  border:
-  1px solid
-  rgba(214,168,63,.18);
-  border-radius:14px;
-  padding:12px;
-  color:#8b8374;
-  font-size:11px;
-  margin-bottom:14px
-}
-
-.sessionBox strong{
-  color:#71d49d
+  color:#efd477 !important;
 }
 
 .roundInfo{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px
+  gap:8px;
 }
 
 .infoBox{
@@ -166,27 +145,27 @@ button:active{
   1px solid
   rgba(255,255,255,.06);
   border-radius:13px;
-  padding:13px
+  padding:13px;
 }
 
 .infoBox small{
   display:block;
   color:#817a6d;
   font-size:10px;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 
 .infoBox strong{
   color:#e9cd78;
   font-size:14px;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .financeGrid{
   display:grid;
   grid-template-columns:
   repeat(3,1fr);
-  gap:9px
+  gap:9px;
 }
 
 .financeBox{
@@ -196,7 +175,7 @@ button:active{
   rgba(255,255,255,.06);
   border-radius:15px;
   padding:14px;
-  min-height:88px
+  min-height:88px;
 }
 
 .financeBox small{
@@ -204,7 +183,7 @@ button:active{
   color:#817a6d;
   font-size:10px;
   margin-bottom:7px;
-  line-height:1.45
+  line-height:1.45;
 }
 
 .financeBox strong{
@@ -212,32 +191,32 @@ button:active{
   color:#ebcd72;
   font-size:20px;
   line-height:1.3;
-  word-break:break-word
+  word-break:break-word;
 }
 
 .financeBox.main{
   border-color:
   rgba(214,168,63,.32);
-  background:#15130e
+  background:#15130e;
 }
 
 .financeBox.net strong{
-  color:#78d7a1
+  color:#78d7a1;
 }
 
 .financeBox.commission strong{
-  color:#dfbd64
+  color:#dfbd64;
 }
 
 .financeBox.multiplier strong{
-  color:#e7ca73
+  color:#e7ca73;
 }
 
 .refreshRow{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  margin-top:12px
+  margin-top:12px;
 }
 
 .msg{
@@ -246,21 +225,20 @@ button:active{
   color:#9d9586;
   font-size:12px;
   margin-top:10px;
-  line-height:1.6
 }
 
 .note{
   color:#766f62;
   font-size:10px;
   line-height:1.65;
-  margin-top:10px
+  margin-top:10px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:
   repeat(2,1fr);
-  gap:8px
+  gap:8px;
 }
 
 .num{
@@ -269,26 +247,26 @@ button:active{
   1px solid
   rgba(255,255,255,.06);
   border-radius:14px;
-  padding:13px
+  padding:13px;
 }
 
 .num.nonzero{
   border-color:
   rgba(214,168,63,.38);
-  background:#15130e
+  background:#15130e;
 }
 
 .numTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px
+  gap:10px;
 }
 
 .code{
   color:#e7c96d;
   font-size:20px;
-  font-weight:900
+  font-weight:900;
 }
 
 .activeBadge{
@@ -297,42 +275,42 @@ button:active{
   border-radius:20px;
   font-size:9px;
   background:#2a2415;
-  color:#dfc36d
+  color:#dfc36d;
 }
 
 .nonzero .activeBadge{
-  display:block
+  display:block;
 }
 
 .numData{
   margin-top:10px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:7px
+  gap:7px;
 }
 
 .numDataBox{
   background:#151516;
   border-radius:9px;
-  padding:9px
+  padding:9px;
 }
 
 .numDataBox small{
   display:block;
   color:#777166;
   font-size:9px;
-  margin-bottom:5px
+  margin-bottom:5px;
 }
 
 .numDataBox strong{
   display:block;
   color:#e8dfc9;
   font-size:13px;
-  line-height:1.35
+  line-height:1.35;
 }
 
 .nonzero .numDataBox strong{
-  color:#efd47d
+  color:#efd47d;
 }
 
 .agent{
@@ -342,26 +320,26 @@ button:active{
   rgba(255,255,255,.06);
   border-radius:15px;
   padding:14px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .agentTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px
+  gap:10px;
 }
 
 .agentName{
   color:#efd278;
   font-size:16px;
-  font-weight:900
+  font-weight:900;
 }
 
 .rate{
   color:#8f8778;
   font-size:11px;
-  margin-top:4px
+  margin-top:4px;
 }
 
 .badge{
@@ -370,7 +348,7 @@ button:active{
   font-size:11px;
   padding:5px 9px;
   border-radius:20px;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .agentStats{
@@ -378,13 +356,13 @@ button:active{
   grid-template-columns:
   repeat(3,1fr);
   gap:8px;
-  margin-top:11px
+  margin-top:11px;
 }
 
 .agentStat{
   background:#151516;
   border-radius:10px;
-  padding:11px
+  padding:11px;
 }
 
 .agentStat small{
@@ -392,22 +370,22 @@ button:active{
   color:#777166;
   font-size:9px;
   margin-bottom:5px;
-  line-height:1.4
+  line-height:1.4;
 }
 
 .agentStat strong{
   color:#e6cf86;
   font-size:14px;
-  line-height:1.4
+  line-height:1.4;
 }
 
 .agentStat.commission strong{
-  color:#79d7a2
+  color:#79d7a2;
 }
 
 .detailButton{
   width:100%;
-  margin-top:10px
+  margin-top:10px;
 }
 
 .agentDetail{
@@ -416,25 +394,25 @@ button:active{
   padding-top:12px;
   border-top:
   1px solid
-  rgba(255,255,255,.07)
+  rgba(255,255,255,.07);
 }
 
 .agentDetail.open{
-  display:block
+  display:block;
 }
 
 .detailTitle{
   font-size:12px;
   color:#cdb66c;
   font-weight:900;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .detailGrid{
   display:grid;
   grid-template-columns:
   repeat(2,1fr);
-  gap:7px
+  gap:7px;
 }
 
 .detailNum{
@@ -446,48 +424,50 @@ button:active{
   padding:10px;
   display:flex;
   justify-content:space-between;
-  align-items:center
+  align-items:center;
 }
 
 .detailNum.active{
   border-color:
   rgba(214,168,63,.34);
-  background:#1a170f
+  background:#1a170f;
 }
 
 .detailNum span:first-child{
   color:#dfc36d;
-  font-weight:900
+  font-weight:900;
 }
 
 .detailNum span:last-child{
   color:#e8dfc9;
   font-size:12px;
-  font-weight:800
+  font-weight:800;
 }
 
 .empty{
   text-align:center;
   color:#777166;
   font-size:13px;
-  padding:25px 10px
+  padding:25px 10px;
 }
 
 .foot{
   text-align:center;
   color:#6f6a61;
   font-size:10px;
-  margin-top:25px
+  margin-top:25px;
 }
 
 @media(max-width:650px){
 
   .financeGrid{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:
+    1fr 1fr;
   }
 
   .agentStats{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:
+    1fr 1fr;
   }
 
 }
@@ -495,11 +475,11 @@ button:active{
 @media(max-width:380px){
 
   .header{
-    align-items:flex-start
+    align-items:flex-start;
   }
 
   .logoTitle{
-    font-size:19px
+    font-size:19px;
   }
 
 }
@@ -511,7 +491,6 @@ button:active{
 <body>
 
 <div class="wrap">
-
 
   <div class="header">
 
@@ -527,25 +506,11 @@ button:active{
 
     </div>
 
-
     <button
       class="dark"
       onclick="location.href='/admin/'">
-
       返回总后台
-
     </button>
-
-  </div>
-
-
-  <div class="sessionBox">
-
-    管理员状态：
-
-    <strong id="adminState">
-      正在验证...
-    </strong>
 
   </div>
 
@@ -556,9 +521,7 @@ button:active{
       当前期数
     </div>
 
-
     <div class="roundInfo">
-
 
       <div class="infoBox">
 
@@ -571,7 +534,6 @@ button:active{
         </strong>
 
       </div>
-
 
       <div class="infoBox">
 
@@ -587,7 +549,6 @@ button:active{
 
       </div>
 
-
       <div class="infoBox">
 
         <small>
@@ -599,7 +560,6 @@ button:active{
         </strong>
 
       </div>
-
 
       <div class="infoBox">
 
@@ -613,7 +573,6 @@ button:active{
 
       </div>
 
-
     </div>
 
   </div>
@@ -625,9 +584,7 @@ button:active{
       本期实时总览
     </div>
 
-
     <div class="financeGrid">
-
 
       <div class="financeBox main">
 
@@ -641,7 +598,6 @@ button:active{
 
       </div>
 
-
       <div class="financeBox commission">
 
         <small>
@@ -653,7 +609,6 @@ button:active{
         </strong>
 
       </div>
-
 
       <div class="financeBox net">
 
@@ -667,7 +622,6 @@ button:active{
 
       </div>
 
-
       <div class="financeBox">
 
         <small>
@@ -679,7 +633,6 @@ button:active{
         </strong>
 
       </div>
-
 
       <div class="financeBox">
 
@@ -693,7 +646,6 @@ button:active{
 
       </div>
 
-
       <div class="financeBox multiplier">
 
         <small>
@@ -705,7 +657,6 @@ button:active{
         </strong>
 
       </div>
-
 
       <div class="financeBox">
 
@@ -721,28 +672,21 @@ button:active{
 
       </div>
 
-
     </div>
 
 
     <div class="refreshRow">
 
       <button
-        id="refreshBtn"
         class="gold"
-        onclick="loadAll(true)">
-
+        onclick="loadAll()">
         刷新本期数据
-
       </button>
-
 
       <button
         class="dark"
         onclick="location.href='/admin/agents/'">
-
         查看代理管理
-
       </button>
 
     </div>
@@ -755,13 +699,10 @@ button:active{
 
 
     <div class="note">
-
       本页面每 20 秒自动同步一次。
-
-      <br>
-
-      代理提交或修改数据后，本期总额、代理佣金、净额以及 00–99 汇总都会重新计算。
-
+      代理提交或修改本期数据后，
+      本期提交总额、代理佣金、扣佣后净额以及
+      00–99 汇总都会重新计算。
     </div>
 
   </div>
@@ -773,21 +714,14 @@ button:active{
       00–99 本期实时汇总
     </div>
 
-
     <div
       class="grid"
       id="numberGrid">
     </div>
 
-
     <div class="note">
-
-      「提交总额」为所有代理在该号码上的提交合计。
-
-      <br>
-
+      「提交总额」为所有代理在该号码上的提交合计；
       「80倍金额」= 该号码提交总额 × 80。
-
     </div>
 
   </div>
@@ -798,7 +732,6 @@ button:active{
     <div class="title">
       本期代理提交
     </div>
-
 
     <div id="agentList">
 
@@ -817,9 +750,7 @@ button:active{
       class="dark"
       style="width:100%"
       onclick="location.href='/admin/'">
-
       ← 返回 Admin 总后台
-
     </button>
 
   </div>
@@ -828,7 +759,6 @@ button:active{
   <div class="foot">
     © 2022 JIN MANTANG · LIVE ROUND SUMMARY
   </div>
-
 
 </div>
 
@@ -867,18 +797,16 @@ sessionStorage.getItem(
 let currentRound =
 null;
 
-
 let agents =
 [];
-
 
 let submissions =
 [];
 
 
-/* =====================================
+/* =========================
    API
-===================================== */
+========================= */
 
 async function api(
   path,
@@ -902,119 +830,9 @@ async function api(
 }
 
 
-/* =====================================
-   ADMIN VERIFY
-===================================== */
-
-async function verifyAdmin(){
-
-  const state =
-  document.getElementById(
-    'adminState'
-  );
-
-
-  if(!token){
-
-    state.textContent =
-    '没有登录';
-
-
-    return false;
-
-  }
-
-
-  try{
-
-    const userRes =
-    await api(
-      '/auth/v1/user'
-    );
-
-
-    if(!userRes.ok){
-
-      throw new Error(
-        'LOGIN_EXPIRED'
-      );
-
-    }
-
-
-    const user =
-    await userRes.json();
-
-
-    const adminRes =
-    await api(
-      '/rest/v1/admin_users'+
-      '?auth_user_id=eq.'+
-      encodeURIComponent(
-        user.id
-      )+
-      '&select=auth_user_id'+
-      '&limit=1'
-    );
-
-
-    if(!adminRes.ok){
-
-      throw new Error(
-        'ADMIN_CHECK_FAILED'
-      );
-
-    }
-
-
-    const admins =
-    await adminRes.json();
-
-
-    if(!admins.length){
-
-      throw new Error(
-        'NOT_ADMIN'
-      );
-
-    }
-
-
-    localStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    state.textContent =
-    '已登录';
-
-
-    return true;
-
-
-  }catch(e){
-
-    state.textContent =
-    '登录已失效';
-
-
-    return false;
-
-  }
-
-}
-
-
-/* =====================================
-   BUILD 00 - 99
-===================================== */
+/* =========================
+   BUILD 00–99
+========================= */
 
 function buildNumberGrid(){
 
@@ -1070,7 +888,6 @@ function buildNumberGrid(){
 
       </div>
 
-
       <div class="numData">
 
         <div class="numDataBox">
@@ -1084,7 +901,6 @@ function buildNumberGrid(){
           </strong>
 
         </div>
-
 
         <div class="numDataBox">
 
@@ -1112,27 +928,82 @@ function buildNumberGrid(){
 }
 
 
-/* =====================================
+/* =========================
+   VERIFY ADMIN
+========================= */
+
+async function verifyAdmin(){
+
+  if(!token){
+
+    location.href =
+    '/admin/';
+
+    return false;
+
+  }
+
+
+  try{
+
+    const r =
+    await api(
+      '/auth/v1/user'
+    );
+
+
+    if(!r.ok){
+
+      throw new Error();
+
+    }
+
+
+    return true;
+
+
+  }catch(e){
+
+    localStorage.removeItem(
+      'jmt_access_token'
+    );
+
+
+    sessionStorage.removeItem(
+      'jmt_access_token'
+    );
+
+
+    location.href =
+    '/admin/';
+
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================
    LOAD ROUND
-===================================== */
+========================= */
 
 async function loadRound(){
 
   const r =
   await api(
     '/rest/v1/rounds'+
-    '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at'+
+    '?select=id,round_date,round_code,deadline_at,result_number,status,created_at'+
     '&order=created_at.desc'+
-    '&limit=50'
+    '&limit=30'
   );
 
 
   if(!r.ok){
 
     throw new Error(
-      await r.text()
-      ||
-      '无法读取期数'
+      '无法读取当前期'
     );
 
   }
@@ -1142,27 +1013,30 @@ async function loadRound(){
   await r.json();
 
 
-  /*
-    汇总页面优先显示开放期。
+  if(!rows.length){
 
-    如果没有开放期，
-    显示最新一期。
-  */
+    currentRound =
+    null;
+
+
+    renderRound();
+
+
+    return;
+
+  }
+
 
   currentRound =
+
   rows.find(
-    r =>
-    r.status ===
-    'open'
+    x=>
+    x.status==='open'
   )
 
   ||
 
-  rows[0]
-
-  ||
-
-  null;
+  rows[0];
 
 
   renderRound();
@@ -1170,9 +1044,9 @@ async function loadRound(){
 }
 
 
-/* =====================================
+/* =========================
    RENDER ROUND
-===================================== */
+========================= */
 
 function renderRound(){
 
@@ -1204,10 +1078,6 @@ function renderRound(){
     '—';
 
 
-    status.className =
-    '';
-
-
     deadline.textContent =
     '—';
 
@@ -1232,16 +1102,11 @@ function renderRound(){
 
 
   status.className =
-  currentRound.status ===
-  'open'
-
+  currentRound.status==='open'
   ?
-
   'green'
-
   :
-
-  'goldText';
+  '';
 
 
   deadline.textContent =
@@ -1252,25 +1117,22 @@ function renderRound(){
 }
 
 
-/* =====================================
+/* =========================
    LOAD AGENTS
-===================================== */
+========================= */
 
 async function loadAgents(){
 
   const r =
   await api(
     '/rest/v1/agents'+
-    '?select=id,display_name,commission_rate,status,created_at'+
-    '&order=created_at.desc'
+    '?select=id,display_name,commission_rate,status,created_at'
   );
 
 
   if(!r.ok){
 
     throw new Error(
-      await r.text()
-      ||
       '无法读取代理'
     );
 
@@ -1283,9 +1145,9 @@ async function loadAgents(){
 }
 
 
-/* =====================================
+/* =========================
    LOAD SUBMISSIONS
-===================================== */
+========================= */
 
 async function loadSubmissions(){
 
@@ -1314,8 +1176,6 @@ async function loadSubmissions(){
   if(!r.ok){
 
     throw new Error(
-      await r.text()
-      ||
       '无法读取代理提交'
     );
 
@@ -1328,9 +1188,9 @@ async function loadSubmissions(){
 }
 
 
-/* =====================================
+/* =========================
    CALCULATE
-===================================== */
+========================= */
 
 function calculate(){
 
@@ -1366,7 +1226,7 @@ function calculate(){
 
       const code =
       String(
-        row.number_code ?? ''
+        row.number_code
       )
       .padStart(
         2,
@@ -1375,8 +1235,8 @@ function calculate(){
 
 
       const points =
-      normalizePoints(
-        row.points
+      Number(
+        row.points || 0
       );
 
 
@@ -1389,7 +1249,9 @@ function calculate(){
         )
       ){
 
-        totals[code] +=
+        totals[
+          code
+        ] +=
         points;
 
       }
@@ -1403,11 +1265,17 @@ function calculate(){
 
         agentMap[
           row.agent_id
-        ] =
-        {
+        ] = {
+
           total:0,
-          lastTime:null,
+
+          lastTime:
+          row.updated_at
+          ||
+          row.submitted_at,
+
           numbers:{}
+
         };
 
 
@@ -1419,7 +1287,8 @@ function calculate(){
 
           agentMap[
             row.agent_id
-          ].numbers[
+          ]
+          .numbers[
             String(i)
             .padStart(
               2,
@@ -1460,34 +1329,40 @@ function calculate(){
       }
 
 
-      const rowTime =
+      const thisTime =
       row.updated_at
       ||
       row.submitted_at;
 
 
-      if(rowTime){
+      if(
+        thisTime
+        &&
+        (
+          !agentMap[
+            row.agent_id
+          ].lastTime
 
-        const oldTime =
+          ||
+
+          new Date(
+            thisTime
+          )
+
+          >
+
+          new Date(
+            agentMap[
+              row.agent_id
+            ].lastTime
+          )
+        )
+      ){
+
         agentMap[
           row.agent_id
-        ].lastTime;
-
-
-        if(
-          !oldTime
-          ||
-          new Date(rowTime)
-          >
-          new Date(oldTime)
-        ){
-
-          agentMap[
-            row.agent_id
-          ].lastTime =
-          rowTime;
-
-        }
+        ].lastTime =
+        thisTime;
 
       }
 
@@ -1503,9 +1378,9 @@ function calculate(){
 }
 
 
-/* =====================================
-   TOTALS
-===================================== */
+/* =========================
+   RENDER TOTALS
+========================= */
 
 function renderTotals(
   totals,
@@ -1528,8 +1403,8 @@ function renderTotals(
 
 
       const amount =
-      normalizePoints(
-        value
+      Number(
+        value || 0
       );
 
 
@@ -1543,7 +1418,7 @@ function renderTotals(
 
 
       if(
-        amount > 0
+        amount>0
       ){
 
         activeNumbers++;
@@ -1593,7 +1468,7 @@ function renderTotals(
 
         box.classList.toggle(
           'nonzero',
-          amount > 0
+          amount>0
         );
 
       }
@@ -1601,10 +1476,6 @@ function renderTotals(
     }
   );
 
-
-  /*
-    代理佣金必须逐个代理计算。
-  */
 
   let commissionTotal =
   0;
@@ -1628,8 +1499,8 @@ function renderTotals(
 
 
       const total =
-      normalizePoints(
-        data.total
+      Number(
+        data.total || 0
       );
 
 
@@ -1645,12 +1516,12 @@ function renderTotals(
       100;
 
 
-      data.rate =
-      rate;
-
-
       data.commission =
       commission;
+
+
+      data.rate =
+      rate;
 
 
       commissionTotal +=
@@ -1666,22 +1537,23 @@ function renderTotals(
 
 
   const submittedAgentIds =
+
   Object.keys(
     agentMap
   )
   .filter(
-    id =>
+    id=>
     Number(
       agentMap[id].total
-    ) > 0
+    )>0
   );
 
 
   const activeAgents =
+
   agents.filter(
-    a =>
-    a.status ===
-    'active'
+    a=>
+    a.status==='active'
   );
 
 
@@ -1730,9 +1602,9 @@ function renderTotals(
 }
 
 
-/* =====================================
+/* =========================
    RENDER AGENTS
-===================================== */
+========================= */
 
 function renderAgents(
   agentMap
@@ -1745,7 +1617,9 @@ function renderAgents(
 
 
   const list =
+
   agents
+
   .map(
     a=>({
       ...a,
@@ -1753,14 +1627,16 @@ function renderAgents(
       agentMap[a.id]
     })
   )
+
   .filter(
-    a =>
+    a=>
     a.roundData
     &&
     Number(
       a.roundData.total
-    ) > 0
+    )>0
   )
+
   .sort(
     (a,b)=>
     Number(
@@ -1787,6 +1663,7 @@ function renderAgents(
 
 
   box.innerHTML =
+
   list.map(
     a=>{
 
@@ -1798,8 +1675,8 @@ function renderAgents(
 
 
       const total =
-      normalizePoints(
-        a.roundData.total
+      Number(
+        a.roundData.total || 0
       );
 
 
@@ -1810,6 +1687,7 @@ function renderAgents(
 
 
       const detailHtml =
+
       Object.entries(
         a.roundData.numbers
       )
@@ -1830,7 +1708,7 @@ function renderAgents(
           <div class="detailNum${active}">
 
             <span>
-              ${escapeHtml(code)}
+              ${code}
             </span>
 
             <span>
@@ -1850,9 +1728,7 @@ function renderAgents(
 
       <div class="agent">
 
-
         <div class="agentTop">
-
 
           <div>
 
@@ -1866,7 +1742,6 @@ function renderAgents(
 
             </div>
 
-
             <div class="rate">
 
               代理比例：
@@ -1876,17 +1751,14 @@ function renderAgents(
 
           </div>
 
-
           <div class="badge">
             已提交
           </div>
-
 
         </div>
 
 
         <div class="agentStats">
-
 
           <div class="agentStat">
 
@@ -1900,7 +1772,6 @@ function renderAgents(
 
           </div>
 
-
           <div class="agentStat commission">
 
             <small>
@@ -1912,7 +1783,6 @@ function renderAgents(
             </strong>
 
           </div>
-
 
           <div class="agentStat">
 
@@ -1936,23 +1806,19 @@ function renderAgents(
 
           </div>
 
-
         </div>
 
 
         <button
           class="dark detailButton"
-          onclick="toggleAgentDetail('${escapeJs(a.id)}',this)">
-
+          onclick="toggleAgentDetail('${a.id}',this)">
           查看 00–99 明细
-
         </button>
 
 
         <div
           class="agentDetail"
-          id="detail-${escapeHtml(a.id)}">
-
+          id="detail-${a.id}">
 
           <div class="detailTitle">
 
@@ -1966,29 +1832,27 @@ function renderAgents(
 
           </div>
 
-
           <div class="detailGrid">
+
             ${detailHtml}
+
           </div>
 
-
         </div>
-
 
       </div>
 
       `;
 
     }
-  )
-  .join('');
+  ).join('');
 
 }
 
 
-/* =====================================
-   TOGGLE DETAIL
-===================================== */
+/* =========================
+   DETAIL
+========================= */
 
 function toggleAgentDetail(
   agentId,
@@ -2030,13 +1894,11 @@ function toggleAgentDetail(
 }
 
 
-/* =====================================
-   LOAD EVERYTHING
-===================================== */
+/* =========================
+   LOAD ALL
+========================= */
 
-async function loadAll(
-  showMessage=false
-){
+async function loadAll(){
 
   const msg =
   document.getElementById(
@@ -2044,22 +1906,8 @@ async function loadAll(
   );
 
 
-  const button =
-  document.getElementById(
-    'refreshBtn'
-  );
-
-
-  if(showMessage){
-
-    msg.textContent =
-    '正在读取最新数据...';
-
-  }
-
-
-  button.disabled =
-  true;
+  msg.textContent =
+  '正在读取最新数据...';
 
 
   try{
@@ -2070,9 +1918,7 @@ async function loadAll(
 
     if(!ok){
 
-      throw new Error(
-        '管理员登录已失效'
-      );
+      return;
 
     }
 
@@ -2095,39 +1941,26 @@ async function loadAll(
     getMMTClock();
 
 
-    if(showMessage){
-
-      msg.className =
-      'msg success';
+    msg.textContent =
+    '✓ 已同步最新数据';
 
 
-      msg.textContent =
-      '✓ 已同步最新数据';
+    setTimeout(
+      ()=>{
 
+        if(
+          msg.textContent===
+          '✓ 已同步最新数据'
+        ){
 
-      setTimeout(
-        ()=>{
+          msg.textContent =
+          '';
 
-          if(
-            msg.textContent ===
-            '✓ 已同步最新数据'
-          ){
+        }
 
-            msg.textContent =
-            '';
-
-          }
-
-        },
-        1800
-      );
-
-    }else{
-
-      msg.textContent =
-      '';
-
-    }
+      },
+      1800
+    );
 
 
   }catch(e){
@@ -2137,29 +1970,19 @@ async function loadAll(
     );
 
 
-    msg.className =
-    'msg red';
-
-
     msg.textContent =
     e.message
     ||
     '读取失败';
-
-
-  }finally{
-
-    button.disabled =
-    false;
 
   }
 
 }
 
 
-/* =====================================
+/* =========================
    RATE
-===================================== */
+========================= */
 
 function normalizeRate(
   value
@@ -2177,49 +2000,25 @@ function normalizeRate(
     )
   ){
 
-    rate = 0;
+    rate =
+    0;
 
   }
 
 
   if(
-    rate > 0
+    rate>0
     &&
-    rate <= 1
+    rate<=1
   ){
 
-    rate *= 100;
+    rate =
+    rate*100;
 
   }
 
 
   return rate;
-
-}
-
-
-function normalizePoints(
-  value
-){
-
-  const n =
-  Number(
-    value || 0
-  );
-
-
-  if(
-    !Number.isFinite(n)
-    ||
-    n < 0
-  ){
-
-    return 0;
-
-  }
-
-
-  return n;
 
 }
 
@@ -2241,30 +2040,32 @@ function formatRate(
 }
 
 
-/* =====================================
-   ROUND NAME
-===================================== */
+/* =========================
+   PERIOD
+========================= */
 
 function periodName(
   code
 ){
 
+  /*
+    1030 / 1530 继续只作为内部期别代码。
+  */
+
   if(
-    code ===
-    '1030'
+    code==='1030'
   ){
 
-    return '上午 10:30';
+    return '上午 11:45';
 
   }
 
 
   if(
-    code ===
-    '1530'
+    code==='1530'
   ){
 
-    return '下午 15:30';
+    return '下午 15:45';
 
   }
 
@@ -2274,17 +2075,16 @@ function periodName(
 }
 
 
-/* =====================================
+/* =========================
    STATUS
-===================================== */
+========================= */
 
 function statusName(
   status
 ){
 
   if(
-    status ===
-    'open'
+    status==='open'
   ){
 
     return '开放中';
@@ -2293,8 +2093,7 @@ function statusName(
 
 
   if(
-    status ===
-    'closed'
+    status==='closed'
   ){
 
     return '已关闭';
@@ -2303,8 +2102,7 @@ function statusName(
 
 
   if(
-    status ===
-    'settled'
+    status==='settled'
   ){
 
     return '已结算';
@@ -2317,9 +2115,9 @@ function statusName(
 }
 
 
-/* =====================================
+/* =========================
    TIME
-===================================== */
+========================= */
 
 function formatMMT(
   value
@@ -2350,7 +2148,9 @@ function formatMMT(
     }
   )
   .format(
-    new Date(value)
+    new Date(
+      value
+    )
   )
   +
   ' MMT';
@@ -2385,7 +2185,9 @@ function formatMMTShort(
     }
   )
   .format(
-    new Date(value)
+    new Date(
+      value
+    )
   );
 
 }
@@ -2423,9 +2225,9 @@ function updateClock(){
 }
 
 
-/* =====================================
+/* =========================
    FORMAT
-===================================== */
+========================= */
 
 function formatNumber(
   value
@@ -2444,16 +2246,12 @@ function formatNumber(
 }
 
 
-/* =====================================
-   ESCAPE
-===================================== */
-
 function escapeHtml(
-  value
+  text
 ){
 
   return String(
-    value ?? ''
+    text
   )
 
   .replaceAll(
@@ -2484,80 +2282,9 @@ function escapeHtml(
 }
 
 
-function escapeJs(
-  value
-){
-
-  return String(
-    value ?? ''
-  )
-  .replaceAll(
-    '\\',
-    '\\\\'
-  )
-  .replaceAll(
-    "'",
-    "\\'"
-  );
-
-}
-
-
-/* =====================================
-   CLEAR SESSION
-===================================== */
-
-function clearAdminSession(){
-
-  localStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  token =
-  '';
-
-}
-
-
-/* =====================================
+/* =========================
    START
-===================================== */
-
-async function start(){
-
-  updateClock();
-
-
-  const ok =
-  await verifyAdmin();
-
-
-  if(!ok){
-
-    clearAdminSession();
-
-
-    location.href =
-    '/admin/';
-
-
-    return;
-
-  }
-
-
-  await loadAll(
-    false
-  );
-
-}
-
+========================= */
 
 buildNumberGrid();
 
@@ -2571,21 +2298,11 @@ setInterval(
 );
 
 
-start();
+loadAll();
 
 
 setInterval(
-  ()=>{
-
-    if(token){
-
-      loadAll(
-        false
-      );
-
-    }
-
-  },
+  loadAll,
   20000
 );
 
