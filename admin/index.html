@@ -111,6 +111,13 @@ button{
   color:#171109
 }
 
+button:disabled{
+  cursor:not-allowed;
+  opacity:.45;
+  background:#292929;
+  color:#8a857b
+}
+
 button.secondary{
   margin-top:10px;
   background:#171718;
@@ -125,16 +132,15 @@ button.danger{
   border:1px solid rgba(180,100,100,.20)
 }
 
-.hidden{
-  display:none!important
-}
+.hidden{display:none!important}
 
 .msg{
   text-align:center;
   min-height:18px;
   margin-top:10px;
   color:#aaa18d;
-  font-size:12px
+  font-size:12px;
+  line-height:1.6
 }
 
 .summaryGrid{
@@ -190,9 +196,7 @@ button.danger{
   min-height:112px
 }
 
-.menu:active{
-  transform:scale(.98)
-}
+.menu:active{transform:scale(.98)}
 
 .menuIcon{
   font-size:26px;
@@ -230,6 +234,86 @@ button.danger{
 .current strong{
   font-size:48px;
   color:#ebca68
+}
+
+/* 新数字发布区域 */
+
+.publishRound{
+  background:#101011;
+  border:1px solid rgba(214,168,63,.20);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:14px
+}
+
+.publishRoundTitle{
+  font-size:11px;
+  color:#817a6d;
+  margin-bottom:8px
+}
+
+.publishRoundName{
+  color:#efd477;
+  font-size:21px;
+  font-weight:900;
+  line-height:1.45
+}
+
+.publishInfoGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px
+}
+
+.publishInfo{
+  background:#151516;
+  border-radius:13px;
+  padding:13px
+}
+
+.publishInfo small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:7px
+}
+
+.publishInfo strong{
+  display:block;
+  color:#ead078;
+  font-size:16px;
+  line-height:1.4
+}
+
+.countdownBox{
+  margin:14px 0;
+  padding:18px 12px;
+  border-radius:16px;
+  text-align:center;
+  background:#0d0d0e;
+  border:1px solid rgba(214,168,63,.25)
+}
+
+.countdownBox small{
+  display:block;
+  color:#8e877a;
+  font-size:11px;
+  margin-bottom:8px
+}
+
+.countdownBox strong{
+  display:block;
+  font-size:29px;
+  letter-spacing:2px;
+  color:#efd477
+}
+
+.publishNote{
+  color:#777268;
+  font-size:11px;
+  line-height:1.65;
+  margin:12px 2px
 }
 
 .settingLabel{
@@ -365,7 +449,6 @@ button.danger{
     <div class="en">JIN MANTANG · MANAGEMENT</div>
   </div>
 
-
   <div class="card" id="loginBox">
 
     <div class="title">管理员登录</div>
@@ -373,9 +456,7 @@ button.danger{
     <input id="email" type="email" placeholder="管理员邮箱">
     <input id="password" type="password" placeholder="管理员密码">
 
-    <button onclick="signIn()">
-      登录管理中心
-    </button>
+    <button onclick="signIn()">登录管理中心</button>
 
     <div class="msg" id="loginMsg"></div>
 
@@ -386,9 +467,7 @@ button.danger{
 
     <div class="card">
 
-      <div class="title">
-        当前运营概况
-      </div>
+      <div class="title">当前运营概况</div>
 
       <div class="summaryGrid">
 
@@ -443,9 +522,7 @@ button.danger{
 
     <div class="card">
 
-      <div class="title">
-        管理中心
-      </div>
+      <div class="title">管理中心</div>
 
       <div class="menuGrid">
 
@@ -455,13 +532,11 @@ button.danger{
           <div class="menuSub">创建代理、搜索、比例、暂停、限制</div>
         </a>
 
-
         <a class="menu" href="/admin/rounds/index.html">
           <div class="menuIcon">🗓️</div>
           <div class="menuTitle">期数管理</div>
           <div class="menuSub">结束本期、归档、开启下一期</div>
         </a>
-
 
         <a class="menu" href="/admin/simulator.html">
           <div class="menuIcon">📊</div>
@@ -469,20 +544,17 @@ button.danger{
           <div class="menuSub">查看当前期所有代理提交与 00–99 汇总</div>
         </a>
 
-
         <a class="menu" href="/history/index.html">
           <div class="menuIcon">📚</div>
           <div class="menuTitle">历史期数</div>
           <div class="menuSub">查询以前每一期与代理历史明细</div>
         </a>
 
-
         <a class="menu" href="#resultManagement">
           <div class="menuIcon">🎯</div>
           <div class="menuTitle">数字发布</div>
-          <div class="menuSub">发布最新公开结果</div>
+          <div class="menuSub">按期数发布开奖结果与实时倒计时</div>
         </a>
-
 
         <a class="menu" href="#siteSettings">
           <div class="menuIcon">⚙️</div>
@@ -495,16 +567,62 @@ button.danger{
     </div>
 
 
+    <!-- 新版数字发布 -->
+
     <div class="card" id="resultManagement">
 
       <div class="title">
         数字发布管理
       </div>
 
+      <div class="publishRound">
+
+        <div class="publishRoundTitle">
+          本次发布对应期数
+        </div>
+
+        <div
+          class="publishRoundName"
+          id="publishRoundName">
+          正在读取...
+        </div>
+
+
+        <div class="publishInfoGrid">
+
+          <div class="publishInfo">
+            <small>截止时间</small>
+            <strong id="publishDeadline">—</strong>
+          </div>
+
+          <div class="publishInfo">
+            <small>当前状态</small>
+            <strong id="publishStatus">—</strong>
+          </div>
+
+        </div>
+
+
+        <div class="countdownBox">
+
+          <small id="countdownLabel">
+            距离截止
+          </small>
+
+          <strong id="publishCountdown">
+            --:--:--
+          </strong>
+
+        </div>
+
+      </div>
+
+
       <div class="current">
-        <small>当前最新数字</small>
+        <small>本期开奖结果</small>
         <strong id="currentResult">--</strong>
       </div>
+
 
       <input
         id="resultInput"
@@ -512,9 +630,20 @@ button.danger{
         maxlength="2"
         placeholder="输入 00 - 99">
 
-      <button onclick="publishResult()">
-        发布最新数字
+
+      <button
+        id="publishButton"
+        onclick="publishResult()"
+        disabled>
+        正在检查期数...
       </button>
+
+
+      <div class="publishNote">
+        数字会绑定到上方显示的期数。
+        截止时间到达前系统不会允许发布。
+        发布成功后，该期开奖结果也会永久显示在历史期数中。
+      </div>
 
       <div class="msg" id="publishMsg"></div>
 
@@ -523,9 +652,7 @@ button.danger{
 
     <div class="card">
 
-      <div class="title">
-        网站 Logo 管理
-      </div>
+      <div class="title">网站 Logo 管理</div>
 
       <div class="logoPreviewWrap">
 
@@ -658,7 +785,10 @@ sessionStorage.getItem('jmt_access_token')
 
 let pendingLogo = '';
 let currentRound = null;
+let publishRound = null;
 
+
+/* API */
 
 async function api(path,options={}){
 
@@ -676,6 +806,8 @@ async function api(path,options={}){
 
 }
 
+
+/* LOGIN */
 
 async function signIn(){
 
@@ -811,16 +943,20 @@ function showAdmin(){
 }
 
 
+/* LOAD */
+
 async function loadEverything(){
 
   await Promise.all([
-    loadCurrent(),
     loadSettings(),
-    loadDashboardSummary()
+    loadDashboardSummary(),
+    loadPublishRound()
   ]);
 
 }
 
+
+/* DASHBOARD */
 
 async function loadDashboardSummary(){
 
@@ -829,7 +965,7 @@ async function loadDashboardSummary(){
     const rr =
     await api(
       '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,status,created_at'+
+      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at'+
       '&order=created_at.desc'+
       '&limit=20'
     );
@@ -851,8 +987,6 @@ async function loadDashboardSummary(){
       x=>x.status==='open'
     )
     ||
-    rounds[0]
-    ||
     null;
 
 
@@ -866,13 +1000,9 @@ async function loadDashboardSummary(){
 
 
     const period =
-    currentRound.round_code==='1530'
-    ? '下午 15:30'
-    :
-    currentRound.round_code==='1030'
-    ? '上午 10:30'
-    :
-    currentRound.round_code;
+    periodName(
+      currentRound.round_code
+    );
 
 
     document.getElementById(
@@ -886,17 +1016,13 @@ async function loadDashboardSummary(){
     document.getElementById(
       'summaryStatus'
     ).textContent =
-    currentRound.status==='open'
-    ? '开放中'
-    : '已关闭';
+    '开放中';
 
 
     document.getElementById(
       'summaryStatus'
     ).className =
-    currentRound.status==='open'
-    ? 'green'
-    : '';
+    'green';
 
 
     document.getElementById(
@@ -1098,26 +1224,26 @@ function renderNoRound(){
 }
 
 
-async function loadCurrent(){
+/* 数字发布对应期数 */
+
+async function loadPublishRound(){
 
   try{
 
     const r =
-    await fetch(
-      BASE+
-      '/rest/v1/results?select=result_number,published_at&order=published_at.desc&limit=1',
-      {
-        headers:{
-          apikey:KEY,
-          Authorization:'Bearer '+KEY
-        }
-      }
+    await api(
+      '/rest/v1/rounds'+
+      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at,settled_at'+
+      '&order=created_at.desc'+
+      '&limit=30'
     );
 
 
     if(!r.ok){
 
-      throw new Error();
+      throw new Error(
+        await r.text()
+      );
 
     }
 
@@ -1126,25 +1252,313 @@ async function loadCurrent(){
     await r.json();
 
 
-    document.getElementById(
-      'currentResult'
-    ).textContent =
-    rows.length
-    ? rows[0].result_number
-    : '--';
+    /*
+      优先：
+      1. 当前开放期
+      2. 如果没有开放期，最近一个还没有开奖结果的已结束期
+    */
+
+    publishRound =
+    rows.find(
+      x=>x.status==='open'
+    )
+    ||
+    rows.find(
+      x=>
+      (
+        x.status==='closed'
+        ||
+        x.status==='settled'
+      )
+      &&
+      !x.result_number
+    )
+    ||
+    null;
+
+
+    renderPublishRound();
 
 
   }catch(e){
 
     document.getElementById(
-      'currentResult'
+      'publishRoundName'
     ).textContent =
-    '--';
+    '读取期数失败';
+
+
+    document.getElementById(
+      'publishButton'
+    ).disabled =
+    true;
+
+
+    document.getElementById(
+      'publishButton'
+    ).textContent =
+    '暂时无法发布';
 
   }
 
 }
 
+
+function renderPublishRound(){
+
+  const roundName =
+  document.getElementById(
+    'publishRoundName'
+  );
+
+  const deadline =
+  document.getElementById(
+    'publishDeadline'
+  );
+
+  const status =
+  document.getElementById(
+    'publishStatus'
+  );
+
+  const result =
+  document.getElementById(
+    'currentResult'
+  );
+
+
+  if(!publishRound){
+
+    roundName.textContent =
+    '暂无可发布期数';
+
+
+    deadline.textContent =
+    '—';
+
+
+    status.textContent =
+    '—';
+
+
+    result.textContent =
+    '--';
+
+
+    updatePublishState();
+
+    return;
+
+  }
+
+
+  roundName.textContent =
+  publishRound.round_date+
+  ' · '+
+  periodName(
+    publishRound.round_code
+  );
+
+
+  deadline.textContent =
+  formatMMTShort(
+    publishRound.deadline_at
+  );
+
+
+  status.textContent =
+  publishRound.status==='open'
+  ? '开放中'
+  : '已结束';
+
+
+  status.className =
+  publishRound.status==='open'
+  ? 'green'
+  : '';
+
+
+  result.textContent =
+  publishRound.result_number
+  ||
+  '--';
+
+
+  updatePublishState();
+
+}
+
+
+/* 倒计时 + 发布按钮状态 */
+
+function updatePublishState(){
+
+  const countdown =
+  document.getElementById(
+    'publishCountdown'
+  );
+
+  const label =
+  document.getElementById(
+    'countdownLabel'
+  );
+
+  const button =
+  document.getElementById(
+    'publishButton'
+  );
+
+
+  if(!publishRound){
+
+    countdown.textContent =
+    '--:--:--';
+
+
+    label.textContent =
+    '距离截止';
+
+
+    button.disabled =
+    true;
+
+
+    button.textContent =
+    '暂无可发布期数';
+
+
+    return;
+
+  }
+
+
+  const deadlineTime =
+  new Date(
+    publishRound.deadline_at
+  ).getTime();
+
+
+  const now =
+  Date.now();
+
+
+  const diff =
+  deadlineTime-now;
+
+
+  if(diff>0){
+
+    countdown.textContent =
+    formatCountdown(
+      diff
+    );
+
+
+    label.textContent =
+    '距离截止';
+
+
+    button.disabled =
+    true;
+
+
+    button.textContent =
+    '尚未截止，暂不可发布';
+
+    return;
+
+  }
+
+
+  countdown.textContent =
+  '00:00:00';
+
+
+  label.textContent =
+  '本期已经截止';
+
+
+  if(publishRound.result_number){
+
+    button.disabled =
+    true;
+
+
+    button.textContent =
+    '本期开奖结果已发布';
+
+    return;
+
+  }
+
+
+  button.disabled =
+  false;
+
+
+  button.textContent =
+  '发布本期数字';
+
+}
+
+
+function formatCountdown(ms){
+
+  let total =
+  Math.max(
+    0,
+    Math.floor(
+      ms/1000
+    )
+  );
+
+
+  const days =
+  Math.floor(
+    total/86400
+  );
+
+
+  total %=
+  86400;
+
+
+  const h =
+  Math.floor(
+    total/3600
+  );
+
+
+  total %=
+  3600;
+
+
+  const m =
+  Math.floor(
+    total/60
+  );
+
+
+  const s =
+  total%60;
+
+
+  const clock =
+  String(h).padStart(2,'0')+
+  ':'+
+  String(m).padStart(2,'0')+
+  ':'+
+  String(s).padStart(2,'0');
+
+
+  return days>0
+  ? days+'天 '+clock
+  : clock;
+
+}
+
+
+/* 发布开奖结果 */
 
 async function publishResult(){
 
@@ -1157,6 +1571,49 @@ async function publishResult(){
   document.getElementById(
     'publishMsg'
   );
+
+
+  if(!publishRound){
+
+    msg.textContent =
+    '目前没有可发布的期数';
+
+    return;
+
+  }
+
+
+  /*
+    再次确认截止时间，
+    防止只依赖按钮状态
+  */
+
+  if(
+    Date.now()
+    <
+    new Date(
+      publishRound.deadline_at
+    ).getTime()
+  ){
+
+    msg.textContent =
+    '本期还没有到截止时间';
+
+    return;
+
+  }
+
+
+  if(
+    publishRound.result_number
+  ){
+
+    msg.textContent =
+    '本期已经发布过开奖结果';
+
+    return;
+
+  }
 
 
   let n =
@@ -1180,13 +1637,83 @@ async function publishResult(){
   );
 
 
+  const ok =
+  confirm(
+    '确定发布本期开奖结果？\n\n'+
+    publishRound.round_date+
+    ' · '+
+    periodName(
+      publishRound.round_code
+    )+
+    '\n\n开奖结果：'+
+    n
+  );
+
+
+  if(!ok){
+    return;
+  }
+
+
   msg.textContent =
   '正在发布...';
 
 
   try{
 
-    const r =
+    /*
+      第一步：
+      把开奖结果永久绑定到这一期
+    */
+
+    const roundRes =
+    await api(
+      '/rest/v1/rounds?id=eq.'+
+      encodeURIComponent(
+        publishRound.id
+      ),
+      {
+        method:'PATCH',
+        headers:{
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
+        },
+        body:JSON.stringify({
+          result_number:n
+        })
+      }
+    );
+
+
+    if(!roundRes.ok){
+
+      throw new Error(
+        await roundRes.text()
+      );
+
+    }
+
+
+    const changed =
+    await roundRes.json();
+
+
+    if(!changed.length){
+
+      throw new Error(
+        '数据库没有确认本期开奖结果'
+      );
+
+    }
+
+
+    /*
+      第二步：
+      保存到 results，
+      继续给公开用户首页显示“最新结果”
+    */
+
+    const resultRes =
     await api(
       '/rest/v1/results',
       {
@@ -1202,11 +1729,17 @@ async function publishResult(){
     );
 
 
-    if(!r.ok){
+    if(!resultRes.ok){
 
-      throw new Error();
+      throw new Error(
+        await resultRes.text()
+      );
 
     }
+
+
+    publishRound.result_number =
+    n;
 
 
     document.getElementById(
@@ -1215,22 +1748,36 @@ async function publishResult(){
     n;
 
 
-    input.value = '';
+    input.value =
+    '';
 
 
     msg.textContent =
-    '✓ 发布成功：'+n;
+    '✓ 发布成功：'+
+    publishRound.round_date+
+    ' · '+
+    periodName(
+      publishRound.round_code
+    )+
+    ' → '+
+    n;
+
+
+    updatePublishState();
 
 
   }catch(e){
 
     msg.textContent =
-    '发布失败，请重新登录';
+    '发布失败：'+
+    e.message;
 
   }
 
 }
 
+
+/* SETTINGS */
 
 async function loadSettings(){
 
@@ -1745,6 +2292,8 @@ async function saveSettings(){
 }
 
 
+/* TIME */
+
 function updateClock(){
 
   document.getElementById(
@@ -1762,6 +2311,9 @@ function updateClock(){
   ).format(
     new Date()
   );
+
+
+  updatePublishState();
 
 }
 
@@ -1792,6 +2344,27 @@ function formatMMTShort(value){
 }
 
 
+function periodName(code){
+
+  if(code==='1030'){
+
+    return '上午 10:30';
+
+  }
+
+
+  if(code==='1530'){
+
+    return '下午 15:30';
+
+  }
+
+
+  return code || '—';
+
+}
+
+
 function formatNumber(value){
 
   return Number(
@@ -1805,6 +2378,8 @@ function formatNumber(value){
 
 }
 
+
+/* LOGOUT */
 
 function clearSession(){
 
@@ -1832,6 +2407,8 @@ function logout(){
 }
 
 
+/* START */
+
 updateClock();
 
 
@@ -1846,9 +2423,15 @@ verifySession();
 
 setInterval(
   ()=>{
+
     if(token){
+
       loadDashboardSummary();
+
+      loadPublishRound();
+
     }
+
   },
   20000
 );
