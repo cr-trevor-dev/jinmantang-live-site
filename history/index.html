@@ -1,42 +1,19 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1">
-
-<meta
-  name="theme-color"
-  content="#09090a">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
 <title>金满堂 · 历史期数</title>
 
 <style>
-
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  background:
-  radial-gradient(
-    circle at top,
-    #251907 0,
-    #0d0c0a 40%,
-    #070708 100%
-  );
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f5edd9;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Arial,
-  sans-serif
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
 
 .wrap{
@@ -51,7 +28,7 @@ body{
   align-items:flex-start;
   justify-content:space-between;
   gap:14px;
-  margin-bottom:22px
+  margin-bottom:26px
 }
 
 .headTitle{
@@ -72,9 +49,7 @@ body{
   text-decoration:none;
   color:#efd477;
   background:#181819;
-  border:
-  1px solid
-  rgba(214,168,63,.30);
+  border:1px solid rgba(214,168,63,.30);
   border-radius:18px;
   padding:14px 17px;
   font-weight:900;
@@ -83,15 +58,8 @@ body{
 }
 
 .card{
-  background:
-  linear-gradient(
-    180deg,
-    #151515,
-    #0d0d0e
-  );
-  border:
-  1px solid
-  rgba(214,168,63,.30);
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.30);
   border-radius:25px;
   padding:20px;
   margin-bottom:18px
@@ -104,28 +72,9 @@ body{
   margin-bottom:17px
 }
 
-.sessionBox{
-  background:#101011;
-  border:
-  1px solid
-  rgba(214,168,63,.18);
-  border-radius:14px;
-  padding:13px;
-  color:#8e8677;
-  font-size:11px;
-  line-height:1.6;
-  margin-bottom:17px
-}
-
-.sessionBox strong{
-  color:#71d49d
-}
-
 input{
   width:100%;
-  border:
-  1px solid
-  rgba(214,168,63,.24);
+  border:1px solid rgba(214,168,63,.24);
   background:#101011;
   color:#fff;
   border-radius:13px;
@@ -134,29 +83,9 @@ input{
   outline:none
 }
 
-.searchActions{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px
-}
-
-.searchActions button{
-  border:
-  1px solid
-  rgba(214,168,63,.26);
-  background:#181819;
-  color:#efd477;
-  border-radius:13px;
-  padding:0 16px;
-  font-weight:900;
-  cursor:pointer
-}
-
 .roundCard{
   background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:18px;
   padding:17px;
   margin-bottom:12px
@@ -194,11 +123,6 @@ input{
   color:#e4c56e
 }
 
-.status.settled{
-  background:#172c38;
-  color:#91d3ef
-}
-
 .status.other{
   background:#222;
   color:#aaa
@@ -233,8 +157,7 @@ input{
 
 .stat strong{
   color:#e9cc72;
-  font-size:17px;
-  word-break:break-word
+  font-size:17px
 }
 
 .detailBtn{
@@ -243,9 +166,7 @@ input{
   width:100%;
   text-align:center;
   text-decoration:none;
-  border:
-  1px solid
-  rgba(214,168,63,.28);
+  border:1px solid rgba(214,168,63,.28);
   background:#181819;
   color:#efd477;
   border-radius:13px;
@@ -271,17 +192,13 @@ input{
   justify-content:space-between;
   align-items:center;
   background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:13px;
   padding:13px
 }
 
 .numBox.active{
-  border-color:
-  rgba(214,168,63,.45);
-  background:#15130e
+  border-color:rgba(214,168,63,.45)
 }
 
 .num{
@@ -296,9 +213,7 @@ input{
 
 .agentCard{
   background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:16px;
   padding:15px;
   margin-bottom:11px
@@ -313,7 +228,7 @@ input{
 .agentMeta{
   color:#8b8374;
   font-size:11px;
-  line-height:1.7;
+  line-height:1.6;
   margin-top:6px
 }
 
@@ -333,10 +248,6 @@ input{
   font-size:11px
 }
 
-.agentNum strong{
-  color:#e9d797
-}
-
 .detailHeader{
   margin-bottom:14px
 }
@@ -350,16 +261,13 @@ input{
 .closeDetail{
   margin-top:13px;
   width:100%;
-  border:
-  1px solid
-  rgba(214,168,63,.28);
+  border:1px solid rgba(214,168,63,.28);
   background:#181819;
   color:#efd477;
   border-radius:13px;
   padding:13px;
   font-size:13px;
-  font-weight:900;
-  cursor:pointer
+  font-weight:900
 }
 
 .hidden{
@@ -370,12 +278,7 @@ input{
   text-align:center;
   color:#8c8578;
   font-size:12px;
-  padding:15px;
-  line-height:1.6
-}
-
-.error{
-  color:#e88e8e!important
+  padding:15px
 }
 
 .foot{
@@ -384,28 +287,12 @@ input{
   font-size:10px;
   margin-top:27px
 }
-
-@media(max-width:420px){
-
-  .headTitle{
-    font-size:24px
-  }
-
-  .grid100,
-  .agentNumbers{
-    grid-template-columns:1fr 1fr
-  }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
 <div class="wrap">
-
 
   <div class="header">
 
@@ -421,25 +308,11 @@ input{
 
     </div>
 
-
     <a
       class="back"
       href="/admin/">
-
       返回总后台
-
     </a>
-
-  </div>
-
-
-  <div class="sessionBox">
-
-    管理员状态：
-
-    <strong id="adminState">
-      正在验证...
-    </strong>
 
   </div>
 
@@ -450,20 +323,10 @@ input{
       搜索历史
     </div>
 
-
-    <div class="searchActions">
-
-      <input
-        id="searchDate"
-        type="date"
-        onchange="renderRounds()">
-
-
-      <button onclick="clearSearch()">
-        清除
-      </button>
-
-    </div>
+    <input
+      id="searchDate"
+      type="date"
+      onchange="renderRounds()">
 
   </div>
 
@@ -475,7 +338,6 @@ input{
     <div class="title">
       历史期数
     </div>
-
 
     <div id="roundList">
 
@@ -497,9 +359,7 @@ input{
       <div
         class="detailTitle"
         id="detailTitle">
-
         本期详情
-
       </div>
 
       <div
@@ -511,7 +371,6 @@ input{
 
 
     <div class="stats">
-
 
       <div class="stat">
 
@@ -525,7 +384,6 @@ input{
 
       </div>
 
-
       <div class="stat">
 
         <small>
@@ -537,7 +395,6 @@ input{
         </strong>
 
       </div>
-
 
       <div class="stat">
 
@@ -551,7 +408,6 @@ input{
 
       </div>
 
-
       <div class="stat">
 
         <small>
@@ -563,7 +419,6 @@ input{
         </strong>
 
       </div>
-
 
     </div>
 
@@ -577,7 +432,6 @@ input{
     <div class="title">
       00–99 本期汇总
     </div>
-
 
     <div
       class="grid100"
@@ -595,17 +449,13 @@ input{
       本期代理提交
     </div>
 
-
     <div id="agentsList">
     </div>
-
 
     <button
       class="closeDetail"
       onclick="closeDetail()">
-
       ← 返回历史期数
-
     </button>
 
   </div>
@@ -615,7 +465,6 @@ input{
     © 2022 JIN MANTANG · ROUND HISTORY
   </div>
 
-
 </div>
 
 
@@ -623,7 +472,6 @@ input{
 
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
-
 
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
@@ -649,14 +497,13 @@ sessionStorage.getItem(
 let rounds =
 [];
 
-
 let agentsMap =
 {};
 
 
-/* =====================================
+/* =========================
    API
-===================================== */
+========================= */
 
 async function api(
   path,
@@ -680,23 +527,16 @@ async function api(
 }
 
 
-/* =====================================
-   ADMIN VERIFY
-===================================== */
+/* =========================
+   VERIFY ADMIN
+========================= */
 
 async function verifyAdmin(){
 
-  const state =
-  document.getElementById(
-    'adminState'
-  );
-
-
   if(!token){
 
-    state.textContent =
-    '没有登录';
-
+    location.href =
+    '/admin/';
 
     return false;
 
@@ -713,9 +553,7 @@ async function verifyAdmin(){
 
     if(!userRes.ok){
 
-      throw new Error(
-        'LOGIN_EXPIRED'
-      );
+      throw new Error();
 
     }
 
@@ -738,9 +576,7 @@ async function verifyAdmin(){
 
     if(!adminRes.ok){
 
-      throw new Error(
-        'ADMIN_CHECK_FAILED'
-      );
+      throw new Error();
 
     }
 
@@ -751,27 +587,9 @@ async function verifyAdmin(){
 
     if(!admins.length){
 
-      throw new Error(
-        'NOT_ADMIN'
-      );
+      throw new Error();
 
     }
-
-
-    localStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    state.textContent =
-    '已登录';
 
 
     return true;
@@ -779,9 +597,8 @@ async function verifyAdmin(){
 
   }catch(e){
 
-    state.textContent =
-    '登录已失效';
-
+    location.href =
+    '/admin/';
 
     return false;
 
@@ -790,9 +607,9 @@ async function verifyAdmin(){
 }
 
 
-/* =====================================
+/* =========================
    LOAD ALL
-===================================== */
+========================= */
 
 async function loadAll(){
 
@@ -810,8 +627,6 @@ async function loadAll(){
 
       throw new Error(
         await rr.text()
-        ||
-        '无法读取历史期数'
       );
 
     }
@@ -828,14 +643,14 @@ async function loadAll(){
     );
 
 
-    agentsMap =
-    {};
-
-
     if(ar.ok){
 
       const agents =
       await ar.json();
+
+
+      agentsMap =
+      {};
 
 
       agents.forEach(
@@ -869,7 +684,7 @@ async function loadAll(){
 
     if(roundId){
 
-      await openDetail(
+      openDetail(
         roundId
       );
 
@@ -881,40 +696,16 @@ async function loadAll(){
     document.getElementById(
       'roundList'
     ).innerHTML =
-    '<div class="empty">'+
-    '读取失败：'+
-    escapeHtml(
-      e.message
-      ||
-      '未知错误'
-    )+
-    '</div>';
+    '<div class="empty">读取失败</div>';
 
   }
 
 }
 
 
-/* =====================================
-   SEARCH
-===================================== */
-
-function clearSearch(){
-
-  document.getElementById(
-    'searchDate'
-  ).value =
-  '';
-
-
-  renderRounds();
-
-}
-
-
-/* =====================================
+/* =========================
    RENDER ROUND LIST
-===================================== */
+========================= */
 
 function renderRounds(){
 
@@ -932,20 +723,17 @@ function renderRounds(){
 
   const filtered =
   rounds.filter(
-    r =>
+    r=>
     !date
     ||
-    r.round_date ===
-    date
+    r.round_date===date
   );
 
 
   if(!filtered.length){
 
     holder.innerHTML =
-    '<div class="empty">'+
-    '没有找到历史期数'+
-    '</div>';
+    '<div class="empty">没有找到历史期数</div>';
 
 
     return;
@@ -971,30 +759,9 @@ function renderRounds(){
       'roundCard';
 
 
-      const result =
-      hasResult(
-        round.result_number
-      )
-
-      ?
-
-      String(
-        round.result_number
-      )
-      .padStart(
-        2,
-        '0'
-      )
-
-      :
-
-      '—';
-
-
       el.innerHTML = `
 
         <div class="roundTop">
-
 
           <div class="roundName">
 
@@ -1013,8 +780,7 @@ function renderRounds(){
           </div>
 
 
-          <div
-            class="status ${statusClass(round.status)}">
+          <div class="status ${statusClass(round.status)}">
 
             ${escapeHtml(
               statusName(
@@ -1023,7 +789,6 @@ function renderRounds(){
             )}
 
           </div>
-
 
         </div>
 
@@ -1040,15 +805,33 @@ function renderRounds(){
           <br>
 
           结果：
-          ${escapeHtml(
-            result
-          )}
+
+          ${
+            hasResult(
+              round.result_number
+            )
+
+            ?
+
+            escapeHtml(
+              String(
+                round.result_number
+              )
+              .padStart(
+                2,
+                '0'
+              )
+            )
+
+            :
+
+            '—'
+          }
 
         </div>
 
 
         <div class="stats">
-
 
           <div class="stat">
 
@@ -1062,7 +845,6 @@ function renderRounds(){
 
           </div>
 
-
           <div class="stat">
 
             <small>
@@ -1075,16 +857,13 @@ function renderRounds(){
 
           </div>
 
-
         </div>
 
 
         <a
           class="detailBtn"
           href="?round=${encodeURIComponent(round.id)}">
-
           查看本期详情
-
         </a>
 
       `;
@@ -1105,9 +884,9 @@ function renderRounds(){
 }
 
 
-/* =====================================
-   ROUND SUMMARY STATS
-===================================== */
+/* =========================
+   ROUND STATS
+========================= */
 
 async function loadRoundStats(
   roundId
@@ -1141,56 +920,36 @@ async function loadRoundStats(
     0;
 
 
-    const agentTotals =
-    {};
+    const set =
+    new Set();
 
 
     rows.forEach(
       row=>{
 
 
-        const points =
-        normalizePoints(
-          row.points
+        const p =
+        Number(
+          row.points || 0
         );
 
 
         total +=
-        points;
+        p;
 
 
         if(
-          !agentTotals[
-            row.agent_id
-          ]
+          p>0
         ){
 
-          agentTotals[
+          set.add(
             row.agent_id
-          ] =
-          0;
+          );
 
         }
 
-
-        agentTotals[
-          row.agent_id
-        ] +=
-        points;
-
       }
     );
-
-
-    const submittedAgents =
-    Object.values(
-      agentTotals
-    )
-    .filter(
-      value =>
-      Number(value) > 0
-    )
-    .length;
 
 
     const totalEl =
@@ -1218,7 +977,7 @@ async function loadRoundStats(
     if(agentEl){
 
       agentEl.textContent =
-      submittedAgents;
+      set.size;
 
     }
 
@@ -1228,9 +987,9 @@ async function loadRoundStats(
 }
 
 
-/* =====================================
+/* =========================
    OPEN DETAIL
-===================================== */
+========================= */
 
 async function openDetail(
   roundId
@@ -1238,9 +997,8 @@ async function openDetail(
 
   const round =
   rounds.find(
-    r =>
-    r.id ===
-    roundId
+    r=>
+    r.id===roundId
   );
 
 
@@ -1289,41 +1047,19 @@ async function openDetail(
   );
 
 
-  let detailText =
+  document.getElementById(
+    'detailMeta'
+  ).textContent =
   '截止：'+
   formatMMT(
     round.deadline_at
   );
 
 
-  if(
-    round.settled_at
-  ){
-
-    detailText +=
-    '\n结算：'+
-    formatMMT(
-      round.settled_at
-    );
-
-  }
-
-
-  document.getElementById(
-    'detailMeta'
-  ).style.whiteSpace =
-  'pre-line';
-
-
-  document.getElementById(
-    'detailMeta'
-  ).textContent =
-  detailText;
-
-
   document.getElementById(
     'detailResult'
   ).textContent =
+
   hasResult(
     round.result_number
   )
@@ -1358,213 +1094,179 @@ async function openDetail(
 }
 
 
-/* =====================================
-   LOAD ROUND DETAIL
-===================================== */
+/* =========================
+   LOAD DETAIL
+========================= */
 
 async function loadDetailData(
   round
 ){
 
-  const holder =
-  document.getElementById(
-    'agentsList'
+  const r =
+  await api(
+    '/rest/v1/agent_submissions'+
+    '?round_id=eq.'+
+    encodeURIComponent(
+      round.id
+    )+
+    '&select=agent_id,number_code,points,submitted_at,updated_at'+
+    '&order=agent_id.asc,number_code.asc'
   );
 
 
-  holder.innerHTML =
-  '<div class="msg">'+
-  '正在读取详情...'+
-  '</div>';
+  if(!r.ok){
+
+    document.getElementById(
+      'agentsList'
+    ).innerHTML =
+    '<div class="empty">读取代理数据失败</div>';
 
 
-  try{
+    return;
 
-    const r =
-    await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        round.id
-      )+
-      '&select=agent_id,number_code,points,submitted_at,updated_at'+
-      '&order=agent_id.asc,number_code.asc'
-    );
+  }
 
 
-    if(!r.ok){
-
-      throw new Error(
-        await r.text()
-        ||
-        '读取代理数据失败'
-      );
-
-    }
+  const rows =
+  await r.json();
 
 
-    const rows =
-    await r.json();
+  let total =
+  0;
 
 
-    let total =
+  const numbers =
+  {};
+
+
+  for(
+    let i=0;
+    i<100;
+    i++
+  ){
+
+    numbers[
+      String(i)
+      .padStart(
+        2,
+        '0'
+      )
+    ] =
     0;
 
-
-    const numbers =
-    {};
+  }
 
 
-    for(
-      let i=0;
-      i<100;
-      i++
-    ){
-
-      numbers[
-        String(i)
-        .padStart(
-          2,
-          '0'
-        )
-      ] =
-      0;
-
-    }
+  const grouped =
+  {};
 
 
-    const grouped =
-    {};
+  rows.forEach(
+    row=>{
 
 
-    rows.forEach(
-      row=>{
+      const p =
+      Number(
+        row.points || 0
+      );
 
 
-        const p =
-        normalizePoints(
-          row.points
-        );
+      total +=
+      p;
 
 
-        total +=
+      const code =
+      String(
+        row.number_code ?? ''
+      )
+      .padStart(
+        2,
+        '0'
+      );
+
+
+      if(
+        numbers[code] !==
+        undefined
+      ){
+
+        numbers[
+          code
+        ] +=
         p;
 
-
-        const code =
-        String(
-          row.number_code ?? ''
-        )
-        .padStart(
-          2,
-          '0'
-        );
+      }
 
 
-        if(
-          Object.prototype
-          .hasOwnProperty
-          .call(
-            numbers,
-            code
-          )
-        ){
-
-          numbers[
-            code
-          ] +=
-          p;
-
-        }
-
-
-        if(
-          !grouped[
-            row.agent_id
-          ]
-        ){
-
-          grouped[
-            row.agent_id
-          ] =
-          [];
-
-        }
-
+      if(
+        !grouped[
+          row.agent_id
+        ]
+      ){
 
         grouped[
           row.agent_id
-        ].push(
-          row
-        );
+        ] =
+        [];
 
       }
-    );
 
 
-    const submittedAgentIds =
-    Object.keys(
-      grouped
+      grouped[
+        row.agent_id
+      ].push(
+        row
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    'detailTotal'
+  ).textContent =
+  formatNumber(
+    total
+  );
+
+
+  const submittedAgents =
+  Object.keys(
+    grouped
+  )
+  .filter(
+    id=>
+    grouped[id]
+    .some(
+      row=>
+      Number(
+        row.points || 0
+      )>0
     )
-    .filter(
-      id =>{
-
-        return grouped[id]
-        .reduce(
-          (
-            sum,
-            row
-          ) =>
-          sum+
-          normalizePoints(
-            row.points
-          ),
-          0
-        ) > 0;
-
-      }
-    );
+  );
 
 
-    document.getElementById(
-      'detailTotal'
-    ).textContent =
-    formatNumber(
-      total
-    );
+  document.getElementById(
+    'detailAgents'
+  ).textContent =
+  submittedAgents.length;
 
 
-    document.getElementById(
-      'detailAgents'
-    ).textContent =
-    submittedAgentIds.length;
+  renderNumbers(
+    numbers
+  );
 
 
-    renderNumbers(
-      numbers
-    );
-
-
-    renderAgents(
-      grouped
-    );
-
-
-  }catch(e){
-
-    holder.innerHTML =
-    '<div class="empty">'+
-    '读取代理数据失败'+
-    '</div>';
-
-  }
+  renderAgents(
+    grouped
+  );
 
 }
 
 
-/* =====================================
+/* =========================
    NUMBERS
-===================================== */
+========================= */
 
 function renderNumbers(
   numbers
@@ -1600,9 +1302,10 @@ function renderNumbers(
 
 
       div.className =
-      'numBox'+
+      'numBox'
+      +
       (
-        points > 0
+        points>0
         ?
         ' active'
         :
@@ -1613,7 +1316,7 @@ function renderNumbers(
       div.innerHTML = `
 
         <span class="num">
-          ${escapeHtml(code)}
+          ${code}
         </span>
 
         <span class="points">
@@ -1633,9 +1336,9 @@ function renderNumbers(
 }
 
 
-/* =====================================
+/* =========================
    AGENTS
-===================================== */
+========================= */
 
 function renderAgents(
   grouped
@@ -1656,31 +1359,21 @@ function renderAgents(
     grouped
   )
   .filter(
-    id =>{
-
-      return grouped[id]
-      .reduce(
-        (
-          sum,
-          row
-        ) =>
-        sum+
-        normalizePoints(
-          row.points
-        ),
-        0
-      ) > 0;
-
-    }
+    id=>
+    grouped[id]
+    .some(
+      row=>
+      Number(
+        row.points || 0
+      )>0
+    )
   );
 
 
   if(!ids.length){
 
     holder.innerHTML =
-    '<div class="empty">'+
-    '本期没有代理提交'+
-    '</div>';
+    '<div class="empty">本期没有代理提交</div>';
 
 
     return;
@@ -1708,46 +1401,13 @@ function renderAgents(
       0;
 
 
-      let latestTime =
-      null;
-
-
       rows.forEach(
-        row=>{
-
+        r=>{
 
           total +=
-          normalizePoints(
-            row.points
+          Number(
+            r.points || 0
           );
-
-
-          const rowTime =
-          row.updated_at
-          ||
-          row.submitted_at;
-
-
-          if(
-            rowTime
-            &&
-            (
-              !latestTime
-              ||
-              new Date(
-                rowTime
-              )
-              >
-              new Date(
-                latestTime
-              )
-            )
-          ){
-
-            latestTime =
-            rowTime;
-
-          }
 
         }
       );
@@ -1766,9 +1426,7 @@ function renderAgents(
       const rate =
       agent
       ?
-      normalizeRate(
-        agent.commission_rate
-      )
+      agent.commission_rate
       :
       null;
 
@@ -1796,35 +1454,21 @@ function renderAgents(
           ${formatNumber(total)}
 
           ${
-            rate !==
-            null
+            rate !== null
+            &&
+            rate !== undefined
 
             ?
 
             '<br>代理比例：'+
             escapeHtml(
-              formatRate(
-                rate
+              String(
+                normalizeRate(
+                  rate
+                )
               )
             )+
             '%'
-
-            :
-
-            ''
-          }
-
-          ${
-            latestTime
-
-            ?
-
-            '<br>最后提交：'+
-            escapeHtml(
-              formatMMT(
-                latestTime
-              )
-            )
 
             :
 
@@ -1841,28 +1485,13 @@ function renderAgents(
 
       rows
       .filter(
-        row =>
-        normalizePoints(
-          row.points
-        ) > 0
-      )
-      .sort(
-        (
-          a,
-          b
-        ) =>
-        String(
-          a.number_code
-        )
-        .localeCompare(
-          String(
-            b.number_code
-          )
-        )
+        row=>
+        Number(
+          row.points || 0
+        )>0
       )
       .forEach(
         row=>{
-
 
           html += `
 
@@ -1920,9 +1549,9 @@ function renderAgents(
 }
 
 
-/* =====================================
+/* =========================
    CLOSE DETAIL
-===================================== */
+========================= */
 
 function closeDetail(){
 
@@ -1963,31 +1592,111 @@ function closeDetail(){
 }
 
 
-/* =====================================
-   RESULT CHECK
-===================================== */
+/* =========================
+   PERIOD NAME
 
-function hasResult(
-  value
+   1030 / 1530 继续保留为内部期别代码。
+========================= */
+
+function periodName(
+  code
 ){
 
-  return (
-    value !==
-    null
-    &&
-    value !==
-    undefined
-    &&
-    value !==
-    ''
-  );
+  if(
+    code==='1030'
+  ){
+
+    return '上午 11:45';
+
+  }
+
+
+  if(
+    code==='1530'
+  ){
+
+    return '下午 15:45';
+
+  }
+
+
+  return code || '—';
 
 }
 
 
-/* =====================================
+/* =========================
+   STATUS
+========================= */
+
+function statusName(
+  status
+){
+
+  if(
+    status==='open'
+  ){
+
+    return '开放中';
+
+  }
+
+
+  if(
+    status==='closed'
+  ){
+
+    return '已关闭';
+
+  }
+
+
+  if(
+    status==='settled'
+  ){
+
+    return '已结算';
+
+  }
+
+
+  return status || '—';
+
+}
+
+
+function statusClass(
+  status
+){
+
+  if(
+    status==='open'
+  ){
+
+    return 'open';
+
+  }
+
+
+  if(
+    status==='closed'
+    ||
+    status==='settled'
+  ){
+
+    return 'closed';
+
+  }
+
+
+  return 'other';
+
+}
+
+
+/* =========================
    RATE
-===================================== */
+========================= */
 
 function normalizeRate(
   value
@@ -2012,9 +1721,9 @@ function normalizeRate(
 
 
   if(
-    rate > 0
+    rate>0
     &&
-    rate <= 1
+    rate<=1
   ){
 
     rate *=
@@ -2028,171 +1737,28 @@ function normalizeRate(
 }
 
 
-function formatRate(
+/* =========================
+   RESULT EXISTS
+========================= */
+
+function hasResult(
   value
 ){
 
-  return Number(
-    value || 0
-  )
-  .toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits:2
-    }
+  return (
+    value !== null
+    &&
+    value !== undefined
+    &&
+    value !== ''
   );
 
 }
 
 
-/* =====================================
-   POINTS
-===================================== */
-
-function normalizePoints(
-  value
-){
-
-  const n =
-  Number(
-    value || 0
-  );
-
-
-  if(
-    !Number.isFinite(n)
-    ||
-    n < 0
-  ){
-
-    return 0;
-
-  }
-
-
-  return n;
-
-}
-
-
-/* =====================================
-   PERIOD
-===================================== */
-
-function periodName(
-  code
-){
-
-  if(
-    code ===
-    '1030'
-  ){
-
-    return '上午 10:30';
-
-  }
-
-
-  if(
-    code ===
-    '1530'
-  ){
-
-    return '下午 15:30';
-
-  }
-
-
-  return code || '—';
-
-}
-
-
-/* =====================================
-   STATUS
-===================================== */
-
-function statusName(
-  status
-){
-
-  if(
-    status ===
-    'open'
-  ){
-
-    return '开放中';
-
-  }
-
-
-  if(
-    status ===
-    'closed'
-  ){
-
-    return '已关闭';
-
-  }
-
-
-  if(
-    status ===
-    'settled'
-  ){
-
-    return '已结算';
-
-  }
-
-
-  return status || '—';
-
-}
-
-
-function statusClass(
-  status
-){
-
-  if(
-    status ===
-    'open'
-  ){
-
-    return 'open';
-
-  }
-
-
-  if(
-    status ===
-    'closed'
-  ){
-
-    return 'closed';
-
-  }
-
-
-  if(
-    status ===
-    'settled'
-  ){
-
-    return 'settled';
-
-  }
-
-
-  return 'other';
-
-}
-
-
-/* =====================================
+/* =========================
    TIME
-===================================== */
+========================= */
 
 function formatMMT(
   value
@@ -2232,9 +1798,9 @@ function formatMMT(
 }
 
 
-/* =====================================
+/* =========================
    NUMBER
-===================================== */
+========================= */
 
 function formatNumber(
   value
@@ -2253,9 +1819,9 @@ function formatNumber(
 }
 
 
-/* =====================================
+/* =========================
    ESCAPE
-===================================== */
+========================= */
 
 function escapeHtml(
   value
@@ -2293,31 +1859,9 @@ function escapeHtml(
 }
 
 
-/* =====================================
-   CLEAR SESSION
-===================================== */
-
-function clearAdminSession(){
-
-  localStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  token =
-  '';
-
-}
-
-
-/* =====================================
+/* =========================
    START
-===================================== */
+========================= */
 
 async function start(){
 
@@ -2326,13 +1870,6 @@ async function start(){
 
 
   if(!ok){
-
-    clearAdminSession();
-
-
-    location.href =
-    '/admin/';
-
 
     return;
 
@@ -2349,5 +1886,4 @@ start();
 </script>
 
 </body>
-
 </html>
