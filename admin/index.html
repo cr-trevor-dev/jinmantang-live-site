@@ -1,978 +1,602 @@
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta name="theme-color" content="#09090a">
-<title>金满堂 · 管理中心</title>
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<title>金满堂 · 代理管理</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box
+}
 
 body{
   margin:0;
-  background:radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
-  color:#f7f0df;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
+
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 40%,
+    #070708 100%
+  );
+
+  color:#f5edd9;
+
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif;
 }
+
 
 .wrap{
-  max-width:650px;
+  max-width:780px;
   margin:auto;
-  min-height:100vh;
-  padding:24px 15px 55px
+  padding:22px 14px 60px;
 }
 
-.brand{
-  text-align:center;
-  margin-bottom:22px
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
 }
 
-.mark{
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  margin:0 auto 10px;
-  overflow:hidden;
-  font-size:24px;
+
+.logo{
+  color:#efd477;
+  font-size:22px;
   font-weight:900;
-  color:#f6da86;
-  border:1px solid #b98a2c;
-  background:linear-gradient(145deg,#382506,#100d08);
-  box-shadow:0 0 28px rgba(235,185,62,.22)
 }
 
-.mark img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
 
-.cn{
-  font-weight:900;
-  font-size:25px;
-  letter-spacing:4px;
-  color:#f3d889
-}
-
-.en{
+.sub{
+  color:#827966;
   font-size:10px;
-  letter-spacing:3px;
-  color:#9f916d;
-  margin-top:5px
+  letter-spacing:2px;
+  margin-top:4px;
 }
+
 
 .card{
-  background:linear-gradient(180deg,rgba(22,22,22,.98),rgba(11,11,12,.98));
-  border:1px solid rgba(214,168,63,.30);
-  border-radius:24px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 22px 60px rgba(0,0,0,.32)
+  background:
+  linear-gradient(
+    180deg,
+    #151515,
+    #0d0d0e
+  );
+
+  border:
+  1px solid
+  rgba(214,168,63,.28);
+
+  border-radius:20px;
+
+  padding:17px;
+
+  margin-bottom:14px;
 }
+
 
 .title{
+  color:#dfc575;
   font-size:15px;
   font-weight:900;
-  color:#dfc575;
-  margin-bottom:16px
+  margin-bottom:14px;
 }
 
-input,
-textarea,
-select{
-  width:100%;
-  border:1px solid rgba(214,168,63,.24);
-  background:#101011;
-  color:#fff;
-  border-radius:13px;
-  padding:14px;
-  font-size:15px;
-  outline:none;
-  margin-bottom:12px
-}
-
-textarea{
-  min-height:105px;
-  resize:vertical;
-  line-height:1.6
-}
 
 button{
-  width:100%;
   border:0;
-  border-radius:13px;
-  padding:14px;
-  font-size:15px;
+  border-radius:11px;
+  padding:11px 14px;
   font-weight:900;
   cursor:pointer;
-  background:linear-gradient(180deg,#f1d784,#b47d20);
-  color:#171109
 }
+
 
 button:disabled{
-  cursor:not-allowed;
   opacity:.45;
-  background:#292929;
-  color:#8a857b
+  cursor:not-allowed;
 }
 
-button.secondary{
-  margin-top:10px;
-  background:#171718;
-  color:#d9c37c;
-  border:1px solid rgba(214,168,63,.22)
+
+.dark{
+  background:#181819;
+  color:#dbc67d;
+
+  border:
+  1px solid
+  rgba(214,168,63,.22);
 }
 
-button.danger{
-  margin-top:9px;
-  background:#1b1717;
-  color:#cfa7a7;
-  border:1px solid rgba(180,100,100,.20)
+
+.gold{
+  background:
+  linear-gradient(
+    180deg,
+    #efd47c,
+    #b87e1e
+  );
+
+  color:#161008;
 }
 
-.hidden{
-  display:none!important
+
+.red{
+  background:#251616;
+  color:#e4a0a0;
+
+  border:
+  1px solid
+  rgba(210,90,90,.22);
 }
 
-.msg{
-  text-align:center;
-  min-height:18px;
-  margin-top:10px;
-  color:#aaa18d;
-  font-size:12px;
-  line-height:1.6
-}
 
-.success{
-  color:#70d49c!important
-}
+input,
+select{
+  width:100%;
+  border-radius:11px;
+  border:
+  1px solid
+  rgba(214,168,63,.24);
 
-.error{
-  color:#e89191!important
-}
-
-.summaryGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px
-}
-
-.summaryBox{
   background:#101011;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:15px;
-  padding:14px
+  color:#fff;
+
+  padding:12px;
+
+  font-size:14px;
+
+  outline:none;
 }
 
-.summaryBox small{
-  display:block;
-  color:#817a6d;
-  font-size:10px;
-  margin-bottom:7px
-}
 
-.summaryBox strong{
-  display:block;
-  color:#ebcd72;
-  font-size:19px;
-  line-height:1.35
-}
-
-.green{
-  color:#72d39d!important
-}
-
-.redText{
-  color:#e89191!important
-}
-
-.refreshLine{
-  text-align:center;
-  color:#746e62;
-  font-size:10px;
-  margin-top:12px
-}
-
-.menuGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.menu{
-  display:block;
-  text-decoration:none;
-  background:#101011;
-  border:1px solid rgba(214,168,63,.20);
-  border-radius:16px;
-  padding:17px 14px;
-  min-height:112px
-}
-
-.menu:active{
-  transform:scale(.98)
-}
-
-.menuIcon{
-  font-size:26px;
-  margin-bottom:10px
-}
-
-.menuTitle{
-  color:#ecd176;
-  font-weight:900;
-  font-size:15px
-}
-
-.menuSub{
-  color:#777166;
-  font-size:10px;
-  line-height:1.55;
-  margin-top:6px
-}
-
-.current{
-  text-align:center;
-  padding:17px;
-  margin-bottom:16px;
-  background:#101011;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:15px
-}
-
-.current small{
-  display:block;
-  color:#8d887c;
-  margin-bottom:5px
-}
-
-.current strong{
-  font-size:48px;
-  color:#ebca68
-}
-
-.publishRound{
-  background:#101011;
-  border:1px solid rgba(214,168,63,.20);
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:14px
-}
-
-.publishRoundTitle{
-  font-size:11px;
-  color:#817a6d;
-  margin-bottom:8px
-}
-
-.publishRoundName{
-  color:#efd477;
-  font-size:21px;
-  font-weight:900;
-  line-height:1.45
-}
-
-.publishInfoGrid{
+.formGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:9px;
-  margin-top:12px
 }
 
-.publishInfo{
-  background:#151516;
+
+.full{
+  grid-column:1/-1;
+}
+
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+
+.stat{
+  background:#101011;
+
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+
   border-radius:13px;
-  padding:13px
+
+  padding:13px;
 }
 
-.publishInfo small{
+
+.stat small{
   display:block;
   color:#817a6d;
   font-size:10px;
-  margin-bottom:7px
+  margin-bottom:6px;
 }
 
-.publishInfo strong{
-  display:block;
-  color:#ead078;
-  font-size:16px;
-  line-height:1.4
+
+.stat strong{
+  color:#ebcd72;
+  font-size:20px;
 }
 
-.countdownBox{
-  margin:14px 0;
-  padding:18px 12px;
-  border-radius:16px;
-  text-align:center;
-  background:#0d0d0e;
-  border:1px solid rgba(214,168,63,.25)
+
+.searchRow{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
 }
 
-.countdownBox small{
-  display:block;
-  color:#8e877a;
-  font-size:11px;
-  margin-bottom:8px
-}
 
-.countdownBox strong{
-  display:block;
-  font-size:29px;
-  letter-spacing:2px;
-  color:#efd477
-}
-
-.publishNote{
-  color:#777268;
-  font-size:11px;
-  line-height:1.65;
-  margin:12px 2px
-}
-
-/* 测试发布 */
-
-.testBadge{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:99px;
-  background:#2d2411;
-  border:1px solid rgba(214,168,63,.28);
-  color:#e5c96f;
-  font-size:10px;
-  font-weight:900;
-  margin-bottom:14px
-}
-
-.testPanel{
+.agent{
   background:#101011;
-  border:1px solid rgba(214,168,63,.20);
-  border-radius:17px;
-  padding:15px;
-  margin-top:14px
+
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+
+  border-radius:14px;
+
+  padding:14px;
+
+  margin-bottom:9px;
 }
 
-.testTitle{
-  color:#e7cb74;
-  font-weight:900;
-  font-size:14px;
-  margin-bottom:12px
-}
 
-.testRow{
+.agentTop{
   display:flex;
   justify-content:space-between;
-  gap:15px;
-  padding:9px 0;
-  border-bottom:1px solid rgba(255,255,255,.05);
-  font-size:12px
+  align-items:flex-start;
+  gap:10px;
 }
 
-.testRow:last-child{
-  border-bottom:0
+
+.name{
+  color:#efd278;
+  font-size:16px;
+  font-weight:900;
 }
 
-.testRow span{
-  color:#837c70
+
+.meta{
+  color:#817b70;
+  font-size:10px;
+  line-height:1.6;
+  margin-top:5px;
 }
 
-.testRow strong{
-  color:#eee0b6;
-  text-align:right
+
+.badge{
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:10px;
+  white-space:nowrap;
 }
 
-.testGood{
-  color:#71d49d!important
+
+.badge.active{
+  background:#153124;
+  color:#77d69e;
 }
 
-.testWarn{
-  color:#e7c86d!important
+
+.badge.suspended{
+  background:#342c17;
+  color:#e4c879;
 }
 
-.testBad{
-  color:#e89191!important
+
+.badge.blocked{
+  background:#371b1b;
+  color:#e89b9b;
 }
 
-.testWarning{
-  background:#121213;
-  border-radius:14px;
-  padding:13px;
-  color:#948c7e;
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:12px;
+}
+
+
+.actions button{
+  width:100%;
+  padding:10px 6px;
   font-size:11px;
-  line-height:1.65;
-  margin-top:13px
 }
 
-.settingLabel{
-  display:block;
-  color:#9c9588;
-  font-size:12px;
-  margin:4px 2px 7px
+
+.rateRow{
+  display:grid;
+  grid-template-columns:1.3fr 1fr auto;
+  gap:8px;
 }
+
+
+.msg{
+  min-height:18px;
+  text-align:center;
+  color:#9d9586;
+  font-size:12px;
+  margin-top:10px;
+  line-height:1.5;
+}
+
+
+.success{
+  color:#71d49d!important;
+}
+
+
+.error{
+  color:#e58e8e!important;
+}
+
+
+.empty{
+  text-align:center;
+  color:#777166;
+  font-size:13px;
+  padding:25px 10px;
+}
+
 
 .note{
-  color:#777268;
-  font-size:11px;
-  line-height:1.55;
-  margin:-3px 2px 12px
-}
-
-.logoPreviewWrap{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  background:#101011;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:15px;
-  padding:14px;
-  margin-bottom:12px
-}
-
-.logoPreview{
-  width:82px;
-  height:82px;
-  border-radius:50%;
-  overflow:hidden;
-  flex:none;
-  border:1px solid rgba(214,168,63,.35);
-  background:#17130c;
-  display:grid;
-  place-items:center;
-  color:#d7ba63;
-  font-weight:900
-}
-
-.logoPreview img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-
-.logoInfo{
-  color:#928b7e;
-  font-size:12px;
-  line-height:1.6
-}
-
-.switchRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:#101011;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:13px;
-  padding:13px 14px;
-  margin-bottom:13px
-}
-
-.switchText{
-  font-size:13px;
-  color:#e7ddc6
-}
-
-.switch{
-  position:relative;
-  width:48px;
-  height:27px
-}
-
-.switch input{
-  opacity:0;
-  width:0;
-  height:0
-}
-
-.slider{
-  position:absolute;
-  inset:0;
-  background:#343436;
-  border-radius:99px;
-  transition:.25s
-}
-
-.slider:before{
-  content:"";
-  position:absolute;
-  width:21px;
-  height:21px;
-  left:3px;
-  top:3px;
-  border-radius:50%;
-  background:#aaa;
-  transition:.25s
-}
-
-.switch input:checked + .slider{
-  background:#b9872f
-}
-
-.switch input:checked + .slider:before{
-  transform:translateX(21px);
-  background:#fff0bd
-}
-
-.foot{
-  text-align:center;
-  color:#706b62;
+  color:#766f62;
   font-size:10px;
-  margin-top:25px
+  line-height:1.6;
+  margin-top:10px;
 }
 
-@media(max-width:380px){
-  .menuGrid{
-    grid-template-columns:1fr
+
+@media(max-width:560px){
+
+  .formGrid{
+    grid-template-columns:1fr;
   }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .rateRow{
+    grid-template-columns:1fr;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
 <div class="wrap">
 
-  <div class="brand">
-    <div class="mark" id="topMark">金</div>
-    <div class="cn">金满堂</div>
-    <div class="en">JIN MANTANG · MANAGEMENT</div>
+
+<div class="header">
+
+  <div>
+
+    <div class="logo">
+      金满堂 · 代理管理
+    </div>
+
+    <div class="sub">
+      ADMIN / AGENTS
+    </div>
+
   </div>
 
+  <button
+    class="dark"
+    onclick="location.href='/admin/'">
+    返回总后台
+  </button>
 
-  <div class="card" id="loginBox">
+</div>
 
-    <div class="title">管理员登录</div>
 
-    <input id="email" type="email" placeholder="管理员邮箱">
-    <input id="password" type="password" placeholder="管理员密码">
+<div class="card">
 
-    <button onclick="signIn()">
-      登录管理中心
+  <div class="title">
+    ＋ 创建新代理
+  </div>
+
+  <div class="formGrid">
+
+    <input
+      id="newName"
+      placeholder="代理名称，例如：小林代理">
+
+    <input
+      id="newEmail"
+      type="email"
+      placeholder="代理登录邮箱">
+
+    <input
+      id="newPassword"
+      type="password"
+      placeholder="初始密码，至少8位">
+
+    <input
+      id="newRate"
+      type="number"
+      min="0"
+      max="40"
+      step="0.01"
+      value="20"
+      placeholder="代理比例 %">
+
+    <button
+      id="createBtn"
+      class="gold full"
+      onclick="createAgent()">
+
+      创建代理账号
+
     </button>
 
-    <div class="msg" id="loginMsg"></div>
-
   </div>
 
+  <div
+    class="msg"
+    id="createMsg">
+  </div>
 
-  <div id="adminBox" class="hidden">
+  <div class="note">
+    创建成功后，代理可以直接使用设置的邮箱和密码登录代理中心。
+  </div>
 
-    <div class="card">
+</div>
 
-      <div class="title">
-        当前运营概况
-      </div>
 
-      <div class="summaryGrid">
+<div class="card">
 
-        <div class="summaryBox">
-          <small>当前开放期</small>
-          <strong id="summaryRound">—</strong>
-        </div>
+  <div class="title">
+    代理概况
+  </div>
 
-        <div class="summaryBox">
-          <small>提交状态</small>
-          <strong id="summaryStatus">—</strong>
-        </div>
+  <div class="stats">
 
-        <div class="summaryBox">
-          <small>正常代理总数</small>
-          <strong id="summaryAgentTotal">0</strong>
-        </div>
+    <div class="stat">
 
-        <div class="summaryBox">
-          <small>已提交代理</small>
-          <strong id="summaryAgents">0</strong>
-        </div>
+      <small>
+        代理总数
+      </small>
 
-        <div class="summaryBox">
-          <small>未提交代理</small>
-          <strong id="summaryMissing">0</strong>
-        </div>
-
-        <div class="summaryBox">
-          <small>本期总积分</small>
-          <strong id="summaryTotal">0</strong>
-        </div>
-
-        <div class="summaryBox">
-          <small>截止时间</small>
-          <strong id="summaryDeadline">—</strong>
-        </div>
-
-        <div class="summaryBox">
-          <small>Myanmar Time</small>
-          <strong id="mmtClock">—</strong>
-        </div>
-
-      </div>
-
-      <div class="refreshLine">
-        本期数据每 20 秒自动更新
-      </div>
+      <strong id="totalAgents">
+        0
+      </strong>
 
     </div>
 
 
-    <div class="card">
+    <div class="stat">
 
-      <div class="title">
-        管理中心
-      </div>
+      <small>
+        正常代理
+      </small>
 
-      <div class="menuGrid">
-
-        <a class="menu" href="/admin/agents/">
-          <div class="menuIcon">👥</div>
-          <div class="menuTitle">代理管理</div>
-          <div class="menuSub">创建代理、搜索、比例、暂停、限制</div>
-        </a>
-
-        <a class="menu" href="/admin/rounds/index.html">
-          <div class="menuIcon">🗓️</div>
-          <div class="menuTitle">期数管理</div>
-          <div class="menuSub">结束本期、归档、开启下一期</div>
-        </a>
-
-        <a class="menu" href="/admin/simulator.html">
-          <div class="menuIcon">📊</div>
-          <div class="menuTitle">本期汇总</div>
-          <div class="menuSub">查看当前期所有代理提交与 00–99 汇总</div>
-        </a>
-
-        <a class="menu" href="/history/index.html">
-          <div class="menuIcon">📚</div>
-          <div class="menuTitle">历史期数</div>
-          <div class="menuSub">查询以前每一期与代理历史明细</div>
-        </a>
-
-        <a class="menu" href="#resultManagement">
-          <div class="menuIcon">🎯</div>
-          <div class="menuTitle">数字发布</div>
-          <div class="menuSub">按期数发布开奖结果与实时倒计时</div>
-        </a>
-
-        <a class="menu" href="#testManagement">
-          <div class="menuIcon">🧪</div>
-          <div class="menuTitle">测试发布</div>
-          <div class="menuSub">模拟发布，不修改正式数据</div>
-        </a>
-
-        <a class="menu" href="#siteSettings">
-          <div class="menuIcon">⚙️</div>
-          <div class="menuTitle">网站设置</div>
-          <div class="menuSub">Logo、Telegram、公告</div>
-        </a>
-
-      </div>
+      <strong id="activeAgents">
+        0
+      </strong>
 
     </div>
 
 
-    <!-- 正式数字发布 -->
-
-    <div class="card" id="resultManagement">
-
-      <div class="title">
-        数字发布管理
-      </div>
-
-      <div class="publishRound">
-
-        <div class="publishRoundTitle">
-          本次发布对应期数
-        </div>
-
-        <div
-          class="publishRoundName"
-          id="publishRoundName">
-          正在读取...
-        </div>
-
-
-        <div class="publishInfoGrid">
-
-          <div class="publishInfo">
-            <small>截止时间</small>
-            <strong id="publishDeadline">—</strong>
-          </div>
-
-          <div class="publishInfo">
-            <small>当前状态</small>
-            <strong id="publishStatus">—</strong>
-          </div>
-
-        </div>
-
-
-        <div class="countdownBox">
-
-          <small id="countdownLabel">
-            距离截止
-          </small>
-
-          <strong id="publishCountdown">
-            --:--:--
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="current">
-        <small>本期开奖结果</small>
-        <strong id="currentResult">--</strong>
-      </div>
-
-
-      <input
-        id="resultInput"
-        inputmode="numeric"
-        maxlength="2"
-        placeholder="输入 00 - 99">
-
-
-      <button
-        id="publishButton"
-        onclick="publishResult()"
-        disabled>
-        正在检查期数...
-      </button>
-
-
-      <div class="publishNote">
-        数字会绑定到上方显示的期数。截止时间到达前系统不会允许发布。
-        发布成功后，该期开奖结果也会永久显示在历史期数中。
-      </div>
-
-      <div class="msg" id="publishMsg"></div>
-
-    </div>
-
-
-    <!-- 测试发布 -->
-
-    <div class="card" id="testManagement">
-
-      <div class="title">
-        🧪 测试发布流程
-      </div>
-
-      <div class="testBadge">
-        SAFE TEST · 不修改正式数据
-      </div>
-
-      <label class="settingLabel">
-        选择测试期数
-      </label>
-
-      <select id="testRoundSelect">
-        <option value="">
-          正在读取期数...
-        </option>
-      </select>
-
-      <label class="settingLabel">
-        模拟开奖结果
-      </label>
-
-      <input
-        id="testResultInput"
-        inputmode="numeric"
-        maxlength="2"
-        placeholder="例如：25">
-
-      <button onclick="runPublishTest()">
-        🧪 开始测试发布流程
-      </button>
-
-      <div class="testWarning">
-        测试模式只会检查目标期数、截止时间、状态、开奖结果字段以及正式发布时会执行的动作。
-        <br><br>
-        不会写入 rounds，也不会写入 results，不会影响用户页面或历史数据。
-      </div>
-
-      <div
-        class="testPanel hidden"
-        id="testPanel">
-
-        <div class="testTitle">
-          测试结果
-        </div>
-
-        <div class="testRow">
-          <span>目标期数</span>
-          <strong id="testRoundName">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>当前状态</span>
-          <strong id="testRoundStatus">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>截止时间</span>
-          <strong id="testDeadline">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>是否已截止</span>
-          <strong id="testDeadlineState">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>原开奖结果</span>
-          <strong id="testOldResult">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>模拟发布数字</span>
-          <strong id="testNewResult">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>绑定 rounds</span>
-          <strong id="testRoundWrite">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>写入 results</span>
-          <strong id="testResultWrite">—</strong>
-        </div>
-
-        <div class="testRow">
-          <span>正式数据修改</span>
-          <strong class="testGood">
-            0 项
-          </strong>
-        </div>
-
-      </div>
-
-      <div class="msg" id="testMsg"></div>
-
-    </div>
-
-
-    <!-- Logo -->
-
-    <div class="card">
-
-      <div class="title">
-        网站 Logo 管理
-      </div>
-
-      <div class="logoPreviewWrap">
-
-        <div class="logoPreview" id="logoPreview">
-          金
-        </div>
-
-        <div class="logoInfo">
-          选择你的 Logo 图片。
-          <br>
-          系统会自动压缩后保存。
-        </div>
-
-      </div>
-
-      <label class="settingLabel">
-        选择 Logo 图片
-      </label>
-
-      <input
-        id="logoFile"
-        type="file"
-        accept="image/*"
-        onchange="handleLogoFile(this)">
-
-      <div class="note">
-        建议使用正方形图片。
-      </div>
-
-      <button onclick="saveLogo()">
-        更新网站 Logo
-      </button>
-
-      <button
-        class="danger"
-        onclick="removeLogo()">
-        恢复文字「金」
-      </button>
-
-      <div class="msg" id="logoMsg"></div>
-
-    </div>
-
-
-    <!-- 网站设置 -->
-
-    <div class="card" id="siteSettings">
-
-      <div class="title">
-        网站内容管理
-      </div>
-
-      <label class="settingLabel">
-        Telegram 频道链接
-      </label>
-
-      <input
-        id="telegramUrl"
-        type="url"
-        placeholder="例如：https://t.me/yourchannel">
-
-      <div class="note">
-        留空后客户页面不会显示 Telegram 入口。
-      </div>
-
-      <label class="settingLabel">
-        网站公告
-      </label>
-
-      <textarea
-        id="announcementText"
-        placeholder="输入网站公告"></textarea>
-
-      <div class="switchRow">
-
-        <div class="switchText">
-          显示滚动公告
-        </div>
-
-        <label class="switch">
-          <input id="announcementEnabled" type="checkbox">
-          <span class="slider"></span>
-        </label>
-
-      </div>
-
-      <button onclick="saveSettings()">
-        更新网站设置
-      </button>
-
-      <div class="msg" id="settingsMsg"></div>
-
-    </div>
-
-
-    <div class="card">
-
-      <button
-        class="secondary"
-        onclick="logout()">
-        退出管理员账号
-      </button>
+    <div class="stat">
+
+      <small>
+        暂停 / 限制
+      </small>
+
+      <strong id="inactiveAgents">
+        0
+      </strong>
 
     </div>
 
   </div>
 
+</div>
 
-  <div class="foot">
-    © 2022 JIN MANTANG · ADMIN SYSTEM
+
+<div class="card">
+
+  <div class="title">
+    调整代理比例
   </div>
+
+  <div class="rateRow">
+
+    <select id="agentSelect">
+
+      <option value="">
+        选择代理
+      </option>
+
+    </select>
+
+    <input
+      id="rateInput"
+      type="number"
+      min="0"
+      max="40"
+      step="0.01"
+      placeholder="新比例 %">
+
+    <button
+      class="gold"
+      onclick="updateRate()">
+
+      保存比例
+
+    </button>
+
+  </div>
+
+  <div
+    class="msg"
+    id="rateMsg">
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="title">
+    代理列表
+  </div>
+
+  <div class="searchRow">
+
+    <input
+      id="searchInput"
+      placeholder="搜索代理名称"
+      oninput="renderAgents()">
+
+    <button
+      class="dark"
+      onclick="loadAgents()">
+
+      刷新
+
+    </button>
+
+  </div>
+
+  <div style="height:13px"></div>
+
+  <div id="agentList">
+
+    <div class="empty">
+      正在读取...
+    </div>
+
+  </div>
+
+  <div
+    class="msg"
+    id="listMsg">
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <button
+    class="dark"
+    style="width:100%"
+    onclick="location.href='/admin/'">
+
+    ← 返回 Admin 总后台
+
+  </button>
+
+</div>
+
 
 </div>
 
@@ -982,1827 +606,506 @@ button.danger{
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
 
+
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
 
+/*
+  这里是这次最重要的修复。
+
+  Admin 总后台可能把 token
+  保存在 localStorage
+  或 sessionStorage。
+
+  代理管理页面现在四种位置都会检查，
+  不会再因为读取不到 token
+  自动把管理员踢出去。
+*/
+
 let token =
-localStorage.getItem('jmt_access_token')
+
+localStorage.getItem(
+  'jmt_access_token'
+)
+
 ||
-sessionStorage.getItem('jmt_access_token')
+
+sessionStorage.getItem(
+  'jmt_access_token'
+)
+
 ||
+
+localStorage.getItem(
+  'jmt_token'
+)
+
+||
+
+sessionStorage.getItem(
+  'jmt_token'
+)
+
+||
+
 '';
 
 
-let pendingLogo = '';
-let currentRound = null;
-let publishRound = null;
-let testRounds = [];
+let adminUser = null;
+
+let agents = [];
 
 
-/* API */
+/* =========================
+   API
+========================= */
 
-async function api(path,options={}){
+async function api(
+  path,
+  options={}
+){
+
+  const headers = {
+
+    apikey:KEY,
+
+    Authorization:
+    'Bearer '+token,
+
+    ...(options.headers || {})
+
+  };
+
 
   return fetch(
     BASE+path,
     {
       ...options,
-      headers:{
-        apikey:KEY,
-        Authorization:'Bearer '+token,
-        ...(options.headers || {})
-      }
+      headers
     }
   );
 
 }
 
 
-/* 登录 */
+/* =========================
+   VERIFY ADMIN
+========================= */
 
-async function signIn(){
-
-  const email =
-  document.getElementById('email').value.trim();
-
-  const password =
-  document.getElementById('password').value;
-
-  const msg =
-  document.getElementById('loginMsg');
-
-
-  if(!email || !password){
-
-    msg.textContent =
-    '请输入管理员邮箱和密码';
-
-    return;
-
-  }
-
-
-  msg.textContent =
-  '正在登录...';
-
-
-  try{
-
-    const r =
-    await fetch(
-      BASE+'/auth/v1/token?grant_type=password',
-      {
-        method:'POST',
-        headers:{
-          apikey:KEY,
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify({
-          email,
-          password
-        })
-      }
-    );
-
-
-    const d =
-    await r.json();
-
-
-    if(!r.ok || !d.access_token){
-
-      throw new Error();
-
-    }
-
-
-    token =
-    d.access_token;
-
-
-    localStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    showAdmin();
-
-    await loadEverything();
-
-
-  }catch(e){
-
-    msg.textContent =
-    '登录失败，请检查邮箱和密码';
-
-  }
-
-}
-
-
-async function verifySession(){
+async function verifyAdmin(){
 
   if(!token){
-    return;
+
+    return false;
+
   }
 
 
   try{
 
-    const r =
-    await api('/auth/v1/user');
+    /*
+      第一步：
+      确认 token 还是有效登录状态。
+    */
 
-
-    if(!r.ok){
-
-      throw new Error();
-
-    }
-
-
-    showAdmin();
-
-    await loadEverything();
-
-
-  }catch(e){
-
-    clearSession();
-
-  }
-
-}
-
-
-function showAdmin(){
-
-  document.getElementById(
-    'loginBox'
-  ).classList.add('hidden');
-
-
-  document.getElementById(
-    'adminBox'
-  ).classList.remove('hidden');
-
-}
-
-
-/* 全部加载 */
-
-async function loadEverything(){
-
-  await Promise.all([
-    loadSettings(),
-    loadDashboardSummary(),
-    loadPublishRound(),
-    loadTestRounds()
-  ]);
-
-}
-
-
-/* Dashboard */
-
-async function loadDashboardSummary(){
-
-  try{
-
-    const rr =
+    const ur =
     await api(
-      '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at'+
-      '&order=created_at.desc'+
-      '&limit=20'
+      '/auth/v1/user'
     );
 
 
-    if(!rr.ok){
+    if(!ur.ok){
 
-      throw new Error();
+      throw new Error(
+        'session'
+      );
 
     }
 
 
-    const rounds =
-    await rr.json();
+    const user =
+    await ur.json();
 
 
-    currentRound =
-    rounds.find(
-      x=>x.status==='open'
-    )
-    ||
-    null;
-
-
-    if(!currentRound){
-
-      renderNoRound();
-
-      return;
-
-    }
-
-
-    document.getElementById(
-      'summaryRound'
-    ).textContent =
-    currentRound.round_date+
-    ' · '+
-    periodName(
-      currentRound.round_code
-    );
-
-
-    document.getElementById(
-      'summaryStatus'
-    ).textContent =
-    '开放中';
-
-
-    document.getElementById(
-      'summaryStatus'
-    ).className =
-    'green';
-
-
-    document.getElementById(
-      'summaryDeadline'
-    ).textContent =
-    formatMMTShort(
-      currentRound.deadline_at
-    );
-
+    /*
+      第二步：
+      不只是确认“有人登录”，
+      还必须确认这个用户真的在 admin_users 表里。
+    */
 
     const ar =
     await api(
-      '/rest/v1/agents'+
-      '?status=eq.active'+
-      '&select=id'
+
+      '/rest/v1/admin_users'+
+      '?auth_user_id=eq.'+
+      encodeURIComponent(
+        user.id
+      )+
+      '&select=auth_user_id'+
+      '&limit=1'
+
     );
 
 
     if(!ar.ok){
 
-      throw new Error();
+      throw new Error(
+        'admin'
+      );
 
     }
 
 
-    const activeAgents =
+    const rows =
     await ar.json();
 
 
-    const activeAgentIds =
-    new Set(
-      activeAgents.map(
-        a=>a.id
-      )
-    );
+    if(!rows.length){
 
-
-    const activeTotal =
-    activeAgents.length;
-
-
-    document.getElementById(
-      'summaryAgentTotal'
-    ).textContent =
-    activeTotal;
-
-
-    const sr =
-    await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        currentRound.id
-      )+
-      '&select=agent_id,points'
-    );
-
-
-    if(!sr.ok){
-
-      throw new Error();
+      throw new Error(
+        'admin'
+      );
 
     }
 
 
-    const rows =
-    await sr.json();
+    adminUser =
+    user;
 
 
-    let total = 0;
-
-    const submittedSet =
-    new Set();
-
-
-    rows.forEach(row=>{
-
-      const points =
-      Number(
-        row.points || 0
-      );
-
-
-      total += points;
-
-
-      if(
-        points>0
-        &&
-        activeAgentIds.has(
-          row.agent_id
-        )
-      ){
-
-        submittedSet.add(
-          row.agent_id
-        );
-
-      }
-
-    });
-
-
-    const submittedCount =
-    submittedSet.size;
-
-
-    const missingCount =
-    Math.max(
-      0,
-      activeTotal-
-      submittedCount
-    );
-
-
-    document.getElementById(
-      'summaryAgents'
-    ).textContent =
-    submittedCount;
-
-
-    document.getElementById(
-      'summaryMissing'
-    ).textContent =
-    missingCount;
-
-
-    document.getElementById(
-      'summaryMissing'
-    ).className =
-    missingCount>0
-    ? 'redText'
-    : 'green';
-
-
-    document.getElementById(
-      'summaryTotal'
-    ).textContent =
-    formatNumber(
-      total
-    );
+    return true;
 
 
   }catch(e){
 
-    document.getElementById(
-      'summaryStatus'
-    ).textContent =
-    '读取失败';
+    /*
+      只有真的无效时才清除登录状态。
+    */
 
-  }
+    localStorage.removeItem(
+      'jmt_access_token'
+    );
 
-}
+    sessionStorage.removeItem(
+      'jmt_access_token'
+    );
 
+    localStorage.removeItem(
+      'jmt_token'
+    );
 
-function renderNoRound(){
-
-  document.getElementById(
-    'summaryRound'
-  ).textContent =
-  '暂无开放期';
-
-
-  document.getElementById(
-    'summaryStatus'
-  ).textContent =
-  '—';
-
-
-  document.getElementById(
-    'summaryAgentTotal'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'summaryAgents'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'summaryMissing'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'summaryTotal'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'summaryDeadline'
-  ).textContent =
-  '—';
-
-}
-
-
-/* 正式发布对应期数 */
-
-async function loadPublishRound(){
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at,settled_at'+
-      '&order=created_at.desc'+
-      '&limit=30'
+    sessionStorage.removeItem(
+      'jmt_token'
     );
 
 
-    if(!r.ok){
-
-      throw new Error(
-        await r.text()
-      );
-
-    }
+    token = '';
 
 
-    const rows =
-    await r.json();
-
-
-    publishRound =
-    rows.find(
-      x=>x.status==='open'
-    )
-    ||
-    rows.find(
-      x=>
-      (
-        x.status==='closed'
-        ||
-        x.status==='settled'
-      )
-      &&
-      !x.result_number
-    )
-    ||
-    null;
-
-
-    renderPublishRound();
-
-
-  }catch(e){
-
-    document.getElementById(
-      'publishRoundName'
-    ).textContent =
-    '读取期数失败';
-
-
-    document.getElementById(
-      'publishButton'
-    ).disabled =
-    true;
-
-
-    document.getElementById(
-      'publishButton'
-    ).textContent =
-    '暂时无法发布';
+    return false;
 
   }
 
 }
 
 
-function renderPublishRound(){
+/* =========================
+   CREATE AGENT
+========================= */
 
-  const roundName =
+async function createAgent(){
+
+  const name =
   document.getElementById(
-    'publishRoundName'
-  );
+    'newName'
+  ).value.trim();
 
-  const deadline =
+
+  const email =
   document.getElementById(
-    'publishDeadline'
-  );
+    'newEmail'
+  ).value.trim();
 
-  const status =
+
+  const password =
   document.getElementById(
-    'publishStatus'
-  );
+    'newPassword'
+  ).value;
 
-  const result =
-  document.getElementById(
-    'currentResult'
-  );
 
-
-  if(!publishRound){
-
-    roundName.textContent =
-    '暂无可发布期数';
-
-
-    deadline.textContent =
-    '—';
-
-
-    status.textContent =
-    '—';
-
-
-    result.textContent =
-    '--';
-
-
-    updatePublishState();
-
-    return;
-
-  }
-
-
-  roundName.textContent =
-  publishRound.round_date+
-  ' · '+
-  periodName(
-    publishRound.round_code
-  );
-
-
-  deadline.textContent =
-  formatMMTShort(
-    publishRound.deadline_at
-  );
-
-
-  status.textContent =
-  publishRound.status==='open'
-  ? '开放中'
-  : '已结束';
-
-
-  status.className =
-  publishRound.status==='open'
-  ? 'green'
-  : '';
-
-
-  result.textContent =
-  publishRound.result_number
-  ||
-  '--';
-
-
-  updatePublishState();
-
-}
-
-
-/* 倒计时 */
-
-function updatePublishState(){
-
-  const countdown =
-  document.getElementById(
-    'publishCountdown'
-  );
-
-  const label =
-  document.getElementById(
-    'countdownLabel'
-  );
-
-  const button =
-  document.getElementById(
-    'publishButton'
-  );
-
-
-  if(!publishRound){
-
-    countdown.textContent =
-    '--:--:--';
-
-
-    label.textContent =
-    '距离截止';
-
-
-    button.disabled =
-    true;
-
-
-    button.textContent =
-    '暂无可发布期数';
-
-
-    return;
-
-  }
-
-
-  const deadlineTime =
-  new Date(
-    publishRound.deadline_at
-  ).getTime();
-
-
-  const now =
-  Date.now();
-
-
-  const diff =
-  deadlineTime-now;
-
-
-  if(diff>0){
-
-    countdown.textContent =
-    formatCountdown(
-      diff
-    );
-
-
-    label.textContent =
-    '距离截止';
-
-
-    button.disabled =
-    true;
-
-
-    button.textContent =
-    '尚未截止，暂不可发布';
-
-    return;
-
-  }
-
-
-  countdown.textContent =
-  '00:00:00';
-
-
-  label.textContent =
-  '本期已经截止';
-
-
-  if(publishRound.result_number){
-
-    button.disabled =
-    true;
-
-
-    button.textContent =
-    '本期开奖结果已发布';
-
-    return;
-
-  }
-
-
-  button.disabled =
-  false;
-
-
-  button.textContent =
-  '发布本期数字';
-
-}
-
-
-function formatCountdown(ms){
-
-  let total =
-  Math.max(
-    0,
-    Math.floor(
-      ms/1000
-    )
-  );
-
-
-  const days =
-  Math.floor(
-    total/86400
-  );
-
-
-  total %=
-  86400;
-
-
-  const h =
-  Math.floor(
-    total/3600
-  );
-
-
-  total %=
-  3600;
-
-
-  const m =
-  Math.floor(
-    total/60
-  );
-
-
-  const s =
-  total%60;
-
-
-  const clock =
-  String(h).padStart(2,'0')+
-  ':'+
-  String(m).padStart(2,'0')+
-  ':'+
-  String(s).padStart(2,'0');
-
-
-  return days>0
-  ? days+'天 '+clock
-  : clock;
-
-}
-
-
-/* 正式发布 */
-
-async function publishResult(){
-
-  const input =
-  document.getElementById(
-    'resultInput'
-  );
-
-  const msg =
-  document.getElementById(
-    'publishMsg'
-  );
-
-
-  if(!publishRound){
-
-    msg.textContent =
-    '目前没有可发布的期数';
-
-    return;
-
-  }
-
-
-  if(
-    Date.now()
-    <
-    new Date(
-      publishRound.deadline_at
-    ).getTime()
-  ){
-
-    msg.textContent =
-    '本期还没有到截止时间';
-
-    return;
-
-  }
-
-
-  if(
-    publishRound.result_number
-  ){
-
-    msg.textContent =
-    '本期已经发布过开奖结果';
-
-    return;
-
-  }
-
-
-  let n =
-  input.value.trim();
-
-
-  if(!/^\d{1,2}$/.test(n)){
-
-    msg.textContent =
-    '请输入 00 到 99';
-
-    return;
-
-  }
-
-
-  n =
-  n.padStart(
-    2,
-    '0'
-  );
-
-
-  const ok =
-  confirm(
-    '确定发布本期开奖结果？\n\n'+
-    publishRound.round_date+
-    ' · '+
-    periodName(
-      publishRound.round_code
-    )+
-    '\n\n开奖结果：'+
-    n
-  );
-
-
-  if(!ok){
-    return;
-  }
-
-
-  msg.textContent =
-  '正在发布...';
-
-
-  try{
-
-    const roundRes =
-    await api(
-      '/rest/v1/rounds?id=eq.'+
-      encodeURIComponent(
-        publishRound.id
-      ),
-      {
-        method:'PATCH',
-        headers:{
-          'Content-Type':'application/json',
-          Prefer:'return=representation'
-        },
-        body:JSON.stringify({
-          result_number:n
-        })
-      }
-    );
-
-
-    if(!roundRes.ok){
-
-      throw new Error(
-        await roundRes.text()
-      );
-
-    }
-
-
-    const changed =
-    await roundRes.json();
-
-
-    if(!changed.length){
-
-      throw new Error(
-        '数据库没有确认本期开奖结果'
-      );
-
-    }
-
-
-    const resultRes =
-    await api(
-      '/rest/v1/results',
-      {
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-          Prefer:'return=representation'
-        },
-        body:JSON.stringify({
-          result_number:n
-        })
-      }
-    );
-
-
-    if(!resultRes.ok){
-
-      throw new Error(
-        await resultRes.text()
-      );
-
-    }
-
-
-    publishRound.result_number =
-    n;
-
-
+  const rate =
+  Number(
     document.getElementById(
-      'currentResult'
-    ).textContent =
-    n;
-
-
-    input.value =
-    '';
-
-
-    msg.textContent =
-    '✓ 发布成功：'+
-    publishRound.round_date+
-    ' · '+
-    periodName(
-      publishRound.round_code
-    )+
-    ' → '+
-    n;
-
-
-    updatePublishState();
-
-
-  }catch(e){
-
-    msg.textContent =
-    '发布失败：'+
-    e.message;
-
-  }
-
-}
-
-
-/* ========================
-   测试发布模式
-======================== */
-
-async function loadTestRounds(){
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at,settled_at'+
-      '&order=round_date.desc,created_at.desc'+
-      '&limit=50'
-    );
-
-
-    if(!r.ok){
-
-      throw new Error();
-
-    }
-
-
-    testRounds =
-    await r.json();
-
-
-    const select =
-    document.getElementById(
-      'testRoundSelect'
-    );
-
-
-    select.innerHTML =
-    '';
-
-
-    if(!testRounds.length){
-
-      select.innerHTML =
-      '<option value="">没有期数</option>';
-
-      return;
-
-    }
-
-
-    testRounds.forEach(
-      round=>{
-
-        const option =
-        document.createElement(
-          'option'
-        );
-
-
-        option.value =
-        round.id;
-
-
-        option.textContent =
-        round.round_date+
-        ' · '+
-        periodName(
-          round.round_code
-        )+
-        ' · '+
-        statusName(
-          round.status
-        );
-
-
-        select.appendChild(
-          option
-        );
-
-      }
-    );
-
-
-  }catch(e){
-
-    document.getElementById(
-      'testRoundSelect'
-    ).innerHTML =
-    '<option value="">读取失败</option>';
-
-  }
-
-}
-
-
-function runPublishTest(){
-
-  const select =
-  document.getElementById(
-    'testRoundSelect'
-  );
-
-
-  const resultInput =
-  document.getElementById(
-    'testResultInput'
+      'newRate'
+    ).value
   );
 
 
   const msg =
   document.getElementById(
-    'testMsg'
+    'createMsg'
   );
 
 
-  let n =
-  resultInput.value.trim();
+  const btn =
+  document.getElementById(
+    'createBtn'
+  );
 
 
   msg.className =
   'msg';
 
 
-  if(!select.value){
+  if(!name){
 
     msg.textContent =
-    '请选择测试期数';
+    '请输入代理名称';
+
+    msg.classList.add(
+      'error'
+    );
 
     return;
 
   }
 
 
-  if(!/^\d{1,2}$/.test(n)){
+  if(
+    !email
+    ||
+    !email.includes('@')
+  ){
 
     msg.textContent =
-    '请输入 00 到 99 的测试数字';
+    '请输入正确的登录邮箱';
+
+    msg.classList.add(
+      'error'
+    );
 
     return;
 
   }
 
 
-  n =
-  n.padStart(
-    2,
-    '0'
-  );
-
-
-  const round =
-  testRounds.find(
-    r =>
-    r.id ===
-    select.value
-  );
-
-
-  if(!round){
+  if(
+    password.length < 8
+  ){
 
     msg.textContent =
-    '没有找到该期数';
+    '初始密码至少需要8位';
+
+    msg.classList.add(
+      'error'
+    );
 
     return;
 
   }
 
 
-  const deadlinePassed =
-  Date.now()
-  >=
-  new Date(
-    round.deadline_at
-  ).getTime();
-
-
-  document.getElementById(
-    'testPanel'
-  ).classList.remove(
-    'hidden'
-  );
-
-
-  document.getElementById(
-    'testRoundName'
-  ).textContent =
-  round.round_date+
-  ' · '+
-  periodName(
-    round.round_code
-  );
-
-
-  document.getElementById(
-    'testRoundStatus'
-  ).textContent =
-  statusName(
-    round.status
-  );
-
-
-  document.getElementById(
-    'testDeadline'
-  ).textContent =
-  formatMMTShort(
-    round.deadline_at
-  );
-
-
-  const deadlineState =
-  document.getElementById(
-    'testDeadlineState'
-  );
-
-
-  deadlineState.textContent =
-  deadlinePassed
-  ? '✓ 已截止'
-  : '✕ 尚未截止';
-
-
-  deadlineState.className =
-  deadlinePassed
-  ? 'testGood'
-  : 'testWarn';
-
-
-  document.getElementById(
-    'testOldResult'
-  ).textContent =
-  round.result_number
-  ||
-  '—';
-
-
-  document.getElementById(
-    'testNewResult'
-  ).textContent =
-  n;
-
-
-  const roundWrite =
-  document.getElementById(
-    'testRoundWrite'
-  );
-
-
-  const resultWrite =
-  document.getElementById(
-    'testResultWrite'
-  );
-
-
-  if(round.result_number){
-
-    roundWrite.textContent =
-    '正式模式会阻止：已有结果 '+round.result_number;
-
-
-    roundWrite.className =
-    'testWarn';
-
-
-    resultWrite.textContent =
-    '不会继续执行';
-
-
-    resultWrite.className =
-    'testWarn';
-
+  if(
+    !Number.isFinite(rate)
+    ||
+    rate < 0
+    ||
+    rate > 40
+  ){
 
     msg.textContent =
-    '🧪 测试完成：此期已经存在开奖结果，正式发布会被阻止。';
+    '代理比例必须在0%–40%之间';
 
-
-    msg.className =
-    'msg success';
+    msg.classList.add(
+      'error'
+    );
 
     return;
 
   }
 
 
-  if(!deadlinePassed){
-
-    roundWrite.textContent =
-    '正式模式会阻止：尚未截止';
-
-
-    roundWrite.className =
-    'testWarn';
-
-
-    resultWrite.textContent =
-    '不会继续执行';
-
-
-    resultWrite.className =
-    'testWarn';
-
-
-    msg.textContent =
-    '🧪 测试完成：截止时间未到，所以正式发布按钮会锁定。';
-
-
-    msg.className =
-    'msg success';
-
-    return;
-
-  }
-
-
-  roundWrite.textContent =
-  '✓ 会绑定 result_number = '+n;
-
-
-  roundWrite.className =
-  'testGood';
-
-
-  resultWrite.textContent =
-  '✓ 会新增最新公开结果 '+n;
-
-
-  resultWrite.className =
-  'testGood';
+  btn.disabled =
+  true;
 
 
   msg.textContent =
-  '✓ 测试通过：如果现在执行正式发布，流程可以正常进入发布步骤。正式数据库没有任何修改。';
+  '正在创建代理账号...';
 
-
-  msg.className =
-  'msg success';
-
-}
-
-
-/* 网站设置 */
-
-async function loadSettings(){
 
   try{
 
     const r =
     await fetch(
+
       BASE+
-      '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled,logo_data_url',
+      '/functions/v1/create-agent',
+
       {
+
+        method:'POST',
+
         headers:{
+
           apikey:KEY,
-          Authorization:'Bearer '+KEY
-        }
-      }
-    );
 
+          Authorization:
+          'Bearer '+token,
 
-    if(!r.ok){
+          'Content-Type':
+          'application/json'
 
-      throw new Error();
-
-    }
-
-
-    const rows =
-    await r.json();
-
-
-    if(!rows.length){
-
-      return;
-
-    }
-
-
-    const s =
-    rows[0];
-
-
-    document.getElementById(
-      'telegramUrl'
-    ).value =
-    s.telegram_url || '';
-
-
-    document.getElementById(
-      'announcementText'
-    ).value =
-    s.announcement_text || '';
-
-
-    document.getElementById(
-      'announcementEnabled'
-    ).checked =
-    !!s.announcement_enabled;
-
-
-    if(s.logo_data_url){
-
-      pendingLogo =
-      s.logo_data_url;
-
-
-      showLogoPreview(
-        s.logo_data_url
-      );
-
-    }
-
-
-  }catch(e){
-
-    document.getElementById(
-      'settingsMsg'
-    ).textContent =
-    '暂时无法读取网站设置';
-
-  }
-
-}
-
-
-/* Logo */
-
-function handleLogoFile(input){
-
-  const file =
-  input.files &&
-  input.files[0];
-
-
-  const msg =
-  document.getElementById(
-    'logoMsg'
-  );
-
-
-  if(!file){
-    return;
-  }
-
-
-  if(!file.type.startsWith('image/')){
-
-    msg.textContent =
-    '请选择图片文件';
-
-    return;
-
-  }
-
-
-  msg.textContent =
-  '正在处理 Logo...';
-
-
-  const reader =
-  new FileReader();
-
-
-  reader.onload =
-  function(e){
-
-    const img =
-    new Image();
-
-
-    img.onload =
-    function(){
-
-      const maxSize =
-      420;
-
-
-      let w =
-      img.width;
-
-      let h =
-      img.height;
-
-
-      if(w>h){
-
-        if(w>maxSize){
-
-          h =
-          Math.round(
-            h*maxSize/w
-          );
-
-          w =
-          maxSize;
-
-        }
-
-      }else{
-
-        if(h>maxSize){
-
-          w =
-          Math.round(
-            w*maxSize/h
-          );
-
-          h =
-          maxSize;
-
-        }
-
-      }
-
-
-      const canvas =
-      document.createElement(
-        'canvas'
-      );
-
-
-      canvas.width =
-      w;
-
-      canvas.height =
-      h;
-
-
-      const ctx =
-      canvas.getContext(
-        '2d'
-      );
-
-
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        w,
-        h
-      );
-
-
-      pendingLogo =
-      canvas.toDataURL(
-        'image/jpeg',
-        .84
-      );
-
-
-      showLogoPreview(
-        pendingLogo
-      );
-
-
-      msg.textContent =
-      '✓ Logo 已准备好';
-
-    };
-
-
-    img.src =
-    e.target.result;
-
-  };
-
-
-  reader.readAsDataURL(
-    file
-  );
-
-}
-
-
-function showLogoPreview(src){
-
-  const preview =
-  document.getElementById(
-    'logoPreview'
-  );
-
-
-  const top =
-  document.getElementById(
-    'topMark'
-  );
-
-
-  preview.innerHTML =
-  '';
-
-
-  top.innerHTML =
-  '';
-
-
-  const img1 =
-  document.createElement(
-    'img'
-  );
-
-
-  img1.src =
-  src;
-
-
-  preview.appendChild(
-    img1
-  );
-
-
-  const img2 =
-  document.createElement(
-    'img'
-  );
-
-
-  img2.src =
-  src;
-
-
-  top.appendChild(
-    img2
-  );
-
-}
-
-
-async function saveLogo(){
-
-  const msg =
-  document.getElementById(
-    'logoMsg'
-  );
-
-
-  if(!pendingLogo){
-
-    msg.textContent =
-    '请先选择 Logo 图片';
-
-    return;
-
-  }
-
-
-  msg.textContent =
-  '正在更新 Logo...';
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/site_settings?id=eq.1',
-      {
-        method:'PATCH',
-        headers:{
-          'Content-Type':'application/json',
-          Prefer:'return=representation'
         },
-        body:JSON.stringify({
-          logo_data_url:pendingLogo,
-          updated_at:new Date().toISOString()
+
+        body:
+        JSON.stringify({
+
+          display_name:
+          name,
+
+          email:
+          email,
+
+          password:
+          password,
+
+          commission_rate:
+          rate
+
         })
+
       }
+
     );
 
 
-    if(!r.ok){
+    let d = {};
 
-      throw new Error();
-
-    }
-
-
-    msg.textContent =
-    '✓ 网站 Logo 更新成功';
-
-
-  }catch(e){
-
-    msg.textContent =
-    'Logo 更新失败';
-
-  }
-
-}
-
-
-async function removeLogo(){
-
-  const msg =
-  document.getElementById(
-    'logoMsg'
-  );
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/site_settings?id=eq.1',
-      {
-        method:'PATCH',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify({
-          logo_data_url:'',
-          updated_at:new Date().toISOString()
-        })
-      }
-    );
-
-
-    if(!r.ok){
-
-      throw new Error();
-
-    }
-
-
-    pendingLogo =
-    '';
-
-
-    document.getElementById(
-      'logoPreview'
-    ).innerHTML =
-    '金';
-
-
-    document.getElementById(
-      'topMark'
-    ).innerHTML =
-    '金';
-
-
-    document.getElementById(
-      'logoFile'
-    ).value =
-    '';
-
-
-    msg.textContent =
-    '✓ 已恢复文字「金」';
-
-
-  }catch(e){
-
-    msg.textContent =
-    '恢复失败';
-
-  }
-
-}
-
-
-/* 保存网站设置 */
-
-async function saveSettings(){
-
-  const msg =
-  document.getElementById(
-    'settingsMsg'
-  );
-
-
-  const telegram =
-  document.getElementById(
-    'telegramUrl'
-  ).value.trim();
-
-
-  const announcement =
-  document.getElementById(
-    'announcementText'
-  ).value.trim();
-
-
-  const enabled =
-  document.getElementById(
-    'announcementEnabled'
-  ).checked;
-
-
-  if(telegram){
 
     try{
 
-      const u =
-      new URL(
-        telegram
-      );
-
-
-      if(
-        u.protocol!=='https:'
-        &&
-        u.protocol!=='http:'
-      ){
-
-        throw new Error();
-
-      }
-
+      d =
+      await r.json();
 
     }catch(e){
 
-      msg.textContent =
-      'Telegram 链接格式不正确';
-
-      return;
+      d = {};
 
     }
 
+
+    if(!r.ok){
+
+      throw new Error(
+        d.error
+        ||
+        '创建失败'
+      );
+
+    }
+
+
+    msg.className =
+    'msg success';
+
+
+    msg.textContent =
+
+    '✓ 代理「'+
+    name+
+    '」创建成功';
+
+
+    document.getElementById(
+      'newName'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newEmail'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newPassword'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newRate'
+    ).value =
+    '20';
+
+
+    await loadAgents();
+
+
+  }catch(e){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    e.message
+    ||
+    '创建代理失败';
+
+
+  }finally{
+
+    btn.disabled =
+    false;
+
   }
 
+}
 
-  msg.textContent =
-  '正在更新网站...';
+
+/* =========================
+   LOAD AGENTS
+========================= */
+
+async function loadAgents(){
+
+  const msg =
+  document.getElementById(
+    'listMsg'
+  );
+
+
+  msg.className =
+  'msg';
+
+
+  if(!token){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '管理员登录状态已失效';
+
+
+    return;
+
+  }
 
 
   try{
 
     const r =
     await api(
-      '/rest/v1/site_settings?id=eq.1',
-      {
-        method:'PATCH',
-        headers:{
-          'Content-Type':'application/json',
-          Prefer:'return=representation'
-        },
-        body:JSON.stringify({
-          telegram_url:telegram,
-          announcement_text:announcement,
-          announcement_enabled:enabled,
-          updated_at:new Date().toISOString()
-        })
-      }
+
+      '/rest/v1/agents'+
+      '?select=id,display_name,commission_rate,status,created_at'+
+      '&order=created_at.desc'
+
     );
 
 
@@ -2813,47 +1116,628 @@ async function saveSettings(){
     }
 
 
+    agents =
+    await r.json();
+
+
+    renderAgents();
+
+    updateStats();
+
+    buildSelect();
+
+
     msg.textContent =
-    '✓ 网站设置更新成功';
+    '';
 
 
   }catch(e){
 
+    msg.className =
+    'msg error';
+
+
     msg.textContent =
-    '更新失败，请重新登录';
+    '无法读取代理资料，请返回 Admin 重新登录';
 
   }
 
 }
 
 
-/* 时间 */
+/* =========================
+   RENDER AGENTS
+========================= */
 
-function updateClock(){
+function renderAgents(){
 
+  const box =
   document.getElementById(
-    'mmtClock'
-  ).textContent =
-  new Intl.DateTimeFormat(
-    'zh-CN',
-    {
-      timeZone:'Asia/Yangon',
-      hour:'2-digit',
-      minute:'2-digit',
-      second:'2-digit',
-      hour12:false
-    }
-  ).format(
-    new Date()
+    'agentList'
   );
 
 
-  updatePublishState();
+  const keyword =
+  document.getElementById(
+    'searchInput'
+  )
+  .value
+  .trim()
+  .toLowerCase();
+
+
+  const list =
+  agents.filter(
+    a=>
+
+    String(
+      a.display_name || ''
+    )
+    .toLowerCase()
+    .includes(
+      keyword
+    )
+
+  );
+
+
+  if(!list.length){
+
+    box.innerHTML =
+    '<div class="empty">'+
+    '没有找到代理'+
+    '</div>';
+
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+
+  list.map(
+    a=>{
+
+      const statusText =
+
+      a.status === 'active'
+
+      ?
+
+      '正常'
+
+      :
+
+      a.status === 'suspended'
+
+      ?
+
+      '已暂停'
+
+      :
+
+      '已限制';
+
+
+      return `
+
+      <div class="agent">
+
+        <div class="agentTop">
+
+          <div>
+
+            <div class="name">
+
+              ${escapeHtml(
+                a.display_name
+                ||
+                '未命名代理'
+              )}
+
+            </div>
+
+            <div class="meta">
+
+              当前比例：
+              ${formatRate(
+                a.commission_rate
+              )}%
+
+              <br>
+
+              创建时间：
+              ${formatDate(
+                a.created_at
+              )}
+
+            </div>
+
+          </div>
+
+          <div class="badge ${a.status}">
+
+            ${statusText}
+
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="dark"
+            onclick="chooseAgent('${a.id}')">
+
+            修改比例
+
+          </button>
+
+
+          <button
+            class="dark"
+            onclick="setStatus(
+              '${a.id}',
+              '${
+                a.status === 'suspended'
+                ?
+                'active'
+                :
+                'suspended'
+              }'
+            )">
+
+            ${
+              a.status === 'suspended'
+              ?
+              '恢复代理'
+              :
+              '暂停代理'
+            }
+
+          </button>
+
+
+          <button
+            class="red"
+            onclick="setStatus(
+              '${a.id}',
+              '${
+                a.status === 'blocked'
+                ?
+                'active'
+                :
+                'blocked'
+              }'
+            )">
+
+            ${
+              a.status === 'blocked'
+              ?
+              '解除限制'
+              :
+              '限制代理'
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    }
+
+  ).join('');
 
 }
 
 
-function formatMMTShort(value){
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+  const total =
+  agents.length;
+
+
+  const active =
+  agents.filter(
+    a=>
+    a.status ===
+    'active'
+  ).length;
+
+
+  document.getElementById(
+    'totalAgents'
+  ).textContent =
+  total;
+
+
+  document.getElementById(
+    'activeAgents'
+  ).textContent =
+  active;
+
+
+  document.getElementById(
+    'inactiveAgents'
+  ).textContent =
+  total-active;
+
+}
+
+
+/* =========================
+   AGENT SELECT
+========================= */
+
+function buildSelect(){
+
+  const select =
+  document.getElementById(
+    'agentSelect'
+  );
+
+
+  const currentValue =
+  select.value;
+
+
+  select.innerHTML =
+  '<option value="">'+
+  '选择代理'+
+  '</option>';
+
+
+  agents.forEach(
+    a=>{
+
+      const option =
+      document.createElement(
+        'option'
+      );
+
+
+      option.value =
+      a.id;
+
+
+      option.textContent =
+
+      (
+        a.display_name
+        ||
+        '未命名代理'
+      )
+
+      +
+
+      ' · '
+
+      +
+
+      formatRate(
+        a.commission_rate
+      )
+
+      +
+
+      '%';
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+
+  );
+
+
+  if(
+    agents.some(
+      a=>
+      a.id ===
+      currentValue
+    )
+  ){
+
+    select.value =
+    currentValue;
+
+  }
+
+}
+
+
+function chooseAgent(id){
+
+  const a =
+  agents.find(
+    x=>
+    x.id === id
+  );
+
+
+  if(!a){
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    'agentSelect'
+  ).value =
+  a.id;
+
+
+  document.getElementById(
+    'rateInput'
+  ).value =
+  Number(
+    a.commission_rate
+    ||
+    0
+  );
+
+
+  document.getElementById(
+    'rateInput'
+  ).scrollIntoView({
+    behavior:'smooth',
+    block:'center'
+  });
+
+}
+
+
+/* =========================
+   UPDATE RATE
+========================= */
+
+async function updateRate(){
+
+  const id =
+  document.getElementById(
+    'agentSelect'
+  ).value;
+
+
+  const rate =
+  Number(
+    document.getElementById(
+      'rateInput'
+    ).value
+  );
+
+
+  const msg =
+  document.getElementById(
+    'rateMsg'
+  );
+
+
+  msg.className =
+  'msg';
+
+
+  if(!id){
+
+    msg.textContent =
+    '请先选择代理';
+
+
+    msg.classList.add(
+      'error'
+    );
+
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(rate)
+    ||
+    rate < 0
+    ||
+    rate > 40
+  ){
+
+    msg.textContent =
+    '请输入0%–40%';
+
+
+    msg.classList.add(
+      'error'
+    );
+
+
+    return;
+
+  }
+
+
+  msg.textContent =
+  '正在保存...';
+
+
+  try{
+
+    const r =
+    await api(
+
+      '/rest/v1/agents'+
+      '?id=eq.'+
+      encodeURIComponent(
+        id
+      ),
+
+      {
+
+        method:'PATCH',
+
+        headers:{
+
+          'Content-Type':
+          'application/json',
+
+          Prefer:
+          'return=minimal'
+
+        },
+
+        body:
+        JSON.stringify({
+          commission_rate:
+          rate
+        })
+
+      }
+
+    );
+
+
+    if(!r.ok){
+
+      throw new Error();
+
+    }
+
+
+    msg.className =
+    'msg success';
+
+
+    msg.textContent =
+    '✓ 比例已保存';
+
+
+    await loadAgents();
+
+
+  }catch(e){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '保存失败';
+
+  }
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+async function setStatus(
+  id,
+  status
+){
+
+  const text =
+
+  status === 'blocked'
+
+  ?
+
+  '确定限制这个代理吗？限制后该代理将不能正常提交。'
+
+  :
+
+  status === 'suspended'
+
+  ?
+
+  '确定暂停这个代理吗？'
+
+  :
+
+  '确定恢复这个代理吗？';
+
+
+  if(!confirm(text)){
+
+    return;
+
+  }
+
+
+  try{
+
+    const r =
+    await api(
+
+      '/rest/v1/agents'+
+      '?id=eq.'+
+      encodeURIComponent(
+        id
+      ),
+
+      {
+
+        method:'PATCH',
+
+        headers:{
+
+          'Content-Type':
+          'application/json',
+
+          Prefer:
+          'return=minimal'
+
+        },
+
+        body:
+        JSON.stringify({
+          status:
+          status
+        })
+
+      }
+
+    );
+
+
+    if(!r.ok){
+
+      throw new Error();
+
+    }
+
+
+    await loadAgents();
+
+
+  }catch(e){
+
+    alert(
+      '操作失败'
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FORMAT
+========================= */
+
+function formatDate(value){
 
   if(!value){
 
@@ -2862,73 +1746,36 @@ function formatMMTShort(value){
   }
 
 
-  return new Intl.DateTimeFormat(
+  return new Intl
+  .DateTimeFormat(
     'zh-CN',
     {
-      timeZone:'Asia/Yangon',
+
+      timeZone:
+      'Asia/Yangon',
+
+      year:'numeric',
+
       month:'2-digit',
+
       day:'2-digit',
+
       hour:'2-digit',
+
       minute:'2-digit',
+
       hour12:false
+
     }
-  ).format(
+  )
+  .format(
     new Date(value)
-  )+' MMT';
+  );
 
 }
 
 
-function periodName(code){
-
-  if(code==='1030'){
-
-    return '上午 10:30';
-
-  }
-
-
-  if(code==='1530'){
-
-    return '下午 15:30';
-
-  }
-
-
-  return code || '—';
-
-}
-
-
-function statusName(status){
-
-  if(status==='open'){
-
-    return '开放中';
-
-  }
-
-
-  if(status==='closed'){
-
-    return '已结束';
-
-  }
-
-
-  if(status==='settled'){
-
-    return '已结算';
-
-  }
-
-
-  return status || '—';
-
-}
-
-
-function formatNumber(value){
+function formatRate(value){
 
   return Number(
     value || 0
@@ -2942,65 +1789,83 @@ function formatNumber(value){
 }
 
 
-/* 登出 */
+function escapeHtml(text){
 
-function clearSession(){
+  return String(text)
 
-  localStorage.removeItem(
-    'jmt_access_token'
+  .replaceAll(
+    '&',
+    '&amp;'
+  )
+
+  .replaceAll(
+    '<',
+    '&lt;'
+  )
+
+  .replaceAll(
+    '>',
+    '&gt;'
+  )
+
+  .replaceAll(
+    '"',
+    '&quot;'
+  )
+
+  .replaceAll(
+    "'",
+    '&#039;'
   );
-
-
-  sessionStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  token =
-  '';
 
 }
 
 
-function logout(){
+/* =========================
+   START
+========================= */
 
-  clearSession();
+async function startPage(){
 
-  location.reload();
+  const msg =
+  document.getElementById(
+    'listMsg'
+  );
+
+
+  msg.textContent =
+  '正在验证管理员身份...';
+
+
+  const ok =
+  await verifyAdmin();
+
+
+  if(!ok){
+
+    /*
+      只有身份真的无效，
+      才回 Admin 登录页。
+    */
+
+    location.href =
+    '/admin/';
+
+
+    return;
+
+  }
+
+
+  await loadAgents();
 
 }
 
 
-/* START */
-
-updateClock();
-
-
-setInterval(
-  updateClock,
-  1000
-);
-
-
-verifySession();
-
-
-setInterval(
-  ()=>{
-
-    if(token){
-
-      loadDashboardSummary();
-
-      loadPublishRound();
-
-    }
-
-  },
-  20000
-);
+startPage();
 
 </script>
 
 </body>
+
 </html>
