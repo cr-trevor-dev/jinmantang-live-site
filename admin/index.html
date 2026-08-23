@@ -8,131 +8,63 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   background:radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
   color:#f7f0df;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
-
 .wrap{
   max-width:650px;
   margin:auto;
   min-height:100vh;
   padding:24px 15px 55px
 }
-
-.brand{
-  text-align:center;
-  margin-bottom:22px
-}
-
+.brand{text-align:center;margin-bottom:22px}
 .mark{
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  margin:0 auto 10px;
-  overflow:hidden;
-  font-size:24px;
-  font-weight:900;
-  color:#f6da86;
-  border:1px solid #b98a2c;
-  background:linear-gradient(145deg,#382506,#100d08);
-  box-shadow:0 0 28px rgba(235,185,62,.22)
+  width:72px;height:72px;border-radius:50%;
+  display:grid;place-items:center;margin:0 auto 10px;
+  overflow:hidden;font-size:24px;font-weight:900;
+  color:#f6da86;border:1px solid #b98a2c;
+  background:linear-gradient(145deg,#382506,#100d08)
 }
-
-.mark img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-
-.cn{
-  font-weight:900;
-  font-size:25px;
-  letter-spacing:4px;
-  color:#f3d889
-}
-
-.en{
-  font-size:10px;
-  letter-spacing:3px;
-  color:#9f916d;
-  margin-top:5px
-}
+.mark img{width:100%;height:100%;object-fit:cover}
+.cn{font-weight:900;font-size:25px;letter-spacing:4px;color:#f3d889}
+.en{font-size:10px;letter-spacing:3px;color:#9f916d;margin-top:5px}
 
 .card{
   background:linear-gradient(180deg,rgba(22,22,22,.98),rgba(11,11,12,.98));
   border:1px solid rgba(214,168,63,.30);
-  border-radius:24px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 22px 60px rgba(0,0,0,.32)
+  border-radius:24px;padding:20px;margin-bottom:16px
 }
+.title{font-size:15px;font-weight:900;color:#dfc575;margin-bottom:16px}
 
-.title{
-  font-size:15px;
-  font-weight:900;
-  color:#dfc575;
-  margin-bottom:16px
+input,textarea{
+  width:100%;border:1px solid rgba(214,168,63,.24);
+  background:#101011;color:#fff;border-radius:13px;
+  padding:14px;font-size:15px;outline:none;margin-bottom:12px
 }
-
-input,
-textarea{
-  width:100%;
-  border:1px solid rgba(214,168,63,.24);
-  background:#101011;
-  color:#fff;
-  border-radius:13px;
-  padding:14px;
-  font-size:15px;
-  outline:none;
-  margin-bottom:12px
-}
-
-textarea{
-  min-height:105px;
-  resize:vertical;
-  line-height:1.6
-}
+textarea{min-height:105px;resize:vertical;line-height:1.6}
 
 button{
-  width:100%;
-  border:0;
-  border-radius:13px;
-  padding:14px;
-  font-size:15px;
-  font-weight:900;
-  cursor:pointer;
+  width:100%;border:0;border-radius:13px;padding:14px;
+  font-size:15px;font-weight:900;cursor:pointer;
   background:linear-gradient(180deg,#f1d784,#b47d20);
   color:#171109
 }
-
 button.secondary{
-  margin-top:10px;
-  background:#171718;
-  color:#d9c37c;
+  margin-top:10px;background:#171718;color:#d9c37c;
   border:1px solid rgba(214,168,63,.22)
 }
-
 button.danger{
-  margin-top:9px;
-  background:#1b1717;
-  color:#cfa7a7;
+  margin-top:9px;background:#1b1717;color:#cfa7a7;
   border:1px solid rgba(180,100,100,.20)
 }
 
 .hidden{display:none!important}
-
 .msg{
-  text-align:center;
-  min-height:18px;
-  margin-top:10px;
-  color:#aaa18d;
-  font-size:12px
+  text-align:center;min-height:18px;margin-top:10px;
+  color:#aaa18d;font-size:12px
 }
 
 .summaryGrid{
@@ -140,210 +72,85 @@ button.danger{
   grid-template-columns:1fr 1fr;
   gap:9px
 }
-
 .summaryBox{
   background:#101011;
   border:1px solid rgba(255,255,255,.06);
   border-radius:15px;
   padding:14px
 }
-
 .summaryBox small{
-  display:block;
-  color:#817a6d;
-  font-size:10px;
-  margin-bottom:7px
+  display:block;color:#817a6d;font-size:10px;margin-bottom:7px
 }
-
 .summaryBox strong{
-  display:block;
-  color:#ebcd72;
-  font-size:19px;
-  line-height:1.35
+  display:block;color:#ebcd72;font-size:19px;line-height:1.35
 }
-
 .green{color:#72d39d!important}
 .redText{color:#e89191!important}
-
-.refreshLine{
-  text-align:center;
-  color:#746e62;
-  font-size:10px;
-  margin-top:12px
-}
+.refreshLine{text-align:center;color:#746e62;font-size:10px;margin-top:12px}
 
 .menuGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px
 }
-
 .menu{
-  display:block;
-  text-decoration:none;
-  background:#101011;
+  display:block;text-decoration:none;background:#101011;
   border:1px solid rgba(214,168,63,.20);
-  border-radius:16px;
-  padding:17px 14px;
-  min-height:112px
+  border-radius:16px;padding:17px 14px;min-height:112px
 }
-
-.menu:active{
-  transform:scale(.98)
-}
-
-.menuIcon{
-  font-size:26px;
-  margin-bottom:10px
-}
-
-.menuTitle{
-  color:#ecd176;
-  font-weight:900;
-  font-size:15px
-}
-
-.menuSub{
-  color:#777166;
-  font-size:10px;
-  line-height:1.55;
-  margin-top:6px
-}
+.menuIcon{font-size:26px;margin-bottom:10px}
+.menuTitle{color:#ecd176;font-weight:900;font-size:15px}
+.menuSub{color:#777166;font-size:10px;line-height:1.55;margin-top:6px}
 
 .current{
-  text-align:center;
-  padding:17px;
-  margin-bottom:16px;
-  background:#101011;
-  border:1px solid rgba(255,255,255,.06);
+  text-align:center;padding:17px;margin-bottom:16px;
+  background:#101011;border:1px solid rgba(255,255,255,.06);
   border-radius:15px
 }
-
-.current small{
-  display:block;
-  color:#8d887c;
-  margin-bottom:5px
-}
-
-.current strong{
-  font-size:48px;
-  color:#ebca68
-}
+.current small{display:block;color:#8d887c;margin-bottom:5px}
+.current strong{font-size:48px;color:#ebca68}
 
 .settingLabel{
-  display:block;
-  color:#9c9588;
-  font-size:12px;
-  margin:4px 2px 7px
+  display:block;color:#9c9588;font-size:12px;margin:4px 2px 7px
 }
-
 .note{
-  color:#777268;
-  font-size:11px;
-  line-height:1.55;
-  margin:-3px 2px 12px
+  color:#777268;font-size:11px;line-height:1.55;margin:-3px 2px 12px
 }
-
 .logoPreviewWrap{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  background:#101011;
+  display:flex;align-items:center;gap:15px;background:#101011;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:15px;
-  padding:14px;
-  margin-bottom:12px
+  border-radius:15px;padding:14px;margin-bottom:12px
 }
-
 .logoPreview{
-  width:82px;
-  height:82px;
-  border-radius:50%;
-  overflow:hidden;
-  flex:none;
+  width:82px;height:82px;border-radius:50%;overflow:hidden;flex:none;
   border:1px solid rgba(214,168,63,.35);
-  background:#17130c;
-  display:grid;
-  place-items:center;
-  color:#d7ba63;
-  font-weight:900
+  background:#17130c;display:grid;place-items:center;
+  color:#d7ba63;font-weight:900
 }
-
-.logoPreview img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-
-.logoInfo{
-  color:#928b7e;
-  font-size:12px;
-  line-height:1.6
-}
+.logoPreview img{width:100%;height:100%;object-fit:cover}
+.logoInfo{color:#928b7e;font-size:12px;line-height:1.6}
 
 .switchRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:#101011;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:13px;
-  padding:13px 14px;
-  margin-bottom:13px
+  display:flex;align-items:center;justify-content:space-between;
+  background:#101011;border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;padding:13px 14px;margin-bottom:13px
 }
-
-.switchText{
-  font-size:13px;
-  color:#e7ddc6
-}
-
-.switch{
-  position:relative;
-  width:48px;
-  height:27px
-}
-
-.switch input{
-  opacity:0;
-  width:0;
-  height:0
-}
-
+.switchText{font-size:13px;color:#e7ddc6}
+.switch{position:relative;width:48px;height:27px}
+.switch input{opacity:0;width:0;height:0}
 .slider{
-  position:absolute;
-  inset:0;
-  background:#343436;
-  border-radius:99px;
-  transition:.25s
+  position:absolute;inset:0;background:#343436;border-radius:99px
 }
-
 .slider:before{
-  content:"";
-  position:absolute;
-  width:21px;
-  height:21px;
-  left:3px;
-  top:3px;
-  border-radius:50%;
-  background:#aaa;
-  transition:.25s
+  content:"";position:absolute;width:21px;height:21px;
+  left:3px;top:3px;border-radius:50%;background:#aaa
 }
-
-.switch input:checked + .slider{
-  background:#b9872f
-}
-
+.switch input:checked + .slider{background:#b9872f}
 .switch input:checked + .slider:before{
-  transform:translateX(21px);
-  background:#fff0bd
+  transform:translateX(21px);background:#fff0bd
 }
 
-.foot{
-  text-align:center;
-  color:#706b62;
-  font-size:10px;
-  margin-top:25px
-}
+.foot{text-align:center;color:#706b62;font-size:10px;margin-top:25px}
 
 @media(max-width:380px){
   .menuGrid{grid-template-columns:1fr}
@@ -361,26 +168,14 @@ button.danger{
     <div class="en">JIN MANTANG · MANAGEMENT</div>
   </div>
 
-
   <div class="card" id="loginBox">
 
-    <div class="title">
-      管理员登录
-    </div>
+    <div class="title">管理员登录</div>
 
-    <input
-      id="email"
-      type="email"
-      placeholder="管理员邮箱">
+    <input id="email" type="email" placeholder="管理员邮箱">
+    <input id="password" type="password" placeholder="管理员密码">
 
-    <input
-      id="password"
-      type="password"
-      placeholder="管理员密码">
-
-    <button onclick="signIn()">
-      登录管理中心
-    </button>
+    <button onclick="signIn()">登录管理中心</button>
 
     <div class="msg" id="loginMsg"></div>
 
@@ -389,14 +184,9 @@ button.danger{
 
   <div id="adminBox" class="hidden">
 
-
-    <!-- 当前运营概况 -->
-
     <div class="card">
 
-      <div class="title">
-        当前运营概况
-      </div>
+      <div class="title">当前运营概况</div>
 
       <div class="summaryGrid">
 
@@ -449,58 +239,40 @@ button.danger{
     </div>
 
 
-    <!-- 管理中心 -->
-
     <div class="card">
 
-      <div class="title">
-        管理中心
-      </div>
+      <div class="title">管理中心</div>
 
       <div class="menuGrid">
 
         <a class="menu" href="/admin/agents/">
           <div class="menuIcon">👥</div>
           <div class="menuTitle">代理管理</div>
-          <div class="menuSub">
-            创建代理、搜索、比例、暂停、限制
-          </div>
+          <div class="menuSub">创建代理、搜索、比例、暂停、限制</div>
         </a>
-
 
         <a class="menu" href="/admin/simulator.html">
           <div class="menuIcon">📊</div>
           <div class="menuTitle">本期汇总</div>
-          <div class="menuSub">
-            查看当前期所有代理提交与 00–99 汇总
-          </div>
+          <div class="menuSub">查看当前期所有代理提交与 00–99 汇总</div>
         </a>
 
-
-        <a class="menu" href="/admin/history/">
+        <a class="menu" href="/history/">
           <div class="menuIcon">📚</div>
           <div class="menuTitle">历史期数</div>
-          <div class="menuSub">
-            查询以前每一期与代理历史明细
-          </div>
+          <div class="menuSub">查询以前每一期与代理历史明细</div>
         </a>
-
 
         <a class="menu" href="#resultManagement">
           <div class="menuIcon">🎯</div>
           <div class="menuTitle">数字发布</div>
-          <div class="menuSub">
-            发布最新公开结果
-          </div>
+          <div class="menuSub">发布最新公开结果</div>
         </a>
-
 
         <a class="menu" href="#siteSettings">
           <div class="menuIcon">⚙️</div>
           <div class="menuTitle">网站设置</div>
-          <div class="menuSub">
-            Logo、Telegram、公告
-          </div>
+          <div class="menuSub">Logo、Telegram、公告</div>
         </a>
 
       </div>
@@ -508,24 +280,13 @@ button.danger{
     </div>
 
 
-    <!-- 数字发布 -->
-
     <div class="card" id="resultManagement">
 
-      <div class="title">
-        数字发布管理
-      </div>
+      <div class="title">数字发布管理</div>
 
       <div class="current">
-
-        <small>
-          当前最新数字
-        </small>
-
-        <strong id="currentResult">
-          --
-        </strong>
-
+        <small>当前最新数字</small>
+        <strong id="currentResult">--</strong>
       </div>
 
       <input
@@ -543,19 +304,13 @@ button.danger{
     </div>
 
 
-    <!-- Logo -->
-
     <div class="card">
 
-      <div class="title">
-        网站 Logo 管理
-      </div>
+      <div class="title">网站 Logo 管理</div>
 
       <div class="logoPreviewWrap">
 
-        <div class="logoPreview" id="logoPreview">
-          金
-        </div>
+        <div class="logoPreview" id="logoPreview">金</div>
 
         <div class="logoInfo">
           选择你的 Logo 图片。
@@ -565,9 +320,7 @@ button.danger{
 
       </div>
 
-      <label class="settingLabel">
-        选择 Logo 图片
-      </label>
+      <label class="settingLabel">选择 Logo 图片</label>
 
       <input
         id="logoFile"
@@ -583,9 +336,7 @@ button.danger{
         更新网站 Logo
       </button>
 
-      <button
-        class="danger"
-        onclick="removeLogo()">
+      <button class="danger" onclick="removeLogo()">
         恢复文字「金」
       </button>
 
@@ -594,13 +345,9 @@ button.danger{
     </div>
 
 
-    <!-- 网站设置 -->
-
     <div class="card" id="siteSettings">
 
-      <div class="title">
-        网站内容管理
-      </div>
+      <div class="title">网站内容管理</div>
 
       <label class="settingLabel">
         Telegram 频道链接
@@ -630,13 +377,8 @@ button.danger{
         </div>
 
         <label class="switch">
-
-          <input
-            id="announcementEnabled"
-            type="checkbox">
-
+          <input id="announcementEnabled" type="checkbox">
           <span class="slider"></span>
-
         </label>
 
       </div>
@@ -651,13 +393,9 @@ button.danger{
 
 
     <div class="card">
-
-      <button
-        class="secondary"
-        onclick="logout()">
+      <button class="secondary" onclick="logout()">
         退出管理员账号
       </button>
-
     </div>
 
   </div>
@@ -680,67 +418,43 @@ const KEY=
 
 
 let token=
-
-localStorage.getItem(
-  'jmt_access_token'
-)
-
+localStorage.getItem('jmt_access_token')
 ||
-
-sessionStorage.getItem(
-  'jmt_access_token'
-)
-
+sessionStorage.getItem('jmt_access_token')
 ||
-
 '';
-
 
 let pendingLogo='';
 let currentRound=null;
 
 
-/* API */
-
 async function api(path,options={}){
 
   return fetch(
-
     BASE+path,
-
     {
       ...options,
-
       headers:{
         apikey:KEY,
         Authorization:'Bearer '+token,
         ...(options.headers || {})
       }
     }
-
   );
 
 }
 
 
-/* LOGIN */
-
 async function signIn(){
 
   const email=
-  document.getElementById(
-    'email'
-  ).value.trim();
+  document.getElementById('email').value.trim();
 
   const password=
-  document.getElementById(
-    'password'
-  ).value;
+  document.getElementById('password').value;
 
   const msg=
-  document.getElementById(
-    'loginMsg'
-  );
+  document.getElementById('loginMsg');
 
 
   if(!email || !password){
@@ -761,24 +475,18 @@ async function signIn(){
 
     const r=
     await fetch(
-
-      BASE+
-      '/auth/v1/token?grant_type=password',
-
+      BASE+'/auth/v1/token?grant_type=password',
       {
         method:'POST',
-
         headers:{
           apikey:KEY,
           'Content-Type':'application/json'
         },
-
         body:JSON.stringify({
           email,
           password
         })
       }
-
     );
 
 
@@ -786,14 +494,8 @@ async function signIn(){
     await r.json();
 
 
-    if(
-      !r.ok
-      ||
-      !d.access_token
-    ){
-
+    if(!r.ok || !d.access_token){
       throw new Error();
-
     }
 
 
@@ -805,7 +507,6 @@ async function signIn(){
       'jmt_access_token',
       token
     );
-
 
     sessionStorage.setItem(
       'jmt_access_token',
@@ -828,8 +529,6 @@ async function signIn(){
 }
 
 
-/* SESSION */
-
 async function verifySession(){
 
   if(!token){
@@ -840,9 +539,7 @@ async function verifySession(){
   try{
 
     const r=
-    await api(
-      '/auth/v1/user'
-    );
+    await api('/auth/v1/user');
 
 
     if(!r.ok){
@@ -868,21 +565,14 @@ function showAdmin(){
 
   document.getElementById(
     'loginBox'
-  ).classList.add(
-    'hidden'
-  );
-
+  ).classList.add('hidden');
 
   document.getElementById(
     'adminBox'
-  ).classList.remove(
-    'hidden'
-  );
+  ).classList.remove('hidden');
 
 }
 
-
-/* LOAD ALL */
 
 async function loadEverything(){
 
@@ -895,20 +585,16 @@ async function loadEverything(){
 }
 
 
-/* DASHBOARD */
-
 async function loadDashboardSummary(){
 
   try{
 
     const rr=
     await api(
-
-      '/rest/v1/rounds' +
-      '?select=id,round_date,round_code,deadline_at,status,created_at' +
-      '&order=created_at.desc' +
+      '/rest/v1/rounds'+
+      '?select=id,round_date,round_code,deadline_at,status,created_at'+
+      '&order=created_at.desc'+
       '&limit=20'
-
     );
 
 
@@ -922,17 +608,10 @@ async function loadDashboardSummary(){
 
 
     currentRound=
-
-    rounds.find(
-      x=>x.status==='open'
-    )
-
+    rounds.find(x=>x.status==='open')
     ||
-
     rounds[0]
-
     ||
-
     null;
 
 
@@ -946,26 +625,16 @@ async function loadDashboardSummary(){
 
 
     const period=
-
     currentRound.round_code==='1530'
-
     ? '下午 15:30'
-
-    :
-
-    currentRound.round_code==='1030'
-
+    : currentRound.round_code==='1030'
     ? '上午 10:30'
-
-    :
-
-    currentRound.round_code;
+    : currentRound.round_code;
 
 
     document.getElementById(
       'summaryRound'
     ).textContent=
-
     currentRound.round_date+
     ' · '+
     period;
@@ -974,7 +643,6 @@ async function loadDashboardSummary(){
     document.getElementById(
       'summaryStatus'
     ).textContent=
-
     currentRound.status==='open'
     ? '开放中'
     : '已关闭';
@@ -983,7 +651,6 @@ async function loadDashboardSummary(){
     document.getElementById(
       'summaryStatus'
     ).className=
-
     currentRound.status==='open'
     ? 'green'
     : '';
@@ -999,11 +666,9 @@ async function loadDashboardSummary(){
 
     const ar=
     await api(
-
-      '/rest/v1/agents' +
-      '?status=eq.active' +
+      '/rest/v1/agents'+
+      '?status=eq.active'+
       '&select=id'
-
     );
 
 
@@ -1018,9 +683,7 @@ async function loadDashboardSummary(){
 
     const activeAgentIds=
     new Set(
-      activeAgents.map(
-        a=>a.id
-      )
+      activeAgents.map(a=>a.id)
     );
 
 
@@ -1036,19 +699,10 @@ async function loadDashboardSummary(){
 
     const sr=
     await api(
-
-      '/rest/v1/agent_submissions' +
-
+      '/rest/v1/agent_submissions'+
       '?round_id=eq.'+
-
-      encodeURIComponent(
-        currentRound.id
-      )
-
-      +
-
+      encodeURIComponent(currentRound.id)+
       '&select=agent_id,points'
-
     );
 
 
@@ -1070,10 +724,7 @@ async function loadDashboardSummary(){
     rows.forEach(row=>{
 
       const points=
-      Number(
-        row.points || 0
-      );
-
+      Number(row.points || 0);
 
       total+=points;
 
@@ -1081,9 +732,7 @@ async function loadDashboardSummary(){
       if(
         points>0
         &&
-        activeAgentIds.has(
-          row.agent_id
-        )
+        activeAgentIds.has(row.agent_id)
       ){
 
         submittedSet.add(
@@ -1102,8 +751,7 @@ async function loadDashboardSummary(){
     const missingCount=
     Math.max(
       0,
-      activeTotal-
-      submittedCount
+      activeTotal-submittedCount
     );
 
 
@@ -1122,7 +770,6 @@ async function loadDashboardSummary(){
     document.getElementById(
       'summaryMissing'
     ).className=
-
     missingCount>0
     ? 'redText'
     : 'green';
@@ -1131,9 +778,7 @@ async function loadDashboardSummary(){
     document.getElementById(
       'summaryTotal'
     ).textContent=
-    formatNumber(
-      total
-    );
+    formatNumber(total);
 
 
   }catch(e){
@@ -1150,51 +795,16 @@ async function loadDashboardSummary(){
 
 function renderNoRound(){
 
-  document.getElementById(
-    'summaryRound'
-  ).textContent=
-  '暂无开放期';
-
-
-  document.getElementById(
-    'summaryStatus'
-  ).textContent=
-  '—';
-
-
-  document.getElementById(
-    'summaryAgentTotal'
-  ).textContent=
-  '0';
-
-
-  document.getElementById(
-    'summaryAgents'
-  ).textContent=
-  '0';
-
-
-  document.getElementById(
-    'summaryMissing'
-  ).textContent=
-  '0';
-
-
-  document.getElementById(
-    'summaryTotal'
-  ).textContent=
-  '0';
-
-
-  document.getElementById(
-    'summaryDeadline'
-  ).textContent=
-  '—';
+  document.getElementById('summaryRound').textContent='暂无开放期';
+  document.getElementById('summaryStatus').textContent='—';
+  document.getElementById('summaryAgentTotal').textContent='0';
+  document.getElementById('summaryAgents').textContent='0';
+  document.getElementById('summaryMissing').textContent='0';
+  document.getElementById('summaryTotal').textContent='0';
+  document.getElementById('summaryDeadline').textContent='—';
 
 }
 
-
-/* CURRENT RESULT */
 
 async function loadCurrent(){
 
@@ -1202,17 +812,14 @@ async function loadCurrent(){
 
     const r=
     await fetch(
-
       BASE+
       '/rest/v1/results?select=result_number,published_at&order=published_at.desc&limit=1',
-
       {
         headers:{
           apikey:KEY,
           Authorization:'Bearer '+KEY
         }
       }
-
     );
 
 
@@ -1228,7 +835,6 @@ async function loadCurrent(){
     document.getElementById(
       'currentResult'
     ).textContent=
-
     rows.length
     ? rows[0].result_number
     : '--';
@@ -1238,36 +844,27 @@ async function loadCurrent(){
 
     document.getElementById(
       'currentResult'
-    ).textContent=
-    '--';
+    ).textContent='--';
 
   }
 
 }
 
 
-/* PUBLISH */
-
 async function publishResult(){
 
   const input=
-  document.getElementById(
-    'resultInput'
-  );
+  document.getElementById('resultInput');
 
   const msg=
-  document.getElementById(
-    'publishMsg'
-  );
+  document.getElementById('publishMsg');
 
 
   let n=
   input.value.trim();
 
 
-  if(
-    !/^\d{1,2}$/.test(n)
-  ){
+  if(!/^\d{1,2}$/.test(n)){
 
     msg.textContent=
     '请输入 00 到 99';
@@ -1278,10 +875,7 @@ async function publishResult(){
 
 
   n=
-  n.padStart(
-    2,
-    '0'
-  );
+  n.padStart(2,'0');
 
 
   msg.textContent=
@@ -1292,22 +886,17 @@ async function publishResult(){
 
     const r=
     await api(
-
       '/rest/v1/results',
-
       {
         method:'POST',
-
         headers:{
           'Content-Type':'application/json',
           Prefer:'return=representation'
         },
-
         body:JSON.stringify({
           result_number:n
         })
       }
-
     );
 
 
@@ -1318,8 +907,7 @@ async function publishResult(){
 
     document.getElementById(
       'currentResult'
-    ).textContent=
-    n;
+    ).textContent=n;
 
 
     input.value='';
@@ -1339,25 +927,20 @@ async function publishResult(){
 }
 
 
-/* SETTINGS */
-
 async function loadSettings(){
 
   try{
 
     const r=
     await fetch(
-
       BASE+
       '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled,logo_data_url',
-
       {
         headers:{
           apikey:KEY,
           Authorization:'Bearer '+KEY
         }
       }
-
     );
 
 
@@ -1402,7 +985,6 @@ async function loadSettings(){
       pendingLogo=
       s.logo_data_url;
 
-
       showLogoPreview(
         s.logo_data_url
       );
@@ -1422,8 +1004,6 @@ async function loadSettings(){
 }
 
 
-/* LOGO */
-
 function handleLogoFile(input){
 
   const file=
@@ -1432,9 +1012,7 @@ function handleLogoFile(input){
 
 
   const msg=
-  document.getElementById(
-    'logoMsg'
-  );
+  document.getElementById('logoMsg');
 
 
   if(!file){
@@ -1442,11 +1020,7 @@ function handleLogoFile(input){
   }
 
 
-  if(
-    !file.type.startsWith(
-      'image/'
-    )
-  ){
+  if(!file.type.startsWith('image/')){
 
     msg.textContent=
     '请选择图片文件';
@@ -1464,15 +1038,13 @@ function handleLogoFile(input){
   new FileReader();
 
 
-  reader.onload=
-  function(e){
+  reader.onload=function(e){
 
     const img=
     new Image();
 
 
-    img.onload=
-    function(){
+    img.onload=function(){
 
       const maxSize=420;
 
@@ -1508,19 +1080,14 @@ function handleLogoFile(input){
 
 
       const canvas=
-      document.createElement(
-        'canvas'
-      );
-
+      document.createElement('canvas');
 
       canvas.width=w;
       canvas.height=h;
 
 
       const ctx=
-      canvas.getContext(
-        '2d'
-      );
+      canvas.getContext('2d');
 
 
       ctx.drawImage(
@@ -1556,9 +1123,7 @@ function handleLogoFile(input){
   };
 
 
-  reader.readAsDataURL(
-    file
-  );
+  reader.readAsDataURL(file);
 
 }
 
@@ -1566,14 +1131,10 @@ function handleLogoFile(input){
 function showLogoPreview(src){
 
   const preview=
-  document.getElementById(
-    'logoPreview'
-  );
+  document.getElementById('logoPreview');
 
   const top=
-  document.getElementById(
-    'topMark'
-  );
+  document.getElementById('topMark');
 
 
   preview.innerHTML='';
@@ -1581,27 +1142,19 @@ function showLogoPreview(src){
 
 
   const img1=
-  document.createElement(
-    'img'
-  );
+  document.createElement('img');
 
   img1.src=src;
 
-  preview.appendChild(
-    img1
-  );
+  preview.appendChild(img1);
 
 
   const img2=
-  document.createElement(
-    'img'
-  );
+  document.createElement('img');
 
   img2.src=src;
 
-  top.appendChild(
-    img2
-  );
+  top.appendChild(img2);
 
 }
 
@@ -1609,9 +1162,7 @@ function showLogoPreview(src){
 async function saveLogo(){
 
   const msg=
-  document.getElementById(
-    'logoMsg'
-  );
+  document.getElementById('logoMsg');
 
 
   if(!pendingLogo){
@@ -1632,23 +1183,18 @@ async function saveLogo(){
 
     const r=
     await api(
-
       '/rest/v1/site_settings?id=eq.1',
-
       {
         method:'PATCH',
-
         headers:{
           'Content-Type':'application/json',
           Prefer:'return=representation'
         },
-
         body:JSON.stringify({
           logo_data_url:pendingLogo,
           updated_at:new Date().toISOString()
         })
       }
-
     );
 
 
@@ -1674,31 +1220,24 @@ async function saveLogo(){
 async function removeLogo(){
 
   const msg=
-  document.getElementById(
-    'logoMsg'
-  );
+  document.getElementById('logoMsg');
 
 
   try{
 
     const r=
     await api(
-
       '/rest/v1/site_settings?id=eq.1',
-
       {
         method:'PATCH',
-
         headers:{
           'Content-Type':'application/json'
         },
-
         body:JSON.stringify({
           logo_data_url:'',
           updated_at:new Date().toISOString()
         })
       }
-
     );
 
 
@@ -1709,23 +1248,9 @@ async function removeLogo(){
 
     pendingLogo='';
 
-
-    document.getElementById(
-      'logoPreview'
-    ).innerHTML=
-    '金';
-
-
-    document.getElementById(
-      'topMark'
-    ).innerHTML=
-    '金';
-
-
-    document.getElementById(
-      'logoFile'
-    ).value='';
-
+    document.getElementById('logoPreview').innerHTML='金';
+    document.getElementById('topMark').innerHTML='金';
+    document.getElementById('logoFile').value='';
 
     msg.textContent=
     '✓ 已恢复文字「金」';
@@ -1741,27 +1266,20 @@ async function removeLogo(){
 }
 
 
-/* SAVE SETTINGS */
-
 async function saveSettings(){
 
   const msg=
-  document.getElementById(
-    'settingsMsg'
-  );
-
+  document.getElementById('settingsMsg');
 
   const telegram=
   document.getElementById(
     'telegramUrl'
   ).value.trim();
 
-
   const announcement=
   document.getElementById(
     'announcementText'
   ).value.trim();
-
 
   const enabled=
   document.getElementById(
@@ -1774,9 +1292,7 @@ async function saveSettings(){
     try{
 
       const u=
-      new URL(
-        telegram
-      );
+      new URL(telegram);
 
 
       if(
@@ -1809,17 +1325,13 @@ async function saveSettings(){
 
     const r=
     await api(
-
       '/rest/v1/site_settings?id=eq.1',
-
       {
         method:'PATCH',
-
         headers:{
           'Content-Type':'application/json',
           Prefer:'return=representation'
         },
-
         body:JSON.stringify({
           telegram_url:telegram,
           announcement_text:announcement,
@@ -1827,7 +1339,6 @@ async function saveSettings(){
           updated_at:new Date().toISOString()
         })
       }
-
     );
 
 
@@ -1850,14 +1361,11 @@ async function saveSettings(){
 }
 
 
-/* TIME */
-
 function updateClock(){
 
   document.getElementById(
     'mmtClock'
   ).textContent=
-
   new Intl.DateTimeFormat(
     'zh-CN',
     {
@@ -1867,9 +1375,7 @@ function updateClock(){
       second:'2-digit',
       hour12:false
     }
-  ).format(
-    new Date()
-  );
+  ).format(new Date());
 
 }
 
@@ -1912,8 +1418,6 @@ function formatNumber(value){
 }
 
 
-/* LOGOUT */
-
 function clearSession(){
 
   localStorage.removeItem(
@@ -1937,8 +1441,6 @@ function logout(){
 
 }
 
-
-/* START */
 
 updateClock();
 
