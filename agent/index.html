@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
+<title>金满堂 · 代理中心</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
+  color:#f7f0df;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
+}
+.wrap{max-width:650px;margin:auto;min-height:100vh;padding:20px 14px 50px}
+.brand{text-align:center;margin-bottom:18px}
+.mark{
+  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
+  margin:0 auto 8px;font-weight:900;font-size:22px;color:#f3d681;
+  border:1px solid #b98a2c;background:#191208
+}
+.cn{font-size:22px;font-weight:900;letter-spacing:3px;color:#f1d47b}
+.en{font-size:10px;color:#998b68;letter-spacing:2px;margin-top:3px}
+.card{
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.3);
+  border-radius:20px;padding:18px;margin-bottom:14px
+}
+.title{font-size:14px;font-weight:900;color:#dec372;margin-bottom:14px}
+.hidden{display:none}
+input{
+  width:100%;padding:12px;border-radius:11px;
+  border:1px solid rgba(214,168,63,.25);
+  background:#101011;color:#fff;outline:none;font-size:15px
+}
+button{
+  width:100%;border:0;border-radius:12px;padding:13px;margin-top:10px;
+  font-weight:900;font-size:14px;
+  background:linear-gradient(180deg,#efd47c,#b87e1e);
+  color:#171109;cursor:pointer
+}
+button:disabled{opacity:.45;cursor:not-allowed}
+.secondary{
+  background:#171718;color:#dac477;
+  border:1px solid rgba(214,168,63,.23)
+}
+.info{
+  display:grid;grid-template-columns:1fr 1fr;gap:9px
+}
+.box{
+  background:#101011;border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;padding:13px
+}
+.box small{display:block;color:#817b71;font-size:10px;margin-bottom:5px}
+.box strong{color:#e7cb74;font-size:16px}
+.statusOpen{color:#6fd09a!important}
+.statusClosed{color:#e58e8e!important}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px
+}
+.num{
+  background:#101011;border:1px solid rgba(255,255,255,.06);
+  border-radius:11px;padding:10px
+}
+.numLabel{
+  font-size:18px;font-weight:900;color:#dec16a;margin-bottom:7px
+}
+.num input{padding:9px;font-size:14px}
+.total{
+  text-align:center;background:#101011;border-radius:14px;padding:15px;
+  border:1px solid rgba(214,168,63,.15);margin-top:13px
+}
+.total small{display:block;color:#817b71;font-size:10px}
+.total strong{display:block;color:#efcf70;font-size:28px;margin-top:5px}
+.msg{text-align:center;min-height:20px;margin-top:11px;font-size:12px;color:#a49c8b}
+.note{font-size:11px;color:#777166;line-height:1.6;margin-top:10px}
+.foot{text-align:center;color:#6f6a61;font-size:10px;margin-top:22px}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="brand">
+    <div class="mark">金</div>
+    <div class="cn">金满堂</div>
+    <div class="en">AGENT CENTER</div>
+  </div>
+
+
+  <div class="card" id="loginBox">
+    <div class="title">代理登录</div>
+
+    <input id="email" type="email" placeholder="代理邮箱">
+
+    <div style="height:9px"></div>
+
+    <input id="password" type="password" placeholder="密码">
+
+    <button onclick="signIn()">登录代理中心</button>
+
+    <div class="msg" id="loginMsg"></div>
+  </div>
+
+
+  <div id="agentBox" class="hidden">
+
+    <div class="card">
+      <div class="title">我的代理资料</div>
+
+      <div class="info">
+
+        <div class="box">
+          <small>代理名称</small>
+          <strong id="agentName">—</strong>
+        </div>
+
+        <div class="box">
+          <small>代理比例</small>
+          <strong id="commissionRate">—</strong>
+        </div>
+
+        <div class="box">
+          <small>账号状态</small>
+          <strong id="agentStatus">—</strong>
+        </div>
+
+        <div class="box">
+          <small>Myanmar Time</small>
+          <strong id="mmtClock">—</strong>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">当前期数</div>
+
+      <div class="info">
+
+        <div class="box">
+          <small>期数</small>
+          <strong id="roundName">—</strong>
+        </div>
+
+        <div class="box">
+          <small>提交状态</small>
+          <strong id="roundStatus">读取中...</strong>
+        </div>
+
+        <div class="box">
+          <small>截止时间</small>
+          <strong id="deadlineText">—</strong>
+        </div>
+
+        <div class="box">
+          <small>距离截止</small>
+          <strong id="countdown">—</strong>
+        </div>
+
+      </div>
+
+      <div class="note">
+        是否接受提交最终由服务器时间决定，不以代理手机时间为准。
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">00–99 本期积分提交</div>
+
+      <div class="grid" id="numberGrid"></div>
+
+      <div class="total">
+        <small>本期提交总积分</small>
+        <strong id="totalPoints">0</strong>
+      </div>
+
+      <button id="submitBtn" onclick="submitRound()">
+        提交本期数据
+      </button>
+
+      <button class="secondary" onclick="loadExisting()">
+        重新读取已提交数据
+      </button>
+
+      <div class="msg" id="submitMsg"></div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">本期结果</div>
+
+      <div class="info">
+
+        <div class="box">
+          <small>开奖号码</small>
+          <strong id="resultNumber">等待开奖</strong>
+        </div>
+
+        <div class="box">
+          <small>结算状态</small>
+          <strong id="settlementStatus">等待结算</strong>
+        </div>
+
+        <div class="box">
+          <small>本期提交总积分</small>
+          <strong id="settledTotal">—</strong>
+        </div>
+
+        <div class="box">
+          <small>本期代理积分</small>
+          <strong id="commissionAmount">—</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+      <button class="secondary" onclick="logout()">退出登录</button>
+    </div>
+
+  </div>
+
+
+  <div class="foot">
+    © 2022 JIN MANTANG · AGENT SYSTEM
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE='https://veserwfjxglxieehfggy.supabase.co';
+const KEY='sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+let token=sessionStorage.getItem('jmt_agent_token') || '';
+let agent=null;
+let currentRound=null;
+
+
+function buildGrid(){
+
+  const grid=document.getElementById('numberGrid');
+
+  for(let i=0;i<=99;i++){
+
+    const n=String(i).padStart(2,'0');
+
+    const div=document.createElement('div');
+    div.className='num';
+
+    div.innerHTML=
+      '<div class="numLabel">'+n+'</div>'+
+      '<input id="n'+n+'" type="number" min="0" step="1" placeholder="0" oninput="updateTotal()">';
+
+    grid.appendChild(div);
+
+  }
+
+}
+
+
+async function signIn(){
+
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  const msg=document.getElementById('loginMsg');
+
+  if(!email || !password){
+    msg.textContent='请输入代理邮箱和密码';
+    return;
+  }
+
+  msg.textContent='正在登录...';
+
+  try{
+
+    const r=await fetch(
+      BASE+'/auth/v1/token?grant_type=password',
+      {
+        method:'POST',
+        headers:{
+          apikey:KEY,
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({email,password})
+      }
+    );
+
+    const d=await r.json();
+
+    if(!r.ok || !d.access_token){
+      throw new Error();
+    }
+
+    token=d.access_token;
+
+    sessionStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+    await startAgent();
+
+  }catch(e){
+
+    msg.textContent='登录失败，请检查账号或密码';
+
+  }
+
+}
+
+
+async function startAgent(){
+
+  try{
+
+    const r=await fetch(
+      BASE+'/rest/v1/agents?select=id,display_name,commission_rate,status',
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer '+token
+        }
+      }
+    );
+
+    if(!r.ok) throw new Error();
+
+    const rows=await r.json();
+
+    if(!rows.length){
+      throw new Error();
+    }
+
+    agent=rows[0];
+
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('agentBox').classList.remove('hidden');
+
+    document.getElementById('agentName').textContent=
+      agent.display_name;
+
+    document.getElementById('commissionRate').textContent=
+      Number(agent.commission_rate)+'%';
+
+    document.getElementById('agentStatus').textContent=
+      agent.status==='active' ? '正常' :
+      agent.status==='suspended' ? '已暂停' :
+      '已限制';
+
+    if(agent.status!=='active'){
+      disableInputs(true);
+    }
+
+    await loadRound();
+
+  }catch(e){
+
+    sessionStorage.removeItem('jmt_agent_token');
+    alert('该账号没有有效代理权限');
+    location.reload();
+
+  }
+
+}
+
+
+async function loadRound(){
+
+  const r=await fetch(
+    BASE+
+    '/rest/v1/rounds?select=id,round_date,round_code,deadline_at,result_number,status&order=deadline_at.asc&limit=10',
+    {
+      headers:{
+        apikey:KEY,
+        Authorization:'Bearer '+token
+      }
+    }
+  );
+
+  if(!r.ok){
+    return;
+  }
+
+  const rounds=await r.json();
+
+  const now=Date.now();
+
+  currentRound=
+    rounds.find(x =>
+      x.status==='open' &&
+      new Date(x.deadline_at).getTime()>now
+    )
+    ||
+    rounds.find(x => x.status==='open')
+    ||
+    rounds[0]
+    ||
+    null;
+
+
+  if(!currentRound){
+
+    document.getElementById('roundStatus').textContent='暂无开放期';
+    document.getElementById('submitBtn').disabled=true;
+    return;
+
+  }
+
+
+  document.getElementById('roundName').textContent=
+    currentRound.round_code==='1030'
+    ? currentRound.round_date+' · 上午 10:30'
+    : currentRound.round_date+' · 下午 15:30';
+
+
+  document.getElementById('deadlineText').textContent=
+    formatMMT(currentRound.deadline_at);
+
+
+  if(currentRound.result_number){
+
+    document.getElementById('resultNumber').textContent=
+      currentRound.result_number;
+
+  }
+
+
+  await loadExisting();
+
+  await loadSettlement();
+
+  updateDeadlineUI();
+
+}
+
+
+async function loadExisting(){
+
+  if(!currentRound || !agent) return;
+
+  const r=await fetch(
+    BASE+
+    '/rest/v1/agent_submissions?round_id=eq.'+
+    encodeURIComponent(currentRound.id)+
+    '&agent_id=eq.'+
+    encodeURIComponent(agent.id)+
+    '&select=number_code,points',
+    {
+      headers:{
+        apikey:KEY,
+        Authorization:'Bearer '+token
+      }
+    }
+  );
+
+  if(!r.ok) return;
+
+  const rows=await r.json();
+
+  for(let i=0;i<=99;i++){
+
+    const n=String(i).padStart(2,'0');
+
+    document.getElementById('n'+n).value='';
+
+  }
+
+
+  rows.forEach(x=>{
+
+    const el=document.getElementById('n'+x.number_code);
+
+    if(el){
+      el.value=Number(x.points) || '';
+    }
+
+  });
+
+  updateTotal();
+
+}
+
+
+async function loadSettlement(){
+
+  if(!currentRound || !agent) return;
+
+  const r=await fetch(
+    BASE+
+    '/rest/v1/agent_round_totals?round_id=eq.'+
+    encodeURIComponent(currentRound.id)+
+    '&agent_id=eq.'+
+    encodeURIComponent(agent.id)+
+    '&select=submitted_total,commission_amount,settlement_status',
+    {
+      headers:{
+        apikey:KEY,
+        Authorization:'Bearer '+token
+      }
+    }
+  );
+
+  if(!r.ok) return;
+
+  const rows=await r.json();
+
+  if(!rows.length) return;
+
+  const x=rows[0];
+
+  document.getElementById('settledTotal').textContent=
+    formatNumber(x.submitted_total);
+
+  document.getElementById('commissionAmount').textContent=
+    formatNumber(x.commission_amount);
+
+  document.getElementById('settlementStatus').textContent=
+    x.settlement_status==='settled'
+    ? '已结算'
+    : '等待结算';
+
+}
+
+
+function getTotal(){
+
+  let total=0;
+
+  for(let i=0;i<=99;i++){
+
+    const n=String(i).padStart(2,'0');
+
+    const v=Number(
+      document.getElementById('n'+n).value || 0
+    );
+
+    if(Number.isFinite(v) && v>0){
+      total+=v;
+    }
+
+  }
+
+  return total;
+
+}
+
+
+function updateTotal(){
+
+  document.getElementById('totalPoints').textContent=
+    formatNumber(getTotal());
+
+}
+
+
+async function submitRound(){
+
+  const msg=document.getElementById('submitMsg');
+
+  if(!agent || !currentRound){
+    msg.textContent='当前没有可以提交的期数';
+    return;
+  }
+
+
+  if(agent.status!=='active'){
+    msg.textContent='你的代理账号目前无法提交';
+    return;
+  }
+
+
+  msg.textContent='正在提交，请稍候...';
+
+  document.getElementById('submitBtn').disabled=true;
+
+
+  try{
+
+    const rows=[];
+
+    for(let i=0;i<=99;i++){
+
+      const n=String(i).padStart(2,'0');
+
+      const points=Number(
+        document.getElementById('n'+n).value || 0
+      );
+
+      if(Number.isFinite(points) && points>=0){
+
+        rows.push({
+          round_id:currentRound.id,
+          agent_id:agent.id,
+          number_code:n,
+          points:points
+        });
+
+      }
+
+    }
+
+
+    const r=await fetch(
+      BASE+
+      '/rest/v1/agent_submissions?on_conflict=round_id,agent_id,number_code',
+      {
+        method:'POST',
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer '+token,
+          'Content-Type':'application/json',
+          Prefer:'resolution=merge-duplicates,return=minimal'
+        },
+        body:JSON.stringify(rows)
+      }
+    );
+
+
+    if(r.status===401 || r.status===403){
+
+      msg.textContent=
+        '本期已经截止，服务器已拒绝提交';
+
+      disableInputs(true);
+
+      return;
+    }
+
+
+    if(!r.ok){
+
+      const text=await r.text();
+
+      if(
+        text.includes('row-level security')
+        ||
+        text.includes('policy')
+      ){
+
+        msg.textContent=
+          '本期已经截止或账号当前无法提交';
+
+      }else{
+
+        msg.textContent=
+          '提交失败，请稍后再试';
+
+      }
+
+      return;
+
+    }
+
+
+    msg.textContent=
+      '✓ 提交成功 · 总积分 '+formatNumber(getTotal());
+
+
+    await loadExisting();
+
+
+  }catch(e){
+
+    msg.textContent=
+      '网络异常，请重新提交';
+
+  }finally{
+
+    updateDeadlineUI();
+
+  }
+
+}
+
+
+function updateDeadlineUI(){
+
+  if(!currentRound) return;
+
+
+  const left=
+    new Date(currentRound.deadline_at).getTime()
+    -
+    Date.now();
+
+
+  const statusEl=
+    document.getElementById('roundStatus');
+
+  const countdown=
+    document.getElementById('countdown');
+
+
+  if(
+    left<=0
+    ||
+    currentRound.status!=='open'
+  ){
+
+    statusEl.textContent='本期已截止';
+    statusEl.className='statusClosed';
+
+    countdown.textContent='已关闭';
+
+    disableInputs(true);
+
+    return;
+
+  }
+
+
+  statusEl.textContent='可以提交';
+  statusEl.className='statusOpen';
+
+
+  const mins=
+    Math.floor(left/60000);
+
+  const secs=
+    Math.floor((left%60000)/1000);
+
+
+  countdown.textContent=
+    mins+'分 '+secs+'秒';
+
+
+  if(agent && agent.status==='active'){
+    disableInputs(false);
+  }
+
+}
+
+
+function disableInputs(disabled){
+
+  for(let i=0;i<=99;i++){
+
+    const n=
+    String(i).padStart(2,'0');
+
+    document.getElementById('n'+n).disabled=
+      disabled;
+
+  }
+
+  document.getElementById('submitBtn').disabled=
+    disabled;
+
+}
+
+
+function formatMMT(iso){
+
+  return new Intl.DateTimeFormat(
+    'zh-CN',
+    {
+      timeZone:'Asia/Yangon',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+      hour12:false
+    }
+  ).format(new Date(iso))+' MMT';
+
+}
+
+
+function formatNumber(v){
+
+  return Number(v || 0).toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function updateClock(){
+
+  document.getElementById('mmtClock').textContent=
+    new Intl.DateTimeFormat(
+      'zh-CN',
+      {
+        timeZone:'Asia/Yangon',
+        hour:'2-digit',
+        minute:'2-digit',
+        second:'2-digit',
+        hour12:false
+      }
+    ).format(new Date());
+
+}
+
+
+function logout(){
+
+  sessionStorage.removeItem('jmt_agent_token');
+
+  location.reload();
+
+}
+
+
+buildGrid();
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+setInterval(updateDeadlineUI,1000);
+
+
+if(token){
+  startAgent();
+}
+
+</script>
+</body>
+</html>
