@@ -1,1603 +1,631 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1">
-
-<meta
-  name="theme-color"
-  content="#09090a">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
 <title>金满堂 · 期数管理</title>
 
 <style>
-
-*{
-  box-sizing:border-box
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
-
-  background:
-  radial-gradient(
-    circle at top,
-    #251907 0,
-    #0d0c0a 40%,
-    #070708 100%
-  );
-
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f5edd9;
-
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Arial,
-  sans-serif
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
-
-
-.wrap{
-  max-width:700px;
-  margin:auto;
-  min-height:100vh;
-  padding:24px 16px 60px
-}
-
-
-.header{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:26px
-}
-
-
-.headTitle{
-  color:#efd477;
-  font-size:28px;
-  font-weight:900;
-  line-height:1.3
-}
-
-
-.headSub{
-  color:#8a8170;
-  font-size:11px;
-  letter-spacing:4px;
-  margin-top:7px;
-  line-height:1.7
-}
-
-
+.wrap{max-width:700px;margin:auto;min-height:100vh;padding:24px 16px 60px}
+.header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:26px}
+.headTitle{color:#efd477;font-size:28px;font-weight:900;line-height:1.3}
+.headSub{color:#8a8170;font-size:11px;letter-spacing:4px;margin-top:7px}
 .back{
-  text-decoration:none;
-  color:#efd477;
-  background:#181819;
+  text-decoration:none;color:#efd477;background:#181819;
   border:1px solid rgba(214,168,63,.30);
-  border-radius:18px;
-  padding:14px 17px;
-  font-weight:900;
-  font-size:13px;
-  flex:none
+  border-radius:18px;padding:14px 17px;font-weight:900;font-size:13px;flex:none
 }
-
-
 .card{
-  background:
-  linear-gradient(
-    180deg,
-    #151515,
-    #0d0d0e
-  );
-
-  border:
-  1px solid
-  rgba(214,168,63,.30);
-
-  border-radius:25px;
-
-  padding:20px;
-
-  margin-bottom:18px
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.30);
+  border-radius:25px;padding:20px;margin-bottom:18px
 }
-
-
-.title{
-  color:#dfc575;
-  font-size:19px;
-  font-weight:900;
-  margin-bottom:17px
-}
-
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-
+.title{color:#dfc575;font-size:19px;font-weight:900;margin-bottom:17px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .box{
-  background:#101011;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:17px;
-  padding:16px
+  background:#101011;border:1px solid rgba(255,255,255,.06);
+  border-radius:17px;padding:16px
 }
-
-
-.box small{
-  display:block;
-  color:#817a6d;
-  font-size:11px;
-  margin-bottom:8px
-}
-
-
-.box strong{
-  display:block;
-  color:#ebcd72;
-  font-size:18px;
-  line-height:1.45
-}
-
-
-.green{
-  color:#71d49d!important
-}
-
-
-.red{
-  color:#e88e8e!important
-}
-
-
-.blue{
-  color:#90bbe9!important
-}
-
-
+.box small{display:block;color:#817a6d;font-size:11px;margin-bottom:8px}
+.box strong{display:block;color:#ebcd72;font-size:18px;line-height:1.45}
+.green{color:#71d49d!important}
+.red{color:#e88e8e!important}
 button{
-  width:100%;
-  border-radius:15px;
-  padding:16px;
-  font-size:16px;
-  font-weight:900;
-  cursor:pointer
+  width:100%;border-radius:15px;padding:16px;
+  font-size:16px;font-weight:900;cursor:pointer
 }
-
-
 .gold{
-  border:0;
-
-  background:
-  linear-gradient(
-    180deg,
-    #f0d47d,
-    #bd8121
-  );
-
+  border:0;background:linear-gradient(180deg,#f0d47d,#bd8121);
   color:#161008
 }
-
-
 .dark{
   border:1px solid rgba(214,168,63,.28);
-  background:#181819;
-  color:#efd477
+  background:#181819;color:#efd477
 }
-
-
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .msg{
-  min-height:20px;
-  text-align:center;
-  color:#9b9384;
-  font-size:12px;
-  margin-top:13px;
-  line-height:1.5
+  min-height:20px;text-align:center;color:#9b9384;
+  font-size:12px;margin-top:13px;line-height:1.6
 }
-
-
+.success{color:#71d49d!important}
+.error{color:#e88e8e!important}
 .warning{
-  margin-top:15px;
-  background:#111112;
-  border-radius:14px;
-  padding:14px;
-  color:#928a7b;
-  font-size:11px;
-  line-height:1.7
+  margin-top:15px;background:#111112;border-radius:14px;
+  padding:14px;color:#928a7b;font-size:11px;line-height:1.7
 }
-
-
-.formGroup{
-  margin-bottom:13px
+.formGroup{margin-bottom:13px}
+label{display:block;color:#988f7e;font-size:11px;margin:0 0 7px 2px}
+input,select{
+  width:100%;border:1px solid rgba(214,168,63,.24);
+  background:#101011;color:#fff;border-radius:13px;
+  padding:14px;font-size:15px;outline:none
 }
-
-
-label{
-  display:block;
-  color:#988f7e;
-  font-size:11px;
-  margin:0 0 7px 2px
-}
-
-
-input,
-select{
-  width:100%;
-  border:1px solid rgba(214,168,63,.24);
-  background:#101011;
-  color:#fff;
-  border-radius:13px;
-  padding:14px;
-  font-size:15px;
-  outline:none
-}
-
-
-.formGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-
+.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .history{
-  display:block;
-  text-decoration:none;
-  text-align:center;
-  padding:15px;
-  border-radius:14px;
+  display:block;text-decoration:none;text-align:center;
+  padding:15px;border-radius:14px;
   border:1px solid rgba(214,168,63,.27);
-  background:#171718;
-  color:#e6cc77;
-  font-weight:900
+  background:#171718;color:#e6cc77;font-weight:900
 }
-
-
-.note{
-  text-align:center;
-  color:#70695d;
-  font-size:10px;
-  margin-top:15px
-}
-
-
-.foot{
-  text-align:center;
-  color:#6f6a61;
-  font-size:10px;
-  margin-top:27px
-}
-
-
+.note{text-align:center;color:#70695d;font-size:10px;margin-top:15px}
+.foot{text-align:center;color:#6f6a61;font-size:10px;margin-top:27px}
 @media(max-width:500px){
-
-  .grid,
-  .actions,
-  .formGrid{
-    grid-template-columns:1fr 1fr
-  }
-
-  .headTitle{
-    font-size:25px
-  }
-
+  .headTitle{font-size:25px}
 }
-
 </style>
-
 </head>
 
-
 <body>
-
 <div class="wrap">
 
-
   <div class="header">
-
     <div>
-
-      <div class="headTitle">
-        金满堂 · 期数管理
-      </div>
-
-      <div class="headSub">
-        ADMIN / ROUND CONTROL
-      </div>
-
+      <div class="headTitle">金满堂 · 期数管理</div>
+      <div class="headSub">ADMIN / ROUND CONTROL</div>
     </div>
 
-
-    <a
-      class="back"
-      href="/admin/index.html">
-
-      返回总后台
-
-    </a>
-
+    <a class="back" href="/admin/index.html">返回总后台</a>
   </div>
 
-
-
-  <!-- 当前期 -->
-
   <div class="card">
-
-    <div class="title">
-      当前期数
-    </div>
-
+    <div class="title">当前期数</div>
 
     <div class="grid">
-
-
       <div class="box">
-
-        <small>
-          当前期
-        </small>
-
-        <strong id="roundName">
-          正在读取...
-        </strong>
-
+        <small>当前期</small>
+        <strong id="roundName">正在读取...</strong>
       </div>
 
-
       <div class="box">
-
-        <small>
-          状态
-        </small>
-
-        <strong id="roundStatus">
-          正在读取...
-        </strong>
-
+        <small>状态</small>
+        <strong id="roundStatus">正在读取...</strong>
       </div>
 
-
       <div class="box">
-
-        <small>
-          截止时间
-        </small>
-
-        <strong id="deadline">
-          —
-        </strong>
-
+        <small>截止时间</small>
+        <strong id="deadline">—</strong>
       </div>
 
-
       <div class="box">
-
-        <small>
-          Myanmar Time
-        </small>
-
-        <strong id="mmtClock">
-          —
-        </strong>
-
+        <small>Myanmar Time</small>
+        <strong id="mmtClock">—</strong>
       </div>
-
-
     </div>
 
-
-    <div class="note">
-      当前期数据每 20 秒自动刷新
-    </div>
-
+    <div class="note">当前期数据每 20 秒自动刷新</div>
   </div>
 
-
-
-  <!-- 本期操作 -->
-
   <div class="card">
-
-    <div class="title">
-      本期操作
-    </div>
-
+    <div class="title">本期操作</div>
 
     <div class="actions">
-
-
-      <button
-        class="gold"
-        onclick="closeRound()">
-
-        结束本期并归档
-
-      </button>
-
-
-      <button
-        class="dark"
-        onclick="refreshRound()">
-
-        刷新当前期
-
-      </button>
-
-
+      <button class="gold" onclick="closeRound()">结束本期并归档</button>
+      <button class="dark" onclick="refreshRound()">刷新当前期</button>
     </div>
-
 
     <div class="warning">
-
-      「结束本期并归档」只会把当前期状态改为已关闭。
-      <br>
-      已经提交的代理数据不会删除，
-      历史期数页面仍然可以继续查看。
-
+      结束本期只会把当前期状态改成「已关闭」。
+      已经提交的代理数据不会删除，之后仍可在历史期数查看。
     </div>
 
-
-    <div
-      class="msg"
-      id="closeMsg">
-    </div>
-
+    <div class="msg" id="closeMsg"></div>
   </div>
 
-
-
-  <!-- 新一期 -->
-
   <div class="card">
-
-    <div class="title">
-      开启下一期
-    </div>
-
+    <div class="title">开启下一期</div>
 
     <div class="formGroup">
-
-      <label>
-        日期
-      </label>
-
-      <input
-        id="newDate"
-        type="date">
-
+      <label>日期</label>
+      <input id="newDate" type="date">
     </div>
-
 
     <div class="formGrid">
-
-
       <div class="formGroup">
-
-        <label>
-          期数
-        </label>
-
-        <select
-          id="newCode"
-          onchange="changePeriod()">
-
-          <option value="1030">
-            上午 10:30
-          </option>
-
-          <option value="1530">
-            下午 15:30
-          </option>
-
+        <label>期数</label>
+        <select id="newCode" onchange="changePeriod()">
+          <option value="1030">上午 10:30</option>
+          <option value="1530">下午 15:30</option>
         </select>
-
       </div>
-
 
       <div class="formGroup">
-
-        <label>
-          截止时间
-        </label>
-
-        <input
-          id="newDeadline"
-          type="time"
-          value="15:00">
-
+        <label>截止时间</label>
+        <input id="newDeadline" type="time" value="15:00">
       </div>
-
-
     </div>
 
-
-    <button
-      class="gold"
-      onclick="createRound()">
-
-      开启这一期
-
-    </button>
-
+    <button class="gold" onclick="createRound()">开启这一期</button>
 
     <div class="warning">
-
-      系统不会自动覆盖旧一期。
-      <br>
-      如果目前仍然有「开放中」的期数，
-      请先结束本期，再创建下一期。
-
+      系统不会覆盖旧一期。如果数据库仍存在「开放中」的期数，
+      系统会阻止创建下一期。
     </div>
 
-
-    <div
-      class="msg"
-      id="createMsg">
-    </div>
-
+    <div class="msg" id="createMsg"></div>
   </div>
-
-
-
-  <!-- 历史 -->
 
   <div class="card">
-
-    <div class="title">
-      历史数据
-    </div>
-
-
-    <a
-      class="history"
-      href="/history/index.html">
-
-      📚 查看全部历史期数
-
-    </a>
-
+    <div class="title">历史数据</div>
+    <a class="history" href="/history/index.html">📚 查看全部历史期数</a>
   </div>
 
-
-  <div class="foot">
-    © 2022 JIN MANTANG · ROUND MANAGEMENT
-  </div>
-
+  <div class="foot">© 2022 JIN MANTANG · ROUND MANAGEMENT</div>
 
 </div>
 
-
-
 <script>
+const BASE='https://veserwfjxglxieehfggy.supabase.co';
+const KEY='sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
+let token=
+  localStorage.getItem('jmt_access_token') ||
+  sessionStorage.getItem('jmt_access_token') ||
+  '';
 
-const BASE =
-'https://veserwfjxglxieehfggy.supabase.co';
+let currentRound=null;
 
-
-const KEY =
-'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
-
-
-let token =
-
-localStorage.getItem(
-  'jmt_access_token'
-)
-
-||
-
-sessionStorage.getItem(
-  'jmt_access_token'
-)
-
-||
-
-'';
-
-
-let currentRound = null;
-
-
-
-/* API */
-
-async function api(
-  path,
-  options={}
-){
-
-  return fetch(
-
-    BASE + path,
-
-    {
-
-      ...options,
-
-      headers:{
-
-        apikey:KEY,
-
-        Authorization:
-        'Bearer ' + token,
-
-        ...(options.headers || {})
-
-      }
-
+async function api(path,options={}){
+  return fetch(BASE+path,{
+    ...options,
+    headers:{
+      apikey:KEY,
+      Authorization:'Bearer '+token,
+      ...(options.headers||{})
     }
-
-  );
-
+  });
 }
-
-
-
-/* ADMIN CHECK */
 
 async function verifyAdmin(){
-
   if(!token){
-
-    location.href =
-    '/admin/index.html';
-
+    location.href='/admin/index.html';
     return false;
-
   }
 
-
   try{
+    const userRes=await api('/auth/v1/user');
+    if(!userRes.ok) throw new Error();
 
-    const r =
-    await api(
-      '/auth/v1/user'
+    const user=await userRes.json();
+
+    const adminRes=await api(
+      '/rest/v1/admin_users?auth_user_id=eq.'+
+      encodeURIComponent(user.id)+
+      '&select=auth_user_id&limit=1'
     );
 
+    if(!adminRes.ok) throw new Error();
 
-    if(!r.ok){
+    const admins=await adminRes.json();
 
-      throw new Error();
-
-    }
-
+    if(!admins.length) throw new Error();
 
     return true;
-
-
   }catch(e){
-
-    localStorage.removeItem(
-      'jmt_access_token'
-    );
-
-    sessionStorage.removeItem(
-      'jmt_access_token'
-    );
-
-
-    location.href =
-    '/admin/index.html';
-
-
+    localStorage.removeItem('jmt_access_token');
+    sessionStorage.removeItem('jmt_access_token');
+    location.href='/admin/index.html';
     return false;
-
   }
-
 }
 
+async function getOpenRound(){
+  const r=await api(
+    '/rest/v1/rounds'+
+    '?status=eq.open'+
+    '&select=id,round_date,round_code,deadline_at,status,created_at,settled_at'+
+    '&order=created_at.desc'+
+    '&limit=1'
+  );
 
+  if(!r.ok){
+    throw new Error(await r.text());
+  }
 
-/* LOAD CURRENT ROUND */
+  const rows=await r.json();
+
+  return rows.length ? rows[0] : null;
+}
 
 async function loadRound(){
+  try{
+    currentRound=await getOpenRound();
+    renderRound();
+  }catch(e){
+    document.getElementById('roundName').textContent='读取失败';
+    document.getElementById('roundStatus').textContent='读取失败';
+    document.getElementById('roundStatus').className='red';
+  }
+}
+
+function renderRound(){
+  const name=document.getElementById('roundName');
+  const status=document.getElementById('roundStatus');
+  const deadline=document.getElementById('deadline');
+
+  if(!currentRound){
+    name.textContent='目前没有开放期';
+    status.textContent='可以开启下一期';
+    status.className='green';
+    deadline.textContent='—';
+
+    fillNextDefaults();
+    return;
+  }
+
+  name.textContent=
+    currentRound.round_date+
+    ' · '+
+    periodName(currentRound.round_code);
+
+  status.textContent='开放中';
+  status.className='green';
+
+  deadline.textContent=formatMMT(currentRound.deadline_at);
+
+  fillNextDefaults();
+}
+
+async function closeRound(){
+  const msg=document.getElementById('closeMsg');
+
+  msg.className='msg';
 
   try{
+    currentRound=await getOpenRound();
 
-    const r =
-    await api(
-
-      '/rest/v1/rounds' +
-
-      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at,settled_at' +
-
-      '&order=created_at.desc' +
-
-      '&limit=30'
-
-    );
-
-
-    if(!r.ok){
-
-      throw new Error(
-        '读取当前期失败'
-      );
-
+    if(!currentRound){
+      msg.textContent='目前已经没有开放中的期数';
+      msg.className='msg success';
+      await loadRound();
+      return;
     }
 
+    const ok=confirm(
+      '确定结束本期？\n\n'+
+      currentRound.round_date+
+      ' · '+
+      periodName(currentRound.round_code)+
+      '\n\n代理提交记录不会删除。'
+    );
 
-    const rows =
-    await r.json();
+    if(!ok) return;
 
+    msg.textContent='正在结束本期...';
 
-    currentRound =
+    const r=await api(
+      '/rest/v1/rounds?id=eq.'+
+      encodeURIComponent(currentRound.id),
+      {
+        method:'PATCH',
+        headers:{
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
+        },
+        body:JSON.stringify({
+          status:'closed',
+          settled_at:new Date().toISOString()
+        })
+      }
+    );
 
-    rows.find(
-      x =>
-      x.status === 'open'
-    )
+    if(!r.ok){
+      throw new Error(await r.text());
+    }
 
-    ||
+    const changed=await r.json();
 
-    null;
+    if(
+      !changed.length ||
+      changed[0].status!=='closed'
+    ){
+      throw new Error('数据库没有确认本期已关闭');
+    }
 
+    const stillOpen=await getOpenRound();
+
+    if(stillOpen && stillOpen.id===currentRound.id){
+      throw new Error('数据库仍然显示本期为开放中');
+    }
+
+    currentRound=stillOpen;
+
+    msg.textContent='✓ 本期已经真正结束，并保留到历史记录';
+    msg.className='msg success';
 
     renderRound();
 
-
   }catch(e){
-
-    document.getElementById(
-      'roundName'
-    ).textContent =
-    '读取失败';
-
-
-    document.getElementById(
-      'roundStatus'
-    ).textContent =
-    '读取失败';
-
-  }
-
-}
-
-
-
-/* SHOW ROUND */
-
-function renderRound(){
-
-  const name =
-  document.getElementById(
-    'roundName'
-  );
-
-  const status =
-  document.getElementById(
-    'roundStatus'
-  );
-
-  const deadline =
-  document.getElementById(
-    'deadline'
-  );
-
-
-  if(!currentRound){
-
-    name.textContent =
-    '目前没有开放期';
-
-
-    status.textContent =
-    '等待开启下一期';
-
-
-    status.className =
-    'red';
-
-
-    deadline.textContent =
-    '—';
-
-
-    fillNextDefaults();
-
-    return;
-
-  }
-
-
-  name.textContent =
-
-  currentRound.round_date
-
-  +
-
-  ' · '
-
-  +
-
-  periodName(
-    currentRound.round_code
-  );
-
-
-  if(
-    currentRound.status === 'open'
-  ){
-
-    status.textContent =
-    '开放中';
-
-    status.className =
-    'green';
-
-  }
-
-  else if(
-    currentRound.status === 'settled'
-  ){
-
-    status.textContent =
-    '已结算';
-
-    status.className =
-    'blue';
-
-  }
-
-  else{
-
-    status.textContent =
-    '已关闭';
-
-    status.className =
-    '';
-
-  }
-
-
-  deadline.textContent =
-  formatMMT(
-    currentRound.deadline_at
-  );
-
-
-  fillNextDefaults();
-
-}
-
-
-
-/* CLOSE ROUND */
-
-async function closeRound(){
-
-  const msg =
-  document.getElementById(
-    'closeMsg'
-  );
-
-
-  if(!currentRound){
-
-    msg.textContent =
-    '目前没有开放中的期数';
-
-    return;
-
-  }
-
-
-  const ok =
-  confirm(
-
-    '确定结束本期？\n\n' +
-
-    currentRound.round_date +
-
-    ' · ' +
-
-    periodName(
-      currentRound.round_code
-    )
-
-    +
-
-    '\n\n代理提交记录不会删除。'
-
-  );
-
-
-  if(!ok){
-    return;
-  }
-
-
-  msg.textContent =
-  '正在结束本期...';
-
-
-  try{
-
-    const r =
-    await api(
-
-      '/rest/v1/rounds?id=eq.' +
-
-      encodeURIComponent(
-        currentRound.id
-      ),
-
-      {
-
-        method:'PATCH',
-
-        headers:{
-
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-
-        },
-
-        body:
-        JSON.stringify({
-
-          status:'closed',
-
-          settled_at:
-          new Date().toISOString()
-
-        })
-
-      }
-
-    );
-
-
-    if(!r.ok){
-
-      const text =
-      await r.text();
-
-      throw new Error(
-        text || '更新失败'
-      );
-
-    }
-
-
-    msg.textContent =
-    '✓ 本期已经结束，并保留到历史记录';
-
-
-    currentRound =
-    null;
-
+    msg.textContent='结束失败：'+e.message;
+    msg.className='msg error';
 
     await loadRound();
-
-
-  }catch(e){
-
-    msg.textContent =
-    '结束失败：' +
-    e.message;
-
   }
-
 }
-
-
-
-/* CREATE ROUND */
 
 async function createRound(){
+  const msg=document.getElementById('createMsg');
 
-  const msg =
-  document.getElementById(
-    'createMsg'
-  );
-
-
-  if(currentRound){
-
-    msg.textContent =
-    '请先结束目前开放中的期数';
-
-    return;
-
-  }
-
-
-  const date =
-  document.getElementById(
-    'newDate'
-  ).value;
-
-
-  const code =
-  document.getElementById(
-    'newCode'
-  ).value;
-
-
-  const deadlineTime =
-  document.getElementById(
-    'newDeadline'
-  ).value;
-
-
-  if(
-    !date
-    ||
-    !deadlineTime
-  ){
-
-    msg.textContent =
-    '请选择日期和截止时间';
-
-    return;
-
-  }
-
-
-  const deadlineISO =
-  mmtToISO(
-    date,
-    deadlineTime
-  );
-
-
-  if(!deadlineISO){
-
-    msg.textContent =
-    '截止时间格式错误';
-
-    return;
-
-  }
-
-
-  const ok =
-  confirm(
-
-    '确定开启新一期？\n\n' +
-
-    date +
-
-    ' · ' +
-
-    periodName(code)
-
-    +
-
-    '\n截止：' +
-
-    deadlineTime +
-
-    ' MMT'
-
-  );
-
-
-  if(!ok){
-    return;
-  }
-
-
-  msg.textContent =
-  '正在创建新一期...';
-
+  msg.className='msg';
 
   try{
+    const realOpenRound=await getOpenRound();
 
-    const r =
-    await api(
+    if(realOpenRound){
+      currentRound=realOpenRound;
+      renderRound();
 
-      '/rest/v1/rounds',
+      msg.textContent=
+        '目前仍有开放期：'+
+        realOpenRound.round_date+
+        ' · '+
+        periodName(realOpenRound.round_code);
 
-      {
+      msg.className='msg error';
+      return;
+    }
 
-        method:'POST',
+    const date=document.getElementById('newDate').value;
+    const code=document.getElementById('newCode').value;
+    const deadlineTime=document.getElementById('newDeadline').value;
 
-        headers:{
+    if(!date || !deadlineTime){
+      msg.textContent='请选择日期和截止时间';
+      msg.className='msg error';
+      return;
+    }
 
-          'Content-Type':
-          'application/json',
+    const deadlineISO=mmtToISO(date,deadlineTime);
 
-          Prefer:
-          'return=representation'
+    if(!deadlineISO){
+      msg.textContent='截止时间格式错误';
+      msg.className='msg error';
+      return;
+    }
 
-        },
-
-        body:
-        JSON.stringify({
-
-          round_date:
-          date,
-
-          round_code:
-          code,
-
-          deadline_at:
-          deadlineISO,
-
-          status:
-          'open'
-
-        })
-
-      }
-
+    const ok=confirm(
+      '确定开启新一期？\n\n'+
+      date+
+      ' · '+
+      periodName(code)+
+      '\n截止：'+
+      deadlineTime+
+      ' MMT'
     );
 
+    if(!ok) return;
+
+    msg.textContent='正在创建新一期...';
+
+    const r=await api(
+      '/rest/v1/rounds',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
+        },
+        body:JSON.stringify({
+          round_date:date,
+          round_code:code,
+          deadline_at:deadlineISO,
+          status:'open'
+        })
+      }
+    );
 
     if(!r.ok){
-
-      const text =
-      await r.text();
-
-      throw new Error(
-        text || '创建失败'
-      );
-
+      throw new Error(await r.text());
     }
 
+    const created=await r.json();
 
-    msg.textContent =
-    '✓ 新一期创建成功';
+    if(!created.length){
+      throw new Error('数据库没有返回新一期');
+    }
 
+    currentRound=await getOpenRound();
+
+    msg.textContent=
+      '✓ 新一期创建成功：'+
+      date+
+      ' · '+
+      periodName(code);
+
+    msg.className='msg success';
+
+    renderRound();
+
+  }catch(e){
+    msg.textContent='创建失败：'+e.message;
+    msg.className='msg error';
 
     await loadRound();
-
-
-  }catch(e){
-
-    msg.textContent =
-    '创建失败：' +
-    e.message;
-
   }
-
 }
-
-
-
-/* REFRESH */
 
 async function refreshRound(){
+  const msg=document.getElementById('closeMsg');
 
-  document.getElementById(
-    'closeMsg'
-  ).textContent =
-  '正在刷新...';
-
+  msg.className='msg';
+  msg.textContent='正在刷新...';
 
   await loadRound();
 
-
-  document.getElementById(
-    'closeMsg'
-  ).textContent =
-  '✓ 已刷新';
-
+  msg.textContent='✓ 已读取数据库最新状态';
+  msg.className='msg success';
 }
-
-
-
-/* AUTO DEFAULT NEXT ROUND */
 
 function fillNextDefaults(){
-
-  let nextDate;
-
-  let nextCode;
-
+  const dateInput=document.getElementById('newDate');
+  const codeInput=document.getElementById('newCode');
 
   if(currentRound){
-
-    nextDate =
-    currentRound.round_date;
-
-
-    if(
-      currentRound.round_code ===
-      '1030'
-    ){
-
-      nextCode =
-      '1530';
-
+    if(currentRound.round_code==='1030'){
+      dateInput.value=currentRound.round_date;
+      codeInput.value='1530';
+    }else{
+      dateInput.value=addDays(currentRound.round_date,1);
+      codeInput.value='1030';
     }
-
-    else{
-
-      nextDate =
-      addDays(
-        currentRound.round_date,
-        1
-      );
-
-      nextCode =
-      '1030';
-
-    }
-
+  }else{
+    dateInput.value=todayMMT();
+    codeInput.value='1530';
   }
-
-  else{
-
-    nextDate =
-    todayMMT();
-
-    nextCode =
-    '1530';
-
-  }
-
-
-  document.getElementById(
-    'newDate'
-  ).value =
-  nextDate;
-
-
-  document.getElementById(
-    'newCode'
-  ).value =
-  nextCode;
-
 
   changePeriod();
-
 }
-
-
-
-/* PERIOD DEFAULT DEADLINE */
 
 function changePeriod(){
+  const code=document.getElementById('newCode').value;
 
-  const code =
-  document.getElementById(
-    'newCode'
-  ).value;
-
-
-  document.getElementById(
-    'newDeadline'
-  ).value =
-
-  code === '1030'
-
-  ? '10:00'
-
-  : '15:00';
-
+  document.getElementById('newDeadline').value=
+    code==='1030'
+    ? '10:00'
+    : '15:00';
 }
-
-
-
-/* TIME */
 
 function updateClock(){
-
-  document.getElementById(
-    'mmtClock'
-  ).textContent =
-
-  new Intl
-  .DateTimeFormat(
-    'zh-CN',
-    {
-
-      timeZone:
-      'Asia/Yangon',
-
-      hour:'2-digit',
-
-      minute:'2-digit',
-
-      second:'2-digit',
-
-      hour12:false
-
-    }
-  )
-  .format(
-    new Date()
-  );
-
+  document.getElementById('mmtClock').textContent=
+    new Intl.DateTimeFormat(
+      'zh-CN',
+      {
+        timeZone:'Asia/Yangon',
+        hour:'2-digit',
+        minute:'2-digit',
+        second:'2-digit',
+        hour12:false
+      }
+    ).format(new Date());
 }
-
-
 
 function formatMMT(value){
+  if(!value) return '—';
 
-  if(!value){
-
-    return '—';
-
-  }
-
-
-  return new Intl
-  .DateTimeFormat(
+  return new Intl.DateTimeFormat(
     'zh-CN',
     {
-
-      timeZone:
-      'Asia/Yangon',
-
+      timeZone:'Asia/Yangon',
       month:'2-digit',
-
       day:'2-digit',
-
       hour:'2-digit',
-
       minute:'2-digit',
-
       hour12:false
-
     }
-  )
-  .format(
-    new Date(
-      value
-    )
-  )
-
-  +
-
-  ' MMT';
-
+  ).format(new Date(value))+' MMT';
 }
 
-
-
-/*
-  Myanmar = UTC +06:30
-*/
-
-function mmtToISO(
-  date,
-  time
-){
-
+function mmtToISO(date,time){
   try{
+    const [y,m,d]=date.split('-').map(Number);
+    const [hh,mm]=time.split(':').map(Number);
 
-    const [
-      y,
-      m,
-      d
-    ] =
-    date
-    .split('-')
-    .map(Number);
+    const utc=
+      Date.UTC(y,m-1,d,hh,mm,0)-
+      (6.5*60*60*1000);
 
-
-    const [
-      hh,
-      mm
-    ] =
-    time
-    .split(':')
-    .map(Number);
-
-
-    const utc =
-    Date.UTC(
-      y,
-      m-1,
-      d,
-      hh,
-      mm,
-      0
-    )
-
-    -
-
-    (
-      6.5 *
-      60 *
-      60 *
-      1000
-    );
-
-
-    return new Date(
-      utc
-    ).toISOString();
-
-
+    return new Date(utc).toISOString();
   }catch(e){
-
     return null;
-
   }
-
 }
-
-
 
 function todayMMT(){
+  const parts=
+    new Intl.DateTimeFormat(
+      'en-CA',
+      {
+        timeZone:'Asia/Yangon',
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit'
+      }
+    ).formatToParts(new Date());
 
-  const parts =
-  new Intl
-  .DateTimeFormat(
-    'en-CA',
-    {
+  const map={};
 
-      timeZone:
-      'Asia/Yangon',
+  parts.forEach(p=>{
+    map[p.type]=p.value;
+  });
 
-      year:'numeric',
-
-      month:'2-digit',
-
-      day:'2-digit'
-
-    }
-  )
-  .formatToParts(
-    new Date()
-  );
-
-
-  const map = {};
-
-
-  parts.forEach(
-    p => {
-
-      map[p.type] =
-      p.value;
-
-    }
-  );
-
-
-  return (
-    map.year +
-    '-' +
-    map.month +
-    '-' +
-    map.day
-  );
-
+  return map.year+'-'+map.month+'-'+map.day;
 }
 
+function addDays(date,days){
+  const [y,m,d]=date.split('-').map(Number);
 
-
-function addDays(
-  date,
-  days
-){
-
-  const [
-    y,
-    m,
-    d
-  ] =
-  date
-  .split('-')
-  .map(Number);
-
-
-  const dt =
-  new Date(
-    Date.UTC(
-      y,
-      m-1,
-      d
-    )
+  const dt=new Date(
+    Date.UTC(y,m-1,d)
   );
-
 
   dt.setUTCDate(
-    dt.getUTCDate() +
-    days
+    dt.getUTCDate()+days
   );
 
-
-  return dt
-  .toISOString()
-  .slice(
-    0,
-    10
-  );
-
+  return dt.toISOString().slice(0,10);
 }
-
-
 
 function periodName(code){
-
-  if(code === '1030'){
-
-    return '上午 10:30';
-
-  }
-
-
-  if(code === '1530'){
-
-    return '下午 15:30';
-
-  }
-
+  if(code==='1030') return '上午 10:30';
+  if(code==='1530') return '下午 15:30';
 
   return code || '—';
-
 }
-
-
-
-/* START */
 
 async function start(){
+  const ok=await verifyAdmin();
 
-  const ok =
-  await verifyAdmin();
-
-
-  if(!ok){
-    return;
-  }
-
+  if(!ok) return;
 
   updateClock();
-
-
   await loadRound();
-
 }
 
-
-
 updateClock();
-
 
 setInterval(
   updateClock,
   1000
 );
 
-
 start();
-
 
 setInterval(
   ()=>{
-
     if(token){
-
       loadRound();
-
     }
-
   },
   20000
 );
-
-
 </script>
 
 </body>
-
 </html>
