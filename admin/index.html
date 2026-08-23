@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
-
 <title>金满堂 · 管理中心</title>
 
 <style>
@@ -12,8 +11,7 @@
 
 body{
   margin:0;
-  background:
-  radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
   color:#f7f0df;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
@@ -24,8 +22,6 @@ body{
   min-height:100vh;
   padding:24px 15px 55px
 }
-
-/* LOGO */
 
 .brand{
   text-align:center;
@@ -68,8 +64,6 @@ body{
   margin-top:5px
 }
 
-/* CARD */
-
 .card{
   background:linear-gradient(180deg,rgba(22,22,22,.98),rgba(11,11,12,.98));
   border:1px solid rgba(214,168,63,.30);
@@ -85,8 +79,6 @@ body{
   color:#dfc575;
   margin-bottom:16px
 }
-
-/* INPUT */
 
 input,
 textarea{
@@ -106,8 +98,6 @@ textarea{
   resize:vertical;
   line-height:1.6
 }
-
-/* BUTTON */
 
 button{
   width:100%;
@@ -145,7 +135,7 @@ button.danger{
   font-size:12px
 }
 
-/* SUMMARY */
+/* 运营概况 */
 
 .summaryGrid{
   display:grid;
@@ -174,9 +164,8 @@ button.danger{
   line-height:1.35
 }
 
-.green{
-  color:#72d39d!important
-}
+.green{color:#72d39d!important}
+.redText{color:#e89191!important}
 
 .refreshLine{
   text-align:center;
@@ -185,7 +174,7 @@ button.danger{
   margin-top:12px
 }
 
-/* MENU */
+/* 菜单 */
 
 .menuGrid{
   display:grid;
@@ -203,9 +192,7 @@ button.danger{
   min-height:112px
 }
 
-.menu:active{
-  transform:scale(.98)
-}
+.menu:active{transform:scale(.98)}
 
 .menuIcon{
   font-size:26px;
@@ -225,7 +212,7 @@ button.danger{
   margin-top:6px
 }
 
-/* RESULT */
+/* 数字发布 */
 
 .current{
   text-align:center;
@@ -247,7 +234,7 @@ button.danger{
   color:#ebca68
 }
 
-/* SETTINGS */
+/* 设置 */
 
 .settingLabel{
   display:block;
@@ -299,8 +286,6 @@ button.danger{
   font-size:12px;
   line-height:1.6
 }
-
-/* SWITCH */
 
 .switchRow{
   display:flex;
@@ -393,7 +378,7 @@ button.danger{
   </div>
 
 
-  <!-- LOGIN -->
+  <!-- 管理员登录 -->
 
   <div class="card" id="loginBox">
 
@@ -420,12 +405,10 @@ button.danger{
   </div>
 
 
-  <!-- ADMIN -->
-
   <div id="adminBox" class="hidden">
 
 
-    <!-- TODAY SUMMARY -->
+    <!-- 当前运营概况 -->
 
     <div class="card">
 
@@ -446,8 +429,18 @@ button.danger{
         </div>
 
         <div class="summaryBox">
+          <small>正常代理总数</small>
+          <strong id="summaryAgentTotal">0</strong>
+        </div>
+
+        <div class="summaryBox">
           <small>已提交代理</small>
           <strong id="summaryAgents">0</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>未提交代理</small>
+          <strong id="summaryMissing">0</strong>
         </div>
 
         <div class="summaryBox">
@@ -474,7 +467,7 @@ button.danger{
     </div>
 
 
-    <!-- MENU -->
+    <!-- 管理中心 -->
 
     <div class="card">
 
@@ -486,9 +479,7 @@ button.danger{
 
         <a class="menu" href="/admin/agents/">
 
-          <div class="menuIcon">
-            👥
-          </div>
+          <div class="menuIcon">👥</div>
 
           <div class="menuTitle">
             代理管理
@@ -503,9 +494,7 @@ button.danger{
 
         <a class="menu" href="/admin/simulator.html">
 
-          <div class="menuIcon">
-            📊
-          </div>
+          <div class="menuIcon">📊</div>
 
           <div class="menuTitle">
             本期汇总
@@ -520,9 +509,7 @@ button.danger{
 
         <a class="menu" href="#resultManagement">
 
-          <div class="menuIcon">
-            🎯
-          </div>
+          <div class="menuIcon">🎯</div>
 
           <div class="menuTitle">
             数字发布
@@ -537,9 +524,7 @@ button.danger{
 
         <a class="menu" href="#siteSettings">
 
-          <div class="menuIcon">
-            ⚙️
-          </div>
+          <div class="menuIcon">⚙️</div>
 
           <div class="menuTitle">
             网站设置
@@ -556,7 +541,7 @@ button.danger{
     </div>
 
 
-    <!-- RESULT -->
+    <!-- 数字发布 -->
 
     <div class="card" id="resultManagement">
 
@@ -591,7 +576,7 @@ button.danger{
     </div>
 
 
-    <!-- LOGO -->
+    <!-- Logo -->
 
     <div class="card">
 
@@ -642,7 +627,7 @@ button.danger{
     </div>
 
 
-    <!-- SETTINGS -->
+    <!-- 网站设置 -->
 
     <div class="card" id="siteSettings">
 
@@ -698,8 +683,6 @@ button.danger{
     </div>
 
 
-    <!-- LOGOUT -->
-
     <div class="card">
 
       <button
@@ -747,7 +730,6 @@ sessionStorage.getItem(
 
 
 let pendingLogo='';
-
 let currentRound=null;
 
 
@@ -756,7 +738,9 @@ let currentRound=null;
 async function api(path,options={}){
 
   return fetch(
+
     BASE+path,
+
     {
       ...options,
 
@@ -766,6 +750,7 @@ async function api(path,options={}){
         ...(options.headers || {})
       }
     }
+
   );
 
 }
@@ -930,7 +915,7 @@ function showAdmin(){
 }
 
 
-/* EVERYTHING */
+/* LOAD ALL */
 
 async function loadEverything(){
 
@@ -943,11 +928,13 @@ async function loadEverything(){
 }
 
 
-/* DASHBOARD SUMMARY */
+/* DASHBOARD */
 
 async function loadDashboardSummary(){
 
   try{
+
+    /* 读取当前期 */
 
     const rr=
     await api(
@@ -1045,6 +1032,47 @@ async function loadDashboardSummary(){
     );
 
 
+    /* 读取正常代理 */
+
+    const ar=
+    await api(
+
+      '/rest/v1/agents' +
+      '?status=eq.active' +
+      '&select=id'
+
+    );
+
+
+    if(!ar.ok){
+      throw new Error();
+    }
+
+
+    const activeAgents=
+    await ar.json();
+
+
+    const activeAgentIds=
+    new Set(
+      activeAgents.map(
+        a=>a.id
+      )
+    );
+
+
+    const activeTotal=
+    activeAgents.length;
+
+
+    document.getElementById(
+      'summaryAgentTotal'
+    ).textContent=
+    activeTotal;
+
+
+    /* 读取本期提交 */
+
     const sr=
     await api(
 
@@ -1074,7 +1102,7 @@ async function loadDashboardSummary(){
 
     let total=0;
 
-    const agentSet=
+    const submittedSet=
     new Set();
 
 
@@ -1089,19 +1117,59 @@ async function loadDashboardSummary(){
       total+=points;
 
 
-      if(points>0){
-        agentSet.add(
+      /*
+        只有正常代理才进入
+        “已提交”统计
+      */
+
+      if(
+        points>0
+        &&
+        activeAgentIds.has(
+          row.agent_id
+        )
+      ){
+
+        submittedSet.add(
           row.agent_id
         );
+
       }
 
     });
 
 
+    const submittedCount=
+    submittedSet.size;
+
+
+    const missingCount=
+    Math.max(
+      0,
+      activeTotal-
+      submittedCount
+    );
+
+
     document.getElementById(
       'summaryAgents'
     ).textContent=
-    agentSet.size;
+    submittedCount;
+
+
+    document.getElementById(
+      'summaryMissing'
+    ).textContent=
+    missingCount;
+
+
+    document.getElementById(
+      'summaryMissing'
+    ).className=
+
+    missingCount>0
+    ? 'redText'
+    : 'green';
 
 
     document.getElementById(
@@ -1131,20 +1199,36 @@ function renderNoRound(){
   ).textContent=
   '暂无开放期';
 
+
   document.getElementById(
     'summaryStatus'
   ).textContent=
   '—';
+
+
+  document.getElementById(
+    'summaryAgentTotal'
+  ).textContent=
+  '0';
+
 
   document.getElementById(
     'summaryAgents'
   ).textContent=
   '0';
 
+
+  document.getElementById(
+    'summaryMissing'
+  ).textContent=
+  '0';
+
+
   document.getElementById(
     'summaryTotal'
   ).textContent=
   '0';
+
 
   document.getElementById(
     'summaryDeadline'
@@ -1154,7 +1238,7 @@ function renderNoRound(){
 }
 
 
-/* RESULT */
+/* CURRENT RESULT */
 
 async function loadCurrent(){
 
@@ -1206,6 +1290,8 @@ async function loadCurrent(){
 }
 
 
+/* PUBLISH RESULT */
+
 async function publishResult(){
 
   const input=
@@ -1250,7 +1336,9 @@ async function publishResult(){
 
     const r=
     await api(
+
       '/rest/v1/results',
+
       {
         method:'POST',
 
@@ -1263,6 +1351,7 @@ async function publishResult(){
           result_number:n
         })
       }
+
     );
 
 
@@ -1357,6 +1446,7 @@ async function loadSettings(){
       pendingLogo=
       s.logo_data_url;
 
+
       showLogoPreview(
         s.logo_data_url
       );
@@ -1376,7 +1466,7 @@ async function loadSettings(){
 }
 
 
-/* LOGO FILE */
+/* LOGO */
 
 function handleLogoFile(input){
 
@@ -1586,7 +1676,9 @@ async function saveLogo(){
 
     const r=
     await api(
+
       '/rest/v1/site_settings?id=eq.1',
+
       {
         method:'PATCH',
 
@@ -1600,6 +1692,7 @@ async function saveLogo(){
           updated_at:new Date().toISOString()
         })
       }
+
     );
 
 
@@ -1634,7 +1727,9 @@ async function removeLogo(){
 
     const r=
     await api(
+
       '/rest/v1/site_settings?id=eq.1',
+
       {
         method:'PATCH',
 
@@ -1647,6 +1742,7 @@ async function removeLogo(){
           updated_at:new Date().toISOString()
         })
       }
+
     );
 
 
@@ -1689,7 +1785,7 @@ async function removeLogo(){
 }
 
 
-/* SAVE SETTINGS */
+/* SAVE SITE SETTINGS */
 
 async function saveSettings(){
 
@@ -1757,7 +1853,9 @@ async function saveSettings(){
 
     const r=
     await api(
+
       '/rest/v1/site_settings?id=eq.1',
+
       {
         method:'PATCH',
 
@@ -1773,6 +1871,7 @@ async function saveSettings(){
           updated_at:new Date().toISOString()
         })
       }
+
     );
 
 
