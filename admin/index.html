@@ -135,8 +135,6 @@ button.danger{
   font-size:12px
 }
 
-/* 运营概况 */
-
 .summaryGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -174,8 +172,6 @@ button.danger{
   margin-top:12px
 }
 
-/* 菜单 */
-
 .menuGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -192,7 +188,9 @@ button.danger{
   min-height:112px
 }
 
-.menu:active{transform:scale(.98)}
+.menu:active{
+  transform:scale(.98)
+}
 
 .menuIcon{
   font-size:26px;
@@ -211,8 +209,6 @@ button.danger{
   line-height:1.55;
   margin-top:6px
 }
-
-/* 数字发布 */
 
 .current{
   text-align:center;
@@ -233,8 +229,6 @@ button.danger{
   font-size:48px;
   color:#ebca68
 }
-
-/* 设置 */
 
 .settingLabel{
   display:block;
@@ -362,23 +356,11 @@ button.danger{
 <div class="wrap">
 
   <div class="brand">
-
-    <div class="mark" id="topMark">
-      金
-    </div>
-
-    <div class="cn">
-      金满堂
-    </div>
-
-    <div class="en">
-      JIN MANTANG · MANAGEMENT
-    </div>
-
+    <div class="mark" id="topMark">金</div>
+    <div class="cn">金满堂</div>
+    <div class="en">JIN MANTANG · MANAGEMENT</div>
   </div>
 
-
-  <!-- 管理员登录 -->
 
   <div class="card" id="loginBox">
 
@@ -478,62 +460,47 @@ button.danger{
       <div class="menuGrid">
 
         <a class="menu" href="/admin/agents/">
-
           <div class="menuIcon">👥</div>
-
-          <div class="menuTitle">
-            代理管理
-          </div>
-
+          <div class="menuTitle">代理管理</div>
           <div class="menuSub">
             创建代理、搜索、比例、暂停、限制
           </div>
-
         </a>
 
 
         <a class="menu" href="/admin/simulator.html">
-
           <div class="menuIcon">📊</div>
-
-          <div class="menuTitle">
-            本期汇总
-          </div>
-
+          <div class="menuTitle">本期汇总</div>
           <div class="menuSub">
-            查看所有代理提交与 00–99 汇总
+            查看当前期所有代理提交与 00–99 汇总
           </div>
+        </a>
 
+
+        <a class="menu" href="/admin/history/">
+          <div class="menuIcon">📚</div>
+          <div class="menuTitle">历史期数</div>
+          <div class="menuSub">
+            查询以前每一期与代理历史明细
+          </div>
         </a>
 
 
         <a class="menu" href="#resultManagement">
-
           <div class="menuIcon">🎯</div>
-
-          <div class="menuTitle">
-            数字发布
-          </div>
-
+          <div class="menuTitle">数字发布</div>
           <div class="menuSub">
             发布最新公开结果
           </div>
-
         </a>
 
 
         <a class="menu" href="#siteSettings">
-
           <div class="menuIcon">⚙️</div>
-
-          <div class="menuTitle">
-            网站设置
-          </div>
-
+          <div class="menuTitle">网站设置</div>
           <div class="menuSub">
             Logo、Telegram、公告
           </div>
-
         </a>
 
       </div>
@@ -934,8 +901,6 @@ async function loadDashboardSummary(){
 
   try{
 
-    /* 读取当前期 */
-
     const rr=
     await api(
 
@@ -1032,8 +997,6 @@ async function loadDashboardSummary(){
     );
 
 
-    /* 读取正常代理 */
-
     const ar=
     await api(
 
@@ -1070,8 +1033,6 @@ async function loadDashboardSummary(){
     ).textContent=
     activeTotal;
 
-
-    /* 读取本期提交 */
 
     const sr=
     await api(
@@ -1116,11 +1077,6 @@ async function loadDashboardSummary(){
 
       total+=points;
 
-
-      /*
-        只有正常代理才进入
-        “已提交”统计
-      */
 
       if(
         points>0
@@ -1290,7 +1246,7 @@ async function loadCurrent(){
 }
 
 
-/* PUBLISH RESULT */
+/* PUBLISH */
 
 async function publishResult(){
 
@@ -1785,7 +1741,7 @@ async function removeLogo(){
 }
 
 
-/* SAVE SITE SETTINGS */
+/* SAVE SETTINGS */
 
 async function saveSettings(){
 
