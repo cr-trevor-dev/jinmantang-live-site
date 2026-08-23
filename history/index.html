@@ -1,390 +1,314 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1">
-
-<meta
-  name="theme-color"
-  content="#09090a">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
 <title>金满堂 · 历史期数</title>
 
 <style>
-
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-
-  background:
-  radial-gradient(
-    circle at top,
-    #251907 0,
-    #0d0c0a 40%,
-    #070708 100%
-  );
-
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f5edd9;
-
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Arial,
-  sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
 
 .wrap{
-  max-width:850px;
+  max-width:700px;
   margin:auto;
-  padding:22px 14px 60px;
+  min-height:100vh;
+  padding:24px 16px 60px
 }
 
 .header{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
+  gap:14px;
+  margin-bottom:26px
 }
 
-.logoTitle{
+.headTitle{
   color:#efd477;
-  font-size:22px;
+  font-size:28px;
   font-weight:900;
+  line-height:1.3
 }
 
-.sub{
-  color:#827966;
-  font-size:10px;
-  letter-spacing:2px;
-  margin-top:4px;
+.headSub{
+  color:#8a8170;
+  font-size:11px;
+  letter-spacing:4px;
+  margin-top:7px
+}
+
+.back{
+  text-decoration:none;
+  color:#efd477;
+  background:#181819;
+  border:1px solid rgba(214,168,63,.30);
+  border-radius:18px;
+  padding:14px 17px;
+  font-weight:900;
+  font-size:13px;
+  flex:none
 }
 
 .card{
-  background:
-  linear-gradient(
-    180deg,
-    #151515,
-    #0d0d0e
-  );
-
-  border:
-  1px solid
-  rgba(214,168,63,.28);
-
-  border-radius:20px;
-
-  padding:17px;
-
-  margin-bottom:14px;
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.30);
+  border-radius:25px;
+  padding:20px;
+  margin-bottom:18px
 }
 
 .title{
   color:#dfc575;
-  font-size:15px;
+  font-size:19px;
   font-weight:900;
-  margin-bottom:14px;
-}
-
-button{
-  border:0;
-  border-radius:11px;
-  padding:11px 14px;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.dark{
-  background:#181819;
-  color:#dbc67d;
-
-  border:
-  1px solid
-  rgba(214,168,63,.22);
-}
-
-.gold{
-  background:
-  linear-gradient(
-    180deg,
-    #efd47c,
-    #b87e1e
-  );
-
-  color:#161008;
+  margin-bottom:17px
 }
 
 input{
   width:100%;
-
+  border:1px solid rgba(214,168,63,.24);
   background:#101011;
   color:#fff;
-
-  border:
-  1px solid
-  rgba(214,168,63,.22);
-
-  border-radius:11px;
-
-  padding:12px;
-
-  outline:none;
-
-  font-size:14px;
+  border-radius:13px;
+  padding:14px;
+  font-size:15px;
+  outline:none
 }
 
 .roundCard{
   background:#101011;
-
-  border:
-  1px solid
-  rgba(255,255,255,.06);
-
-  border-radius:15px;
-
-  padding:14px;
-
-  margin-bottom:10px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px
 }
 
 .roundTop{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:10px;
+  gap:12px
 }
 
 .roundName{
-  color:#efd278;
-  font-size:16px;
+  color:#efd477;
+  font-size:18px;
   font-weight:900;
+  line-height:1.45
 }
 
-.roundMeta{
-  color:#898173;
+.status{
+  border-radius:99px;
+  padding:7px 12px;
   font-size:11px;
-  line-height:1.7;
-  margin-top:5px;
+  font-weight:900;
+  white-space:nowrap
 }
 
-.badge{
-  padding:5px 9px;
-  border-radius:20px;
+.status.open{
+  background:#103522;
+  color:#73d7a0
+}
+
+.status.closed{
+  background:#322715;
+  color:#e4c56e
+}
+
+.status.other{
+  background:#222;
+  color:#aaa
+}
+
+.meta{
+  color:#8d8577;
   font-size:11px;
-  white-space:nowrap;
+  margin-top:8px;
+  line-height:1.7
 }
 
-.open{
-  background:#153124;
-  color:#77d69e;
-}
-
-.closed{
-  background:#352d13;
-  color:#e0c46c;
-}
-
-.settled{
-  background:#18283c;
-  color:#8db8e8;
-}
-
-.roundStats{
+.stats{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:11px;
+  gap:9px;
+  margin-top:14px
 }
 
 .stat{
-  background:#171718;
-  border-radius:10px;
-  padding:11px;
+  background:#151516;
+  border-radius:13px;
+  padding:13px
 }
 
 .stat small{
   display:block;
-  color:#777166;
-  font-size:9px;
-  margin-bottom:5px;
+  color:#777064;
+  font-size:10px;
+  margin-bottom:6px
 }
 
 .stat strong{
-  color:#e6cf86;
-  font-size:14px;
+  color:#e9cc72;
+  font-size:17px
 }
 
 .detailBtn{
-  width:100%;
-  margin-top:10px;
-}
-
-.detail{
-  display:none;
   margin-top:13px;
-  padding-top:13px;
-
-  border-top:
-  1px solid
-  rgba(255,255,255,.07);
-}
-
-.detail.openDetail{
   display:block;
-}
-
-.sectionTitle{
-  color:#d8bc6e;
-  font-size:12px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.numberGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-}
-
-.numberItem{
-  background:#171718;
-
-  border:
-  1px solid
-  rgba(255,255,255,.05);
-
-  border-radius:10px;
-
-  padding:10px;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.numberItem.active{
-  background:#1a170f;
-
-  border-color:
-  rgba(214,168,63,.35);
-}
-
-.numberItem span:first-child{
-  color:#dfc36d;
-  font-weight:900;
-}
-
-.numberItem span:last-child{
-  color:#e8dfc9;
-  font-size:12px;
-  font-weight:800;
-}
-
-.agentBox{
-  background:#151516;
-
-  border:
-  1px solid
-  rgba(255,255,255,.05);
-
-  border-radius:12px;
-
-  padding:12px;
-
-  margin-top:9px;
-}
-
-.agentName{
-  color:#efd278;
-  font-weight:900;
-  font-size:14px;
-}
-
-.agentMeta{
-  color:#81796c;
-  font-size:10px;
-  margin-top:4px;
-  line-height:1.6;
-}
-
-.agentNumbers{
-  display:none;
-  margin-top:10px;
-}
-
-.agentNumbers.openDetail{
-  display:grid;
-}
-
-.smallBtn{
   width:100%;
-  margin-top:9px;
-  padding:9px;
-  font-size:11px;
+  text-align:center;
+  text-decoration:none;
+  border:1px solid rgba(214,168,63,.28);
+  background:#181819;
+  color:#efd477;
+  border-radius:13px;
+  padding:13px;
+  font-weight:900;
+  font-size:13px
 }
 
 .empty{
   text-align:center;
   color:#777166;
-  padding:25px 10px;
-  font-size:13px;
+  padding:45px 10px
 }
+
+.grid100{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px
+}
+
+.numBox{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px
+}
+
+.numBox.active{
+  border-color:rgba(214,168,63,.45)
+}
+
+.num{
+  color:#e9cc72;
+  font-weight:900
+}
+
+.points{
+  color:#eee3c9;
+  font-weight:800
+}
+
+.agentCard{
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:11px
+}
+
+.agentName{
+  color:#efd477;
+  font-size:16px;
+  font-weight:900
+}
+
+.agentMeta{
+  color:#8b8374;
+  font-size:11px;
+  line-height:1.6;
+  margin-top:6px
+}
+
+.agentNumbers{
+  margin-top:11px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px
+}
+
+.agentNum{
+  display:flex;
+  justify-content:space-between;
+  background:#161617;
+  border-radius:10px;
+  padding:9px 11px;
+  font-size:11px
+}
+
+.detailHeader{
+  margin-bottom:14px
+}
+
+.detailTitle{
+  color:#efd477;
+  font-size:22px;
+  font-weight:900
+}
+
+.closeDetail{
+  margin-top:13px;
+  width:100%;
+  border:1px solid rgba(214,168,63,.28);
+  background:#181819;
+  color:#efd477;
+  border-radius:13px;
+  padding:13px;
+  font-size:13px;
+  font-weight:900
+}
+
+.hidden{display:none!important}
 
 .msg{
   text-align:center;
-  min-height:18px;
-  margin-top:10px;
-  color:#9d9586;
+  color:#8c8578;
   font-size:12px;
+  padding:15px
 }
 
 .foot{
   text-align:center;
   color:#6f6a61;
   font-size:10px;
-  margin-top:25px;
+  margin-top:27px
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <div class="wrap">
 
-
   <div class="header">
 
     <div>
-
-      <div class="logoTitle">
+      <div class="headTitle">
         金满堂 · 历史期数
       </div>
 
-      <div class="sub">
+      <div class="headSub">
         ADMIN / ROUND HISTORY
       </div>
-
     </div>
 
-    <button
-      class="dark"
-      onclick="location.href='/admin/'">
-
+    <a
+      class="back"
+      href="/admin/index.html">
       返回总后台
-
-    </button>
+    </a>
 
   </div>
 
@@ -396,41 +320,105 @@ input{
     </div>
 
     <input
-      id="searchInput"
-      placeholder="搜索日期，例如 2026-08-23"
-      oninput="renderHistory()">
+      id="searchDate"
+      type="date"
+      onchange="renderRounds()">
 
   </div>
 
 
-  <div class="card">
+  <div class="card" id="listCard">
 
     <div class="title">
       历史期数
     </div>
 
-    <div id="historyList">
-
-      <div class="empty">
-        正在读取历史数据...
+    <div id="roundList">
+      <div class="msg">
+        正在读取...
       </div>
-
     </div>
-
-    <div class="msg" id="msg"></div>
 
   </div>
 
 
-  <div class="card">
+  <div
+    class="card hidden"
+    id="detailCard">
+
+    <div class="detailHeader">
+
+      <div
+        class="detailTitle"
+        id="detailTitle">
+        本期详情
+      </div>
+
+      <div
+        class="meta"
+        id="detailMeta">
+      </div>
+
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+        <small>提交总积分</small>
+        <strong id="detailTotal">0</strong>
+      </div>
+
+      <div class="stat">
+        <small>已提交代理</small>
+        <strong id="detailAgents">0</strong>
+      </div>
+
+      <div class="stat">
+        <small>开奖结果</small>
+        <strong id="detailResult">—</strong>
+      </div>
+
+      <div class="stat">
+        <small>状态</small>
+        <strong id="detailStatus">—</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="card hidden"
+    id="numbersCard">
+
+    <div class="title">
+      00–99 本期汇总
+    </div>
+
+    <div
+      class="grid100"
+      id="numbersGrid">
+    </div>
+
+  </div>
+
+
+  <div
+    class="card hidden"
+    id="agentsCard">
+
+    <div class="title">
+      本期代理提交
+    </div>
+
+    <div id="agentsList"></div>
 
     <button
-      class="dark"
-      style="width:100%"
-      onclick="location.href='/admin/'">
-
-      ← 返回 Admin 总后台
-
+      class="closeDetail"
+      onclick="closeDetail()">
+      ← 返回历史期数
     </button>
 
   </div>
@@ -440,49 +428,41 @@ input{
     © 2022 JIN MANTANG · ROUND HISTORY
   </div>
 
-
 </div>
 
 
 <script>
 
-const BASE=
+const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
 
-const KEY=
+const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
 
-let token=
-
+let token =
 localStorage.getItem(
   'jmt_access_token'
 )
-
 ||
-
 sessionStorage.getItem(
   'jmt_access_token'
 )
-
 ||
-
 '';
 
 
-let rounds=[];
-let agents=[];
-let submissions=[];
+let rounds = [];
+let agentsMap = {};
 
 
-/* API */
-
-async function api(path,options={}){
+async function api(
+  path,
+  options={}
+){
 
   return fetch(
-
-    BASE+path,
-
+    BASE + path,
     {
       ...options,
 
@@ -492,48 +472,79 @@ async function api(path,options={}){
         ...(options.headers || {})
       }
     }
-
   );
 
 }
 
-
-/* VERIFY */
 
 async function verifyAdmin(){
 
   if(!token){
 
-    location.href='/admin/';
+    location.href =
+    '/admin/index.html';
 
     return false;
 
   }
 
+
   try{
 
-    const r=
+    const userRes =
     await api(
       '/auth/v1/user'
     );
 
-    if(!r.ok){
+
+    if(!userRes.ok){
+
       throw new Error();
+
     }
+
+
+    const user =
+    await userRes.json();
+
+
+    const adminRes =
+    await api(
+      '/rest/v1/admin_users'+
+      '?auth_user_id=eq.'+
+      encodeURIComponent(
+        user.id
+      )+
+      '&select=auth_user_id'+
+      '&limit=1'
+    );
+
+
+    if(!adminRes.ok){
+
+      throw new Error();
+
+    }
+
+
+    const admins =
+    await adminRes.json();
+
+
+    if(!admins.length){
+
+      throw new Error();
+
+    }
+
 
     return true;
 
+
   }catch(e){
 
-    localStorage.removeItem(
-      'jmt_access_token'
-    );
-
-    sessionStorage.removeItem(
-      'jmt_access_token'
-    );
-
-    location.href='/admin/';
+    location.href =
+    '/admin/index.html';
 
     return false;
 
@@ -542,135 +553,118 @@ async function verifyAdmin(){
 }
 
 
-/* LOAD */
-
-async function loadHistory(){
-
-  const msg=
-  document.getElementById(
-    'msg'
-  );
-
-  msg.textContent=
-  '正在读取历史记录...';
-
+async function loadAll(){
 
   try{
 
-    const ok=
-    await verifyAdmin();
+    const rr =
+    await api(
+      '/rest/v1/rounds'+
+      '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at'+
+      '&order=round_date.desc,created_at.desc'
+    );
 
-    if(!ok){
-      return;
+
+    if(!rr.ok){
+
+      throw new Error(
+        await rr.text()
+      );
+
     }
 
 
-    const [
-      roundRes,
-      agentRes,
-      subRes
-    ]=
-    await Promise.all([
-
-      api(
-        '/rest/v1/rounds'+
-        '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at'+
-        '&order=created_at.desc'
-      ),
-
-      api(
-        '/rest/v1/agents'+
-        '?select=id,display_name,commission_rate,status'
-      ),
-
-      api(
-        '/rest/v1/agent_submissions'+
-        '?select=round_id,agent_id,number_code,points,submitted_at,updated_at'
-      )
-
-    ]);
+    rounds =
+    await rr.json();
 
 
-    if(
-      !roundRes.ok
-      ||
-      !agentRes.ok
-      ||
-      !subRes.ok
-    ){
-      throw new Error();
+    const ar =
+    await api(
+      '/rest/v1/agents'+
+      '?select=id,display_name,commission_rate,status'
+    );
+
+
+    if(ar.ok){
+
+      const agents =
+      await ar.json();
+
+
+      agents.forEach(
+        a=>{
+
+          agentsMap[a.id] =
+          a;
+
+        }
+      );
+
     }
 
 
-    rounds=
-    await roundRes.json();
-
-    agents=
-    await agentRes.json();
-
-    submissions=
-    await subRes.json();
+    renderRounds();
 
 
-    renderHistory();
+    const params =
+    new URLSearchParams(
+      location.search
+    );
 
-    msg.textContent='';
+
+    const roundId =
+    params.get(
+      'round'
+    );
+
+
+    if(roundId){
+
+      openDetail(
+        roundId
+      );
+
+    }
 
 
   }catch(e){
 
-    msg.textContent=
-    '无法读取历史记录';
+    document.getElementById(
+      'roundList'
+    ).innerHTML =
+    '<div class="empty">读取失败</div>';
 
   }
 
 }
 
 
-/* RENDER */
+function renderRounds(){
 
-function renderHistory(){
-
-  const box=
+  const holder =
   document.getElementById(
-    'historyList'
+    'roundList'
   );
 
-  const keyword=
+
+  const date =
   document.getElementById(
-    'searchInput'
-  ).value.trim().toLowerCase();
+    'searchDate'
+  ).value;
 
 
-  const list=
-  rounds.filter(r=>{
-
-    const period=
-    getPeriodName(
-      r.round_code
-    );
-
-    const text=
-    (
-      r.round_date+
-      ' '+
-      period+
-      ' '+
-      r.status+
-      ' '+
-      (r.result_number || '')
-    ).toLowerCase();
-
-    return text.includes(
-      keyword
-    );
-
-  });
+  const filtered =
+  rounds.filter(
+    r =>
+    !date
+    ||
+    r.round_date === date
+  );
 
 
-  if(!list.length){
+  if(!filtered.length){
 
-    box.innerHTML=
+    holder.innerHTML =
     '<div class="empty">没有找到历史期数</div>';
 
     return;
@@ -678,547 +672,808 @@ function renderHistory(){
   }
 
 
-  box.innerHTML=
-  list.map(
-    round =>
-    buildRoundCard(
-      round
-    )
-  ).join('');
+  holder.innerHTML =
+  '';
+
+
+  filtered.forEach(
+    round=>{
+
+      const el =
+      document.createElement(
+        'div'
+      );
+
+
+      el.className =
+      'roundCard';
+
+
+      el.innerHTML = `
+
+        <div class="roundTop">
+
+          <div class="roundName">
+            ${escapeHtml(round.round_date)}
+            ·
+            ${escapeHtml(periodName(round.round_code))}
+          </div>
+
+          <div class="status ${statusClass(round.status)}">
+            ${escapeHtml(statusName(round.status))}
+          </div>
+
+        </div>
+
+
+        <div class="meta">
+          截止：
+          ${escapeHtml(formatMMT(round.deadline_at))}
+          <br>
+
+          结果：
+          ${
+            round.result_number
+            ? escapeHtml(round.result_number)
+            : '—'
+          }
+        </div>
+
+
+        <div class="stats">
+
+          <div class="stat">
+            <small>提交总积分</small>
+            <strong id="total-${round.id}">
+              读取中
+            </strong>
+          </div>
+
+          <div class="stat">
+            <small>已提交代理</small>
+            <strong id="agents-${round.id}">
+              读取中
+            </strong>
+          </div>
+
+        </div>
+
+
+        <a
+          class="detailBtn"
+          href="?round=${encodeURIComponent(round.id)}">
+          查看本期详情
+        </a>
+
+      `;
+
+
+      holder.appendChild(
+        el
+      );
+
+
+      loadRoundStats(
+        round.id
+      );
+
+    }
+  );
 
 }
 
 
-/* ROUND CARD */
+async function loadRoundStats(
+  roundId
+){
 
-function buildRoundCard(round){
+  try{
 
-  const roundSubs=
-  submissions.filter(
-    s=>s.round_id===round.id
+    const r =
+    await api(
+      '/rest/v1/agent_submissions'+
+      '?round_id=eq.'+
+      encodeURIComponent(
+        roundId
+      )+
+      '&select=agent_id,points'
+    );
+
+
+    if(!r.ok){
+
+      throw new Error();
+
+    }
+
+
+    const rows =
+    await r.json();
+
+
+    let total =
+    0;
+
+
+    const set =
+    new Set();
+
+
+    rows.forEach(
+      row=>{
+
+        const p =
+        Number(
+          row.points || 0
+        );
+
+
+        total += p;
+
+
+        if(p>0){
+
+          set.add(
+            row.agent_id
+          );
+
+        }
+
+      }
+    );
+
+
+    const totalEl =
+    document.getElementById(
+      'total-'+roundId
+    );
+
+
+    const agentEl =
+    document.getElementById(
+      'agents-'+roundId
+    );
+
+
+    if(totalEl){
+
+      totalEl.textContent =
+      formatNumber(
+        total
+      );
+
+    }
+
+
+    if(agentEl){
+
+      agentEl.textContent =
+      set.size;
+
+    }
+
+
+  }catch(e){}
+
+}
+
+
+async function openDetail(
+  roundId
+){
+
+  const round =
+  rounds.find(
+    r =>
+    r.id === roundId
   );
 
 
-  const totalMap={};
+  if(!round){
 
-  const agentMap={};
-
-
-  for(let i=0;i<=99;i++){
-
-    totalMap[
-      String(i).padStart(2,'0')
-    ]=0;
+    return;
 
   }
 
 
-  roundSubs.forEach(row=>{
-
-    const code=
-    String(
-      row.number_code
-    ).padStart(2,'0');
-
-    const points=
-    Number(
-      row.points || 0
-    );
-
-
-    totalMap[code]+=points;
-
-
-    if(!agentMap[row.agent_id]){
-
-      agentMap[row.agent_id]={
-        total:0,
-        numbers:{}
-      };
-
-
-      for(let i=0;i<=99;i++){
-
-        agentMap[
-          row.agent_id
-        ].numbers[
-          String(i).padStart(2,'0')
-        ]=0;
-
-      }
-
-    }
-
-
-    agentMap[
-      row.agent_id
-    ].total+=points;
-
-
-    agentMap[
-      row.agent_id
-    ].numbers[
-      code
-    ]+=points;
-
-  });
-
-
-  const total=
-  Object.values(
-    totalMap
-  )
-  .reduce(
-    (a,b)=>a+Number(b),
-    0
+  document.getElementById(
+    'listCard'
+  ).classList.add(
+    'hidden'
   );
 
 
-  const submittedAgents=
-  Object.entries(
-    agentMap
-  )
-  .filter(
-    ([id,data])=>
-    Number(data.total)>0
+  document.getElementById(
+    'detailCard'
+  ).classList.remove(
+    'hidden'
   );
 
 
-  const statusInfo=
-  getStatusInfo(
+  document.getElementById(
+    'numbersCard'
+  ).classList.remove(
+    'hidden'
+  );
+
+
+  document.getElementById(
+    'agentsCard'
+  ).classList.remove(
+    'hidden'
+  );
+
+
+  document.getElementById(
+    'detailTitle'
+  ).textContent =
+  round.round_date+
+  ' · '+
+  periodName(
+    round.round_code
+  );
+
+
+  document.getElementById(
+    'detailMeta'
+  ).textContent =
+  '截止：'+
+  formatMMT(
+    round.deadline_at
+  );
+
+
+  document.getElementById(
+    'detailResult'
+  ).textContent =
+  round.result_number || '—';
+
+
+  document.getElementById(
+    'detailStatus'
+  ).textContent =
+  statusName(
     round.status
   );
 
 
-  const totalNumbersHtml=
-  Object.entries(
-    totalMap
-  )
-  .map(
-    ([code,value])=>{
+  await loadDetailData(
+    round
+  );
 
-      const cls=
-      Number(value)>0
-      ? 'numberItem active'
-      : 'numberItem';
-
-      return `
-
-        <div class="${cls}">
-
-          <span>${code}</span>
-
-          <span>
-            ${formatNumber(value)}
-          </span>
-
-        </div>
-
-      `;
-
-    }
-  )
-  .join('');
+}
 
 
-  const agentHtml=
-  submittedAgents.length
+async function loadDetailData(
+  round
+){
 
-  ?
+  const r =
+  await api(
+    '/rest/v1/agent_submissions'+
+    '?round_id=eq.'+
+    encodeURIComponent(
+      round.id
+    )+
+    '&select=agent_id,number_code,points,submitted_at,updated_at'+
+    '&order=agent_id.asc,number_code.asc'
+  );
 
-  submittedAgents.map(
-    ([agentId,data])=>{
 
-      const agent=
-      agents.find(
-        a=>a.id===agentId
+  if(!r.ok){
+
+    document.getElementById(
+      'agentsList'
+    ).innerHTML =
+    '<div class="empty">读取代理数据失败</div>';
+
+    return;
+
+  }
+
+
+  const rows =
+  await r.json();
+
+
+  let total =
+  0;
+
+
+  const numbers =
+  {};
+
+
+  for(
+    let i=0;
+    i<100;
+    i++
+  ){
+
+    numbers[
+      String(i).padStart(
+        2,
+        '0'
+      )
+    ] = 0;
+
+  }
+
+
+  const grouped =
+  {};
+
+
+  rows.forEach(
+    row=>{
+
+      const p =
+      Number(
+        row.points || 0
       );
 
 
-      const name=
+      total += p;
+
+
+      const code =
+      String(
+        row.number_code || ''
+      ).padStart(
+        2,
+        '0'
+      );
+
+
+      if(
+        numbers[code] !==
+        undefined
+      ){
+
+        numbers[code] += p;
+
+      }
+
+
+      if(!grouped[row.agent_id]){
+
+        grouped[row.agent_id] =
+        [];
+
+      }
+
+
+      grouped[
+        row.agent_id
+      ].push(
+        row
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    'detailTotal'
+  ).textContent =
+  formatNumber(
+    total
+  );
+
+
+  document.getElementById(
+    'detailAgents'
+  ).textContent =
+  Object.keys(
+    grouped
+  ).length;
+
+
+  renderNumbers(
+    numbers
+  );
+
+
+  renderAgents(
+    grouped
+  );
+
+}
+
+
+function renderNumbers(
+  numbers
+){
+
+  const holder =
+  document.getElementById(
+    'numbersGrid'
+  );
+
+
+  holder.innerHTML =
+  '';
+
+
+  Object.keys(
+    numbers
+  ).forEach(
+    code=>{
+
+      const points =
+      numbers[code];
+
+
+      const div =
+      document.createElement(
+        'div'
+      );
+
+
+      div.className =
+      'numBox'+
+      (
+        points>0
+        ? ' active'
+        : ''
+      );
+
+
+      div.innerHTML = `
+
+        <span class="num">
+          ${code}
+        </span>
+
+        <span class="points">
+          ${formatNumber(points)}
+        </span>
+
+      `;
+
+
+      holder.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+function renderAgents(
+  grouped
+){
+
+  const holder =
+  document.getElementById(
+    'agentsList'
+  );
+
+
+  holder.innerHTML =
+  '';
+
+
+  const ids =
+  Object.keys(
+    grouped
+  );
+
+
+  if(!ids.length){
+
+    holder.innerHTML =
+    '<div class="empty">本期没有代理提交</div>';
+
+    return;
+
+  }
+
+
+  ids.forEach(
+    id=>{
+
+      const agent =
+      agentsMap[id];
+
+
+      const rows =
+      grouped[id];
+
+
+      let total =
+      0;
+
+
+      rows.forEach(
+        r=>{
+
+          total +=
+          Number(
+            r.points || 0
+          );
+
+        }
+      );
+
+
+      const card =
+      document.createElement(
+        'div'
+      );
+
+
+      card.className =
+      'agentCard';
+
+
+      const rate =
       agent
-      ? agent.display_name
-      : '未知代理';
+      ? agent.commission_rate
+      : null;
 
 
-      const rate=
-      agent
-      ? Number(agent.commission_rate)
-      : 0;
+      let html = `
+
+        <div class="agentName">
+          ${
+            escapeHtml(
+              agent
+              ? agent.display_name
+              : '未知代理'
+            )
+          }
+        </div>
+
+        <div class="agentMeta">
+          提交总积分：
+          ${formatNumber(total)}
+          ${
+            rate !== null
+            &&
+            rate !== undefined
+
+            ? '<br>代理比例：'+
+              escapeHtml(
+                String(rate)
+              )+
+              '%'
+
+            : ''
+          }
+        </div>
+
+        <div class="agentNumbers">
+
+      `;
 
 
-      const numbersHtml=
-      Object.entries(
-        data.numbers
+      rows
+      .filter(
+        row =>
+        Number(
+          row.points || 0
+        ) > 0
       )
-      .map(
-        ([code,value])=>{
+      .forEach(
+        row=>{
 
-          const cls=
-          Number(value)>0
-          ? 'numberItem active'
-          : 'numberItem';
+          html += `
 
-          return `
-
-            <div class="${cls}">
-
-              <span>${code}</span>
+            <div class="agentNum">
 
               <span>
-                ${formatNumber(value)}
+                ${
+                  escapeHtml(
+                    String(
+                      row.number_code
+                    ).padStart(
+                      2,
+                      '0'
+                    )
+                  )
+                }
               </span>
+
+              <strong>
+                ${
+                  formatNumber(
+                    row.points
+                  )
+                }
+              </strong>
 
             </div>
 
           `;
 
         }
-      )
-      .join('');
+      );
 
 
-      return `
+      html +=
+      '</div>';
 
-        <div class="agentBox">
 
-          <div class="agentName">
+      card.innerHTML =
+      html;
 
-            ${escapeHtml(name)}
 
-          </div>
-
-          <div class="agentMeta">
-
-            代理比例：${rate}%
-            <br>
-            提交总积分：
-            ${formatNumber(data.total)}
-
-          </div>
-
-          <button
-            class="dark smallBtn"
-            onclick="toggleAgent(
-              '${round.id}',
-              '${agentId}',
-              this
-            )">
-
-            查看代理 00–99 明细
-
-          </button>
-
-          <div
-            class="numberGrid agentNumbers"
-            id="agent-${round.id}-${agentId}">
-
-            ${numbersHtml}
-
-          </div>
-
-        </div>
-
-      `;
+      holder.appendChild(
+        card
+      );
 
     }
-  ).join('')
-
-  :
-
-  '<div class="empty">该期没有代理提交</div>';
-
-
-  return `
-
-  <div class="roundCard">
-
-    <div class="roundTop">
-
-      <div>
-
-        <div class="roundName">
-
-          ${round.round_date}
-          ·
-          ${getPeriodName(round.round_code)}
-
-        </div>
-
-        <div class="roundMeta">
-
-          截止：
-          ${formatMMT(round.deadline_at)}
-
-          <br>
-
-          结果：
-          ${round.result_number || '—'}
-
-        </div>
-
-      </div>
-
-      <div class="badge ${statusInfo.className}">
-
-        ${statusInfo.text}
-
-      </div>
-
-    </div>
-
-
-    <div class="roundStats">
-
-      <div class="stat">
-
-        <small>
-          提交总积分
-        </small>
-
-        <strong>
-          ${formatNumber(total)}
-        </strong>
-
-      </div>
-
-
-      <div class="stat">
-
-        <small>
-          已提交代理
-        </small>
-
-        <strong>
-          ${submittedAgents.length}
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="dark detailBtn"
-      onclick="toggleRound(
-        '${round.id}',
-        this
-      )">
-
-      查看本期详情
-
-    </button>
-
-
-    <div
-      class="detail"
-      id="round-${round.id}">
-
-
-      <div class="sectionTitle">
-        00–99 本期总汇总
-      </div>
-
-
-      <div class="numberGrid">
-
-        ${totalNumbersHtml}
-
-      </div>
-
-
-      <div
-        class="sectionTitle"
-        style="margin-top:16px">
-
-        本期代理提交
-
-      </div>
-
-
-      ${agentHtml}
-
-
-    </div>
-
-  </div>
-
-  `;
+  );
 
 }
 
 
-/* TOGGLE ROUND */
+function closeDetail(){
 
-function toggleRound(
-  id,
-  button
-){
+  history.replaceState(
+    {},
+    '',
+    '/history/index.html'
+  );
 
-  const el=
+
   document.getElementById(
-    'round-'+id
-  );
-
-  if(!el){
-    return;
-  }
-
-
-  const open=
-  el.classList.contains(
-    'openDetail'
+    'listCard'
+  ).classList.remove(
+    'hidden'
   );
 
 
-  el.classList.toggle(
-    'openDetail',
-    !open
-  );
-
-
-  button.textContent=
-
-  open
-
-  ? '查看本期详情'
-
-  : '收起本期详情';
-
-}
-
-
-/* TOGGLE AGENT */
-
-function toggleAgent(
-  roundId,
-  agentId,
-  button
-){
-
-  const el=
   document.getElementById(
-    'agent-'+
-    roundId+
-    '-'+
-    agentId
-  );
-
-  if(!el){
-    return;
-  }
-
-
-  const open=
-  el.classList.contains(
-    'openDetail'
+    'detailCard'
+  ).classList.add(
+    'hidden'
   );
 
 
-  el.classList.toggle(
-    'openDetail',
-    !open
+  document.getElementById(
+    'numbersCard'
+  ).classList.add(
+    'hidden'
   );
 
 
-  button.textContent=
-
-  open
-
-  ? '查看代理 00–99 明细'
-
-  : '收起代理 00–99 明细';
+  document.getElementById(
+    'agentsCard'
+  ).classList.add(
+    'hidden'
+  );
 
 }
 
 
-/* STATUS */
-
-function getStatusInfo(status){
-
-  if(status==='open'){
-
-    return{
-      text:'开放中',
-      className:'open'
-    };
-
-  }
-
-
-  if(status==='settled'){
-
-    return{
-      text:'已结算',
-      className:'settled'
-    };
-
-  }
-
-
-  return{
-    text:'已关闭',
-    className:'closed'
-  };
-
-}
-
-
-/* PERIOD */
-
-function getPeriodName(code){
+function periodName(
+  code
+){
 
   if(code==='1030'){
+
     return '上午 10:30';
+
   }
 
+
   if(code==='1530'){
+
     return '下午 15:30';
+
   }
+
 
   return code || '—';
 
 }
 
 
-/* TIME */
+function statusName(
+  status
+){
 
-function formatMMT(value){
+  if(status==='open'){
+
+    return '开放中';
+
+  }
+
+
+  if(status==='closed'){
+
+    return '已结束';
+
+  }
+
+
+  if(status==='settled'){
+
+    return '已结算';
+
+  }
+
+
+  return status || '—';
+
+}
+
+
+function statusClass(
+  status
+){
+
+  if(status==='open'){
+
+    return 'open';
+
+  }
+
+
+  if(
+    status==='closed'
+    ||
+    status==='settled'
+  ){
+
+    return 'closed';
+
+  }
+
+
+  return 'other';
+
+}
+
+
+function formatMMT(
+  value
+){
 
   if(!value){
+
     return '—';
+
   }
 
 
   return new Intl.DateTimeFormat(
     'zh-CN',
     {
-      timeZone:'Asia/Yangon',
+      timeZone:
+      'Asia/Yangon',
+
       year:'numeric',
       month:'2-digit',
       day:'2-digit',
+
       hour:'2-digit',
       minute:'2-digit',
-      second:'2-digit',
+
       hour12:false
     }
   )
   .format(
-    new Date(value)
+    new Date(
+      value
+    )
   )
   +' MMT';
 
 }
 
 
-/* FORMAT */
-
-function formatNumber(value){
+function formatNumber(
+  value
+){
 
   return Number(
     value || 0
-  )
-  .toLocaleString(
+  ).toLocaleString(
     'en-US',
     {
       maximumFractionDigits:2
@@ -1228,30 +1483,29 @@ function formatNumber(value){
 }
 
 
-function escapeHtml(text){
+function escapeHtml(
+  value
+){
 
-  return String(text)
-
+  return String(
+    value ?? ''
+  )
   .replaceAll(
     '&',
     '&amp;'
   )
-
   .replaceAll(
     '<',
     '&lt;'
   )
-
   .replaceAll(
     '>',
     '&gt;'
   )
-
   .replaceAll(
     '"',
     '&quot;'
   )
-
   .replaceAll(
     "'",
     '&#039;'
@@ -1260,12 +1514,27 @@ function escapeHtml(text){
 }
 
 
-/* START */
+async function start(){
 
-loadHistory();
+  const ok =
+  await verifyAdmin();
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  await loadAll();
+
+}
+
+
+start();
 
 </script>
 
 </body>
-
 </html>
