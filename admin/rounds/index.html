@@ -1,42 +1,19 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1">
-
-<meta
-  name="theme-color"
-  content="#09090a">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
 <title>金满堂 · 期数管理</title>
 
 <style>
-
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  background:
-  radial-gradient(
-    circle at top,
-    #251907 0,
-    #0d0c0a 40%,
-    #070708 100%
-  );
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f5edd9;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Arial,
-  sans-serif
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
 
 .wrap{
@@ -72,9 +49,7 @@ body{
   text-decoration:none;
   color:#efd477;
   background:#181819;
-  border:
-  1px solid
-  rgba(214,168,63,.30);
+  border:1px solid rgba(214,168,63,.30);
   border-radius:18px;
   padding:14px 17px;
   font-weight:900;
@@ -83,15 +58,8 @@ body{
 }
 
 .card{
-  background:
-  linear-gradient(
-    180deg,
-    #151515,
-    #0d0d0e
-  );
-  border:
-  1px solid
-  rgba(214,168,63,.30);
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.30);
   border-radius:25px;
   padding:20px;
   margin-bottom:18px
@@ -112,9 +80,7 @@ body{
 
 .box{
   background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:17px;
   padding:16px
 }
@@ -130,8 +96,7 @@ body{
   display:block;
   color:#ebcd72;
   font-size:18px;
-  line-height:1.45;
-  word-break:break-word
+  line-height:1.45
 }
 
 .green{
@@ -140,10 +105,6 @@ body{
 
 .red{
   color:#e88e8e!important
-}
-
-.goldText{
-  color:#e9c96f!important
 }
 
 button{
@@ -155,26 +116,14 @@ button{
   cursor:pointer
 }
 
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed
-}
-
 .gold{
   border:0;
-  background:
-  linear-gradient(
-    180deg,
-    #f0d47d,
-    #bd8121
-  );
+  background:linear-gradient(180deg,#f0d47d,#bd8121);
   color:#161008
 }
 
 .dark{
-  border:
-  1px solid
-  rgba(214,168,63,.28);
+  border:1px solid rgba(214,168,63,.28);
   background:#181819;
   color:#efd477
 }
@@ -191,8 +140,7 @@ button:disabled{
   color:#9b9384;
   font-size:12px;
   margin-top:13px;
-  line-height:1.6;
-  word-break:break-word
+  line-height:1.6
 }
 
 .success{
@@ -213,20 +161,6 @@ button:disabled{
   line-height:1.7
 }
 
-.pendingWarning{
-  display:none;
-  background:#261d10;
-  border:
-  1px solid
-  rgba(225,181,72,.30);
-  border-radius:15px;
-  padding:14px;
-  color:#e8cb75;
-  font-size:11px;
-  line-height:1.7;
-  margin-bottom:15px
-}
-
 .formGroup{
   margin-bottom:13px
 }
@@ -235,16 +169,13 @@ label{
   display:block;
   color:#988f7e;
   font-size:11px;
-  margin:
-  0 0 7px 2px
+  margin:0 0 7px 2px
 }
 
 input,
 select{
   width:100%;
-  border:
-  1px solid
-  rgba(214,168,63,.24);
+  border:1px solid rgba(214,168,63,.24);
   background:#101011;
   color:#fff;
   border-radius:13px;
@@ -265,9 +196,7 @@ select{
   text-align:center;
   padding:15px;
   border-radius:14px;
-  border:
-  1px solid
-  rgba(214,168,63,.27);
+  border:1px solid rgba(214,168,63,.27);
   background:#171718;
   color:#e6cc77;
   font-weight:900
@@ -280,76 +209,6 @@ select{
   margin-top:15px
 }
 
-.sessionBox{
-  background:#101011;
-  border:
-  1px solid
-  rgba(214,168,63,.18);
-  border-radius:14px;
-  padding:13px;
-  color:#8e8677;
-  font-size:11px;
-  line-height:1.6;
-  margin-bottom:17px
-}
-
-.sessionBox strong{
-  color:#71d49d
-}
-
-.recentRound{
-  background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
-  border-radius:14px;
-  padding:13px;
-  margin-bottom:9px
-}
-
-.recentTop{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:flex-start
-}
-
-.recentName{
-  color:#e9cc72;
-  font-size:14px;
-  font-weight:900;
-  line-height:1.45
-}
-
-.recentStatus{
-  padding:5px 8px;
-  border-radius:99px;
-  font-size:10px;
-  white-space:nowrap
-}
-
-.recentStatus.open{
-  background:#153124;
-  color:#71d49d
-}
-
-.recentStatus.closed{
-  background:#342a15;
-  color:#e3c46b
-}
-
-.recentStatus.settled{
-  background:#172a34;
-  color:#8dcfe8
-}
-
-.recentMeta{
-  color:#7f786b;
-  font-size:10px;
-  line-height:1.65;
-  margin-top:7px
-}
-
 .foot{
   text-align:center;
   color:#6f6a61;
@@ -358,31 +217,20 @@ select{
 }
 
 @media(max-width:500px){
-
   .headTitle{
     font-size:25px
   }
-
-  .actions{
-    grid-template-columns:1fr
-  }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <div class="wrap">
 
-
   <div class="header">
 
     <div>
-
       <div class="headTitle">
         金满堂 · 期数管理
       </div>
@@ -390,102 +238,54 @@ select{
       <div class="headSub">
         ADMIN / ROUND CONTROL
       </div>
-
     </div>
-
 
     <a
       class="back"
       href="/admin/">
-
       返回总后台
-
     </a>
 
-  </div>
-
-
-  <div class="sessionBox">
-
-    管理员状态：
-
-    <strong id="adminState">
-      正在验证...
-    </strong>
-
-  </div>
-
-
-  <div
-    class="pendingWarning"
-    id="pendingWarning">
   </div>
 
 
   <div class="card">
 
     <div class="title">
-      当前开放期
+      当前期数
     </div>
-
 
     <div class="grid">
 
-
       <div class="box">
-
-        <small>
-          当前期
-        </small>
-
+        <small>当前期</small>
         <strong id="roundName">
           正在读取...
         </strong>
-
       </div>
 
-
       <div class="box">
-
-        <small>
-          状态
-        </small>
-
+        <small>状态</small>
         <strong id="roundStatus">
           正在读取...
         </strong>
-
       </div>
 
-
       <div class="box">
-
-        <small>
-          截止时间
-        </small>
-
+        <small>截止时间</small>
         <strong id="deadline">
           —
         </strong>
-
       </div>
 
-
       <div class="box">
-
-        <small>
-          Myanmar Time
-        </small>
-
+        <small>Myanmar Time</small>
         <strong id="mmtClock">
           —
         </strong>
-
       </div>
 
-
     </div>
-
 
     <div class="note">
       当前期数据每 20 秒自动刷新
@@ -497,52 +297,29 @@ select{
   <div class="card">
 
     <div class="title">
-      当前期操作
+      本期操作
     </div>
-
 
     <div class="actions">
 
-
       <button
-        id="closeBtn"
         class="gold"
         onclick="closeRound()">
-
         关闭当前期
-
       </button>
-
 
       <button
         class="dark"
         onclick="refreshRound()">
-
         刷新当前状态
-
       </button>
 
-
     </div>
-
 
     <div class="warning">
-
-      「关闭当前期」只会把该期状态从
-      <strong>open</strong>
-      改成
-      <strong>closed</strong>。
-
-      <br><br>
-
-      它不会删除代理数据，也不会提前写入「已结算」。
-
-      <br><br>
-
-      真正发布开奖结果后，开奖流程才会负责最终结算。
-
+      关闭当前期只会把当前期状态改成「已关闭」。
+      已经提交的代理数据不会删除，之后仍可在历史期数查看。
     </div>
-
 
     <div
       class="msg"
@@ -557,7 +334,6 @@ select{
     <div class="title">
       开启下一期
     </div>
-
 
     <div class="formGroup">
 
@@ -574,7 +350,6 @@ select{
 
     <div class="formGrid">
 
-
       <div class="formGroup">
 
         <label>
@@ -586,11 +361,11 @@ select{
           onchange="changePeriod()">
 
           <option value="1030">
-            上午 10:30
+            上午 11:45
           </option>
 
           <option value="1530">
-            下午 15:30
+            下午 15:45
           </option>
 
         </select>
@@ -607,36 +382,28 @@ select{
         <input
           id="newDeadline"
           type="time"
-          value="15:00">
+          value="15:15">
 
       </div>
-
 
     </div>
 
 
     <button
-      id="createBtn"
       class="gold"
       onclick="createRound()">
-
       开启这一期
-
     </button>
 
 
     <div class="warning">
-
-      系统不允许同时存在两个「开放中」期数。
-
+      上午期正式开奖时间为 11:45，默认截止时间为 11:15。
       <br><br>
-
-      如果上一期已经关闭、但还没有开奖，可以先开启下一期。
-
-      Admin 首页开奖时会优先处理「已经截止但还没有开奖结果」的旧一期，不会误给新一期开奖。
-
+      下午期正式开奖时间为 15:45，默认截止时间为 15:15。
+      <br><br>
+      系统不会覆盖旧一期。如果数据库仍存在「开放中」的期数，
+      系统会阻止创建下一期。
     </div>
-
 
     <div
       class="msg"
@@ -649,48 +416,14 @@ select{
   <div class="card">
 
     <div class="title">
-      最近期数状态
-    </div>
-
-
-    <div id="recentRounds">
-
-      <div class="msg">
-        正在读取...
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="title">
       历史数据
     </div>
-
 
     <a
       class="history"
       href="/history/">
-
       📚 查看全部历史期数
-
     </a>
-
-  </div>
-
-
-  <div class="card">
-
-    <button
-      class="dark"
-      onclick="location.href='/admin/'">
-
-      ← 返回 Admin 总后台
-
-    </button>
 
   </div>
 
@@ -699,7 +432,6 @@ select{
     © 2022 JIN MANTANG · ROUND MANAGEMENT
   </div>
 
-
 </div>
 
 
@@ -707,7 +439,6 @@ select{
 
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
-
 
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
@@ -734,13 +465,9 @@ let currentRound =
 null;
 
 
-let recentRounds =
-[];
-
-
-/* =====================================
+/* =========================
    API
-===================================== */
+========================= */
 
 async function api(
   path,
@@ -764,23 +491,16 @@ async function api(
 }
 
 
-/* =====================================
-   ADMIN VERIFY
-===================================== */
+/* =========================
+   VERIFY ADMIN
+========================= */
 
 async function verifyAdmin(){
 
-  const state =
-  document.getElementById(
-    'adminState'
-  );
-
-
   if(!token){
 
-    state.textContent =
-    '没有登录';
-
+    location.href =
+    '/admin/';
 
     return false;
 
@@ -797,9 +517,7 @@ async function verifyAdmin(){
 
     if(!userRes.ok){
 
-      throw new Error(
-        'LOGIN_EXPIRED'
-      );
+      throw new Error();
 
     }
 
@@ -822,29 +540,21 @@ async function verifyAdmin(){
 
     if(!adminRes.ok){
 
-      throw new Error(
-        'ADMIN_CHECK_FAILED'
-      );
+      throw new Error();
 
     }
 
 
-    const rows =
+    const admins =
     await adminRes.json();
 
 
-    if(!rows.length){
+    if(!admins.length){
 
-      throw new Error(
-        'NOT_ADMIN'
-      );
+      throw new Error();
 
     }
 
-
-    /*
-      保证两个 Storage 始终一致。
-    */
 
     localStorage.setItem(
       'jmt_access_token',
@@ -858,17 +568,23 @@ async function verifyAdmin(){
     );
 
 
-    state.textContent =
-    '已登录';
-
-
     return true;
 
 
   }catch(e){
 
-    state.textContent =
-    '登录已失效';
+    localStorage.removeItem(
+      'jmt_access_token'
+    );
+
+
+    sessionStorage.removeItem(
+      'jmt_access_token'
+    );
+
+
+    location.href =
+    '/admin/';
 
 
     return false;
@@ -878,18 +594,19 @@ async function verifyAdmin(){
 }
 
 
-/* =====================================
-   LOAD ROUNDS
-===================================== */
+/* =========================
+   GET OPEN ROUND
+========================= */
 
-async function loadRounds(){
+async function getOpenRound(){
 
   const r =
   await api(
     '/rest/v1/rounds'+
-    '?select=id,round_date,round_code,deadline_at,status,result_number,created_at,settled_at'+
-    '&order=round_date.desc,created_at.desc'+
-    '&limit=60'
+    '?status=eq.open'+
+    '&select=id,round_date,round_code,deadline_at,status,result_number,created_at,settled_at'+
+    '&order=created_at.desc'+
+    '&limit=1'
   );
 
 
@@ -897,56 +614,37 @@ async function loadRounds(){
 
     throw new Error(
       await r.text()
-      ||
-      '无法读取期数'
     );
 
   }
 
 
-  recentRounds =
+  const rows =
   await r.json();
 
 
-  /*
-    当前开放期只能取 status=open。
-  */
-
-  currentRound =
-  recentRounds.find(
-    r =>
-    r.status ===
-    'open'
-  )
-
-  ||
-
+  return rows.length
+  ?
+  rows[0]
+  :
   null;
 
 }
 
 
-/* =====================================
-   LOAD PAGE
-===================================== */
+/* =========================
+   LOAD CURRENT ROUND
+========================= */
 
 async function loadRound(){
 
   try{
 
-    await loadRounds();
+    currentRound =
+    await getOpenRound();
 
 
     renderRound();
-
-
-    renderPendingWarning();
-
-
-    renderRecentRounds();
-
-
-    fillNextDefaults();
 
 
   }catch(e){
@@ -973,9 +671,9 @@ async function loadRound(){
 }
 
 
-/* =====================================
-   CURRENT ROUND
-===================================== */
+/* =========================
+   RENDER
+========================= */
 
 function renderRound(){
 
@@ -997,12 +695,6 @@ function renderRound(){
   );
 
 
-  const closeBtn =
-  document.getElementById(
-    'closeBtn'
-  );
-
-
   if(!currentRound){
 
     name.textContent =
@@ -1021,8 +713,7 @@ function renderRound(){
     '—';
 
 
-    closeBtn.disabled =
-    true;
+    fillNextDefaults();
 
 
     return;
@@ -1038,33 +729,12 @@ function renderRound(){
   );
 
 
-  const passed =
-  Date.now()
-  >=
-  new Date(
-    currentRound.deadline_at
-  ).getTime();
+  status.textContent =
+  '开放中';
 
 
-  if(passed){
-
-    status.textContent =
-    '已到截止时间';
-
-
-    status.className =
-    'red';
-
-  }else{
-
-    status.textContent =
-    '开放中';
-
-
-    status.className =
-    'green';
-
-  }
+  status.className =
+  'green';
 
 
   deadline.textContent =
@@ -1073,103 +743,14 @@ function renderRound(){
   );
 
 
-  closeBtn.disabled =
-  false;
+  fillNextDefaults();
 
 }
 
 
-/* =====================================
-   PENDING RESULT WARNING
-===================================== */
-
-function renderPendingWarning(){
-
-  const box =
-  document.getElementById(
-    'pendingWarning'
-  );
-
-
-  const now =
-  Date.now();
-
-
-  const pending =
-  recentRounds
-  .filter(
-    r =>
-    !r.result_number
-    &&
-    new Date(
-      r.deadline_at
-    ).getTime()
-    <= now
-  )
-  .sort(
-    (a,b) =>
-    new Date(
-      a.deadline_at
-    )
-    -
-    new Date(
-      b.deadline_at
-    )
-  );
-
-
-  if(!pending.length){
-
-    box.style.display =
-    'none';
-
-
-    box.textContent =
-    '';
-
-
-    return;
-
-  }
-
-
-  const oldest =
-  pending[0];
-
-
-  box.style.display =
-  'block';
-
-
-  box.innerHTML =
-
-  '⚠️ 目前有 '+
-  pending.length+
-  ' 个已经截止但还没有开奖结果的期数。'+
-
-  '<br><br>'+
-
-  '最早待开奖：'+
-  escapeHtml(
-    oldest.round_date
-  )+
-  ' · '+
-  escapeHtml(
-    periodName(
-      oldest.round_code
-    )
-  )+
-
-  '<br><br>'+
-
-  '可以继续管理下一期，但正式开奖请回 Admin 首页处理。';
-
-}
-
-
-/* =====================================
+/* =========================
    CLOSE ROUND
-===================================== */
+========================= */
 
 async function closeRound(){
 
@@ -1179,41 +760,24 @@ async function closeRound(){
   );
 
 
-  const button =
-  document.getElementById(
-    'closeBtn'
-  );
-
-
   msg.className =
   'msg';
 
 
   try{
 
-    await loadRounds();
-
-
     currentRound =
-    recentRounds.find(
-      r =>
-      r.status ===
-      'open'
-    )
-
-    ||
-
-    null;
+    await getOpenRound();
 
 
     if(!currentRound){
 
-      msg.className =
-      'msg success';
-
-
       msg.textContent =
       '目前已经没有开放中的期数';
+
+
+      msg.className =
+      'msg success';
 
 
       await loadRound();
@@ -1224,42 +788,15 @@ async function closeRound(){
     }
 
 
-    const passed =
-    Date.now()
-    >=
-    new Date(
-      currentRound.deadline_at
-    ).getTime();
-
-
-    let confirmText =
-
-    '确定关闭这一期？\n\n'+
-
-    currentRound.round_date+
-    ' · '+
-    periodName(
-      currentRound.round_code
-    )+
-
-    '\n\n代理提交记录不会删除。'+
-
-    '\n本操作不会提前写入“已结算”。';
-
-
-    if(!passed){
-
-      confirmText +=
-
-      '\n\n⚠️ 注意：现在还没有到截止时间。'+
-      '\n如果现在关闭，代理会立即不能继续提交。';
-
-    }
-
-
     const ok =
     confirm(
-      confirmText
+      '确定关闭当前期？\n\n'+
+      currentRound.round_date+
+      ' · '+
+      periodName(
+        currentRound.round_code
+      )+
+      '\n\n代理提交记录不会删除。'
     );
 
 
@@ -1270,21 +807,9 @@ async function closeRound(){
     }
 
 
-    button.disabled =
-    true;
-
-
     msg.textContent =
-    '正在关闭本期...';
+    '正在关闭当前期...';
 
-
-    /*
-      这里只关闭。
-
-      不写 settled_at。
-
-      settled_at 应该在正式开奖/结算时写。
-    */
 
     const r =
     await api(
@@ -1306,56 +831,29 @@ async function closeRound(){
 
         body:
         JSON.stringify({
-          status:
-          'closed'
+          status:'closed',
+          settled_at:
+          new Date()
+          .toISOString()
         })
       }
     );
 
 
-    const text =
-    await r.text();
-
-
     if(!r.ok){
 
       throw new Error(
-        text
-        ||
-        '关闭失败'
+        await r.text()
       );
 
     }
 
 
-    let changed =
-    [];
-
-
-    try{
-
-      changed =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      [];
-
-    }catch(e){
-
-      changed =
-      [];
-
-    }
+    const changed =
+    await r.json();
 
 
     if(
-      !Array.isArray(
-        changed
-      )
-      ||
       !changed.length
       ||
       changed[0].status !==
@@ -1363,54 +861,66 @@ async function closeRound(){
     ){
 
       throw new Error(
-        '数据库没有确认本期已经关闭'
+        '数据库没有确认当前期已关闭'
       );
 
     }
+
+
+    const stillOpen =
+    await getOpenRound();
+
+
+    if(
+      stillOpen
+      &&
+      stillOpen.id ===
+      currentRound.id
+    ){
+
+      throw new Error(
+        '数据库仍然显示当前期为开放中'
+      );
+
+    }
+
+
+    currentRound =
+    stillOpen;
+
+
+    msg.textContent =
+    '✓ 当前期已经关闭，数据已保留到历史记录';
 
 
     msg.className =
     'msg success';
 
 
-    msg.textContent =
-    '✓ 本期已经关闭，代理提交数据全部保留';
-
-
-    await loadRound();
+    renderRound();
 
 
   }catch(e){
+
+    msg.textContent =
+    '关闭失败：'+
+    e.message;
+
 
     msg.className =
     'msg error';
 
 
-    msg.textContent =
-    '关闭失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
     await loadRound();
-
-
-  }finally{
-
-    button.disabled =
-    !currentRound;
 
   }
 
 }
 
 
-/* =====================================
+/* =========================
    CREATE ROUND
-===================================== */
+========================= */
 
 async function createRound(){
 
@@ -1420,34 +930,14 @@ async function createRound(){
   );
 
 
-  const button =
-  document.getElementById(
-    'createBtn'
-  );
-
-
   msg.className =
   'msg';
 
 
   try{
 
-    /*
-      再读取一次数据库。
-
-      防止用户页面打开很久以后，
-      后台实际已经存在开放期。
-    */
-
-    await loadRounds();
-
-
     const realOpenRound =
-    recentRounds.find(
-      r =>
-      r.status ===
-      'open'
-    );
+    await getOpenRound();
 
 
     if(realOpenRound){
@@ -1459,18 +949,17 @@ async function createRound(){
       renderRound();
 
 
-      msg.className =
-      'msg error';
-
-
       msg.textContent =
-
       '目前仍有开放期：'+
       realOpenRound.round_date+
       ' · '+
       periodName(
         realOpenRound.round_code
       );
+
+
+      msg.className =
+      'msg error';
 
 
       return;
@@ -1502,12 +991,12 @@ async function createRound(){
       !deadlineTime
     ){
 
-      msg.className =
-      'msg error';
-
-
       msg.textContent =
       '请选择日期和截止时间';
+
+
+      msg.className =
+      'msg error';
 
 
       return;
@@ -1524,131 +1013,30 @@ async function createRound(){
 
     if(!deadlineISO){
 
-      msg.className =
-      'msg error';
-
-
       msg.textContent =
       '截止时间格式错误';
 
 
-      return;
-
-    }
-
-
-    /*
-      检查是否已经存在同一天同一期。
-
-      防止误点两次。
-    */
-
-    const duplicate =
-    recentRounds.find(
-      r =>
-      r.round_date === date
-      &&
-      r.round_code === code
-    );
-
-
-    if(duplicate){
-
       msg.className =
       'msg error';
 
 
-      msg.textContent =
-
-      '这一期已经存在：'+
-      date+
-      ' · '+
-      periodName(
-        code
-      )+
-      ' · '+
-
-      statusName(
-        duplicate.status
-      );
-
-
       return;
-
-    }
-
-
-    const deadlineMs =
-    new Date(
-      deadlineISO
-    ).getTime();
-
-
-    if(
-      !Number.isFinite(
-        deadlineMs
-      )
-    ){
-
-      msg.className =
-      'msg error';
-
-
-      msg.textContent =
-      '截止时间无效';
-
-
-      return;
-
-    }
-
-
-    const pendingResults =
-    recentRounds.filter(
-      r =>
-      !r.result_number
-      &&
-      new Date(
-        r.deadline_at
-      ).getTime()
-      <= Date.now()
-    );
-
-
-    let confirmText =
-
-    '确定开启新一期？\n\n'+
-
-    date+
-    ' · '+
-    periodName(
-      code
-    )+
-
-    '\n截止：'+
-    deadlineTime+
-    ' MMT';
-
-
-    if(
-      pendingResults.length
-    ){
-
-      confirmText +=
-
-      '\n\n⚠️ 目前还有 '+
-      pendingResults.length+
-      ' 个旧期已经截止但尚未开奖。'+
-
-      '\n开启新一期不会删除旧期。'+
-      '\nAdmin 首页会优先给旧期开奖。';
 
     }
 
 
     const ok =
     confirm(
-      confirmText
+      '确定开启新一期？\n\n'+
+      date+
+      ' · '+
+      periodName(
+        code
+      )+
+      '\n截止：'+
+      deadlineTime+
+      ' MMT'
     );
 
 
@@ -1657,10 +1045,6 @@ async function createRound(){
       return;
 
     }
-
-
-    button.disabled =
-    true;
 
 
     msg.textContent =
@@ -1699,51 +1083,20 @@ async function createRound(){
     );
 
 
-    const text =
-    await r.text();
-
-
     if(!r.ok){
 
       throw new Error(
-        text
-        ||
-        '创建失败'
+        await r.text()
       );
 
     }
 
 
-    let created =
-    [];
+    const created =
+    await r.json();
 
 
-    try{
-
-      created =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      [];
-
-    }catch(e){
-
-      created =
-      [];
-
-    }
-
-
-    if(
-      !Array.isArray(
-        created
-      )
-      ||
-      !created.length
-    ){
+    if(!created.length){
 
       throw new Error(
         '数据库没有返回新一期'
@@ -1752,39 +1105,11 @@ async function createRound(){
     }
 
 
-    await loadRounds();
-
-
-    const realCreated =
-    recentRounds.find(
-      r =>
-      r.id ===
-      created[0].id
-      &&
-      r.status ===
-      'open'
-    );
-
-
-    if(!realCreated){
-
-      throw new Error(
-        '数据库没有确认新一期为开放状态'
-      );
-
-    }
-
-
     currentRound =
-    realCreated;
-
-
-    msg.className =
-    'msg success';
+    await getOpenRound();
 
 
     msg.textContent =
-
     '✓ 新一期创建成功：'+
     date+
     ' · '+
@@ -1793,49 +1118,34 @@ async function createRound(){
     );
 
 
+    msg.className =
+    'msg success';
+
+
     renderRound();
 
 
-    renderPendingWarning();
-
-
-    renderRecentRounds();
-
-
-    fillNextDefaults();
-
-
   }catch(e){
+
+    msg.textContent =
+    '创建失败：'+
+    e.message;
+
 
     msg.className =
     'msg error';
 
 
-    msg.textContent =
-    '创建失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
     await loadRound();
-
-
-  }finally{
-
-    button.disabled =
-    false;
 
   }
 
 }
 
 
-/* =====================================
+/* =========================
    REFRESH
-===================================== */
+========================= */
 
 async function refreshRound(){
 
@@ -1850,57 +1160,25 @@ async function refreshRound(){
 
 
   msg.textContent =
-  '正在读取数据库最新状态...';
+  '正在刷新...';
 
 
-  try{
-
-    await loadRound();
+  await loadRound();
 
 
-    msg.className =
-    'msg success';
+  msg.textContent =
+  '✓ 已读取数据库最新状态';
 
 
-    msg.textContent =
-    '✓ 已读取数据库最新状态';
-
-
-    setTimeout(
-      ()=>{
-
-        if(
-          msg.textContent ===
-          '✓ 已读取数据库最新状态'
-        ){
-
-          msg.textContent =
-          '';
-
-        }
-
-      },
-      1800
-    );
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '刷新失败';
-
-  }
+  msg.className =
+  'msg success';
 
 }
 
 
-/* =====================================
-   NEXT DEFAULTS
-===================================== */
+/* =========================
+   DEFAULT NEXT ROUND
+========================= */
 
 function fillNextDefaults(){
 
@@ -1916,12 +1194,12 @@ function fillNextDefaults(){
   );
 
 
-  /*
-    有开放期：
-    根据开放期推算下一期。
-  */
-
   if(currentRound){
+
+    /*
+      如果当前是上午期，
+      下一期默认还是当天的下午期。
+    */
 
     if(
       currentRound.round_code ===
@@ -1935,7 +1213,14 @@ function fillNextDefaults(){
       codeInput.value =
       '1530';
 
-    }else{
+    }
+
+    /*
+      如果当前是下午期，
+      下一期默认是第二天上午期。
+    */
+
+    else{
 
       dateInput.value =
       addDays(
@@ -1949,73 +1234,44 @@ function fillNextDefaults(){
 
     }
 
-
-    changePeriod();
-
-
-    return;
-
   }
 
+  else{
 
-  /*
-    没有开放期：
-    根据数据库最新一期推算。
-  */
-
-  const latest =
-  recentRounds[0];
+    dateInput.value =
+    todayMMT();
 
 
-  if(latest){
+    /*
+      根据当前缅甸时间自动判断，
+      尽量给出最合理的下一期。
+    */
+
+    const now =
+    getMMTMinutes();
+
 
     if(
-      latest.round_code ===
-      '1030'
+      now <
+      11*60+15
     ){
-
-      dateInput.value =
-      latest.round_date;
-
-
-      codeInput.value =
-      '1530';
-
-    }else{
-
-      dateInput.value =
-      addDays(
-        latest.round_date,
-        1
-      );
-
 
       codeInput.value =
       '1030';
 
     }
 
-  }else{
-
-    dateInput.value =
-    todayMMT();
-
-
-    const hour =
-    currentMMTHour();
-
-
-    if(hour < 10){
-
-      codeInput.value =
-      '1030';
-
-    }else if(hour < 15){
+    else if(
+      now <
+      15*60+15
+    ){
 
       codeInput.value =
       '1530';
 
-    }else{
+    }
+
+    else{
 
       dateInput.value =
       addDays(
@@ -2037,9 +1293,9 @@ function fillNextDefaults(){
 }
 
 
-/* =====================================
-   PERIOD CHANGE
-===================================== */
+/* =========================
+   PERIOD DEFAULT DEADLINE
+========================= */
 
 function changePeriod(){
 
@@ -2049,162 +1305,43 @@ function changePeriod(){
   ).value;
 
 
+  /*
+    正式规则：
+
+    上午 11:45 开奖
+    上午 11:15 截止
+
+    下午 15:45 开奖
+    下午 15:15 截止
+  */
+
   document.getElementById(
     'newDeadline'
   ).value =
+
   code ===
   '1030'
 
   ?
 
-  '10:00'
+  '11:15'
 
   :
 
-  '15:00';
+  '15:15';
 
 }
 
 
-/* =====================================
-   RECENT ROUNDS
-===================================== */
-
-function renderRecentRounds(){
-
-  const holder =
-  document.getElementById(
-    'recentRounds'
-  );
-
-
-  if(!recentRounds.length){
-
-    holder.innerHTML =
-
-    '<div class="msg">'+
-    '暂无期数'+
-    '</div>';
-
-
-    return;
-
-  }
-
-
-  holder.innerHTML =
-  recentRounds
-  .slice(
-    0,
-    8
-  )
-  .map(
-    round=>{
-
-
-      const result =
-      round.result_number
-      ?
-      String(
-        round.result_number
-      ).padStart(
-        2,
-        '0'
-      )
-      :
-      '未开奖';
-
-
-      return `
-
-      <div class="recentRound">
-
-
-        <div class="recentTop">
-
-
-          <div class="recentName">
-
-            ${escapeHtml(
-              round.round_date
-            )}
-
-            ·
-
-            ${escapeHtml(
-              periodName(
-                round.round_code
-              )
-            )}
-
-          </div>
-
-
-          <div
-            class="recentStatus ${statusClass(round.status)}">
-
-            ${escapeHtml(
-              statusName(
-                round.status
-              )
-            )}
-
-          </div>
-
-
-        </div>
-
-
-        <div class="recentMeta">
-
-          截止：
-          ${escapeHtml(
-            formatMMT(
-              round.deadline_at
-            )
-          )}
-
-          <br>
-
-          开奖结果：
-          ${escapeHtml(
-            result
-          )}
-
-        </div>
-
-
-      </div>
-
-      `;
-
-    }
-  )
-  .join('');
-
-}
-
-
-/* =====================================
-   MMT CLOCK
-===================================== */
+/* =========================
+   CLOCK
+========================= */
 
 function updateClock(){
 
-  const el =
   document.getElementById(
     'mmtClock'
-  );
-
-
-  if(!el){
-
-    return;
-
-  }
-
-
-  el.textContent =
+  ).textContent =
   new Intl.DateTimeFormat(
     'zh-CN',
     {
@@ -2217,16 +1354,72 @@ function updateClock(){
 
       hour12:false
     }
-  ).format(
+  )
+  .format(
     new Date()
   );
 
 }
 
 
-/* =====================================
+/* =========================
+   CURRENT MMT MINUTES
+========================= */
+
+function getMMTMinutes(){
+
+  const parts =
+  new Intl.DateTimeFormat(
+    'en-GB',
+    {
+      timeZone:
+      'Asia/Yangon',
+
+      hour:'2-digit',
+      minute:'2-digit',
+
+      hour12:false
+    }
+  )
+  .formatToParts(
+    new Date()
+  );
+
+
+  const map =
+  {};
+
+
+  parts.forEach(
+    p=>{
+
+      map[
+        p.type
+      ] =
+      p.value;
+
+    }
+  );
+
+
+  return (
+    Number(
+      map.hour || 0
+    )
+    *
+    60
+  )
+  +
+  Number(
+    map.minute || 0
+  );
+
+}
+
+
+/* =========================
    FORMAT MMT
-===================================== */
+========================= */
 
 function formatMMT(
   value
@@ -2254,7 +1447,8 @@ function formatMMT(
 
       hour12:false
     }
-  ).format(
+  )
+  .format(
     new Date(
       value
     )
@@ -2265,9 +1459,9 @@ function formatMMT(
 }
 
 
-/* =====================================
-   MMT LOCAL → ISO UTC
-===================================== */
+/* =========================
+   MMT TO ISO
+========================= */
 
 function mmtToISO(
   date,
@@ -2283,7 +1477,9 @@ function mmtToISO(
     ] =
     date
     .split('-')
-    .map(Number);
+    .map(
+      Number
+    );
 
 
     const [
@@ -2292,32 +1488,10 @@ function mmtToISO(
     ] =
     time
     .split(':')
-    .map(Number);
+    .map(
+      Number
+    );
 
-
-    if(
-      !y
-      ||
-      !m
-      ||
-      !d
-      ||
-      !Number.isFinite(hh)
-      ||
-      !Number.isFinite(mm)
-    ){
-
-      return null;
-
-    }
-
-
-    /*
-      Myanmar = UTC + 6:30
-
-      因此：
-      MMT 时间 - 6小时30分钟 = UTC
-    */
 
     const utc =
     Date.UTC(
@@ -2339,7 +1513,8 @@ function mmtToISO(
 
     return new Date(
       utc
-    ).toISOString();
+    )
+    .toISOString();
 
 
   }catch(e){
@@ -2351,9 +1526,9 @@ function mmtToISO(
 }
 
 
-/* =====================================
+/* =========================
    TODAY MMT
-===================================== */
+========================= */
 
 function todayMMT(){
 
@@ -2368,7 +1543,8 @@ function todayMMT(){
       month:'2-digit',
       day:'2-digit'
     }
-  ).formatToParts(
+  )
+  .formatToParts(
     new Date()
   );
 
@@ -2380,7 +1556,9 @@ function todayMMT(){
   parts.forEach(
     p=>{
 
-      map[p.type] =
+      map[
+        p.type
+      ] =
       p.value;
 
     }
@@ -2398,50 +1576,9 @@ function todayMMT(){
 }
 
 
-/* =====================================
-   CURRENT MMT HOUR
-===================================== */
-
-function currentMMTHour(){
-
-  const parts =
-  new Intl.DateTimeFormat(
-    'en-US',
-    {
-      timeZone:
-      'Asia/Yangon',
-
-      hour:'2-digit',
-
-      hour12:false
-    }
-  ).formatToParts(
-    new Date()
-  );
-
-
-  const h =
-  parts.find(
-    p =>
-    p.type ===
-    'hour'
-  );
-
-
-  return Number(
-    h
-    ?
-    h.value
-    :
-    0
-  );
-
-}
-
-
-/* =====================================
+/* =========================
    ADD DAYS
-===================================== */
+========================= */
 
 function addDays(
   date,
@@ -2455,7 +1592,9 @@ function addDays(
   ] =
   date
   .split('-')
-  .map(Number);
+  .map(
+    Number
+  );
 
 
   const dt =
@@ -2469,7 +1608,8 @@ function addDays(
 
 
   dt.setUTCDate(
-    dt.getUTCDate()+
+    dt.getUTCDate()
+    +
     days
   );
 
@@ -2484,20 +1624,26 @@ function addDays(
 }
 
 
-/* =====================================
-   PERIOD
-===================================== */
+/* =========================
+   PERIOD NAME
+========================= */
 
 function periodName(
   code
 ){
+
+  /*
+    注意：
+    1030 / 1530 现在只是内部期别代码，
+    不再代表真实开奖时间。
+  */
 
   if(
     code ===
     '1030'
   ){
 
-    return '上午 10:30';
+    return '上午 11:45';
 
   }
 
@@ -2507,7 +1653,7 @@ function periodName(
     '1530'
   ){
 
-    return '下午 15:30';
+    return '下午 15:45';
 
   }
 
@@ -2517,148 +1663,11 @@ function periodName(
 }
 
 
-/* =====================================
-   STATUS
-===================================== */
-
-function statusName(
-  status
-){
-
-  if(
-    status ===
-    'open'
-  ){
-
-    return '开放中';
-
-  }
-
-
-  if(
-    status ===
-    'closed'
-  ){
-
-    return '已关闭';
-
-  }
-
-
-  if(
-    status ===
-    'settled'
-  ){
-
-    return '已结算';
-
-  }
-
-
-  return status || '—';
-
-}
-
-
-function statusClass(
-  status
-){
-
-  if(
-    status ===
-    'open'
-  ){
-
-    return 'open';
-
-  }
-
-
-  if(
-    status ===
-    'settled'
-  ){
-
-    return 'settled';
-
-  }
-
-
-  return 'closed';
-
-}
-
-
-/* =====================================
-   ESCAPE
-===================================== */
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ''
-  )
-
-  .replaceAll(
-    '&',
-    '&amp;'
-  )
-
-  .replaceAll(
-    '<',
-    '&lt;'
-  )
-
-  .replaceAll(
-    '>',
-    '&gt;'
-  )
-
-  .replaceAll(
-    '"',
-    '&quot;'
-  )
-
-  .replaceAll(
-    "'",
-    '&#039;'
-  );
-
-}
-
-
-/* =====================================
-   SESSION
-===================================== */
-
-function clearAdminSession(){
-
-  localStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  token =
-  '';
-
-}
-
-
-/* =====================================
+/* =========================
    START
-===================================== */
+========================= */
 
 async function start(){
-
-  updateClock();
-
 
   const ok =
   await verifyAdmin();
@@ -2666,16 +1675,12 @@ async function start(){
 
   if(!ok){
 
-    clearAdminSession();
-
-
-    location.href =
-    '/admin/';
-
-
     return;
 
   }
+
+
+  updateClock();
 
 
   await loadRound();
@@ -2711,5 +1716,4 @@ setInterval(
 </script>
 
 </body>
-
 </html>
