@@ -2,217 +2,107 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
-
 <title>金满堂 · 代理管理</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f5edd9;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
-
-.wrap{
-  max-width:850px;
-  margin:auto;
-  padding:20px 14px 60px;
-}
-
+.wrap{max-width:850px;margin:auto;padding:20px 14px 60px}
 .header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:18px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;margin-bottom:18px
 }
-
-.logo{
-  font-size:21px;
-  font-weight:900;
-  color:#efd477;
-}
-
-.sub{
-  font-size:11px;
-  color:#817969;
-  margin-top:3px;
-}
-
+.logo{font-size:21px;font-weight:900;color:#efd477}
+.sub{font-size:10px;color:#817969;margin-top:4px;letter-spacing:1px}
 .card{
   background:linear-gradient(180deg,#151515,#0d0d0e);
   border:1px solid rgba(214,168,63,.28);
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:14px;
+  border-radius:18px;padding:16px;margin-bottom:14px
 }
-
-.title{
-  color:#dec372;
-  font-size:14px;
-  font-weight:900;
-  margin-bottom:13px;
-}
-
+.title{color:#dec372;font-size:15px;font-weight:900;margin-bottom:13px}
 input,select{
-  width:100%;
-  background:#101011;
-  color:#fff;
+  width:100%;background:#101011;color:#fff;
   border:1px solid rgba(214,168,63,.22);
-  border-radius:11px;
-  padding:12px;
-  outline:none;
-  font-size:14px;
+  border-radius:11px;padding:12px;outline:none;font-size:14px
 }
-
 button{
-  border:0;
-  border-radius:10px;
-  padding:11px 14px;
-  font-weight:800;
-  cursor:pointer;
+  border:0;border-radius:10px;padding:11px 14px;
+  font-weight:800;cursor:pointer
 }
-
 .gold{
   background:linear-gradient(180deg,#efd47c,#b87e1e);
-  color:#171109;
+  color:#171109
 }
-
 .dark{
-  background:#191919;
-  color:#d9c77d;
-  border:1px solid rgba(214,168,63,.2);
+  background:#191919;color:#d9c77d;
+  border:1px solid rgba(214,168,63,.2)
 }
-
 .red{
-  background:#351616;
-  color:#e9a0a0;
-  border:1px solid rgba(220,90,90,.25);
+  background:#351616;color:#e9a0a0;
+  border:1px solid rgba(220,90,90,.25)
 }
-
-.row{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:9px;
+.formGrid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:9px
 }
-
-.search{
-  margin-bottom:12px;
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px
 }
-
+.stat{
+  background:#101011;border-radius:12px;padding:13px;
+  border:1px solid rgba(255,255,255,.05)
+}
+.stat small{display:block;color:#817a6d;font-size:10px}
+.stat strong{
+  display:block;color:#ebce73;font-size:20px;margin-top:5px
+}
 .agent{
   background:#101011;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:9px;
+  border-radius:14px;padding:14px;margin-bottom:9px
 }
-
 .agentTop{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:center;
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px
 }
-
-.name{
-  font-size:16px;
-  font-weight:900;
-  color:#f0d27a;
-}
-
-.meta{
-  font-size:11px;
-  color:#8b8374;
-  margin-top:5px;
-}
-
+.name{font-size:16px;font-weight:900;color:#f0d27a}
+.meta{font-size:11px;color:#8b8374;margin-top:5px;line-height:1.6}
 .badge{
-  font-size:11px;
-  padding:5px 9px;
-  border-radius:20px;
-  white-space:nowrap;
+  font-size:11px;padding:5px 9px;
+  border-radius:20px;white-space:nowrap
 }
-
-.active{
-  background:#153124;
-  color:#76d6a0;
-}
-
-.suspended{
-  background:#352d13;
-  color:#e0c46c;
-}
-
-.blocked{
-  background:#371717;
-  color:#e79292;
-}
-
+.active{background:#153124;color:#76d6a0}
+.suspended{background:#352d13;color:#e0c46c}
+.blocked{background:#371717;color:#e79292}
 .actions{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:7px;
-  margin-top:12px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:7px;margin-top:12px
 }
-
-.actions button{
-  padding:9px 5px;
-  font-size:11px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.stat{
-  background:#101011;
-  border-radius:12px;
-  padding:13px;
-}
-
-.stat small{
-  color:#817a6d;
-  font-size:10px;
-  display:block;
-}
-
-.stat strong{
-  display:block;
-  color:#ebce73;
-  font-size:20px;
-  margin-top:5px;
-}
-
+.actions button{font-size:11px;padding:9px 4px}
 .msg{
-  font-size:12px;
-  text-align:center;
-  color:#9d9586;
-  margin-top:10px;
-  min-height:18px;
+  text-align:center;color:#9d9586;
+  font-size:12px;min-height:18px;margin-top:10px
 }
-
-.empty{
-  text-align:center;
-  color:#777;
-  padding:30px 10px;
-  font-size:13px;
+.success{color:#76d6a0}
+.error{color:#e79292}
+.empty{text-align:center;color:#777;padding:25px 10px;font-size:13px}
+.divider{
+  height:1px;background:rgba(255,255,255,.06);
+  margin:15px 0
 }
+.hint{font-size:11px;color:#777166;line-height:1.6;margin-top:10px}
 
-.back{
-  width:100%;
-  margin-top:5px;
-}
-
-@media(max-width:500px){
-  .actions{
-    grid-template-columns:1fr;
-  }
+@media(max-width:550px){
+  .formGrid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .actions{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -221,179 +111,359 @@ button{
 
 <div class="wrap">
 
-  <div class="header">
-    <div>
-      <div class="logo">金满堂 · 代理管理</div>
-      <div class="sub">ADMIN / AGENTS</div>
-    </div>
-
-    <button class="dark" onclick="location.href='/admin/'">
-      返回总后台
-    </button>
+<div class="header">
+  <div>
+    <div class="logo">金满堂 · 代理管理</div>
+    <div class="sub">ADMIN / AGENTS</div>
   </div>
 
-
-  <div class="card">
-
-    <div class="title">代理概况</div>
-
-    <div class="stats">
-
-      <div class="stat">
-        <small>代理总数</small>
-        <strong id="totalAgents">0</strong>
-      </div>
-
-      <div class="stat">
-        <small>正常代理</small>
-        <strong id="activeAgents">0</strong>
-      </div>
-
-    </div>
-
-  </div>
+  <button class="dark" onclick="location.href='/admin/'">
+    返回总后台
+  </button>
+</div>
 
 
-  <div class="card">
+<div class="card">
 
-    <div class="title">搜索代理</div>
+  <div class="title">＋ 创建新代理</div>
+
+  <div class="formGrid">
 
     <input
-      class="search"
-      id="searchInput"
-      placeholder="输入代理名字搜索"
-      oninput="renderAgents()"
-    >
+      id="newName"
+      placeholder="代理名称，例如：小林代理">
+
+    <input
+      id="newEmail"
+      type="email"
+      placeholder="代理登录邮箱">
+
+    <input
+      id="newPassword"
+      type="password"
+      placeholder="初始密码，至少8位">
+
+    <input
+      id="newRate"
+      type="number"
+      min="0"
+      max="40"
+      step="0.5"
+      value="20"
+      placeholder="代理比例 %">
 
   </div>
 
+  <button
+    id="createBtn"
+    class="gold"
+    style="width:100%;margin-top:10px"
+    onclick="createAgent()">
+    创建代理账号
+  </button>
 
-  <div class="card">
+  <div class="msg" id="createMsg"></div>
 
-    <div class="title">代理列表</div>
+  <div class="hint">
+    创建成功后，代理可以使用这里设置的邮箱和密码登录代理中心。
+    每位代理的比例可以单独设置，范围为 0%–40%。
+  </div>
 
-    <div id="agentList">
-      <div class="empty">正在读取代理...</div>
+</div>
+
+
+<div class="card">
+
+  <div class="title">代理概况</div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <small>代理总数</small>
+      <strong id="totalAgents">0</strong>
     </div>
 
-    <div class="msg" id="msg"></div>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="title">修改代理比例</div>
-
-    <div class="row">
-
-      <select id="agentSelect">
-        <option value="">选择代理</option>
-      </select>
-
-      <input
-        id="rateInput"
-        type="number"
-        min="0"
-        max="40"
-        step="0.5"
-        placeholder="%"
-      >
-
+    <div class="stat">
+      <small>正常</small>
+      <strong id="activeAgents">0</strong>
     </div>
 
-    <button class="gold" style="width:100%;margin-top:10px"
-      onclick="updateRate()">
-      保存代理比例
-    </button>
-
-    <div class="msg" id="rateMsg"></div>
+    <div class="stat">
+      <small>暂停 / 限制</small>
+      <strong id="inactiveAgents">0</strong>
+    </div>
 
   </div>
 
+</div>
 
-  <button class="dark back" onclick="location.href='/admin/'">
+
+<div class="card">
+
+  <div class="title">搜索代理</div>
+
+  <input
+    id="searchInput"
+    placeholder="输入代理名字搜索"
+    oninput="renderAgents()">
+
+  <div class="divider"></div>
+
+  <div class="title">代理列表</div>
+
+  <div id="agentList">
+    <div class="empty">正在读取代理...</div>
+  </div>
+
+  <div class="msg" id="listMsg"></div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="title">修改代理比例</div>
+
+  <div class="formGrid">
+
+    <select id="agentSelect">
+      <option value="">选择代理</option>
+    </select>
+
+    <input
+      id="rateInput"
+      type="number"
+      min="0"
+      max="40"
+      step="0.5"
+      placeholder="新比例 %">
+
+  </div>
+
+  <button
+    class="gold"
+    style="width:100%;margin-top:10px"
+    onclick="updateRate()">
+    保存代理比例
+  </button>
+
+  <div class="msg" id="rateMsg"></div>
+
+</div>
+
+
+<div class="card">
+  <button
+    class="dark"
+    style="width:100%"
+    onclick="location.href='/admin/'">
     ← 返回 Admin 总后台
   </button>
+</div>
 
 </div>
 
 
 <script>
 
-const BASE =
-'https://veserwfjxglxieehfggy.supabase.co';
+const BASE='https://veserwfjxglxieehfggy.supabase.co';
+const KEY='sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
-const KEY =
-'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+let token=
+  sessionStorage.getItem('jmt_access_token')
+  ||
+  sessionStorage.getItem('jmt_token')
+  ||
+  '';
 
-let token =
-sessionStorage.getItem('jmt_access_token') || '';
-
-let agents = [];
+let agents=[];
 
 
 async function api(path,options={}){
 
-  const headers = {
+  const headers={
     apikey:KEY,
     Authorization:'Bearer '+token,
     ...(options.headers || {})
   };
 
-  return fetch(
-    BASE + path,
-    {
-      ...options,
-      headers
+  return fetch(BASE+path,{
+    ...options,
+    headers
+  });
+
+}
+
+
+async function createAgent(){
+
+  const name=
+    document.getElementById('newName').value.trim();
+
+  const email=
+    document.getElementById('newEmail').value.trim();
+
+  const password=
+    document.getElementById('newPassword').value;
+
+  const rate=
+    Number(document.getElementById('newRate').value);
+
+  const msg=
+    document.getElementById('createMsg');
+
+  const btn=
+    document.getElementById('createBtn');
+
+
+  msg.className='msg';
+
+
+  if(!name){
+    msg.textContent='请输入代理名称';
+    msg.classList.add('error');
+    return;
+  }
+
+  if(!email || !email.includes('@')){
+    msg.textContent='请输入正确的登录邮箱';
+    msg.classList.add('error');
+    return;
+  }
+
+  if(password.length<8){
+    msg.textContent='初始密码至少需要8位';
+    msg.classList.add('error');
+    return;
+  }
+
+  if(
+    !Number.isFinite(rate)
+    ||
+    rate<0
+    ||
+    rate>40
+  ){
+    msg.textContent='代理比例必须在0%–40%之间';
+    msg.classList.add('error');
+    return;
+  }
+
+
+  btn.disabled=true;
+  msg.textContent='正在创建代理账号...';
+
+
+  try{
+
+    const r=await fetch(
+      BASE+'/functions/v1/create-agent',
+      {
+        method:'POST',
+
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer '+token,
+          'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+          display_name:name,
+          email:email,
+          password:password,
+          commission_rate:rate
+        })
+      }
+    );
+
+
+    const d=await r.json();
+
+
+    if(!r.ok){
+      throw new Error(
+        d.error || '创建失败'
+      );
     }
-  );
+
+
+    msg.className='msg success';
+
+    msg.textContent=
+      '✓ 代理「'+name+'」创建成功';
+
+
+    document.getElementById('newName').value='';
+    document.getElementById('newEmail').value='';
+    document.getElementById('newPassword').value='';
+    document.getElementById('newRate').value='20';
+
+
+    await loadAgents();
+
+
+  }catch(e){
+
+    msg.className='msg error';
+
+    msg.textContent=
+      e.message || '创建代理失败';
+
+  }finally{
+
+    btn.disabled=false;
+
+  }
 
 }
 
 
 async function loadAgents(){
 
+  const msg=
+    document.getElementById('listMsg');
+
+
   if(!token){
 
-    alert('请先登录 Admin');
+    msg.textContent='请先登录 Admin';
 
-    location.href='/admin/';
+    setTimeout(()=>{
+      location.href='/admin/';
+    },1000);
 
     return;
-
   }
 
-  const msg =
-  document.getElementById('msg');
-
-  msg.textContent =
-  '正在读取...';
 
   try{
 
-    const r =
-    await api(
+    const r=await api(
       '/rest/v1/agents?select=id,display_name,commission_rate,status,created_at&order=created_at.desc'
     );
+
 
     if(!r.ok){
       throw new Error();
     }
 
-    agents =
-    await r.json();
+
+    agents=await r.json();
+
 
     renderAgents();
     updateStats();
     buildSelect();
 
-    msg.textContent = '';
+    msg.textContent='';
+
 
   }catch(e){
 
-    msg.textContent =
-    '无法读取代理资料，请重新登录 Admin';
+    msg.className='msg error';
+
+    msg.textContent=
+      '无法读取代理资料，请重新登录 Admin';
 
   }
 
@@ -402,57 +472,61 @@ async function loadAgents(){
 
 function renderAgents(){
 
-  const box =
-  document.getElementById('agentList');
+  const box=
+    document.getElementById('agentList');
 
-  const keyword =
-  document.getElementById(
-    'searchInput'
-  ).value.trim().toLowerCase();
+  const keyword=
+    document.getElementById('searchInput')
+    .value
+    .trim()
+    .toLowerCase();
 
-  const list =
-  agents.filter(a =>
-    (a.display_name || '')
-    .toLowerCase()
-    .includes(keyword)
-  );
+
+  const list=
+    agents.filter(a=>
+      String(a.display_name || '')
+      .toLowerCase()
+      .includes(keyword)
+    );
 
 
   if(!list.length){
 
-    box.innerHTML =
-    '<div class="empty">没有找到代理</div>';
+    box.innerHTML=
+      '<div class="empty">没有找到代理</div>';
 
     return;
-
   }
 
 
-  box.innerHTML =
-  list.map(a=>{
+  box.innerHTML=
+    list.map(a=>{
 
-    const statusText =
-    a.status==='active'
-    ? '正常'
-    : a.status==='suspended'
-    ? '已暂停'
-    : '已限制';
+      const statusText=
+        a.status==='active'
+        ? '正常'
+        : a.status==='suspended'
+        ? '已暂停'
+        : '已限制';
 
 
-    return `
+      return `
       <div class="agent">
 
         <div class="agentTop">
 
           <div>
+
             <div class="name">
               ${escapeHtml(a.display_name || '未命名代理')}
             </div>
 
             <div class="meta">
-              代理比例：
-              ${Number(a.commission_rate)}%
+              当前比例：${Number(a.commission_rate)}%
+              <br>
+              创建时间：${formatDate(a.created_at)}
             </div>
+
           </div>
 
           <div class="badge ${a.status}">
@@ -470,74 +544,88 @@ function renderAgents(){
             修改比例
           </button>
 
+
           <button
             class="dark"
-            onclick="setStatus('${a.id}','${a.status==='suspended' ? 'active' : 'suspended'}')">
-            ${a.status==='suspended' ? '恢复代理' : '暂停代理'}
+            onclick="setStatus(
+              '${a.id}',
+              '${a.status==='suspended' ? 'active' : 'suspended'}'
+            )">
+
+            ${a.status==='suspended'
+              ? '恢复代理'
+              : '暂停代理'}
+
           </button>
+
 
           <button
             class="red"
-            onclick="setStatus('${a.id}','${a.status==='blocked' ? 'active' : 'blocked'}')">
-            ${a.status==='blocked' ? '解除限制' : '限制代理'}
+            onclick="setStatus(
+              '${a.id}',
+              '${a.status==='blocked' ? 'active' : 'blocked'}'
+            )">
+
+            ${a.status==='blocked'
+              ? '解除限制'
+              : '限制代理'}
+
           </button>
 
         </div>
 
       </div>
-    `;
+      `;
 
-  }).join('');
+    }).join('');
 
 }
 
 
 function updateStats(){
 
-  document.getElementById(
-    'totalAgents'
-  ).textContent =
-  agents.length;
+  const total=agents.length;
+
+  const active=
+    agents.filter(
+      a=>a.status==='active'
+    ).length;
 
 
-  document.getElementById(
-    'activeAgents'
-  ).textContent =
-  agents.filter(
-    a => a.status==='active'
-  ).length;
+  document.getElementById('totalAgents').textContent=
+    total;
+
+  document.getElementById('activeAgents').textContent=
+    active;
+
+  document.getElementById('inactiveAgents').textContent=
+    total-active;
 
 }
 
 
 function buildSelect(){
 
-  const select =
-  document.getElementById(
-    'agentSelect'
-  );
+  const select=
+    document.getElementById('agentSelect');
 
 
-  select.innerHTML =
-  '<option value="">选择代理</option>';
+  select.innerHTML=
+    '<option value="">选择代理</option>';
 
 
   agents.forEach(a=>{
 
-    const option =
-    document.createElement('option');
+    const option=
+      document.createElement('option');
 
-    option.value =
-    a.id;
+    option.value=a.id;
 
-    option.textContent =
-    (a.display_name || '未命名代理')
-    +
-    ' · '
-    +
-    Number(a.commission_rate)
-    +
-    '%';
+    option.textContent=
+      (a.display_name || '未命名代理')
+      +' · '
+      +Number(a.commission_rate)
+      +'%';
 
     select.appendChild(option);
 
@@ -548,92 +636,68 @@ function buildSelect(){
 
 function chooseAgent(id){
 
-  const a =
-  agents.find(x => x.id===id);
+  const a=
+    agents.find(x=>x.id===id);
 
-  if(!a){
-    return;
-  }
+  if(!a) return;
 
 
-  document.getElementById(
-    'agentSelect'
-  ).value =
-  a.id;
+  document.getElementById('agentSelect').value=
+    a.id;
+
+  document.getElementById('rateInput').value=
+    Number(a.commission_rate);
 
 
-  document.getElementById(
-    'rateInput'
-  ).value =
-  Number(a.commission_rate);
-
-
-  document.getElementById(
-    'rateInput'
-  ).scrollIntoView({
-    behavior:'smooth',
-    block:'center'
-  });
+  document.getElementById('rateInput')
+    .scrollIntoView({
+      behavior:'smooth',
+      block:'center'
+    });
 
 }
 
 
 async function updateRate(){
 
-  const id =
-  document.getElementById(
-    'agentSelect'
-  ).value;
+  const id=
+    document.getElementById('agentSelect').value;
+
+  const rate=
+    Number(document.getElementById('rateInput').value);
+
+  const msg=
+    document.getElementById('rateMsg');
 
 
-  const rate =
-  Number(
-    document.getElementById(
-      'rateInput'
-    ).value
-  );
-
-
-  const msg =
-  document.getElementById(
-    'rateMsg'
-  );
+  msg.className='msg';
 
 
   if(!id){
-
-    msg.textContent =
-    '请先选择代理';
-
+    msg.textContent='请先选择代理';
+    msg.classList.add('error');
     return;
-
   }
 
 
   if(
     !Number.isFinite(rate)
     ||
-    rate < 0
+    rate<0
     ||
-    rate > 40
+    rate>40
   ){
-
-    msg.textContent =
-    '请输入 0%–40%';
-
+    msg.textContent='请输入0%–40%';
+    msg.classList.add('error');
     return;
-
   }
 
 
-  msg.textContent =
-  '正在保存...';
+  msg.textContent='正在保存...';
 
 
-  const r =
-  await api(
-    '/rest/v1/agents?id=eq.'
-    +
+  const r=await api(
+    '/rest/v1/agents?id=eq.'+
     encodeURIComponent(id),
     {
       method:'PATCH',
@@ -652,16 +716,15 @@ async function updateRate(){
 
   if(!r.ok){
 
-    msg.textContent =
-    '保存失败';
+    msg.className='msg error';
+    msg.textContent='保存失败';
 
     return;
-
   }
 
 
-  msg.textContent =
-  '✓ 已保存';
+  msg.className='msg success';
+  msg.textContent='✓ 比例已保存';
 
 
   await loadAgents();
@@ -671,12 +734,12 @@ async function updateRate(){
 
 async function setStatus(id,status){
 
-  const text =
-  status==='blocked'
-  ? '确定限制这个代理吗？'
-  : status==='suspended'
-  ? '确定暂停这个代理吗？'
-  : '确定恢复这个代理吗？';
+  const text=
+    status==='blocked'
+    ? '确定限制这个代理吗？限制后该代理将不能正常提交。'
+    : status==='suspended'
+    ? '确定暂停这个代理吗？'
+    : '确定恢复这个代理吗？';
 
 
   if(!confirm(text)){
@@ -684,10 +747,8 @@ async function setStatus(id,status){
   }
 
 
-  const r =
-  await api(
-    '/rest/v1/agents?id=eq.'
-    +
+  const r=await api(
+    '/rest/v1/agents?id=eq.'+
     encodeURIComponent(id),
     {
       method:'PATCH',
@@ -698,7 +759,7 @@ async function setStatus(id,status){
       },
 
       body:JSON.stringify({
-        status
+        status:status
       })
     }
   );
@@ -709,7 +770,6 @@ async function setStatus(id,status){
     alert('操作失败');
 
     return;
-
   }
 
 
@@ -718,14 +778,34 @@ async function setStatus(id,status){
 }
 
 
+function formatDate(value){
+
+  if(!value) return '—';
+
+  return new Intl.DateTimeFormat(
+    'zh-CN',
+    {
+      timeZone:'Asia/Yangon',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      hour12:false
+    }
+  ).format(new Date(value));
+
+}
+
+
 function escapeHtml(text){
 
   return String(text)
-  .replaceAll('&','&amp;')
-  .replaceAll('<','&lt;')
-  .replaceAll('>','&gt;')
-  .replaceAll('"','&quot;')
-  .replaceAll("'","&#039;");
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
 
 }
 
