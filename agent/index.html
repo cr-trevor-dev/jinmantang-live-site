@@ -1,42 +1,19 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1">
-
-<meta
-  name="theme-color"
-  content="#09090a">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#09090a">
 <title>金满堂 · Agent Center</title>
 
 <style>
-
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  background:
-  radial-gradient(
-    circle at top,
-    #251907 0,
-    #0d0c0a 40%,
-    #070708 100%
-  );
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f7f0df;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Arial,
-  sans-serif
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
 
 .wrap{
@@ -58,19 +35,11 @@ body{
   display:grid;
   place-items:center;
   margin:0 auto 9px;
-  overflow:hidden;
   font-weight:900;
   font-size:23px;
   color:#f3d681;
   border:1px solid #b98a2c;
   background:#191208
-}
-
-.mark img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block
 }
 
 .cn{
@@ -88,15 +57,8 @@ body{
 }
 
 .card{
-  background:
-  linear-gradient(
-    180deg,
-    #151515,
-    #0d0d0e
-  );
-  border:
-  1px solid
-  rgba(214,168,63,.30);
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.30);
   border-radius:20px;
   padding:18px;
   margin-bottom:14px
@@ -118,9 +80,7 @@ select{
   width:100%;
   padding:12px;
   border-radius:11px;
-  border:
-  1px solid
-  rgba(214,168,63,.25);
+  border:1px solid rgba(214,168,63,.25);
   background:#101011;
   color:#fff;
   outline:none;
@@ -135,12 +95,7 @@ button{
   margin-top:10px;
   font-weight:900;
   font-size:14px;
-  background:
-  linear-gradient(
-    180deg,
-    #efd47c,
-    #b87e1e
-  );
+  background:linear-gradient(180deg,#efd47c,#b87e1e);
   color:#171109;
   cursor:pointer
 }
@@ -153,9 +108,7 @@ button:disabled{
 .secondary{
   background:#171718;
   color:#dac477;
-  border:
-  1px solid
-  rgba(214,168,63,.23)
+  border:1px solid rgba(214,168,63,.23)
 }
 
 .langWrap{
@@ -168,24 +121,6 @@ button:disabled{
   font-weight:800
 }
 
-.sessionLine{
-  display:none;
-  background:#101011;
-  border:
-  1px solid
-  rgba(214,168,63,.16);
-  border-radius:12px;
-  padding:11px 12px;
-  color:#837c70;
-  font-size:10px;
-  margin-bottom:14px;
-  line-height:1.55
-}
-
-.sessionLine strong{
-  color:#70d39d
-}
-
 .info{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -194,9 +129,7 @@ button:disabled{
 
 .box{
   background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:13px;
   padding:13px;
   min-height:90px
@@ -220,8 +153,7 @@ button:disabled{
 
 .box.highlight{
   background:#15130e;
-  border-color:
-  rgba(214,168,63,.30)
+  border-color:rgba(214,168,63,.30)
 }
 
 .box.commission strong{
@@ -237,36 +169,23 @@ button:disabled{
   color:#e58e8e!important
 }
 
-.statusPause{
-  color:#e6c66e!important
-}
-
 .grid{
   display:grid;
-  grid-template-columns:
-  repeat(2,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:8px
 }
 
 .num{
   background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:11px;
   padding:10px;
   transition:.2s
 }
 
 .num.changed{
-  border-color:
-  rgba(214,168,63,.62);
+  border-color:rgba(214,168,63,.62);
   background:#19160f
-}
-
-.num.saved{
-  border-color:
-  rgba(91,187,132,.28)
 }
 
 .numLabel{
@@ -286,9 +205,7 @@ button:disabled{
   background:#101011;
   border-radius:14px;
   padding:15px;
-  border:
-  1px solid
-  rgba(214,168,63,.15);
+  border:1px solid rgba(214,168,63,.15);
   margin-top:13px
 }
 
@@ -311,8 +228,7 @@ button:disabled{
   margin-top:11px;
   font-size:12px;
   color:#a49c8b;
-  line-height:1.6;
-  word-break:break-word
+  line-height:1.6
 }
 
 .success{
@@ -349,1218 +265,717 @@ button:disabled{
 }
 
 @media(max-width:420px){
-
   .info{
     grid-template-columns:1fr 1fr
   }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <div class="wrap">
 
-
   <div class="brand">
-
-    <div
-      class="mark"
-      id="siteLogo">
-      金
-    </div>
-
-    <div class="cn">
-      金满堂
-    </div>
-
-    <div class="en">
-      AGENT CENTER
-    </div>
-
+    <div class="mark">金</div>
+    <div class="cn">金满堂</div>
+    <div class="en">AGENT CENTER</div>
   </div>
-
 
   <div class="langWrap">
-
-    <select
-      id="langSelect"
-      onchange="changeLanguage(this.value)">
-
-      <option value="zh">
-        🇨🇳 中文
-      </option>
-
-      <option value="my">
-        🇲🇲 မြန်မာ
-      </option>
-
-      <option value="en">
-        🇬🇧 English
-      </option>
-
-      <option value="th">
-        🇹🇭 ไทย
-      </option>
-
-      <option value="ms">
-        🇲🇾 Bahasa Melayu
-      </option>
-
-      <option value="vi">
-        🇻🇳 Tiếng Việt
-      </option>
-
-      <option value="id">
-        🇮🇩 Bahasa Indonesia
-      </option>
-
+    <select id="langSelect" onchange="changeLanguage(this.value)">
+      <option value="zh">中文</option>
+      <option value="my">မြန်မာ</option>
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+      <option value="ms">Bahasa Melayu</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="id">Bahasa Indonesia</option>
     </select>
-
   </div>
 
+  <div class="card" id="loginBox">
 
-  <div
-    class="sessionLine"
-    id="sessionLine">
-
-    <span data-i18n="loginState">
-      登录状态
-    </span>：
-
-    <strong id="sessionState">
-      —
-    </strong>
-
-  </div>
-
-
-  <div
-    class="card"
-    id="loginBox">
-
-
-    <div
-      class="title"
-      data-i18n="loginTitle">
-
+    <div class="title" data-i18n="loginTitle">
       代理登录
-
     </div>
-
 
     <input
       id="email"
       type="email"
-      autocomplete="username"
       data-ph="email"
       placeholder="代理邮箱">
 
-
-    <div style="height:9px">
-    </div>
-
+    <div style="height:9px"></div>
 
     <input
       id="password"
       type="password"
-      autocomplete="current-password"
       data-ph="password"
       placeholder="密码">
 
-
-    <button
-      id="loginBtn"
-      onclick="signIn()"
-      data-i18n="loginBtn">
-
+    <button onclick="signIn()" data-i18n="loginBtn">
       登录代理中心
-
     </button>
 
-
-    <div
-      class="msg"
-      id="loginMsg">
-    </div>
-
+    <div class="msg" id="loginMsg"></div>
 
   </div>
 
-
-  <div
-    id="agentBox"
-    class="hidden">
-
+  <div id="agentBox" class="hidden">
 
     <div class="card">
 
-      <div
-        class="title"
-        data-i18n="agentInfo">
-
+      <div class="title" data-i18n="agentInfo">
         我的代理资料
-
       </div>
-
 
       <div class="info">
 
-
         <div class="box">
-
-          <small data-i18n="agentName">
-            代理名称
-          </small>
-
-          <strong id="agentName">
-            —
-          </strong>
-
+          <small data-i18n="agentName">代理名称</small>
+          <strong id="agentName">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="agentRate">
-            代理比例
-          </small>
-
-          <strong id="commissionRate">
-            —
-          </strong>
-
+          <small data-i18n="agentRate">代理比例</small>
+          <strong id="commissionRate">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="accountStatus">
-            账号状态
-          </small>
-
-          <strong id="agentStatus">
-            —
-          </strong>
-
+          <small data-i18n="accountStatus">账号状态</small>
+          <strong id="agentStatus">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            Myanmar Time
-          </small>
-
-          <strong id="mmtClock">
-            —
-          </strong>
-
+          <small>Myanmar Time</small>
+          <strong id="mmtClock">—</strong>
         </div>
-
 
       </div>
 
     </div>
 
-
     <div class="card">
 
-
-      <div
-        class="title"
-        data-i18n="currentRound">
-
+      <div class="title" data-i18n="currentRound">
         当前期数
-
       </div>
-
 
       <div class="info">
 
-
         <div class="box">
-
-          <small data-i18n="round">
-            期数
-          </small>
-
-          <strong id="roundName">
-            —
-          </strong>
-
+          <small data-i18n="round">期数</small>
+          <strong id="roundName">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="submitStatus">
-            提交状态
-          </small>
-
-          <strong id="roundStatus">
-            —
-          </strong>
-
+          <small data-i18n="submitStatus">提交状态</small>
+          <strong id="roundStatus">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="deadline">
-            截止时间
-          </small>
-
-          <strong id="deadlineText">
-            —
-          </strong>
-
+          <small data-i18n="deadline">截止时间</small>
+          <strong id="deadlineText">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="timeLeft">
-            距离截止
-          </small>
-
-          <strong id="countdown">
-            —
-          </strong>
-
+          <small data-i18n="timeLeft">距离截止</small>
+          <strong id="countdown">—</strong>
         </div>
-
 
       </div>
 
-
-      <div
-        class="note"
-        data-i18n="serverNote">
-
+      <div class="note" data-i18n="serverNote">
         截止时间以前可以增加或修改数据；截止以后系统自动锁定。
-
       </div>
-
 
     </div>
 
-
     <div class="card">
 
-
-      <div
-        class="title"
-        data-i18n="submitTitle">
-
+      <div class="title" data-i18n="submitTitle">
         00–99 本期积分提交
-
       </div>
 
-
-      <div
-        class="grid"
-        id="numberGrid">
-      </div>
-
+      <div class="grid" id="numberGrid"></div>
 
       <div class="total">
-
         <small data-i18n="totalPoints">
           当前输入总额
         </small>
-
-        <strong id="totalPoints">
-          0
-        </strong>
-
+        <strong id="totalPoints">0</strong>
       </div>
-
 
       <button
         id="submitBtn"
         onclick="submitRound()"
         data-i18n="submitBtn">
-
         保存本期数据
-
       </button>
-
 
       <button
         class="secondary"
-        id="reloadBtn"
         onclick="loadExisting(true)"
         data-i18n="reloadBtn">
-
         重新读取已保存数据
-
       </button>
 
+      <div class="msg" id="submitMsg"></div>
 
-      <div
-        class="msg"
-        id="submitMsg">
-      </div>
-
-
-      <div
-        class="note"
-        data-i18n="editNote">
-
+      <div class="note" data-i18n="editNote">
         已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。
-
       </div>
-
 
     </div>
 
-
     <div class="card">
 
-
-      <div
-        class="title"
-        data-i18n="resultTitle">
-
+      <div class="title" data-i18n="resultTitle">
         本期结果
-
       </div>
-
 
       <div class="info">
 
-
         <div class="box">
-
-          <small data-i18n="resultNumber">
-            开奖号码
-          </small>
-
-          <strong id="resultNumber">
-            等待开奖
-          </strong>
-
+          <small data-i18n="resultNumber">开奖号码</small>
+          <strong id="resultNumber">等待开奖</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="submittedTotal">
-            本期提交总额
-          </small>
-
-          <strong id="resultSubmittedTotal">
-            0
-          </strong>
-
+          <small data-i18n="submittedTotal">本期提交总额</small>
+          <strong id="resultSubmittedTotal">0</strong>
         </div>
 
-
         <div class="box">
-
-          <small data-i18n="agentRate">
-            代理比例
-          </small>
-
-          <strong id="resultRate">
-            —
-          </strong>
-
+          <small data-i18n="agentRate">代理比例</small>
+          <strong id="resultRate">—</strong>
         </div>
-
 
         <div class="box commission highlight">
-
-          <small data-i18n="commission">
-            本期代理佣金
-          </small>
-
-          <strong id="resultCommission">
-            0
-          </strong>
-
+          <small data-i18n="commission">本期代理佣金</small>
+          <strong id="resultCommission">0</strong>
         </div>
-
 
         <div class="box highlight">
-
-          <small data-i18n="winningAmount">
-            本期中奖金额
-          </small>
-
-          <strong id="winningAmount">
-            等待开奖
-          </strong>
-
+          <small data-i18n="winningAmount">本期中奖金额</small>
+          <strong id="winningAmount">等待开奖</strong>
         </div>
 
-
       </div>
 
-
-      <div
-        class="resultNote"
-        data-i18n="commissionNote">
-
+      <div class="resultNote" data-i18n="commissionNote">
         代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。
-
       </div>
-
 
     </div>
 
-
     <div class="card">
-
       <button
         class="secondary"
         onclick="logout()"
         data-i18n="logout">
-
         退出登录
-
       </button>
-
     </div>
 
-
   </div>
-
 
   <div class="foot">
     © 2022 JIN MANTANG · AGENT SYSTEM
   </div>
 
-
 </div>
-
 
 <script>
 
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
 
-
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
-
 
 const MULTIPLIER =
 80;
 
-
-/* ==========================================
-   SESSION
-========================================== */
-
 let token =
-
-localStorage.getItem(
-  'jmt_agent_token'
-)
-
+localStorage.getItem('jmt_agent_token')
 ||
-
-sessionStorage.getItem(
-  'jmt_agent_token'
-)
-
+sessionStorage.getItem('jmt_agent_token')
 ||
-
 '';
-
-
-let refreshToken =
-
-localStorage.getItem(
-  'jmt_agent_refresh_token'
-)
-
-||
-
-sessionStorage.getItem(
-  'jmt_agent_refresh_token'
-)
-
-||
-
-'';
-
 
 let agent =
 null;
 
-
 let currentRound =
 null;
-
-
-let allRounds =
-[];
-
 
 let submittedNumbers =
 {};
 
-
 let submittedTotal =
 0;
-
 
 let existingCodes =
 new Set();
 
-
 let isSaving =
 false;
 
-
-let isLoadingExisting =
-false;
-
-
 let currentLang =
-
-localStorage.getItem(
-  'jmt_agent_lang'
-)
-
+localStorage.getItem('jmt_agent_lang')
 ||
-
 'zh';
 
-
-/* ==========================================
-   TRANSLATIONS
-========================================== */
 
 const T = {
 
 zh:{
-
 loginTitle:'代理登录',
 email:'代理邮箱',
 password:'密码',
 loginBtn:'登录代理中心',
-loginState:'登录状态',
-loggedIn:'已登录',
-
 agentInfo:'我的代理资料',
 agentName:'代理名称',
 agentRate:'代理比例',
 accountStatus:'账号状态',
-
 normal:'正常',
 suspended:'已暂停',
 blocked:'已限制',
-
 currentRound:'当前期数',
 round:'期数',
 submitStatus:'提交状态',
 deadline:'截止时间',
 timeLeft:'距离截止',
-
 serverNote:'截止时间以前可以增加或修改数据；截止以后系统自动锁定。',
-
 submitTitle:'00–99 本期积分提交',
 totalPoints:'当前输入总额',
 submitBtn:'保存本期数据',
 reloadBtn:'重新读取已保存数据',
-
 editNote:'已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。',
-
 resultTitle:'本期结果',
 resultNumber:'开奖号码',
 submittedTotal:'本期提交总额',
 commission:'本期代理佣金',
 winningAmount:'本期中奖金额',
-
 commissionNote:'代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。',
-
 logout:'退出登录',
-
 loginMissing:'请输入代理邮箱和密码',
 logging:'正在登录...',
 loginFail:'登录失败，请检查账号或密码',
-
 noAgent:'该账号没有有效代理权限',
-
 noRound:'暂无开放期',
 canSubmit:'可以提交 / 修改',
 closed:'本期已截止',
 closedShort:'已关闭',
-
 minutes:'分',
 seconds:'秒',
-
 saving:'正在保存，请稍候...',
 noSubmitRound:'当前没有可以提交的期数',
 accountCannot:'你的代理账号目前无法提交',
-
 serverRejected:'本期已经截止，服务器已拒绝修改',
-
 saveFail:'保存失败',
 networkError:'网络异常，请重新提交',
-
 saveSuccess:'✓ 保存成功 · 本期总额 ',
 noChange:'✓ 没有需要保存的修改',
-
 reloaded:'✓ 已重新读取最新数据',
-
 waitingResult:'等待开奖',
-
-morning:'上午 10:30',
-afternoon:'下午 15:30',
-
-loading:'正在读取...',
-sessionExpired:'登录已失效，请重新登录',
-
-newRoundLoaded:'✓ 已自动切换到最新一期'
-
+morning:'上午 11:45',
+afternoon:'下午 15:45'
 },
 
-
 my:{
-
 loginTitle:'ကိုယ်စားလှယ် ဝင်ရောက်ရန်',
 email:'ကိုယ်စားလှယ် Email',
 password:'စကားဝှက်',
 loginBtn:'ကိုယ်စားလှယ်စနစ်သို့ ဝင်မည်',
-loginState:'ဝင်ရောက်မှုအခြေအနေ',
-loggedIn:'ဝင်ထားသည်',
-
 agentInfo:'ကျွန်ုပ်၏ ကိုယ်စားလှယ်အချက်အလက်',
 agentName:'ကိုယ်စားလှယ်အမည်',
 agentRate:'ကိုယ်စားလှယ် ရာခိုင်နှုန်း',
 accountStatus:'အကောင့်အခြေအနေ',
-
 normal:'ပုံမှန်',
 suspended:'ယာယီရပ်ထား',
 blocked:'ကန့်သတ်ထား',
-
 currentRound:'လက်ရှိအကြိမ်',
 round:'အကြိမ်',
 submitStatus:'တင်သွင်းမှုအခြေအနေ',
 deadline:'နောက်ဆုံးအချိန်',
 timeLeft:'ကျန်ရှိချိန်',
-
 serverNote:'ပိတ်ချိန်မတိုင်မီ ဒေတာထည့်ခြင်းနှင့် ပြင်ခြင်း ပြုလုပ်နိုင်သည်။ ပိတ်ချိန်ကျော်ပါက စနစ်က အလိုအလျောက်ပိတ်မည်။',
-
 submitTitle:'00–99 လက်ရှိအကြိမ် Point တင်သွင်းမှု',
 totalPoints:'လက်ရှိစုစုပေါင်း',
 submitBtn:'ဒေတာသိမ်းမည်',
 reloadBtn:'သိမ်းထားသောဒေတာ ပြန်ဖတ်မည်',
-
 editNote:'ပိတ်ချိန်မတိုင်မီ သိမ်းထားသော နံပါတ်များကို ပြန်ပြင်နိုင်သည်။ 0 ပြောင်းပြီး သိမ်းပါက 0 ဖြစ်သွားမည်။',
-
 resultTitle:'လက်ရှိအကြိမ် ရလဒ်',
 resultNumber:'ရလဒ်နံပါတ်',
 submittedTotal:'တင်ထားသော စုစုပေါင်း',
 commission:'ကိုယ်စားလှယ် ကော်မရှင်',
 winningAmount:'အနိုင်ရငွေ',
-
 commissionNote:'ကော်မရှင်ကို စနစ်ထဲတွင် အမှန်တကယ်သိမ်းထားသော စုစုပေါင်းနှင့် ကိုယ်စားလှယ်ရာခိုင်နှုန်းအလိုက် တွက်သည်။',
-
 logout:'ထွက်မည်',
-
 loginMissing:'Email နှင့် စကားဝှက်ထည့်ပါ',
 logging:'ဝင်ရောက်နေသည်...',
 loginFail:'ဝင်မရပါ။ Email/စကားဝှက်စစ်ပါ',
-
 noAgent:'ဤအကောင့်တွင် ကိုယ်စားလှယ်ခွင့်မရှိပါ',
-
 noRound:'ဖွင့်ထားသောအကြိမ်မရှိပါ',
 canSubmit:'တင် / ပြင်နိုင်သည်',
 closed:'လက်ရှိအကြိမ် ပိတ်ပြီးပါပြီ',
 closedShort:'ပိတ်ပြီး',
-
 minutes:'မိနစ်',
 seconds:'စက္ကန့်',
-
 saving:'သိမ်းနေသည်...',
 noSubmitRound:'တင်နိုင်သောအကြိမ်မရှိပါ',
 accountCannot:'ဤအကောင့်ဖြင့် လက်ရှိတင်မရပါ',
-
 serverRejected:'နောက်ဆုံးအချိန်ကျော်သွားသဖြင့် ပြင်ဆင်၍မရပါ',
-
 saveFail:'သိမ်းမရပါ',
 networkError:'Network အမှား',
-
 saveSuccess:'✓ သိမ်းပြီး · စုစုပေါင်း ',
 noChange:'✓ ပြောင်းလဲမှုမရှိပါ',
-
 reloaded:'✓ ဒေတာပြန်ဖတ်ပြီး',
-
 waitingResult:'ရလဒ်စောင့်နေသည်',
-
-morning:'မနက် 10:30',
-afternoon:'နေ့လယ် 15:30',
-
-loading:'ဖတ်နေသည်...',
-sessionExpired:'ဝင်ရောက်မှု သက်တမ်းကုန်ပါပြီ',
-newRoundLoaded:'✓ နောက်ဆုံးအကြိမ်သို့ ပြောင်းပြီး'
-
+morning:'မနက် 11:45',
+afternoon:'နေ့လယ် 15:45'
 },
 
-
 en:{
-
 loginTitle:'Agent Login',
 email:'Agent Email',
 password:'Password',
 loginBtn:'Login to Agent Center',
-loginState:'Login Status',
-loggedIn:'Logged In',
-
 agentInfo:'My Agent Profile',
 agentName:'Agent Name',
 agentRate:'Agent Rate',
 accountStatus:'Account Status',
-
 normal:'Active',
 suspended:'Suspended',
 blocked:'Restricted',
-
 currentRound:'Current Round',
 round:'Round',
 submitStatus:'Submission Status',
 deadline:'Deadline',
 timeLeft:'Time Remaining',
-
 serverNote:'Data may be added or edited before the deadline. The system locks automatically after the deadline.',
-
 submitTitle:'00–99 Round Submission',
 totalPoints:'Current Input Total',
 submitBtn:'Save Round Data',
 reloadBtn:'Reload Saved Data',
-
 editNote:'Saved numbers can still be edited before the deadline. Clear an amount or enter 0 and save again to set it to 0.',
-
 resultTitle:'Round Result',
 resultNumber:'Result Number',
 submittedTotal:'Submitted Total',
 commission:'Agent Commission',
 winningAmount:'Winning Amount',
-
 commissionNote:'Commission is automatically calculated from the actual saved total and agent rate.',
-
 logout:'Logout',
-
 loginMissing:'Please enter agent email and password',
 logging:'Logging in...',
 loginFail:'Login failed. Check email or password',
-
 noAgent:'This account has no valid agent access',
-
 noRound:'No open round',
 canSubmit:'Open / Editable',
 closed:'Round Closed',
 closedShort:'Closed',
-
 minutes:'min',
 seconds:'sec',
-
 saving:'Saving...',
 noSubmitRound:'No round available',
 accountCannot:'Your account cannot submit now',
-
 serverRejected:'Deadline passed. Changes are no longer accepted',
-
 saveFail:'Save failed',
 networkError:'Network error',
-
 saveSuccess:'✓ Saved · Total ',
 noChange:'✓ No changes to save',
-
 reloaded:'✓ Latest saved data loaded',
-
 waitingResult:'Waiting for result',
-
-morning:'Morning 10:30',
-afternoon:'Afternoon 15:30',
-
-loading:'Loading...',
-sessionExpired:'Session expired. Please log in again',
-newRoundLoaded:'✓ Switched to latest round'
-
+morning:'Morning 11:45',
+afternoon:'Afternoon 15:45'
 },
 
-
 th:{
-
 loginTitle:'เข้าสู่ระบบตัวแทน',
 email:'อีเมลตัวแทน',
 password:'รหัสผ่าน',
 loginBtn:'เข้าสู่ศูนย์ตัวแทน',
-loginState:'สถานะการเข้าสู่ระบบ',
-loggedIn:'เข้าสู่ระบบแล้ว',
-
 agentInfo:'ข้อมูลตัวแทนของฉัน',
 agentName:'ชื่อตัวแทน',
 agentRate:'อัตราตัวแทน',
 accountStatus:'สถานะบัญชี',
-
 normal:'ปกติ',
 suspended:'ระงับชั่วคราว',
 blocked:'ถูกจำกัด',
-
 currentRound:'รอบปัจจุบัน',
 round:'รอบ',
 submitStatus:'สถานะการส่ง',
 deadline:'เวลาปิดรับ',
 timeLeft:'เวลาที่เหลือ',
-
 serverNote:'ก่อนเวลาปิดสามารถเพิ่มหรือแก้ไขข้อมูลได้ หลังเวลาปิดระบบจะล็อกอัตโนมัติ',
-
 submitTitle:'ส่งข้อมูล 00–99',
 totalPoints:'ยอดรวมปัจจุบัน',
 submitBtn:'บันทึกข้อมูล',
 reloadBtn:'โหลดข้อมูลที่บันทึก',
-
 editNote:'ข้อมูลเดิมสามารถแก้ไขได้ก่อนเวลาปิด ใส่ 0 แล้วบันทึกเพื่อเปลี่ยนยอดเป็น 0',
-
 resultTitle:'ผลรอบนี้',
 resultNumber:'หมายเลขผล',
 submittedTotal:'ยอดส่งทั้งหมด',
 commission:'ค่าคอมมิชชั่นตัวแทน',
 winningAmount:'ยอดเงินรางวัล',
-
 commissionNote:'ค่าคอมมิชชั่นคำนวณจากยอดที่บันทึกจริงและอัตราตัวแทน',
-
 logout:'ออกจากระบบ',
-
 loginMissing:'กรุณากรอกอีเมลและรหัสผ่าน',
 logging:'กำลังเข้าสู่ระบบ...',
 loginFail:'เข้าสู่ระบบไม่สำเร็จ',
-
 noAgent:'บัญชีนี้ไม่มีสิทธิ์ตัวแทน',
-
 noRound:'ไม่มีรอบที่เปิด',
 canSubmit:'ส่ง / แก้ไขได้',
 closed:'ปิดรอบแล้ว',
 closedShort:'ปิดแล้ว',
-
 minutes:'นาที',
 seconds:'วินาที',
-
 saving:'กำลังบันทึก...',
 noSubmitRound:'ไม่มีรอบ',
 accountCannot:'บัญชีนี้ไม่สามารถส่งได้',
-
 serverRejected:'เกินเวลาปิดรับแล้ว',
-
 saveFail:'บันทึกไม่สำเร็จ',
 networkError:'เครือข่ายผิดพลาด',
-
 saveSuccess:'✓ บันทึกสำเร็จ · รวม ',
 noChange:'✓ ไม่มีการเปลี่ยนแปลง',
-
 reloaded:'✓ โหลดข้อมูลล่าสุดแล้ว',
-
 waitingResult:'รอผล',
-
-morning:'เช้า 10:30',
-afternoon:'บ่าย 15:30',
-
-loading:'กำลังโหลด...',
-sessionExpired:'เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่',
-newRoundLoaded:'✓ เปลี่ยนเป็นรอบล่าสุดแล้ว'
-
+morning:'ช่วงเช้า 11:45',
+afternoon:'ช่วงบ่าย 15:45'
 },
 
-
 ms:{
-
 loginTitle:'Log Masuk Ejen',
 email:'E-mel Ejen',
 password:'Kata Laluan',
 loginBtn:'Log Masuk Pusat Ejen',
-loginState:'Status Log Masuk',
-loggedIn:'Telah Log Masuk',
-
 agentInfo:'Profil Ejen Saya',
 agentName:'Nama Ejen',
 agentRate:'Kadar Ejen',
 accountStatus:'Status Akaun',
-
 normal:'Aktif',
 suspended:'Digantung',
 blocked:'Disekat',
-
 currentRound:'Pusingan Semasa',
 round:'Pusingan',
 submitStatus:'Status Hantaran',
 deadline:'Masa Tutup',
 timeLeft:'Masa Baki',
-
 serverNote:'Data boleh ditambah atau diubah sebelum masa tutup. Sistem akan dikunci selepas masa tutup.',
-
 submitTitle:'Hantaran 00–99',
 totalPoints:'Jumlah Input',
 submitBtn:'Simpan Data',
 reloadBtn:'Muat Semula Data',
-
 editNote:'Data yang telah disimpan boleh diubah sebelum masa tutup. Masukkan 0 dan simpan untuk menjadikannya 0.',
-
 resultTitle:'Keputusan',
 resultNumber:'Nombor Keputusan',
 submittedTotal:'Jumlah Dihantar',
 commission:'Komisen Ejen',
 winningAmount:'Jumlah Menang',
-
 commissionNote:'Komisen dikira berdasarkan jumlah sebenar yang disimpan dan kadar ejen.',
-
 logout:'Log Keluar',
-
 loginMissing:'Masukkan e-mel dan kata laluan',
 logging:'Sedang log masuk...',
 loginFail:'Log masuk gagal',
-
 noAgent:'Tiada akses ejen',
-
 noRound:'Tiada pusingan terbuka',
 canSubmit:'Boleh Hantar / Ubah',
 closed:'Pusingan Ditutup',
 closedShort:'Ditutup',
-
 minutes:'min',
 seconds:'saat',
-
 saving:'Menyimpan...',
 noSubmitRound:'Tiada pusingan',
 accountCannot:'Akaun tidak boleh menghantar',
-
 serverRejected:'Masa tutup telah tamat',
-
 saveFail:'Gagal menyimpan',
 networkError:'Ralat rangkaian',
-
 saveSuccess:'✓ Berjaya · Jumlah ',
 noChange:'✓ Tiada perubahan',
-
 reloaded:'✓ Data terkini dimuatkan',
-
 waitingResult:'Menunggu keputusan',
-
-morning:'Pagi 10:30',
-afternoon:'Petang 15:30',
-
-loading:'Memuatkan...',
-sessionExpired:'Sesi tamat. Sila log masuk semula',
-newRoundLoaded:'✓ Bertukar ke pusingan terbaru'
-
+morning:'Pagi 11:45',
+afternoon:'Petang 15:45'
 },
 
-
 vi:{
-
 loginTitle:'Đăng nhập đại lý',
 email:'Email đại lý',
 password:'Mật khẩu',
 loginBtn:'Đăng nhập trung tâm đại lý',
-loginState:'Trạng thái đăng nhập',
-loggedIn:'Đã đăng nhập',
-
 agentInfo:'Thông tin đại lý',
 agentName:'Tên đại lý',
 agentRate:'Tỷ lệ đại lý',
 accountStatus:'Trạng thái',
-
 normal:'Hoạt động',
 suspended:'Tạm dừng',
 blocked:'Hạn chế',
-
 currentRound:'Kỳ hiện tại',
 round:'Kỳ',
 submitStatus:'Trạng thái gửi',
 deadline:'Hạn chót',
 timeLeft:'Thời gian còn lại',
-
 serverNote:'Có thể thêm hoặc sửa dữ liệu trước hạn chót. Sau hạn hệ thống sẽ tự khóa.',
-
 submitTitle:'Gửi dữ liệu 00–99',
 totalPoints:'Tổng đang nhập',
 submitBtn:'Lưu dữ liệu',
 reloadBtn:'Tải lại dữ liệu',
-
 editNote:'Dữ liệu đã lưu vẫn có thể sửa trước hạn. Nhập 0 và lưu để đưa số tiền về 0.',
-
 resultTitle:'Kết quả',
 resultNumber:'Số kết quả',
 submittedTotal:'Tổng đã gửi',
 commission:'Hoa hồng đại lý',
 winningAmount:'Tiền trúng',
-
 commissionNote:'Hoa hồng được tính theo tổng thực tế đã lưu và tỷ lệ đại lý.',
-
 logout:'Đăng xuất',
-
 loginMissing:'Nhập email và mật khẩu',
 logging:'Đang đăng nhập...',
 loginFail:'Đăng nhập thất bại',
-
 noAgent:'Không có quyền đại lý',
-
 noRound:'Không có kỳ đang mở',
 canSubmit:'Có thể gửi / sửa',
 closed:'Đã đóng',
 closedShort:'Đã đóng',
-
 minutes:'phút',
 seconds:'giây',
-
 saving:'Đang lưu...',
 noSubmitRound:'Không có kỳ',
 accountCannot:'Không thể gửi',
-
 serverRejected:'Đã quá hạn',
-
 saveFail:'Lưu thất bại',
 networkError:'Lỗi mạng',
-
 saveSuccess:'✓ Đã lưu · Tổng ',
 noChange:'✓ Không có thay đổi',
-
 reloaded:'✓ Đã tải dữ liệu mới nhất',
-
 waitingResult:'Chờ kết quả',
-
-morning:'Sáng 10:30',
-afternoon:'Chiều 15:30',
-
-loading:'Đang tải...',
-sessionExpired:'Phiên đăng nhập đã hết hạn',
-newRoundLoaded:'✓ Đã chuyển sang kỳ mới nhất'
-
+morning:'Sáng 11:45',
+afternoon:'Chiều 15:45'
 },
 
-
 id:{
-
 loginTitle:'Login Agen',
 email:'Email Agen',
 password:'Kata Sandi',
 loginBtn:'Masuk Pusat Agen',
-loginState:'Status Login',
-loggedIn:'Sudah Login',
-
 agentInfo:'Profil Agen',
 agentName:'Nama Agen',
 agentRate:'Persentase Agen',
 accountStatus:'Status Akun',
-
 normal:'Aktif',
 suspended:'Ditangguhkan',
 blocked:'Dibatasi',
-
 currentRound:'Putaran Saat Ini',
 round:'Putaran',
 submitStatus:'Status',
 deadline:'Batas Waktu',
 timeLeft:'Sisa Waktu',
-
 serverNote:'Data dapat ditambah atau diubah sebelum batas waktu. Sistem terkunci otomatis setelah batas waktu.',
-
 submitTitle:'Kirim Data 00–99',
 totalPoints:'Total Input',
 submitBtn:'Simpan Data',
 reloadBtn:'Muat Ulang Data',
-
 editNote:'Data yang sudah tersimpan dapat diubah sebelum batas waktu. Masukkan 0 lalu simpan untuk menjadikannya 0.',
-
 resultTitle:'Hasil Putaran',
 resultNumber:'Nomor Hasil',
 submittedTotal:'Total Dikirim',
 commission:'Komisi Agen',
 winningAmount:'Jumlah Menang',
-
 commissionNote:'Komisi dihitung dari total yang benar-benar tersimpan dan persentase agen.',
-
 logout:'Keluar',
-
 loginMissing:'Masukkan email dan kata sandi',
 logging:'Sedang login...',
 loginFail:'Login gagal',
-
 noAgent:'Tidak ada akses agen',
-
 noRound:'Tidak ada putaran terbuka',
 canSubmit:'Bisa Kirim / Ubah',
 closed:'Putaran Ditutup',
 closedShort:'Ditutup',
-
 minutes:'mnt',
 seconds:'dtk',
-
 saving:'Menyimpan...',
 noSubmitRound:'Tidak ada putaran',
 accountCannot:'Akun tidak bisa mengirim',
-
 serverRejected:'Batas waktu telah lewat',
-
 saveFail:'Gagal menyimpan',
 networkError:'Kesalahan jaringan',
-
 saveSuccess:'✓ Tersimpan · Total ',
 noChange:'✓ Tidak ada perubahan',
-
 reloaded:'✓ Data terbaru dimuat',
-
 waitingResult:'Menunggu hasil',
-
-morning:'Pagi 10:30',
-afternoon:'Sore 15:30',
-
-loading:'Memuat...',
-sessionExpired:'Sesi telah berakhir. Silakan login lagi',
-newRoundLoaded:'✓ Beralih ke putaran terbaru'
-
+morning:'Pagi 11:45',
+afternoon:'Sore 15:45'
 }
 
 };
 
 
-/* ==========================================
-   TRANSLATION
-========================================== */
+function tr(key){
 
-function tr(
-  key
-){
+  return T[currentLang]?.[key]
+  ||
+  T.zh[key]
+  ||
+  key;
 
-  return (
-    T[currentLang]?.[key]
-    ||
-    T.zh[key]
-    ||
-    key
+}
+
+
+function normalizeRate(value){
+
+  let rate =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(
+      rate
+    )
+  ){
+
+    rate =
+    0;
+
+  }
+
+
+  if(
+    rate>0
+    &&
+    rate<=1
+  ){
+
+    rate *=
+    100;
+
+  }
+
+
+  return rate;
+
+}
+
+
+function formatRate(value){
+
+  return Number(
+    value || 0
+  )
+  .toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
   );
 
 }
 
 
-/* ==========================================
-   LANGUAGE
-========================================== */
-
-function changeLanguage(
-  lang
-){
-
-  if(
-    !T[lang]
-  ){
-
-    lang =
-    'zh';
-
-  }
-
+function changeLanguage(lang){
 
   currentLang =
   lang;
@@ -1590,7 +1005,9 @@ function changeLanguage(
 
 
       el.textContent =
-      tr(key);
+      tr(
+        key
+      );
 
     }
   );
@@ -1610,340 +1027,22 @@ function changeLanguage(
 
 
       el.placeholder =
-      tr(key);
+      tr(
+        key
+      );
 
     }
   );
-
-
-  const select =
-  document.getElementById(
-    'langSelect'
-  );
-
-
-  if(select){
-
-    select.value =
-    currentLang;
-
-  }
 
 
   renderAgentStatus();
 
-
   renderRound();
-
 
   renderAgentFinance();
 
-
-  updateDeadlineUI();
-
-
-  if(agent){
-
-    document.getElementById(
-      'sessionState'
-    ).textContent =
-    tr('loggedIn');
-
-  }
-
 }
 
-
-/* ==========================================
-   API
-========================================== */
-
-async function api(
-  path,
-  options={}
-){
-
-  return fetch(
-    BASE+path,
-    {
-      ...options,
-
-      headers:{
-        apikey:KEY,
-        Authorization:
-        'Bearer '+token,
-        ...(options.headers || {})
-      }
-    }
-  );
-
-}
-
-
-/* ==========================================
-   RATE
-========================================== */
-
-function normalizeRate(
-  value
-){
-
-  let rate =
-  Number(
-    value || 0
-  );
-
-
-  if(
-    !Number.isFinite(
-      rate
-    )
-  ){
-
-    rate =
-    0;
-
-  }
-
-
-  /*
-    兼容两种格式：
-    20  = 20%
-    0.2 = 20%
-  */
-
-  if(
-    rate > 0
-    &&
-    rate <= 1
-  ){
-
-    rate *=
-    100;
-
-  }
-
-
-  return rate;
-
-}
-
-
-function formatRate(
-  value
-){
-
-  return Number(
-    value || 0
-  )
-  .toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits:2
-    }
-  );
-
-}
-
-
-/* ==========================================
-   POINTS
-========================================== */
-
-function parsePoints(
-  value
-){
-
-  const n =
-  Number(
-    value || 0
-  );
-
-
-  if(
-    !Number.isFinite(n)
-    ||
-    n < 0
-  ){
-
-    return 0;
-
-  }
-
-
-  return n;
-
-}
-
-
-/* ==========================================
-   SESSION STORAGE
-========================================== */
-
-function saveAgentSession(
-  accessToken,
-  newRefreshToken=''
-){
-
-  token =
-  accessToken || '';
-
-
-  if(newRefreshToken){
-
-    refreshToken =
-    newRefreshToken;
-
-  }
-
-
-  if(token){
-
-    localStorage.setItem(
-      'jmt_agent_token',
-      token
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_agent_token',
-      token
-    );
-
-  }
-
-
-  if(refreshToken){
-
-    localStorage.setItem(
-      'jmt_agent_refresh_token',
-      refreshToken
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_agent_refresh_token',
-      refreshToken
-    );
-
-  }
-
-}
-
-
-/* ==========================================
-   CLEAR SESSION
-========================================== */
-
-function clearAgentSession(){
-
-  localStorage.removeItem(
-    'jmt_agent_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_agent_token'
-  );
-
-
-  localStorage.removeItem(
-    'jmt_agent_refresh_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_agent_refresh_token'
-  );
-
-
-  token =
-  '';
-
-
-  refreshToken =
-  '';
-
-}
-
-
-/* ==========================================
-   TRY REFRESH LOGIN
-========================================== */
-
-async function tryRefreshSession(){
-
-  if(
-    !refreshToken
-  ){
-
-    return false;
-
-  }
-
-
-  try{
-
-    const r =
-    await fetch(
-      BASE+
-      '/auth/v1/token?grant_type=refresh_token',
-      {
-        method:'POST',
-
-        headers:{
-          apikey:KEY,
-          'Content-Type':
-          'application/json'
-        },
-
-        body:
-        JSON.stringify({
-          refresh_token:
-          refreshToken
-        })
-      }
-    );
-
-
-    const d =
-    await r.json();
-
-
-    if(
-      !r.ok
-      ||
-      !d.access_token
-    ){
-
-      return false;
-
-    }
-
-
-    saveAgentSession(
-      d.access_token,
-      d.refresh_token
-      ||
-      refreshToken
-    );
-
-
-    return true;
-
-
-  }catch(e){
-
-    return false;
-
-  }
-
-}
-
-
-/* ==========================================
-   RESET SUBMISSION DATA
-========================================== */
 
 function resetSubmittedData(){
 
@@ -1982,10 +1081,6 @@ function resetSubmittedData(){
 
 }
 
-
-/* ==========================================
-   BUILD 00 - 99
-========================================== */
 
 function buildGrid(){
 
@@ -2054,30 +1149,37 @@ function buildGrid(){
 }
 
 
-/* ==========================================
-   INPUT CHANGED
-========================================== */
+function parsePoints(value){
 
-function inputChanged(
-  code
-){
-
-  const input =
-  document.getElementById(
-    'n'+code
+  const n =
+  Number(
+    value || 0
   );
 
 
-  if(!input){
+  if(
+    !Number.isFinite(n)
+    ||
+    n<0
+  ){
 
-    return;
+    return 0;
 
   }
 
 
+  return n;
+
+}
+
+
+function inputChanged(code){
+
   const newValue =
   parsePoints(
-    input.value
+    document.getElementById(
+      'n'+code
+    ).value
   );
 
 
@@ -2113,29 +1215,12 @@ function inputChanged(
 }
 
 
-/* ==========================================
-   INPUT VALUES
-========================================== */
-
-function getInputValue(
-  code
-){
-
-  const el =
-  document.getElementById(
-    'n'+code
-  );
-
-
-  if(!el){
-
-    return 0;
-
-  }
-
+function getInputValue(code){
 
   return parsePoints(
-    el.value
+    document.getElementById(
+      'n'+code
+    ).value
   );
 
 }
@@ -2186,10 +1271,6 @@ function updateInputTotal(){
 }
 
 
-/* ==========================================
-   LOGIN
-========================================== */
-
 async function signIn(){
 
   const email =
@@ -2210,16 +1291,6 @@ async function signIn(){
   );
 
 
-  const btn =
-  document.getElementById(
-    'loginBtn'
-  );
-
-
-  msg.className =
-  'msg';
-
-
   if(
     !email
     ||
@@ -2235,10 +1306,6 @@ async function signIn(){
     return;
 
   }
-
-
-  btn.disabled =
-  true;
 
 
   msg.textContent =
@@ -2258,12 +1325,10 @@ async function signIn(){
 
         headers:{
           apikey:KEY,
-          'Content-Type':
-          'application/json'
+          'Content-Type':'application/json'
         },
 
-        body:
-        JSON.stringify({
+        body:JSON.stringify({
           email,
           password
         })
@@ -2281,128 +1346,65 @@ async function signIn(){
       !d.access_token
     ){
 
-      throw new Error(
-        'LOGIN_FAILED'
-      );
+      throw new Error();
 
     }
 
 
-    saveAgentSession(
-      d.access_token,
-      d.refresh_token
-      ||
-      ''
+    token =
+    d.access_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_token',
+      token
     );
 
 
-    await startAgent(
-      false
+    sessionStorage.setItem(
+      'jmt_agent_token',
+      token
     );
+
+
+    await startAgent();
 
 
   }catch(e){
-
-    clearAgentSession();
-
-
-    msg.className =
-    'msg error';
-
 
     msg.textContent =
     tr(
       'loginFail'
     );
 
-
-  }finally{
-
-    btn.disabled =
-    false;
-
   }
 
 }
 
 
-/* ==========================================
-   START AGENT
-========================================== */
-
-async function startAgent(
-  allowRefresh=true
-){
+async function startAgent(){
 
   try{
 
-    if(!token){
-
-      return false;
-
-    }
-
-
-    /*
-      先确认 Auth 用户仍有效。
-    */
-
-    let userRes =
-    await api(
-      '/auth/v1/user'
-    );
-
-
-    if(
-      !userRes.ok
-      &&
-      allowRefresh
-    ){
-
-      const refreshed =
-      await tryRefreshSession();
-
-
-      if(refreshed){
-
-        userRes =
-        await api(
-          '/auth/v1/user'
-        );
-
-      }
-
-    }
-
-
-    if(!userRes.ok){
-
-      throw new Error(
-        'AUTH_EXPIRED'
-      );
-
-    }
-
-
-    /*
-      agents 的 RLS 应保证代理只能看到自己的资料。
-    */
-
     const r =
-    await api(
+    await fetch(
+      BASE+
       '/rest/v1/agents'+
       '?select=id,display_name,commission_rate,status'+
-      '&limit=1'
+      '&limit=1',
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:
+          'Bearer '+token
+        }
+      }
     );
 
 
     if(!r.ok){
 
-      throw new Error(
-        await r.text()
-        ||
-        'AGENT_READ_FAILED'
-      );
+      throw new Error();
 
     }
 
@@ -2412,14 +1414,10 @@ async function startAgent(
 
 
     if(
-      !Array.isArray(rows)
-      ||
       !rows.length
     ){
 
-      throw new Error(
-        'NO_AGENT'
-      );
+      throw new Error();
 
     }
 
@@ -2439,20 +1437,6 @@ async function startAgent(
       'agentBox'
     ).classList.remove(
       'hidden'
-    );
-
-
-    document.getElementById(
-      'sessionLine'
-    ).style.display =
-    'block';
-
-
-    document.getElementById(
-      'sessionState'
-    ).textContent =
-    tr(
-      'loggedIn'
     );
 
 
@@ -2479,92 +1463,27 @@ async function startAgent(
     renderAgentStatus();
 
 
-    await loadSiteLogo();
-
-
-    await loadRound(
-      true
-    );
-
-
-    return true;
+    await loadRound();
 
 
   }catch(e){
 
-    console.error(
-      e
-    );
-
-
     clearAgentSession();
 
 
-    agent =
-    null;
-
-
-    currentRound =
-    null;
-
-
-    document.getElementById(
-      'agentBox'
-    ).classList.add(
-      'hidden'
+    alert(
+      tr(
+        'noAgent'
+      )
     );
 
 
-    document.getElementById(
-      'loginBox'
-    ).classList.remove(
-      'hidden'
-    );
-
-
-    document.getElementById(
-      'sessionLine'
-    ).style.display =
-    'none';
-
-
-    const msg =
-    document.getElementById(
-      'loginMsg'
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    e.message ===
-    'NO_AGENT'
-
-    ?
-
-    tr(
-      'noAgent'
-    )
-
-    :
-
-    tr(
-      'sessionExpired'
-    );
-
-
-    return false;
+    location.reload();
 
   }
 
 }
 
-
-/* ==========================================
-   AGENT STATUS
-========================================== */
 
 function renderAgentStatus(){
 
@@ -2582,7 +1501,7 @@ function renderAgentStatus(){
 
 
   if(
-    agent.status ===
+    agent.status===
     'active'
   ){
 
@@ -2598,7 +1517,7 @@ function renderAgentStatus(){
   }
 
   else if(
-    agent.status ===
+    agent.status===
     'suspended'
   ){
 
@@ -2609,7 +1528,7 @@ function renderAgentStatus(){
 
 
     el.className =
-    'statusPause';
+    'statusClosed';
 
   }
 
@@ -2629,111 +1548,22 @@ function renderAgentStatus(){
 }
 
 
-/* ==========================================
-   LOAD LOGO
-========================================== */
-
-async function loadSiteLogo(){
-
-  try{
-
-    const r =
-    await fetch(
-      BASE+
-      '/rest/v1/site_settings'+
-      '?id=eq.1'+
-      '&select=logo_data_url'+
-      '&limit=1',
-      {
-        headers:{
-          apikey:KEY,
-          Authorization:
-          'Bearer '+KEY
-        }
-      }
-    );
-
-
-    if(!r.ok){
-
-      return;
-
-    }
-
-
-    const rows =
-    await r.json();
-
-
-    if(
-      !rows.length
-      ||
-      !rows[0].logo_data_url
-    ){
-
-      return;
-
-    }
-
-
-    const holder =
-    document.getElementById(
-      'siteLogo'
-    );
-
-
-    holder.innerHTML =
-    '';
-
-
-    const img =
-    document.createElement(
-      'img'
-    );
-
-
-    img.src =
-    rows[0].logo_data_url;
-
-
-    holder.appendChild(
-      img
-    );
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-  }
-
-}
-
-
-/* ==========================================
-   LOAD ROUND
-========================================== */
-
-async function loadRound(
-  loadSubmission=true
-){
-
-  const oldRoundId =
-  currentRound
-  ?
-  currentRound.id
-  :
-  null;
-
+async function loadRound(){
 
   const r =
-  await api(
+  await fetch(
+    BASE+
     '/rest/v1/rounds'+
-    '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at'+
+    '?select=id,round_date,round_code,deadline_at,result_number,status,created_at'+
     '&order=created_at.desc'+
-    '&limit=50'
+    '&limit=30',
+    {
+      headers:{
+        apikey:KEY,
+        Authorization:
+        'Bearer '+token
+      }
+    }
   );
 
 
@@ -2746,7 +1576,7 @@ async function loadRound(
   }
 
 
-  allRounds =
+  const rounds =
   await r.json();
 
 
@@ -2754,41 +1584,27 @@ async function loadRound(
   Date.now();
 
 
-  /*
-    优先：
-    1. 仍开放且还没到截止的期
-    2. 仍标记 open 的期
-    3. 最新一期
-
-    第3种只用于显示结果，
-    不代表还能提交。
-  */
-
   currentRound =
 
-  allRounds.find(
-    r =>
-    r.status ===
-    'open'
+  rounds.find(
+    x=>
+    x.status==='open'
     &&
     new Date(
-      r.deadline_at
-    ).getTime()
-    >
-    now
+      x.deadline_at
+    ).getTime()>now
   )
 
   ||
 
-  allRounds.find(
-    r =>
-    r.status ===
-    'open'
+  rounds.find(
+    x=>
+    x.status==='open'
   )
 
   ||
 
-  allRounds[0]
+  rounds[0]
 
   ||
 
@@ -2798,14 +1614,9 @@ async function loadRound(
   renderRound();
 
 
-  if(
-    !currentRound
-  ){
+  if(!currentRound){
 
     resetSubmittedData();
-
-
-    clearGridInputs();
 
 
     renderAgentFinance();
@@ -2821,82 +1632,23 @@ async function loadRound(
   }
 
 
-  const changedRound =
-  oldRoundId
-  &&
-  currentRound.id !==
-  oldRoundId;
-
-
-  if(
-    loadSubmission
-    ||
-    !oldRoundId
-    ||
-    changedRound
-  ){
-
-    await loadExisting(
-      false
-    );
-
-  }
+  await loadExisting(
+    false
+  );
 
 
   updateDeadlineUI();
 
-
-  if(changedRound){
-
-    const msg =
-    document.getElementById(
-      'submitMsg'
-    );
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    tr(
-      'newRoundLoaded'
-    );
-
-  }
-
 }
 
 
-/* ==========================================
-   RENDER ROUND
-========================================== */
-
 function renderRound(){
 
-  const roundName =
-  document.getElementById(
-    'roundName'
-  );
+  if(!currentRound){
 
-
-  const deadline =
-  document.getElementById(
-    'deadlineText'
-  );
-
-
-  const result =
-  document.getElementById(
-    'resultNumber'
-  );
-
-
-  if(
-    !currentRound
-  ){
-
-    roundName.textContent =
+    document.getElementById(
+      'roundName'
+    ).textContent =
     '—';
 
 
@@ -2908,7 +1660,9 @@ function renderRound(){
     );
 
 
-    deadline.textContent =
+    document.getElementById(
+      'deadlineText'
+    ).textContent =
     '—';
 
 
@@ -2918,7 +1672,9 @@ function renderRound(){
     '—';
 
 
-    result.textContent =
+    document.getElementById(
+      'resultNumber'
+    ).textContent =
     tr(
       'waitingResult'
     );
@@ -2934,7 +1690,7 @@ function renderRound(){
 
 
   if(
-    currentRound.round_code ===
+    currentRound.round_code===
     '1030'
   ){
 
@@ -2946,7 +1702,7 @@ function renderRound(){
   }
 
   else if(
-    currentRound.round_code ===
+    currentRound.round_code===
     '1530'
   ){
 
@@ -2958,33 +1714,29 @@ function renderRound(){
   }
 
 
-  roundName.textContent =
+  document.getElementById(
+    'roundName'
+  ).textContent =
   currentRound.round_date+
   ' · '+
   period;
 
 
-  deadline.textContent =
+  document.getElementById(
+    'deadlineText'
+  ).textContent =
   formatMMT(
     currentRound.deadline_at
   );
 
 
-  result.textContent =
+  document.getElementById(
+    'resultNumber'
+  ).textContent =
 
-  currentRound.result_number
-  !==
-  null
-
-  &&
-  currentRound.result_number
-  !==
-  undefined
-
-  &&
-  currentRound.result_number
-  !==
-  ''
+  hasResult(
+    currentRound.result_number
+  )
 
   ?
 
@@ -3005,11 +1757,59 @@ function renderRound(){
 }
 
 
-/* ==========================================
-   CLEAR INPUTS
-========================================== */
+async function loadExisting(
+  showMessage=false
+){
 
-function clearGridInputs(){
+  if(
+    !currentRound
+    ||
+    !agent
+  ){
+
+    return;
+
+  }
+
+
+  const r =
+  await fetch(
+    BASE+
+    '/rest/v1/agent_submissions'+
+    '?round_id=eq.'+
+    encodeURIComponent(
+      currentRound.id
+    )+
+    '&agent_id=eq.'+
+    encodeURIComponent(
+      agent.id
+    )+
+    '&select=number_code,points',
+    {
+      headers:{
+        apikey:KEY,
+        Authorization:
+        'Bearer '+token
+      }
+    }
+  );
+
+
+  if(!r.ok){
+
+    throw new Error(
+      '读取提交数据失败'
+    );
+
+  }
+
+
+  const rows =
+  await r.json();
+
+
+  resetSubmittedData();
+
 
   for(
     let i=0;
@@ -3031,271 +1831,102 @@ function clearGridInputs(){
     );
 
 
-    const box =
+    input.value =
+    '';
+
+
     document.getElementById(
       'box'+code
+    ).classList.remove(
+      'changed'
     );
 
-
-    if(input){
-
-      input.value =
-      '';
-
-    }
-
-
-    if(box){
-
-      box.classList.remove(
-        'changed'
-      );
-
-
-      box.classList.remove(
-        'saved'
-      );
-
-    }
-
   }
+
+
+  rows.forEach(
+    row=>{
+
+
+      const code =
+      String(
+        row.number_code
+      )
+      .padStart(
+        2,
+        '0'
+      );
+
+
+      const points =
+      Number(
+        row.points || 0
+      );
+
+
+      existingCodes.add(
+        code
+      );
+
+
+      submittedNumbers[
+        code
+      ] =
+      points;
+
+
+      submittedTotal +=
+      points;
+
+
+      const input =
+      document.getElementById(
+        'n'+code
+      );
+
+
+      if(input){
+
+        input.value =
+        points>0
+        ?
+        points
+        :
+        '';
+
+      }
+
+    }
+  );
 
 
   updateInputTotal();
 
-}
 
-
-/* ==========================================
-   LOAD EXISTING SUBMISSION
-========================================== */
-
-async function loadExisting(
-  showMessage=false
-){
-
-  if(
-    isLoadingExisting
-    ||
-    !currentRound
-    ||
-    !agent
-  ){
-
-    return;
-
-  }
-
-
-  isLoadingExisting =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'submitMsg'
-  );
+  renderAgentFinance();
 
 
   if(showMessage){
 
+    const msg =
+    document.getElementById(
+      'submitMsg'
+    );
+
+
     msg.className =
-    'msg';
+    'msg success';
 
 
     msg.textContent =
     tr(
-      'loading'
+      'reloaded'
     );
-
-  }
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        currentRound.id
-      )+
-      '&agent_id=eq.'+
-      encodeURIComponent(
-        agent.id
-      )+
-      '&select=number_code,points'
-    );
-
-
-    if(!r.ok){
-
-      throw new Error(
-        await r.text()
-        ||
-        '读取提交数据失败'
-      );
-
-    }
-
-
-    const rows =
-    await r.json();
-
-
-    resetSubmittedData();
-
-
-    clearGridInputs();
-
-
-    rows.forEach(
-      row=>{
-
-
-        const code =
-        String(
-          row.number_code
-        )
-        .padStart(
-          2,
-          '0'
-        );
-
-
-        if(
-          submittedNumbers[
-            code
-          ]
-          ===
-          undefined
-        ){
-
-          return;
-
-        }
-
-
-        const points =
-        parsePoints(
-          row.points
-        );
-
-
-        existingCodes.add(
-          code
-        );
-
-
-        submittedNumbers[
-          code
-        ] =
-        points;
-
-
-        submittedTotal +=
-        points;
-
-
-        const input =
-        document.getElementById(
-          'n'+code
-        );
-
-
-        const box =
-        document.getElementById(
-          'box'+code
-        );
-
-
-        if(input){
-
-          input.value =
-          points > 0
-          ?
-          points
-          :
-          '';
-
-        }
-
-
-        if(
-          box
-          &&
-          points > 0
-        ){
-
-          box.classList.add(
-            'saved'
-          );
-
-        }
-
-      }
-    );
-
-
-    updateInputTotal();
-
-
-    renderAgentFinance();
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      tr(
-        'reloaded'
-      );
-
-    }
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg error';
-
-
-      msg.textContent =
-      e.message
-      ||
-      tr(
-        'networkError'
-      );
-
-    }
-
-
-  }finally{
-
-    isLoadingExisting =
-    false;
-
-
-    updateDeadlineUI();
 
   }
 
 }
 
-
-/* ==========================================
-   FINANCE
-========================================== */
 
 function renderAgentFinance(){
 
@@ -3349,14 +1980,9 @@ function renderAgentFinance(){
   if(
     !currentRound
     ||
-    currentRound.result_number ===
-    null
-    ||
-    currentRound.result_number ===
-    undefined
-    ||
-    currentRound.result_number ===
-    ''
+    !hasResult(
+      currentRound.result_number
+    )
   ){
 
     document.getElementById(
@@ -3407,17 +2033,14 @@ function renderAgentFinance(){
 }
 
 
-/* ==========================================
-   UPDATE EXISTING NUMBER
-========================================== */
-
 async function updateExistingCode(
   code,
   points
 ){
 
   const r =
-  await api(
+  await fetch(
+    BASE+
     '/rest/v1/agent_submissions'+
     '?round_id=eq.'+
     encodeURIComponent(
@@ -3435,15 +2058,16 @@ async function updateExistingCode(
       method:'PATCH',
 
       headers:{
+        apikey:KEY,
+        Authorization:
+        'Bearer '+token,
         'Content-Type':
         'application/json',
-
         Prefer:
         'return=representation'
       },
 
-      body:
-      JSON.stringify({
+      body:JSON.stringify({
         points:
         points,
 
@@ -3499,8 +2123,7 @@ async function updateExistingCode(
       rows
     )
     ||
-    rows.length ===
-    0
+    rows.length===0
   ){
 
     throw new Error(
@@ -3514,31 +2137,29 @@ async function updateExistingCode(
 }
 
 
-/* ==========================================
-   INSERT NEW NUMBER
-========================================== */
-
 async function insertNewCode(
   code,
   points
 ){
 
   const r =
-  await api(
+  await fetch(
+    BASE+
     '/rest/v1/agent_submissions',
     {
       method:'POST',
 
       headers:{
+        apikey:KEY,
+        Authorization:
+        'Bearer '+token,
         'Content-Type':
         'application/json',
-
         Prefer:
         'return=representation'
       },
 
-      body:
-      JSON.stringify({
+      body:JSON.stringify({
         round_id:
         currentRound.id,
 
@@ -3570,59 +2191,12 @@ async function insertNewCode(
 
   }
 
-
-  let rows =
-  [];
-
-
-  try{
-
-    rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-  }catch(e){
-
-    rows =
-    [];
-
-  }
-
-
-  if(
-    !Array.isArray(
-      rows
-    )
-    ||
-    rows.length ===
-    0
-  ){
-
-    throw new Error(
-      '号码 '+
-      code+
-      ' 没有成功保存'
-    );
-
-  }
-
 }
 
 
-/* ==========================================
-   SUBMIT ROUND
-========================================== */
-
 async function submitRound(){
 
-  if(
-    isSaving
-  ){
+  if(isSaving){
 
     return;
 
@@ -3657,13 +2231,9 @@ async function submitRound(){
 
 
   if(
-    agent.status !==
+    agent.status!==
     'active'
   ){
-
-    msg.className =
-    'msg error';
-
 
     msg.textContent =
     tr(
@@ -3676,77 +2246,8 @@ async function submitRound(){
   }
 
 
-  /*
-    保存前再从数据库确认当前期。
-  */
-
-  try{
-
-    const check =
-    await api(
-      '/rest/v1/rounds'+
-      '?id=eq.'+
-      encodeURIComponent(
-        currentRound.id
-      )+
-      '&select=id,status,deadline_at,result_number'+
-      '&limit=1'
-    );
-
-
-    if(
-      !check.ok
-    ){
-
-      throw new Error();
-
-    }
-
-
-    const rows =
-    await check.json();
-
-
-    if(
-      !rows.length
-    ){
-
-      throw new Error();
-
-    }
-
-
-    currentRound.status =
-    rows[0].status;
-
-
-    currentRound.deadline_at =
-    rows[0].deadline_at;
-
-
-    currentRound.result_number =
-    rows[0].result_number;
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'networkError'
-    );
-
-
-    return;
-
-  }
-
-
   if(
-    currentRound.status !==
+    currentRound.status!==
     'open'
     ||
     Date.now()
@@ -3755,10 +2256,6 @@ async function submitRound(){
       currentRound.deadline_at
     ).getTime()
   ){
-
-    msg.className =
-    'msg error';
-
 
     msg.textContent =
     tr(
@@ -3769,9 +2266,6 @@ async function submitRound(){
     disableInputs(
       true
     );
-
-
-    updateDeadlineUI();
 
 
     return;
@@ -3818,7 +2312,7 @@ async function submitRound(){
         code
       )
       &&
-      newValue !==
+      newValue!==
       oldValue
     ){
 
@@ -3839,7 +2333,7 @@ async function submitRound(){
         code
       )
       &&
-      newValue > 0
+      newValue>0
     ){
 
       changes.push({
@@ -3876,26 +2370,18 @@ async function submitRound(){
   true;
 
 
-  disableInputs(
-    true
-  );
-
-
   msg.textContent =
   tr(
     'saving'
   );
 
 
+  disableInputs(
+    true
+  );
+
+
   try{
-
-    /*
-      这里只保存真正有变化的号码。
-
-      已存在 → PATCH
-      新号码 → POST
-      清零 → PATCH 为 0
-    */
 
     for(
       const change
@@ -3903,7 +2389,7 @@ async function submitRound(){
     ){
 
       if(
-        change.type ===
+        change.type===
         'update'
       ){
 
@@ -3925,11 +2411,6 @@ async function submitRound(){
 
     }
 
-
-    /*
-      保存以后重新读数据库。
-      最终显示以数据库实际值为准。
-    */
 
     await loadExisting(
       false
@@ -3990,11 +2471,22 @@ async function submitRound(){
 }
 
 
-/* ==========================================
-   DEADLINE
-========================================== */
-
 function updateDeadlineUI(){
+
+  if(!currentRound){
+
+    return;
+
+  }
+
+
+  const left =
+  new Date(
+    currentRound.deadline_at
+  ).getTime()
+  -
+  Date.now();
+
 
   const statusEl =
   document.getElementById(
@@ -4009,59 +2501,9 @@ function updateDeadlineUI(){
 
 
   if(
-    !statusEl
+    left<=0
     ||
-    !countdown
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    !currentRound
-  ){
-
-    statusEl.textContent =
-    tr(
-      'noRound'
-    );
-
-
-    statusEl.className =
-    'statusClosed';
-
-
-    countdown.textContent =
-    '—';
-
-
-    disableInputs(
-      true
-    );
-
-
-    return;
-
-  }
-
-
-  const deadlineMs =
-  new Date(
-    currentRound.deadline_at
-  ).getTime();
-
-
-  const left =
-  deadlineMs-
-  Date.now();
-
-
-  if(
-    left <= 0
-    ||
-    currentRound.status !==
+    currentRound.status!==
     'open'
   ){
 
@@ -4091,54 +2533,14 @@ function updateDeadlineUI(){
   }
 
 
-  if(
-    !agent
-    ||
-    agent.status !==
-    'active'
-  ){
-
-    statusEl.textContent =
-    tr(
-      'accountCannot'
-    );
+  statusEl.textContent =
+  tr(
+    'canSubmit'
+  );
 
 
-    statusEl.className =
-    'statusClosed';
-
-
-    disableInputs(
-      true
-    );
-
-  }
-
-  else{
-
-    statusEl.textContent =
-    tr(
-      'canSubmit'
-    );
-
-
-    statusEl.className =
-    'statusOpen';
-
-
-    if(
-      !isSaving
-      &&
-      !isLoadingExisting
-    ){
-
-      disableInputs(
-        false
-      );
-
-    }
-
-  }
+  statusEl.className =
+  'statusOpen';
 
 
   let totalSeconds =
@@ -4150,21 +2552,9 @@ function updateDeadlineUI(){
   );
 
 
-  const days =
-  Math.floor(
-    totalSeconds/
-    86400
-  );
-
-
-  totalSeconds %=
-  86400;
-
-
   const hours =
   Math.floor(
-    totalSeconds/
-    3600
+    totalSeconds/3600
   );
 
 
@@ -4174,49 +2564,16 @@ function updateDeadlineUI(){
 
   const minutes =
   Math.floor(
-    totalSeconds/
-    60
+    totalSeconds/60
   );
 
 
   const seconds =
-  totalSeconds%
-  60;
+  totalSeconds%60;
 
 
   if(
-    days > 0
-  ){
-
-    countdown.textContent =
-    days+
-    'd '+
-    String(hours)
-    .padStart(
-      2,
-      '0'
-    )
-    +
-    ':'
-    +
-    String(minutes)
-    .padStart(
-      2,
-      '0'
-    )
-    +
-    ':'
-    +
-    String(seconds)
-    .padStart(
-      2,
-      '0'
-    );
-
-  }
-
-  else if(
-    hours > 0
+    hours>0
   ){
 
     countdown.textContent =
@@ -4251,8 +2608,7 @@ function updateDeadlineUI(){
     ' '+
     tr(
       'minutes'
-    )
-    +
+    )+
     ' '+
     seconds+
     ' '+
@@ -4262,12 +2618,24 @@ function updateDeadlineUI(){
 
   }
 
+
+  if(
+    agent
+    &&
+    agent.status===
+    'active'
+    &&
+    !isSaving
+  ){
+
+    disableInputs(
+      false
+    );
+
+  }
+
 }
 
-
-/* ==========================================
-   DISABLE
-========================================== */
 
 function disableInputs(
   disabled
@@ -4287,257 +2655,95 @@ function disableInputs(
     );
 
 
-    const input =
     document.getElementById(
       'n'+code
-    );
-
-
-    if(input){
-
-      input.disabled =
-      disabled;
-
-    }
-
-  }
-
-
-  const btn =
-  document.getElementById(
-    'submitBtn'
-  );
-
-
-  if(btn){
-
-    btn.disabled =
+    ).disabled =
     disabled;
 
   }
 
-}
 
-
-/* ==========================================
-   AUTO CHECK LATEST ROUND
-========================================== */
-
-async function refreshRoundOnly(){
-
-  if(
-    !token
-    ||
-    !agent
-    ||
-    isSaving
-    ||
-    isLoadingExisting
-  ){
-
-    return;
-
-  }
-
-
-  try{
-
-    /*
-      重新查询期数列表，而不是只查当前 ID。
-
-      这样 Admin 开启新一期以后，
-      代理页面会自动发现新一期。
-    */
-
-    const r =
-    await api(
-      '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at'+
-      '&order=created_at.desc'+
-      '&limit=50'
-    );
-
-
-    if(!r.ok){
-
-      if(
-        r.status ===
-        401
-      ){
-
-        const refreshed =
-        await tryRefreshSession();
-
-
-        if(!refreshed){
-
-          clearAgentSession();
-
-
-          location.reload();
-
-        }
-
-      }
-
-
-      return;
-
-    }
-
-
-    const rows =
-    await r.json();
-
-
-    const now =
-    Date.now();
-
-
-    const latestRound =
-
-    rows.find(
-      x =>
-      x.status ===
-      'open'
-      &&
-      new Date(
-        x.deadline_at
-      ).getTime()
-      >
-      now
-    )
-
-    ||
-
-    rows.find(
-      x =>
-      x.status ===
-      'open'
-    )
-
-    ||
-
-    rows[0]
-
-    ||
-
-    null;
-
-
-    if(
-      !latestRound
-    ){
-
-      if(currentRound){
-
-        currentRound =
-        null;
-
-
-        resetSubmittedData();
-
-
-        clearGridInputs();
-
-
-        renderRound();
-
-
-        renderAgentFinance();
-
-
-        updateDeadlineUI();
-
-      }
-
-
-      return;
-
-    }
-
-
-    /*
-      如果已经切换新一期，
-      才重新读取提交数据。
-
-      如果还是同一期，
-      只更新状态和开奖结果，
-      不覆盖用户正在输入的金额。
-    */
-
-    if(
-      !currentRound
-      ||
-      latestRound.id !==
-      currentRound.id
-    ){
-
-      currentRound =
-      latestRound;
-
-
-      renderRound();
-
-
-      await loadExisting(
-        false
-      );
-
-
-      updateDeadlineUI();
-
-
-      const msg =
-      document.getElementById(
-        'submitMsg'
-      );
-
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      tr(
-        'newRoundLoaded'
-      );
-
-
-      return;
-
-    }
-
-
-    currentRound = {
-      ...currentRound,
-      ...latestRound
-    };
-
-
-    renderRound();
-
-
-    renderAgentFinance();
-
-
-    updateDeadlineUI();
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-  }
+  document.getElementById(
+    'submitBtn'
+  ).disabled =
+  disabled;
 
 }
 
 
-/* ==========================================
-   CLOCK
-========================================== */
+function formatMMT(
+  iso
+){
+
+  if(!iso){
+
+    return '—';
+
+  }
+
+
+  return new Intl.DateTimeFormat(
+    'zh-CN',
+    {
+      timeZone:
+      'Asia/Yangon',
+
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+
+      hour12:false
+    }
+  )
+  .format(
+    new Date(
+      iso
+    )
+  )
+  +
+  ' MMT';
+
+}
+
+
+function formatNumber(
+  value
+){
+
+  return Number(
+    value || 0
+  )
+  .toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function hasResult(
+  value
+){
+
+  return (
+    value !==
+    null
+    &&
+    value !==
+    undefined
+    &&
+    value !==
+    ''
+  );
+
+}
+
 
 function updateClock(){
 
@@ -4567,78 +2773,109 @@ function updateClock(){
 
       hour12:false
     }
-  ).format(
+  )
+  .format(
     new Date()
   );
 
 }
 
 
-/* ==========================================
-   FORMAT MMT
-========================================== */
+async function refreshRoundOnly(){
 
-function formatMMT(
-  iso
-){
+  if(
+    !token
+    ||
+    !agent
+    ||
+    !currentRound
+  ){
 
-  if(!iso){
-
-    return '—';
+    return;
 
   }
 
 
-  return new Intl.DateTimeFormat(
-    'zh-CN',
-    {
-      timeZone:
-      'Asia/Yangon',
+  try{
 
-      year:'numeric',
-      month:'2-digit',
-      day:'2-digit',
+    const r =
+    await fetch(
+      BASE+
+      '/rest/v1/rounds'+
+      '?id=eq.'+
+      encodeURIComponent(
+        currentRound.id
+      )+
+      '&select=id,round_date,round_code,deadline_at,result_number,status'+
+      '&limit=1',
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:
+          'Bearer '+token
+        }
+      }
+    );
 
-      hour:'2-digit',
-      minute:'2-digit',
-      second:'2-digit',
 
-      hour12:false
+    if(!r.ok){
+
+      return;
+
     }
-  ).format(
-    new Date(
-      iso
-    )
-  )
-  +
-  ' MMT';
+
+
+    const rows =
+    await r.json();
+
+
+    if(
+      rows.length
+    ){
+
+      currentRound =
+      rows[0];
+
+
+      renderRound();
+
+
+      renderAgentFinance();
+
+
+      updateDeadlineUI();
+
+    }
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+  }
 
 }
 
 
-/* ==========================================
-   FORMAT NUMBER
-========================================== */
+function clearAgentSession(){
 
-function formatNumber(
-  value
-){
-
-  return Number(
-    value || 0
-  ).toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits:2
-    }
+  localStorage.removeItem(
+    'jmt_agent_token'
   );
 
+
+  sessionStorage.removeItem(
+    'jmt_agent_token'
+  );
+
+
+  token =
+  '';
+
 }
 
-
-/* ==========================================
-   LOGOUT
-========================================== */
 
 function logout(){
 
@@ -4650,9 +2887,9 @@ function logout(){
 }
 
 
-/* ==========================================
+/* =========================
    START
-========================================== */
+========================= */
 
 resetSubmittedData();
 
@@ -4686,16 +2923,6 @@ setInterval(
 );
 
 
-/*
-  每20秒只检查：
-  - 是否出现新一期
-  - 当前期是否关闭
-  - 是否已经开奖
-
-  如果仍然是同一期，
-  不会覆盖代理正在输入的 00–99。
-*/
-
 setInterval(
   refreshRoundOnly,
   20000
@@ -4704,14 +2931,11 @@ setInterval(
 
 if(token){
 
-  startAgent(
-    true
-  );
+  startAgent();
 
 }
 
 </script>
 
 </body>
-
 </html>
