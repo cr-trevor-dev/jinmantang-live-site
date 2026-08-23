@@ -623,10 +623,10 @@ button.danger{
           <div class="menuSub">创建代理、搜索、比例、暂停、限制</div>
         </a>
 
-        <a class="menu" href="/admin/rounds/index.html">
+        <a class="menu" href="/admin/rounds/">
           <div class="menuIcon">🗓️</div>
           <div class="menuTitle">期数管理</div>
-          <div class="menuSub">结束本期、归档、开启下一期</div>
+          <div class="menuSub">关闭本期、归档、开启下一期</div>
         </a>
 
         <a class="menu" href="/admin/simulator.html">
@@ -635,7 +635,7 @@ button.danger{
           <div class="menuSub">查看当前期所有代理提交与 00–99 汇总</div>
         </a>
 
-        <a class="menu" href="/history/index.html">
+        <a class="menu" href="/history/">
           <div class="menuIcon">📚</div>
           <div class="menuTitle">历史期数</div>
           <div class="menuSub">查询以前每一期与代理历史明细</div>
@@ -951,6 +951,7 @@ button.danger{
 
 </div>
 
+
 <script>
 
 const BASE =
@@ -959,25 +960,46 @@ const BASE =
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
+
 let token =
-localStorage.getItem('jmt_access_token')
+localStorage.getItem(
+  'jmt_access_token'
+)
 ||
-sessionStorage.getItem('jmt_access_token')
+sessionStorage.getItem(
+  'jmt_access_token'
+)
 ||
 '';
 
-let pendingLogo = '';
-let currentRound = null;
-let publishRound = null;
-let testRounds = [];
+
+let pendingLogo =
+'';
+
+let currentRound =
+null;
+
+let publishRound =
+null;
+
+let testRounds =
+[];
 
 
-async function api(path,options={}){
+/* =========================
+   API
+========================= */
+
+async function api(
+  path,
+  options={}
+){
 
   return fetch(
     BASE+path,
     {
       ...options,
+
       headers:{
         apikey:KEY,
         Authorization:'Bearer '+token,
@@ -989,11 +1011,16 @@ async function api(path,options={}){
 }
 
 
+/* =========================
+   VERIFY ADMIN
+========================= */
+
 async function verifyAdminIdentity(){
 
   if(!token){
     return false;
   }
+
 
   try{
 
@@ -1002,30 +1029,39 @@ async function verifyAdminIdentity(){
       '/auth/v1/user'
     );
 
+
     if(!userRes.ok){
       return false;
     }
 
+
     const user =
     await userRes.json();
 
+
     const adminRes =
     await api(
-      '/rest/v1/admin_users?auth_user_id=eq.'+
+      '/rest/v1/admin_users'+
+      '?auth_user_id=eq.'+
       encodeURIComponent(
         user.id
       )+
-      '&select=auth_user_id&limit=1'
+      '&select=auth_user_id'+
+      '&limit=1'
     );
+
 
     if(!adminRes.ok){
       return false;
     }
 
+
     const rows =
     await adminRes.json();
 
+
     return rows.length>0;
+
 
   }catch(e){
 
@@ -1036,6 +1072,10 @@ async function verifyAdminIdentity(){
 }
 
 
+/* =========================
+   SIGN IN
+========================= */
+
 async function signIn(){
 
   const email =
@@ -1043,17 +1083,24 @@ async function signIn(){
     'email'
   ).value.trim();
 
+
   const password =
   document.getElementById(
     'password'
   ).value;
+
 
   const msg =
   document.getElementById(
     'loginMsg'
   );
 
-  if(!email || !password){
+
+  if(
+    !email
+    ||
+    !password
+  ){
 
     msg.textContent =
     '请输入管理员邮箱和密码';
@@ -1062,8 +1109,10 @@ async function signIn(){
 
   }
 
+
   msg.textContent =
   '正在登录...';
+
 
   try{
 
@@ -1073,10 +1122,12 @@ async function signIn(){
       '/auth/v1/token?grant_type=password',
       {
         method:'POST',
+
         headers:{
           apikey:KEY,
           'Content-Type':'application/json'
         },
+
         body:JSON.stringify({
           email,
           password
@@ -1084,30 +1135,41 @@ async function signIn(){
       }
     );
 
+
     const d =
     await r.json();
 
-    if(!r.ok || !d.access_token){
+
+    if(
+      !r.ok
+      ||
+      !d.access_token
+    ){
 
       throw new Error();
 
     }
 
+
     token =
     d.access_token;
+
 
     localStorage.setItem(
       'jmt_access_token',
       token
     );
 
+
     sessionStorage.setItem(
       'jmt_access_token',
       token
     );
 
+
     const isAdmin =
     await verifyAdminIdentity();
+
 
     if(!isAdmin){
 
@@ -1119,9 +1181,12 @@ async function signIn(){
 
     }
 
+
     showAdmin();
 
+
     await loadEverything();
+
 
   }catch(e){
 
@@ -1133,24 +1198,35 @@ async function signIn(){
 }
 
 
+/* =========================
+   VERIFY SESSION
+========================= */
+
 async function verifySession(){
 
   if(!token){
     return;
   }
 
+
   try{
 
     const isAdmin =
     await verifyAdminIdentity();
 
+
     if(!isAdmin){
+
       throw new Error();
+
     }
+
 
     showAdmin();
 
+
     await loadEverything();
+
 
   }catch(e){
 
@@ -1163,6 +1239,10 @@ async function verifySession(){
 }
 
 
+/* =========================
+   SHOW ADMIN
+========================= */
+
 function showAdmin(){
 
   document.getElementById(
@@ -1170,6 +1250,7 @@ function showAdmin(){
   ).classList.add(
     'hidden'
   );
+
 
   document.getElementById(
     'adminBox'
@@ -1179,6 +1260,10 @@ function showAdmin(){
 
 }
 
+
+/* =========================
+   LOAD EVERYTHING
+========================= */
 
 async function loadEverything(){
 
@@ -1192,6 +1277,10 @@ async function loadEverything(){
 }
 
 
+/* =========================
+   DASHBOARD SUMMARY
+========================= */
+
 async function loadDashboardSummary(){
 
   try{
@@ -1204,21 +1293,26 @@ async function loadDashboardSummary(){
       '&limit=20'
     );
 
+
     if(!rr.ok){
 
       throw new Error();
 
     }
 
+
     const rounds =
     await rr.json();
 
+
     currentRound =
     rounds.find(
-      x=>x.status==='open'
+      x=>
+      x.status==='open'
     )
     ||
     null;
+
 
     if(!currentRound){
 
@@ -1227,6 +1321,7 @@ async function loadDashboardSummary(){
       return;
 
     }
+
 
     document.getElementById(
       'summaryRound'
@@ -1237,15 +1332,18 @@ async function loadDashboardSummary(){
       currentRound.round_code
     );
 
+
     document.getElementById(
       'summaryStatus'
     ).textContent =
     '开放中';
 
+
     document.getElementById(
       'summaryStatus'
     ).className =
     'green';
+
 
     document.getElementById(
       'summaryDeadline'
@@ -1254,6 +1352,7 @@ async function loadDashboardSummary(){
       currentRound.deadline_at
     );
 
+
     const ar =
     await api(
       '/rest/v1/agents'+
@@ -1261,14 +1360,17 @@ async function loadDashboardSummary(){
       '&select=id'
     );
 
+
     if(!ar.ok){
 
       throw new Error();
 
     }
 
+
     const activeAgents =
     await ar.json();
+
 
     const activeAgentIds =
     new Set(
@@ -1277,13 +1379,16 @@ async function loadDashboardSummary(){
       )
     );
 
+
     const activeTotal =
     activeAgents.length;
+
 
     document.getElementById(
       'summaryAgentTotal'
     ).textContent =
     activeTotal;
+
 
     const sr =
     await api(
@@ -1295,47 +1400,60 @@ async function loadDashboardSummary(){
       '&select=agent_id,points'
     );
 
+
     if(!sr.ok){
 
       throw new Error();
 
     }
 
+
     const rows =
     await sr.json();
 
-    let total = 0;
+
+    let total =
+    0;
+
 
     const submittedSet =
     new Set();
 
-    rows.forEach(row=>{
 
-      const points =
-      Number(
-        row.points || 0
-      );
+    rows.forEach(
+      row=>{
 
-      total += points;
-
-      if(
-        points>0
-        &&
-        activeAgentIds.has(
-          row.agent_id
-        )
-      ){
-
-        submittedSet.add(
-          row.agent_id
+        const points =
+        Number(
+          row.points || 0
         );
 
-      }
 
-    });
+        total +=
+        points;
+
+
+        if(
+          points>0
+          &&
+          activeAgentIds.has(
+            row.agent_id
+          )
+        ){
+
+          submittedSet.add(
+            row.agent_id
+          );
+
+        }
+
+      }
+    );
+
 
     const submittedCount =
     submittedSet.size;
+
 
     const missingCount =
     Math.max(
@@ -1344,22 +1462,28 @@ async function loadDashboardSummary(){
       submittedCount
     );
 
+
     document.getElementById(
       'summaryAgents'
     ).textContent =
     submittedCount;
+
 
     document.getElementById(
       'summaryMissing'
     ).textContent =
     missingCount;
 
+
     document.getElementById(
       'summaryMissing'
     ).className =
     missingCount>0
-    ? 'redText'
-    : 'green';
+    ?
+    'redText'
+    :
+    'green';
+
 
     document.getElementById(
       'summaryTotal'
@@ -1367,6 +1491,7 @@ async function loadDashboardSummary(){
     formatNumber(
       total
     );
+
 
   }catch(e){
 
@@ -1380,6 +1505,10 @@ async function loadDashboardSummary(){
 }
 
 
+/* =========================
+   NO ROUND
+========================= */
+
 function renderNoRound(){
 
   document.getElementById(
@@ -1387,30 +1516,36 @@ function renderNoRound(){
   ).textContent =
   '暂无开放期';
 
+
   document.getElementById(
     'summaryStatus'
   ).textContent =
   '—';
+
 
   document.getElementById(
     'summaryAgentTotal'
   ).textContent =
   '0';
 
+
   document.getElementById(
     'summaryAgents'
   ).textContent =
   '0';
+
 
   document.getElementById(
     'summaryMissing'
   ).textContent =
   '0';
 
+
   document.getElementById(
     'summaryTotal'
   ).textContent =
   '0';
+
 
   document.getElementById(
     'summaryDeadline'
@@ -1419,6 +1554,10 @@ function renderNoRound(){
 
 }
 
+
+/* =========================
+   LOAD PUBLISH ROUND
+========================= */
 
 async function loadPublishRound(){
 
@@ -1432,6 +1571,7 @@ async function loadPublishRound(){
       '&limit=30'
     );
 
+
     if(!r.ok){
 
       throw new Error(
@@ -1440,14 +1580,19 @@ async function loadPublishRound(){
 
     }
 
+
     const rows =
     await r.json();
 
+
     publishRound =
     rows.find(
-      x=>x.status==='open'
+      x=>
+      x.status==='open'
     )
+
     ||
+
     rows.find(
       x=>
       (
@@ -1456,12 +1601,18 @@ async function loadPublishRound(){
         x.status==='settled'
       )
       &&
-      !x.result_number
+      !hasResult(
+        x.result_number
+      )
     )
+
     ||
+
     null;
 
+
     renderPublishRound();
+
 
   }catch(e){
 
@@ -1470,10 +1621,12 @@ async function loadPublishRound(){
     ).textContent =
     '读取期数失败';
 
+
     document.getElementById(
       'publishButton'
     ).disabled =
     true;
+
 
     document.getElementById(
       'publishButton'
@@ -1485,6 +1638,10 @@ async function loadPublishRound(){
 }
 
 
+/* =========================
+   RENDER PUBLISH
+========================= */
+
 function renderPublishRound(){
 
   const roundName =
@@ -1492,40 +1649,50 @@ function renderPublishRound(){
     'publishRoundName'
   );
 
+
   const deadline =
   document.getElementById(
     'publishDeadline'
   );
+
 
   const status =
   document.getElementById(
     'publishStatus'
   );
 
+
   const result =
   document.getElementById(
     'currentResult'
   );
+
 
   if(!publishRound){
 
     roundName.textContent =
     '暂无可发布期数';
 
+
     deadline.textContent =
     '—';
+
 
     status.textContent =
     '—';
 
+
     result.textContent =
     '--';
 
+
     updatePublishState();
+
 
     return;
 
   }
+
 
   roundName.textContent =
   publishRound.round_date+
@@ -1534,30 +1701,52 @@ function renderPublishRound(){
     publishRound.round_code
   );
 
+
   deadline.textContent =
   formatMMTShort(
     publishRound.deadline_at
   );
 
+
   status.textContent =
   publishRound.status==='open'
-  ? '开放中'
-  : '已结束';
+  ?
+  '开放中'
+  :
+  '已结束';
+
 
   status.className =
   publishRound.status==='open'
-  ? 'green'
-  : '';
+  ?
+  'green'
+  :
+  '';
+
 
   result.textContent =
-  publishRound.result_number
-  ||
+  hasResult(
+    publishRound.result_number
+  )
+  ?
+  String(
+    publishRound.result_number
+  ).padStart(
+    2,
+    '0'
+  )
+  :
   '--';
+
 
   updatePublishState();
 
 }
 
+
+/* =========================
+   PUBLISH STATE
+========================= */
 
 function updatePublishState(){
 
@@ -1566,44 +1755,55 @@ function updatePublishState(){
     'publishCountdown'
   );
 
+
   const label =
   document.getElementById(
     'countdownLabel'
   );
+
 
   const button =
   document.getElementById(
     'publishButton'
   );
 
+
   if(!publishRound){
 
     countdown.textContent =
     '--:--:--';
 
+
     label.textContent =
     '距离截止';
+
 
     button.disabled =
     true;
 
+
     button.textContent =
     '暂无可发布期数';
+
 
     return;
 
   }
+
 
   const deadlineTime =
   new Date(
     publishRound.deadline_at
   ).getTime();
 
+
   const now =
   Date.now();
 
+
   const diff =
   deadlineTime-now;
+
 
   if(diff>0){
 
@@ -1612,39 +1812,54 @@ function updatePublishState(){
       diff
     );
 
+
     label.textContent =
     '距离截止';
 
+
     button.disabled =
     true;
+
 
     button.textContent =
     '尚未截止，暂不可发布';
 
+
     return;
 
   }
+
 
   countdown.textContent =
   '00:00:00';
 
+
   label.textContent =
   '本期已经截止';
 
-  if(publishRound.result_number){
+
+  if(
+    hasResult(
+      publishRound.result_number
+    )
+  ){
 
     button.disabled =
     true;
 
+
     button.textContent =
     '本期开奖结果已发布';
+
 
     return;
 
   }
 
+
   button.disabled =
   false;
+
 
   button.textContent =
   '发布本期数字';
@@ -1652,7 +1867,13 @@ function updatePublishState(){
 }
 
 
-function formatCountdown(ms){
+/* =========================
+   COUNTDOWN
+========================= */
+
+function formatCountdown(
+  ms
+){
 
   let total =
   Math.max(
@@ -1662,29 +1883,36 @@ function formatCountdown(ms){
     )
   );
 
+
   const days =
   Math.floor(
     total/86400
   );
 
+
   total %=
   86400;
+
 
   const h =
   Math.floor(
     total/3600
   );
 
+
   total %=
   3600;
+
 
   const m =
   Math.floor(
     total/60
   );
 
+
   const s =
   total%60;
+
 
   const clock =
   String(h).padStart(2,'0')+
@@ -1693,12 +1921,19 @@ function formatCountdown(ms){
   ':'+
   String(s).padStart(2,'0');
 
+
   return days>0
-  ? days+'天 '+clock
-  : clock;
+  ?
+  days+'天 '+clock
+  :
+  clock;
 
 }
 
+
+/* =========================
+   PUBLISH RESULT
+========================= */
 
 async function publishResult(){
 
@@ -1707,19 +1942,23 @@ async function publishResult(){
     'resultInput'
   );
 
+
   const msg =
   document.getElementById(
     'publishMsg'
   );
+
 
   if(!publishRound){
 
     msg.textContent =
     '目前没有可发布的期数';
 
+
     return;
 
   }
+
 
   if(
     Date.now()
@@ -1732,38 +1971,52 @@ async function publishResult(){
     msg.textContent =
     '本期还没有到截止时间';
 
+
     return;
 
   }
 
+
   if(
-    publishRound.result_number
+    hasResult(
+      publishRound.result_number
+    )
   ){
 
     msg.textContent =
     '本期已经发布过开奖结果';
 
+
     return;
 
   }
+
 
   let n =
   input.value.trim();
 
-  if(!/^\d{1,2}$/.test(n)){
+
+  if(
+    !/^\d{1,2}$/.test(
+      n
+    )
+  ){
 
     msg.textContent =
     '请输入 00 到 99';
 
+
     return;
 
   }
+
 
   n =
   n.padStart(
     2,
     '0'
   );
+
 
   const ok =
   confirm(
@@ -1777,12 +2030,17 @@ async function publishResult(){
     n
   );
 
+
   if(!ok){
+
     return;
+
   }
+
 
   msg.textContent =
   '正在发布...';
+
 
   try{
 
@@ -1791,17 +2049,21 @@ async function publishResult(){
       '/rest/v1/rpc/publish_round_result',
       {
         method:'POST',
+
         headers:{
           'Content-Type':'application/json'
         },
+
         body:JSON.stringify({
           p_round_id:
           publishRound.id,
+
           p_result_number:
           n
         })
       }
     );
+
 
     if(!resultRes.ok){
 
@@ -1811,21 +2073,31 @@ async function publishResult(){
 
     }
 
+
     const updatedRound =
     await resultRes.json();
 
+
     publishRound.result_number =
     updatedRound.result_number
-    ||
+    ??
     n;
+
 
     document.getElementById(
       'currentResult'
     ).textContent =
-    publishRound.result_number;
+    String(
+      publishRound.result_number
+    ).padStart(
+      2,
+      '0'
+    );
+
 
     input.value =
     '';
+
 
     msg.textContent =
     '✓ 发布成功：'+
@@ -1835,9 +2107,16 @@ async function publishResult(){
       publishRound.round_code
     )+
     ' → '+
-    publishRound.result_number;
+    String(
+      publishRound.result_number
+    ).padStart(
+      2,
+      '0'
+    );
+
 
     updatePublishState();
+
 
   }catch(e){
 
@@ -1849,6 +2128,10 @@ async function publishResult(){
 
 }
 
+
+/* =========================
+   LOAD TEST ROUNDS
+========================= */
 
 async function loadTestRounds(){
 
@@ -1862,31 +2145,38 @@ async function loadTestRounds(){
       '&limit=50'
     );
 
+
     if(!r.ok){
 
       throw new Error();
 
     }
 
+
     testRounds =
     await r.json();
+
 
     const select =
     document.getElementById(
       'testRoundSelect'
     );
 
+
     select.innerHTML =
     '';
+
 
     if(!testRounds.length){
 
       select.innerHTML =
       '<option value="">没有期数</option>';
 
+
       return;
 
     }
+
 
     testRounds.forEach(
       round=>{
@@ -1896,8 +2186,10 @@ async function loadTestRounds(){
           'option'
         );
 
+
         option.value =
         round.id;
+
 
         option.textContent =
         round.round_date+
@@ -1910,12 +2202,14 @@ async function loadTestRounds(){
           round.status
         );
 
+
         select.appendChild(
           option
         );
 
       }
     );
+
 
   }catch(e){
 
@@ -1929,6 +2223,10 @@ async function loadTestRounds(){
 }
 
 
+/* =========================
+   TEST PUBLISH
+========================= */
+
 function runPublishTest(){
 
   const select =
@@ -1936,45 +2234,59 @@ function runPublishTest(){
     'testRoundSelect'
   );
 
+
   const resultInput =
   document.getElementById(
     'testResultInput'
   );
+
 
   const msg =
   document.getElementById(
     'testMsg'
   );
 
+
   let n =
   resultInput.value.trim();
 
+
   msg.className =
   'msg';
+
 
   if(!select.value){
 
     msg.textContent =
     '请选择测试期数';
 
+
     return;
 
   }
 
-  if(!/^\d{1,2}$/.test(n)){
+
+  if(
+    !/^\d{1,2}$/.test(
+      n
+    )
+  ){
 
     msg.textContent =
     '请输入 00 到 99 的测试数字';
 
+
     return;
 
   }
+
 
   n =
   n.padStart(
     2,
     '0'
   );
+
 
   const round =
   testRounds.find(
@@ -1983,14 +2295,17 @@ function runPublishTest(){
     select.value
   );
 
+
   if(!round){
 
     msg.textContent =
     '没有找到该期数';
 
+
     return;
 
   }
+
 
   const deadlinePassed =
   Date.now()
@@ -1999,11 +2314,13 @@ function runPublishTest(){
     round.deadline_at
   ).getTime();
 
+
   document.getElementById(
     'testPanel'
   ).classList.remove(
     'hidden'
   );
+
 
   document.getElementById(
     'testRoundName'
@@ -2014,12 +2331,14 @@ function runPublishTest(){
     round.round_code
   );
 
+
   document.getElementById(
     'testRoundStatus'
   ).textContent =
   statusName(
     round.status
   );
+
 
   document.getElementById(
     'testDeadline'
@@ -2028,114 +2347,167 @@ function runPublishTest(){
     round.deadline_at
   );
 
+
   const deadlineState =
   document.getElementById(
     'testDeadlineState'
   );
 
+
   deadlineState.textContent =
   deadlinePassed
-  ? '✓ 已截止'
-  : '✕ 尚未截止';
+  ?
+  '✓ 已截止'
+  :
+  '✕ 尚未截止';
+
 
   deadlineState.className =
   deadlinePassed
-  ? 'testGood'
-  : 'testWarn';
+  ?
+  'testGood'
+  :
+  'testWarn';
+
 
   document.getElementById(
     'testOldResult'
   ).textContent =
-  round.result_number
-  ||
+  hasResult(
+    round.result_number
+  )
+  ?
+  String(
+    round.result_number
+  ).padStart(
+    2,
+    '0'
+  )
+  :
   '—';
+
 
   document.getElementById(
     'testNewResult'
   ).textContent =
   n;
 
+
   const roundWrite =
   document.getElementById(
     'testRoundWrite'
   );
+
 
   const resultWrite =
   document.getElementById(
     'testResultWrite'
   );
 
-  if(round.result_number){
+
+  if(
+    hasResult(
+      round.result_number
+    )
+  ){
 
     roundWrite.textContent =
     '正式模式会阻止：已有结果 '+
-    round.result_number;
+    String(
+      round.result_number
+    ).padStart(
+      2,
+      '0'
+    );
+
 
     roundWrite.className =
     'testWarn';
 
+
     resultWrite.textContent =
     '不会继续执行';
+
 
     resultWrite.className =
     'testWarn';
 
+
     msg.textContent =
     '🧪 测试完成：此期已经存在开奖结果，正式发布会被阻止。';
+
 
     msg.className =
     'msg success';
 
+
     return;
 
   }
+
 
   if(!deadlinePassed){
 
     roundWrite.textContent =
     '正式模式会阻止：尚未截止';
 
+
     roundWrite.className =
     'testWarn';
+
 
     resultWrite.textContent =
     '不会继续执行';
 
+
     resultWrite.className =
     'testWarn';
+
 
     msg.textContent =
     '🧪 测试完成：截止时间未到，所以正式发布按钮会锁定。';
 
+
     msg.className =
     'msg success';
+
 
     return;
 
   }
 
+
   roundWrite.textContent =
   '✓ 会绑定 result_number = '+
   n;
 
+
   roundWrite.className =
   'testGood';
+
 
   resultWrite.textContent =
   '✓ 会新增最新公开结果 '+
   n;
 
+
   resultWrite.className =
   'testGood';
 
+
   msg.textContent =
   '✓ 测试通过：如果现在执行正式发布，流程可以正常进入发布步骤。正式数据库没有任何修改。';
+
 
   msg.className =
   'msg success';
 
 }
 
+
+/* =========================
+   SETTINGS
+========================= */
 
 async function loadSettings(){
 
@@ -2144,15 +2516,17 @@ async function loadSettings(){
     const r =
     await fetch(
       BASE+
-      '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled,logo_data_url',
+      '/rest/v1/site_settings'+
+      '?id=eq.1'+
+      '&select=telegram_url,announcement_text,announcement_enabled,logo_data_url',
       {
         headers:{
           apikey:KEY,
-          Authorization:
-          'Bearer '+KEY
+          Authorization:'Bearer '+KEY
         }
       }
     );
+
 
     if(!r.ok){
 
@@ -2160,8 +2534,10 @@ async function loadSettings(){
 
     }
 
+
     const rows =
     await r.json();
+
 
     if(!rows.length){
 
@@ -2169,34 +2545,41 @@ async function loadSettings(){
 
     }
 
+
     const s =
     rows[0];
+
 
     document.getElementById(
       'telegramUrl'
     ).value =
     s.telegram_url || '';
 
+
     document.getElementById(
       'announcementText'
     ).value =
     s.announcement_text || '';
+
 
     document.getElementById(
       'announcementEnabled'
     ).checked =
     !!s.announcement_enabled;
 
+
     if(s.logo_data_url){
 
       pendingLogo =
       s.logo_data_url;
+
 
       showLogoPreview(
         s.logo_data_url
       );
 
     }
+
 
   }catch(e){
 
@@ -2210,35 +2593,55 @@ async function loadSettings(){
 }
 
 
-function handleLogoFile(input){
+/* =========================
+   LOGO FILE
+========================= */
+
+function handleLogoFile(
+  input
+){
 
   const file =
-  input.files &&
+  input.files
+  &&
   input.files[0];
+
 
   const msg =
   document.getElementById(
     'logoMsg'
   );
 
+
   if(!file){
+
     return;
+
   }
 
-  if(!file.type.startsWith('image/')){
+
+  if(
+    !file.type.startsWith(
+      'image/'
+    )
+  ){
 
     msg.textContent =
     '请选择图片文件';
 
+
     return;
 
   }
 
+
   msg.textContent =
   '正在处理 Logo...';
 
+
   const reader =
   new FileReader();
+
 
   reader.onload =
   function(e){
@@ -2246,17 +2649,21 @@ function handleLogoFile(input){
     const img =
     new Image();
 
+
     img.onload =
     function(){
 
       const maxSize =
       420;
 
+
       let w =
       img.width;
 
+
       let h =
       img.height;
+
 
       if(w>h){
 
@@ -2264,22 +2671,30 @@ function handleLogoFile(input){
 
           h =
           Math.round(
-            h*maxSize/w
+            h*
+            maxSize/
+            w
           );
+
 
           w =
           maxSize;
 
         }
 
-      }else{
+      }
+
+      else{
 
         if(h>maxSize){
 
           w =
           Math.round(
-            w*maxSize/h
+            w*
+            maxSize/
+            h
           );
+
 
           h =
           maxSize;
@@ -2288,21 +2703,26 @@ function handleLogoFile(input){
 
       }
 
+
       const canvas =
       document.createElement(
         'canvas'
       );
 
+
       canvas.width =
       w;
 
+
       canvas.height =
       h;
+
 
       const ctx =
       canvas.getContext(
         '2d'
       );
+
 
       ctx.drawImage(
         img,
@@ -2312,25 +2732,30 @@ function handleLogoFile(input){
         h
       );
 
+
       pendingLogo =
       canvas.toDataURL(
         'image/jpeg',
         .84
       );
 
+
       showLogoPreview(
         pendingLogo
       );
+
 
       msg.textContent =
       '✓ Logo 已准备好';
 
     };
 
+
     img.src =
     e.target.result;
 
   };
+
 
   reader.readAsDataURL(
     file
@@ -2339,43 +2764,58 @@ function handleLogoFile(input){
 }
 
 
-function showLogoPreview(src){
+/* =========================
+   LOGO PREVIEW
+========================= */
+
+function showLogoPreview(
+  src
+){
 
   const preview =
   document.getElementById(
     'logoPreview'
   );
 
+
   const top =
   document.getElementById(
     'topMark'
   );
 
+
   preview.innerHTML =
   '';
 
+
   top.innerHTML =
   '';
+
 
   const img1 =
   document.createElement(
     'img'
   );
 
+
   img1.src =
   src;
+
 
   preview.appendChild(
     img1
   );
+
 
   const img2 =
   document.createElement(
     'img'
   );
 
+
   img2.src =
   src;
+
 
   top.appendChild(
     img2
@@ -2384,6 +2824,10 @@ function showLogoPreview(src){
 }
 
 
+/* =========================
+   SAVE LOGO
+========================= */
+
 async function saveLogo(){
 
   const msg =
@@ -2391,17 +2835,21 @@ async function saveLogo(){
     'logoMsg'
   );
 
+
   if(!pendingLogo){
 
     msg.textContent =
     '请先选择 Logo 图片';
 
+
     return;
 
   }
 
+
   msg.textContent =
   '正在更新 Logo...';
+
 
   try{
 
@@ -2410,18 +2858,23 @@ async function saveLogo(){
       '/rest/v1/site_settings?id=eq.1',
       {
         method:'PATCH',
+
         headers:{
           'Content-Type':'application/json',
           Prefer:'return=representation'
         },
+
         body:JSON.stringify({
           logo_data_url:
           pendingLogo,
+
           updated_at:
-          new Date().toISOString()
+          new Date()
+          .toISOString()
         })
       }
     );
+
 
     if(!r.ok){
 
@@ -2429,8 +2882,10 @@ async function saveLogo(){
 
     }
 
+
     msg.textContent =
     '✓ 网站 Logo 更新成功';
+
 
   }catch(e){
 
@@ -2442,12 +2897,17 @@ async function saveLogo(){
 }
 
 
+/* =========================
+   REMOVE LOGO
+========================= */
+
 async function removeLogo(){
 
   const msg =
   document.getElementById(
     'logoMsg'
   );
+
 
   try{
 
@@ -2456,16 +2916,21 @@ async function removeLogo(){
       '/rest/v1/site_settings?id=eq.1',
       {
         method:'PATCH',
+
         headers:{
           'Content-Type':'application/json'
         },
+
         body:JSON.stringify({
           logo_data_url:'',
+
           updated_at:
-          new Date().toISOString()
+          new Date()
+          .toISOString()
         })
       }
     );
+
 
     if(!r.ok){
 
@@ -2473,26 +2938,32 @@ async function removeLogo(){
 
     }
 
+
     pendingLogo =
     '';
+
 
     document.getElementById(
       'logoPreview'
     ).innerHTML =
     '金';
 
+
     document.getElementById(
       'topMark'
     ).innerHTML =
     '金';
+
 
     document.getElementById(
       'logoFile'
     ).value =
     '';
 
+
     msg.textContent =
     '✓ 已恢复文字「金」';
+
 
   }catch(e){
 
@@ -2504,6 +2975,10 @@ async function removeLogo(){
 }
 
 
+/* =========================
+   SAVE SETTINGS
+========================= */
+
 async function saveSettings(){
 
   const msg =
@@ -2511,20 +2986,24 @@ async function saveSettings(){
     'settingsMsg'
   );
 
+
   const telegram =
   document.getElementById(
     'telegramUrl'
   ).value.trim();
+
 
   const announcement =
   document.getElementById(
     'announcementText'
   ).value.trim();
 
+
   const enabled =
   document.getElementById(
     'announcementEnabled'
   ).checked;
+
 
   if(telegram){
 
@@ -2534,6 +3013,7 @@ async function saveSettings(){
       new URL(
         telegram
       );
+
 
       if(
         u.protocol!=='https:'
@@ -2545,10 +3025,12 @@ async function saveSettings(){
 
       }
 
+
     }catch(e){
 
       msg.textContent =
       'Telegram 链接格式不正确';
+
 
       return;
 
@@ -2556,8 +3038,10 @@ async function saveSettings(){
 
   }
 
+
   msg.textContent =
   '正在更新网站...';
+
 
   try{
 
@@ -2566,22 +3050,29 @@ async function saveSettings(){
       '/rest/v1/site_settings?id=eq.1',
       {
         method:'PATCH',
+
         headers:{
           'Content-Type':'application/json',
           Prefer:'return=representation'
         },
+
         body:JSON.stringify({
           telegram_url:
           telegram,
+
           announcement_text:
           announcement,
+
           announcement_enabled:
           enabled,
+
           updated_at:
-          new Date().toISOString()
+          new Date()
+          .toISOString()
         })
       }
     );
+
 
     if(!r.ok){
 
@@ -2589,8 +3080,10 @@ async function saveSettings(){
 
     }
 
+
     msg.textContent =
     '✓ 网站设置更新成功';
+
 
   }catch(e){
 
@@ -2602,6 +3095,10 @@ async function saveSettings(){
 }
 
 
+/* =========================
+   CLOCK
+========================= */
+
 function updateClock(){
 
   document.getElementById(
@@ -2611,21 +3108,31 @@ function updateClock(){
     'zh-CN',
     {
       timeZone:'Asia/Yangon',
+
       hour:'2-digit',
       minute:'2-digit',
       second:'2-digit',
+
       hour12:false
     }
-  ).format(
+  )
+  .format(
     new Date()
   );
+
 
   updatePublishState();
 
 }
 
 
-function formatMMTShort(value){
+/* =========================
+   FORMAT MMT
+========================= */
+
+function formatMMTShort(
+  value
+){
 
   if(!value){
 
@@ -2633,73 +3140,137 @@ function formatMMTShort(value){
 
   }
 
+
   return new Intl.DateTimeFormat(
     'zh-CN',
     {
       timeZone:'Asia/Yangon',
+
       month:'2-digit',
       day:'2-digit',
+
       hour:'2-digit',
       minute:'2-digit',
+
       hour12:false
     }
-  ).format(
-    new Date(value)
-  )+
+  )
+  .format(
+    new Date(
+      value
+    )
+  )
+  +
   ' MMT';
 
 }
 
 
-function periodName(code){
+/* =========================
+   PERIOD NAME
 
-  if(code==='1030'){
+   注意：
+   1030 / 1530 只作为内部期别代码。
+========================= */
 
-    return '上午 10:30';
+function periodName(
+  code
+){
+
+  if(
+    code==='1030'
+  ){
+
+    return '上午 11:45';
 
   }
 
-  if(code==='1530'){
 
-    return '下午 15:30';
+  if(
+    code==='1530'
+  ){
+
+    return '下午 15:45';
 
   }
+
 
   return code || '—';
 
 }
 
 
-function statusName(status){
+/* =========================
+   STATUS
+========================= */
 
-  if(status==='open'){
+function statusName(
+  status
+){
+
+  if(
+    status==='open'
+  ){
 
     return '开放中';
 
   }
 
-  if(status==='closed'){
 
-    return '已结束';
+  if(
+    status==='closed'
+  ){
+
+    return '已关闭';
 
   }
 
-  if(status==='settled'){
+
+  if(
+    status==='settled'
+  ){
 
     return '已结算';
 
   }
+
 
   return status || '—';
 
 }
 
 
-function formatNumber(value){
+/* =========================
+   RESULT EXISTS
+========================= */
+
+function hasResult(
+  value
+){
+
+  return (
+    value !== null
+    &&
+    value !== undefined
+    &&
+    value !== ''
+  );
+
+}
+
+
+/* =========================
+   FORMAT NUMBER
+========================= */
+
+function formatNumber(
+  value
+){
 
   return Number(
     value || 0
-  ).toLocaleString(
+  )
+  .toLocaleString(
     'en-US',
     {
       maximumFractionDigits:2
@@ -2709,15 +3280,21 @@ function formatNumber(value){
 }
 
 
+/* =========================
+   SESSION
+========================= */
+
 function clearSession(){
 
   localStorage.removeItem(
     'jmt_access_token'
   );
 
+
   sessionStorage.removeItem(
     'jmt_access_token'
   );
+
 
   token =
   '';
@@ -2725,23 +3302,35 @@ function clearSession(){
 }
 
 
+/* =========================
+   LOGOUT
+========================= */
+
 function logout(){
 
   clearSession();
+
 
   location.reload();
 
 }
 
 
+/* =========================
+   START
+========================= */
+
 updateClock();
+
 
 setInterval(
   updateClock,
   1000
 );
 
+
 verifySession();
+
 
 setInterval(
   ()=>{
@@ -2749,6 +3338,7 @@ setInterval(
     if(token){
 
       loadDashboardSummary();
+
 
       loadPublishRound();
 
