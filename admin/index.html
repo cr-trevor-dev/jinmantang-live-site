@@ -8,43 +8,28 @@
 <title>金满堂 · 管理中心</title>
 
 <style>
-
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
   background:
-  radial-gradient(
-    circle at top,
-    #251907 0,
-    #0d0c0a 38%,
-    #070708 100%
-  );
+  radial-gradient(circle at top,#251907 0,#0d0c0a 38%,#070708 100%);
   color:#f7f0df;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Tahoma,
-  Arial,
-  sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
 
 .wrap{
-  max-width:560px;
+  max-width:650px;
   margin:auto;
   min-height:100vh;
-  padding:24px 15px 55px;
+  padding:24px 15px 55px
 }
 
-
-/* ===== LOGO ===== */
+/* LOGO */
 
 .brand{
   text-align:center;
-  margin-bottom:22px;
+  margin-bottom:22px
 }
 
 .mark{
@@ -55,456 +40,345 @@ body{
   place-items:center;
   margin:0 auto 10px;
   overflow:hidden;
-
   font-size:24px;
   font-weight:900;
-
   color:#f6da86;
-
   border:1px solid #b98a2c;
-
-  background:
-  linear-gradient(
-    145deg,
-    #382506,
-    #100d08
-  );
-
-  box-shadow:
-  0 0 28px rgba(235,185,62,.22);
+  background:linear-gradient(145deg,#382506,#100d08);
+  box-shadow:0 0 28px rgba(235,185,62,.22)
 }
 
 .mark img{
   width:100%;
   height:100%;
-  object-fit:cover;
-  display:block;
+  object-fit:cover
 }
 
 .cn{
   font-weight:900;
   font-size:25px;
   letter-spacing:4px;
-  color:#f3d889;
+  color:#f3d889
 }
 
 .en{
   font-size:10px;
   letter-spacing:3px;
   color:#9f916d;
-  margin-top:5px;
+  margin-top:5px
 }
 
-
-/* ===== CARD ===== */
+/* CARD */
 
 .card{
-  background:
-  linear-gradient(
-    180deg,
-    rgba(22,22,22,.98),
-    rgba(11,11,12,.98)
-  );
-
-  border:
-  1px solid rgba(214,168,63,.30);
-
+  background:linear-gradient(180deg,rgba(22,22,22,.98),rgba(11,11,12,.98));
+  border:1px solid rgba(214,168,63,.30);
   border-radius:24px;
-
-  padding:21px;
-
+  padding:20px;
   margin-bottom:16px;
-
-  box-shadow:
-  0 22px 60px rgba(0,0,0,.38);
+  box-shadow:0 22px 60px rgba(0,0,0,.32)
 }
 
 .title{
   font-size:15px;
   font-weight:900;
   color:#dfc575;
-  margin-bottom:16px;
-  letter-spacing:.8px;
+  margin-bottom:16px
 }
 
-
-/* ===== INPUT ===== */
+/* INPUT */
 
 input,
 textarea{
   width:100%;
-
-  border:
-  1px solid rgba(214,168,63,.24);
-
+  border:1px solid rgba(214,168,63,.24);
   background:#101011;
-
   color:#fff;
-
   border-radius:13px;
-
   padding:14px;
-
   font-size:15px;
-
   outline:none;
-
-  margin-bottom:12px;
+  margin-bottom:12px
 }
 
 textarea{
-  resize:vertical;
   min-height:105px;
-  line-height:1.6;
+  resize:vertical;
+  line-height:1.6
 }
 
-input:focus,
-textarea:focus{
-  border-color:#d8ad4e;
-
-  box-shadow:
-  0 0 0 2px rgba(216,173,78,.08);
-}
-
-input[type="file"]{
-  padding:12px;
-  color:#c9bea2;
-}
-
-
-/* ===== BUTTON ===== */
+/* BUTTON */
 
 button{
   width:100%;
-
   border:0;
-
   border-radius:13px;
-
   padding:14px;
-
   font-size:15px;
-
   font-weight:900;
-
   cursor:pointer;
-
-  background:
-  linear-gradient(
-    180deg,
-    #f1d784,
-    #b47d20
-  );
-
-  color:#171109;
+  background:linear-gradient(180deg,#f1d784,#b47d20);
+  color:#171109
 }
 
 button.secondary{
   margin-top:10px;
-
   background:#171718;
-
   color:#d9c37c;
-
-  border:
-  1px solid rgba(214,168,63,.22);
+  border:1px solid rgba(214,168,63,.22)
 }
 
 button.danger{
   margin-top:9px;
-
   background:#1b1717;
-
   color:#cfa7a7;
-
-  border:
-  1px solid rgba(180,100,100,.20);
+  border:1px solid rgba(180,100,100,.20)
 }
 
-
-/* ===== LOGIN ===== */
-
-.hidden{
-  display:none !important;
-}
+.hidden{display:none!important}
 
 .msg{
   text-align:center;
-  min-height:20px;
-  margin-top:12px;
+  min-height:18px;
+  margin-top:10px;
   color:#aaa18d;
-  font-size:12px;
+  font-size:12px
 }
 
-.success{
-  color:#79d4a0;
+/* SUMMARY */
+
+.summaryGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px
 }
 
-.error{
-  color:#df9393;
+.summaryBox{
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:15px;
+  padding:14px
 }
 
+.summaryBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:7px
+}
 
-/* ===== DASHBOARD ===== */
+.summaryBox strong{
+  display:block;
+  color:#ebcd72;
+  font-size:19px;
+  line-height:1.35
+}
+
+.green{
+  color:#72d39d!important
+}
+
+.refreshLine{
+  text-align:center;
+  color:#746e62;
+  font-size:10px;
+  margin-top:12px
+}
+
+/* MENU */
 
 .menuGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:10px
 }
 
 .menu{
   display:block;
-
   text-decoration:none;
-
   background:#101011;
-
-  border:
-  1px solid rgba(214,168,63,.20);
-
-  border-radius:15px;
-
+  border:1px solid rgba(214,168,63,.20);
+  border-radius:16px;
   padding:17px 14px;
-
-  min-height:105px;
-
-  transition:.2s;
+  min-height:112px
 }
 
 .menu:active{
-  transform:scale(.98);
+  transform:scale(.98)
 }
 
 .menuIcon{
-  font-size:25px;
-  margin-bottom:9px;
+  font-size:26px;
+  margin-bottom:10px
 }
 
 .menuTitle{
   color:#ecd176;
   font-weight:900;
-  font-size:14px;
+  font-size:15px
 }
 
 .menuSub{
   color:#777166;
   font-size:10px;
-  line-height:1.5;
-  margin-top:5px;
+  line-height:1.55;
+  margin-top:6px
 }
 
-
-/* ===== RESULT ===== */
+/* RESULT */
 
 .current{
   text-align:center;
-
   padding:17px;
-
   margin-bottom:16px;
-
   background:#101011;
-
-  border:
-  1px solid rgba(255,255,255,.06);
-
-  border-radius:15px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:15px
 }
 
 .current small{
   display:block;
   color:#8d887c;
-  margin-bottom:5px;
+  margin-bottom:5px
 }
 
 .current strong{
   font-size:48px;
-  color:#ebca68;
+  color:#ebca68
 }
 
-
-/* ===== SETTINGS ===== */
+/* SETTINGS */
 
 .settingLabel{
   display:block;
   color:#9c9588;
   font-size:12px;
-  margin:4px 2px 7px;
+  margin:4px 2px 7px
 }
 
 .note{
   color:#777268;
   font-size:11px;
   line-height:1.55;
-  margin:-3px 2px 12px;
+  margin:-3px 2px 12px
 }
-
-
-/* ===== LOGO PREVIEW ===== */
 
 .logoPreviewWrap{
   display:flex;
   align-items:center;
   gap:15px;
-
   background:#101011;
-
-  border:
-  1px solid rgba(255,255,255,.06);
-
+  border:1px solid rgba(255,255,255,.06);
   border-radius:15px;
-
   padding:14px;
-
-  margin-bottom:12px;
+  margin-bottom:12px
 }
 
 .logoPreview{
   width:82px;
   height:82px;
-
   border-radius:50%;
-
   overflow:hidden;
-
   flex:none;
-
-  border:
-  1px solid rgba(214,168,63,.35);
-
+  border:1px solid rgba(214,168,63,.35);
   background:#17130c;
-
   display:grid;
   place-items:center;
-
   color:#d7ba63;
-  font-weight:900;
+  font-weight:900
 }
 
 .logoPreview img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover
 }
 
 .logoInfo{
   color:#928b7e;
   font-size:12px;
-  line-height:1.6;
+  line-height:1.6
 }
 
-
-/* ===== SWITCH ===== */
+/* SWITCH */
 
 .switchRow{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   background:#101011;
-
-  border:
-  1px solid rgba(255,255,255,.06);
-
+  border:1px solid rgba(255,255,255,.06);
   border-radius:13px;
-
   padding:13px 14px;
-
-  margin-bottom:13px;
+  margin-bottom:13px
 }
 
 .switchText{
   font-size:13px;
-  color:#e7ddc6;
+  color:#e7ddc6
 }
 
 .switch{
   position:relative;
   width:48px;
-  height:27px;
+  height:27px
 }
 
 .switch input{
   opacity:0;
   width:0;
-  height:0;
-  margin:0;
+  height:0
 }
 
 .slider{
   position:absolute;
   inset:0;
-
   background:#343436;
-
   border-radius:99px;
-
-  transition:.25s;
+  transition:.25s
 }
 
 .slider:before{
   content:"";
-
   position:absolute;
-
   width:21px;
   height:21px;
-
   left:3px;
   top:3px;
-
   border-radius:50%;
-
   background:#aaa;
-
-  transition:.25s;
+  transition:.25s
 }
 
 .switch input:checked + .slider{
-  background:#b9872f;
+  background:#b9872f
 }
 
 .switch input:checked + .slider:before{
   transform:translateX(21px);
-  background:#fff0bd;
+  background:#fff0bd
 }
-
-
-/* ===== FOOTER ===== */
 
 .foot{
   text-align:center;
   color:#706b62;
   font-size:10px;
-  margin-top:25px;
+  margin-top:25px
 }
 
 @media(max-width:380px){
-
-  .menuGrid{
-    grid-template-columns:1fr;
-  }
-
+  .menuGrid{grid-template-columns:1fr}
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="wrap">
 
-
-  <!-- ===== LOGO ===== -->
-
   <div class="brand">
 
-    <div
-      class="mark"
-      id="topMark"
-    >
+    <div class="mark" id="topMark">
       金
     </div>
 
@@ -519,13 +393,9 @@ button.danger{
   </div>
 
 
+  <!-- LOGIN -->
 
-  <!-- ===== LOGIN ===== -->
-
-  <div
-    class="card"
-    id="loginBox"
-  >
+  <div class="card" id="loginBox">
 
     <div class="title">
       管理员登录
@@ -534,37 +404,77 @@ button.danger{
     <input
       id="email"
       type="email"
-      placeholder="管理员邮箱"
-    >
+      placeholder="管理员邮箱">
 
     <input
       id="password"
       type="password"
-      placeholder="管理员密码"
-    >
+      placeholder="管理员密码">
 
     <button onclick="signIn()">
       登录管理中心
     </button>
 
-    <div
-      class="msg"
-      id="loginMsg"
-    ></div>
+    <div class="msg" id="loginMsg"></div>
 
   </div>
 
 
+  <!-- ADMIN -->
 
-  <!-- ===== ADMIN ===== -->
-
-  <div
-    id="adminBox"
-    class="hidden"
-  >
+  <div id="adminBox" class="hidden">
 
 
-    <!-- ===== 总后台入口 ===== -->
+    <!-- TODAY SUMMARY -->
+
+    <div class="card">
+
+      <div class="title">
+        当前运营概况
+      </div>
+
+      <div class="summaryGrid">
+
+        <div class="summaryBox">
+          <small>当前开放期</small>
+          <strong id="summaryRound">—</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>提交状态</small>
+          <strong id="summaryStatus">—</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>已提交代理</small>
+          <strong id="summaryAgents">0</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>本期总积分</small>
+          <strong id="summaryTotal">0</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>截止时间</small>
+          <strong id="summaryDeadline">—</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>Myanmar Time</small>
+          <strong id="mmtClock">—</strong>
+        </div>
+
+      </div>
+
+      <div class="refreshLine">
+        本期数据每 20 秒自动更新
+      </div>
+
+    </div>
+
+
+    <!-- MENU -->
 
     <div class="card">
 
@@ -574,11 +484,7 @@ button.danger{
 
       <div class="menuGrid">
 
-
-        <a
-          class="menu"
-          href="/admin/agents/"
-        >
+        <a class="menu" href="/admin/agents/">
 
           <div class="menuIcon">
             👥
@@ -595,30 +501,24 @@ button.danger{
         </a>
 
 
-        <a
-          class="menu"
-          href="/admin/simulator.html"
-        >
+        <a class="menu" href="/admin/simulator.html">
 
           <div class="menuIcon">
             📊
           </div>
 
           <div class="menuTitle">
-            期数模拟
+            本期汇总
           </div>
 
           <div class="menuSub">
-            00–99积分与结算模拟
+            查看所有代理提交与 00–99 汇总
           </div>
 
         </a>
 
 
-        <a
-          class="menu"
-          href="#resultManagement"
-        >
+        <a class="menu" href="#resultManagement">
 
           <div class="menuIcon">
             🎯
@@ -629,16 +529,13 @@ button.danger{
           </div>
 
           <div class="menuSub">
-            发布最新结果
+            发布最新公开结果
           </div>
 
         </a>
 
 
-        <a
-          class="menu"
-          href="#siteSettings"
-        >
+        <a class="menu" href="#siteSettings">
 
           <div class="menuIcon">
             ⚙️
@@ -654,19 +551,14 @@ button.danger{
 
         </a>
 
-
       </div>
 
     </div>
 
 
+    <!-- RESULT -->
 
-    <!-- ===== 数字发布 ===== -->
-
-    <div
-      class="card"
-      id="resultManagement"
-    >
+    <div class="card" id="resultManagement">
 
       <div class="title">
         数字发布管理
@@ -684,30 +576,22 @@ button.danger{
 
       </div>
 
-
       <input
         id="resultInput"
         inputmode="numeric"
         maxlength="2"
-        placeholder="输入 00 - 99"
-      >
-
+        placeholder="输入 00 - 99">
 
       <button onclick="publishResult()">
         发布最新数字
       </button>
 
-
-      <div
-        class="msg"
-        id="publishMsg"
-      ></div>
+      <div class="msg" id="publishMsg"></div>
 
     </div>
 
 
-
-    <!-- ===== LOGO ===== -->
+    <!-- LOGO -->
 
     <div class="card">
 
@@ -715,197 +599,137 @@ button.danger{
         网站 Logo 管理
       </div>
 
-
       <div class="logoPreviewWrap">
 
-
-        <div
-          class="logoPreview"
-          id="logoPreview"
-        >
+        <div class="logoPreview" id="logoPreview">
           金
         </div>
 
-
         <div class="logoInfo">
-
           选择你的 Logo 图片。
-
           <br>
-
-          系统会自动压缩并保存。
-
+          系统会自动压缩后保存。
         </div>
 
       </div>
-
 
       <label class="settingLabel">
         选择 Logo 图片
       </label>
 
-
       <input
         id="logoFile"
         type="file"
         accept="image/*"
-        onchange="handleLogoFile(this)"
-      >
-
+        onchange="handleLogoFile(this)">
 
       <div class="note">
         建议使用正方形图片。
       </div>
 
-
       <button onclick="saveLogo()">
         更新网站 Logo
       </button>
 
-
       <button
         class="danger"
-        onclick="removeLogo()"
-      >
+        onclick="removeLogo()">
         恢复文字「金」
       </button>
 
-
-      <div
-        class="msg"
-        id="logoMsg"
-      ></div>
+      <div class="msg" id="logoMsg"></div>
 
     </div>
 
 
+    <!-- SETTINGS -->
 
-    <!-- ===== 网站设置 ===== -->
-
-    <div
-      class="card"
-      id="siteSettings"
-    >
+    <div class="card" id="siteSettings">
 
       <div class="title">
         网站内容管理
       </div>
 
-
       <label class="settingLabel">
         Telegram 频道链接
       </label>
 
-
       <input
         id="telegramUrl"
         type="url"
-        placeholder="例如：https://t.me/yourchannel"
-      >
-
+        placeholder="例如：https://t.me/yourchannel">
 
       <div class="note">
         留空后客户页面不会显示 Telegram 入口。
       </div>
 
-
-
       <label class="settingLabel">
         网站公告
       </label>
 
-
       <textarea
         id="announcementText"
-        placeholder="输入网站公告"
-      ></textarea>
-
-
+        placeholder="输入网站公告"></textarea>
 
       <div class="switchRow">
-
 
         <div class="switchText">
           显示滚动公告
         </div>
 
-
         <label class="switch">
 
           <input
             id="announcementEnabled"
-            type="checkbox"
-          >
+            type="checkbox">
 
           <span class="slider"></span>
 
         </label>
 
-
       </div>
-
 
       <button onclick="saveSettings()">
         更新网站设置
       </button>
 
-
-      <div
-        class="msg"
-        id="settingsMsg"
-      ></div>
+      <div class="msg" id="settingsMsg"></div>
 
     </div>
 
 
-
-    <!-- ===== LOGOUT ===== -->
+    <!-- LOGOUT -->
 
     <div class="card">
 
       <button
         class="secondary"
-        onclick="logout()"
-      >
+        onclick="logout()">
         退出管理员账号
       </button>
 
     </div>
 
-
   </div>
-
 
 
   <div class="foot">
-
     © 2022 JIN MANTANG · ADMIN SYSTEM
-
   </div>
-
 
 </div>
 
 
-
 <script>
 
-
-const BASE =
+const BASE=
 'https://veserwfjxglxieehfggy.supabase.co';
 
-
-const KEY =
+const KEY=
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
 
-
-/* =============================
-   登录状态
-============================= */
-
-
-let token =
+let token=
 
 localStorage.getItem(
   'jmt_access_token'
@@ -922,31 +746,46 @@ sessionStorage.getItem(
 '';
 
 
+let pendingLogo='';
 
-let pendingLogo = '';
+let currentRound=null;
 
 
+/* API */
 
-/* =============================
-   登录
-============================= */
+async function api(path,options={}){
 
+  return fetch(
+    BASE+path,
+    {
+      ...options,
+
+      headers:{
+        apikey:KEY,
+        Authorization:'Bearer '+token,
+        ...(options.headers || {})
+      }
+    }
+  );
+
+}
+
+
+/* LOGIN */
 
 async function signIn(){
 
-  const email =
+  const email=
   document.getElementById(
     'email'
   ).value.trim();
 
-
-  const password =
+  const password=
   document.getElementById(
     'password'
   ).value;
 
-
-  const msg =
+  const msg=
   document.getElementById(
     'loginMsg'
   );
@@ -954,7 +793,7 @@ async function signIn(){
 
   if(!email || !password){
 
-    msg.textContent =
+    msg.textContent=
     '请输入管理员邮箱和密码';
 
     return;
@@ -962,45 +801,36 @@ async function signIn(){
   }
 
 
-  msg.textContent =
+  msg.textContent=
   '正在登录...';
 
 
   try{
 
-
-    const r =
+    const r=
     await fetch(
 
-      BASE +
+      BASE+
       '/auth/v1/token?grant_type=password',
 
       {
-
         method:'POST',
 
         headers:{
-
           apikey:KEY,
-
-          'Content-Type':
-          'application/json'
-
+          'Content-Type':'application/json'
         },
 
         body:JSON.stringify({
-
           email,
           password
-
         })
-
       }
 
     );
 
 
-    const d =
+    const d=
     await r.json();
 
 
@@ -1015,12 +845,9 @@ async function signIn(){
     }
 
 
-    token =
+    token=
     d.access_token;
 
-
-
-    /* 持久登录 */
 
     localStorage.setItem(
       'jmt_access_token',
@@ -1036,99 +863,56 @@ async function signIn(){
 
     showAdmin();
 
-
-    await loadCurrent();
-
-    await loadSettings();
+    await loadEverything();
 
 
   }catch(e){
 
-
-    msg.textContent =
+    msg.textContent=
     '登录失败，请检查邮箱和密码';
-
 
   }
 
 }
 
 
-
-/* =============================
-   验证现有登录
-============================= */
-
+/* SESSION */
 
 async function verifySession(){
 
-
   if(!token){
-
     return;
-
   }
 
 
   try{
 
-
-    const r =
-    await fetch(
-
-      BASE +
-      '/auth/v1/user',
-
-      {
-
-        headers:{
-
-          apikey:KEY,
-
-          Authorization:
-          'Bearer ' + token
-
-        }
-
-      }
-
+    const r=
+    await api(
+      '/auth/v1/user'
     );
 
 
     if(!r.ok){
-
       throw new Error();
-
     }
 
 
     showAdmin();
 
-
-    await loadCurrent();
-
-    await loadSettings();
+    await loadEverything();
 
 
   }catch(e){
 
-
     clearSession();
-
 
   }
 
 }
 
 
-
-/* =============================
-   显示后台
-============================= */
-
-
 function showAdmin(){
-
 
   document.getElementById(
     'loginBox'
@@ -1143,102 +927,299 @@ function showAdmin(){
     'hidden'
   );
 
+}
+
+
+/* EVERYTHING */
+
+async function loadEverything(){
+
+  await Promise.all([
+    loadCurrent(),
+    loadSettings(),
+    loadDashboardSummary()
+  ]);
 
 }
 
 
+/* DASHBOARD SUMMARY */
 
-/* =============================
-   当前号码
-============================= */
-
-
-async function loadCurrent(){
-
+async function loadDashboardSummary(){
 
   try{
 
+    const rr=
+    await api(
 
-    const r =
-    await fetch(
-
-      BASE +
-      '/rest/v1/results?select=result_number,published_at&order=published_at.desc&limit=1',
-
-      {
-
-        headers:{
-
-          apikey:KEY,
-
-          Authorization:
-          'Bearer ' + KEY
-
-        }
-
-      }
+      '/rest/v1/rounds' +
+      '?select=id,round_date,round_code,deadline_at,status,created_at' +
+      '&order=created_at.desc' +
+      '&limit=20'
 
     );
 
 
-    if(!r.ok){
-
+    if(!rr.ok){
       throw new Error();
+    }
+
+
+    const rounds=
+    await rr.json();
+
+
+    currentRound=
+
+    rounds.find(
+      x=>x.status==='open'
+    )
+
+    ||
+
+    rounds[0]
+
+    ||
+
+    null;
+
+
+    if(!currentRound){
+
+      renderNoRound();
+
+      return;
 
     }
 
 
-    const rows =
-    await r.json();
+    const period=
+
+    currentRound.round_code==='1530'
+
+    ? '下午 15:30'
+
+    :
+
+    currentRound.round_code==='1030'
+
+    ? '上午 10:30'
+
+    :
+
+    currentRound.round_code;
 
 
     document.getElementById(
-      'currentResult'
-    ).textContent =
+      'summaryRound'
+    ).textContent=
 
-    rows.length
+    currentRound.round_date+
+    ' · '+
+    period;
 
-    ? rows[0].result_number
 
-    : '--';
+    document.getElementById(
+      'summaryStatus'
+    ).textContent=
+
+    currentRound.status==='open'
+    ? '开放中'
+    : '已关闭';
+
+
+    document.getElementById(
+      'summaryStatus'
+    ).className=
+
+    currentRound.status==='open'
+    ? 'green'
+    : '';
+
+
+    document.getElementById(
+      'summaryDeadline'
+    ).textContent=
+    formatMMTShort(
+      currentRound.deadline_at
+    );
+
+
+    const sr=
+    await api(
+
+      '/rest/v1/agent_submissions' +
+
+      '?round_id=eq.'+
+
+      encodeURIComponent(
+        currentRound.id
+      )
+
+      +
+
+      '&select=agent_id,points'
+
+    );
+
+
+    if(!sr.ok){
+      throw new Error();
+    }
+
+
+    const rows=
+    await sr.json();
+
+
+    let total=0;
+
+    const agentSet=
+    new Set();
+
+
+    rows.forEach(row=>{
+
+      const points=
+      Number(
+        row.points || 0
+      );
+
+
+      total+=points;
+
+
+      if(points>0){
+        agentSet.add(
+          row.agent_id
+        );
+      }
+
+    });
+
+
+    document.getElementById(
+      'summaryAgents'
+    ).textContent=
+    agentSet.size;
+
+
+    document.getElementById(
+      'summaryTotal'
+    ).textContent=
+    formatNumber(
+      total
+    );
 
 
   }catch(e){
 
-
     document.getElementById(
-      'currentResult'
-    ).textContent =
-    '--';
-
+      'summaryStatus'
+    ).textContent=
+    '读取失败';
 
   }
 
 }
 
 
+function renderNoRound(){
 
-/* =============================
-   发布号码
-============================= */
+  document.getElementById(
+    'summaryRound'
+  ).textContent=
+  '暂无开放期';
+
+  document.getElementById(
+    'summaryStatus'
+  ).textContent=
+  '—';
+
+  document.getElementById(
+    'summaryAgents'
+  ).textContent=
+  '0';
+
+  document.getElementById(
+    'summaryTotal'
+  ).textContent=
+  '0';
+
+  document.getElementById(
+    'summaryDeadline'
+  ).textContent=
+  '—';
+
+}
+
+
+/* RESULT */
+
+async function loadCurrent(){
+
+  try{
+
+    const r=
+    await fetch(
+
+      BASE+
+      '/rest/v1/results?select=result_number,published_at&order=published_at.desc&limit=1',
+
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer '+KEY
+        }
+      }
+
+    );
+
+
+    if(!r.ok){
+      throw new Error();
+    }
+
+
+    const rows=
+    await r.json();
+
+
+    document.getElementById(
+      'currentResult'
+    ).textContent=
+
+    rows.length
+    ? rows[0].result_number
+    : '--';
+
+
+  }catch(e){
+
+    document.getElementById(
+      'currentResult'
+    ).textContent=
+    '--';
+
+  }
+
+}
 
 
 async function publishResult(){
 
-
-  const input =
+  const input=
   document.getElementById(
     'resultInput'
   );
 
-
-  const msg =
+  const msg=
   document.getElementById(
     'publishMsg'
   );
 
 
-  let n =
+  let n=
   input.value.trim();
 
 
@@ -1246,246 +1227,172 @@ async function publishResult(){
     !/^\d{1,2}$/.test(n)
   ){
 
-
-    msg.textContent =
+    msg.textContent=
     '请输入 00 到 99';
-
 
     return;
 
   }
 
 
-  n =
+  n=
   n.padStart(
     2,
     '0'
   );
 
 
-  msg.textContent =
+  msg.textContent=
   '正在发布...';
 
 
   try{
 
-
-    const r =
-    await fetch(
-
-      BASE +
+    const r=
+    await api(
       '/rest/v1/results',
-
       {
-
         method:'POST',
 
         headers:{
-
-          apikey:KEY,
-
-          Authorization:
-          'Bearer ' + token,
-
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
         },
 
-
         body:JSON.stringify({
-
           result_number:n
-
         })
-
       }
-
     );
 
 
-    if(
-      r.status===401
-      ||
-      r.status===403
-    ){
-
-
-      clearSession();
-
-      throw new Error();
-
-    }
-
-
     if(!r.ok){
-
       throw new Error();
-
     }
 
 
     document.getElementById(
       'currentResult'
-    ).textContent =
+    ).textContent=
     n;
 
 
-    input.value =
-    '';
+    input.value='';
 
 
-    msg.textContent =
-    '✓ 发布成功：' + n;
+    msg.textContent=
+    '✓ 发布成功：'+n;
 
 
   }catch(e){
 
-
-    msg.textContent =
+    msg.textContent=
     '发布失败，请重新登录';
-
 
   }
 
 }
 
 
-
-/* =============================
-   读取设置
-============================= */
-
+/* SETTINGS */
 
 async function loadSettings(){
 
-
   try{
 
-
-    const r =
+    const r=
     await fetch(
 
-      BASE +
+      BASE+
       '/rest/v1/site_settings?id=eq.1&select=telegram_url,announcement_text,announcement_enabled,logo_data_url',
 
       {
-
         headers:{
-
           apikey:KEY,
-
-          Authorization:
-          'Bearer ' + KEY
-
+          Authorization:'Bearer '+KEY
         }
-
       }
 
     );
 
 
     if(!r.ok){
-
       throw new Error();
-
     }
 
 
-    const rows =
+    const rows=
     await r.json();
 
 
     if(!rows.length){
-
       return;
-
     }
 
 
-    const s =
+    const s=
     rows[0];
-
 
 
     document.getElementById(
       'telegramUrl'
-    ).value =
+    ).value=
     s.telegram_url || '';
-
 
 
     document.getElementById(
       'announcementText'
-    ).value =
+    ).value=
     s.announcement_text || '';
-
 
 
     document.getElementById(
       'announcementEnabled'
-    ).checked =
+    ).checked=
     !!s.announcement_enabled;
-
 
 
     if(s.logo_data_url){
 
-
-      pendingLogo =
+      pendingLogo=
       s.logo_data_url;
-
 
       showLogoPreview(
         s.logo_data_url
       );
-
 
     }
 
 
   }catch(e){
 
-
     document.getElementById(
       'settingsMsg'
-    ).textContent =
+    ).textContent=
     '暂时无法读取网站设置';
-
 
   }
 
 }
 
 
-
-/* =============================
-   Logo 选择
-============================= */
-
+/* LOGO FILE */
 
 function handleLogoFile(input){
 
-
-  const file =
-  input.files
-  &&
+  const file=
+  input.files &&
   input.files[0];
 
 
-  const msg =
+  const msg=
   document.getElementById(
     'logoMsg'
   );
 
 
   if(!file){
-
     return;
-
   }
 
 
@@ -1495,114 +1402,79 @@ function handleLogoFile(input){
     )
   ){
 
-
-    msg.textContent =
+    msg.textContent=
     '请选择图片文件';
-
 
     return;
 
   }
 
 
-  msg.textContent =
+  msg.textContent=
   '正在处理 Logo...';
 
 
-
-  const reader =
+  const reader=
   new FileReader();
 
 
-
-  reader.onload =
+  reader.onload=
   function(e){
 
-
-    const img =
+    const img=
     new Image();
 
 
-
-    img.onload =
+    img.onload=
     function(){
 
+      const maxSize=420;
 
-      const maxSize =
-      420;
-
-
-      let w =
-      img.width;
+      let w=img.width;
+      let h=img.height;
 
 
-      let h =
-      img.height;
+      if(w>h){
 
+        if(w>maxSize){
 
-
-      if(w > h){
-
-
-        if(w > maxSize){
-
-
-          h =
-          Math.round(
-            h * maxSize / w
+          h=Math.round(
+            h*maxSize/w
           );
 
-
-          w =
-          maxSize;
-
+          w=maxSize;
 
         }
-
 
       }else{
 
+        if(h>maxSize){
 
-        if(h > maxSize){
-
-
-          w =
-          Math.round(
-            w * maxSize / h
+          w=Math.round(
+            w*maxSize/h
           );
 
-
-          h =
-          maxSize;
-
+          h=maxSize;
 
         }
-
 
       }
 
 
-
-      const canvas =
+      const canvas=
       document.createElement(
         'canvas'
       );
 
 
-      canvas.width =
-      w;
+      canvas.width=w;
+      canvas.height=h;
 
 
-      canvas.height =
-      h;
-
-
-
-      const ctx =
+      const ctx=
       canvas.getContext(
         '2d'
       );
-
 
 
       ctx.drawImage(
@@ -1614,13 +1486,11 @@ function handleLogoFile(input){
       );
 
 
-
-      pendingLogo =
+      pendingLogo=
       canvas.toDataURL(
         'image/jpeg',
         .84
       );
-
 
 
       showLogoPreview(
@@ -1628,17 +1498,14 @@ function handleLogoFile(input){
       );
 
 
-
-      msg.textContent =
+      msg.textContent=
       '✓ Logo 已准备好';
-
 
     };
 
 
-    img.src =
+    img.src=
     e.target.result;
-
 
   };
 
@@ -1650,59 +1517,41 @@ function handleLogoFile(input){
 }
 
 
-
-/* =============================
-   Logo 预览
-============================= */
-
-
 function showLogoPreview(src){
 
-
-  const preview =
+  const preview=
   document.getElementById(
     'logoPreview'
   );
 
-
-  const top =
+  const top=
   document.getElementById(
     'topMark'
   );
 
 
-  preview.innerHTML =
-  '';
+  preview.innerHTML='';
+  top.innerHTML='';
 
 
-  top.innerHTML =
-  '';
-
-
-  const img1 =
+  const img1=
   document.createElement(
     'img'
   );
 
-
-  img1.src =
-  src;
-
+  img1.src=src;
 
   preview.appendChild(
     img1
   );
 
 
-  const img2 =
+  const img2=
   document.createElement(
     'img'
   );
 
-
-  img2.src =
-  src;
-
+  img2.src=src;
 
   top.appendChild(
     img2
@@ -1711,16 +1560,9 @@ function showLogoPreview(src){
 }
 
 
-
-/* =============================
-   保存 Logo
-============================= */
-
-
 async function saveLogo(){
 
-
-  const msg =
+  const msg=
   document.getElementById(
     'logoMsg'
   );
@@ -1728,232 +1570,158 @@ async function saveLogo(){
 
   if(!pendingLogo){
 
-
-    msg.textContent =
+    msg.textContent=
     '请先选择 Logo 图片';
-
 
     return;
 
   }
 
 
-  msg.textContent =
+  msg.textContent=
   '正在更新 Logo...';
 
 
   try{
 
-
-    const r =
-    await fetch(
-
-      BASE +
+    const r=
+    await api(
       '/rest/v1/site_settings?id=eq.1',
-
       {
-
         method:'PATCH',
 
         headers:{
-
-          apikey:KEY,
-
-          Authorization:
-          'Bearer ' + token,
-
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
         },
 
-
         body:JSON.stringify({
-
-          logo_data_url:
-          pendingLogo,
-
-          updated_at:
-          new Date().toISOString()
-
+          logo_data_url:pendingLogo,
+          updated_at:new Date().toISOString()
         })
-
       }
-
     );
 
 
     if(!r.ok){
-
       throw new Error();
-
     }
 
 
-    msg.textContent =
+    msg.textContent=
     '✓ 网站 Logo 更新成功';
 
 
   }catch(e){
 
-
-    msg.textContent =
+    msg.textContent=
     'Logo 更新失败';
-
 
   }
 
 }
 
 
-
-/* =============================
-   恢复文字 Logo
-============================= */
-
-
 async function removeLogo(){
 
-
-  const msg =
+  const msg=
   document.getElementById(
     'logoMsg'
   );
 
 
-  msg.textContent =
-  '正在恢复...';
-
-
   try{
 
-
-    const r =
-    await fetch(
-
-      BASE +
+    const r=
+    await api(
       '/rest/v1/site_settings?id=eq.1',
-
       {
-
         method:'PATCH',
 
         headers:{
-
-          apikey:KEY,
-
-          Authorization:
-          'Bearer ' + token,
-
-          'Content-Type':
-          'application/json'
-
+          'Content-Type':'application/json'
         },
 
-
         body:JSON.stringify({
-
           logo_data_url:'',
-
-          updated_at:
-          new Date().toISOString()
-
+          updated_at:new Date().toISOString()
         })
-
       }
-
     );
 
 
     if(!r.ok){
-
       throw new Error();
-
     }
 
 
-    pendingLogo =
-    '';
+    pendingLogo='';
 
 
     document.getElementById(
       'logoPreview'
-    ).innerHTML =
+    ).innerHTML=
     '金';
 
 
     document.getElementById(
       'topMark'
-    ).innerHTML =
+    ).innerHTML=
     '金';
 
 
     document.getElementById(
       'logoFile'
-    ).value =
-    '';
+    ).value='';
 
 
-    msg.textContent =
+    msg.textContent=
     '✓ 已恢复文字「金」';
 
 
   }catch(e){
 
-
-    msg.textContent =
+    msg.textContent=
     '恢复失败';
-
 
   }
 
 }
 
 
-
-/* =============================
-   保存网站设置
-============================= */
-
+/* SAVE SETTINGS */
 
 async function saveSettings(){
 
-
-  const msg =
+  const msg=
   document.getElementById(
     'settingsMsg'
   );
 
 
-  const telegram =
+  const telegram=
   document.getElementById(
     'telegramUrl'
   ).value.trim();
 
 
-  const announcement =
+  const announcement=
   document.getElementById(
     'announcementText'
   ).value.trim();
 
 
-  const enabled =
+  const enabled=
   document.getElementById(
     'announcementEnabled'
   ).checked;
 
 
-
   if(telegram){
-
 
     try{
 
-
-      const u =
+      const u=
       new URL(
         telegram
       );
@@ -1965,160 +1733,177 @@ async function saveSettings(){
         u.protocol!=='http:'
       ){
 
-
         throw new Error();
-
 
       }
 
-
     }catch(e){
 
-
-      msg.textContent =
+      msg.textContent=
       'Telegram 链接格式不正确';
-
 
       return;
 
-
     }
-
 
   }
 
 
-
-  msg.textContent =
+  msg.textContent=
   '正在更新网站...';
-
 
 
   try{
 
-
-    const r =
-    await fetch(
-
-      BASE +
+    const r=
+    await api(
       '/rest/v1/site_settings?id=eq.1',
-
       {
-
         method:'PATCH',
 
         headers:{
-
-          apikey:KEY,
-
-          Authorization:
-          'Bearer ' + token,
-
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-
+          'Content-Type':'application/json',
+          Prefer:'return=representation'
         },
 
-
         body:JSON.stringify({
-
-          telegram_url:
-          telegram,
-
-          announcement_text:
-          announcement,
-
-          announcement_enabled:
-          enabled,
-
-          updated_at:
-          new Date().toISOString()
-
+          telegram_url:telegram,
+          announcement_text:announcement,
+          announcement_enabled:enabled,
+          updated_at:new Date().toISOString()
         })
-
       }
-
     );
 
 
     if(!r.ok){
-
       throw new Error();
-
     }
 
 
-    msg.textContent =
+    msg.textContent=
     '✓ 网站设置更新成功';
 
 
   }catch(e){
 
-
-    msg.textContent =
+    msg.textContent=
     '更新失败，请重新登录';
-
 
   }
 
 }
 
 
+/* TIME */
 
-/* =============================
-   清除登录
-============================= */
+function updateClock(){
 
+  document.getElementById(
+    'mmtClock'
+  ).textContent=
+
+  new Intl.DateTimeFormat(
+    'zh-CN',
+    {
+      timeZone:'Asia/Yangon',
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+      hour12:false
+    }
+  ).format(
+    new Date()
+  );
+
+}
+
+
+function formatMMTShort(value){
+
+  if(!value){
+    return '—';
+  }
+
+
+  return new Intl.DateTimeFormat(
+    'zh-CN',
+    {
+      timeZone:'Asia/Yangon',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      hour12:false
+    }
+  ).format(
+    new Date(value)
+  )+' MMT';
+
+}
+
+
+function formatNumber(value){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+/* LOGOUT */
 
 function clearSession(){
-
 
   localStorage.removeItem(
     'jmt_access_token'
   );
 
-
   sessionStorage.removeItem(
     'jmt_access_token'
   );
 
-
-  token =
-  '';
-
+  token='';
 
 }
-
-
-
-/* =============================
-   退出
-============================= */
 
 
 function logout(){
 
-
   clearSession();
 
-
   location.reload();
-
 
 }
 
 
+/* START */
 
-/* =============================
-   页面启动
-============================= */
+updateClock();
+
+setInterval(
+  updateClock,
+  1000
+);
 
 
 verifySession();
 
+
+setInterval(
+  ()=>{
+    if(token){
+      loadDashboardSummary();
+    }
+  },
+  20000
+);
 
 </script>
 
