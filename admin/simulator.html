@@ -18,12 +18,11 @@
 <style>
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
-
   background:
   radial-gradient(
     circle at top,
@@ -31,9 +30,7 @@ body{
     #0d0c0a 40%,
     #070708 100%
   );
-
   color:#f5edd9;
-
   font-family:
   -apple-system,
   BlinkMacSystemFont,
@@ -42,13 +39,11 @@ body{
   sans-serif;
 }
 
-
 .wrap{
-  max-width:850px;
+  max-width:900px;
   margin:auto;
   padding:22px 14px 60px;
 }
-
 
 .header{
   display:flex;
@@ -58,13 +53,11 @@ body{
   margin-bottom:18px;
 }
 
-
 .logoTitle{
   color:#efd477;
   font-size:22px;
   font-weight:900;
 }
-
 
 .sub{
   color:#827966;
@@ -73,7 +66,6 @@ body{
   margin-top:4px;
 }
 
-
 .card{
   background:
   linear-gradient(
@@ -81,18 +73,16 @@ body{
     #151515,
     #0d0d0e
   );
-
   border:
   1px solid
   rgba(214,168,63,.28);
-
   border-radius:20px;
-
   padding:17px;
-
   margin-bottom:14px;
+  box-shadow:
+  0 18px 50px
+  rgba(0,0,0,.22);
 }
-
 
 .title{
   color:#dfc575;
@@ -100,7 +90,6 @@ body{
   font-weight:900;
   margin-bottom:14px;
 }
-
 
 button{
   border:0;
@@ -110,16 +99,17 @@ button{
   cursor:pointer;
 }
 
+button:active{
+  transform:scale(.98);
+}
 
 .dark{
   background:#181819;
   color:#dbc67d;
-
   border:
   1px solid
   rgba(214,168,63,.22);
 }
-
 
 .gold{
   background:
@@ -128,50 +118,22 @@ button{
     #efd47c,
     #b87e1e
   );
-
   color:#161008;
 }
-
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-
-
-.stat{
-  background:#101011;
-
-  border:
-  1px solid
-  rgba(255,255,255,.06);
-
-  border-radius:13px;
-
-  padding:13px;
-}
-
-
-.stat small{
-  display:block;
-  color:#817a6d;
-  font-size:10px;
-  margin-bottom:6px;
-}
-
-
-.stat strong{
-  color:#ebcd72;
-  font-size:19px;
-  line-height:1.25;
-}
-
 
 .green{
   color:#71d49d !important;
 }
 
+.red{
+  color:#e88d8d !important;
+}
+
+.goldText{
+  color:#efd477 !important;
+}
+
+/* CURRENT ROUND */
 
 .roundInfo{
   display:grid;
@@ -179,19 +141,14 @@ button{
   gap:8px;
 }
 
-
 .infoBox{
   background:#101011;
-
   border:
   1px solid
   rgba(255,255,255,.06);
-
   border-radius:13px;
-
   padding:13px;
 }
-
 
 .infoBox small{
   display:block;
@@ -200,227 +157,71 @@ button{
   margin-bottom:6px;
 }
 
-
 .infoBox strong{
   color:#e9cd78;
   font-size:14px;
   line-height:1.5;
 }
 
+/* FINANCIAL OVERVIEW */
 
-.grid{
+.financeGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
+  grid-template-columns:
+  repeat(3,1fr);
+  gap:9px;
 }
 
-
-.num{
+.financeBox{
   background:#101011;
-
   border:
   1px solid
   rgba(255,255,255,.06);
-
-  border-radius:13px;
-
-  padding:13px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
+  border-radius:15px;
+  padding:14px;
+  min-height:88px;
 }
 
-
-.code{
-  color:#e7c96d;
-  font-size:18px;
-  font-weight:900;
+.financeBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:7px;
+  line-height:1.45;
 }
 
-
-.amount{
-  color:#eee5cf;
-  font-size:15px;
-  font-weight:800;
+.financeBox strong{
+  display:block;
+  color:#ebcd72;
+  font-size:20px;
+  line-height:1.3;
+  word-break:break-word;
 }
 
-
-.nonzero{
+.financeBox.main{
   border-color:
-  rgba(214,168,63,.38);
-
+  rgba(214,168,63,.32);
   background:#15130e;
 }
 
-
-.nonzero .amount{
-  color:#f0d47e;
+.financeBox.net strong{
+  color:#78d7a1;
 }
 
-
-/* AGENT */
-
-.agent{
-  background:#101011;
-
-  border:
-  1px solid
-  rgba(255,255,255,.06);
-
-  border-radius:14px;
-
-  padding:14px;
-
-  margin-bottom:9px;
+.financeBox.commission strong{
+  color:#dfbd64;
 }
 
-
-.agentTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+.financeBox.multiplier strong{
+  color:#e7ca73;
 }
 
-
-.agentName{
-  color:#efd278;
-  font-size:16px;
-  font-weight:900;
-}
-
-
-.rate{
-  color:#8f8778;
-  font-size:11px;
-  margin-top:4px;
-}
-
-
-.badge{
-  background:#153124;
-  color:#77d69e;
-
-  font-size:11px;
-
-  padding:5px 9px;
-
-  border-radius:20px;
-}
-
-
-.agentStats{
+.refreshRow{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  margin-top:11px;
-}
-
-
-.agentStat{
-  background:#151516;
-  border-radius:10px;
-  padding:11px;
-}
-
-
-.agentStat small{
-  display:block;
-  color:#777166;
-  font-size:9px;
-  margin-bottom:5px;
-}
-
-
-.agentStat strong{
-  color:#e6cf86;
-  font-size:14px;
-}
-
-
-.detailButton{
-  width:100%;
-  margin-top:10px;
-}
-
-
-.agentDetail{
-  display:none;
-
   margin-top:12px;
-
-  padding-top:12px;
-
-  border-top:
-  1px solid
-  rgba(255,255,255,.07);
 }
-
-
-.agentDetail.open{
-  display:block;
-}
-
-
-.detailTitle{
-  font-size:12px;
-  color:#cdb66c;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-
-.detailGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:7px;
-}
-
-
-.detailNum{
-  background:#171718;
-
-  border:
-  1px solid
-  rgba(255,255,255,.05);
-
-  border-radius:10px;
-
-  padding:10px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-}
-
-
-.detailNum.active{
-  border-color:
-  rgba(214,168,63,.34);
-
-  background:#1a170f;
-}
-
-
-.detailNum span:first-child{
-  color:#dfc36d;
-  font-weight:900;
-}
-
-
-.detailNum span:last-child{
-  color:#e8dfc9;
-  font-size:12px;
-  font-weight:800;
-}
-
 
 .msg{
   min-height:18px;
@@ -430,6 +231,226 @@ button{
   margin-top:10px;
 }
 
+.note{
+  color:#766f62;
+  font-size:10px;
+  line-height:1.65;
+  margin-top:10px;
+}
+
+/* NUMBER GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:8px;
+}
+
+.num{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:13px;
+}
+
+.num.nonzero{
+  border-color:
+  rgba(214,168,63,.38);
+  background:#15130e;
+}
+
+.numTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.code{
+  color:#e7c96d;
+  font-size:20px;
+  font-weight:900;
+}
+
+.activeBadge{
+  display:none;
+  padding:4px 7px;
+  border-radius:20px;
+  font-size:9px;
+  background:#2a2415;
+  color:#dfc36d;
+}
+
+.nonzero .activeBadge{
+  display:block;
+}
+
+.numData{
+  margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.numDataBox{
+  background:#151516;
+  border-radius:9px;
+  padding:9px;
+}
+
+.numDataBox small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.numDataBox strong{
+  display:block;
+  color:#e8dfc9;
+  font-size:13px;
+  line-height:1.35;
+}
+
+.nonzero .numDataBox strong{
+  color:#efd47d;
+}
+
+/* AGENTS */
+
+.agent{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:10px;
+}
+
+.agentTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.agentName{
+  color:#efd278;
+  font-size:16px;
+  font-weight:900;
+}
+
+.rate{
+  color:#8f8778;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.badge{
+  background:#153124;
+  color:#77d69e;
+  font-size:11px;
+  padding:5px 9px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.agentStats{
+  display:grid;
+  grid-template-columns:
+  repeat(3,1fr);
+  gap:8px;
+  margin-top:11px;
+}
+
+.agentStat{
+  background:#151516;
+  border-radius:10px;
+  padding:11px;
+}
+
+.agentStat small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px;
+  line-height:1.4;
+}
+
+.agentStat strong{
+  color:#e6cf86;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.agentStat.commission strong{
+  color:#79d7a2;
+}
+
+.detailButton{
+  width:100%;
+  margin-top:10px;
+}
+
+.agentDetail{
+  display:none;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:
+  1px solid
+  rgba(255,255,255,.07);
+}
+
+.agentDetail.open{
+  display:block;
+}
+
+.detailTitle{
+  font-size:12px;
+  color:#cdb66c;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.detailGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:7px;
+}
+
+.detailNum{
+  background:#171718;
+  border:
+  1px solid
+  rgba(255,255,255,.05);
+  border-radius:10px;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.detailNum.active{
+  border-color:
+  rgba(214,168,63,.34);
+  background:#1a170f;
+}
+
+.detailNum span:first-child{
+  color:#dfc36d;
+  font-weight:900;
+}
+
+.detailNum span:last-child{
+  color:#e8dfc9;
+  font-size:12px;
+  font-weight:800;
+}
 
 .empty{
   text-align:center;
@@ -438,22 +459,6 @@ button{
   padding:25px 10px;
 }
 
-
-.refreshRow{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-
-.note{
-  color:#766f62;
-  font-size:10px;
-  line-height:1.6;
-  margin-top:10px;
-}
-
-
 .foot{
   text-align:center;
   color:#6f6a61;
@@ -461,11 +466,28 @@ button{
   margin-top:25px;
 }
 
+@media(max-width:650px){
 
-@media(max-width:600px){
+  .financeGrid{
+    grid-template-columns:
+    1fr 1fr;
+  }
 
-  .stats{
-    grid-template-columns:1fr 1fr;
+  .agentStats{
+    grid-template-columns:
+    1fr 1fr;
+  }
+
+}
+
+@media(max-width:380px){
+
+  .header{
+    align-items:flex-start;
+  }
+
+  .logoTitle{
+    font-size:19px;
   }
 
 }
@@ -474,11 +496,9 @@ button{
 
 </head>
 
-
 <body>
 
 <div class="wrap">
-
 
   <div class="header">
 
@@ -489,25 +509,21 @@ button{
       </div>
 
       <div class="sub">
-        ADMIN / ROUND SUMMARY
+        ADMIN / LIVE ROUND SUMMARY
       </div>
 
     </div>
 
-
     <button
       class="dark"
       onclick="location.href='/admin/'">
-
       返回总后台
-
     </button>
 
   </div>
 
 
-
-  <!-- 当前期数 -->
+  <!-- CURRENT ROUND -->
 
   <div class="card">
 
@@ -515,14 +531,12 @@ button{
       当前期数
     </div>
 
-
     <div class="roundInfo">
-
 
       <div class="infoBox">
 
         <small>
-          期数
+          本期
         </small>
 
         <strong id="roundName">
@@ -531,23 +545,19 @@ button{
 
       </div>
 
-
       <div class="infoBox">
 
         <small>
-          状态
+          当前状态
         </small>
 
         <strong
           id="roundStatus"
           class="green">
-
           —
-
         </strong>
 
       </div>
-
 
       <div class="infoBox">
 
@@ -561,7 +571,6 @@ button{
 
       </div>
 
-
       <div class="infoBox">
 
         <small>
@@ -574,29 +583,25 @@ button{
 
       </div>
 
-
     </div>
 
   </div>
 
 
-
-  <!-- 总体数据 -->
+  <!-- FINANCIAL OVERVIEW -->
 
   <div class="card">
 
     <div class="title">
-      本期数据
+      本期实时总览
     </div>
 
+    <div class="financeGrid">
 
-    <div class="stats">
-
-
-      <div class="stat">
+      <div class="financeBox main">
 
         <small>
-          提交总积分
+          本期提交总额
         </small>
 
         <strong id="grandTotal">
@@ -606,20 +611,46 @@ button{
       </div>
 
 
-      <div class="stat">
+      <div class="financeBox commission">
 
         <small>
-          已提交代理
+          代理佣金合计
         </small>
 
-        <strong id="agentCount">
+        <strong id="commissionTotal">
           0
         </strong>
 
       </div>
 
 
-      <div class="stat">
+      <div class="financeBox net">
+
+        <small>
+          扣佣后净额
+        </small>
+
+        <strong id="netTotal">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="financeBox">
+
+        <small>
+          已提交代理
+        </small>
+
+        <strong id="agentCount">
+          0 / 0
+        </strong>
+
+      </div>
+
+
+      <div class="financeBox">
 
         <small>
           有数据号码
@@ -632,7 +663,20 @@ button{
       </div>
 
 
-      <div class="stat">
+      <div class="financeBox multiplier">
+
+        <small>
+          计算倍数
+        </small>
+
+        <strong>
+          80倍
+        </strong>
+
+      </div>
+
+
+      <div class="financeBox">
 
         <small>
           最后刷新
@@ -640,40 +684,28 @@ button{
 
         <strong
           id="lastRefresh"
-          style="font-size:13px">
-
+          style="font-size:14px">
           —
-
         </strong>
 
       </div>
 
-
     </div>
 
 
-    <div
-      class="refreshRow"
-      style="margin-top:12px">
-
+    <div class="refreshRow">
 
       <button
         class="gold"
         onclick="loadAll()">
-
         刷新本期数据
-
       </button>
-
 
       <button
         class="dark"
         onclick="location.href='/admin/agents/'">
-
         查看代理管理
-
       </button>
-
 
     </div>
 
@@ -685,32 +717,34 @@ button{
 
 
     <div class="note">
-
-      页面每 20 秒自动刷新一次。
-      所有数据来自代理已提交的本期积分。
-
+      本页面每 20 秒自动同步一次。
+      代理提交或修改本期数据后，
+      本期提交总额、代理佣金、扣佣后净额以及
+      00–99 汇总都会重新计算。
     </div>
 
   </div>
 
 
-
-  <!-- 总汇总 -->
+  <!-- NUMBER SUMMARY -->
 
   <div class="card">
 
     <div class="title">
-      00–99 本期总汇总
+      00–99 本期实时汇总
     </div>
-
 
     <div
       class="grid"
       id="numberGrid">
     </div>
 
-  </div>
+    <div class="note">
+      「提交总额」为所有代理在该号码上的提交合计；
+      「80倍金额」= 该号码提交总额 × 80。
+    </div>
 
+  </div>
 
 
   <!-- AGENT LIST -->
@@ -720,7 +754,6 @@ button{
     <div class="title">
       本期代理提交
     </div>
-
 
     <div id="agentList">
 
@@ -733,34 +766,26 @@ button{
   </div>
 
 
-
   <div class="card">
 
     <button
       class="dark"
       style="width:100%"
       onclick="location.href='/admin/'">
-
       ← 返回 Admin 总后台
-
     </button>
 
   </div>
 
 
   <div class="foot">
-
-    © 2022 JIN MANTANG · ROUND SUMMARY
-
+    © 2022 JIN MANTANG · LIVE ROUND SUMMARY
   </div>
-
 
 </div>
 
 
-
 <script>
-
 
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
@@ -768,6 +793,9 @@ const BASE =
 
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+const MULTIPLIER = 80;
 
 
 let token =
@@ -794,8 +822,9 @@ let agents = [];
 let submissions = [];
 
 
-
-/* API */
+/* =========================
+   API
+========================= */
 
 async function api(
   path,
@@ -828,8 +857,9 @@ async function api(
 }
 
 
-
-/* BUILD TOTAL GRID */
+/* =========================
+   BUILD 00-99
+========================= */
 
 function buildNumberGrid(){
 
@@ -872,15 +902,45 @@ function buildNumberGrid(){
 
     div.innerHTML = `
 
-      <div class="code">
-        ${n}
+      <div class="numTop">
+
+        <div class="code">
+          ${n}
+        </div>
+
+        <div class="activeBadge">
+          有数据
+        </div>
+
       </div>
 
-      <div
-        class="amount"
-        id="num${n}">
 
-        0
+      <div class="numData">
+
+        <div class="numDataBox">
+
+          <small>
+            提交总额
+          </small>
+
+          <strong id="numAmount${n}">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="numDataBox">
+
+          <small>
+            80倍金额
+          </small>
+
+          <strong id="numPayout${n}">
+            0
+          </strong>
+
+        </div>
 
       </div>
 
@@ -896,8 +956,9 @@ function buildNumberGrid(){
 }
 
 
-
-/* VERIFY ADMIN */
+/* =========================
+   VERIFY ADMIN
+========================= */
 
 async function verifyAdmin(){
 
@@ -935,6 +996,7 @@ async function verifyAdmin(){
       'jmt_access_token'
     );
 
+
     sessionStorage.removeItem(
       'jmt_access_token'
     );
@@ -951,8 +1013,9 @@ async function verifyAdmin(){
 }
 
 
-
-/* LOAD ROUND */
+/* =========================
+   LOAD ROUND
+========================= */
 
 async function loadRound(){
 
@@ -965,7 +1028,7 @@ async function loadRound(){
 
     '&order=created_at.desc' +
 
-    '&limit=20'
+    '&limit=30'
 
   );
 
@@ -987,6 +1050,8 @@ async function loadRound(){
 
     currentRound =
     null;
+
+    renderRound();
 
     return;
 
@@ -1010,28 +1075,41 @@ async function loadRound(){
 }
 
 
-
-/* RENDER ROUND */
+/* =========================
+   RENDER ROUND
+========================= */
 
 function renderRound(){
 
+  const roundName =
+  document.getElementById(
+    'roundName'
+  );
+
+
+  const status =
+  document.getElementById(
+    'roundStatus'
+  );
+
+
+  const deadline =
+  document.getElementById(
+    'deadlineText'
+  );
+
+
   if(!currentRound){
 
-    document.getElementById(
-      'roundName'
-    ).textContent =
+    roundName.textContent =
     '暂无期数';
 
 
-    document.getElementById(
-      'roundStatus'
-    ).textContent =
+    status.textContent =
     '—';
 
 
-    document.getElementById(
-      'deadlineText'
-    ).textContent =
+    deadline.textContent =
     '—';
 
 
@@ -1040,60 +1118,37 @@ function renderRound(){
   }
 
 
-  const sessionName =
-
-  currentRound.round_code === '1530'
-
-  ? '下午 15:30'
-
-  :
-
-  currentRound.round_code === '1030'
-
-  ? '上午 10:30'
-
-  :
-
-  currentRound.round_code;
-
-
-
-  document.getElementById(
-    'roundName'
-  ).textContent =
+  roundName.textContent =
 
   currentRound.round_date
+
   +
+
   ' · '
+
   +
-  sessionName;
+
+  periodName(
+    currentRound.round_code
+  );
 
 
+  status.textContent =
+  statusName(
+    currentRound.status
+  );
 
-  document.getElementById(
-    'roundStatus'
-  ).textContent =
+
+  status.className =
 
   currentRound.status === 'open'
 
-  ? '开放中'
+  ? 'green'
 
-  :
-
-  currentRound.status === 'settled'
-
-  ? '已结算'
-
-  :
-
-  '已关闭';
+  : '';
 
 
-
-  document.getElementById(
-    'deadlineText'
-  ).textContent =
-
+  deadline.textContent =
   formatMMT(
     currentRound.deadline_at
   );
@@ -1101,8 +1156,9 @@ function renderRound(){
 }
 
 
-
-/* LOAD AGENTS */
+/* =========================
+   LOAD AGENTS
+========================= */
 
 async function loadAgents(){
 
@@ -1131,8 +1187,9 @@ async function loadAgents(){
 }
 
 
-
-/* LOAD SUBMISSIONS */
+/* =========================
+   LOAD SUBMISSIONS
+========================= */
 
 async function loadSubmissions(){
 
@@ -1178,8 +1235,9 @@ async function loadSubmissions(){
 }
 
 
-
-/* CALCULATE */
+/* =========================
+   CALCULATE
+========================= */
 
 function calculate(){
 
@@ -1205,14 +1263,14 @@ function calculate(){
   }
 
 
-
   submissions.forEach(
     row => {
 
       const code =
       String(
         row.number_code
-      ).padStart(
+      )
+      .padStart(
         2,
         '0'
       );
@@ -1237,7 +1295,6 @@ function calculate(){
         points;
 
       }
-
 
 
       if(
@@ -1289,12 +1346,25 @@ function calculate(){
       points;
 
 
-      agentMap[
-        row.agent_id
-      ].numbers[
-        code
-      ] +=
-      points;
+      if(
+        Object.prototype
+        .hasOwnProperty
+        .call(
+          agentMap[
+            row.agent_id
+          ].numbers,
+          code
+        )
+      ){
+
+        agentMap[
+          row.agent_id
+        ].numbers[
+          code
+        ] +=
+        points;
+
+      }
 
 
       const thisTime =
@@ -1316,7 +1386,9 @@ function calculate(){
           new Date(
             thisTime
           )
+
           >
+
           new Date(
             agentMap[
               row.agent_id
@@ -1345,8 +1417,9 @@ function calculate(){
 }
 
 
-
-/* RENDER TOTALS */
+/* =========================
+   RENDER TOTALS
+========================= */
 
 function renderTotals(
   totals,
@@ -1364,22 +1437,37 @@ function renderTotals(
   .forEach(
     ([code,value]) => {
 
+      const amount =
+      Number(
+        value || 0
+      );
+
+
+      const payout =
+      amount *
+      MULTIPLIER;
+
+
       grandTotal +=
-      Number(value);
+      amount;
 
 
-      if(
-        Number(value) > 0
-      ){
+      if(amount > 0){
 
         activeNumbers++;
 
       }
 
 
-      const el =
+      const amountEl =
       document.getElementById(
-        'num' + code
+        'numAmount' + code
+      );
+
+
+      const payoutEl =
+      document.getElementById(
+        'numPayout' + code
       );
 
 
@@ -1389,11 +1477,21 @@ function renderTotals(
       );
 
 
-      if(el){
+      if(amountEl){
 
-        el.textContent =
+        amountEl.textContent =
         formatNumber(
-          value
+          amount
+        );
+
+      }
+
+
+      if(payoutEl){
+
+        payoutEl.textContent =
+        formatNumber(
+          payout
         );
 
       }
@@ -1403,7 +1501,7 @@ function renderTotals(
 
         box.classList.toggle(
           'nonzero',
-          Number(value) > 0
+          amount > 0
         );
 
       }
@@ -1411,6 +1509,77 @@ function renderTotals(
     }
 
   );
+
+
+  /*
+    佣金必须逐个代理计算。
+
+    不能：
+    总额 × 一个统一比例
+
+    必须：
+    代理A总额 × A比例
+    +
+    代理B总额 × B比例
+    +
+    ...
+  */
+
+
+  let commissionTotal = 0;
+
+
+  agents.forEach(
+    agent => {
+
+      const data =
+      agentMap[
+        agent.id
+      ];
+
+
+      if(!data){
+        return;
+      }
+
+
+      const total =
+      Number(
+        data.total || 0
+      );
+
+
+      const rate =
+      normalizeRate(
+        agent.commission_rate
+      );
+
+
+      const commission =
+      total *
+      rate /
+      100;
+
+
+      data.commission =
+      commission;
+
+
+      data.rate =
+      rate;
+
+
+      commissionTotal +=
+      commission;
+
+    }
+
+  );
+
+
+  const netTotal =
+  grandTotal -
+  commissionTotal;
 
 
   const submittedAgentIds =
@@ -1427,6 +1596,14 @@ function renderTotals(
   );
 
 
+  const activeAgents =
+
+  agents.filter(
+    a =>
+    a.status === 'active'
+  );
+
+
   document.getElementById(
     'grandTotal'
   ).textContent =
@@ -1436,9 +1613,34 @@ function renderTotals(
 
 
   document.getElementById(
+    'commissionTotal'
+  ).textContent =
+  formatNumber(
+    commissionTotal
+  );
+
+
+  document.getElementById(
+    'netTotal'
+  ).textContent =
+  formatNumber(
+    netTotal
+  );
+
+
+  document.getElementById(
     'agentCount'
   ).textContent =
-  submittedAgentIds.length;
+
+  submittedAgentIds.length
+
+  +
+
+  ' / '
+
+  +
+
+  activeAgents.length;
 
 
   document.getElementById(
@@ -1454,8 +1656,9 @@ function renderTotals(
 }
 
 
-
-/* RENDER AGENTS */
+/* =========================
+   RENDER AGENTS
+========================= */
 
 function renderAgents(
   agentMap
@@ -1507,7 +1710,6 @@ function renderAgents(
   );
 
 
-
   if(!list.length){
 
     box.innerHTML =
@@ -1523,7 +1725,6 @@ function renderAgents(
   }
 
 
-
   box.innerHTML =
 
   list.map(
@@ -1531,8 +1732,8 @@ function renderAgents(
 
 
       const rate =
-      Number(
-        a.commission_rate || 0
+      normalizeRate(
+        a.commission_rate
       );
 
 
@@ -1540,6 +1741,12 @@ function renderAgents(
       Number(
         a.roundData.total || 0
       );
+
+
+      const commission =
+      total *
+      rate /
+      100;
 
 
       const detailHtml =
@@ -1581,7 +1788,6 @@ function renderAgents(
       .join('');
 
 
-
       return `
 
       <div class="agent">
@@ -1606,7 +1812,7 @@ function renderAgents(
             <div class="rate">
 
               代理比例：
-              ${rate}%
+              ${formatRate(rate)}%
 
             </div>
 
@@ -1614,14 +1820,11 @@ function renderAgents(
 
 
           <div class="badge">
-
             已提交
-
           </div>
 
 
         </div>
-
 
 
         <div class="agentStats">
@@ -1630,13 +1833,30 @@ function renderAgents(
           <div class="agentStat">
 
             <small>
-              本期提交总积分
+              本期提交总额
             </small>
 
             <strong>
 
               ${formatNumber(
                 total
+              )}
+
+            </strong>
+
+          </div>
+
+
+          <div class="agentStat commission">
+
+            <small>
+              代理佣金
+            </small>
+
+            <strong>
+
+              ${formatNumber(
+                commission
               )}
 
             </strong>
@@ -1657,7 +1877,7 @@ function renderAgents(
 
                 ?
 
-                formatMMT(
+                formatMMTShort(
                   a.roundData.lastTime
                 )
 
@@ -1674,7 +1894,6 @@ function renderAgents(
         </div>
 
 
-
         <button
           class="dark detailButton"
           onclick="toggleAgentDetail('${a.id}',this)">
@@ -1682,7 +1901,6 @@ function renderAgents(
           查看 00–99 明细
 
         </button>
-
 
 
         <div
@@ -1724,8 +1942,9 @@ function renderAgents(
 }
 
 
-
-/* OPEN/CLOSE DETAIL */
+/* =========================
+   DETAIL
+========================= */
 
 function toggleAgentDetail(
   agentId,
@@ -1766,8 +1985,9 @@ function toggleAgentDetail(
 }
 
 
-
-/* LOAD ALL */
+/* =========================
+   LOAD ALL
+========================= */
 
 async function loadAll(){
 
@@ -1805,32 +2025,11 @@ async function loadAll(){
     document.getElementById(
       'lastRefresh'
     ).textContent =
-
-    new Intl
-    .DateTimeFormat(
-      'zh-CN',
-      {
-
-        timeZone:
-        'Asia/Yangon',
-
-        hour:'2-digit',
-
-        minute:'2-digit',
-
-        second:'2-digit',
-
-        hour12:false
-
-      }
-    )
-    .format(
-      new Date()
-    );
+    getMMTClock();
 
 
     msg.textContent =
-    '✓ 已更新';
+    '✓ 已同步最新数据';
 
 
     setTimeout(
@@ -1838,7 +2037,7 @@ async function loadAll(){
 
         if(
           msg.textContent ===
-          '✓ 已更新'
+          '✓ 已同步最新数据'
         ){
 
           msg.textContent =
@@ -1853,6 +2052,9 @@ async function loadAll(){
 
   }catch(e){
 
+    console.error(e);
+
+
     msg.textContent =
     e.message
     ||
@@ -1863,15 +2065,141 @@ async function loadAll(){
 }
 
 
+/* =========================
+   RATE
+========================= */
 
-/* TIME */
+function normalizeRate(
+  value
+){
+
+  let rate =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(
+      rate
+    )
+  ){
+
+    rate = 0;
+
+  }
+
+
+  /*
+    兼容两种数据库写法：
+
+    20  = 20%
+    0.2 = 20%
+  */
+
+  if(
+    rate > 0
+    &&
+    rate <= 1
+  ){
+
+    rate =
+    rate * 100;
+
+  }
+
+
+  return rate;
+
+}
+
+
+function formatRate(
+  value
+){
+
+  return Number(
+    value || 0
+  )
+  .toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+/* =========================
+   ROUND NAMES
+========================= */
+
+function periodName(
+  code
+){
+
+  if(code === '1030'){
+
+    return '上午 10:30';
+
+  }
+
+
+  if(code === '1530'){
+
+    return '下午 15:30';
+
+  }
+
+
+  return code || '—';
+
+}
+
+
+function statusName(
+  status
+){
+
+  if(status === 'open'){
+
+    return '开放中';
+
+  }
+
+
+  if(status === 'closed'){
+
+    return '已关闭';
+
+  }
+
+
+  if(status === 'settled'){
+
+    return '已结算';
+
+  }
+
+
+  return status || '—';
+
+}
+
+
+/* =========================
+   TIME
+========================= */
 
 function formatMMT(
   value
 ){
 
   if(!value){
+
     return '—';
+
   }
 
 
@@ -1912,14 +2240,49 @@ function formatMMT(
 }
 
 
+function formatMMTShort(
+  value
+){
 
-function updateClock(){
+  if(!value){
 
-  document.getElementById(
-    'mmtClock'
-  ).textContent =
+    return '—';
 
-  new Intl
+  }
+
+
+  return new Intl
+  .DateTimeFormat(
+    'zh-CN',
+    {
+
+      timeZone:
+      'Asia/Yangon',
+
+      month:'2-digit',
+
+      day:'2-digit',
+
+      hour:'2-digit',
+
+      minute:'2-digit',
+
+      hour12:false
+
+    }
+  )
+  .format(
+    new Date(
+      value
+    )
+  );
+
+}
+
+
+function getMMTClock(){
+
+  return new Intl
   .DateTimeFormat(
     'zh-CN',
     {
@@ -1944,8 +2307,19 @@ function updateClock(){
 }
 
 
+function updateClock(){
 
-/* FORMAT */
+  document.getElementById(
+    'mmtClock'
+  ).textContent =
+  getMMTClock();
+
+}
+
+
+/* =========================
+   FORMAT
+========================= */
 
 function formatNumber(
   value
@@ -1964,7 +2338,6 @@ function formatNumber(
 }
 
 
-
 function escapeHtml(
   text
 ){
@@ -1973,25 +2346,43 @@ function escapeHtml(
     text
   )
 
-  .replaceAll('&','&amp;')
+  .replaceAll(
+    '&',
+    '&amp;'
+  )
 
-  .replaceAll('<','&lt;')
+  .replaceAll(
+    '<',
+    '&lt;'
+  )
 
-  .replaceAll('>','&gt;')
+  .replaceAll(
+    '>',
+    '&gt;'
+  )
 
-  .replaceAll('"','&quot;')
+  .replaceAll(
+    '"',
+    '&quot;'
+  )
 
-  .replaceAll("'","&#039;");
+  .replaceAll(
+    "'",
+    '&#039;'
+  );
 
 }
 
 
-
-/* START */
+/* =========================
+   START
+========================= */
 
 buildNumberGrid();
 
+
 updateClock();
+
 
 setInterval(
   updateClock,
@@ -2007,9 +2398,7 @@ setInterval(
   20000
 );
 
-
 </script>
-
 
 </body>
 
