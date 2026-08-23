@@ -4,85 +4,227 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
-<title>金满堂 · 代理中心</title>
+<title>金满堂 · Agent Center</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
-  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
+  background:
+  radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f7f0df;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
-.wrap{max-width:650px;margin:auto;min-height:100vh;padding:20px 14px 50px}
-.brand{text-align:center;margin-bottom:18px}
-.mark{
-  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
-  margin:0 auto 8px;font-weight:900;font-size:22px;color:#f3d681;
-  border:1px solid #b98a2c;background:#191208
+
+.wrap{
+  max-width:650px;
+  margin:auto;
+  min-height:100vh;
+  padding:20px 14px 50px
 }
-.cn{font-size:22px;font-weight:900;letter-spacing:3px;color:#f1d47b}
-.en{font-size:10px;color:#998b68;letter-spacing:2px;margin-top:3px}
+
+.brand{
+  text-align:center;
+  margin-bottom:18px
+}
+
+.mark{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 9px;
+  font-weight:900;
+  font-size:23px;
+  color:#f3d681;
+  border:1px solid #b98a2c;
+  background:#191208
+}
+
+.cn{
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#f1d47b
+}
+
+.en{
+  font-size:10px;
+  color:#998b68;
+  letter-spacing:3px;
+  margin-top:4px
+}
+
 .card{
   background:linear-gradient(180deg,#151515,#0d0d0e);
   border:1px solid rgba(214,168,63,.3);
-  border-radius:20px;padding:18px;margin-bottom:14px
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px
 }
-.title{font-size:14px;font-weight:900;color:#dec372;margin-bottom:14px}
-.hidden{display:none}
-input{
-  width:100%;padding:12px;border-radius:11px;
+
+.title{
+  font-size:15px;
+  font-weight:900;
+  color:#dec372;
+  margin-bottom:14px
+}
+
+.hidden{display:none!important}
+
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:11px;
   border:1px solid rgba(214,168,63,.25);
-  background:#101011;color:#fff;outline:none;font-size:15px
+  background:#101011;
+  color:#fff;
+  outline:none;
+  font-size:15px
 }
+
 button{
-  width:100%;border:0;border-radius:12px;padding:13px;margin-top:10px;
-  font-weight:900;font-size:14px;
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  margin-top:10px;
+  font-weight:900;
+  font-size:14px;
   background:linear-gradient(180deg,#efd47c,#b87e1e);
-  color:#171109;cursor:pointer
+  color:#171109;
+  cursor:pointer
 }
-button:disabled{opacity:.45;cursor:not-allowed}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed
+}
+
 .secondary{
-  background:#171718;color:#dac477;
+  background:#171718;
+  color:#dac477;
   border:1px solid rgba(214,168,63,.23)
 }
+
+.langWrap{
+  margin-bottom:14px
+}
+
+.langWrap select{
+  text-align:center;
+  color:#ecd277;
+  font-weight:800
+}
+
 .info{
-  display:grid;grid-template-columns:1fr 1fr;gap:9px
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px
 }
+
 .box{
-  background:#101011;border:1px solid rgba(255,255,255,.06);
-  border-radius:13px;padding:13px
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px
 }
-.box small{display:block;color:#817b71;font-size:10px;margin-bottom:5px}
-.box strong{color:#e7cb74;font-size:16px}
+
+.box small{
+  display:block;
+  color:#817b71;
+  font-size:10px;
+  margin-bottom:5px
+}
+
+.box strong{
+  color:#e7cb74;
+  font-size:16px;
+  line-height:1.35
+}
+
 .statusOpen{color:#6fd09a!important}
 .statusClosed{color:#e58e8e!important}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:8px
 }
+
 .num{
-  background:#101011;border:1px solid rgba(255,255,255,.06);
-  border-radius:11px;padding:10px
+  background:#101011;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:11px;
+  padding:10px
 }
+
 .numLabel{
-  font-size:18px;font-weight:900;color:#dec16a;margin-bottom:7px
+  font-size:18px;
+  font-weight:900;
+  color:#dec16a;
+  margin-bottom:7px
 }
-.num input{padding:9px;font-size:14px}
+
+.num input{
+  padding:9px;
+  font-size:14px
+}
+
 .total{
-  text-align:center;background:#101011;border-radius:14px;padding:15px;
-  border:1px solid rgba(214,168,63,.15);margin-top:13px
+  text-align:center;
+  background:#101011;
+  border-radius:14px;
+  padding:15px;
+  border:1px solid rgba(214,168,63,.15);
+  margin-top:13px
 }
-.total small{display:block;color:#817b71;font-size:10px}
-.total strong{display:block;color:#efcf70;font-size:28px;margin-top:5px}
-.msg{text-align:center;min-height:20px;margin-top:11px;font-size:12px;color:#a49c8b}
-.note{font-size:11px;color:#777166;line-height:1.6;margin-top:10px}
-.foot{text-align:center;color:#6f6a61;font-size:10px;margin-top:22px}
+
+.total small{
+  display:block;
+  color:#817b71;
+  font-size:10px
+}
+
+.total strong{
+  display:block;
+  color:#efcf70;
+  font-size:28px;
+  margin-top:5px
+}
+
+.msg{
+  text-align:center;
+  min-height:20px;
+  margin-top:11px;
+  font-size:12px;
+  color:#a49c8b
+}
+
+.note{
+  font-size:11px;
+  color:#777166;
+  line-height:1.6;
+  margin-top:10px
+}
+
+.foot{
+  text-align:center;
+  color:#6f6a61;
+  font-size:10px;
+  margin-top:22px
+}
+
+@media(max-width:420px){
+  .info{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
 
   <div class="brand">
@@ -91,41 +233,69 @@ button:disabled{opacity:.45;cursor:not-allowed}
     <div class="en">AGENT CENTER</div>
   </div>
 
+  <div class="langWrap">
+    <select id="langSelect" onchange="changeLanguage(this.value)">
+      <option value="zh">中文</option>
+      <option value="my">မြန်မာ</option>
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+      <option value="ms">Bahasa Melayu</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="id">Bahasa Indonesia</option>
+    </select>
+  </div>
 
   <div class="card" id="loginBox">
-    <div class="title">代理登录</div>
 
-    <input id="email" type="email" placeholder="代理邮箱">
+    <div class="title" data-i18n="loginTitle">
+      代理登录
+    </div>
+
+    <input
+      id="email"
+      type="email"
+      data-ph="email"
+      placeholder="代理邮箱">
 
     <div style="height:9px"></div>
 
-    <input id="password" type="password" placeholder="密码">
+    <input
+      id="password"
+      type="password"
+      data-ph="password"
+      placeholder="密码">
 
-    <button onclick="signIn()">登录代理中心</button>
+    <button onclick="signIn()" data-i18n="loginBtn">
+      登录代理中心
+    </button>
 
     <div class="msg" id="loginMsg"></div>
+
   </div>
 
 
   <div id="agentBox" class="hidden">
 
     <div class="card">
-      <div class="title">我的代理资料</div>
+
+      <div class="title" data-i18n="agentInfo">
+        我的代理资料
+      </div>
 
       <div class="info">
 
         <div class="box">
-          <small>代理名称</small>
+          <small data-i18n="agentName">代理名称</small>
           <strong id="agentName">—</strong>
         </div>
 
         <div class="box">
-          <small>代理比例</small>
+          <small data-i18n="agentRate">代理比例</small>
           <strong id="commissionRate">—</strong>
         </div>
 
         <div class="box">
-          <small>账号状态</small>
+          <small data-i18n="accountStatus">账号状态</small>
           <strong id="agentStatus">—</strong>
         </div>
 
@@ -135,38 +305,41 @@ button:disabled{opacity:.45;cursor:not-allowed}
         </div>
 
       </div>
+
     </div>
 
 
     <div class="card">
 
-      <div class="title">当前期数</div>
+      <div class="title" data-i18n="currentRound">
+        当前期数
+      </div>
 
       <div class="info">
 
         <div class="box">
-          <small>期数</small>
+          <small data-i18n="round">期数</small>
           <strong id="roundName">—</strong>
         </div>
 
         <div class="box">
-          <small>提交状态</small>
-          <strong id="roundStatus">读取中...</strong>
+          <small data-i18n="submitStatus">提交状态</small>
+          <strong id="roundStatus">—</strong>
         </div>
 
         <div class="box">
-          <small>截止时间</small>
+          <small data-i18n="deadline">截止时间</small>
           <strong id="deadlineText">—</strong>
         </div>
 
         <div class="box">
-          <small>距离截止</small>
+          <small data-i18n="timeLeft">距离截止</small>
           <strong id="countdown">—</strong>
         </div>
 
       </div>
 
-      <div class="note">
+      <div class="note" data-i18n="serverNote">
         是否接受提交最终由服务器时间决定，不以代理手机时间为准。
       </div>
 
@@ -175,20 +348,24 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
     <div class="card">
 
-      <div class="title">00–99 本期积分提交</div>
+      <div class="title" data-i18n="submitTitle">
+        00–99 本期积分提交
+      </div>
 
       <div class="grid" id="numberGrid"></div>
 
       <div class="total">
-        <small>本期提交总积分</small>
+        <small data-i18n="totalPoints">
+          本期提交总积分
+        </small>
         <strong id="totalPoints">0</strong>
       </div>
 
-      <button id="submitBtn" onclick="submitRound()">
+      <button id="submitBtn" onclick="submitRound()" data-i18n="submitBtn">
         提交本期数据
       </button>
 
-      <button class="secondary" onclick="loadExisting()">
+      <button class="secondary" onclick="loadExisting()" data-i18n="reloadBtn">
         重新读取已提交数据
       </button>
 
@@ -199,27 +376,29 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
     <div class="card">
 
-      <div class="title">本期结果</div>
+      <div class="title" data-i18n="resultTitle">
+        本期结果
+      </div>
 
       <div class="info">
 
         <div class="box">
-          <small>开奖号码</small>
-          <strong id="resultNumber">等待开奖</strong>
+          <small data-i18n="resultNumber">结果号码</small>
+          <strong id="resultNumber">—</strong>
         </div>
 
         <div class="box">
-          <small>结算状态</small>
-          <strong id="settlementStatus">等待结算</strong>
+          <small data-i18n="settlement">结算状态</small>
+          <strong id="settlementStatus">—</strong>
         </div>
 
         <div class="box">
-          <small>本期提交总积分</small>
+          <small data-i18n="settledTotal">本期提交总积分</small>
           <strong id="settledTotal">—</strong>
         </div>
 
         <div class="box">
-          <small>本期代理积分</small>
+          <small data-i18n="agentPoints">本期代理积分</small>
           <strong id="commissionAmount">—</strong>
         </div>
 
@@ -229,7 +408,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
 
     <div class="card">
-      <button class="secondary" onclick="logout()">退出登录</button>
+      <button class="secondary" onclick="logout()" data-i18n="logout">
+        退出登录
+      </button>
     </div>
 
   </div>
@@ -247,20 +428,466 @@ button:disabled{opacity:.45;cursor:not-allowed}
 const BASE='https://veserwfjxglxieehfggy.supabase.co';
 const KEY='sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
-let token=sessionStorage.getItem('jmt_agent_token') || '';
+let token=
+  localStorage.getItem('jmt_agent_token')
+  ||
+  sessionStorage.getItem('jmt_agent_token')
+  ||
+  '';
+
 let agent=null;
 let currentRound=null;
+
+let currentLang=
+  localStorage.getItem('jmt_agent_lang')
+  ||
+  'zh';
+
+
+const T={
+
+zh:{
+loginTitle:'代理登录',
+email:'代理邮箱',
+password:'密码',
+loginBtn:'登录代理中心',
+agentInfo:'我的代理资料',
+agentName:'代理名称',
+agentRate:'代理比例',
+accountStatus:'账号状态',
+normal:'正常',
+suspended:'已暂停',
+blocked:'已限制',
+currentRound:'当前期数',
+round:'期数',
+submitStatus:'提交状态',
+deadline:'截止时间',
+timeLeft:'距离截止',
+serverNote:'是否接受提交最终由服务器时间决定，不以代理手机时间为准。',
+submitTitle:'00–99 本期积分提交',
+totalPoints:'本期提交总积分',
+submitBtn:'提交本期数据',
+reloadBtn:'重新读取已提交数据',
+resultTitle:'本期结果',
+resultNumber:'结果号码',
+settlement:'结算状态',
+settledTotal:'本期提交总积分',
+agentPoints:'本期代理积分',
+logout:'退出登录',
+loginMissing:'请输入代理邮箱和密码',
+logging:'正在登录...',
+loginFail:'登录失败，请检查账号或密码',
+noAgent:'该账号没有有效代理权限',
+noRound:'暂无开放期',
+canSubmit:'可以提交',
+closed:'本期已截止',
+closedShort:'已关闭',
+minutes:'分',
+seconds:'秒',
+submitting:'正在提交，请稍候...',
+noSubmitRound:'当前没有可以提交的期数',
+accountCannot:'你的代理账号目前无法提交',
+serverRejected:'本期已经截止，服务器已拒绝提交',
+submitFail:'提交失败，请稍后再试',
+submitBlocked:'本期已经截止或账号当前无法提交',
+networkError:'网络异常，请重新提交',
+submitSuccess:'✓ 提交成功 · 总积分 ',
+waitingResult:'等待结果',
+waitingSettlement:'等待结算',
+settled:'已结算',
+morning:'上午 10:30',
+afternoon:'下午 15:30'
+},
+
+my:{
+loginTitle:'ကိုယ်စားလှယ် ဝင်ရောက်ရန်',
+email:'ကိုယ်စားလှယ် Email',
+password:'စကားဝှက်',
+loginBtn:'ကိုယ်စားလှယ်စနစ်သို့ ဝင်မည်',
+agentInfo:'ကျွန်ုပ်၏ ကိုယ်စားလှယ်အချက်အလက်',
+agentName:'ကိုယ်စားလှယ်အမည်',
+agentRate:'ကိုယ်စားလှယ် ရာခိုင်နှုန်း',
+accountStatus:'အကောင့်အခြေအနေ',
+normal:'ပုံမှန်',
+suspended:'ယာယီရပ်ထား',
+blocked:'ကန့်သတ်ထား',
+currentRound:'လက်ရှိအကြိမ်',
+round:'အကြိမ်',
+submitStatus:'တင်သွင်းမှုအခြေအနေ',
+deadline:'နောက်ဆုံးအချိန်',
+timeLeft:'ကျန်ရှိချိန်',
+serverNote:'တင်သွင်းမှုလက်ခံ/မလက်ခံကို Server အချိန်ဖြင့်သာဆုံးဖြတ်ပါသည်။ ဖုန်းအချိန်ကိုမယူပါ။',
+submitTitle:'00–99 လက်ရှိအကြိမ် Point တင်သွင်းမှု',
+totalPoints:'စုစုပေါင်း Point',
+submitBtn:'လက်ရှိဒေတာ တင်မည်',
+reloadBtn:'တင်ထားသောဒေတာ ပြန်ဖတ်မည်',
+resultTitle:'လက်ရှိအကြိမ် ရလဒ်',
+resultNumber:'ရလဒ်နံပါတ်',
+settlement:'ရှင်းတမ်းအခြေအနေ',
+settledTotal:'တင်သွင်းစုစုပေါင်း',
+agentPoints:'ကိုယ်စားလှယ် Point',
+logout:'ထွက်မည်',
+loginMissing:'Email နှင့် စကားဝှက်ထည့်ပါ',
+logging:'ဝင်ရောက်နေသည်...',
+loginFail:'ဝင်မရပါ။ Email/စကားဝှက်စစ်ပါ',
+noAgent:'ဤအကောင့်တွင် ကိုယ်စားလှယ်ခွင့်မရှိပါ',
+noRound:'ဖွင့်ထားသောအကြိမ်မရှိပါ',
+canSubmit:'တင်နိုင်သည်',
+closed:'လက်ရှိအကြိမ် ပိတ်ပြီးပါပြီ',
+closedShort:'ပိတ်ပြီး',
+minutes:'မိနစ်',
+seconds:'စက္ကန့်',
+submitting:'တင်နေပါသည်...',
+noSubmitRound:'တင်နိုင်သောအကြိမ်မရှိပါ',
+accountCannot:'ဤအကောင့်ဖြင့် လက်ရှိတင်မရပါ',
+serverRejected:'နောက်ဆုံးအချိန်ကျော်သွားသဖြင့် Server မှငြင်းပယ်ပါသည်',
+submitFail:'တင်မရပါ။ နောက်မှပြန်စမ်းပါ',
+submitBlocked:'အကြိမ်ပိတ်ပြီး သို့မဟုတ် အကောင့်တင်မရပါ',
+networkError:'Network အမှား။ ပြန်စမ်းပါ',
+submitSuccess:'✓ တင်သွင်းအောင်မြင် · စုစုပေါင်း ',
+waitingResult:'ရလဒ်စောင့်နေသည်',
+waitingSettlement:'ရှင်းတမ်းစောင့်နေသည်',
+settled:'ရှင်းပြီး',
+morning:'မနက် 10:30',
+afternoon:'နေ့လယ် 15:30'
+},
+
+en:{
+loginTitle:'Agent Login',
+email:'Agent Email',
+password:'Password',
+loginBtn:'Login to Agent Center',
+agentInfo:'My Agent Profile',
+agentName:'Agent Name',
+agentRate:'Agent Rate',
+accountStatus:'Account Status',
+normal:'Active',
+suspended:'Suspended',
+blocked:'Restricted',
+currentRound:'Current Round',
+round:'Round',
+submitStatus:'Submission Status',
+deadline:'Deadline',
+timeLeft:'Time Remaining',
+serverNote:'Submission availability is determined by server time, not the agent device time.',
+submitTitle:'00–99 Round Points Submission',
+totalPoints:'Total Points',
+submitBtn:'Submit Round Data',
+reloadBtn:'Reload Submitted Data',
+resultTitle:'Round Result',
+resultNumber:'Result Number',
+settlement:'Settlement Status',
+settledTotal:'Submitted Total',
+agentPoints:'Agent Points',
+logout:'Logout',
+loginMissing:'Please enter agent email and password',
+logging:'Logging in...',
+loginFail:'Login failed. Check email or password',
+noAgent:'This account has no valid agent access',
+noRound:'No open round',
+canSubmit:'Open for submission',
+closed:'Round closed',
+closedShort:'Closed',
+minutes:'min',
+seconds:'sec',
+submitting:'Submitting...',
+noSubmitRound:'No round available for submission',
+accountCannot:'Your agent account cannot submit now',
+serverRejected:'Deadline passed. Server rejected submission',
+submitFail:'Submission failed. Please try again',
+submitBlocked:'Round closed or account cannot submit',
+networkError:'Network error. Please try again',
+submitSuccess:'✓ Submitted · Total ',
+waitingResult:'Waiting for result',
+waitingSettlement:'Waiting for settlement',
+settled:'Settled',
+morning:'Morning 10:30',
+afternoon:'Afternoon 15:30'
+},
+
+th:{
+loginTitle:'เข้าสู่ระบบตัวแทน',
+email:'อีเมลตัวแทน',
+password:'รหัสผ่าน',
+loginBtn:'เข้าสู่ศูนย์ตัวแทน',
+agentInfo:'ข้อมูลตัวแทนของฉัน',
+agentName:'ชื่อตัวแทน',
+agentRate:'อัตราตัวแทน',
+accountStatus:'สถานะบัญชี',
+normal:'ปกติ',
+suspended:'ระงับชั่วคราว',
+blocked:'ถูกจำกัด',
+currentRound:'รอบปัจจุบัน',
+round:'รอบ',
+submitStatus:'สถานะการส่ง',
+deadline:'เวลาปิดรับ',
+timeLeft:'เวลาที่เหลือ',
+serverNote:'การรับข้อมูลยึดตามเวลาเซิร์ฟเวอร์ ไม่ใช่เวลาบนโทรศัพท์ของตัวแทน',
+submitTitle:'ส่งคะแนนรอบนี้ 00–99',
+totalPoints:'คะแนนรวม',
+submitBtn:'ส่งข้อมูลรอบนี้',
+reloadBtn:'โหลดข้อมูลที่ส่งแล้ว',
+resultTitle:'ผลรอบนี้',
+resultNumber:'หมายเลขผล',
+settlement:'สถานะการสรุป',
+settledTotal:'ยอดส่งทั้งหมด',
+agentPoints:'คะแนนตัวแทน',
+logout:'ออกจากระบบ',
+loginMissing:'กรุณากรอกอีเมลและรหัสผ่าน',
+logging:'กำลังเข้าสู่ระบบ...',
+loginFail:'เข้าสู่ระบบไม่สำเร็จ',
+noAgent:'บัญชีนี้ไม่มีสิทธิ์ตัวแทน',
+noRound:'ไม่มีรอบที่เปิด',
+canSubmit:'สามารถส่งได้',
+closed:'รอบนี้ปิดแล้ว',
+closedShort:'ปิดแล้ว',
+minutes:'นาที',
+seconds:'วินาที',
+submitting:'กำลังส่ง...',
+noSubmitRound:'ไม่มีรอบที่ส่งได้',
+accountCannot:'บัญชีนี้ไม่สามารถส่งได้',
+serverRejected:'เลยเวลาปิดรับแล้ว เซิร์ฟเวอร์ปฏิเสธ',
+submitFail:'ส่งไม่สำเร็จ กรุณาลองใหม่',
+submitBlocked:'รอบปิดแล้วหรือบัญชีถูกจำกัด',
+networkError:'เครือข่ายผิดพลาด กรุณาลองใหม่',
+submitSuccess:'✓ ส่งสำเร็จ · รวม ',
+waitingResult:'รอผล',
+waitingSettlement:'รอสรุป',
+settled:'สรุปแล้ว',
+morning:'รอบเช้า 10:30',
+afternoon:'รอบบ่าย 15:30'
+},
+
+ms:{
+loginTitle:'Log Masuk Ejen',
+email:'E-mel Ejen',
+password:'Kata Laluan',
+loginBtn:'Log Masuk Pusat Ejen',
+agentInfo:'Profil Ejen Saya',
+agentName:'Nama Ejen',
+agentRate:'Kadar Ejen',
+accountStatus:'Status Akaun',
+normal:'Aktif',
+suspended:'Digantung',
+blocked:'Disekat',
+currentRound:'Pusingan Semasa',
+round:'Pusingan',
+submitStatus:'Status Hantaran',
+deadline:'Masa Tutup',
+timeLeft:'Masa Baki',
+serverNote:'Penerimaan hantaran ditentukan oleh masa pelayan, bukan masa telefon ejen.',
+submitTitle:'Hantaran Mata 00–99',
+totalPoints:'Jumlah Mata',
+submitBtn:'Hantar Data Pusingan',
+reloadBtn:'Muat Semula Data',
+resultTitle:'Keputusan Pusingan',
+resultNumber:'Nombor Keputusan',
+settlement:'Status Penyelesaian',
+settledTotal:'Jumlah Dihantar',
+agentPoints:'Mata Ejen',
+logout:'Log Keluar',
+loginMissing:'Masukkan e-mel dan kata laluan',
+logging:'Sedang log masuk...',
+loginFail:'Log masuk gagal',
+noAgent:'Akaun ini tiada akses ejen',
+noRound:'Tiada pusingan terbuka',
+canSubmit:'Boleh dihantar',
+closed:'Pusingan ditutup',
+closedShort:'Ditutup',
+minutes:'min',
+seconds:'saat',
+submitting:'Sedang menghantar...',
+noSubmitRound:'Tiada pusingan untuk dihantar',
+accountCannot:'Akaun ejen tidak boleh menghantar',
+serverRejected:'Masa tutup telah tamat',
+submitFail:'Hantaran gagal',
+submitBlocked:'Pusingan ditutup atau akaun disekat',
+networkError:'Ralat rangkaian',
+submitSuccess:'✓ Berjaya dihantar · Jumlah ',
+waitingResult:'Menunggu keputusan',
+waitingSettlement:'Menunggu penyelesaian',
+settled:'Selesai',
+morning:'Pagi 10:30',
+afternoon:'Petang 15:30'
+},
+
+vi:{
+loginTitle:'Đăng nhập đại lý',
+email:'Email đại lý',
+password:'Mật khẩu',
+loginBtn:'Đăng nhập trung tâm đại lý',
+agentInfo:'Thông tin đại lý',
+agentName:'Tên đại lý',
+agentRate:'Tỷ lệ đại lý',
+accountStatus:'Trạng thái tài khoản',
+normal:'Hoạt động',
+suspended:'Tạm dừng',
+blocked:'Bị hạn chế',
+currentRound:'Kỳ hiện tại',
+round:'Kỳ',
+submitStatus:'Trạng thái gửi',
+deadline:'Hạn chót',
+timeLeft:'Thời gian còn lại',
+serverNote:'Hệ thống sử dụng thời gian máy chủ, không dùng thời gian trên điện thoại đại lý.',
+submitTitle:'Gửi điểm 00–99',
+totalPoints:'Tổng điểm',
+submitBtn:'Gửi dữ liệu kỳ này',
+reloadBtn:'Tải lại dữ liệu đã gửi',
+resultTitle:'Kết quả kỳ',
+resultNumber:'Số kết quả',
+settlement:'Trạng thái quyết toán',
+settledTotal:'Tổng đã gửi',
+agentPoints:'Điểm đại lý',
+logout:'Đăng xuất',
+loginMissing:'Vui lòng nhập email và mật khẩu',
+logging:'Đang đăng nhập...',
+loginFail:'Đăng nhập thất bại',
+noAgent:'Tài khoản không có quyền đại lý',
+noRound:'Không có kỳ đang mở',
+canSubmit:'Có thể gửi',
+closed:'Kỳ đã đóng',
+closedShort:'Đã đóng',
+minutes:'phút',
+seconds:'giây',
+submitting:'Đang gửi...',
+noSubmitRound:'Không có kỳ để gửi',
+accountCannot:'Tài khoản hiện không thể gửi',
+serverRejected:'Đã quá hạn gửi',
+submitFail:'Gửi thất bại',
+submitBlocked:'Kỳ đã đóng hoặc tài khoản bị hạn chế',
+networkError:'Lỗi mạng',
+submitSuccess:'✓ Gửi thành công · Tổng ',
+waitingResult:'Đang chờ kết quả',
+waitingSettlement:'Đang chờ quyết toán',
+settled:'Đã quyết toán',
+morning:'Sáng 10:30',
+afternoon:'Chiều 15:30'
+},
+
+id:{
+loginTitle:'Login Agen',
+email:'Email Agen',
+password:'Kata Sandi',
+loginBtn:'Masuk Pusat Agen',
+agentInfo:'Profil Agen Saya',
+agentName:'Nama Agen',
+agentRate:'Persentase Agen',
+accountStatus:'Status Akun',
+normal:'Aktif',
+suspended:'Ditangguhkan',
+blocked:'Dibatasi',
+currentRound:'Putaran Saat Ini',
+round:'Putaran',
+submitStatus:'Status Pengiriman',
+deadline:'Batas Waktu',
+timeLeft:'Sisa Waktu',
+serverNote:'Penerimaan data mengikuti waktu server, bukan waktu ponsel agen.',
+submitTitle:'Kirim Poin 00–99',
+totalPoints:'Total Poin',
+submitBtn:'Kirim Data Putaran',
+reloadBtn:'Muat Ulang Data',
+resultTitle:'Hasil Putaran',
+resultNumber:'Nomor Hasil',
+settlement:'Status Penyelesaian',
+settledTotal:'Total Dikirim',
+agentPoints:'Poin Agen',
+logout:'Keluar',
+loginMissing:'Masukkan email dan kata sandi',
+logging:'Sedang login...',
+loginFail:'Login gagal',
+noAgent:'Akun ini tidak memiliki akses agen',
+noRound:'Tidak ada putaran terbuka',
+canSubmit:'Bisa dikirim',
+closed:'Putaran ditutup',
+closedShort:'Ditutup',
+minutes:'mnt',
+seconds:'dtk',
+submitting:'Sedang mengirim...',
+noSubmitRound:'Tidak ada putaran untuk dikirim',
+accountCannot:'Akun agen tidak dapat mengirim',
+serverRejected:'Batas waktu sudah lewat',
+submitFail:'Pengiriman gagal',
+submitBlocked:'Putaran ditutup atau akun dibatasi',
+networkError:'Kesalahan jaringan',
+submitSuccess:'✓ Berhasil dikirim · Total ',
+waitingResult:'Menunggu hasil',
+waitingSettlement:'Menunggu penyelesaian',
+settled:'Selesai',
+morning:'Pagi 10:30',
+afternoon:'Sore 15:30'
+}
+
+};
+
+
+function tr(key){
+  return T[currentLang]?.[key] || T.zh[key] || key;
+}
+
+
+function changeLanguage(lang){
+
+  currentLang=lang;
+
+  localStorage.setItem(
+    'jmt_agent_lang',
+    lang
+  );
+
+  document.documentElement.lang=lang;
+
+  document.querySelectorAll(
+    '[data-i18n]'
+  ).forEach(el=>{
+
+    const key=
+      el.getAttribute('data-i18n');
+
+    el.textContent=
+      tr(key);
+
+  });
+
+
+  document.querySelectorAll(
+    '[data-ph]'
+  ).forEach(el=>{
+
+    const key=
+      el.getAttribute('data-ph');
+
+    el.placeholder=
+      tr(key);
+
+  });
+
+
+  renderAgentStatus();
+
+  renderRound();
+
+  renderSettlement();
+
+}
 
 
 function buildGrid(){
 
-  const grid=document.getElementById('numberGrid');
+  const grid=
+    document.getElementById(
+      'numberGrid'
+    );
+
+  grid.innerHTML='';
 
   for(let i=0;i<=99;i++){
 
-    const n=String(i).padStart(2,'0');
+    const n=
+      String(i).padStart(2,'0');
 
-    const div=document.createElement('div');
+    const div=
+      document.createElement('div');
+
     div.className='num';
 
     div.innerHTML=
@@ -276,49 +903,81 @@ function buildGrid(){
 
 async function signIn(){
 
-  const email=document.getElementById('email').value.trim();
-  const password=document.getElementById('password').value;
-  const msg=document.getElementById('loginMsg');
+  const email=
+    document.getElementById('email').value.trim();
+
+  const password=
+    document.getElementById('password').value;
+
+  const msg=
+    document.getElementById('loginMsg');
+
 
   if(!email || !password){
-    msg.textContent='请输入代理邮箱和密码';
+
+    msg.textContent=
+      tr('loginMissing');
+
     return;
+
   }
 
-  msg.textContent='正在登录...';
+
+  msg.textContent=
+    tr('logging');
+
 
   try{
 
-    const r=await fetch(
-      BASE+'/auth/v1/token?grant_type=password',
-      {
-        method:'POST',
-        headers:{
-          apikey:KEY,
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify({email,password})
-      }
-    );
+    const r=
+      await fetch(
+        BASE+'/auth/v1/token?grant_type=password',
+        {
+          method:'POST',
+          headers:{
+            apikey:KEY,
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+            email,
+            password
+          })
+        }
+      );
 
-    const d=await r.json();
+
+    const d=
+      await r.json();
+
 
     if(!r.ok || !d.access_token){
       throw new Error();
     }
 
-    token=d.access_token;
+
+    token=
+      d.access_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
 
     sessionStorage.setItem(
       'jmt_agent_token',
       token
     );
 
+
     await startAgent();
+
 
   }catch(e){
 
-    msg.textContent='登录失败，请检查账号或密码';
+    msg.textContent=
+      tr('loginFail');
 
   }
 
@@ -329,8 +988,109 @@ async function startAgent(){
 
   try{
 
-    const r=await fetch(
-      BASE+'/rest/v1/agents?select=id,display_name,commission_rate,status',
+    const r=
+      await fetch(
+        BASE+'/rest/v1/agents?select=id,display_name,commission_rate,status',
+        {
+          headers:{
+            apikey:KEY,
+            Authorization:'Bearer '+token
+          }
+        }
+      );
+
+
+    if(!r.ok){
+      throw new Error();
+    }
+
+
+    const rows=
+      await r.json();
+
+
+    if(!rows.length){
+      throw new Error();
+    }
+
+
+    agent=
+      rows[0];
+
+
+    document.getElementById(
+      'loginBox'
+    ).classList.add('hidden');
+
+
+    document.getElementById(
+      'agentBox'
+    ).classList.remove('hidden');
+
+
+    document.getElementById(
+      'agentName'
+    ).textContent=
+      agent.display_name;
+
+
+    document.getElementById(
+      'commissionRate'
+    ).textContent=
+      Number(agent.commission_rate)+'%';
+
+
+    renderAgentStatus();
+
+
+    if(agent.status!=='active'){
+      disableInputs(true);
+    }
+
+
+    await loadRound();
+
+
+  }catch(e){
+
+    clearAgentSession();
+
+    alert(
+      tr('noAgent')
+    );
+
+    location.reload();
+
+  }
+
+}
+
+
+function renderAgentStatus(){
+
+  if(!agent){
+    return;
+  }
+
+  document.getElementById(
+    'agentStatus'
+  ).textContent=
+
+    agent.status==='active'
+    ? tr('normal')
+    : agent.status==='suspended'
+    ? tr('suspended')
+    : tr('blocked');
+
+}
+
+
+async function loadRound(){
+
+  const r=
+    await fetch(
+      BASE+
+      '/rest/v1/rounds?select=id,round_date,round_code,deadline_at,result_number,status&order=created_at.desc&limit=20',
       {
         headers:{
           apikey:KEY,
@@ -339,104 +1099,47 @@ async function startAgent(){
       }
     );
 
-    if(!r.ok) throw new Error();
-
-    const rows=await r.json();
-
-    if(!rows.length){
-      throw new Error();
-    }
-
-    agent=rows[0];
-
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('agentBox').classList.remove('hidden');
-
-    document.getElementById('agentName').textContent=
-      agent.display_name;
-
-    document.getElementById('commissionRate').textContent=
-      Number(agent.commission_rate)+'%';
-
-    document.getElementById('agentStatus').textContent=
-      agent.status==='active' ? '正常' :
-      agent.status==='suspended' ? '已暂停' :
-      '已限制';
-
-    if(agent.status!=='active'){
-      disableInputs(true);
-    }
-
-    await loadRound();
-
-  }catch(e){
-
-    sessionStorage.removeItem('jmt_agent_token');
-    alert('该账号没有有效代理权限');
-    location.reload();
-
-  }
-
-}
-
-
-async function loadRound(){
-
-  const r=await fetch(
-    BASE+
-    '/rest/v1/rounds?select=id,round_date,round_code,deadline_at,result_number,status&order=deadline_at.asc&limit=10',
-    {
-      headers:{
-        apikey:KEY,
-        Authorization:'Bearer '+token
-      }
-    }
-  );
 
   if(!r.ok){
     return;
   }
 
-  const rounds=await r.json();
 
-  const now=Date.now();
+  const rounds=
+    await r.json();
+
+
+  const now=
+    Date.now();
+
 
   currentRound=
-    rounds.find(x =>
-      x.status==='open' &&
+    rounds.find(
+      x=>
+      x.status==='open'
+      &&
       new Date(x.deadline_at).getTime()>now
     )
     ||
-    rounds.find(x => x.status==='open')
+    rounds.find(
+      x=>x.status==='open'
+    )
     ||
     rounds[0]
     ||
     null;
 
 
+  renderRound();
+
+
   if(!currentRound){
 
-    document.getElementById('roundStatus').textContent='暂无开放期';
-    document.getElementById('submitBtn').disabled=true;
+    document.getElementById(
+      'submitBtn'
+    ).disabled=true;
+
     return;
-
-  }
-
-
-  document.getElementById('roundName').textContent=
-    currentRound.round_code==='1030'
-    ? currentRound.round_date+' · 上午 10:30'
-    : currentRound.round_date+' · 下午 15:30';
-
-
-  document.getElementById('deadlineText').textContent=
-    formatMMT(currentRound.deadline_at);
-
-
-  if(currentRound.result_number){
-
-    document.getElementById('resultNumber').textContent=
-      currentRound.result_number;
 
   }
 
@@ -450,90 +1153,232 @@ async function loadRound(){
 }
 
 
+function renderRound(){
+
+  if(!currentRound){
+
+    document.getElementById(
+      'roundName'
+    ).textContent='—';
+
+    document.getElementById(
+      'roundStatus'
+    ).textContent=
+      tr('noRound');
+
+    document.getElementById(
+      'deadlineText'
+    ).textContent='—';
+
+    document.getElementById(
+      'countdown'
+    ).textContent='—';
+
+    return;
+
+  }
+
+
+  const period=
+    currentRound.round_code==='1030'
+    ? tr('morning')
+    : currentRound.round_code==='1530'
+    ? tr('afternoon')
+    : currentRound.round_code;
+
+
+  document.getElementById(
+    'roundName'
+  ).textContent=
+    currentRound.round_date+
+    ' · '+
+    period;
+
+
+  document.getElementById(
+    'deadlineText'
+  ).textContent=
+    formatMMT(
+      currentRound.deadline_at
+    );
+
+
+  if(currentRound.result_number){
+
+    document.getElementById(
+      'resultNumber'
+    ).textContent=
+      currentRound.result_number;
+
+  }else{
+
+    document.getElementById(
+      'resultNumber'
+    ).textContent=
+      tr('waitingResult');
+
+  }
+
+}
+
+
 async function loadExisting(){
 
-  if(!currentRound || !agent) return;
+  if(!currentRound || !agent){
+    return;
+  }
 
-  const r=await fetch(
-    BASE+
-    '/rest/v1/agent_submissions?round_id=eq.'+
-    encodeURIComponent(currentRound.id)+
-    '&agent_id=eq.'+
-    encodeURIComponent(agent.id)+
-    '&select=number_code,points',
-    {
-      headers:{
-        apikey:KEY,
-        Authorization:'Bearer '+token
+
+  const r=
+    await fetch(
+      BASE+
+      '/rest/v1/agent_submissions?round_id=eq.'+
+      encodeURIComponent(currentRound.id)+
+      '&agent_id=eq.'+
+      encodeURIComponent(agent.id)+
+      '&select=number_code,points',
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer '+token
+        }
       }
-    }
-  );
+    );
 
-  if(!r.ok) return;
 
-  const rows=await r.json();
+  if(!r.ok){
+    return;
+  }
+
+
+  const rows=
+    await r.json();
+
 
   for(let i=0;i<=99;i++){
 
-    const n=String(i).padStart(2,'0');
+    const n=
+      String(i).padStart(2,'0');
 
-    document.getElementById('n'+n).value='';
+    document.getElementById(
+      'n'+n
+    ).value='';
 
   }
 
 
   rows.forEach(x=>{
 
-    const el=document.getElementById('n'+x.number_code);
+    const el=
+      document.getElementById(
+        'n'+x.number_code
+      );
 
     if(el){
-      el.value=Number(x.points) || '';
+      el.value=
+        Number(x.points) || '';
     }
 
   });
+
 
   updateTotal();
 
 }
 
 
+let settlementData=null;
+
+
 async function loadSettlement(){
 
-  if(!currentRound || !agent) return;
+  if(!currentRound || !agent){
+    return;
+  }
 
-  const r=await fetch(
-    BASE+
-    '/rest/v1/agent_round_totals?round_id=eq.'+
-    encodeURIComponent(currentRound.id)+
-    '&agent_id=eq.'+
-    encodeURIComponent(agent.id)+
-    '&select=submitted_total,commission_amount,settlement_status',
-    {
-      headers:{
-        apikey:KEY,
-        Authorization:'Bearer '+token
+
+  const r=
+    await fetch(
+      BASE+
+      '/rest/v1/agent_round_totals?round_id=eq.'+
+      encodeURIComponent(currentRound.id)+
+      '&agent_id=eq.'+
+      encodeURIComponent(agent.id)+
+      '&select=submitted_total,commission_amount,settlement_status',
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:'Bearer '+token
+        }
       }
-    }
-  );
+    );
 
-  if(!r.ok) return;
 
-  const rows=await r.json();
+  if(!r.ok){
+    return;
+  }
 
-  if(!rows.length) return;
 
-  const x=rows[0];
+  const rows=
+    await r.json();
 
-  document.getElementById('settledTotal').textContent=
-    formatNumber(x.submitted_total);
 
-  document.getElementById('commissionAmount').textContent=
-    formatNumber(x.commission_amount);
+  settlementData=
+    rows.length
+    ? rows[0]
+    : null;
 
-  document.getElementById('settlementStatus').textContent=
-    x.settlement_status==='settled'
-    ? '已结算'
-    : '等待结算';
+
+  renderSettlement();
+
+}
+
+
+function renderSettlement(){
+
+  if(!settlementData){
+
+    document.getElementById(
+      'settledTotal'
+    ).textContent='—';
+
+    document.getElementById(
+      'commissionAmount'
+    ).textContent='—';
+
+    document.getElementById(
+      'settlementStatus'
+    ).textContent=
+      tr('waitingSettlement');
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    'settledTotal'
+  ).textContent=
+    formatNumber(
+      settlementData.submitted_total
+    );
+
+
+  document.getElementById(
+    'commissionAmount'
+  ).textContent=
+    formatNumber(
+      settlementData.commission_amount
+    );
+
+
+  document.getElementById(
+    'settlementStatus'
+  ).textContent=
+
+    settlementData.settlement_status==='settled'
+    ? tr('settled')
+    : tr('waitingSettlement');
 
 }
 
@@ -544,13 +1389,21 @@ function getTotal(){
 
   for(let i=0;i<=99;i++){
 
-    const n=String(i).padStart(2,'0');
+    const n=
+      String(i).padStart(2,'0');
 
-    const v=Number(
-      document.getElementById('n'+n).value || 0
-    );
+    const v=
+      Number(
+        document.getElementById(
+          'n'+n
+        ).value || 0
+      );
 
-    if(Number.isFinite(v) && v>0){
+    if(
+      Number.isFinite(v)
+      &&
+      v>0
+    ){
       total+=v;
     }
 
@@ -563,46 +1416,76 @@ function getTotal(){
 
 function updateTotal(){
 
-  document.getElementById('totalPoints').textContent=
-    formatNumber(getTotal());
+  document.getElementById(
+    'totalPoints'
+  ).textContent=
+    formatNumber(
+      getTotal()
+    );
 
 }
 
 
 async function submitRound(){
 
-  const msg=document.getElementById('submitMsg');
+  const msg=
+    document.getElementById(
+      'submitMsg'
+    );
+
 
   if(!agent || !currentRound){
-    msg.textContent='当前没有可以提交的期数';
+
+    msg.textContent=
+      tr('noSubmitRound');
+
     return;
+
   }
 
 
   if(agent.status!=='active'){
-    msg.textContent='你的代理账号目前无法提交';
+
+    msg.textContent=
+      tr('accountCannot');
+
     return;
+
   }
 
 
-  msg.textContent='正在提交，请稍候...';
+  msg.textContent=
+    tr('submitting');
 
-  document.getElementById('submitBtn').disabled=true;
+
+  document.getElementById(
+    'submitBtn'
+  ).disabled=true;
 
 
   try{
 
     const rows=[];
 
+
     for(let i=0;i<=99;i++){
 
-      const n=String(i).padStart(2,'0');
+      const n=
+        String(i).padStart(2,'0');
 
-      const points=Number(
-        document.getElementById('n'+n).value || 0
-      );
+      const points=
+        Number(
+          document.getElementById(
+            'n'+n
+          ).value || 0
+        );
 
-      if(Number.isFinite(points) && points>=0){
+
+      if(
+        Number.isFinite(points)
+        &&
+        points>=0
+      ){
 
         rows.push({
           round_id:currentRound.id,
@@ -616,36 +1499,44 @@ async function submitRound(){
     }
 
 
-    const r=await fetch(
-      BASE+
-      '/rest/v1/agent_submissions?on_conflict=round_id,agent_id,number_code',
-      {
-        method:'POST',
-        headers:{
-          apikey:KEY,
-          Authorization:'Bearer '+token,
-          'Content-Type':'application/json',
-          Prefer:'resolution=merge-duplicates,return=minimal'
-        },
-        body:JSON.stringify(rows)
-      }
-    );
+    const r=
+      await fetch(
+        BASE+
+        '/rest/v1/agent_submissions?on_conflict=round_id,agent_id,number_code',
+        {
+          method:'POST',
+          headers:{
+            apikey:KEY,
+            Authorization:'Bearer '+token,
+            'Content-Type':'application/json',
+            Prefer:'resolution=merge-duplicates,return=minimal'
+          },
+          body:JSON.stringify(rows)
+        }
+      );
 
 
-    if(r.status===401 || r.status===403){
+    if(
+      r.status===401
+      ||
+      r.status===403
+    ){
 
       msg.textContent=
-        '本期已经截止，服务器已拒绝提交';
+        tr('serverRejected');
 
       disableInputs(true);
 
       return;
+
     }
 
 
     if(!r.ok){
 
-      const text=await r.text();
+      const text=
+        await r.text();
+
 
       if(
         text.includes('row-level security')
@@ -654,12 +1545,12 @@ async function submitRound(){
       ){
 
         msg.textContent=
-          '本期已经截止或账号当前无法提交';
+          tr('submitBlocked');
 
       }else{
 
         msg.textContent=
-          '提交失败，请稍后再试';
+          tr('submitFail');
 
       }
 
@@ -669,7 +1560,10 @@ async function submitRound(){
 
 
     msg.textContent=
-      '✓ 提交成功 · 总积分 '+formatNumber(getTotal());
+      tr('submitSuccess')+
+      formatNumber(
+        getTotal()
+      );
 
 
     await loadExisting();
@@ -678,7 +1572,7 @@ async function submitRound(){
   }catch(e){
 
     msg.textContent=
-      '网络异常，请重新提交';
+      tr('networkError');
 
   }finally{
 
@@ -691,20 +1585,29 @@ async function submitRound(){
 
 function updateDeadlineUI(){
 
-  if(!currentRound) return;
+  if(!currentRound){
+    return;
+  }
 
 
   const left=
-    new Date(currentRound.deadline_at).getTime()
+    new Date(
+      currentRound.deadline_at
+    ).getTime()
     -
     Date.now();
 
 
   const statusEl=
-    document.getElementById('roundStatus');
+    document.getElementById(
+      'roundStatus'
+    );
+
 
   const countdown=
-    document.getElementById('countdown');
+    document.getElementById(
+      'countdown'
+    );
 
 
   if(
@@ -713,10 +1616,14 @@ function updateDeadlineUI(){
     currentRound.status!=='open'
   ){
 
-    statusEl.textContent='本期已截止';
-    statusEl.className='statusClosed';
+    statusEl.textContent=
+      tr('closed');
 
-    countdown.textContent='已关闭';
+    statusEl.className=
+      'statusClosed';
+
+    countdown.textContent=
+      tr('closedShort');
 
     disableInputs(true);
 
@@ -725,23 +1632,43 @@ function updateDeadlineUI(){
   }
 
 
-  statusEl.textContent='可以提交';
-  statusEl.className='statusOpen';
+  statusEl.textContent=
+    tr('canSubmit');
+
+  statusEl.className=
+    'statusOpen';
 
 
   const mins=
-    Math.floor(left/60000);
+    Math.floor(
+      left/60000
+    );
+
 
   const secs=
-    Math.floor((left%60000)/1000);
+    Math.floor(
+      (left%60000)/1000
+    );
 
 
   countdown.textContent=
-    mins+'分 '+secs+'秒';
+    mins+
+    ' '+
+    tr('minutes')+
+    ' '+
+    secs+
+    ' '+
+    tr('seconds');
 
 
-  if(agent && agent.status==='active'){
+  if(
+    agent
+    &&
+    agent.status==='active'
+  ){
+
     disableInputs(false);
+
   }
 
 }
@@ -752,14 +1679,19 @@ function disableInputs(disabled){
   for(let i=0;i<=99;i++){
 
     const n=
-    String(i).padStart(2,'0');
+      String(i).padStart(2,'0');
 
-    document.getElementById('n'+n).disabled=
+    document.getElementById(
+      'n'+n
+    ).disabled=
       disabled;
 
   }
 
-  document.getElementById('submitBtn').disabled=
+
+  document.getElementById(
+    'submitBtn'
+  ).disabled=
     disabled;
 
 }
@@ -779,14 +1711,18 @@ function formatMMT(iso){
       second:'2-digit',
       hour12:false
     }
-  ).format(new Date(iso))+' MMT';
+  ).format(
+    new Date(iso)
+  )+' MMT';
 
 }
 
 
 function formatNumber(v){
 
-  return Number(v || 0).toLocaleString(
+  return Number(
+    v || 0
+  ).toLocaleString(
     'en-US',
     {
       maximumFractionDigits:2
@@ -798,7 +1734,9 @@ function formatNumber(v){
 
 function updateClock(){
 
-  document.getElementById('mmtClock').textContent=
+  document.getElementById(
+    'mmtClock'
+  ).textContent=
     new Intl.DateTimeFormat(
       'zh-CN',
       {
@@ -808,14 +1746,31 @@ function updateClock(){
         second:'2-digit',
         hour12:false
       }
-    ).format(new Date());
+    ).format(
+      new Date()
+    );
+
+}
+
+
+function clearAgentSession(){
+
+  localStorage.removeItem(
+    'jmt_agent_token'
+  );
+
+  sessionStorage.removeItem(
+    'jmt_agent_token'
+  );
+
+  token='';
 
 }
 
 
 function logout(){
 
-  sessionStorage.removeItem('jmt_agent_token');
+  clearAgentSession();
 
   location.reload();
 
@@ -824,11 +1779,26 @@ function logout(){
 
 buildGrid();
 
+document.getElementById(
+  'langSelect'
+).value=
+  currentLang;
+
+changeLanguage(
+  currentLang
+);
+
 updateClock();
 
-setInterval(updateClock,1000);
+setInterval(
+  updateClock,
+  1000
+);
 
-setInterval(updateDeadlineUI,1000);
+setInterval(
+  updateDeadlineUI,
+  1000
+);
 
 
 if(token){
@@ -836,5 +1806,6 @@ if(token){
 }
 
 </script>
+
 </body>
 </html>
