@@ -3,11 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#09090a">
 
 <link rel="manifest" href="/admin/manifest.webmanifest">
@@ -47,8 +42,6 @@
   content="金满堂管理">
 
 <title>金满堂 · 管理中心</title>
-
-<style>
 
 <style>
 *{box-sizing:border-box}
@@ -1853,12 +1846,6 @@ function getPublishUnlockTime(
 
   else{
 
-    /*
-      如果以后出现未知期别，
-      为避免意外锁死，
-      回退到截止时间。
-    */
-
     return new Date(
       round.deadline_at
     ).getTime();
@@ -1899,13 +1886,6 @@ function getPublishUnlockTime(
   ] =
   parts;
 
-
-  /*
-    Myanmar Time = UTC + 6:30
-
-    所以把 MMT 转为 UTC：
-    UTC = MMT - 6小时30分
-  */
 
   const utc =
   Date.UTC(
@@ -2007,11 +1987,6 @@ function updatePublishState(){
   );
 
 
-  /*
-    已经存在开奖结果时，
-    永远不再允许重复发布。
-  */
-
   if(
     hasResult(
       publishRound.result_number
@@ -2046,11 +2021,6 @@ function updatePublishState(){
 
   }
 
-
-  /*
-    第一阶段：
-    代理仍然可以提交。
-  */
 
   if(
     Number.isFinite(
@@ -2092,12 +2062,6 @@ function updatePublishState(){
   }
 
 
-  /*
-    第二阶段：
-    已经截止，
-    但还没有到开奖前5秒。
-  */
-
   if(
     Number.isFinite(
       unlockTime
@@ -2137,11 +2101,6 @@ function updatePublishState(){
 
   }
 
-
-  /*
-    第三阶段：
-    已到开奖前5秒。
-  */
 
   countdown.textContent =
   '00:00:00';
@@ -2282,11 +2241,6 @@ async function publishResult(){
   );
 
 
-  /*
-    第一重保护：
-    代理截止以前绝对不能发布。
-  */
-
   if(
     now <
     deadlineTime
@@ -2300,12 +2254,6 @@ async function publishResult(){
 
   }
 
-
-  /*
-    第二重保护：
-    截止以后仍然要等到
-    11:44:55 / 15:44:55。
-  */
 
   if(
     Number.isFinite(
@@ -2391,14 +2339,6 @@ async function publishResult(){
 
 
   try{
-
-    /*
-      用户确认以后，
-      再检查一次时间。
-
-      避免确认窗口停留期间
-      状态发生变化。
-    */
 
     const finalNow =
     Date.now();
@@ -3606,9 +3546,6 @@ function formatMMTShort(
 
 /* =========================
    PERIOD NAME
-
-   1030 / 1530
-   继续保留为内部代码。
 ========================= */
 
 function periodName(
