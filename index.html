@@ -206,11 +206,21 @@ select{
   color:#dfd2ac;
   font-size:12px;
   padding-left:100%;
+
+  /*
+    32 秒只是安全默认值。
+    页面加载后 JavaScript 会根据
+    公告实际长度自动调整。
+  */
+
   animation:
   scrollNotice
-  18s
+  32s
   linear
-  infinite
+  infinite;
+
+  will-change:
+  transform
 }
 
 @keyframes scrollNotice{
@@ -1340,6 +1350,101 @@ function normalizeResult(
 
 
 /* =====================================
+   NOTICE SPEED
+===================================== */
+
+function updateNoticeSpeed(){
+
+  const noticeText =
+  document.getElementById(
+    'noticeText'
+  );
+
+
+  const viewport =
+  document.querySelector(
+    '.noticeViewport'
+  );
+
+
+  if(
+    !noticeText
+    ||
+    !viewport
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !noticeText.textContent
+    .trim()
+  ){
+
+    return;
+
+  }
+
+
+  /*
+    noticeTrack 本身包含：
+    - 左侧一整屏的起始空白
+    - 公告文字
+
+    所以直接使用 scrollWidth
+    作为完整滚动距离。
+
+    速度约为每秒 24 像素。
+    公告越长，动画时间自然越长。
+  */
+
+
+  const distance =
+  noticeText.scrollWidth;
+
+
+  let seconds =
+  distance /
+  24;
+
+
+  /*
+    太短的公告也不要跑得太快。
+  */
+
+  seconds =
+  Math.max(
+    28,
+    seconds
+  );
+
+
+  /*
+    极长公告也限制在合理范围，
+    避免一轮等待时间过久。
+  */
+
+  seconds =
+  Math.min(
+    85,
+    seconds
+  );
+
+
+  noticeText.style
+  .animationDuration =
+  seconds.toFixed(
+    1
+  )
+  +
+  's';
+
+}
+
+
+/* =====================================
    LANGUAGE
 ===================================== */
 
@@ -1755,6 +1860,26 @@ function renderSiteSettings(){
 
     noticeWrap.style.display =
     'block';
+
+
+    /*
+      公告真正显示之后，
+      再读取它的实际宽度。
+
+      双 requestAnimationFrame
+      是为了确保手机 Safari
+      已经完成排版。
+    */
+
+    requestAnimationFrame(
+      ()=>{
+
+        requestAnimationFrame(
+          updateNoticeSpeed
+        );
+
+      }
+    );
 
   }
 
@@ -2330,6 +2455,28 @@ function escapeHtml(
   );
 
 }
+
+
+/* =====================================
+   RESIZE
+===================================== */
+
+/*
+  手机横竖屏切换、
+  浏览器尺寸变化时，
+  重新计算一次公告速度。
+*/
+
+window.addEventListener(
+  'resize',
+  ()=>{
+
+    requestAnimationFrame(
+      updateNoticeSpeed
+    );
+
+  }
+);
 
 
 /* =====================================
