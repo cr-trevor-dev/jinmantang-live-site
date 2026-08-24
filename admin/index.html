@@ -728,8 +728,10 @@ button.danger{
       </button>
 
       <div class="publishNote">
-        数字会绑定到上方显示的期数。截止时间到达前系统不会允许发布。
-        发布成功后，该期开奖结果也会永久显示在历史期数中。
+        代理数据到截止时间后自动锁定。
+        正式发布按钮会在开奖前 5 秒自动开放：
+        上午 11:44:55 / 下午 15:44:55。
+        发布成功后，该期开奖结果会永久显示在历史期数中。
       </div>
 
       <div class="msg" id="publishMsg"></div>
@@ -771,9 +773,11 @@ button.danger{
       </button>
 
       <div class="testWarning">
-        测试模式只会检查目标期数、截止时间、状态、开奖结果字段以及正式发布时会执行的动作。
+        测试模式会检查目标期数、截止时间、允许发布时间、
+        状态、开奖结果字段以及正式发布时会执行的动作。
         <br><br>
-        不会写入 rounds，也不会写入 results，不会影响用户页面或历史数据。
+        不会写入 rounds，也不会写入 results，
+        不会影响用户页面或历史数据。
       </div>
 
       <div
@@ -1333,16 +1337,45 @@ async function loadDashboardSummary(){
     );
 
 
-    document.getElementById(
-      'summaryStatus'
-    ).textContent =
-    '开放中';
+    const summaryDeadlineTime =
+    new Date(
+      currentRound.deadline_at
+    ).getTime();
 
 
-    document.getElementById(
-      'summaryStatus'
-    ).className =
-    'green';
+    if(
+      Date.now()
+      <
+      summaryDeadlineTime
+    ){
+
+      document.getElementById(
+        'summaryStatus'
+      ).textContent =
+      '开放中';
+
+
+      document.getElementById(
+        'summaryStatus'
+      ).className =
+      'green';
+
+    }
+
+    else{
+
+      document.getElementById(
+        'summaryStatus'
+      ).textContent =
+      '本期已截止';
+
+
+      document.getElementById(
+        'summaryStatus'
+      ).className =
+      'redText';
+
+    }
 
 
     document.getElementById(
@@ -1656,12 +1689,6 @@ function renderPublishRound(){
   );
 
 
-  const status =
-  document.getElementById(
-    'publishStatus'
-  );
-
-
   const result =
   document.getElementById(
     'currentResult'
@@ -1678,7 +1705,9 @@ function renderPublishRound(){
     '—';
 
 
-    status.textContent =
+    document.getElementById(
+      'publishStatus'
+    ).textContent =
     '—';
 
 
@@ -1708,22 +1737,6 @@ function renderPublishRound(){
   );
 
 
-  status.textContent =
-  publishRound.status==='open'
-  ?
-  '开放中'
-  :
-  '已结束';
-
-
-  status.className =
-  publishRound.status==='open'
-  ?
-  'green'
-  :
-  '';
-
-
   result.textContent =
   hasResult(
     publishRound.result_number
@@ -1740,6 +1753,135 @@ function renderPublishRound(){
 
 
   updatePublishState();
+
+}
+
+
+/* =========================
+   PUBLISH UNLOCK TIME
+
+   上午期：
+   11:15 截止
+   11:44:55 开放发布
+
+   下午期：
+   15:15 截止
+   15:44:55 开放发布
+========================= */
+
+function getPublishUnlockTime(
+  round
+){
+
+  if(
+    !round
+    ||
+    !round.round_date
+  ){
+
+    return NaN;
+
+  }
+
+
+  let hour;
+  let minute = 44;
+  let second = 55;
+
+
+  if(
+    round.round_code ===
+    '1030'
+  ){
+
+    hour = 11;
+
+  }
+
+  else if(
+    round.round_code ===
+    '1530'
+  ){
+
+    hour = 15;
+
+  }
+
+  else{
+
+    /*
+      如果以后出现未知期别，
+      为避免意外锁死，
+      回退到截止时间。
+    */
+
+    return new Date(
+      round.deadline_at
+    ).getTime();
+
+  }
+
+
+  const parts =
+  String(
+    round.round_date
+  )
+  .split('-')
+  .map(
+    Number
+  );
+
+
+  if(
+    parts.length !== 3
+    ||
+    parts.some(
+      n=>
+      !Number.isFinite(
+        n
+      )
+    )
+  ){
+
+    return NaN;
+
+  }
+
+
+  const [
+    year,
+    month,
+    day
+  ] =
+  parts;
+
+
+  /*
+    Myanmar Time = UTC + 6:30
+
+    所以把 MMT 转为 UTC：
+    UTC = MMT - 6小时30分
+  */
+
+  const utc =
+  Date.UTC(
+    year,
+    month-1,
+    day,
+    hour,
+    minute,
+    second
+  )
+  -
+  (
+    6.5*
+    60*
+    60*
+    1000
+  );
+
+
+  return utc;
 
 }
 
@@ -1768,6 +1910,12 @@ function updatePublishState(){
   );
 
 
+  const status =
+  document.getElementById(
+    'publishStatus'
+  );
+
+
   if(!publishRound){
 
     countdown.textContent =
@@ -1776,6 +1924,14 @@ function updatePublishState(){
 
     label.textContent =
     '距离截止';
+
+
+    status.textContent =
+    '—';
+
+
+    status.className =
+    '';
 
 
     button.disabled =
@@ -1791,30 +1947,92 @@ function updatePublishState(){
   }
 
 
+  const now =
+  Date.now();
+
+
   const deadlineTime =
   new Date(
     publishRound.deadline_at
   ).getTime();
 
 
-  const now =
-  Date.now();
+  const unlockTime =
+  getPublishUnlockTime(
+    publishRound
+  );
 
 
-  const diff =
-  deadlineTime-now;
+  /*
+    已经存在开奖结果时，
+    永远不再允许重复发布。
+  */
+
+  if(
+    hasResult(
+      publishRound.result_number
+    )
+  ){
+
+    countdown.textContent =
+    '00:00:00';
 
 
-  if(diff>0){
+    label.textContent =
+    '本期已经发布';
+
+
+    status.textContent =
+    '已发布';
+
+
+    status.className =
+    'green';
+
+
+    button.disabled =
+    true;
+
+
+    button.textContent =
+    '本期开奖结果已发布';
+
+
+    return;
+
+  }
+
+
+  /*
+    第一阶段：
+    代理仍然可以提交。
+  */
+
+  if(
+    Number.isFinite(
+      deadlineTime
+    )
+    &&
+    now <
+    deadlineTime
+  ){
 
     countdown.textContent =
     formatCountdown(
-      diff
+      deadlineTime-now
     );
 
 
     label.textContent =
     '距离截止';
+
+
+    status.textContent =
+    '开放中';
+
+
+    status.className =
+    'green';
 
 
     button.disabled =
@@ -1830,31 +2048,71 @@ function updatePublishState(){
   }
 
 
-  countdown.textContent =
-  '00:00:00';
-
-
-  label.textContent =
-  '本期已经截止';
-
+  /*
+    第二阶段：
+    已经截止，
+    但还没有到开奖前5秒。
+  */
 
   if(
-    hasResult(
-      publishRound.result_number
+    Number.isFinite(
+      unlockTime
     )
+    &&
+    now <
+    unlockTime
   ){
+
+    countdown.textContent =
+    formatCountdown(
+      unlockTime-now
+    );
+
+
+    label.textContent =
+    '距离开放发布';
+
+
+    status.textContent =
+    '已截止 · 等待发布';
+
+
+    status.className =
+    '';
+
 
     button.disabled =
     true;
 
 
     button.textContent =
-    '本期开奖结果已发布';
+    '已截止，等待开奖时间';
 
 
     return;
 
   }
+
+
+  /*
+    第三阶段：
+    已到开奖前5秒。
+  */
+
+  countdown.textContent =
+  '00:00:00';
+
+
+  label.textContent =
+  '发布已开放';
+
+
+  status.textContent =
+  '可以发布';
+
+
+  status.className =
+  'green';
 
 
   button.disabled =
@@ -1878,7 +2136,7 @@ function formatCountdown(
   let total =
   Math.max(
     0,
-    Math.floor(
+    Math.ceil(
       ms/1000
     )
   );
@@ -1949,6 +2207,10 @@ async function publishResult(){
   );
 
 
+  msg.className =
+  'msg';
+
+
   if(!publishRound){
 
     msg.textContent =
@@ -1960,16 +2222,58 @@ async function publishResult(){
   }
 
 
+  const now =
+  Date.now();
+
+
+  const deadlineTime =
+  new Date(
+    publishRound.deadline_at
+  ).getTime();
+
+
+  const unlockTime =
+  getPublishUnlockTime(
+    publishRound
+  );
+
+
+  /*
+    第一重保护：
+    代理截止以前绝对不能发布。
+  */
+
   if(
-    Date.now()
-    <
-    new Date(
-      publishRound.deadline_at
-    ).getTime()
+    now <
+    deadlineTime
   ){
 
     msg.textContent =
     '本期还没有到截止时间';
+
+
+    return;
+
+  }
+
+
+  /*
+    第二重保护：
+    截止以后仍然要等到
+    11:44:55 / 15:44:55。
+  */
+
+  if(
+    Number.isFinite(
+      unlockTime
+    )
+    &&
+    now <
+    unlockTime
+  ){
+
+    msg.textContent =
+    '本期已经截止，但还未到允许发布时间。请等待开奖前 5 秒。';
 
 
     return;
@@ -2044,6 +2348,39 @@ async function publishResult(){
 
   try{
 
+    /*
+      用户确认以后，
+      再检查一次时间。
+
+      避免确认窗口停留期间
+      状态发生变化。
+    */
+
+    const finalNow =
+    Date.now();
+
+
+    if(
+      finalNow <
+      deadlineTime
+      ||
+      (
+        Number.isFinite(
+          unlockTime
+        )
+        &&
+        finalNow <
+        unlockTime
+      )
+    ){
+
+      throw new Error(
+        '当前还没有到允许发布时间'
+      );
+
+    }
+
+
     const resultRes =
     await api(
       '/rest/v1/rpc/publish_round_result',
@@ -2099,6 +2436,10 @@ async function publishResult(){
     '';
 
 
+    msg.className =
+    'msg success';
+
+
     msg.textContent =
     '✓ 发布成功：'+
     publishRound.round_date+
@@ -2119,6 +2460,10 @@ async function publishResult(){
 
 
   }catch(e){
+
+    msg.className =
+    'msg error';
+
 
     msg.textContent =
     '发布失败：'+
@@ -2307,12 +2652,30 @@ function runPublishTest(){
   }
 
 
+  const now =
+  Date.now();
+
+
   const deadlinePassed =
-  Date.now()
+  now
   >=
   new Date(
     round.deadline_at
   ).getTime();
+
+
+  const unlockTime =
+  getPublishUnlockTime(
+    round
+  );
+
+
+  const publishUnlocked =
+  !Number.isFinite(
+    unlockTime
+  )
+  ||
+  now>=unlockTime;
 
 
   document.getElementById(
@@ -2449,7 +2812,7 @@ function runPublishTest(){
   if(!deadlinePassed){
 
     roundWrite.textContent =
-    '正式模式会阻止：尚未截止';
+    '正式模式会阻止：代理提交尚未截止';
 
 
     roundWrite.className =
@@ -2466,6 +2829,37 @@ function runPublishTest(){
 
     msg.textContent =
     '🧪 测试完成：截止时间未到，所以正式发布按钮会锁定。';
+
+
+    msg.className =
+    'msg success';
+
+
+    return;
+
+  }
+
+
+  if(!publishUnlocked){
+
+    roundWrite.textContent =
+    '正式模式会阻止：尚未到开奖前 5 秒';
+
+
+    roundWrite.className =
+    'testWarn';
+
+
+    resultWrite.textContent =
+    '不会继续执行';
+
+
+    resultWrite.className =
+    'testWarn';
+
+
+    msg.textContent =
+    '🧪 测试完成：本期已经截止，但还没有到允许发布时间。';
 
 
     msg.className =
@@ -2496,7 +2890,7 @@ function runPublishTest(){
 
 
   msg.textContent =
-  '✓ 测试通过：如果现在执行正式发布，流程可以正常进入发布步骤。正式数据库没有任何修改。';
+  '✓ 测试通过：已经到允许发布时间，正式发布流程可以执行。正式数据库没有任何修改。';
 
 
   msg.className =
@@ -3169,8 +3563,8 @@ function formatMMTShort(
 /* =========================
    PERIOD NAME
 
-   注意：
-   1030 / 1530 只作为内部期别代码。
+   1030 / 1530
+   继续保留为内部代码。
 ========================= */
 
 function periodName(
