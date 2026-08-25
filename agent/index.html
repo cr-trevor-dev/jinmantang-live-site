@@ -4122,15 +4122,11 @@ function renderSettlement(){
 
 
     notice.textContent =
-    tr(
-      'settlementWaiting'
-    );
+tr(
+  'settlementWaiting'
+);
 
-
-    renderPaymentCenter();
-
-
-    return;
+return;
 
   }
 
@@ -4221,15 +4217,11 @@ function renderSettlement(){
 
 
     notice.textContent =
-    tr(
-      'settlementPaid'
-    );
+tr(
+  'settlementPaid'
+);
 
-
-    renderPaymentCenter();
-
-
-    return;
+return;
 
   }
 
@@ -4253,15 +4245,11 @@ function renderSettlement(){
 
 
     notice.textContent =
-    tr(
-      'settlementOverdue'
-    );
+tr(
+  'settlementOverdue'
+);
 
-
-    renderPaymentCenter();
-
-
-    return;
+return;
 
   }
 
@@ -4281,12 +4269,9 @@ function renderSettlement(){
 
 
   notice.textContent =
-  tr(
-    'settlementPending'
-  );
-
-
-  renderPaymentCenter();
+tr(
+  'settlementPending'
+);
 
 }
 
@@ -5081,9 +5066,6 @@ async function loadPaymentCenter(
     isLoadingPaymentCenter
   ){
 
-    renderPaymentCenter();
-
-
     return;
 
   }
@@ -5193,11 +5175,11 @@ async function loadPaymentCenter(
     }
 
 
-    paymentAccounts =
+    const newPaymentAccounts =
     await accountRes.json();
 
 
-    paymentSubmissions =
+    const newPaymentSubmissions =
     await submissionRes.json();
 
 
@@ -5207,20 +5189,76 @@ async function loadPaymentCenter(
 
     const submissionIds =
     new Set(
-      paymentSubmissions.map(
+      newPaymentSubmissions.map(
         row =>
         row.id
       )
     );
 
 
-    paymentProofs =
+    const newPaymentProofs =
     allProofs.filter(
       proof =>
       submissionIds.has(
         proof.payment_submission_id
       )
     );
+
+
+    /*
+      建立付款区域的数据指纹。
+
+      数据完全一样：
+      不重新 render，
+      不重新装载图片。
+
+      后台真的有修改：
+      才重新更新页面。
+    */
+
+    const newSignature =
+    JSON.stringify({
+
+      round:
+      currentRound.id,
+
+      accounts:
+      newPaymentAccounts,
+
+      submissions:
+      newPaymentSubmissions,
+
+      proofs:
+      newPaymentProofs
+
+    });
+
+
+    const oldSignature =
+    window.__jmtPaymentCenterSignature
+    ||
+    '';
+
+
+    const hasChanged =
+    newSignature!==
+    oldSignature;
+
+
+    /*
+      数据本身始终更新到最新版本。
+    */
+
+    paymentAccounts =
+    newPaymentAccounts;
+
+
+    paymentSubmissions =
+    newPaymentSubmissions;
+
+
+    paymentProofs =
+    newPaymentProofs;
 
 
     if(
@@ -5239,25 +5277,38 @@ async function loadPaymentCenter(
     }
 
 
-    renderPaymentCenter();
-
-
     /*
-      重新渲染以后再装载二维码和历史付款截图。
+      只有付款资料真正发生变化，
+      才重新生成付款页面。
     */
 
-    await refreshPaymentImages();
+    if(
+      hasChanged
+    ){
+
+      window.__jmtPaymentCenterSignature =
+      newSignature;
 
 
-    /*
-      特别注意：
-      不清除 selectedPaymentProofFiles。
+      renderPaymentCenter();
 
-      所以 20 秒自动刷新发生时，
-      用户尚未提交的本地图片仍然保留。
-    */
 
-    renderSelectedPaymentProofs();
+      /*
+        页面结构已经改变以后，
+        才重新读取 QR 和付款截图。
+      */
+
+      await refreshPaymentImages();
+
+
+      /*
+        用户当前自己选择、
+        尚未提交的付款截图继续保留。
+      */
+
+      renderSelectedPaymentProofs();
+
+    }
 
 
     if(
@@ -5310,8 +5361,10 @@ async function loadPaymentCenter(
       msg.textContent =
       tr(
         'paymentRefreshFail'
-      )+
-      '：'+
+      )
+      +
+      '：'
+      +
       paymentErrorText(
         e
       );
@@ -5327,7 +5380,6 @@ async function loadPaymentCenter(
   }
 
 }
-
 
 
 /* =========================================================
