@@ -6446,6 +6446,1272 @@ async function refreshPaymentImages(){
 
   }
 
+} 
+/* =========================================================
+   PAYMENT SUBMISSION CORE
+========================================================= */
+
+function validateProofFiles(files){
+
+  const list =
+  Array.from(files || []);
+
+  if(!list.length){
+
+    throw new Error(
+      'PROOF_REQUIRED'
+    );
+
+  }
+
+  for(const file of list){
+
+    validateSingleProofFile(
+      file
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   FILE EXTENSION
+========================================================= */
+
+function getFileExtension(file){
+
+  const name =
+  String(
+    file?.name || ''
+  );
+
+  const match =
+  name.match(
+    /\.([a-zA-Z0-9]+)$/
+  );
+
+  if(match){
+
+    return match[1]
+    .toLowerCase();
+
+  }
+
+  if(
+    file?.type===
+    'image/png'
+  ){
+
+    return 'png';
+
+  }
+
+  if(
+    file?.type===
+    'image/webp'
+  ){
+
+    return 'webp';
+
+  }
+
+  if(
+    file?.type===
+    'image/heic'
+  ){
+
+    return 'heic';
+
+  }
+
+  if(
+    file?.type===
+    'image/heif'
+  ){
+
+    return 'heif';
+
+  }
+
+  return 'jpg';
+
+}
+
+
+
+/* =========================================================
+   RANDOM ID
+========================================================= */
+
+function randomId(){
+
+  if(
+    typeof crypto!==
+    'undefined'
+    &&
+    typeof crypto.randomUUID===
+    'function'
+  ){
+
+    return crypto.randomUUID();
+
+  }
+
+  return (
+    Date.now().toString(36)
+    +
+    '-'
+    +
+    Math.random()
+    .toString(36)
+    .slice(2)
+  );
+
+}
+
+
+
+/* =========================================================
+   CLEAN API ERROR
+========================================================= */
+
+function cleanApiError(value){
+
+  const raw =
+  String(
+    value || ''
+  );
+
+  if(!raw){
+
+    return '';
+
+  }
+
+  try{
+
+    const data =
+    JSON.parse(
+      raw
+    );
+
+    return (
+      data.message
+      ||
+      data.hint
+      ||
+      data.error
+      ||
+      raw
+    );
+
+  }catch(e){
+
+    return raw;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   PAYMENT ERROR TEXT
+========================================================= */
+
+function paymentErrorText(error){
+
+  const text =
+  String(
+    error?.message
+    ||
+    error
+    ||
+    ''
+  );
+
+  if(
+    text.includes(
+      'PROOF_REQUIRED'
+    )
+  ){
+
+    return tr(
+      'proofRequired'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'INVALID_PROOF_TYPE'
+    )
+  ){
+
+    return tr(
+      'invalidProof'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'PROOF_TOO_LARGE'
+    )
+  ){
+
+    return tr(
+      'proofTooLarge'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'INVALID_PAYMENT_AMOUNT'
+    )
+  ){
+
+    return tr(
+      'invalidPaymentAmount'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'PAYMENT_EXCEEDS_REMAINING_AMOUNT'
+    )
+  ){
+
+    return tr(
+      'paymentAmountTooHigh'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'PAYMENT_ACCOUNT_NOT_AVAILABLE'
+    )
+  ){
+
+    return tr(
+      'noPaymentAccount'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'ROUND_ALREADY_FULLY_PAID'
+    )
+  ){
+
+    return tr(
+      'allAmountSubmitted'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'ROUND_SETTLEMENT_NOT_FOUND'
+    )
+  ){
+
+    return tr(
+      'paymentNotReady'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'NO_SUBMITTED_AMOUNT'
+    )
+  ){
+
+    return tr(
+      'paymentNotReady'
+    );
+
+  }
+
+  return (
+    cleanApiError(
+      text
+    )
+    ||
+    tr(
+      'networkError'
+    )
+  );
+
+}
+
+
+
+/* =========================================================
+   UPLOAD ONE PAYMENT PROOF
+========================================================= */
+
+async function uploadSinglePaymentProof(
+  submissionId,
+  file
+){
+
+  if(
+    !agent
+    ||
+    !submissionId
+    ||
+    !file
+  ){
+
+    throw new Error(
+      'INVALID_PAYMENT_PROOF_UPLOAD'
+    );
+
+  }
+
+  validateSingleProofFile(
+    file
+  );
+
+  const ext =
+  getFileExtension(
+    file
+  );
+
+  /*
+    Storage 第一层目录使用 agent.id
+  */
+
+  const storagePath =
+  agent.id+
+  '/'+
+  submissionId+
+  '/'+
+  Date.now()+
+  '-'+
+  randomId()+
+  '.'+
+  ext;
+
+  const uploadRes =
+  await api(
+    '/storage/v1/object/'+
+    PAYMENT_PROOF_BUCKET+
+    '/'+
+    encodeStoragePath(
+      storagePath
+    ),
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        file.type
+        ||
+        'application/octet-stream',
+
+        'x-upsert':
+        'false'
+      },
+
+      body:file
+    }
+  );
+
+  if(
+    !uploadRes.ok
+  ){
+
+    throw new Error(
+      await uploadRes.text()
+    );
+
+  }
+
+  const metaRes =
+  await api(
+    '/rest/v1/agent_payment_proofs',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        'application/json',
+
+        Prefer:
+        'return=representation'
+      },
+
+      body:
+      JSON.stringify({
+
+        payment_submission_id:
+        submissionId,
+
+        agent_id:
+        agent.id,
+
+        storage_path:
+        storagePath,
+
+        original_name:
+        file.name
+        ||
+        (
+          'payment-proof.'+
+          ext
+        ),
+
+        mime_type:
+        file.type
+        ||
+        null,
+
+        file_size:
+        Number(
+          file.size || 0
+        )
+
+      })
+    }
+  );
+
+  if(
+    !metaRes.ok
+  ){
+
+    /*
+      Storage 已上传但资料表写入失败。
+      尝试把刚上传的孤儿文件删除掉。
+    */
+
+    try{
+
+      await api(
+        '/storage/v1/object/'+
+        PAYMENT_PROOF_BUCKET+
+        '/'+
+        encodeStoragePath(
+          storagePath
+        ),
+        {
+          method:'DELETE'
+        }
+      );
+
+    }catch(e){
+
+      console.error(
+        'ORPHAN_PROOF_CLEANUP_FAILED',
+        e
+      );
+
+    }
+
+    throw new Error(
+      await metaRes.text()
+    );
+
+  }
+
+  return storagePath;
+
+}
+
+
+
+/* =========================================================
+   UPLOAD MULTIPLE PAYMENT PROOFS
+========================================================= */
+
+async function uploadPaymentProofFiles(
+  submissionId,
+  files
+){
+
+  const list =
+  Array.from(
+    files || []
+  );
+
+  validateProofFiles(
+    list
+  );
+
+  const uploaded =
+  [];
+
+  for(
+    const file
+    of list
+  ){
+
+    const path =
+    await uploadSinglePaymentProof(
+      submissionId,
+      file
+    );
+
+    uploaded.push({
+      name:
+      file.name,
+
+      path
+    });
+
+  }
+
+  return uploaded;
+
+}
+
+
+
+/* =========================================================
+   CREATE PAYMENT SUBMISSION
+========================================================= */
+
+async function createPaymentSubmission(
+  paymentAccountId,
+  amount,
+  note
+){
+
+  if(
+    !currentRound
+    ||
+    !agent
+  ){
+
+    throw new Error(
+      'ROUND_SETTLEMENT_NOT_FOUND'
+    );
+
+  }
+
+  const r =
+  await api(
+    '/rest/v1/rpc/agent_create_payment_submission',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        'application/json'
+      },
+
+      body:
+      JSON.stringify({
+
+        p_round_id:
+        currentRound.id,
+
+        p_payment_account_id:
+        paymentAccountId,
+
+        p_declared_amount:
+        Number(
+          amount
+        ),
+
+        p_agent_note:
+        note
+        ?
+        String(note)
+        :
+        null
+
+      })
+    }
+  );
+
+  const text =
+  await r.text();
+
+  if(
+    !r.ok
+  ){
+
+    throw new Error(
+      text
+      ||
+      'PAYMENT_SUBMISSION_FAILED'
+    );
+
+  }
+
+  let result =
+  null;
+
+  try{
+
+    result =
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    null;
+
+  }catch(e){
+
+    result =
+    null;
+
+  }
+
+  /*
+    RPC 正常版本返回：
+    { submission_id: "..." }
+  */
+
+  if(
+    result
+    &&
+    result.submission_id
+  ){
+
+    return result;
+
+  }
+
+  /*
+    兼容 RPC 偶尔直接返回 UUID 字符串
+  */
+
+  if(
+    typeof result===
+    'string'
+    &&
+    result
+  ){
+
+    return {
+      submission_id:
+      result
+    };
+
+  }
+
+  throw new Error(
+    'PAYMENT_SUBMISSION_ID_MISSING'
+  );
+
+}
+
+
+
+/* =========================================================
+   SUBMIT PAYMENT PROOF
+========================================================= */
+
+async function submitPaymentProof(){
+
+  if(
+    isSubmittingPayment
+  ){
+
+    return;
+
+  }
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+  const btn =
+  document.getElementById(
+    'paymentSubmitBtn'
+  );
+
+  const amountInput =
+  document.getElementById(
+    'paymentAmountInput'
+  );
+
+  const noteInput =
+  document.getElementById(
+    'paymentNoteInput'
+  );
+
+  if(msg){
+
+    msg.className =
+    'msg';
+
+    msg.textContent =
+    '';
+
+  }
+
+  if(
+    !agent
+    ||
+    !currentRound
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'paymentNotReady'
+      );
+
+    }
+
+    return;
+
+  }
+
+  if(
+    !selectedPaymentAccountId
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'selectPaymentAccount'
+      );
+
+    }
+
+    return;
+
+  }
+
+  const selectedAccount =
+  paymentAccounts.find(
+    row =>
+    row.id===
+    selectedPaymentAccountId
+  );
+
+  if(
+    !selectedAccount
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'selectPaymentAccount'
+      );
+
+    }
+
+    return;
+
+  }
+
+  const amount =
+  Number(
+    amountInput?.value
+  );
+
+  const remaining =
+  getPaymentRemaining();
+
+  if(
+    !Number.isFinite(
+      amount
+    )
+    ||
+    amount<=0
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'invalidPaymentAmount'
+      );
+
+    }
+
+    return;
+
+  }
+
+  if(
+    amount>
+    remaining+
+    0.001
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'paymentAmountTooHigh'
+      );
+
+    }
+
+    return;
+
+  }
+
+  /*
+    这里使用我们自己保存的图片数组，
+    不再使用 paymentProofFiles.files。
+  */
+
+  const files =
+  Array.from(
+    selectedPaymentProofFiles
+  );
+
+  try{
+
+    validateProofFiles(
+      files
+    );
+
+  }catch(e){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      paymentErrorText(
+        e
+      );
+
+    }
+
+    return;
+
+  }
+
+  const ok =
+  confirm(
+
+    currentLang===
+    'zh'
+
+    ?
+
+    (
+      '请确认付款资料：\n\n'+
+
+      '收款方式：'+
+      (
+        selectedAccount.method_name
+        ||
+        selectedAccount.bank_name
+        ||
+        '—'
+      )+
+
+      '\n收款人：'+
+      (
+        selectedAccount.account_name
+        ||
+        '—'
+      )+
+
+      '\n收款号码：'+
+      (
+        selectedAccount.account_number
+        ||
+        '—'
+      )+
+
+      '\n实际转账：'+
+      formatNumber(
+        amount
+      )+
+
+      '\n付款凭证：'+
+      files.length+
+      ' 张'+
+
+      '\n\n提交后将等待管理员核实。'
+    )
+
+    :
+
+    (
+      'Confirm payment submission?\n\n'+
+      (
+        selectedAccount.method_name
+        ||
+        selectedAccount.bank_name
+        ||
+        'Payment'
+      )+
+
+      '\nAmount: '+
+      formatNumber(
+        amount
+      )+
+
+      '\nProofs: '+
+      files.length
+    )
+
+  );
+
+  if(
+    !ok
+  ){
+
+    return;
+
+  }
+
+  isSubmittingPayment =
+  true;
+
+  if(btn){
+
+    btn.disabled =
+    true;
+
+  }
+
+  let submissionId =
+  '';
+
+  try{
+
+    if(msg){
+
+      msg.className =
+      'msg';
+
+      msg.textContent =
+      tr(
+        'paymentSubmitting'
+      );
+
+    }
+
+    /*
+      第一步：
+      建立付款申请记录
+    */
+
+    const result =
+    await createPaymentSubmission(
+      selectedPaymentAccountId,
+      amount,
+      noteInput
+      ?
+      noteInput.value.trim()
+      :
+      ''
+    );
+
+    submissionId =
+    result.submission_id;
+
+    if(msg){
+
+      msg.textContent =
+      tr(
+        'paymentUploading'
+      );
+
+    }
+
+    /*
+      第二步：
+      上传所有图片
+    */
+
+    try{
+
+      await uploadPaymentProofFiles(
+        submissionId,
+        files
+      );
+
+    }catch(uploadError){
+
+      console.error(
+        'PAYMENT_PROOF_UPLOAD_ERROR',
+        uploadError
+      );
+
+      await loadPaymentCenter(
+        false
+      );
+
+      if(msg){
+
+        msg.className =
+        'msg error';
+
+        msg.textContent =
+        tr(
+          'paymentRecordCreatedProofFailed'
+        )
+        +
+        '：'
+        +
+        paymentErrorText(
+          uploadError
+        );
+
+      }
+
+      return;
+
+    }
+
+    /*
+      第三步：
+      提交成功以后才清空填写资料
+    */
+
+    if(amountInput){
+
+      amountInput.value =
+      '';
+
+    }
+
+    if(noteInput){
+
+      noteInput.value =
+      '';
+
+    }
+
+    clearSelectedPaymentProofs(
+      false
+    );
+
+    selectedPaymentAccountId =
+    '';
+
+    /*
+      第四步：
+      重新读取数据库最新状态
+    */
+
+    await loadSettlement();
+
+    await loadPaymentCenter(
+      false
+    );
+
+    if(msg){
+
+      msg.className =
+      'msg success';
+
+      msg.textContent =
+      tr(
+        'paymentSuccess'
+      );
+
+    }
+
+  }catch(e){
+
+    console.error(
+      'PAYMENT_SUBMIT_ERROR',
+      e
+    );
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'paymentSubmitFail'
+      )
+      +
+      '：'
+      +
+      paymentErrorText(
+        e
+      );
+
+    }
+
+  }finally{
+
+    isSubmittingPayment =
+    false;
+
+    if(btn){
+
+      btn.disabled =
+      false;
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   ADD / RETRY PAYMENT PROOFS
+========================================================= */
+
+async function uploadMoreProofs(
+  submissionId
+){
+
+  const input =
+  document.getElementById(
+    'retryProofInput_'+
+    safeId(
+      submissionId
+    )
+  );
+
+  const msg =
+  document.getElementById(
+    'retryProofMsg_'+
+    safeId(
+      submissionId
+    )
+  );
+
+  if(
+    !input
+    ||
+    !msg
+  ){
+
+    return;
+
+  }
+
+  const row =
+  paymentSubmissions.find(
+    item =>
+    item.id===
+    submissionId
+  );
+
+  if(
+    !row
+    ||
+    row.status!==
+    'pending'
+  ){
+
+    msg.className =
+    'msg error';
+
+    msg.textContent =
+    tr(
+      'paymentRefreshFail'
+    );
+
+    return;
+
+  }
+
+  const files =
+  Array.from(
+    input.files || []
+  );
+
+  try{
+
+    validateProofFiles(
+      files
+    );
+
+    msg.className =
+    'msg';
+
+    msg.textContent =
+    tr(
+      'paymentUploading'
+    );
+
+    await uploadPaymentProofFiles(
+      submissionId,
+      files
+    );
+
+    input.value =
+    '';
+
+    await loadPaymentCenter(
+      false
+    );
+
+    const newMsg =
+    document.getElementById(
+      'retryProofMsg_'+
+      safeId(
+        submissionId
+      )
+    );
+
+    if(newMsg){
+
+      newMsg.className =
+      'msg success';
+
+      newMsg.textContent =
+      '✓';
+
+    }
+
+  }catch(e){
+
+    console.error(
+      'RETRY_PROOF_UPLOAD_ERROR',
+      e
+    );
+
+    msg.className =
+    'msg error';
+
+    msg.textContent =
+    tr(
+      'proofUploadFail'
+    )
+    +
+    '：'
+    +
+    paymentErrorText(
+      e
+    );
+
+  }
+
 }
 function renderAgentFinance(){
 const rate=settlement&&settlement.commission_rate_snapshot!=null?Number(settlement.commission_rate_snapshot):agent?normalizeRate(agent.commission_rate):0,
@@ -6827,7 +8093,7 @@ paymentProofs=[];
 
 selectedPaymentAccountId='';
 
-clearSelectedPaymentProofs();
+clearSelectedPaymentProofs(false);
 
 renderRound();
 
@@ -6913,21 +8179,28 @@ window.addEventListener(
 'beforeunload',
 ()=>{
 
-selectedPaymentProofPreviewUrls.forEach(u=>{
-try{
-URL.revokeObjectURL(u)
-}catch(e){}
-});
+selectedPaymentProofPreviewUrls.forEach(
+u=>{
 
-retryProofPreviewUrls.forEach(u=>{
 try{
 URL.revokeObjectURL(u)
 }catch(e){}
-})
 
 }
 );
 
+privateImageObjectUrls.forEach(
+u=>{
+
+try{
+URL.revokeObjectURL(u)
+}catch(e){}
+
+}
+);
+
+}
+);
 resetSubmittedData();
 buildGrid();
 
