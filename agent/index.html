@@ -5239,10 +5239,9 @@ async function loadPaymentCenter(
 
 
     const oldSignature =
-    window.__jmtPaymentCenterSignature
-    ||
-    '';
-
+paymentCenterSignature
+||
+'';
 
     const hasChanged =
     newSignature!==
@@ -5290,7 +5289,7 @@ async function loadPaymentCenter(
       hasChanged
     ){
 
-      window.__jmtPaymentCenterSignature =
+      paymentCenterSignature =
       newSignature;
 
 
