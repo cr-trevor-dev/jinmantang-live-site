@@ -4333,24 +4333,25 @@ function getPaymentPendingTotal(){
 
 function getPaymentAmountDue(){
 
-  if(
-    settlement
-  ){
+  const settlementDue =
+  settlement
+  ?
+  Number(
+    settlement.amount_due || 0
+  )
+  :
+  0;
 
-    return Math.max(
-      Number(
-        settlement.amount_due || 0
-      ),
-      0
-    );
 
-  }
+  const submittedDue =
+  Number(
+    submittedTotal || 0
+  );
 
 
   return Math.max(
-    Number(
-      submittedTotal || 0
-    ),
+    settlementDue,
+    submittedDue,
     0
   );
 
