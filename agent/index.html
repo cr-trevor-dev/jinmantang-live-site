@@ -5222,21 +5222,40 @@ async function loadPaymentCenter(
     */
 
     const newSignature =
-    JSON.stringify({
+JSON.stringify({
 
-      round:
-      currentRound.id,
+  round:
+  currentRound.id,
 
-      accounts:
-      newPaymentAccounts,
+  amountDue:
+  getPaymentAmountDue(),
 
-      submissions:
-      newPaymentSubmissions,
+  paymentStatus:
+  settlement
+  ?
+  settlement.payment_status
+  :
+  '',
 
-      proofs:
-      newPaymentProofs
+  amountReceived:
+  settlement
+  ?
+  Number(
+    settlement.amount_received || 0
+  )
+  :
+  0,
 
-    });
+  accounts:
+  newPaymentAccounts,
+
+  submissions:
+  newPaymentSubmissions,
+
+  proofs:
+  newPaymentProofs
+
+});
 
 
     const oldSignature =
