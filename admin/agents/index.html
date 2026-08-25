@@ -284,7 +284,7 @@ button:disabled{
 .hint{
   font-size:11px;
   color:#777166;
-  line-height:1.6;
+  line-height:1.7;
   margin-top:10px
 }
 
@@ -394,7 +394,7 @@ button:disabled{
 .settlementRound{
   color:#8b8374;
   font-size:11px;
-  line-height:1.55;
+  line-height:1.6;
   margin-top:5px
 }
 
@@ -463,6 +463,10 @@ button:disabled{
   color:#79d6a2
 }
 
+.financeBox.received strong{
+  color:#7bdba8
+}
+
 .settlementInputWrap{
   margin-top:13px;
   padding-top:13px;
@@ -497,7 +501,7 @@ button:disabled{
 .settlementNote{
   color:#746e63;
   font-size:10px;
-  line-height:1.6;
+  line-height:1.7;
   margin-top:10px
 }
 
@@ -516,7 +520,7 @@ button:disabled{
   font-size:10px;
   color:#777166;
   margin-top:9px;
-  line-height:1.5
+  line-height:1.6
 }
 
 @media(max-width:700px){
@@ -564,6 +568,7 @@ button:disabled{
 </style>
 
 </head>
+
 
 <body>
 
@@ -742,7 +747,7 @@ button:disabled{
 
 
   <!-- =================================
-       本期结款管理
+       代理结款管理
   ================================== -->
 
   <div class="card">
@@ -808,7 +813,7 @@ button:disabled{
       <div class="settlementStat">
 
         <small>
-          已确认结款
+          已确认到账
         </small>
 
         <strong id="settlementSettled">
@@ -836,19 +841,23 @@ button:disabled{
 
     <div class="hint">
 
-      代理提交并截止锁单后，应付款不可撤销。
+      系统结款金额以数据库中的「本期应交平台」为唯一标准。
 
       <br>
 
-      管理员收到代理转账后，输入「实际到账金额」。
+      本期应交平台 = 本期提交总额 − 本期代理佣金。
 
       <br>
 
-      只有实际到账金额与系统显示的待结款金额完全一致时，才可以确认到账。
+      管理员收到代理转账后，输入实际到账金额。
 
       <br>
 
-      已开奖仍未结款的代理会显示为「逾期未结款」，但原投注不会自动作废。
+      只有实际到账金额与系统应交金额完全一致时，才允许确认到账。
+
+      <br>
+
+      确认成功后，系统会同时更新到账金额、付款状态、确认时间以及本期结算状态。
 
     </div>
 
@@ -1011,19 +1020,14 @@ const KEY =
 
 
 let token =
-
 localStorage.getItem(
   'jmt_access_token'
 )
-
 ||
-
 sessionStorage.getItem(
   'jmt_access_token'
 )
-
 ||
-
 '';
 
 
@@ -1043,11 +1047,11 @@ let settlementRows =
 [];
 
 
-let settlementGroups =
-[];
-
-
 let settlementLoading =
+false;
+
+
+let settlementConfirming =
 false;
 
 
@@ -1710,7 +1714,6 @@ function renderAgents(){
   list.map(
     a=>{
 
-
       const statusText =
       statusName(
         a.status
@@ -1727,23 +1730,17 @@ function renderAgents(){
 
       <div class="agent">
 
-
         <div class="agentTop">
-
 
           <div>
 
-
             <div class="name">
-
               ${escapeHtml(
                 a.display_name
                 ||
                 '未命名代理'
               )}
-
             </div>
-
 
             <div class="meta">
 
@@ -1761,7 +1758,6 @@ function renderAgents(){
 
             </div>
 
-
           </div>
 
 
@@ -1774,12 +1770,10 @@ function renderAgents(){
 
           </div>
 
-
         </div>
 
 
         <div class="actions">
-
 
           <button
             class="dark"
@@ -1837,9 +1831,7 @@ function renderAgents(){
 
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -1853,7 +1845,7 @@ function renderAgents(){
 
 
 /* =====================================
-   STATS
+   AGENT STATS
 ===================================== */
 
 function updateStats(){
@@ -1891,7 +1883,7 @@ function updateStats(){
 
 
 /* =====================================
-   SELECT
+   BUILD SELECT
 ===================================== */
 
 function buildSelect(){
@@ -1907,9 +1899,7 @@ function buildSelect(){
 
 
   select.innerHTML =
-  '<option value="">'+
-  '选择代理'+
-  '</option>';
+  '<option value="">选择代理</option>';
 
 
   agents.forEach(
@@ -1954,8 +1944,7 @@ function buildSelect(){
   if(
     agents.some(
       a =>
-      a.id ===
-      oldValue
+      a.id === oldValue
     )
   ){
 
@@ -2257,7 +2246,7 @@ async function updateRate(){
 
 
 /* =====================================
-   STATUS
+   SET STATUS
 ===================================== */
 
 async function setStatus(
@@ -2447,13 +2436,23 @@ async function setStatus(
 
 /* =====================================
    LOAD SETTLEMENT DATA
+
+   关键：
+   不再读取 agent_submissions
+   作为应收金额。
+
+   结款只读取 agent_round_totals。
 ===================================== */
 
 async function loadSettlementData(
   showMessage=false
 ){
 
-  if(settlementLoading){
+  if(
+    settlementLoading
+    ||
+    settlementConfirming
+  ){
 
     return;
 
@@ -2506,31 +2505,41 @@ async function loadSettlementData(
     await roundRes.json();
 
 
-    const submissionRes =
+    const totalRes =
     await api(
-      '/rest/v1/agent_submissions'+
-      '?select=round_id,agent_id,number_code,points,finance_status,settled_at,invalidated_at'+
+      '/rest/v1/agent_round_totals'+
+      '?select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,result_payout,final_balance,settlement_status,completed_at,updated_at'+
       '&order=updated_at.desc'
     );
 
 
-    if(!submissionRes.ok){
+    if(!totalRes.ok){
 
       throw new Error(
-        await submissionRes.text()
+        await totalRes.text()
       );
 
     }
 
 
     settlementRows =
-    await submissionRes.json();
+    await totalRes.json();
+
+
+    if(
+      !Array.isArray(
+        settlementRows
+      )
+    ){
+
+      throw new Error(
+        '结款数据格式错误'
+      );
+
+    }
 
 
     buildSettlementRoundSelect();
-
-
-    buildSettlementGroups();
 
 
     renderSettlements();
@@ -2638,7 +2647,7 @@ function buildSettlementRoundSelect(){
   if(!relevantRounds.length){
 
     select.innerHTML =
-    '<option value="">暂无提交记录</option>';
+    '<option value="">暂无结款记录</option>';
 
 
     return;
@@ -2689,176 +2698,36 @@ function buildSettlementRoundSelect(){
     select.value =
     oldValue;
 
-  }
 
-  else{
-
-    const pendingRound =
-    relevantRounds.find(
-      round =>
-      settlementRows.some(
-        row =>
-        row.round_id === round.id
-        &&
-        row.finance_status ===
-        'pending'
-        &&
-        Number(
-          row.points || 0
-        ) > 0
-      )
-    );
-
-
-    select.value =
-    pendingRound
-    ?
-    pendingRound.id
-    :
-    relevantRounds[0].id;
+    return;
 
   }
 
-}
 
-
-/* =====================================
-   BUILD SETTLEMENT GROUPS
-===================================== */
-
-function buildSettlementGroups(){
-
-  const map =
-  new Map();
-
-
-  settlementRows.forEach(
-    row=>{
-
-      const key =
-      row.round_id+
-      '::'+
-      row.agent_id;
-
-
-      if(
-        !map.has(
-          key
-        )
-      ){
-
-        map.set(
-          key,
-          {
-            round_id:
-            row.round_id,
-
-            agent_id:
-            row.agent_id,
-
-            total:
-            0,
-
-            pending:
-            0,
-
-            settled:
-            0,
-
-            invalid:
-            0,
-
-            latest_settled_at:
-            null
-          }
-        );
-
-      }
-
-
-      const group =
-      map.get(
-        key
-      );
-
-
-      const points =
+  const pendingRound =
+  relevantRounds.find(
+    round =>
+    settlementRows.some(
+      row =>
+      row.round_id ===
+      round.id
+      &&
       Number(
-        row.points || 0
-      );
-
-
-      if(
-        row.finance_status !==
-        'invalid'
-      ){
-
-        group.total +=
-        points;
-
-      }
-
-
-      if(
-        row.finance_status ===
-        'pending'
-      ){
-
-        group.pending +=
-        points;
-
-      }
-
-      else if(
-        row.finance_status ===
-        'settled'
-      ){
-
-        group.settled +=
-        points;
-
-
-        if(
-          row.settled_at
-          &&
-          (
-            !group.latest_settled_at
-            ||
-            new Date(
-              row.settled_at
-            ).getTime()
-            >
-            new Date(
-              group.latest_settled_at
-            ).getTime()
-          )
-        ){
-
-          group.latest_settled_at =
-          row.settled_at;
-
-        }
-
-      }
-
-      else if(
-        row.finance_status ===
-        'invalid'
-      ){
-
-        group.invalid +=
-        points;
-
-      }
-
-    }
+        row.amount_due || 0
+      ) > 0
+      &&
+      row.payment_status !==
+      'paid'
+    )
   );
 
 
-  settlementGroups =
-  Array.from(
-    map.values()
-  );
+  select.value =
+  pendingRound
+  ?
+  pendingRound.id
+  :
+  relevantRounds[0].id;
 
 }
 
@@ -2920,41 +2789,65 @@ function renderSettlements(){
   }
 
 
-  const groups =
-  settlementGroups
+  const rows =
+  settlementRows
   .filter(
-    g =>
-    g.round_id ===
+    row =>
+    row.round_id ===
     roundId
-  )
-  .filter(
-    g =>
-    g.total > 0
-    ||
-    g.pending > 0
-    ||
-    g.settled > 0
   )
   .sort(
     (
       a,
       b
-    ) =>
-    b.pending-
-    a.pending
+    ) =>{
+
+      const aPaid =
+      a.payment_status ===
+      'paid';
+
+
+      const bPaid =
+      b.payment_status ===
+      'paid';
+
+
+      if(
+        aPaid !==
+        bPaid
+      ){
+
+        return aPaid
+        ?
+        1
+        :
+        -1;
+
+      }
+
+
+      return Number(
+        b.amount_due || 0
+      )
+      -
+      Number(
+        a.amount_due || 0
+      );
+
+    }
   );
 
 
   updateSettlementStats(
-    groups
+    rows
   );
 
 
-  if(!groups.length){
+  if(!rows.length){
 
     listBox.innerHTML =
     '<div class="empty">'+
-    '本期暂无代理提交记录'+
+    '本期暂无代理结款记录'+
     '</div>';
 
 
@@ -2964,15 +2857,14 @@ function renderSettlements(){
 
 
   listBox.innerHTML =
-  groups.map(
-    group=>{
-
+  rows.map(
+    row=>{
 
       const agent =
       agents.find(
         a =>
         a.id ===
-        group.agent_id
+        row.agent_id
       );
 
 
@@ -2988,20 +2880,44 @@ function renderSettlements(){
       '未知代理';
 
 
+      const submittedTotal =
+      Number(
+        row.submitted_total || 0
+      );
+
+
       const rate =
-      agent
-      ?
-      normalizeRate(
-        agent.commission_rate
-      )
-      :
-      0;
+      Number(
+        row.commission_rate_snapshot
+        ??
+        (
+          agent
+          ?
+          normalizeRate(
+            agent.commission_rate
+          )
+          :
+          0
+        )
+      );
 
 
       const commission =
-      group.total*
-      rate/
-      100;
+      Number(
+        row.commission_amount || 0
+      );
+
+
+      const amountDue =
+      Number(
+        row.amount_due || 0
+      );
+
+
+      const amountReceived =
+      Number(
+        row.amount_received || 0
+      );
 
 
       const deadlinePassed =
@@ -3012,9 +2928,36 @@ function renderSettlements(){
       ).getTime();
 
 
-      const resultPublished =
-      hasResult(
-        round.result_number
+      const isPaid =
+      row.payment_status ===
+      'paid';
+
+
+      const dueTime =
+      row.payment_due_at
+      ?
+      new Date(
+        row.payment_due_at
+      ).getTime()
+      :
+      NaN;
+
+
+      const isOverdue =
+      !isPaid
+      &&
+      (
+        row.payment_status ===
+        'overdue'
+        ||
+        (
+          Number.isFinite(
+            dueTime
+          )
+          &&
+          Date.now() >=
+          dueTime
+        )
       );
 
 
@@ -3023,18 +2966,14 @@ function renderSettlements(){
 
 
       let financeText =
-      '等待截止';
+      '尚未截止';
 
 
       let itemClass =
       '';
 
 
-      if(
-        group.pending <= 0
-        &&
-        group.total > 0
-      ){
+      if(isPaid){
 
         financeClass =
         'done';
@@ -3049,11 +2988,7 @@ function renderSettlements(){
 
       }
 
-      else if(
-        group.pending > 0
-        &&
-        resultPublished
-      ){
+      else if(isOverdue){
 
         financeClass =
         'overdue';
@@ -3068,11 +3003,7 @@ function renderSettlements(){
 
       }
 
-      else if(
-        group.pending > 0
-        &&
-        deadlinePassed
-      ){
+      else if(deadlinePassed){
 
         financeClass =
         'waiting';
@@ -3083,27 +3014,18 @@ function renderSettlements(){
 
       }
 
-      else{
-
-        financeClass =
-        'waiting';
-
-
-        financeText =
-        '尚未截止';
-
-      }
-
 
       const inputId =
       'settlementAmount_'+
       safeId(
-        group.agent_id
+        row.agent_id
       );
 
 
       const canSettle =
-      group.pending > 0
+      !isPaid
+      &&
+      amountDue > 0
       &&
       deadlinePassed;
 
@@ -3174,6 +3096,19 @@ function renderSettlements(){
                 )
               )}
 
+              ${
+                row.payment_due_at
+                ?
+                '<br>付款截止：'+
+                escapeHtml(
+                  formatDate(
+                    row.payment_due_at
+                  )
+                )
+                :
+                ''
+              }
+
             </div>
 
 
@@ -3204,37 +3139,7 @@ function renderSettlements(){
 
             <strong>
               ${formatNumber(
-                group.total
-              )}
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox due">
-
-            <small>
-              当前待结款
-            </small>
-
-            <strong>
-              ${formatNumber(
-                group.pending
-              )}
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox">
-
-            <small>
-              已确认结款
-            </small>
-
-            <strong>
-              ${formatNumber(
-                group.settled
+                submittedTotal
               )}
             </strong>
 
@@ -3256,21 +3161,69 @@ function renderSettlements(){
           </div>
 
 
+          <div class="financeBox due">
+
+            <small>
+              本期应交平台
+            </small>
+
+            <strong>
+              ${formatNumber(
+                amountDue
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="financeBox received">
+
+            <small>
+              平台已确认到账
+            </small>
+
+            <strong>
+              ${formatNumber(
+                amountReceived
+              )}
+            </strong>
+
+          </div>
+
+
         </div>
 
 
         ${
-          group.latest_settled_at
+          row.payment_confirmed_at
           ?
           `
 
           <div class="settleTime">
 
-            最近确认结款：
+            确认到账时间：
             ${escapeHtml(
               formatDate(
-                group.latest_settled_at
+                row.payment_confirmed_at
               )
+            )}
+
+            <br>
+
+            支付状态：
+            ${escapeHtml(
+              row.payment_status
+              ||
+              '—'
+            )}
+
+            ·
+
+            结算状态：
+            ${escapeHtml(
+              row.settlement_status
+              ||
+              '—'
             )}
 
           </div>
@@ -3282,7 +3235,9 @@ function renderSettlements(){
 
 
         ${
-          group.pending > 0
+          !isPaid
+          &&
+          amountDue > 0
           ?
           `
 
@@ -3318,7 +3273,7 @@ function renderSettlements(){
                   'disabled'
                 }
                 onclick="confirmSettlement(
-                  '${escapeJs(group.agent_id)}',
+                  '${escapeJs(row.agent_id)}',
                   '${escapeJs(round.id)}'
                 )">
 
@@ -3336,8 +3291,8 @@ function renderSettlements(){
               <button
                 class="dark"
                 onclick="fillSettlementAmount(
-                  '${escapeJs(group.agent_id)}',
-                  ${Number(group.pending)}
+                  '${escapeJs(row.agent_id)}',
+                  ${Number(amountDue)}
                 )">
 
                 填入系统应到账金额
@@ -3355,7 +3310,7 @@ function renderSettlements(){
                   'dark'
                 }"
                 onclick="setStatus(
-                  '${escapeJs(group.agent_id)}',
+                  '${escapeJs(row.agent_id)}',
                   '${escapeJs(suspendStatus)}'
                 )">
 
@@ -3374,9 +3329,13 @@ function renderSettlements(){
               ${
                 canSettle
                 ?
-                '只有实际到账金额与系统待结款金额完全一致，系统才允许确认。代理佣金单独结算，不从本次应到账金额中自动扣除。'
+                '系统应到账金额为 '+
+                formatNumber(
+                  amountDue
+                )+
+                '。只有实际到账金额完全一致，数据库才允许确认。'
                 :
-                '本期尚未到截止时间，目前不能确认结款。'
+                '本期尚未截止，目前不能确认结款。'
               }
 
             </div>
@@ -3414,7 +3373,7 @@ function renderSettlements(){
 ===================================== */
 
 function updateSettlementStats(
-  groups
+  rows
 ){
 
   let total =
@@ -3433,34 +3392,48 @@ function updateSettlementStats(
   0;
 
 
-  groups.forEach(
-    g=>{
+  rows.forEach(
+    row=>{
+
+      const submitted =
+      Number(
+        row.submitted_total || 0
+      );
+
+
+      const due =
+      Number(
+        row.amount_due || 0
+      );
+
+
+      const received =
+      Number(
+        row.amount_received || 0
+      );
+
 
       total +=
-      Number(
-        g.total || 0
-      );
-
-
-      pending +=
-      Number(
-        g.pending || 0
-      );
-
-
-      settled +=
-      Number(
-        g.settled || 0
-      );
+      submitted;
 
 
       if(
-        Number(
-          g.pending || 0
-        )
-        >
-        0
+        row.payment_status ===
+        'paid'
       ){
+
+        settled +=
+        received;
+
+      }
+
+      else if(
+        due > 0
+      ){
+
+        pending +=
+        due;
+
 
         pendingAgents++;
 
@@ -3564,13 +3537,94 @@ function fillSettlementAmount(
 
 
 /* =====================================
+   READ FRESH SETTLEMENT
+
+   确认以前再次从数据库读取，
+   不信任页面缓存。
+===================================== */
+
+async function getFreshSettlement(
+  agentId,
+  roundId
+){
+
+  const r =
+  await api(
+    '/rest/v1/agent_round_totals'+
+    '?agent_id=eq.'+
+    encodeURIComponent(
+      agentId
+    )+
+    '&round_id=eq.'+
+    encodeURIComponent(
+      roundId
+    )+
+    '&select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,settlement_status'+
+    '&limit=1'
+  );
+
+
+  if(!r.ok){
+
+    throw new Error(
+      await r.text()
+    );
+
+  }
+
+
+  const rows =
+  await r.json();
+
+
+  if(
+    !Array.isArray(
+      rows
+    )
+    ||
+    !rows.length
+  ){
+
+    throw new Error(
+      '没有找到本期结款记录'
+    );
+
+  }
+
+
+  return rows[0];
+
+}
+
+
+/* =====================================
    CONFIRM SETTLEMENT
+
+   关键：
+   不直接 PATCH agent_submissions。
+   只调用数据库 RPC。
+
+   RPC 会一次性处理：
+   - amount_received
+   - payment_status
+   - payment_confirmed_at
+   - settlement_status
+   - agent_submissions.finance_status
 ===================================== */
 
 async function confirmSettlement(
   agentId,
   roundId
 ){
+
+  if(
+    settlementConfirming
+  ){
+
+    return;
+
+  }
+
 
   const msg =
   document.getElementById(
@@ -3681,67 +3735,59 @@ async function confirmSettlement(
   }
 
 
+  settlementConfirming =
+  true;
+
+
   msg.textContent =
-  '正在重新核对系统金额...';
+  '正在重新核对系统应到账金额...';
 
 
   try{
 
-    /*
-      重要：
-      确认以前重新从数据库读取一次 pending，
-      不使用页面旧缓存。
-    */
-
-    const checkRes =
-    await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        roundId
-      )+
-      '&agent_id=eq.'+
-      encodeURIComponent(
-        agentId
-      )+
-      '&finance_status=eq.pending'+
-      '&select=points'
+    const fresh =
+    await getFreshSettlement(
+      agentId,
+      roundId
     );
 
 
-    if(!checkRes.ok){
+    const submittedTotal =
+    Number(
+      fresh.submitted_total || 0
+    );
+
+
+    const commissionAmount =
+    Number(
+      fresh.commission_amount || 0
+    );
+
+
+    const amountDue =
+    Number(
+      fresh.amount_due || 0
+    );
+
+
+    if(
+      fresh.payment_status ===
+      'paid'
+    ){
 
       throw new Error(
-        await checkRes.text()
+        '本期已经确认到账，请刷新页面'
       );
 
     }
 
 
-    const freshRows =
-    await checkRes.json();
-
-
-    const freshPending =
-    freshRows.reduce(
-      (
-        sum,
-        row
-      ) =>
-      sum+
-      Number(
-        row.points || 0
-      ),
-      0
-    );
-
-
     if(
-      freshPending <= 0
+      amountDue <= 0
     ){
 
       throw new Error(
-        '系统已经没有待结款金额，请刷新页面'
+        '系统当前没有需要确认的应到账金额'
       );
 
     }
@@ -3750,7 +3796,7 @@ async function confirmSettlement(
     if(
       !moneyEqual(
         receivedAmount,
-        freshPending
+        amountDue
       )
     ){
 
@@ -3761,7 +3807,7 @@ async function confirmSettlement(
       msg.textContent =
       '金额不一致：系统应到账 '+
       formatNumber(
-        freshPending
+        amountDue
       )+
       '，你输入的是 '+
       formatNumber(
@@ -3789,15 +3835,23 @@ async function confirmSettlement(
       periodName(
         round.round_code
       )+
-      '\n系统应到账：'+
+      '\n\n本期提交总额：'+
       formatNumber(
-        freshPending
+        submittedTotal
+      )+
+      '\n代理佣金：'+
+      formatNumber(
+        commissionAmount
+      )+
+      '\n本期应交平台：'+
+      formatNumber(
+        amountDue
       )+
       '\n实际到账：'+
       formatNumber(
         receivedAmount
       )+
-      '\n\n确认后，本期待结款记录将变更为「已结款」。'
+      '\n\n确认后将正式标记为「已结款」。'
     );
 
 
@@ -3813,103 +3867,128 @@ async function confirmSettlement(
 
 
     msg.textContent =
-    '正在确认到账...';
+    '正在提交数据库确认...';
 
 
-    const nowIso =
-    new Date()
-    .toISOString();
-
-
-    const settleRes =
+    const rpcRes =
     await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        roundId
-      )+
-      '&agent_id=eq.'+
-      encodeURIComponent(
-        agentId
-      )+
-      '&finance_status=eq.pending',
+      '/rest/v1/rpc/admin_confirm_agent_settlement',
       {
-        method:'PATCH',
+        method:'POST',
 
         headers:{
           'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
+          'application/json'
         },
 
         body:
         JSON.stringify({
-          finance_status:
-          'settled',
+          p_agent_id:
+          agentId,
 
-          settled_at:
-          nowIso,
+          p_round_id:
+          roundId,
 
-          invalidated_at:
-          null,
-
-          invalid_reason:
-          null
+          p_amount_received:
+          receivedAmount
         })
       }
     );
 
 
     const text =
-    await settleRes.text();
+    await rpcRes.text();
 
 
-    if(!settleRes.ok){
-
-      throw new Error(
-        text
-        ||
-        '结款确认失败'
-      );
-
-    }
-
-
-    let updated =
-    [];
+    let result =
+    null;
 
 
     try{
 
-      updated =
+      result =
       text
       ?
       JSON.parse(
         text
       )
       :
-      [];
+      null;
 
     }catch(e){
 
-      updated =
-      [];
+      result =
+      null;
 
     }
 
 
-    if(
-      !Array.isArray(
-        updated
-      )
+    if(!rpcRes.ok){
+
+      let errorMessage =
+      text
       ||
-      !updated.length
-    ){
+      '数据库确认失败';
+
+
+      if(
+        errorMessage.includes(
+          'SETTLEMENT_AMOUNT_MISMATCH'
+        )
+      ){
+
+        errorMessage =
+        '实际到账金额与数据库应收金额不一致';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'SETTLEMENT_ALREADY_PAID'
+        )
+      ){
+
+        errorMessage =
+        '本期已经确认到账';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'SETTLEMENT_NOT_FOUND'
+        )
+      ){
+
+        errorMessage =
+        '没有找到本期结款记录';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'NOT_ADMIN'
+        )
+      ){
+
+        errorMessage =
+        '当前账号没有管理员权限';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'NOT_AUTHENTICATED'
+        )
+      ){
+
+        errorMessage =
+        '管理员登录已经失效';
+
+      }
+
 
       throw new Error(
-        '数据库没有确认任何结款记录'
+        errorMessage
       );
 
     }
@@ -3928,7 +4007,7 @@ async function confirmSettlement(
     )+
     ' · '+
     formatNumber(
-      freshPending
+      amountDue
     );
 
 
@@ -3955,6 +4034,12 @@ async function confirmSettlement(
       ||
       '未知错误'
     );
+
+
+  }finally{
+
+    settlementConfirming =
+    false;
 
   }
 
@@ -4101,7 +4186,7 @@ function roundStatusName(
 
 
 /* =====================================
-   RATE NORMALIZE
+   NORMALIZE RATE
 ===================================== */
 
 function normalizeRate(
@@ -4120,7 +4205,8 @@ function normalizeRate(
     )
   ){
 
-    rate = 0;
+    rate =
+    0;
 
   }
 
@@ -4131,7 +4217,8 @@ function normalizeRate(
     rate <= 1
   ){
 
-    rate *= 100;
+    rate *=
+    100;
 
   }
 
@@ -4185,7 +4272,7 @@ function statusName(
 
 
 /* =====================================
-   RESULT EXISTS
+   HAS RESULT
 ===================================== */
 
 function hasResult(
@@ -4193,11 +4280,14 @@ function hasResult(
 ){
 
   return (
-    value !== null
+    value !==
+    null
     &&
-    value !== undefined
+    value !==
+    undefined
     &&
-    value !== ''
+    value !==
+    ''
   );
 
 }
@@ -4250,7 +4340,8 @@ function formatDate(
 
       hour12:false
     }
-  ).format(
+  )
+  .format(
     d
   )
   +
@@ -4269,7 +4360,8 @@ function formatRate(
 
   return Number(
     value || 0
-  ).toLocaleString(
+  )
+  .toLocaleString(
     'en-US',
     {
       maximumFractionDigits:2
@@ -4289,7 +4381,8 @@ function formatNumber(
 
   return Number(
     value || 0
-  ).toLocaleString(
+  )
+  .toLocaleString(
     'en-US',
     {
       maximumFractionDigits:2
@@ -4359,7 +4452,7 @@ function escapeHtml(
 
 
 /* =====================================
-   JS STRING ESCAPE
+   JS ESCAPE
 ===================================== */
 
 function escapeJs(
@@ -4414,7 +4507,7 @@ function clearAdminSession(){
 
 
 /* =====================================
-   AUTO REFRESH WHEN ACTIVE
+   AUTO REFRESH
 ===================================== */
 
 function refreshWhenActive(){
@@ -4425,6 +4518,8 @@ function refreshWhenActive(){
     adminUser
     &&
     !settlementLoading
+    &&
+    !settlementConfirming
   ){
 
     loadSettlementData(
@@ -4512,7 +4607,7 @@ startPage();
 
 /*
   管理页面正常打开时，
-  每 20 秒自动更新代理结款资料。
+  每 20 秒自动更新结款资料。
 */
 
 setInterval(
@@ -4522,6 +4617,8 @@ setInterval(
       token
       &&
       adminUser
+      &&
+      !settlementConfirming
     ){
 
       loadSettlementData(
