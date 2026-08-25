@@ -212,6 +212,14 @@ button:disabled{
   rgba(80,200,130,.26)
 }
 
+.redBtn{
+  background:#351616;
+  color:#e9a0a0;
+  border:
+  1px solid
+  rgba(220,90,90,.25)
+}
+
 .langWrap{
   margin-bottom:14px
 }
@@ -263,12 +271,6 @@ button:disabled{
 .box.commission strong{
   color:#70d39d;
   font-size:19px
-}
-
-.box.dangerBox{
-  background:#171111;
-  border-color:
-  rgba(200,100,100,.24)
 }
 
 .statusOpen{
@@ -517,7 +519,8 @@ button:disabled{
 .paymentQrEmpty{
   color:#777166;
   font-size:11px;
-  padding:22px 8px
+  padding:22px 8px;
+  text-align:center
 }
 
 .paymentForm{
@@ -567,6 +570,102 @@ button:disabled{
 .paymentAmountInfo.pending strong{
   color:#e8c86e
 }
+
+
+/* =========================================================
+   NEW: SELECTED PROOF PREVIEW
+========================================================= */
+
+.selectedProofWrap{
+  margin-top:12px
+}
+
+.selectedProofHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px
+}
+
+.selectedProofTitle{
+  color:#d8c277;
+  font-size:11px;
+  font-weight:800
+}
+
+.selectedProofCount{
+  color:#777166;
+  font-size:10px
+}
+
+.selectedProofGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:8px
+}
+
+.selectedProofItem{
+  position:relative;
+  overflow:hidden;
+  background:#09090a;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  border-radius:12px;
+  min-height:130px
+}
+
+.selectedProofItem img{
+  display:block;
+  width:100%;
+  height:170px;
+  object-fit:contain;
+  background:#080809
+}
+
+.selectedProofMeta{
+  padding:8px 9px 9px;
+  color:#817b71;
+  font-size:9px;
+  line-height:1.45;
+  word-break:break-word
+}
+
+.removeSelectedProof{
+  position:absolute;
+  right:7px;
+  top:7px;
+  width:30px;
+  height:30px;
+  padding:0;
+  margin:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:17px;
+  line-height:1;
+  background:rgba(57,24,24,.95);
+  color:#f1a2a2;
+  border:
+  1px solid
+  rgba(230,110,110,.35);
+  z-index:2
+}
+
+.addProofButton{
+  margin-top:8px
+}
+
+.clearProofButton{
+  margin-top:8px
+}
+
+
+/* =========================================================
+   PAYMENT HISTORY
+========================================================= */
 
 .paymentHistoryItem{
   background:#101011;
@@ -721,6 +820,11 @@ button:disabled{
     1fr 1fr
   }
 
+  .selectedProofGrid{
+    grid-template-columns:
+    1fr 1fr
+  }
+
 }
 
 </style>
@@ -789,10 +893,6 @@ button:disabled{
   </div>
 
 
-  <!-- =====================================================
-       LOGIN
-  ====================================================== -->
-
   <div
     class="card"
     id="loginBox">
@@ -844,10 +944,6 @@ button:disabled{
     id="agentBox"
     class="hidden">
 
-
-    <!-- =================================================
-         AGENT INFO
-    ================================================== -->
 
     <div class="card">
 
@@ -917,10 +1013,6 @@ button:disabled{
 
     </div>
 
-
-    <!-- =================================================
-         CURRENT ROUND
-    ================================================== -->
 
     <div class="card">
 
@@ -1000,10 +1092,6 @@ button:disabled{
     </div>
 
 
-    <!-- =================================================
-         00 - 99 SUBMISSION
-    ================================================== -->
-
     <div class="card">
 
       <div
@@ -1070,10 +1158,6 @@ button:disabled{
 
     </div>
 
-
-    <!-- =================================================
-         SETTLEMENT
-    ================================================== -->
 
     <div class="card">
 
@@ -1179,10 +1263,6 @@ button:disabled{
     </div>
 
 
-    <!-- =================================================
-         PAYMENT CENTER
-    ================================================== -->
-
     <div class="card">
 
       <div
@@ -1194,8 +1274,7 @@ button:disabled{
       </div>
 
 
-      <div
-        class="paymentAmountBox">
+      <div class="paymentAmountBox">
 
         <div class="paymentAmountInfo">
 
@@ -1231,10 +1310,6 @@ button:disabled{
 
         请先选择平台当前启用的收款方式，完成转账后提交实际转账金额及付款截图。管理员核实后才会正式确认到账。
 
-      </div>
-
-
-      <div class="dividerSpace">
       </div>
 
 
@@ -1298,6 +1373,13 @@ button:disabled{
           placeholder="请输入实际转账金额">
 
 
+        <div class="note">
+
+          实际转账金额可以自行修改，但不能超过当前可提交余额。
+
+        </div>
+
+
         <div style="height:10px"></div>
 
 
@@ -1313,8 +1395,7 @@ button:disabled{
         <textarea
           id="paymentNoteInput"
           data-ph="paymentNotePlaceholder"
-          placeholder="例如：已通过 K Pay 转账，请核实">
-        </textarea>
+          placeholder="例如：已通过 K Pay 转账，请核实"></textarea>
 
 
         <div style="height:10px"></div>
@@ -1329,11 +1410,17 @@ button:disabled{
         </div>
 
 
+        <!--
+          真正的 file input 保留，
+          但选中的 File 会马上保存进 JS 数组。
+        -->
+
         <input
           id="paymentProofFiles"
           type="file"
-          accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
-          multiple>
+          accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
+          multiple
+          onchange="handlePaymentProofSelection(this)">
 
 
         <div
@@ -1341,6 +1428,61 @@ button:disabled{
           data-i18n="proofNote">
 
           必须至少上传 1 张付款凭证。可以一次选择多张图片，每张最大 10MB。
+
+        </div>
+
+
+        <div
+          id="selectedProofWrap"
+          class="selectedProofWrap hidden">
+
+          <div class="selectedProofHeader">
+
+            <div
+              class="selectedProofTitle"
+              data-i18n="selectedProofTitle">
+
+              已选择的付款凭证
+
+            </div>
+
+            <div
+              id="selectedProofCount"
+              class="selectedProofCount">
+
+              0
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="selectedProofGrid"
+            class="selectedProofGrid">
+          </div>
+
+
+          <button
+            type="button"
+            class="secondary addProofButton"
+            onclick="openMorePaymentProofs()"
+            data-i18n="addMoreProof">
+
+            ＋ 继续添加图片
+
+          </button>
+
+
+          <button
+            type="button"
+            class="redBtn clearProofButton"
+            onclick="clearSelectedPaymentProofs()"
+            data-i18n="clearSelectedProof">
+
+            清空已选图片
+
+          </button>
 
         </div>
 
@@ -1387,10 +1529,6 @@ button:disabled{
 
     </div>
 
-
-    <!-- =================================================
-         RESULT
-    ================================================== -->
 
     <div class="card">
 
@@ -1634,6 +1772,38 @@ let isLoadingPaymentCenter =
 false;
 
 
+/*
+  新增：
+  代理当前准备提交、但尚未真正上传的付款图片。
+
+  不依赖 input.files。
+  因此：
+  - 20秒刷新不会丢
+  - 可以多次追加
+  - 可以删除某一张
+  - 可以清空全部
+*/
+
+let selectedPaymentProofFiles =
+[];
+
+
+const selectedPaymentProofPreviewUrls =
+new Map();
+
+
+/*
+  私有 Storage 图片通过登录 token
+  直接读取 Blob 后生成 object URL。
+
+  这里保存 URL，
+  避免页面重复下载同一张图片。
+*/
+
+const privateImageObjectUrls =
+new Map();
+
+
 
 /* =========================================================
    TRANSLATIONS
@@ -1694,6 +1864,10 @@ paymentNote:'付款备注，可不填',
 paymentNotePlaceholder:'例如：已通过 K Pay 转账，请核实',
 paymentProof:'付款截图 / 凭证',
 proofNote:'必须至少上传 1 张付款凭证。可以一次选择多张图片，每张最大 10MB。',
+selectedProofTitle:'已选择的付款凭证',
+addMoreProof:'＋ 继续添加图片',
+clearSelectedProof:'清空已选图片',
+removeProof:'删除',
 submitPaymentProof:'提交付款凭证',
 paymentHistory:'本期付款记录',
 noPaymentAccount:'目前没有可使用的平台收款账户',
@@ -1770,7 +1944,6 @@ balanced:'已结清'
 
 },
 
-
 my:{
 
 loginTitle:'ကိုယ်စားလှယ် ဝင်ရောက်ရန်',
@@ -1824,6 +1997,10 @@ paymentNote:'မှတ်ချက်၊ မဖြည့်လည်းရသည
 paymentNotePlaceholder:'ဥပမာ - K Pay ဖြင့်လွှဲပြီးပါပြီ',
 paymentProof:'ငွေလွှဲ Screenshot',
 proofNote:'အနည်းဆုံး screenshot ၁ ပုံတင်ရမည်။ ပုံများစွာရွေးနိုင်ပြီး တစ်ပုံ 10MB အများဆုံးဖြစ်သည်။',
+selectedProofTitle:'ရွေးထားသော Screenshot များ',
+addMoreProof:'＋ ပုံထပ်ထည့်မည်',
+clearSelectedProof:'ရွေးထားသမျှရှင်းမည်',
+removeProof:'ဖျက်မည်',
 submitPaymentProof:'ငွေလွှဲအထောက်အထားတင်မည်',
 paymentHistory:'ယခုအကြိမ် ငွေပေးချေမှုမှတ်တမ်း',
 noPaymentAccount:'လက်ရှိအသုံးပြုနိုင်သော ငွေလက်ခံ account မရှိပါ',
@@ -1900,7 +2077,6 @@ balanced:'ရှင်းပြီး'
 
 },
 
-
 en:{
 
 loginTitle:'Agent Login',
@@ -1954,6 +2130,10 @@ paymentNote:'Payment Note · Optional',
 paymentNotePlaceholder:'Example: Transferred via K Pay, please verify',
 paymentProof:'Payment Screenshots / Proof',
 proofNote:'At least 1 payment proof image is required. Multiple images are allowed. Maximum 10MB per image.',
+selectedProofTitle:'Selected Payment Proofs',
+addMoreProof:'＋ Add More Images',
+clearSelectedProof:'Clear Selected Images',
+removeProof:'Remove',
 submitPaymentProof:'Submit Payment Proof',
 paymentHistory:'Payment History for This Round',
 noPaymentAccount:'No platform payment account is currently available',
@@ -2029,8 +2209,6 @@ platformPays:'Platform Pays Agent',
 balanced:'Balanced'
 
 },
-
-
 th:{
 
 loginTitle:'เข้าสู่ระบบตัวแทน',
@@ -2084,6 +2262,10 @@ paymentNote:'หมายเหตุ ไม่บังคับ',
 paymentNotePlaceholder:'เช่น โอนผ่าน K Pay แล้ว กรุณาตรวจสอบ',
 paymentProof:'ภาพหลักฐานการชำระ',
 proofNote:'ต้องมีภาพหลักฐานอย่างน้อย 1 ภาพ เลือกหลายภาพได้ ภาพละไม่เกิน 10MB',
+selectedProofTitle:'ภาพหลักฐานที่เลือก',
+addMoreProof:'＋ เพิ่มรูปภาพ',
+clearSelectedProof:'ล้างรูปภาพที่เลือก',
+removeProof:'ลบ',
 submitPaymentProof:'ส่งหลักฐานการชำระ',
 paymentHistory:'ประวัติการชำระรอบนี้',
 noPaymentAccount:'ขณะนี้ไม่มีบัญชีรับเงินที่ใช้งานได้',
@@ -2214,6 +2396,10 @@ paymentNote:'Nota Bayaran · Pilihan',
 paymentNotePlaceholder:'Contoh: Sudah pindah melalui K Pay',
 paymentProof:'Gambar Bukti Bayaran',
 proofNote:'Sekurang-kurangnya 1 gambar diperlukan. Boleh pilih banyak gambar. Maksimum 10MB setiap gambar.',
+selectedProofTitle:'Bukti Bayaran Dipilih',
+addMoreProof:'＋ Tambah Gambar',
+clearSelectedProof:'Kosongkan Gambar Dipilih',
+removeProof:'Buang',
 submitPaymentProof:'Hantar Bukti Bayaran',
 paymentHistory:'Sejarah Bayaran Pusingan Ini',
 noPaymentAccount:'Tiada akaun pembayaran platform yang tersedia',
@@ -2344,6 +2530,10 @@ paymentNote:'Ghi chú · Không bắt buộc',
 paymentNotePlaceholder:'Ví dụ: Đã chuyển qua K Pay',
 paymentProof:'Ảnh chứng từ thanh toán',
 proofNote:'Bắt buộc ít nhất 1 ảnh. Có thể chọn nhiều ảnh, tối đa 10MB mỗi ảnh.',
+selectedProofTitle:'Ảnh chứng từ đã chọn',
+addMoreProof:'＋ Thêm ảnh',
+clearSelectedProof:'Xóa ảnh đã chọn',
+removeProof:'Xóa',
 submitPaymentProof:'Gửi chứng từ thanh toán',
 paymentHistory:'Lịch sử thanh toán kỳ này',
 noPaymentAccount:'Hiện không có tài khoản nhận tiền khả dụng',
@@ -2474,6 +2664,10 @@ paymentNote:'Catatan · Opsional',
 paymentNotePlaceholder:'Contoh: Sudah transfer melalui K Pay',
 paymentProof:'Screenshot / Bukti Pembayaran',
 proofNote:'Minimal 1 gambar bukti wajib. Bisa memilih banyak gambar. Maksimum 10MB per gambar.',
+selectedProofTitle:'Bukti Pembayaran Dipilih',
+addMoreProof:'＋ Tambah Gambar',
+clearSelectedProof:'Hapus Gambar Dipilih',
+removeProof:'Hapus',
 submitPaymentProof:'Kirim Bukti Pembayaran',
 paymentHistory:'Riwayat Pembayaran Putaran Ini',
 noPaymentAccount:'Tidak ada akun penerimaan yang tersedia',
@@ -2680,6 +2874,8 @@ function changeLanguage(
   renderAgentFinance();
 
   renderPaymentCenter();
+
+  renderSelectedPaymentProofs();
 
 }
 
@@ -3392,6 +3588,11 @@ async function loadRound(){
     '';
 
 
+    clearSelectedPaymentProofs(
+      false
+    );
+
+
     renderSettlement();
 
 
@@ -3892,15 +4093,6 @@ function renderSettlement(){
     );
 
 
-    /*
-      注意：
-      页面在数据库正式生成结款记录前
-      这里只显示参考值。
-
-      真正应付款最终仍以数据库
-      agent_round_totals.amount_due 为准。
-    */
-
     dueEl.textContent =
     formatNumber(
       submittedTotal
@@ -4202,6 +4394,678 @@ function getPaymentRemaining(){
 
 
 /* =========================================================
+   PAYMENT PROOF FILE KEY
+========================================================= */
+
+function getProofFileKey(
+  file
+){
+
+  return [
+    file.name || '',
+    file.size || 0,
+    file.lastModified || 0
+  ]
+  .join(
+    '__'
+  );
+
+}
+
+
+
+/* =========================================================
+   VALIDATE IMAGE FILE
+========================================================= */
+
+function validateSingleProofFile(
+  file
+){
+
+  if(!file){
+
+    throw new Error(
+      'PROOF_REQUIRED'
+    );
+
+  }
+
+
+  const name =
+  String(
+    file.name || ''
+  )
+  .toLowerCase();
+
+
+  const allowedByType =
+  [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/heic',
+    'image/heif'
+  ]
+  .includes(
+    file.type
+  );
+
+
+  const allowedByExtension =
+  /\.(jpg|jpeg|png|webp|heic|heif)$/i
+  .test(
+    name
+  );
+
+
+  if(
+    !allowedByType
+    &&
+    !allowedByExtension
+  ){
+
+    throw new Error(
+      'INVALID_PROOF_TYPE'
+    );
+
+  }
+
+
+  if(
+    Number(
+      file.size || 0
+    )
+    >
+    MAX_IMAGE_SIZE
+  ){
+
+    throw new Error(
+      'PROOF_TOO_LARGE'
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   HANDLE PAYMENT PROOF SELECTION
+
+   这是这次重要修改之一：
+
+   每次选择文件，
+   马上把 File 保存进 selectedPaymentProofFiles。
+
+   不依赖 input.files 长期保存。
+========================================================= */
+
+function handlePaymentProofSelection(
+  input
+){
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+
+  try{
+
+    const files =
+    Array.from(
+      input.files || []
+    );
+
+
+    if(
+      !files.length
+    ){
+
+      return;
+
+    }
+
+
+    const existingKeys =
+    new Set(
+      selectedPaymentProofFiles.map(
+        file =>
+        getProofFileKey(
+          file
+        )
+      )
+    );
+
+
+    for(
+      const file
+      of files
+    ){
+
+      validateSingleProofFile(
+        file
+      );
+
+
+      const key =
+      getProofFileKey(
+        file
+      );
+
+
+      if(
+        existingKeys.has(
+          key
+        )
+      ){
+
+        continue;
+
+      }
+
+
+      selectedPaymentProofFiles.push(
+        file
+      );
+
+
+      existingKeys.add(
+        key
+      );
+
+
+      const url =
+      URL.createObjectURL(
+        file
+      );
+
+
+      selectedPaymentProofPreviewUrls.set(
+        key,
+        url
+      );
+
+    }
+
+
+    /*
+      清空原生 input。
+
+      这样用户下一次可以继续选择，
+      即使再次选择同一张图浏览器也会触发 change。
+    */
+
+    input.value =
+    '';
+
+
+    renderSelectedPaymentProofs();
+
+
+    if(msg){
+
+      msg.className =
+      'msg';
+
+
+      msg.textContent =
+      '';
+
+    }
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    input.value =
+    '';
+
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+
+      msg.textContent =
+      paymentErrorText(
+        e
+      );
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   OPEN MORE PAYMENT PROOFS
+========================================================= */
+
+function openMorePaymentProofs(){
+
+  const input =
+  document.getElementById(
+    'paymentProofFiles'
+  );
+
+
+  if(input){
+
+    input.click();
+
+  }
+
+}
+
+
+
+/* =========================================================
+   REMOVE ONE SELECTED PROOF
+========================================================= */
+
+function removeSelectedPaymentProof(
+  key
+){
+
+  const index =
+  selectedPaymentProofFiles
+  .findIndex(
+    file =>
+    getProofFileKey(
+      file
+    )===
+    key
+  );
+
+
+  if(
+    index<
+    0
+  ){
+
+    return;
+
+  }
+
+
+  selectedPaymentProofFiles.splice(
+    index,
+    1
+  );
+
+
+  const url =
+  selectedPaymentProofPreviewUrls.get(
+    key
+  );
+
+
+  if(url){
+
+    try{
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    }catch(e){}
+
+
+    selectedPaymentProofPreviewUrls.delete(
+      key
+    );
+
+  }
+
+
+  renderSelectedPaymentProofs();
+
+}
+
+
+
+/* =========================================================
+   CLEAR SELECTED PROOFS
+========================================================= */
+
+function clearSelectedPaymentProofs(
+  ask=true
+){
+
+  if(
+    ask
+    &&
+    selectedPaymentProofFiles.length
+  ){
+
+    const ok =
+    confirm(
+      currentLang===
+      'zh'
+      ?
+      '确定清空目前已经选择的付款图片？'
+      :
+      'Clear all selected payment images?'
+    );
+
+
+    if(!ok){
+
+      return;
+
+    }
+
+  }
+
+
+  selectedPaymentProofPreviewUrls
+  .forEach(
+    url=>{
+
+      try{
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      }catch(e){}
+
+    }
+  );
+
+
+  selectedPaymentProofPreviewUrls.clear();
+
+
+  selectedPaymentProofFiles =
+  [];
+
+
+  const input =
+  document.getElementById(
+    'paymentProofFiles'
+  );
+
+
+  if(input){
+
+    input.value =
+    '';
+
+  }
+
+
+  renderSelectedPaymentProofs();
+
+}
+
+
+
+/* =========================================================
+   RENDER SELECTED PROOFS
+========================================================= */
+
+function renderSelectedPaymentProofs(){
+
+  const wrap =
+  document.getElementById(
+    'selectedProofWrap'
+  );
+
+
+  const grid =
+  document.getElementById(
+    'selectedProofGrid'
+  );
+
+
+  const count =
+  document.getElementById(
+    'selectedProofCount'
+  );
+
+
+  if(
+    !wrap
+    ||
+    !grid
+    ||
+    !count
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !selectedPaymentProofFiles.length
+  ){
+
+    wrap.classList.add(
+      'hidden'
+    );
+
+
+    grid.innerHTML =
+    '';
+
+
+    count.textContent =
+    '0';
+
+
+    return;
+
+  }
+
+
+  wrap.classList.remove(
+    'hidden'
+  );
+
+
+  count.textContent =
+  selectedPaymentProofFiles.length;
+
+
+  grid.innerHTML =
+  selectedPaymentProofFiles
+  .map(
+    file=>{
+
+      const key =
+      getProofFileKey(
+        file
+      );
+
+
+      const url =
+      selectedPaymentProofPreviewUrls.get(
+        key
+      )
+      ||
+      '';
+
+
+      return `
+
+      <div class="selectedProofItem">
+
+        <button
+          type="button"
+          class="removeSelectedProof"
+          onclick="removeSelectedPaymentProof(
+            '${escapeJs(key)}'
+          )">
+
+          ×
+
+        </button>
+
+
+        ${
+          url
+          ?
+          `
+
+          <img
+            src="${escapeHtml(url)}"
+            alt="${escapeHtml(
+              file.name || 'proof'
+            )}">
+
+          `
+          :
+          `
+
+          <div class="paymentProofLoading">
+            ${escapeHtml(
+              file.name || 'Image'
+            )}
+          </div>
+
+          `
+        }
+
+
+        <div class="selectedProofMeta">
+
+          ${escapeHtml(
+            file.name || 'Image'
+          )}
+
+          <br>
+
+          ${escapeHtml(
+            formatFileSize(
+              file.size
+            )
+          )}
+
+        </div>
+
+      </div>
+
+      `;
+
+    }
+  )
+  .join('');
+
+}
+
+
+
+/* =========================================================
+   PRIVATE STORAGE OBJECT URL
+
+   这里不再依赖 signed URL。
+
+   已登录代理直接使用自己的 JWT
+   读取私有 Storage 对象。
+
+   Supabase 当前 RLS 已允许：
+   - payment-qr-codes 已登录用户读取
+   - agent-payment-proofs 当前代理读取自己的目录
+========================================================= */
+
+async function getPrivateStorageObjectUrl(
+  bucket,
+  path
+){
+
+  if(
+    !bucket
+    ||
+    !path
+  ){
+
+    return '';
+
+  }
+
+
+  const cacheKey =
+  bucket+
+  '::'+
+  path;
+
+
+  if(
+    privateImageObjectUrls.has(
+      cacheKey
+    )
+  ){
+
+    return privateImageObjectUrls.get(
+      cacheKey
+    );
+
+  }
+
+
+  const r =
+  await api(
+    '/storage/v1/object/authenticated/'+
+    encodeURIComponent(
+      bucket
+    )+
+    '/'+
+    encodeStoragePath(
+      path
+    )
+  );
+
+
+  if(
+    !r.ok
+  ){
+
+    const errorText =
+    await r.text();
+
+
+    throw new Error(
+      errorText
+      ||
+      'STORAGE_READ_FAILED'
+    );
+
+  }
+
+
+  const blob =
+  await r.blob();
+
+
+  const url =
+  URL.createObjectURL(
+    blob
+  );
+
+
+  privateImageObjectUrls.set(
+    cacheKey,
+    url
+  );
+
+
+  return url;
+
+}
+
+
+
+/* =========================================================
    LOAD PAYMENT CENTER
 ========================================================= */
 
@@ -4378,7 +5242,22 @@ async function loadPaymentCenter(
     renderPaymentCenter();
 
 
+    /*
+      重新渲染以后再装载二维码和历史付款截图。
+    */
+
     await refreshPaymentImages();
+
+
+    /*
+      特别注意：
+      不清除 selectedPaymentProofFiles。
+
+      所以 20 秒自动刷新发生时，
+      用户尚未提交的本地图片仍然保留。
+    */
+
+    renderSelectedPaymentProofs();
 
 
     if(
@@ -4431,6 +5310,10 @@ async function loadPaymentCenter(
       msg.textContent =
       tr(
         'paymentRefreshFail'
+      )+
+      '：'+
+      paymentErrorText(
+        e
       );
 
     }
@@ -4448,7 +5331,7 @@ async function loadPaymentCenter(
 
 
 /* =========================================================
-   PAYMENT ACCOUNT RENDER
+   RENDER PAYMENT CENTER
 ========================================================= */
 
 function renderPaymentCenter(){
@@ -4811,6 +5694,14 @@ function renderPaymentCenter(){
       );
 
 
+      /*
+        只在输入为空或输入大于当前余额时
+        自动调整。
+
+        用户自己输入 3000、5000 等部分付款金额，
+        系统不会再强制改回全部余额。
+      */
+
       if(
         amountInput
         &&
@@ -4865,6 +5756,9 @@ function renderPaymentCenter(){
 
 
   renderPaymentHistory();
+
+
+  renderSelectedPaymentProofs();
 
 }
 
@@ -5187,7 +6081,7 @@ function renderPaymentHistory(){
             <input
               id="retryProofInput_${safeId(row.id)}"
               type="file"
-              accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+              accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
               multiple>
 
 
@@ -5374,99 +6268,12 @@ function encodeStoragePath(
 
 
 /* =========================================================
-   CREATE SIGNED STORAGE URL
-========================================================= */
-
-async function createSignedStorageUrl(
-  bucket,
-  path,
-  expiresIn=3600
-){
-
-  if(!path){
-
-    return '';
-
-  }
-
-
-  const r =
-  await api(
-    '/storage/v1/object/sign/'+
-    encodeURIComponent(
-      bucket
-    )+
-    '/'+
-    encodeStoragePath(
-      path
-    ),
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-        'application/json'
-      },
-
-      body:
-      JSON.stringify({
-        expiresIn:
-        expiresIn
-      })
-    }
-  );
-
-
-  if(!r.ok){
-
-    throw new Error(
-      await r.text()
-    );
-
-  }
-
-
-  const data =
-  await r.json();
-
-
-  const signed =
-  data.signedURL
-  ||
-  data.signedUrl
-  ||
-  '';
-
-
-  if(!signed){
-
-    throw new Error(
-      'SIGNED_URL_FAILED'
-    );
-
-  }
-
-
-  if(
-    signed.startsWith(
-      'http'
-    )
-  ){
-
-    return signed;
-
-  }
-
-
-  return BASE+
-  signed;
-
-}
-
-
-
-/* =========================================================
    REFRESH PAYMENT IMAGES
+
+   修复后台 QR 在代理端只显示 "..." 的问题。
+
+   不创建 signed URL。
+   直接读取 authenticated private object。
 ========================================================= */
 
 async function refreshPaymentImages(){
@@ -5513,26 +6320,42 @@ async function refreshPaymentImages(){
     try{
 
       const url =
-      await createSignedStorageUrl(
+      await getPrivateStorageObjectUrl(
         PAYMENT_QR_BUCKET,
-        account.qr_storage_path,
-        3600
+        account.qr_storage_path
       );
 
 
-      box.outerHTML = `
+      const img =
+      document.createElement(
+        'img'
+      );
 
-      <img
-        id="accountQr_${safeId(account.id)}"
-        src="${escapeHtml(url)}"
-        alt="QR">
 
-      `;
+      img.id =
+      'accountQr_'+
+      safeId(
+        account.id
+      );
+
+
+      img.src =
+      url;
+
+
+      img.alt =
+      'QR';
+
+
+      box.replaceWith(
+        img
+      );
 
 
     }catch(e){
 
       console.error(
+        'QR_READ_ERROR',
         e
       );
 
@@ -5571,29 +6394,41 @@ async function refreshPaymentImages(){
     try{
 
       const url =
-      await createSignedStorageUrl(
+      await getPrivateStorageObjectUrl(
         PAYMENT_PROOF_BUCKET,
-        proof.storage_path,
-        3600
+        proof.storage_path
       );
 
 
-      box.innerHTML = `
+      box.innerHTML =
+      '';
 
-      <img
-        src="${escapeHtml(url)}"
-        alt="${escapeHtml(
-          proof.original_name
-          ||
-          'Payment Proof'
-        )}">
 
-      `;
+      const img =
+      document.createElement(
+        'img'
+      );
+
+
+      img.src =
+      url;
+
+
+      img.alt =
+      proof.original_name
+      ||
+      'Payment Proof';
+
+
+      box.appendChild(
+        img
+      );
 
 
     }catch(e){
 
       console.error(
+        'PROOF_READ_ERROR',
         e
       );
 
@@ -5612,2790 +6447,502 @@ async function refreshPaymentImages(){
   }
 
 }
-
-
-
-/* =========================================================
-   VALIDATE IMAGE FILES
-========================================================= */
-
-function validateProofFiles(
-  files
-){
-
-  if(
-    !files
-    ||
-    !files.length
-  ){
-
-    throw new Error(
-      'PROOF_REQUIRED'
-    );
-
-  }
-
-
-  for(
-    const file
-    of files
-  ){
-
-    const name =
-    String(
-      file.name || ''
-    )
-    .toLowerCase();
-
-
-    const allowedByType =
-    [
-      'image/jpeg',
-      'image/png',
-      'image/webp',
-      'image/heic',
-      'image/heif'
-    ]
-    .includes(
-      file.type
-    );
-
-
-    const allowedByExtension =
-    /\.(jpg|jpeg|png|webp|heic|heif)$/i
-    .test(
-      name
-    );
-
-
-    if(
-      !allowedByType
-      &&
-      !allowedByExtension
-    ){
-
-      throw new Error(
-        'INVALID_PROOF_TYPE'
-      );
-
-    }
-
-
-    if(
-      Number(
-        file.size || 0
-      )
-      >
-      MAX_IMAGE_SIZE
-    ){
-
-      throw new Error(
-        'PROOF_TOO_LARGE'
-      );
-
-    }
-
-  }
-
-}
-
-
-
-/* =========================================================
-   FILE EXTENSION
-========================================================= */
-
-function getFileExtension(
-  file
-){
-
-  const name =
-  String(
-    file.name || ''
-  );
-
-
-  const match =
-  name.match(
-    /\.([a-zA-Z0-9]+)$/
-  );
-
-
-  if(match){
-
-    return match[1]
-    .toLowerCase();
-
-  }
-
-
-  if(
-    file.type===
-    'image/png'
-  ){
-
-    return 'png';
-
-  }
-
-
-  if(
-    file.type===
-    'image/webp'
-  ){
-
-    return 'webp';
-
-  }
-
-
-  if(
-    file.type===
-    'image/heic'
-  ){
-
-    return 'heic';
-
-  }
-
-
-  if(
-    file.type===
-    'image/heif'
-  ){
-
-    return 'heif';
-
-  }
-
-
-  return 'jpg';
-
-}
-
-
-
-/* =========================================================
-   UUID
-========================================================= */
-
-function randomId(){
-
-  if(
-    crypto
-    &&
-    typeof crypto.randomUUID===
-    'function'
-  ){
-
-    return crypto.randomUUID();
-
-  }
-
-
-  return (
-    Date.now().toString(36)
-    +
-    '-'
-    +
-    Math.random()
-    .toString(36)
-    .slice(2)
-  );
-
-}
-
-
-
-/* =========================================================
-   UPLOAD SINGLE PAYMENT PROOF
-========================================================= */
-
-async function uploadSinglePaymentProof(
-  submissionId,
-  file
-){
-
-  const ext =
-  getFileExtension(
-    file
-  );
-
-
-  /*
-    Storage policy 要求第一层目录必须是 agent.id
-  */
-
-  const storagePath =
-  agent.id+
-  '/'+
-  submissionId+
-  '/'+
-  Date.now()+
-  '-'+
-  randomId()+
-  '.'+
-  ext;
-
-
-  const uploadRes =
-  await api(
-    '/storage/v1/object/'+
-    PAYMENT_PROOF_BUCKET+
-    '/'+
-    encodeStoragePath(
-      storagePath
-    ),
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-        file.type
-        ||
-        'application/octet-stream',
-
-        'x-upsert':
-        'false'
-      },
-
-      body:
-      file
-    }
-  );
-
-
-  if(
-    !uploadRes.ok
-  ){
-
-    throw new Error(
-      await uploadRes.text()
-    );
-
-  }
-
-
-  const metaRes =
-  await api(
-    '/rest/v1/agent_payment_proofs',
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-        'application/json',
-
-        Prefer:
-        'return=representation'
-      },
-
-      body:
-      JSON.stringify({
-        payment_submission_id:
-        submissionId,
-
-        agent_id:
-        agent.id,
-
-        storage_path:
-        storagePath,
-
-        original_name:
-        file.name
-        ||
-        'payment-proof.'+
-        ext,
-
-        mime_type:
-        file.type
-        ||
-        null,
-
-        file_size:
-        Number(
-          file.size || 0
-        )
-      })
-    }
-  );
-
-
-  if(
-    !metaRes.ok
-  ){
-
-    throw new Error(
-      await metaRes.text()
-    );
-
-  }
-
-
-  return storagePath;
-
-}
-
-
-
-/* =========================================================
-   UPLOAD MULTIPLE PROOFS
-========================================================= */
-
-async function uploadPaymentProofFiles(
-  submissionId,
-  fileList
-){
-
-  const files =
-  Array.from(
-    fileList || []
-  );
-
-
-  validateProofFiles(
-    files
-  );
-
-
-  const uploaded =
-  [];
-
-
-  for(
-    const file
-    of files
-  ){
-
-    await uploadSinglePaymentProof(
-      submissionId,
-      file
-    );
-
-
-    uploaded.push(
-      file.name
-    );
-
-  }
-
-
-  return uploaded;
-
-}
-
-
-
-/* =========================================================
-   CREATE PAYMENT SUBMISSION
-========================================================= */
-
-async function createPaymentSubmission(
-  paymentAccountId,
-  amount,
-  note
-){
-
-  const r =
-  await api(
-    '/rest/v1/rpc/agent_create_payment_submission',
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-        'application/json'
-      },
-
-      body:
-      JSON.stringify({
-        p_round_id:
-        currentRound.id,
-
-        p_payment_account_id:
-        paymentAccountId,
-
-        p_declared_amount:
-        amount,
-
-        p_agent_note:
-        note
-        ||
-        null
-      })
-    }
-  );
-
-
-  const text =
-  await r.text();
-
-
-  if(
-    !r.ok
-  ){
-
-    throw new Error(
-      text
-      ||
-      'PAYMENT_SUBMISSION_FAILED'
-    );
-
-  }
-
-
-  let result =
-  {};
-
-
-  try{
-
-    result =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    {};
-
-  }catch(e){
-
-    result =
-    {};
-
-  }
-
-
-  if(
-    !result
-    ||
-    !result.submission_id
-  ){
-
-    throw new Error(
-      'PAYMENT_SUBMISSION_ID_MISSING'
-    );
-
-  }
-
-
-  return result;
-
-}
-
-
-
-/* =========================================================
-   PAYMENT ERROR NAME
-========================================================= */
-
-function paymentErrorText(
-  error
-){
-
-  const text =
-  String(
-    error?.message
-    ||
-    error
-    ||
-    ''
-  );
-
-
-  if(
-    text.includes(
-      'PROOF_REQUIRED'
-    )
-  ){
-
-    return tr(
-      'proofRequired'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'INVALID_PROOF_TYPE'
-    )
-  ){
-
-    return tr(
-      'invalidProof'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'PROOF_TOO_LARGE'
-    )
-  ){
-
-    return tr(
-      'proofTooLarge'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'INVALID_PAYMENT_AMOUNT'
-    )
-  ){
-
-    return tr(
-      'invalidPaymentAmount'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'PAYMENT_EXCEEDS_REMAINING_AMOUNT'
-    )
-  ){
-
-    return tr(
-      'paymentAmountTooHigh'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'PAYMENT_ACCOUNT_NOT_AVAILABLE'
-    )
-  ){
-
-    return tr(
-      'noPaymentAccount'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'ROUND_ALREADY_FULLY_PAID'
-    )
-  ){
-
-    return tr(
-      'allAmountSubmitted'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'ROUND_SETTLEMENT_NOT_FOUND'
-    )
-  ){
-
-    return tr(
-      'paymentNotReady'
-    );
-
-  }
-
-
-  if(
-    text.includes(
-      'NO_SUBMITTED_AMOUNT'
-    )
-  ){
-
-    return tr(
-      'paymentNotReady'
-    );
-
-  }
-
-
-  return text
-  ||
-  tr(
-    'networkError'
-  );
-
-}
-
-
-
-/* =========================================================
-   SUBMIT PAYMENT PROOF
-========================================================= */
-
-async function submitPaymentProof(){
-
-  if(
-    isSubmittingPayment
-  ){
-
-    return;
-
-  }
-
-
-  const msg =
-  document.getElementById(
-    'paymentMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  if(
-    !agent
-    ||
-    !currentRound
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'paymentNotReady'
-    );
-
-
-    return;
-
-  }
-
-
-  if(
-    !selectedPaymentAccountId
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'selectPaymentAccount'
-    );
-
-
-    return;
-
-  }
-
-
-  const amountInput =
-  document.getElementById(
-    'paymentAmountInput'
-  );
-
-
-  const noteInput =
-  document.getElementById(
-    'paymentNoteInput'
-  );
-
-
-  const fileInput =
-  document.getElementById(
-    'paymentProofFiles'
-  );
-
-
-  const amount =
-  Number(
-    amountInput.value
-  );
-
-
-  const remaining =
-  getPaymentRemaining();
-
-
-  if(
-    !Number.isFinite(
-      amount
-    )
-    ||
-    amount<=0
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'invalidPaymentAmount'
-    );
-
-
-    return;
-
-  }
-
-
-  if(
-    amount>
-    remaining+
-    0.001
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'paymentAmountTooHigh'
-    );
-
-
-    return;
-
-  }
-
-
-  const files =
-  Array.from(
-    fileInput.files || []
-  );
-
-
-  try{
-
-    validateProofFiles(
-      files
-    );
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    paymentErrorText(
-      e
-    );
-
-
-    return;
-
-  }
-
-
-  const selectedAccount =
-  paymentAccounts.find(
-    row =>
-    row.id===
-    selectedPaymentAccountId
-  );
-
-
-  if(!selectedAccount){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'selectPaymentAccount'
-    );
-
-
-    return;
-
-  }
-
-
-  const ok =
-  confirm(
-    (
-      currentLang===
-      'zh'
-    )
-    ?
-    (
-      '请确认付款资料：\n\n'+
-      '收款方式：'+
-      (
-        selectedAccount.method_name
-        ||
-        selectedAccount.bank_name
-        ||
-        '—'
-      )+
-      '\n收款人：'+
-      (
-        selectedAccount.account_name
-        ||
-        '—'
-      )+
-      '\n收款号码：'+
-      (
-        selectedAccount.account_number
-        ||
-        '—'
-      )+
-      '\n实际转账：'+
-      formatNumber(
-        amount
-      )+
-      '\n付款凭证：'+
-      files.length+
-      ' 张\n\n提交后将等待管理员核实。'
-    )
-    :
-    (
-      'Confirm payment submission?\n\n'+
-      (
-        selectedAccount.method_name
-        ||
-        selectedAccount.bank_name
-        ||
-        'Payment'
-      )+
-      '\nAmount: '+
-      formatNumber(
-        amount
-      )+
-      '\nProofs: '+
-      files.length
-    )
-  );
-
-
-  if(!ok){
-
-    return;
-
-  }
-
-
-  isSubmittingPayment =
-  true;
-
-
-  const btn =
-  document.getElementById(
-    'paymentSubmitBtn'
-  );
-
-
-  btn.disabled =
-  true;
-
-
-  let submissionId =
-  '';
-
-
-  try{
-
-    msg.textContent =
-    tr(
-      'paymentSubmitting'
-    );
-
-
-    const result =
-    await createPaymentSubmission(
-      selectedPaymentAccountId,
-      amount,
-      noteInput.value.trim()
-    );
-
-
-    submissionId =
-    result.submission_id;
-
-
-    msg.textContent =
-    tr(
-      'paymentUploading'
-    );
-
-
-    try{
-
-      await uploadPaymentProofFiles(
-        submissionId,
-        files
-      );
-
-    }catch(uploadError){
-
-      console.error(
-        uploadError
-      );
-
-
-      await loadPaymentCenter(
-        false
-      );
-
-
-      msg.className =
-      'msg error';
-
-
-      msg.textContent =
-      tr(
-        'paymentRecordCreatedProofFailed'
-      );
-
-
-      return;
-
-    }
-
-
-    amountInput.value =
-    '';
-
-
-    noteInput.value =
-    '';
-
-
-    fileInput.value =
-    '';
-
-
-    selectedPaymentAccountId =
-    '';
-
-
-    await loadSettlement();
-
-
-    await loadPaymentCenter(
-      false
-    );
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    tr(
-      'paymentSuccess'
-    );
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'paymentSubmitFail'
-    )+
-    '：'+
-    paymentErrorText(
-      e
-    );
-
-
-  }finally{
-
-    isSubmittingPayment =
-    false;
-
-
-    btn.disabled =
-    false;
-
-  }
-
-}
-
-
-
-/* =========================================================
-   RETRY / ADD PROOFS
-========================================================= */
-
-async function uploadMoreProofs(
-  submissionId
-){
-
-  const input =
-  document.getElementById(
-    'retryProofInput_'+
-    safeId(
-      submissionId
-    )
-  );
-
-
-  const msg =
-  document.getElementById(
-    'retryProofMsg_'+
-    safeId(
-      submissionId
-    )
-  );
-
-
-  if(
-    !input
-    ||
-    !msg
-  ){
-
-    return;
-
-  }
-
-
-  const files =
-  Array.from(
-    input.files || []
-  );
-
-
-  try{
-
-    validateProofFiles(
-      files
-    );
-
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    tr(
-      'paymentUploading'
-    );
-
-
-    await uploadPaymentProofFiles(
-      submissionId,
-      files
-    );
-
-
-    input.value =
-    '';
-
-
-    await loadPaymentCenter(
-      false
-    );
-
-
-    const newMsg =
-    document.getElementById(
-      'retryProofMsg_'+
-      safeId(
-        submissionId
-      )
-    );
-
-
-    if(newMsg){
-
-      newMsg.className =
-      'msg success';
-
-
-      newMsg.textContent =
-      '✓';
-
-    }
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    tr(
-      'proofUploadFail'
-    )+
-    '：'+
-    paymentErrorText(
-      e
-    );
-
-  }
-
-}
-
-
-
-/* =========================================================
-   RESULT / FINANCE
-========================================================= */
-
 function renderAgentFinance(){
-
-  const rate =
-
-  settlement
-  &&
-  settlement.commission_rate_snapshot
-  !==
-  null
-  &&
-  settlement.commission_rate_snapshot
-  !==
-  undefined
-
-  ?
-
-  Number(
-    settlement.commission_rate_snapshot
-  )
-
-  :
-
-  agent
-
-  ?
-
-  normalizeRate(
-    agent.commission_rate
-  )
-
-  :
-
-  0;
-
-
-  const total =
-  settlement
-  ?
-  Number(
-    settlement.submitted_total
-    ||
-    0
-  )
-  :
-  submittedTotal;
-
-
-  const commission =
-  settlement
-  ?
-  Number(
-    settlement.commission_amount
-    ||
-    0
-  )
-  :
-  total*
-  rate/
-  100;
-
-
-  document.getElementById(
-    'resultSubmittedTotal'
-  ).textContent =
-  formatNumber(
-    total
-  );
-
-
-  document.getElementById(
-    'resultRate'
-  ).textContent =
-  formatRate(
-    rate
-  )
-  +
-  '%';
-
-
-  document.getElementById(
-    'resultCommission'
-  ).textContent =
-  formatNumber(
-    commission
-  );
-
-
-  if(
-    !currentRound
-    ||
-    !hasResult(
-      currentRound.result_number
-    )
-  ){
-
-    document.getElementById(
-      'winningAmount'
-    ).textContent =
-    tr(
-      'waitingResult'
-    );
-
-
-    document.getElementById(
-      'finalBalance'
-    ).textContent =
-    tr(
-      'waitingResult'
-    );
-
-
-    return;
-
-  }
-
-
-  let winningAmount =
-  0;
-
-
-  if(
-    settlement
-  ){
-
-    winningAmount =
-    Number(
-      settlement.result_payout
-      ||
-      0
-    );
-
-  }
-
-  else{
-
-    const resultCode =
-    String(
-      currentRound.result_number
-    )
-    .padStart(
-      2,
-      '0'
-    );
-
-
-    const winningPoints =
-    Number(
-      submittedNumbers[
-        resultCode
-      ]
-      ||
-      0
-    );
-
-
-    winningAmount =
-    winningPoints*
-    MULTIPLIER;
-
-  }
-
-
-  document.getElementById(
-    'winningAmount'
-  ).textContent =
-  formatNumber(
-    winningAmount
-  );
-
-
-  /*
-    final_balance 只要数据库已有，
-    始终优先使用数据库值。
-  */
-
-  const finalBalance =
-  settlement
-  &&
-  settlement.final_balance
-  !==
-  null
-  &&
-  settlement.final_balance
-  !==
-  undefined
-
-  ?
-
-  Number(
-    settlement.final_balance
-  )
-
-  :
-
-  Number(
-    settlement
-    ?
-    settlement.amount_due
-    :
-    total
-  )
-  -
-  winningAmount;
-
-
-  const finalEl =
-  document.getElementById(
-    'finalBalance'
-  );
-
-
-  if(
-    finalBalance>0
-  ){
-
-    finalEl.textContent =
-    tr(
-      'platformReceives'
-    )
-    +
-    ' '+
-    formatNumber(
-      finalBalance
-    );
-
-
-    finalEl.className =
-    'statusPending';
-
-  }
-
-  else if(
-    finalBalance<0
-  ){
-
-    finalEl.textContent =
-    tr(
-      'platformPays'
-    )
-    +
-    ' '+
-    formatNumber(
-      Math.abs(
-        finalBalance
-      )
-    );
-
-
-    finalEl.className =
-    'statusPaid';
-
-  }
-
-  else{
-
-    finalEl.textContent =
-    tr(
-      'balanced'
-    );
-
-
-    finalEl.className =
-    'statusPaid';
-
-  }
-
+const rate=settlement&&settlement.commission_rate_snapshot!=null?Number(settlement.commission_rate_snapshot):agent?normalizeRate(agent.commission_rate):0,
+total=settlement?Number(settlement.submitted_total||0):submittedTotal,
+commission=settlement?Number(settlement.commission_amount||0):total*rate/100;
+
+document.getElementById('resultSubmittedTotal').textContent=formatNumber(total);
+document.getElementById('resultRate').textContent=formatRate(rate)+'%';
+document.getElementById('resultCommission').textContent=formatNumber(commission);
+
+if(!currentRound||!hasResult(currentRound.result_number)){
+document.getElementById('winningAmount').textContent=tr('waitingResult');
+document.getElementById('finalBalance').textContent=tr('waitingResult');
+return
 }
 
+let win=settlement
+?Number(settlement.result_payout||0)
+:Number(submittedNumbers[String(currentRound.result_number).padStart(2,'0')]||0)*MULTIPLIER;
 
+document.getElementById('winningAmount').textContent=formatNumber(win);
 
-/* =========================================================
-   UPDATE EXISTING NUMBER
-========================================================= */
+const fb=settlement&&settlement.final_balance!=null
+?Number(settlement.final_balance)
+:Number(settlement?settlement.amount_due:total)-win,
+el=document.getElementById('finalBalance');
 
-async function updateExistingCode(
-  code,
-  points
-){
-
-  const r =
-  await api(
-    '/rest/v1/agent_submissions'+
-    '?round_id=eq.'+
-    encodeURIComponent(
-      currentRound.id
-    )+
-    '&agent_id=eq.'+
-    encodeURIComponent(
-      agent.id
-    )+
-    '&number_code=eq.'+
-    encodeURIComponent(
-      code
-    ),
-    {
-      method:'PATCH',
-
-      headers:{
-        'Content-Type':
-        'application/json',
-
-        Prefer:
-        'return=representation'
-      },
-
-      body:
-      JSON.stringify({
-        points:
-        points,
-
-        updated_at:
-        new Date()
-        .toISOString()
-      })
-    }
-  );
-
-
-  const text =
-  await r.text();
-
-
-  if(
-    !r.ok
-  ){
-
-    throw new Error(
-      text
-      ||
-      'UPDATE_FAILED'
-    );
-
-  }
-
-
-  let rows =
-  [];
-
-
-  try{
-
-    rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-  }catch(e){
-
-    rows =
-    [];
-
-  }
-
-
-  if(
-    !Array.isArray(
-      rows
-    )
-    ||
-    rows.length===
-    0
-  ){
-
-    throw new Error(
-      'UPDATE_NOT_APPLIED'
-    );
-
-  }
-
+if(fb>0){
+el.textContent=tr('platformReceives')+' '+formatNumber(fb);
+el.className='statusPending'
+}else if(fb<0){
+el.textContent=tr('platformPays')+' '+formatNumber(Math.abs(fb));
+el.className='statusPaid'
+}else{
+el.textContent=tr('balanced');
+el.className='statusPaid'
+}
 }
 
+async function updateExistingCode(c,p){
+const r=await api(
+'/rest/v1/agent_submissions?round_id=eq.'+
+encodeURIComponent(currentRound.id)+
+'&agent_id=eq.'+
+encodeURIComponent(agent.id)+
+'&number_code=eq.'+
+encodeURIComponent(c),
+{
+method:'PATCH',
+headers:{
+'Content-Type':'application/json',
+Prefer:'return=representation'
+},
+body:JSON.stringify({
+points:p,
+updated_at:new Date().toISOString()
+})
+}
+),
+t=await r.text();
 
+if(!r.ok)throw new Error(t||'UPDATE_FAILED');
 
-/* =========================================================
-   INSERT NEW NUMBER
-========================================================= */
+let rows=[];
 
-async function insertNewCode(
-  code,
-  points
-){
+try{
+rows=t?JSON.parse(t):[]
+}catch(e){}
 
-  const r =
-  await api(
-    '/rest/v1/agent_submissions',
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-        'application/json',
-
-        Prefer:
-        'return=representation'
-      },
-
-      body:
-      JSON.stringify({
-        round_id:
-        currentRound.id,
-
-        agent_id:
-        agent.id,
-
-        number_code:
-        code,
-
-        points:
-        points
-      })
-    }
-  );
-
-
-  const text =
-  await r.text();
-
-
-  if(
-    !r.ok
-  ){
-
-    throw new Error(
-      text
-      ||
-      'INSERT_FAILED'
-    );
-
-  }
-
+if(!Array.isArray(rows)||!rows.length)
+throw new Error('UPDATE_NOT_APPLIED')
 }
 
+async function insertNewCode(c,p){
+const r=await api(
+'/rest/v1/agent_submissions',
+{
+method:'POST',
+headers:{
+'Content-Type':'application/json',
+Prefer:'return=representation'
+},
+body:JSON.stringify({
+round_id:currentRound.id,
+agent_id:agent.id,
+number_code:c,
+points:p
+})
+}
+),
+t=await r.text();
 
-
-/* =========================================================
-   SUBMIT ROUND
-========================================================= */
+if(!r.ok)throw new Error(t||'INSERT_FAILED')
+}
 
 async function submitRound(){
+if(isSaving)return;
 
-  if(
-    isSaving
-  ){
+const m=document.getElementById('submitMsg');
+m.className='msg';
 
-    return;
-
-  }
-
-
-  const msg =
-  document.getElementById(
-    'submitMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  if(
-    !agent
-    ||
-    !currentRound
-  ){
-
-    msg.textContent =
-    tr(
-      'noSubmitRound'
-    );
-
-
-    return;
-
-  }
-
-
-  if(
-    agent.status!==
-    'active'
-  ){
-
-    msg.textContent =
-    tr(
-      'accountCannot'
-    );
-
-
-    return;
-
-  }
-
-
-  if(
-    currentRound.status!==
-    'open'
-    ||
-    Date.now()
-    >=
-    new Date(
-      currentRound.deadline_at
-    ).getTime()
-  ){
-
-    msg.textContent =
-    tr(
-      'serverRejected'
-    );
-
-
-    disableInputs(
-      true
-    );
-
-
-    return;
-
-  }
-
-
-  const changes =
-  [];
-
-
-  for(
-    let i=0;
-    i<=99;
-    i++
-  ){
-
-    const code =
-    String(i)
-    .padStart(
-      2,
-      '0'
-    );
-
-
-    const oldValue =
-    Number(
-      submittedNumbers[
-        code
-      ]
-      ||
-      0
-    );
-
-
-    const newValue =
-    getInputValue(
-      code
-    );
-
-
-    if(
-      existingCodes.has(
-        code
-      )
-      &&
-      newValue!==
-      oldValue
-    ){
-
-      changes.push({
-        type:'update',
-        code,
-        points:newValue
-      });
-
-
-      continue;
-
-    }
-
-
-    if(
-      !existingCodes.has(
-        code
-      )
-      &&
-      newValue>0
-    ){
-
-      changes.push({
-        type:'insert',
-        code,
-        points:newValue
-      });
-
-    }
-
-  }
-
-
-  if(
-    !changes.length
-  ){
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    tr(
-      'noChange'
-    );
-
-
-    return;
-
-  }
-
-
-  isSaving =
-  true;
-
-
-  msg.textContent =
-  tr(
-    'saving'
-  );
-
-
-  disableInputs(
-    true
-  );
-
-
-  try{
-
-    for(
-      const change
-      of changes
-    ){
-
-      if(
-        change.type===
-        'update'
-      ){
-
-        await updateExistingCode(
-          change.code,
-          change.points
-        );
-
-      }
-
-      else{
-
-        await insertNewCode(
-          change.code,
-          change.points
-        );
-
-      }
-
-    }
-
-
-    await loadExisting(
-      false
-    );
-
-
-    await loadSettlement();
-
-
-    await loadPaymentCenter(
-      false
-    );
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    tr(
-      'saveSuccess'
-    )
-    +
-    formatNumber(
-      submittedTotal
-    );
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    const errorText =
-    String(
-      e.message
-      ||
-      ''
-    );
-
-
-    if(
-      errorText.includes(
-        'AGENT_PREVIOUS_PAYMENT_OVERDUE'
-      )
-    ){
-
-      msg.textContent =
-      tr(
-        'previousPaymentOverdue'
-      );
-
-    }
-
-    else{
-
-      msg.textContent =
-      tr(
-        'saveFail'
-      )
-      +
-      '：'
-      +
-      (
-        errorText
-        ||
-        tr(
-          'networkError'
-        )
-      );
-
-    }
-
-
-  }finally{
-
-    isSaving =
-    false;
-
-
-    updateDeadlineUI();
-
-  }
-
+if(!agent||!currentRound){
+m.textContent=tr('noSubmitRound');
+return
 }
 
+if(agent.status!=='active'){
+m.textContent=tr('accountCannot');
+return
+}
 
+if(
+currentRound.status!=='open'||
+Date.now()>=new Date(currentRound.deadline_at).getTime()
+){
+m.textContent=tr('serverRejected');
+disableInputs(true);
+return
+}
 
-/* =========================================================
-   DEADLINE UI
-========================================================= */
+const changes=[];
+
+for(let i=0;i<=99;i++){
+const c=String(i).padStart(2,'0'),
+o=Number(submittedNumbers[c]||0),
+n=getInputValue(c);
+
+if(existingCodes.has(c)&&n!==o)
+changes.push({type:'update',code:c,points:n});
+else if(!existingCodes.has(c)&&n>0)
+changes.push({type:'insert',code:c,points:n})
+}
+
+if(!changes.length){
+m.className='msg success';
+m.textContent=tr('noChange');
+return
+}
+
+isSaving=true;
+m.textContent=tr('saving');
+disableInputs(true);
+
+try{
+
+for(const ch of changes)
+ch.type==='update'
+?await updateExistingCode(ch.code,ch.points)
+:await insertNewCode(ch.code,ch.points);
+
+await loadExisting(false);
+await loadSettlement();
+await loadPaymentCenter(false);
+
+m.className='msg success';
+m.textContent=tr('saveSuccess')+formatNumber(submittedTotal)
+
+}catch(e){
+
+const t=String(e.message||'');
+
+m.className='msg error';
+
+m.textContent=t.includes('AGENT_PREVIOUS_PAYMENT_OVERDUE')
+?tr('previousPaymentOverdue')
+:tr('saveFail')+'：'+(cleanApiError(t)||tr('networkError'))
+
+}finally{
+
+isSaving=false;
+updateDeadlineUI()
+
+}
+}
 
 function updateDeadlineUI(){
 
-  if(
-    !currentRound
-  ){
+if(!currentRound)return;
 
-    return;
+const left=
+new Date(currentRound.deadline_at).getTime()-Date.now(),
 
-  }
+s=document.getElementById('roundStatus'),
+c=document.getElementById('countdown');
 
+if(left<=0||currentRound.status!=='open'){
 
-  const left =
-  new Date(
-    currentRound.deadline_at
-  ).getTime()
-  -
-  Date.now();
+s.textContent=tr('closed');
+s.className='statusClosed';
 
+c.textContent=tr('closedShort');
 
-  const statusEl =
-  document.getElementById(
-    'roundStatus'
-  );
-
-
-  const countdown =
-  document.getElementById(
-    'countdown'
-  );
-
-
-  if(
-    left<=0
-    ||
-    currentRound.status!==
-    'open'
-  ){
-
-    statusEl.textContent =
-    tr(
-      'closed'
-    );
-
-
-    statusEl.className =
-    'statusClosed';
-
-
-    countdown.textContent =
-    tr(
-      'closedShort'
-    );
-
-
-    disableInputs(
-      true
-    );
-
-
-    renderSettlement();
-
-
-    return;
-
-  }
-
-
-  statusEl.textContent =
-  tr(
-    'canSubmit'
-  );
-
-
-  statusEl.className =
-  'statusOpen';
-
-
-  let totalSeconds =
-  Math.max(
-    0,
-    Math.floor(
-      left/1000
-    )
-  );
-
-
-  const hours =
-  Math.floor(
-    totalSeconds/
-    3600
-  );
-
-
-  totalSeconds %=
-  3600;
-
-
-  const minutes =
-  Math.floor(
-    totalSeconds/
-    60
-  );
-
-
-  const seconds =
-  totalSeconds%
-  60;
-
-
-  if(
-    hours>0
-  ){
-
-    countdown.textContent =
-    String(
-      hours
-    )
-    .padStart(
-      2,
-      '0'
-    )
-    +
-    ':'
-    +
-    String(
-      minutes
-    )
-    .padStart(
-      2,
-      '0'
-    )
-    +
-    ':'
-    +
-    String(
-      seconds
-    )
-    .padStart(
-      2,
-      '0'
-    );
-
-  }
-
-  else{
-
-    countdown.textContent =
-    minutes+
-    ' '+
-    tr(
-      'minutes'
-    )+
-    ' '+
-    seconds+
-    ' '+
-    tr(
-      'seconds'
-    );
-
-  }
-
-
-  if(
-    agent
-    &&
-    agent.status===
-    'active'
-    &&
-    !isSaving
-  ){
-
-    disableInputs(
-      false
-    );
-
-  }
-
-
-  renderSettlement();
-
+disableInputs(true);
+return
 }
 
+s.textContent=tr('canSubmit');
+s.className='statusOpen';
 
+let ts=Math.max(0,Math.floor(left/1000));
 
-/* =========================================================
-   DISABLE INPUTS
-========================================================= */
+const h=Math.floor(ts/3600);
 
-function disableInputs(
-  disabled
-){
+ts%=3600;
 
-  for(
-    let i=0;
-    i<=99;
-    i++
-  ){
+const m=Math.floor(ts/60),
+sec=ts%60;
 
-    const code =
-    String(
-      i
-    )
-    .padStart(
-      2,
-      '0'
-    );
+c.textContent=
+h>0
+?String(h).padStart(2,'0')+
+':'+String(m).padStart(2,'0')+
+':'+String(sec).padStart(2,'0')
+:m+' '+tr('minutes')+' '+sec+' '+tr('seconds');
 
-
-    const input =
-    document.getElementById(
-      'n'+code
-    );
-
-
-    if(
-      input
-    ){
-
-      input.disabled =
-      disabled;
-
-    }
-
-  }
-
-
-  const submitButton =
-  document.getElementById(
-    'submitBtn'
-  );
-
-
-  if(
-    submitButton
-  ){
-
-    submitButton.disabled =
-    disabled;
-
-  }
-
+if(agent&&agent.status==='active'&&!isSaving)
+disableInputs(false)
 }
 
+function disableInputs(disabled){
 
+for(let i=0;i<=99;i++){
 
-/* =========================================================
-   FORMAT MMT
-========================================================= */
+const x=document.getElementById(
+'n'+String(i).padStart(2,'0')
+);
 
-function formatMMT(
-  iso
-){
-
-  if(
-    !iso
-  ){
-
-    return '—';
-
-  }
-
-
-  const d =
-  new Date(
-    iso
-  );
-
-
-  if(
-    Number.isNaN(
-      d.getTime()
-    )
-  ){
-
-    return '—';
-
-  }
-
-
-  return new Intl.DateTimeFormat(
-    'zh-CN',
-    {
-      timeZone:
-      'Asia/Yangon',
-
-      year:
-      'numeric',
-
-      month:
-      '2-digit',
-
-      day:
-      '2-digit',
-
-      hour:
-      '2-digit',
-
-      minute:
-      '2-digit',
-
-      second:
-      '2-digit',
-
-      hour12:
-      false
-    }
-  )
-  .format(
-    d
-  )
-  +
-  ' MMT';
-
+if(x)x.disabled=disabled
 }
 
+const b=document.getElementById('submitBtn');
 
-
-/* =========================================================
-   FORMAT NUMBER
-========================================================= */
-
-function formatNumber(
-  value
-){
-
-  return Number(
-    value || 0
-  )
-  .toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits:
-      2
-    }
-  );
-
+if(b)b.disabled=disabled
 }
 
+function formatMMT(iso){
 
+if(!iso)return'—';
 
-/* =========================================================
-   RESULT EXISTS
-========================================================= */
+const d=new Date(iso);
 
-function hasResult(
-  value
-){
+if(Number.isNaN(d.getTime()))return'—';
 
-  return (
-    value !==
-    null
-    &&
-    value !==
-    undefined
-    &&
-    value !==
-    ''
-  );
-
+return new Intl.DateTimeFormat(
+'zh-CN',
+{
+timeZone:'Asia/Yangon',
+year:'numeric',
+month:'2-digit',
+day:'2-digit',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit',
+hour12:false
+}
+).format(d)+' MMT'
 }
 
-
-
-/* =========================================================
-   SAFE HTML
-========================================================= */
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ''
-  )
-  .replaceAll(
-    '&',
-    '&amp;'
-  )
-  .replaceAll(
-    '<',
-    '&lt;'
-  )
-  .replaceAll(
-    '>',
-    '&gt;'
-  )
-  .replaceAll(
-    '"',
-    '&quot;'
-  )
-  .replaceAll(
-    "'",
-    '&#039;'
-  );
-
+function formatNumber(v){
+return Number(v||0).toLocaleString(
+'en-US',
+{maximumFractionDigits:2}
+)
 }
 
+function formatFileSize(s){
 
-function escapeJs(
-  value
-){
+const b=Number(s||0);
 
-  return String(
-    value ?? ''
-  )
-  .replaceAll(
-    '\\',
-    '\\\\'
-  )
-  .replaceAll(
-    "'",
-    "\\'"
-  );
-
+return b<1024
+?b+' B'
+:b<1048576
+?(b/1024).toFixed(1)+' KB'
+:(b/1048576).toFixed(2)+' MB'
 }
 
-
-function safeId(
-  value
-){
-
-  return String(
-    value || ''
-  )
-  .replace(
-    /[^a-zA-Z0-9_-]/g,
-    '_'
-  );
-
+function hasResult(v){
+return v!==null&&v!==undefined&&v!==''
 }
 
+function escapeHtml(v){
 
+return String(v??'')
+.replaceAll('&','&amp;')
+.replaceAll('<','&lt;')
+.replaceAll('>','&gt;')
+.replaceAll('"','&quot;')
+.replaceAll("'",'&#039;')
+}
 
-/* =========================================================
-   CLOCK
-========================================================= */
+function escapeJs(v){
+return String(v??'')
+.replaceAll('\\','\\\\')
+.replaceAll("'","\\'")
+}
+
+function safeId(v){
+return String(v||'')
+.replace(/[^a-zA-Z0-9_-]/g,'_')
+}
 
 function updateClock(){
 
-  const el =
-  document.getElementById(
-    'mmtClock'
-  );
+const e=document.getElementById('mmtClock');
 
-
-  if(
-    !el
-  ){
-
-    return;
-
-  }
-
-
-  el.textContent =
-  new Intl.DateTimeFormat(
-    'zh-CN',
-    {
-      timeZone:
-      'Asia/Yangon',
-
-      hour:
-      '2-digit',
-
-      minute:
-      '2-digit',
-
-      second:
-      '2-digit',
-
-      hour12:
-      false
-    }
-  )
-  .format(
-    new Date()
-  );
-
+if(e)
+e.textContent=new Intl.DateTimeFormat(
+'zh-CN',
+{
+timeZone:'Asia/Yangon',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit',
+hour12:false
 }
-
-
-
-/* =========================================================
-   AUTO ROUND REFRESH
-========================================================= */
+).format(new Date())
+}
 
 async function refreshRoundOnly(){
 
-  if(
-    !token
-    ||
-    !agent
-    ||
-    isSaving
-    ||
-    isSubmittingPayment
-    ||
-    isRefreshingRound
-  ){
-
-    return;
-
-  }
-
-
-  isRefreshingRound =
-  true;
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,result_number,status,created_at'+
-      '&order=created_at.desc'+
-      '&limit=30'
-    );
-
-
-    if(
-      !r.ok
-    ){
-
-      return;
-
-    }
-
-
-    const rounds =
-    await r.json();
-
-
-    const latestRound =
-    chooseBestRound(
-      rounds
-    );
-
-
-    if(
-      !latestRound
-    ){
-
-      currentRound =
-      null;
-
-
-      settlement =
-      null;
-
-
-      resetSubmittedData();
-
-
-      paymentAccounts =
-      [];
-
-
-      paymentSubmissions =
-      [];
-
-
-      paymentProofs =
-      [];
-
-
-      selectedPaymentAccountId =
-      '';
-
-
-      renderRound();
-
-
-      renderSettlement();
-
-
-      renderAgentFinance();
-
-
-      renderPaymentCenter();
-
-
-      disableInputs(
-        true
-      );
-
-
-      return;
-
-    }
-
-
-    const oldRoundId =
-    currentRound
-    ?
-    currentRound.id
-    :
-    null;
-
-
-    const isNewRound =
-    oldRoundId
-    !==
-    latestRound.id;
-
-
-    if(
-      isNewRound
-    ){
-
-      disableInputs(
-        true
-      );
-
-
-      currentRound =
-      latestRound;
-
-
-      settlement =
-      null;
-
-
-      paymentSubmissions =
-      [];
-
-
-      paymentProofs =
-      [];
-
-
-      selectedPaymentAccountId =
-      '';
-
-
-      const msg =
-      document.getElementById(
-        'submitMsg'
-      );
-
-
-      if(msg){
-
-        msg.className =
-        'msg';
-
-
-        msg.textContent =
-        '';
-
-      }
-
-
-      renderRound();
-
-
-      await loadExisting(
-        false
-      );
-
-
-      await loadSettlement();
-
-
-      await loadPaymentCenter(
-        false
-      );
-
-
-      updateDeadlineUI();
-
-
-      return;
-
-    }
-
-
-    currentRound =
-    latestRound;
-
-
-    renderRound();
-
-
-    await loadSettlement();
-
-
-    await loadPaymentCenter(
-      false
-    );
-
-
-    renderAgentFinance();
-
-
-    updateDeadlineUI();
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-  }finally{
-
-    isRefreshingRound =
-    false;
-
-  }
-
-}
-
-
-
-/* =========================================================
-   PWA / SAFARI RESUME
-========================================================= */
-
-function checkRoundWhenActive(){
-
-  if(
-    token
-    &&
-    agent
-    &&
-    !isSaving
-    &&
-    !isSubmittingPayment
-  ){
-
-    refreshRoundOnly();
-
-  }
-
-}
-
-
-document.addEventListener(
-  'visibilitychange',
-  ()=>{
-
-    if(
-      document.visibilityState===
-      'visible'
-    ){
-
-      checkRoundWhenActive();
-
-    }
-
-  }
+if(
+!token||
+!agent||
+isSaving||
+isSubmittingPayment||
+isRefreshingRound
+)return;
+
+isRefreshingRound=true;
+
+try{
+
+const r=await api(
+'/rest/v1/rounds?select=id,round_date,round_code,deadline_at,result_number,status,created_at&order=created_at.desc&limit=30'
 );
 
+if(!r.ok)return;
 
-window.addEventListener(
-  'focus',
-  checkRoundWhenActive
-);
+const latest=chooseBestRound(await r.json());
 
+if(!latest){
 
-window.addEventListener(
-  'pageshow',
-  checkRoundWhenActive
-);
-
-
-window.addEventListener(
-  'online',
-  checkRoundWhenActive
-);
-
-
-
-/* =========================================================
-   SESSION
-========================================================= */
-
-function clearAgentSession(){
-
-  localStorage.removeItem(
-    'jmt_agent_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_agent_token'
-  );
-
-
-  token =
-  '';
-
-}
-
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-function logout(){
-
-  clearAgentSession();
-
-
-  location.reload();
-
-}
-
-
-
-/* =========================================================
-   START
-========================================================= */
+currentRound=null;
+settlement=null;
 
 resetSubmittedData();
 
+paymentAccounts=[];
+paymentSubmissions=[];
+paymentProofs=[];
 
-buildGrid();
+selectedPaymentAccountId='';
 
+clearSelectedPaymentProofs();
 
-document.getElementById(
-  'langSelect'
-).value =
-currentLang;
+renderRound();
+renderSettlement();
+renderAgentFinance();
+renderPaymentCenter();
 
+disableInputs(true);
 
-changeLanguage(
-  currentLang
+return
+}
+
+const isNew=
+!currentRound||
+currentRound.id!==latest.id;
+
+if(isNew){
+
+disableInputs(true);
+
+currentRound=latest;
+settlement=null;
+
+paymentSubmissions=[];
+paymentProofs=[];
+
+selectedPaymentAccountId='';
+
+clearSelectedPaymentProofs();
+
+renderRound();
+
+await loadExisting(false);
+await loadSettlement();
+await loadPaymentCenter(false);
+
+updateDeadlineUI();
+
+return
+}
+
+currentRound=latest;
+
+renderRound();
+
+await loadSettlement();
+await loadPaymentCenter(false);
+
+renderAgentFinance();
+updateDeadlineUI()
+
+}catch(e){
+
+console.error(e)
+
+}finally{
+
+isRefreshingRound=false
+
+}
+}
+
+function checkRoundWhenActive(){
+
+if(
+token&&
+agent&&
+!isSaving&&
+!isSubmittingPayment
+)
+refreshRoundOnly()
+}
+
+document.addEventListener(
+'visibilitychange',
+()=>{
+if(document.visibilityState==='visible')
+checkRoundWhenActive()
+}
 );
 
+window.addEventListener(
+'focus',
+checkRoundWhenActive
+);
+
+window.addEventListener(
+'pageshow',
+checkRoundWhenActive
+);
+
+window.addEventListener(
+'online',
+checkRoundWhenActive
+);
+
+function clearAgentSession(){
+
+localStorage.removeItem('jmt_agent_token');
+sessionStorage.removeItem('jmt_agent_token');
+
+token=''
+}
+
+function logout(){
+
+clearAgentSession();
+location.reload()
+}
+
+window.addEventListener(
+'beforeunload',
+()=>{
+
+selectedPaymentProofPreviewUrls.forEach(u=>{
+try{
+URL.revokeObjectURL(u)
+}catch(e){}
+});
+
+retryProofPreviewUrls.forEach(u=>{
+try{
+URL.revokeObjectURL(u)
+}catch(e){}
+})
+
+}
+);
+
+resetSubmittedData();
+buildGrid();
+
+document.getElementById('langSelect').value=currentLang;
+
+changeLanguage(currentLang);
 
 updateClock();
 
+setInterval(updateClock,1000);
+setInterval(updateDeadlineUI,1000);
+setInterval(refreshRoundOnly,20000);
 
-setInterval(
-  updateClock,
-  1000
-);
-
-
-setInterval(
-  updateDeadlineUI,
-  1000
-);
-
-
-/*
-  每 20 秒同步：
-
-  - 当前期数
-  - 开奖结果
-  - 结款金额
-  - 管理员确认到账状态
-  - 平台收款账号
-  - 付款提交记录
-  - 付款凭证
-*/
-
-setInterval(
-  refreshRoundOnly,
-  20000
-);
-
-
-if(
-  token
-){
-
-  startAgent();
-
-}
+if(token)startAgent();
 
 </script>
-
 </body>
-
 </html>
