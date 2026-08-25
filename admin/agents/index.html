@@ -821,7 +821,11 @@ button:disabled{
 
     <div class="hint">
 
-      系统结款金额以数据库中的「本期应交平台」为唯一标准。
+      系统只显示本期真正有提交金额的代理。
+
+      <br>
+
+      本期提交总额为 0 的代理不会进入结款列表。
 
       <br>
 
@@ -837,11 +841,7 @@ button:disabled{
 
       <br>
 
-      本期没有任何有效金额的代理不会出现在结款列表。
-
-      <br>
-
-      确认成功后，系统会同时更新到账金额、付款状态、确认时间以及本期结算状态。
+      确认成功后，系统会更新到账金额、付款状态、确认时间以及本期结算状态。
 
     </div>
 
@@ -2402,19 +2402,25 @@ async function setStatus(
 
 
 /* =====================================
-   VALID SETTLEMENT ROW
+   REAL SETTLEMENT ROW
 
-   只有存在真实财务金额的记录才显示。
+   最终规则：
 
-   下面全部为 0 时不显示：
-   - submitted_total
-   - commission_amount
-   - amount_due
-   - amount_received
+   只有本期真正有提交金额的代理
+   才属于有效结款记录。
+
+   submitted_total <= 0
+   一律不显示。
+
+   即使数据库旧记录存在：
    - result_payout
+   - payment_status
+   - settlement_status
+   - completed_at
+   - 其他历史残留字段
 
-   这样以前产生的空白结款记录不会再
-   出现在管理员结款页面。
+   只要本期提交总额为 0，
+   管理员结款页面都不会显示。
 ===================================== */
 
 function isMeaningfulSettlementRow(
@@ -2428,56 +2434,18 @@ function isMeaningfulSettlementRow(
   }
 
 
-  const submitted =
-  Math.abs(
-    Number(
-      row.submitted_total || 0
-    )
-  );
-
-
-  const commission =
-  Math.abs(
-    Number(
-      row.commission_amount || 0
-    )
-  );
-
-
-  const due =
-  Math.abs(
-    Number(
-      row.amount_due || 0
-    )
-  );
-
-
-  const received =
-  Math.abs(
-    Number(
-      row.amount_received || 0
-    )
-  );
-
-
-  const payout =
-  Math.abs(
-    Number(
-      row.result_payout || 0
-    )
+  const submittedTotal =
+  Number(
+    row.submitted_total || 0
   );
 
 
   return (
-    submitted > 0
-    ||
-    commission > 0
-    ||
-    due > 0
-    ||
-    received > 0
-    ||
-    payout > 0
+    Number.isFinite(
+      submittedTotal
+    )
+    &&
+    submittedTotal > 0
   );
 
 }
@@ -2552,6 +2520,7 @@ async function loadSettlementData(
     await api(
       '/rest/v1/agent_round_totals'+
       '?select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,result_payout,final_balance,settlement_status,completed_at,updated_at'+
+      '&submitted_total=gt.0'+
       '&order=updated_at.desc'
     );
 
@@ -2583,19 +2552,12 @@ async function loadSettlementData(
 
 
     /*
-      核心修正：
+      第一层过滤：
+      Supabase 查询已经要求
+      submitted_total > 0。
 
-      数据库中即使存在旧的 0 金额记录，
-      管理页面也直接过滤掉。
-
-      例如：
-      提交 0
-      佣金 0
-      应交 0
-      到账 0
-      派彩 0
-
-      这种代理不会再出现在结款管理。
+      第二层过滤：
+      前端再次检查一次。
     */
 
     settlementRows =
@@ -2698,11 +2660,6 @@ function buildSettlementRoundSelect(){
   '';
 
 
-  /*
-    只有真正存在有效财务数据的期数
-    才进入下拉菜单。
-  */
-
   const relevantRounds =
   settlementRounds.filter(
     round =>
@@ -2789,10 +2746,6 @@ function buildSettlementRoundSelect(){
   }
 
 
-  /*
-    默认优先打开存在待结款的期数。
-  */
-
   const pendingRound =
   relevantRounds.find(
     round =>
@@ -2800,6 +2753,10 @@ function buildSettlementRoundSelect(){
       row =>
       row.round_id ===
       round.id
+      &&
+      isMeaningfulSettlementRow(
+        row
+      )
       &&
       Number(
         row.amount_due || 0
@@ -2879,11 +2836,10 @@ function renderSettlements(){
 
 
   /*
-    双重保护。
+    第三层保护：
 
-    即使未来 loadSettlementData 的逻辑改变，
-    renderSettlements 这里仍然不会显示
-    0 / 0 / 0 / 0 的空记录。
+    当前期数里面，
+    submitted_total 必须 > 0。
   */
 
   const rows =
@@ -3694,6 +3650,19 @@ async function getFreshSettlement(
   }
 
 
+  if(
+    !isMeaningfulSettlementRow(
+      rows[0]
+    )
+  ){
+
+    throw new Error(
+      '本期没有有效提交金额'
+    );
+
+  }
+
+
   return rows[0];
 
 }
@@ -3859,6 +3828,17 @@ async function confirmSettlement(
     Number(
       fresh.amount_due || 0
     );
+
+
+    if(
+      submittedTotal <= 0
+    ){
+
+      throw new Error(
+        '本期没有有效提交金额'
+      );
+
+    }
 
 
     if(
