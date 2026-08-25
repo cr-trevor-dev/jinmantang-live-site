@@ -612,10 +612,6 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       创建代理
-  ================================== -->
-
   <div class="card">
 
     <div class="title">
@@ -625,11 +621,9 @@ button:disabled{
 
     <div class="formGrid">
 
-
       <input
         id="newName"
         placeholder="代理名称，例如：小林代理">
-
 
       <input
         id="newEmail"
@@ -637,13 +631,11 @@ button:disabled{
         autocomplete="off"
         placeholder="代理登录邮箱">
 
-
       <input
         id="newPassword"
         type="password"
         autocomplete="new-password"
         placeholder="初始密码，至少8位">
-
 
       <input
         id="newRate"
@@ -653,7 +645,6 @@ button:disabled{
         step="0.5"
         value="20"
         placeholder="代理比例 %">
-
 
     </div>
 
@@ -687,10 +678,6 @@ button:disabled{
 
   </div>
 
-
-  <!-- =================================
-       代理概况
-  ================================== -->
 
   <div class="card">
 
@@ -740,15 +727,10 @@ button:disabled{
 
       </div>
 
-
     </div>
 
   </div>
 
-
-  <!-- =================================
-       代理结款管理
-  ================================== -->
 
   <div class="card">
 
@@ -782,7 +764,6 @@ button:disabled{
 
 
     <div class="settlementStats">
-
 
       <div class="settlementStat">
 
@@ -835,7 +816,6 @@ button:disabled{
 
       </div>
 
-
     </div>
 
 
@@ -854,6 +834,10 @@ button:disabled{
       <br>
 
       只有实际到账金额与系统应交金额完全一致时，才允许确认到账。
+
+      <br>
+
+      本期没有任何有效金额的代理不会出现在结款列表。
 
       <br>
 
@@ -882,10 +866,6 @@ button:disabled{
 
   </div>
 
-
-  <!-- =================================
-       搜索代理
-  ================================== -->
 
   <div class="card">
 
@@ -939,10 +919,6 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       修改比例
-  ================================== -->
-
   <div class="card">
 
     <div class="title">
@@ -951,7 +927,6 @@ button:disabled{
 
 
     <div class="formGrid">
-
 
       <select id="agentSelect">
 
@@ -969,7 +944,6 @@ button:disabled{
         max="40"
         step="0.5"
         placeholder="新比例 %">
-
 
     </div>
 
@@ -1097,7 +1071,6 @@ async function verifyAdmin(){
 
     state.textContent =
     '没有登录';
-
 
     return false;
 
@@ -1248,10 +1221,8 @@ async function createAgent(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '请输入代理名称';
-
 
     return;
 
@@ -1267,10 +1238,8 @@ async function createAgent(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '请输入正确的登录邮箱';
-
 
     return;
 
@@ -1284,10 +1253,8 @@ async function createAgent(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '初始密码至少需要8位';
-
 
     return;
 
@@ -1307,10 +1274,8 @@ async function createAgent(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '代理比例必须在 0%–40% 之间';
-
 
     return;
 
@@ -1735,11 +1700,13 @@ function renderAgents(){
           <div>
 
             <div class="name">
+
               ${escapeHtml(
                 a.display_name
                 ||
                 '未命名代理'
               )}
+
             </div>
 
             <div class="meta">
@@ -1883,7 +1850,7 @@ function updateStats(){
 
 
 /* =====================================
-   BUILD SELECT
+   BUILD AGENT SELECT
 ===================================== */
 
 function buildSelect(){
@@ -2435,13 +2402,89 @@ async function setStatus(
 
 
 /* =====================================
+   VALID SETTLEMENT ROW
+
+   只有存在真实财务金额的记录才显示。
+
+   下面全部为 0 时不显示：
+   - submitted_total
+   - commission_amount
+   - amount_due
+   - amount_received
+   - result_payout
+
+   这样以前产生的空白结款记录不会再
+   出现在管理员结款页面。
+===================================== */
+
+function isMeaningfulSettlementRow(
+  row
+){
+
+  if(!row){
+
+    return false;
+
+  }
+
+
+  const submitted =
+  Math.abs(
+    Number(
+      row.submitted_total || 0
+    )
+  );
+
+
+  const commission =
+  Math.abs(
+    Number(
+      row.commission_amount || 0
+    )
+  );
+
+
+  const due =
+  Math.abs(
+    Number(
+      row.amount_due || 0
+    )
+  );
+
+
+  const received =
+  Math.abs(
+    Number(
+      row.amount_received || 0
+    )
+  );
+
+
+  const payout =
+  Math.abs(
+    Number(
+      row.result_payout || 0
+    )
+  );
+
+
+  return (
+    submitted > 0
+    ||
+    commission > 0
+    ||
+    due > 0
+    ||
+    received > 0
+    ||
+    payout > 0
+  );
+
+}
+
+
+/* =====================================
    LOAD SETTLEMENT DATA
-
-   关键：
-   不再读取 agent_submissions
-   作为应收金额。
-
-   结款只读取 agent_round_totals。
 ===================================== */
 
 async function loadSettlementData(
@@ -2522,13 +2565,13 @@ async function loadSettlementData(
     }
 
 
-    settlementRows =
+    const rawRows =
     await totalRes.json();
 
 
     if(
       !Array.isArray(
-        settlementRows
+        rawRows
       )
     ){
 
@@ -2537,6 +2580,28 @@ async function loadSettlementData(
       );
 
     }
+
+
+    /*
+      核心修正：
+
+      数据库中即使存在旧的 0 金额记录，
+      管理页面也直接过滤掉。
+
+      例如：
+      提交 0
+      佣金 0
+      应交 0
+      到账 0
+      派彩 0
+
+      这种代理不会再出现在结款管理。
+    */
+
+    settlementRows =
+    rawRows.filter(
+      isMeaningfulSettlementRow
+    );
 
 
     buildSettlementRoundSelect();
@@ -2614,7 +2679,7 @@ async function loadSettlementData(
 
 
 /* =====================================
-   BUILD ROUND SELECT
+   BUILD SETTLEMENT ROUND SELECT
 ===================================== */
 
 function buildSettlementRoundSelect(){
@@ -2633,6 +2698,11 @@ function buildSettlementRoundSelect(){
   '';
 
 
+  /*
+    只有真正存在有效财务数据的期数
+    才进入下拉菜单。
+  */
+
   const relevantRounds =
   settlementRounds.filter(
     round =>
@@ -2640,6 +2710,10 @@ function buildSettlementRoundSelect(){
       row =>
       row.round_id ===
       round.id
+      &&
+      isMeaningfulSettlementRow(
+        row
+      )
     )
   );
 
@@ -2648,6 +2722,17 @@ function buildSettlementRoundSelect(){
 
     select.innerHTML =
     '<option value="">暂无结款记录</option>';
+
+
+    resetSettlementStats();
+
+
+    document.getElementById(
+      'settlementList'
+    ).innerHTML =
+    '<div class="empty">'+
+    '暂无需要显示的结款记录'+
+    '</div>';
 
 
     return;
@@ -2703,6 +2788,10 @@ function buildSettlementRoundSelect(){
 
   }
 
+
+  /*
+    默认优先打开存在待结款的期数。
+  */
 
   const pendingRound =
   relevantRounds.find(
@@ -2789,12 +2878,24 @@ function renderSettlements(){
   }
 
 
+  /*
+    双重保护。
+
+    即使未来 loadSettlementData 的逻辑改变，
+    renderSettlements 这里仍然不会显示
+    0 / 0 / 0 / 0 的空记录。
+  */
+
   const rows =
   settlementRows
   .filter(
     row =>
     row.round_id ===
     roundId
+    &&
+    isMeaningfulSettlementRow(
+      row
+    )
   )
   .sort(
     (
@@ -2847,7 +2948,7 @@ function renderSettlements(){
 
     listBox.innerHTML =
     '<div class="empty">'+
-    '本期暂无代理结款记录'+
+    '本期暂无需要结款的代理'+
     '</div>';
 
 
@@ -3392,7 +3493,11 @@ function updateSettlementStats(
   0;
 
 
-  rows.forEach(
+  rows
+  .filter(
+    isMeaningfulSettlementRow
+  )
+  .forEach(
     row=>{
 
       const submitted =
@@ -3538,9 +3643,6 @@ function fillSettlementAmount(
 
 /* =====================================
    READ FRESH SETTLEMENT
-
-   确认以前再次从数据库读取，
-   不信任页面缓存。
 ===================================== */
 
 async function getFreshSettlement(
@@ -3599,17 +3701,6 @@ async function getFreshSettlement(
 
 /* =====================================
    CONFIRM SETTLEMENT
-
-   关键：
-   不直接 PATCH agent_submissions。
-   只调用数据库 RPC。
-
-   RPC 会一次性处理：
-   - amount_received
-   - payment_status
-   - payment_confirmed_at
-   - settlement_status
-   - agent_submissions.finance_status
 ===================================== */
 
 async function confirmSettlement(
@@ -3898,29 +3989,6 @@ async function confirmSettlement(
 
     const text =
     await rpcRes.text();
-
-
-    let result =
-    null;
-
-
-    try{
-
-      result =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      null;
-
-    }catch(e){
-
-      result =
-      null;
-
-    }
 
 
     if(!rpcRes.ok){
