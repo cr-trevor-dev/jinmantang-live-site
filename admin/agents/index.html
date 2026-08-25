@@ -105,13 +105,13 @@ textarea{
 }
 
 textarea{
-  min-height:88px;
+  min-height:100px;
   resize:vertical
 }
 
 input[type="file"]{
   padding:10px;
-  font-size:12px
+  color:#ddd
 }
 
 button{
@@ -332,13 +332,7 @@ button:disabled{
    PAYMENT ACCOUNTS
 ===================================== */
 
-.paymentAccountForm{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px
-}
-
-.paymentAccountItem{
+.paymentAccountCard{
   background:
   linear-gradient(
     180deg,
@@ -350,131 +344,145 @@ button:disabled{
   rgba(214,168,63,.18);
   border-radius:16px;
   padding:15px;
-  margin-bottom:11px
-}
-
-.paymentAccountItem.inactive{
-  opacity:.68;
-  border-color:
-  rgba(255,255,255,.08)
+  margin-bottom:12px
 }
 
 .paymentAccountHead{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:12px
+  gap:10px
 }
 
-.paymentMethodName{
+.paymentAccountName{
   color:#f0d27a;
-  font-size:17px;
-  font-weight:900
+  font-weight:900;
+  font-size:17px
 }
 
-.paymentMethodMeta{
+.paymentAccountMeta{
+  color:#8b8374;
+  font-size:11px;
   margin-top:5px;
-  color:#827a6c;
-  font-size:10px;
   line-height:1.6
 }
 
-.paymentAccountBadge{
-  flex:none;
-  border-radius:30px;
-  padding:6px 10px;
-  font-size:10px;
-  font-weight:900
-}
-
-.paymentAccountBadge.active{
-  color:#79d6a2;
-  background:#153124
-}
-
-.paymentAccountBadge.inactive{
-  color:#a9a094;
-  background:#272727
-}
-
-.paymentDetails{
+.paymentAccountGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
   margin-top:13px
 }
 
-.paymentDetail{
+.accountBox{
+  background:#0d0d0e;
   border:
   1px solid
-  rgba(255,255,255,.055);
-  background:#0c0c0d;
+  rgba(255,255,255,.05);
   border-radius:12px;
   padding:11px
 }
 
-.paymentDetail small{
+.accountBox small{
   display:block;
-  color:#7f776b;
-  font-size:9px
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px
 }
 
-.paymentDetail strong{
+.accountBox strong{
   display:block;
-  margin-top:5px;
-  color:#e8cd78;
-  font-size:13px;
+  color:#ead077;
+  font-size:14px;
   line-height:1.5;
   word-break:break-word
 }
 
-.qrWrap{
+.qrPreview{
   margin-top:13px;
-  text-align:center;
   background:#0c0c0d;
   border:
   1px solid
   rgba(255,255,255,.05);
-  border-radius:13px;
-  padding:12px
+  border-radius:14px;
+  padding:12px;
+  text-align:center
 }
 
-.qrWrap img{
+.qrPreview img{
   display:block;
-  max-width:220px;
   width:100%;
-  max-height:260px;
+  max-width:320px;
+  max-height:380px;
   object-fit:contain;
   margin:auto;
-  border-radius:12px;
-  background:#fff
+  border-radius:12px
 }
 
 .qrEmpty{
   color:#777166;
-  font-size:11px;
-  padding:18px 5px
+  padding:35px 10px;
+  font-size:12px
 }
 
 .accountEdit{
-  margin-top:13px;
-  padding-top:13px;
+  margin-top:15px;
+  padding-top:15px;
   border-top:
   1px solid
   rgba(255,255,255,.06)
 }
 
-.accountEditGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px
+.accountEditTitle{
+  color:#dec372;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:10px
 }
 
-.accountEditButtons{
+.fileState{
+  font-size:11px;
+  color:#79d6a2;
+  margin-top:7px;
+  min-height:17px;
+  line-height:1.5;
+  word-break:break-word
+}
+
+.previewBox{
+  display:none;
+  margin-top:10px;
+  padding:10px;
+  border-radius:12px;
+  background:#0c0c0d;
+  border:
+  1px solid
+  rgba(214,168,63,.12);
+  text-align:center
+}
+
+.previewBox.show{
+  display:block
+}
+
+.previewBox img{
+  width:100%;
+  max-width:280px;
+  max-height:340px;
+  object-fit:contain;
+  border-radius:10px
+}
+
+.paymentButtons{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  margin-top:9px
+  margin-top:10px
+}
+
+.paymentFormStack{
+  display:grid;
+  gap:9px
 }
 
 
@@ -685,6 +693,7 @@ button:disabled{
   line-height:1.6
 }
 
+
 @media(max-width:700px){
 
   .settlementStats{
@@ -695,12 +704,6 @@ button:disabled{
   .settlementGrid{
     grid-template-columns:
     1fr 1fr
-  }
-
-  .paymentAccountForm,
-  .paymentDetails,
-  .accountEditGrid{
-    grid-template-columns:1fr 1fr
   }
 
 }
@@ -731,16 +734,11 @@ button:disabled{
     grid-template-columns:1fr
   }
 
-  .paymentAccountForm,
-  .accountEditGrid{
-    grid-template-columns:1fr
-  }
-
-  .paymentDetails{
+  .paymentAccountGrid{
     grid-template-columns:1fr 1fr
   }
 
-  .accountEditButtons{
+  .paymentButtons{
     grid-template-columns:1fr
   }
 
@@ -792,6 +790,10 @@ button:disabled{
 
   </div>
 
+
+  <!-- =================================
+       CREATE AGENT
+  ================================== -->
 
   <div class="card">
 
@@ -860,6 +862,10 @@ button:disabled{
   </div>
 
 
+  <!-- =================================
+       AGENT STATS
+  ================================== -->
+
   <div class="card">
 
     <div class="title">
@@ -913,7 +919,7 @@ button:disabled{
 
 
   <!-- =================================
-       平台收款账户
+       PAYMENT ACCOUNT MANAGEMENT
   ================================== -->
 
   <div class="card">
@@ -923,13 +929,14 @@ button:disabled{
     </div>
 
 
-    <div class="paymentAccountForm">
+    <div class="paymentFormStack">
 
       <input
-        id="payMethodName"
+        id="payMethod"
         placeholder="支付方式，例如：K Pay">
 
-      <select id="payMethodType">
+
+      <select id="payType">
 
         <option value="wallet">
           电子钱包
@@ -947,26 +954,26 @@ button:disabled{
 
 
       <input
-        id="payAccountName"
+        id="payReceiver"
         placeholder="收款人姓名">
 
 
       <input
-        id="payAccountNumber"
+        id="payAccount"
         placeholder="电话号码 / 银行卡号 / 账号">
 
 
       <input
-        id="payBankName"
+        id="payBank"
         placeholder="银行名称，可不填">
 
 
       <input
-        id="paySortOrder"
+        id="paySort"
         type="number"
         step="1"
         value="0"
-        placeholder="排序，例如：1">
+        placeholder="排序">
 
 
       <textarea
@@ -974,27 +981,48 @@ button:disabled{
         placeholder="给代理看的备注，例如：转账后请提交付款截图"></textarea>
 
 
-      <div>
+      <input
+        id="payQrFile"
+        type="file"
+        accept="image/*"
+        onchange="newQrSelected(this)">
 
-        <input
-          id="payQrFile"
-          type="file"
-          accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
 
-        <div class="hint">
-          可上传收款二维码。单张最大 10MB。
-        </div>
+      <div
+        class="fileState"
+        id="newQrState">
+      </div>
+
+
+      <div
+        class="previewBox"
+        id="newQrPreviewBox">
+
+        <img
+          id="newQrPreview"
+          alt="二维码预览">
 
       </div>
 
     </div>
 
 
+    <div class="hint">
+
+      可上传收款二维码，单张最大 10MB。
+
+      <br>
+
+      图片选好后会一直保留，直到你点击「添加收款账户」或主动重新选择图片。
+
+    </div>
+
+
     <button
-      id="createPaymentAccountBtn"
+      id="addPaymentBtn"
       class="gold"
-      style="width:100%;margin-top:10px"
-      onclick="createPaymentAccount()">
+      style="width:100%;margin-top:12px"
+      onclick="addPaymentAccount()">
 
       ＋ 添加收款账户
 
@@ -1017,7 +1045,7 @@ button:disabled{
 
       <br>
 
-      修改这里的账号不会改变已经提交过的旧付款记录，旧付款会保留当时使用的账户资料。
+      修改收款账户不会改变已经提交过的旧付款记录。
 
     </div>
 
@@ -1041,6 +1069,10 @@ button:disabled{
 
   </div>
 
+
+  <!-- =================================
+       SETTLEMENT
+  ================================== -->
 
   <div class="card">
 
@@ -1177,6 +1209,10 @@ button:disabled{
   </div>
 
 
+  <!-- =================================
+       SEARCH AGENTS
+  ================================== -->
+
   <div class="card">
 
     <div class="title">
@@ -1228,6 +1264,10 @@ button:disabled{
 
   </div>
 
+
+  <!-- =================================
+       UPDATE RATE
+  ================================== -->
 
   <div class="card">
 
@@ -1303,8 +1343,23 @@ const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
 
-const PAYMENT_BUCKET =
-'agent-payment-proofs';
+/*
+  收款二维码 Storage Bucket。
+
+  系统会依次尝试这些名称。
+
+  只要你之前 SQL 建立的 Bucket
+  在其中一个名字里，就会自动使用。
+*/
+
+const PAYMENT_BUCKET_CANDIDATES = [
+  'payment-assets',
+  'payment-qrcodes',
+  'payment-qr',
+  'payment_accounts',
+  'payment-accounts',
+  'qr-codes'
+];
 
 
 let token =
@@ -1327,18 +1382,6 @@ let adminUser =
 null;
 
 
-let paymentAccounts =
-[];
-
-
-let paymentAccountLoading =
-false;
-
-
-let paymentAccountSaving =
-false;
-
-
 let settlementRounds =
 [];
 
@@ -1353,6 +1396,57 @@ false;
 
 let settlementConfirming =
 false;
+
+
+/*
+  PAYMENT ACCOUNT STATE
+*/
+
+let paymentAccounts =
+[];
+
+
+let paymentAccountsLoading =
+false;
+
+
+let paymentAccountSaving =
+false;
+
+
+/*
+  最关键的地方：
+
+  新增账户选择的文件，
+  我们单独保存在 JS 变量里。
+
+  页面不会因为刷新数据
+  把文件状态清空。
+*/
+
+let newPaymentQrFile =
+null;
+
+
+let newPaymentQrPreviewUrl =
+null;
+
+
+/*
+  编辑已有账户选择的图片
+  保存在 Map。
+
+  key = payment account id
+  value = File
+*/
+
+const editPaymentQrFiles =
+new Map();
+
+
+const editPaymentQrPreviewUrls =
+new Map();
+
 
 
 /* =====================================
@@ -1379,6 +1473,7 @@ async function api(
   );
 
 }
+
 
 
 /* =====================================
@@ -1492,6 +1587,7 @@ async function verifyAdmin(){
   }
 
 }
+
 
 
 /* =====================================
@@ -1786,6 +1882,7 @@ async function createAgent(){
 }
 
 
+
 /* =====================================
    LOAD AGENTS
 ===================================== */
@@ -1946,6 +2043,7 @@ async function loadAgents(
   }
 
 }
+
 
 
 /* =====================================
@@ -2137,6 +2235,7 @@ function renderAgents(){
 }
 
 
+
 /* =====================================
    AGENT STATS
 ===================================== */
@@ -2173,6 +2272,7 @@ function updateStats(){
   total-active;
 
 }
+
 
 
 /* =====================================
@@ -2249,6 +2349,7 @@ function buildSelect(){
 }
 
 
+
 /* =====================================
    CHOOSE AGENT
 ===================================== */
@@ -2295,6 +2396,7 @@ function chooseAgent(
 }
 
 
+
 /* =====================================
    UPDATE RATE
 ===================================== */
@@ -2330,10 +2432,8 @@ async function updateRate(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '请先选择代理';
-
 
     return;
 
@@ -2353,10 +2453,8 @@ async function updateRate(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '请输入 0%–40%';
-
 
     return;
 
@@ -2375,10 +2473,8 @@ async function updateRate(){
     msg.className =
     'msg error';
 
-
     msg.textContent =
     '没有找到该代理';
-
 
     return;
 
@@ -2538,6 +2634,7 @@ async function updateRate(){
 }
 
 
+
 /* =====================================
    SET STATUS
 ===================================== */
@@ -2559,7 +2656,6 @@ async function setStatus(
     alert(
       '没有找到该代理'
     );
-
 
     return;
 
@@ -2727,69 +2823,835 @@ async function setStatus(
 }
 
 
+
+/* =========================================================
+   PAYMENT ACCOUNT HELPERS
+========================================================= */
+
+function paymentField(
+  row,
+  names,
+  fallback=''
+){
+
+  for(
+    const name
+    of names
+  ){
+
+    if(
+      row
+      &&
+      row[name] !==
+      undefined
+      &&
+      row[name] !==
+      null
+    ){
+
+      return row[name];
+
+    }
+
+  }
+
+
+  return fallback;
+
+}
+
+
+function normalizePaymentAccount(
+  row
+){
+
+  return {
+
+    raw:
+    row,
+
+    id:
+    paymentField(
+      row,
+      ['id']
+    ),
+
+    method:
+    paymentField(
+      row,
+      [
+        'payment_method',
+        'method_name',
+        'method',
+        'name'
+      ]
+    ),
+
+    type:
+    paymentField(
+      row,
+      [
+        'payment_type',
+        'account_type',
+        'type'
+      ],
+      'wallet'
+    ),
+
+    receiver:
+    paymentField(
+      row,
+      [
+        'receiver_name',
+        'recipient_name',
+        'account_name',
+        'holder_name'
+      ]
+    ),
+
+    account:
+    paymentField(
+      row,
+      [
+        'account_number',
+        'account_no',
+        'phone_number',
+        'number'
+      ]
+    ),
+
+    bank:
+    paymentField(
+      row,
+      [
+        'bank_name',
+        'bank'
+      ]
+    ),
+
+    sort:
+    Number(
+      paymentField(
+        row,
+        [
+          'sort_order',
+          'sort_index',
+          'position'
+        ],
+        0
+      )
+      ||
+      0
+    ),
+
+    note:
+    paymentField(
+      row,
+      [
+        'note',
+        'remark',
+        'instructions'
+      ]
+    ),
+
+    qrPath:
+    paymentField(
+      row,
+      [
+        'qr_image_path',
+        'qr_path',
+        'qr_code_path',
+        'image_path'
+      ]
+    ),
+
+    qrUrl:
+    paymentField(
+      row,
+      [
+        'qr_image_url',
+        'qr_url',
+        'image_url'
+      ]
+    ),
+
+    active:
+    Boolean(
+      paymentField(
+        row,
+        [
+          'is_active',
+          'active',
+          'enabled'
+        ],
+        true
+      )
+    )
+
+  };
+
+}
+
+
+
 /* =====================================
-   PAYMENT ACCOUNT CREATE
+   PAYMENT FILE DIRTY
 ===================================== */
 
-async function createPaymentAccount(){
+function hasUnsavedPaymentFile(){
 
-  if(paymentAccountSaving){
+  return (
+    !!newPaymentQrFile
+    ||
+    editPaymentQrFiles.size > 0
+  );
+
+}
+
+
+
+/* =====================================
+   NEW QR SELECTED
+===================================== */
+
+function newQrSelected(
+  input
+){
+
+  const state =
+  document.getElementById(
+    'newQrState'
+  );
+
+
+  const previewBox =
+  document.getElementById(
+    'newQrPreviewBox'
+  );
+
+
+  const preview =
+  document.getElementById(
+    'newQrPreview'
+  );
+
+
+  const file =
+  input.files
+  &&
+  input.files[0]
+  ?
+  input.files[0]
+  :
+  null;
+
+
+  if(!file){
+
+    newPaymentQrFile =
+    null;
+
+
+    state.textContent =
+    '';
+
+
+    previewBox.classList.remove(
+      'show'
+    );
+
 
     return;
 
   }
 
 
-  const methodName =
-  document.getElementById(
-    'payMethodName'
-  ).value.trim();
+  if(
+    file.size >
+    10*1024*1024
+  ){
+
+    input.value =
+    '';
 
 
-  const methodType =
-  document.getElementById(
-    'payMethodType'
-  ).value;
+    newPaymentQrFile =
+    null;
 
 
-  const accountName =
-  document.getElementById(
-    'payAccountName'
-  ).value.trim();
+    state.textContent =
+    '图片不能超过 10MB';
 
 
-  const accountNumber =
-  document.getElementById(
-    'payAccountNumber'
-  ).value.trim();
+    state.className =
+    'fileState error';
 
 
-  const bankName =
-  document.getElementById(
-    'payBankName'
-  ).value.trim();
+    previewBox.classList.remove(
+      'show'
+    );
 
 
-  const sortOrder =
-  Number(
-    document.getElementById(
-      'paySortOrder'
-    ).value || 0
+    return;
+
+  }
+
+
+  newPaymentQrFile =
+  file;
+
+
+  state.className =
+  'fileState success';
+
+
+  state.textContent =
+  '✓ 已选择：'+
+  file.name;
+
+
+  if(
+    newPaymentQrPreviewUrl
+  ){
+
+    URL.revokeObjectURL(
+      newPaymentQrPreviewUrl
+    );
+
+  }
+
+
+  newPaymentQrPreviewUrl =
+  URL.createObjectURL(
+    file
   );
 
 
-  const note =
-  document.getElementById(
-    'payNote'
-  ).value.trim();
+  preview.src =
+  newPaymentQrPreviewUrl;
 
+
+  previewBox.classList.add(
+    'show'
+  );
+
+}
+
+
+
+/* =====================================
+   EDIT QR SELECTED
+===================================== */
+
+function editQrSelected(
+  id,
+  input
+){
 
   const file =
-  document.getElementById(
-    'payQrFile'
-  ).files[0]
-  ||
+  input.files
+  &&
+  input.files[0]
+  ?
+  input.files[0]
+  :
   null;
+
+
+  const state =
+  document.getElementById(
+    'editFileState_'+
+    safeId(
+      id
+    )
+  );
+
+
+  const previewBox =
+  document.getElementById(
+    'editPreviewBox_'+
+    safeId(
+      id
+    )
+  );
+
+
+  const preview =
+  document.getElementById(
+    'editPreview_'+
+    safeId(
+      id
+    )
+  );
+
+
+  if(!file){
+
+    editPaymentQrFiles.delete(
+      id
+    );
+
+
+    state.textContent =
+    '';
+
+
+    return;
+
+  }
+
+
+  if(
+    file.size >
+    10*1024*1024
+  ){
+
+    input.value =
+    '';
+
+
+    editPaymentQrFiles.delete(
+      id
+    );
+
+
+    state.className =
+    'fileState error';
+
+
+    state.textContent =
+    '图片不能超过 10MB';
+
+
+    return;
+
+  }
+
+
+  editPaymentQrFiles.set(
+    id,
+    file
+  );
+
+
+  state.className =
+  'fileState success';
+
+
+  state.textContent =
+  '✓ 已选择新二维码：'+
+  file.name;
+
+
+  const oldPreview =
+  editPaymentQrPreviewUrls.get(
+    id
+  );
+
+
+  if(oldPreview){
+
+    URL.revokeObjectURL(
+      oldPreview
+    );
+
+  }
+
+
+  const url =
+  URL.createObjectURL(
+    file
+  );
+
+
+  editPaymentQrPreviewUrls.set(
+    id,
+    url
+  );
+
+
+  preview.src =
+  url;
+
+
+  previewBox.classList.add(
+    'show'
+  );
+
+}
+
+
+
+/* =====================================
+   STORAGE UPLOAD
+===================================== */
+
+async function uploadPaymentImage(
+  file,
+  accountId='new'
+){
+
+  if(!file){
+
+    return {
+      path:'',
+      url:''
+    };
+
+  }
+
+
+  const extension =
+  (
+    file.name.split('.').pop()
+    ||
+    'jpg'
+  )
+  .replace(
+    /[^a-zA-Z0-9]/g,
+    ''
+  )
+  .toLowerCase();
+
+
+  const fileName =
+  'payment-accounts/'+
+  safeId(
+    accountId
+  )+
+  '/'+
+  Date.now()+
+  '-'+
+  Math.random()
+  .toString(36)
+  .slice(2,9)+
+  '.'+
+  extension;
+
+
+  let lastError =
+  '';
+
+
+  for(
+    const bucket
+    of PAYMENT_BUCKET_CANDIDATES
+  ){
+
+    try{
+
+      const uploadRes =
+      await fetch(
+        BASE+
+        '/storage/v1/object/'+
+        encodeURIComponent(
+          bucket
+        )+
+        '/'+
+        fileName,
+        {
+          method:'POST',
+
+          headers:{
+            apikey:KEY,
+            Authorization:
+            'Bearer '+token,
+            'Content-Type':
+            file.type
+            ||
+            'application/octet-stream',
+            'x-upsert':'true'
+          },
+
+          body:
+          file
+        }
+      );
+
+
+      if(
+        !uploadRes.ok
+      ){
+
+        lastError =
+        await uploadRes.text();
+
+
+        continue;
+
+      }
+
+
+      const publicUrl =
+      BASE+
+      '/storage/v1/object/public/'+
+      encodeURIComponent(
+        bucket
+      )+
+      '/'+
+      fileName;
+
+
+      return {
+        bucket,
+        path:
+        fileName,
+        url:
+        publicUrl
+      };
+
+
+    }catch(e){
+
+      lastError =
+      e.message
+      ||
+      '上传失败';
+
+    }
+
+  }
+
+
+  throw new Error(
+    '二维码上传失败：'+
+    (
+      lastError
+      ||
+      '没有找到可用的 Storage Bucket'
+    )
+  );
+
+}
+
+
+
+/* =====================================
+   PAYMENT INSERT VARIANTS
+===================================== */
+
+function getPaymentInsertVariants(
+  values
+){
+
+  const variants =
+  [];
+
+
+  variants.push({
+
+    payment_method:
+    values.method,
+
+    payment_type:
+    values.type,
+
+    receiver_name:
+    values.receiver,
+
+    account_number:
+    values.account,
+
+    bank_name:
+    values.bank,
+
+    sort_order:
+    values.sort,
+
+    note:
+    values.note,
+
+    qr_image_path:
+    values.qrPath,
+
+    qr_image_url:
+    values.qrUrl,
+
+    is_active:
+    true
+
+  });
+
+
+  variants.push({
+
+    method_name:
+    values.method,
+
+    account_type:
+    values.type,
+
+    recipient_name:
+    values.receiver,
+
+    account_number:
+    values.account,
+
+    bank_name:
+    values.bank,
+
+    sort_order:
+    values.sort,
+
+    note:
+    values.note,
+
+    qr_path:
+    values.qrPath,
+
+    qr_url:
+    values.qrUrl,
+
+    is_active:
+    true
+
+  });
+
+
+  variants.push({
+
+    payment_method:
+    values.method,
+
+    account_type:
+    values.type,
+
+    account_name:
+    values.receiver,
+
+    account_number:
+    values.account,
+
+    bank_name:
+    values.bank,
+
+    sort_order:
+    values.sort,
+
+    note:
+    values.note,
+
+    qr_path:
+    values.qrPath,
+
+    is_active:
+    true
+
+  });
+
+
+  return variants;
+
+}
+
+
+
+/* =====================================
+   INSERT PAYMENT ACCOUNT
+===================================== */
+
+async function insertPaymentAccountAdaptive(
+  values
+){
+
+  const variants =
+  getPaymentInsertVariants(
+    values
+  );
+
+
+  let lastText =
+  '';
+
+
+  for(
+    const body
+    of variants
+  ){
+
+    const r =
+    await api(
+      '/rest/v1/payment_accounts',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json',
+
+          Prefer:
+          'return=representation'
+        },
+
+        body:
+        JSON.stringify(
+          body
+        )
+      }
+    );
+
+
+    const text =
+    await r.text();
+
+
+    if(r.ok){
+
+      let rows =
+      [];
+
+
+      try{
+
+        rows =
+        text
+        ?
+        JSON.parse(
+          text
+        )
+        :
+        [];
+
+      }catch(e){
+
+        rows =
+        [];
+
+      }
+
+
+      return rows;
+
+    }
+
+
+    lastText =
+    text;
+
+  }
+
+
+  throw new Error(
+    lastText
+    ||
+    '无法新增收款账户'
+  );
+
+}
+
+
+
+/* =====================================
+   ADD PAYMENT ACCOUNT
+===================================== */
+
+async function addPaymentAccount(){
+
+  if(paymentAccountSaving){
+
+    return;
+
+  }
 
 
   const msg =
@@ -2800,22 +3662,68 @@ async function createPaymentAccount(){
 
   const btn =
   document.getElementById(
-    'createPaymentAccountBtn'
+    'addPaymentBtn'
   );
+
+
+  const method =
+  document.getElementById(
+    'payMethod'
+  ).value.trim();
+
+
+  const type =
+  document.getElementById(
+    'payType'
+  ).value;
+
+
+  const receiver =
+  document.getElementById(
+    'payReceiver'
+  ).value.trim();
+
+
+  const account =
+  document.getElementById(
+    'payAccount'
+  ).value.trim();
+
+
+  const bank =
+  document.getElementById(
+    'payBank'
+  ).value.trim();
+
+
+  const sort =
+  Number(
+    document.getElementById(
+      'paySort'
+    ).value
+    ||
+    0
+  );
+
+
+  const note =
+  document.getElementById(
+    'payNote'
+  ).value.trim();
 
 
   msg.className =
   'msg';
 
 
-  if(!methodName){
+  if(!method){
 
     msg.className =
     'msg error';
 
 
     msg.textContent =
-    '请输入支付方式名称';
+    '请输入支付方式，例如 K Pay';
 
 
     return;
@@ -2823,7 +3731,7 @@ async function createPaymentAccount(){
   }
 
 
-  if(!accountName){
+  if(!receiver){
 
     msg.className =
     'msg error';
@@ -2838,53 +3746,14 @@ async function createPaymentAccount(){
   }
 
 
-  if(!accountNumber){
+  if(!account){
 
     msg.className =
     'msg error';
 
 
     msg.textContent =
-    '请输入收款号码或账号';
-
-
-    return;
-
-  }
-
-
-  if(
-    !Number.isInteger(
-      sortOrder
-    )
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '排序必须填写整数';
-
-
-    return;
-
-  }
-
-
-  if(
-    file
-    &&
-    file.size >
-    10*1024*1024
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '二维码图片不能超过 10MB';
+    '请输入收款号码 / 银行卡号 / 账号';
 
 
     return;
@@ -2895,9 +3764,9 @@ async function createPaymentAccount(){
   const ok =
   confirm(
     '确定添加这个收款账户？\n\n'+
-    '方式：'+methodName+
-    '\n姓名：'+accountName+
-    '\n号码：'+accountNumber
+    '支付方式：'+method+
+    '\n收款人：'+receiver+
+    '\n账号：'+account
   );
 
 
@@ -2917,186 +3786,59 @@ async function createPaymentAccount(){
 
 
   msg.textContent =
-  '正在创建收款账户...';
+  '正在保存收款账户...';
 
 
   try{
 
-    const createRes =
-    await api(
-      '/rest/v1/payment_accounts',
-      {
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          method_name:
-          methodName,
-
-          method_type:
-          methodType,
-
-          account_name:
-          accountName,
-
-          account_number:
-          accountNumber,
-
-          bank_name:
-          bankName || null,
-
-          note:
-          note || null,
-
-          is_active:
-          true,
-
-          sort_order:
-          sortOrder,
-
-          created_by:
-          adminUser
-          ?
-          adminUser.id
-          :
-          null,
-
-          updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
-          null
-        })
-      }
-    );
+    let qrPath =
+    '';
 
 
-    const text =
-    await createRes.text();
-
-
-    if(!createRes.ok){
-
-      throw new Error(
-        text
-        ||
-        '数据库创建失败'
-      );
-
-    }
-
-
-    let rows =
-    [];
-
-
-    try{
-
-      rows =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      [];
-
-    }catch(e){
-
-      rows =
-      [];
-
-    }
+    let qrUrl =
+    '';
 
 
     if(
-      !Array.isArray(
-        rows
-      )
-      ||
-      !rows.length
+      newPaymentQrFile
     ){
 
-      throw new Error(
-        '数据库没有返回新收款账户'
-      );
-
-    }
-
-
-    const account =
-    rows[0];
-
-
-    if(file){
-
       msg.textContent =
-      '账户已创建，正在上传二维码...';
+      '正在上传收款二维码...';
 
 
-      const storagePath =
-      await uploadPaymentAccountQr(
-        account.id,
-        file
+      const uploaded =
+      await uploadPaymentImage(
+        newPaymentQrFile,
+        'new'
       );
 
 
-      const updateRes =
-      await api(
-        '/rest/v1/payment_accounts'+
-        '?id=eq.'+
-        encodeURIComponent(
-          account.id
-        ),
-        {
-          method:'PATCH',
-
-          headers:{
-            'Content-Type':
-            'application/json',
-
-            Prefer:
-            'return=representation'
-          },
-
-          body:
-          JSON.stringify({
-            qr_storage_path:
-            storagePath,
-
-            updated_by:
-            adminUser
-            ?
-            adminUser.id
-            :
-            null,
-
-            updated_at:
-            new Date()
-            .toISOString()
-          })
-        }
-      );
+      qrPath =
+      uploaded.path;
 
 
-      if(!updateRes.ok){
-
-        throw new Error(
-          await updateRes.text()
-        );
-
-      }
+      qrUrl =
+      uploaded.url;
 
     }
+
+
+    msg.textContent =
+    '正在写入数据库...';
+
+
+    await insertPaymentAccountAdaptive({
+      method,
+      type,
+      receiver,
+      account,
+      bank,
+      sort,
+      note,
+      qrPath,
+      qrUrl
+    });
 
 
     msg.className =
@@ -3107,56 +3849,12 @@ async function createPaymentAccount(){
     '✓ 收款账户添加成功';
 
 
-    document.getElementById(
-      'payMethodName'
-    ).value =
-    '';
-
-
-    document.getElementById(
-      'payMethodType'
-    ).value =
-    'wallet';
-
-
-    document.getElementById(
-      'payAccountName'
-    ).value =
-    '';
-
-
-    document.getElementById(
-      'payAccountNumber'
-    ).value =
-    '';
-
-
-    document.getElementById(
-      'payBankName'
-    ).value =
-    '';
-
-
-    document.getElementById(
-      'paySortOrder'
-    ).value =
-    '0';
-
-
-    document.getElementById(
-      'payNote'
-    ).value =
-    '';
-
-
-    document.getElementById(
-      'payQrFile'
-    ).value =
-    '';
+    clearNewPaymentForm();
 
 
     await loadPaymentAccounts(
-      false
+      false,
+      true
     );
 
 
@@ -3194,22 +3892,142 @@ async function createPaymentAccount(){
 }
 
 
+
+/* =====================================
+   CLEAR NEW PAYMENT FORM
+===================================== */
+
+function clearNewPaymentForm(){
+
+  document.getElementById(
+    'payMethod'
+  ).value =
+  '';
+
+
+  document.getElementById(
+    'payType'
+  ).value =
+  'wallet';
+
+
+  document.getElementById(
+    'payReceiver'
+  ).value =
+  '';
+
+
+  document.getElementById(
+    'payAccount'
+  ).value =
+  '';
+
+
+  document.getElementById(
+    'payBank'
+  ).value =
+  '';
+
+
+  document.getElementById(
+    'paySort'
+  ).value =
+  '0';
+
+
+  document.getElementById(
+    'payNote'
+  ).value =
+  '';
+
+
+  document.getElementById(
+    'payQrFile'
+  ).value =
+  '';
+
+
+  document.getElementById(
+    'newQrState'
+  ).textContent =
+  '';
+
+
+  document.getElementById(
+    'newQrPreviewBox'
+  ).classList.remove(
+    'show'
+  );
+
+
+  newPaymentQrFile =
+  null;
+
+
+  if(
+    newPaymentQrPreviewUrl
+  ){
+
+    URL.revokeObjectURL(
+      newPaymentQrPreviewUrl
+    );
+
+
+    newPaymentQrPreviewUrl =
+    null;
+
+  }
+
+}
+
+
+
 /* =====================================
    LOAD PAYMENT ACCOUNTS
+
+   force = true
+   表示保存成功后允许刷新。
+
+   平时如果发现用户已经选了图片，
+   就不重新渲染，
+   防止 file input 被清掉。
 ===================================== */
 
 async function loadPaymentAccounts(
-  showMessage=false
+  showMessage=false,
+  force=false
 ){
 
-  if(paymentAccountLoading){
+  if(
+    paymentAccountsLoading
+    ||
+    paymentAccountSaving
+  ){
 
     return;
 
   }
 
 
-  paymentAccountLoading =
+  if(
+    !force
+    &&
+    hasUnsavedPaymentFile()
+  ){
+
+    /*
+      最重要的保护：
+
+      已选图片时，
+      自动刷新直接跳过。
+    */
+
+    return;
+
+  }
+
+
+  paymentAccountsLoading =
   true;
 
 
@@ -3226,7 +4044,7 @@ async function loadPaymentAccounts(
 
 
     msg.textContent =
-    '正在读取收款账户...';
+    '正在读取最新收款账户...';
 
   }
 
@@ -3236,22 +4054,34 @@ async function loadPaymentAccounts(
     const r =
     await api(
       '/rest/v1/payment_accounts'+
-      '?select=id,method_name,method_type,account_name,account_number,bank_name,qr_storage_path,note,is_active,sort_order,created_at,updated_at'+
-      '&order=sort_order.asc,created_at.asc'
+      '?select=*'+
+      '&order=created_at.desc'
     );
+
+
+    const text =
+    await r.text();
 
 
     if(!r.ok){
 
       throw new Error(
-        await r.text()
+        text
+        ||
+        '读取失败'
       );
 
     }
 
 
     const rows =
-    await r.json();
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    [];
 
 
     if(
@@ -3268,10 +4098,9 @@ async function loadPaymentAccounts(
 
 
     paymentAccounts =
-    rows;
-
-
-    await loadPaymentAccountQrUrls();
+    rows.map(
+      normalizePaymentAccount
+    );
 
 
     renderPaymentAccounts();
@@ -3319,7 +4148,7 @@ async function loadPaymentAccounts(
 
   }finally{
 
-    paymentAccountLoading =
+    paymentAccountsLoading =
     false;
 
   }
@@ -3327,50 +4156,48 @@ async function loadPaymentAccounts(
 }
 
 
+
 /* =====================================
-   LOAD QR URLS
+   PAYMENT TYPE NAME
 ===================================== */
 
-async function loadPaymentAccountQrUrls(){
+function paymentTypeName(
+  value
+){
 
-  await Promise.all(
-    paymentAccounts.map(
-      async account=>{
+  if(
+    value ===
+    'wallet'
+    ||
+    value ===
+    'e_wallet'
+    ||
+    value ===
+    'ewallet'
+  ){
 
-        account._qrUrl =
-        '';
+    return '电子钱包';
 
-
-        if(
-          !account.qr_storage_path
-        ){
-
-          return;
-
-        }
-
-
-        try{
-
-          account._qrUrl =
-          await createSignedStorageUrl(
-            account.qr_storage_path
-          );
+  }
 
 
-        }catch(e){
+  if(
+    value ===
+    'bank'
+    ||
+    value ===
+    'bank_account'
+  ){
 
-          console.error(
-            e
-          );
+    return '银行账户';
 
-        }
+  }
 
-      }
-    )
-  );
+
+  return '其他';
 
 }
+
 
 
 /* =====================================
@@ -3385,7 +4212,9 @@ function renderPaymentAccounts(){
   );
 
 
-  if(!paymentAccounts.length){
+  if(
+    !paymentAccounts.length
+  ){
 
     box.innerHTML =
     '<div class="empty">'+
@@ -3398,73 +4227,94 @@ function renderPaymentAccounts(){
   }
 
 
+  const rows =
+  [...paymentAccounts]
+  .sort(
+    (
+      a,
+      b
+    ) =>
+    a.sort-
+    b.sort
+  );
+
+
   box.innerHTML =
-  paymentAccounts.map(
+  rows.map(
     account=>{
 
       const id =
+      account.id;
+
+
+      const sid =
       safeId(
-        account.id
+        id
       );
+
+
+      const typeName =
+      paymentTypeName(
+        account.type
+      );
+
+
+      const currentQr =
+      account.qrUrl
+      ||
+      account.qrPath;
 
 
       return `
 
-      <div
-        class="paymentAccountItem ${
-          account.is_active
-          ?
-          ''
-          :
-          'inactive'
-        }">
+      <div class="paymentAccountCard">
 
 
         <div class="paymentAccountHead">
 
+
           <div>
 
-            <div class="paymentMethodName">
+
+            <div class="paymentAccountName">
 
               ${escapeHtml(
-                account.method_name
+                account.method
+                ||
+                '未命名收款方式'
               )}
 
             </div>
 
-            <div class="paymentMethodMeta">
 
-              ${
-                escapeHtml(
-                  paymentTypeName(
-                    account.method_type
-                  )
-                )
-              }
+            <div class="paymentAccountMeta">
+
+              ${escapeHtml(
+                typeName
+              )}
 
               · 排序：
-              ${escapeHtml(
-                account.sort_order
-                ??
-                0
+              ${formatNumber(
+                account.sort
               )}
 
             </div>
+
 
           </div>
 
 
           <div
-            class="paymentAccountBadge ${
-              account.is_active
+            class="badge ${
+              account.active
               ?
               'active'
               :
-              'inactive'
+              'blocked'
             }">
 
             ${
-              account.is_active
+              account.active
               ?
               '启用中'
               :
@@ -3473,12 +4323,14 @@ function renderPaymentAccounts(){
 
           </div>
 
+
         </div>
 
 
-        <div class="paymentDetails">
+        <div class="paymentAccountGrid">
 
-          <div class="paymentDetail">
+
+          <div class="accountBox">
 
             <small>
               收款人
@@ -3486,14 +4338,16 @@ function renderPaymentAccounts(){
 
             <strong>
               ${escapeHtml(
-                account.account_name
+                account.receiver
+                ||
+                '—'
               )}
             </strong>
 
           </div>
 
 
-          <div class="paymentDetail">
+          <div class="accountBox">
 
             <small>
               收款号码 / 账号
@@ -3501,39 +4355,33 @@ function renderPaymentAccounts(){
 
             <strong>
               ${escapeHtml(
-                account.account_number
+                account.account
+                ||
+                '—'
               )}
             </strong>
 
           </div>
 
 
-          ${
-            account.bank_name
-            ?
-            `
+          <div class="accountBox">
 
-            <div class="paymentDetail">
+            <small>
+              银行名称
+            </small>
 
-              <small>
-                银行名称
-              </small>
+            <strong>
+              ${escapeHtml(
+                account.bank
+                ||
+                '—'
+              )}
+            </strong>
 
-              <strong>
-                ${escapeHtml(
-                  account.bank_name
-                )}
-              </strong>
-
-            </div>
-
-            `
-            :
-            ''
-          }
+          </div>
 
 
-          <div class="paymentDetail">
+          <div class="accountBox">
 
             <small>
               当前状态
@@ -3541,15 +4389,16 @@ function renderPaymentAccounts(){
 
             <strong>
               ${
-                account.is_active
+                account.active
                 ?
                 '代理可使用'
                 :
-                '代理不可用于新付款'
+                '已停止使用'
               }
             </strong>
 
           </div>
+
 
         </div>
 
@@ -3574,18 +4423,27 @@ function renderPaymentAccounts(){
         }
 
 
-        <div class="qrWrap">
+        <div class="qrPreview">
 
           ${
-            account._qrUrl
+            currentQr
             ?
             `
 
             <img
               src="${escapeHtml(
-                account._qrUrl
+                currentQr
               )}"
-              alt="收款二维码">
+              alt="收款二维码"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+
+            <div
+              class="qrEmpty"
+              style="display:none">
+
+              二维码地址存在，但图片暂时无法显示
+
+            </div>
 
             `
             :
@@ -3603,29 +4461,37 @@ function renderPaymentAccounts(){
 
         <div class="accountEdit">
 
-          <div class="title">
+
+          <div class="accountEditTitle">
             修改此收款账户
           </div>
 
 
-          <div class="accountEditGrid">
+          <div class="paymentFormStack">
+
 
             <input
-              id="editMethod_${id}"
-              value="${escapeHtmlAttr(
-                account.method_name
+              id="editMethod_${sid}"
+              value="${escapeHtml(
+                account.method
               )}"
               placeholder="支付方式">
 
 
             <select
-              id="editType_${id}">
+              id="editType_${sid}">
 
               <option
                 value="wallet"
                 ${
-                  account.method_type ===
+                  account.type ===
                   'wallet'
+                  ||
+                  account.type ===
+                  'e_wallet'
+                  ||
+                  account.type ===
+                  'ewallet'
                   ?
                   'selected'
                   :
@@ -3639,8 +4505,11 @@ function renderPaymentAccounts(){
               <option
                 value="bank"
                 ${
-                  account.method_type ===
+                  account.type ===
                   'bank'
+                  ||
+                  account.type ===
+                  'bank_account'
                   ?
                   'selected'
                   :
@@ -3654,8 +4523,15 @@ function renderPaymentAccounts(){
               <option
                 value="other"
                 ${
-                  account.method_type ===
-                  'other'
+                  ![
+                    'wallet',
+                    'e_wallet',
+                    'ewallet',
+                    'bank',
+                    'bank_account'
+                  ].includes(
+                    account.type
+                  )
                   ?
                   'selected'
                   :
@@ -3670,76 +4546,91 @@ function renderPaymentAccounts(){
 
 
             <input
-              id="editName_${id}"
-              value="${escapeHtmlAttr(
-                account.account_name
+              id="editReceiver_${sid}"
+              value="${escapeHtml(
+                account.receiver
               )}"
               placeholder="收款人姓名">
 
 
             <input
-              id="editNumber_${id}"
-              value="${escapeHtmlAttr(
-                account.account_number
+              id="editAccount_${sid}"
+              value="${escapeHtml(
+                account.account
               )}"
-              placeholder="电话号码 / 银行账号">
+              placeholder="电话号码 / 银行卡号 / 账号">
 
 
             <input
-              id="editBank_${id}"
-              value="${escapeHtmlAttr(
-                account.bank_name
-                ||
-                ''
+              id="editBank_${sid}"
+              value="${escapeHtml(
+                account.bank
               )}"
               placeholder="银行名称，可不填">
 
 
             <input
-              id="editSort_${id}"
+              id="editSort_${sid}"
               type="number"
-              step="1"
               value="${Number(
-                account.sort_order
-                ||
-                0
+                account.sort || 0
               )}"
               placeholder="排序">
 
 
             <textarea
-              id="editNote_${id}"
-              placeholder="备注">${escapeHtml(
+              id="editNote_${sid}"
+              placeholder="给代理看的备注">${escapeHtml(
                 account.note
-                ||
-                ''
               )}</textarea>
 
 
-            <div>
+            <input
+              id="editQr_${sid}"
+              type="file"
+              accept="image/*"
+              onchange="editQrSelected(
+                '${escapeJs(id)}',
+                this
+              )">
 
-              <input
-                id="editQr_${id}"
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
 
-              <div class="hint">
-                选择图片后保存，即可更换二维码。
-              </div>
+            <div
+              class="fileState"
+              id="editFileState_${sid}">
+            </div>
+
+
+            <div
+              class="previewBox"
+              id="editPreviewBox_${sid}">
+
+              <img
+                id="editPreview_${sid}"
+                alt="新二维码预览">
 
             </div>
 
           </div>
 
 
-          <div class="accountEditButtons">
+          <div class="hint">
+
+            选择图片后先不要刷新页面，点击「保存修改」即可更换二维码。
+
+            <br>
+
+            本页面自动刷新检测到你已经选择图片时，会自动暂停收款账户重绘。
+
+          </div>
+
+
+          <div class="paymentButtons">
 
             <button
               class="gold"
               onclick="savePaymentAccount(
-                '${escapeJs(
-                  account.id
-                )}'
+                '${escapeJs(id)}'
               )">
 
               保存修改
@@ -3749,18 +4640,16 @@ function renderPaymentAccounts(){
 
             <button
               class="${
-                account.is_active
+                account.active
                 ?
                 'red'
                 :
                 'greenBtn'
               }"
               onclick="togglePaymentAccount(
-                '${escapeJs(
-                  account.id
-                )}',
+                '${escapeJs(id)}',
                 ${
-                  account.is_active
+                  account.active
                   ?
                   'false'
                   :
@@ -3769,16 +4658,17 @@ function renderPaymentAccounts(){
               )">
 
               ${
-                account.is_active
+                account.active
                 ?
                 '停用此收款账户'
                 :
-                '重新启用'
+                '重新启用此收款账户'
               }
 
             </button>
 
           </div>
+
 
         </div>
 
@@ -3794,12 +4684,187 @@ function renderPaymentAccounts(){
 }
 
 
+
+/* =====================================
+   UPDATE PAYLOAD FROM EXISTING COLUMN
+===================================== */
+
+function buildAdaptiveUpdateBody(
+  account,
+  values
+){
+
+  const raw =
+  account.raw
+  ||
+  {};
+
+
+  const body =
+  {};
+
+
+  function setExisting(
+    candidates,
+    value
+  ){
+
+    const found =
+    candidates.find(
+      key =>
+      Object.prototype.hasOwnProperty.call(
+        raw,
+        key
+      )
+    );
+
+
+    if(found){
+
+      body[found] =
+      value;
+
+    }
+
+  }
+
+
+  setExisting(
+    [
+      'payment_method',
+      'method_name',
+      'method',
+      'name'
+    ],
+    values.method
+  );
+
+
+  setExisting(
+    [
+      'payment_type',
+      'account_type',
+      'type'
+    ],
+    values.type
+  );
+
+
+  setExisting(
+    [
+      'receiver_name',
+      'recipient_name',
+      'account_name',
+      'holder_name'
+    ],
+    values.receiver
+  );
+
+
+  setExisting(
+    [
+      'account_number',
+      'account_no',
+      'phone_number',
+      'number'
+    ],
+    values.account
+  );
+
+
+  setExisting(
+    [
+      'bank_name',
+      'bank'
+    ],
+    values.bank
+  );
+
+
+  setExisting(
+    [
+      'sort_order',
+      'sort_index',
+      'position'
+    ],
+    values.sort
+  );
+
+
+  setExisting(
+    [
+      'note',
+      'remark',
+      'instructions'
+    ],
+    values.note
+  );
+
+
+  if(
+    values.qrPath !==
+    undefined
+  ){
+
+    setExisting(
+      [
+        'qr_image_path',
+        'qr_path',
+        'qr_code_path',
+        'image_path'
+      ],
+      values.qrPath
+    );
+
+  }
+
+
+  if(
+    values.qrUrl !==
+    undefined
+  ){
+
+    setExisting(
+      [
+        'qr_image_url',
+        'qr_url',
+        'image_url'
+      ],
+      values.qrUrl
+    );
+
+  }
+
+
+  if(
+    values.active !==
+    undefined
+  ){
+
+    setExisting(
+      [
+        'is_active',
+        'active',
+        'enabled'
+      ],
+      values.active
+    );
+
+  }
+
+
+  return body;
+
+}
+
+
+
 /* =====================================
    SAVE PAYMENT ACCOUNT
 ===================================== */
 
 async function savePaymentAccount(
-  accountId
+  id
 ){
 
   if(paymentAccountSaving){
@@ -3813,119 +4878,85 @@ async function savePaymentAccount(
   paymentAccounts.find(
     x =>
     x.id ===
-    accountId
+    id
   );
 
 
   if(!account){
 
+    alert(
+      '没有找到这个收款账户'
+    );
+
+
     return;
 
   }
 
 
-  const id =
+  const sid =
   safeId(
-    accountId
+    id
   );
 
 
-  const methodName =
+  const method =
   document.getElementById(
-    'editMethod_'+id
+    'editMethod_'+sid
   ).value.trim();
 
 
-  const methodType =
+  const type =
   document.getElementById(
-    'editType_'+id
+    'editType_'+sid
   ).value;
 
 
-  const accountName =
+  const receiver =
   document.getElementById(
-    'editName_'+id
+    'editReceiver_'+sid
   ).value.trim();
 
 
   const accountNumber =
   document.getElementById(
-    'editNumber_'+id
+    'editAccount_'+sid
   ).value.trim();
 
 
-  const bankName =
+  const bank =
   document.getElementById(
-    'editBank_'+id
+    'editBank_'+sid
   ).value.trim();
 
 
-  const sortOrder =
+  const sort =
   Number(
     document.getElementById(
-      'editSort_'+id
-    ).value || 0
+      'editSort_'+sid
+    ).value
+    ||
+    0
   );
 
 
   const note =
   document.getElementById(
-    'editNote_'+id
+    'editNote_'+sid
   ).value.trim();
 
 
-  const file =
-  document.getElementById(
-    'editQr_'+id
-  ).files[0]
-  ||
-  null;
-
-
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
   if(
-    !methodName
+    !method
     ||
-    !accountName
+    !receiver
     ||
     !accountNumber
   ){
 
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '支付方式、收款人和收款号码不能为空';
-
-
-    return;
-
-  }
-
-
-  if(
-    file
-    &&
-    file.size >
-    10*1024*1024
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '二维码图片不能超过 10MB';
+    alert(
+      '支付方式、收款人姓名和收款账号不能为空'
+    );
 
 
     return;
@@ -3935,7 +4966,12 @@ async function savePaymentAccount(
 
   const ok =
   confirm(
-    '确定保存这个收款账户的修改？'
+    '确定保存这个收款账户的修改？\n\n'+
+    method+
+    '\n'+
+    receiver+
+    '\n'+
+    accountNumber
   );
 
 
@@ -3950,28 +4986,85 @@ async function savePaymentAccount(
   true;
 
 
+  const msg =
+  document.getElementById(
+    'paymentAccountMsg'
+  );
+
+
+  msg.className =
+  'msg';
+
+
   msg.textContent =
-  '正在保存收款账户...';
+  '正在保存修改...';
 
 
   try{
 
     let qrPath =
-    account.qr_storage_path
-    ||
-    null;
+    undefined;
 
 
-    if(file){
+    let qrUrl =
+    undefined;
+
+
+    const selectedFile =
+    editPaymentQrFiles.get(
+      id
+    );
+
+
+    if(selectedFile){
 
       msg.textContent =
-      '正在上传新的二维码...';
+      '正在上传新二维码...';
+
+
+      const uploaded =
+      await uploadPaymentImage(
+        selectedFile,
+        id
+      );
 
 
       qrPath =
-      await uploadPaymentAccountQr(
-        accountId,
-        file
+      uploaded.path;
+
+
+      qrUrl =
+      uploaded.url;
+
+    }
+
+
+    const body =
+    buildAdaptiveUpdateBody(
+      account,
+      {
+        method,
+        type,
+        receiver,
+        account:
+        accountNumber,
+        bank,
+        sort,
+        note,
+        qrPath,
+        qrUrl
+      }
+    );
+
+
+    if(
+      !Object.keys(
+        body
+      ).length
+    ){
+
+      throw new Error(
+        '无法识别 payment_accounts 字段'
       );
 
     }
@@ -3982,7 +5075,7 @@ async function savePaymentAccount(
       '/rest/v1/payment_accounts'+
       '?id=eq.'+
       encodeURIComponent(
-        accountId
+        id
       ),
       {
         method:'PATCH',
@@ -3996,48 +5089,9 @@ async function savePaymentAccount(
         },
 
         body:
-        JSON.stringify({
-          method_name:
-          methodName,
-
-          method_type:
-          methodType,
-
-          account_name:
-          accountName,
-
-          account_number:
-          accountNumber,
-
-          bank_name:
-          bankName || null,
-
-          qr_storage_path:
-          qrPath,
-
-          note:
-          note || null,
-
-          sort_order:
-          Number.isInteger(
-            sortOrder
-          )
-          ?
-          sortOrder
-          :
-          0,
-
-          updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
-          null,
-
-          updated_at:
-          new Date()
-          .toISOString()
-        })
+        JSON.stringify(
+          body
+        )
       }
     );
 
@@ -4057,16 +5111,42 @@ async function savePaymentAccount(
     }
 
 
+    editPaymentQrFiles.delete(
+      id
+    );
+
+
+    const previewUrl =
+    editPaymentQrPreviewUrls.get(
+      id
+    );
+
+
+    if(previewUrl){
+
+      URL.revokeObjectURL(
+        previewUrl
+      );
+
+
+      editPaymentQrPreviewUrls.delete(
+        id
+      );
+
+    }
+
+
     msg.className =
     'msg success';
 
 
     msg.textContent =
-    '✓ 收款账户已经更新';
+    '✓ 收款账户修改成功';
 
 
     await loadPaymentAccounts(
-      false
+      false,
+      true
     );
 
 
@@ -4100,20 +5180,40 @@ async function savePaymentAccount(
 }
 
 
+
 /* =====================================
-   ENABLE / DISABLE PAYMENT ACCOUNT
+   TOGGLE PAYMENT ACCOUNT
 ===================================== */
 
 async function togglePaymentAccount(
-  accountId,
-  enabled
+  id,
+  nextState
 ){
+
+  if(
+    hasUnsavedPaymentFile()
+  ){
+
+    const ok =
+    confirm(
+      '你目前还有已经选择但尚未保存的二维码图片。\n\n继续操作可能会重新读取账户资料。\n\n确定继续吗？'
+    );
+
+
+    if(!ok){
+
+      return;
+
+    }
+
+  }
+
 
   const account =
   paymentAccounts.find(
     x =>
     x.id ===
-    accountId
+    id
   );
 
 
@@ -4126,11 +5226,11 @@ async function togglePaymentAccount(
 
   const ok =
   confirm(
-    enabled
+    nextState
     ?
     '确定重新启用这个收款账户？'
     :
-    '确定停用这个收款账户？\n\n停用后，代理不会再把它作为新的付款方式使用。'
+    '确定停用这个收款账户？'
   );
 
 
@@ -4141,9 +5241,13 @@ async function togglePaymentAccount(
   }
 
 
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
+  const body =
+  buildAdaptiveUpdateBody(
+    account,
+    {
+      active:
+      nextState
+    }
   );
 
 
@@ -4154,7 +5258,7 @@ async function togglePaymentAccount(
       '/rest/v1/payment_accounts'+
       '?id=eq.'+
       encodeURIComponent(
-        accountId
+        id
       ),
       {
         method:'PATCH',
@@ -4168,21 +5272,9 @@ async function togglePaymentAccount(
         },
 
         body:
-        JSON.stringify({
-          is_active:
-          enabled,
-
-          updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
-          null,
-
-          updated_at:
-          new Date()
-          .toISOString()
-        })
+        JSON.stringify(
+          body
+        )
       }
     );
 
@@ -4196,384 +5288,27 @@ async function togglePaymentAccount(
     }
 
 
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    enabled
-    ?
-    '✓ 收款账户已经重新启用'
-    :
-    '✓ 收款账户已经停用';
-
-
     await loadPaymentAccounts(
-      false
+      false,
+      true
     );
 
 
   }catch(e){
 
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '操作失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-  }
-
-}
-
-
-/* =====================================
-   UPLOAD PAYMENT ACCOUNT QR
-===================================== */
-
-async function uploadPaymentAccountQr(
-  accountId,
-  file
-){
-
-  if(!file){
-
-    throw new Error(
-      '没有选择二维码图片'
-    );
-
-  }
-
-
-  const ext =
-  getFileExtension(
-    file
-  );
-
-
-  const storagePath =
-  'payment-accounts/'+
-  accountId+
-  '/'+
-  Date.now()+
-  '_'+
-  randomString()+
-  '.'+
-  ext;
-
-
-  const r =
-  await fetch(
-    BASE+
-    '/storage/v1/object/'+
-    PAYMENT_BUCKET+
-    '/'+
-    encodeStoragePath(
-      storagePath
-    ),
-    {
-      method:'POST',
-
-      headers:{
-        apikey:KEY,
-        Authorization:
-        'Bearer '+token,
-        'Content-Type':
-        file.type
+    alert(
+      '操作失败：'+
+      (
+        e.message
         ||
-        'application/octet-stream',
-
-        'x-upsert':
-        'false'
-      },
-
-      body:
-      file
-    }
-  );
-
-
-  const text =
-  await r.text();
-
-
-  if(!r.ok){
-
-    throw new Error(
-      text
-      ||
-      '二维码上传失败'
+        '未知错误'
+      )
     );
 
   }
 
-
-  return storagePath;
-
 }
 
-
-/* =====================================
-   SIGNED STORAGE URL
-===================================== */
-
-async function createSignedStorageUrl(
-  storagePath
-){
-
-  const r =
-  await fetch(
-    BASE+
-    '/storage/v1/object/sign/'+
-    PAYMENT_BUCKET+
-    '/'+
-    encodeStoragePath(
-      storagePath
-    ),
-    {
-      method:'POST',
-
-      headers:{
-        apikey:KEY,
-        Authorization:
-        'Bearer '+token,
-        'Content-Type':
-        'application/json'
-      },
-
-      body:
-      JSON.stringify({
-        expiresIn:
-        3600
-      })
-    }
-  );
-
-
-  const text =
-  await r.text();
-
-
-  if(!r.ok){
-
-    throw new Error(
-      text
-      ||
-      '二维码读取失败'
-    );
-
-  }
-
-
-  let data =
-  {};
-
-
-  try{
-
-    data =
-    JSON.parse(
-      text
-    );
-
-  }catch(e){
-
-    data =
-    {};
-
-  }
-
-
-  const signedPath =
-  data.signedURL
-  ||
-  data.signedUrl
-  ||
-  '';
-
-
-  if(!signedPath){
-
-    throw new Error(
-      '没有取得二维码访问地址'
-    );
-
-  }
-
-
-  if(
-    signedPath.startsWith(
-      'http'
-    )
-  ){
-
-    return signedPath;
-
-  }
-
-
-  return BASE+
-  '/storage/v1'+
-  (
-    signedPath.startsWith('/')
-    ?
-    signedPath
-    :
-    '/'+signedPath
-  );
-
-}
-
-
-/* =====================================
-   FILE HELPERS
-===================================== */
-
-function getFileExtension(
-  file
-){
-
-  const name =
-  String(
-    file.name || ''
-  );
-
-
-  const fromName =
-  name.includes('.')
-  ?
-  name
-  .split('.')
-  .pop()
-  .toLowerCase()
-  :
-  '';
-
-
-  if(
-    [
-      'jpg',
-      'jpeg',
-      'png',
-      'webp',
-      'heic',
-      'heif'
-    ]
-    .includes(
-      fromName
-    )
-  ){
-
-    return fromName;
-
-  }
-
-
-  if(
-    file.type ===
-    'image/png'
-  ){
-
-    return 'png';
-
-  }
-
-
-  if(
-    file.type ===
-    'image/webp'
-  ){
-
-    return 'webp';
-
-  }
-
-
-  if(
-    file.type ===
-    'image/heic'
-  ){
-
-    return 'heic';
-
-  }
-
-
-  if(
-    file.type ===
-    'image/heif'
-  ){
-
-    return 'heif';
-
-  }
-
-
-  return 'jpg';
-
-}
-
-
-function randomString(){
-
-  return Math.random()
-  .toString(36)
-  .slice(2,10);
-
-}
-
-
-function encodeStoragePath(
-  path
-){
-
-  return String(
-    path || ''
-  )
-  .split('/')
-  .map(
-    part =>
-    encodeURIComponent(
-      part
-    )
-  )
-  .join('/');
-
-}
-
-
-function paymentTypeName(
-  type
-){
-
-  if(
-    type ===
-    'wallet'
-  ){
-
-    return '电子钱包';
-
-  }
-
-
-  if(
-    type ===
-    'bank'
-  ){
-
-    return '银行账户';
-
-  }
-
-
-  return '其他';
-
-}
 
 
 /* =====================================
@@ -4606,6 +5341,7 @@ function isMeaningfulSettlementRow(
   );
 
 }
+
 
 
 /* =====================================
@@ -4788,6 +5524,7 @@ async function loadSettlementData(
 }
 
 
+
 /* =====================================
    BUILD SETTLEMENT ROUND SELECT
 ===================================== */
@@ -4924,6 +5661,7 @@ function buildSettlementRoundSelect(){
   relevantRounds[0].id;
 
 }
+
 
 
 /* =====================================
@@ -5258,7 +5996,9 @@ function renderSettlements(){
 
         <div class="settlementHead">
 
+
           <div>
+
 
             <div class="settlementName">
 
@@ -5307,6 +6047,7 @@ function renderSettlements(){
 
             </div>
 
+
           </div>
 
 
@@ -5319,10 +6060,12 @@ function renderSettlements(){
 
           </div>
 
+
         </div>
 
 
         <div class="settlementGrid">
+
 
           <div class="financeBox">
 
@@ -5383,6 +6126,7 @@ function renderSettlements(){
 
           </div>
 
+
         </div>
 
 
@@ -5435,6 +6179,7 @@ function renderSettlements(){
 
           <div class="settlementInputWrap">
 
+
             <div class="settlementInputLabel">
 
               实际到账金额
@@ -5443,6 +6188,7 @@ function renderSettlements(){
 
 
             <div class="settlementInputRow">
+
 
               <input
                 id="${inputId}"
@@ -5471,10 +6217,12 @@ function renderSettlements(){
 
               </button>
 
+
             </div>
 
 
             <div class="settlementButtons">
+
 
               <button
                 class="dark"
@@ -5508,6 +6256,7 @@ function renderSettlements(){
 
               </button>
 
+
             </div>
 
 
@@ -5527,6 +6276,7 @@ function renderSettlements(){
 
             </div>
 
+
           </div>
 
           `
@@ -5542,6 +6292,7 @@ function renderSettlements(){
           `
         }
 
+
       </div>
 
       `;
@@ -5551,6 +6302,7 @@ function renderSettlements(){
   .join('');
 
 }
+
 
 
 /* =====================================
@@ -5692,6 +6444,7 @@ function resetSettlementStats(){
 }
 
 
+
 /* =====================================
    FILL SETTLEMENT AMOUNT
 ===================================== */
@@ -5723,6 +6476,7 @@ function fillSettlementAmount(
   );
 
 }
+
 
 
 /* =====================================
@@ -5794,6 +6548,7 @@ async function getFreshSettlement(
   return rows[0];
 
 }
+
 
 
 /* =====================================
@@ -6222,6 +6977,7 @@ async function confirmSettlement(
 }
 
 
+
 /* =====================================
    MONEY EQUAL
 ===================================== */
@@ -6252,6 +7008,7 @@ function moneyEqual(
   return aa === bb;
 
 }
+
 
 
 /* =====================================
@@ -6285,6 +7042,7 @@ function periodName(
   return code || '—';
 
 }
+
 
 
 /* =====================================
@@ -6361,6 +7119,7 @@ function roundStatusName(
 }
 
 
+
 /* =====================================
    NORMALIZE RATE
 ===================================== */
@@ -6402,6 +7161,7 @@ function normalizeRate(
   return rate;
 
 }
+
 
 
 /* =====================================
@@ -6447,6 +7207,7 @@ function statusName(
 }
 
 
+
 /* =====================================
    HAS RESULT
 ===================================== */
@@ -6467,6 +7228,7 @@ function hasResult(
   );
 
 }
+
 
 
 /* =====================================
@@ -6526,6 +7288,7 @@ function formatDate(
 }
 
 
+
 /* =====================================
    RATE FORMAT
 ===================================== */
@@ -6545,6 +7308,7 @@ function formatRate(
   );
 
 }
+
 
 
 /* =====================================
@@ -6568,6 +7332,7 @@ function formatNumber(
 }
 
 
+
 /* =====================================
    SAFE ID
 ===================================== */
@@ -6585,6 +7350,7 @@ function safeId(
   );
 
 }
+
 
 
 /* =====================================
@@ -6627,16 +7393,6 @@ function escapeHtml(
 }
 
 
-function escapeHtmlAttr(
-  value
-){
-
-  return escapeHtml(
-    value
-  );
-
-}
-
 
 /* =====================================
    JS ESCAPE
@@ -6659,6 +7415,7 @@ function escapeJs(
   );
 
 }
+
 
 
 /* =====================================
@@ -6693,6 +7450,7 @@ function clearAdminSession(){
 }
 
 
+
 /* =====================================
    AUTO REFRESH
 ===================================== */
@@ -6700,21 +7458,21 @@ function clearAdminSession(){
 function refreshWhenActive(){
 
   if(
-    token
-    &&
-    adminUser
-    &&
+    !token
+    ||
+    !adminUser
+  ){
+
+    return;
+
+  }
+
+
+  if(
     !settlementLoading
     &&
     !settlementConfirming
-    &&
-    !paymentAccountSaving
   ){
-
-    loadPaymentAccounts(
-      false
-    );
-
 
     loadSettlementData(
       false
@@ -6722,7 +7480,32 @@ function refreshWhenActive(){
 
   }
 
+
+  /*
+    如果用户已经选择二维码，
+    不刷新收款账户列表。
+
+    这样 iPhone 上选择的图片
+    不会突然消失。
+  */
+
+  if(
+    !paymentAccountsLoading
+    &&
+    !paymentAccountSaving
+    &&
+    !hasUnsavedPaymentFile()
+  ){
+
+    loadPaymentAccounts(
+      false,
+      false
+    );
+
+  }
+
 }
+
 
 
 document.addEventListener(
@@ -6760,6 +7543,7 @@ window.addEventListener(
 );
 
 
+
 /* =====================================
    START
 ===================================== */
@@ -6790,7 +7574,8 @@ async function startPage(){
 
 
   await loadPaymentAccounts(
-    false
+    false,
+    true
   );
 
 
@@ -6804,25 +7589,54 @@ async function startPage(){
 startPage();
 
 
+
+/*
+  正常打开页面时每 20 秒更新。
+
+  结款：
+  正常自动刷新。
+
+  收款账户：
+  如果管理员已经选择二维码图片，
+  自动刷新暂停。
+
+  保存图片成功以后，
+  才重新读取收款账户。
+*/
+
 setInterval(
   ()=>{
 
     if(
-      token
-      &&
-      adminUser
-      &&
-      !settlementConfirming
-      &&
-      !paymentAccountSaving
+      !token
+      ||
+      !adminUser
     ){
 
-      loadPaymentAccounts(
+      return;
+
+    }
+
+
+    if(
+      !settlementConfirming
+    ){
+
+      loadSettlementData(
         false
       );
 
+    }
 
-      loadSettlementData(
+
+    if(
+      !paymentAccountSaving
+      &&
+      !hasUnsavedPaymentFile()
+    ){
+
+      loadPaymentAccounts(
+        false,
         false
       );
 
