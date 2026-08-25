@@ -526,6 +526,208 @@ button:disabled{
 
 
 /* =====================================
+   PAYMENT REVIEW
+===================================== */
+
+.reviewStats{
+  display:grid;
+  grid-template-columns:
+  repeat(3,1fr);
+  gap:8px;
+  margin-bottom:14px
+}
+
+.reviewStat{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.055);
+  border-radius:13px;
+  padding:13px
+}
+
+.reviewStat small{
+  display:block;
+  color:#80796c;
+  font-size:10px
+}
+
+.reviewStat strong{
+  display:block;
+  margin-top:6px;
+  font-size:19px;
+  color:#ecd076
+}
+
+.paymentReviewItem{
+  background:
+  linear-gradient(
+    180deg,
+    #121213,
+    #0e0e0f
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:12px
+}
+
+.paymentReviewItem.pendingReview{
+  border-color:
+  rgba(214,168,63,.34)
+}
+
+.paymentReviewItem.approvedReview{
+  border-color:
+  rgba(90,200,135,.25)
+}
+
+.paymentReviewItem.rejectedReview{
+  border-color:
+  rgba(215,99,99,.30)
+}
+
+.reviewHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px
+}
+
+.reviewName{
+  color:#f0d27a;
+  font-size:17px;
+  font-weight:900
+}
+
+.reviewMeta{
+  color:#847c6e;
+  font-size:11px;
+  line-height:1.7;
+  margin-top:5px
+}
+
+.reviewBadge{
+  flex:none;
+  border-radius:99px;
+  padding:6px 10px;
+  font-size:10px;
+  font-weight:900
+}
+
+.reviewBadge.pending{
+  background:#352d13;
+  color:#e2c870
+}
+
+.reviewBadge.approved{
+  background:#153124;
+  color:#79d6a2
+}
+
+.reviewBadge.rejected{
+  background:#391818;
+  color:#ed9b9b
+}
+
+.reviewGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(4,1fr);
+  gap:8px;
+  margin-top:13px
+}
+
+.reviewBox{
+  background:#0d0d0e;
+  border:
+  1px solid
+  rgba(255,255,255,.05);
+  border-radius:12px;
+  padding:11px
+}
+
+.reviewBox small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  line-height:1.4
+}
+
+.reviewBox strong{
+  display:block;
+  color:#ead077;
+  margin-top:5px;
+  font-size:14px;
+  line-height:1.4;
+  word-break:break-word
+}
+
+.reviewProofs{
+  margin-top:13px;
+  border-top:
+  1px solid
+  rgba(255,255,255,.06);
+  padding-top:13px
+}
+
+.reviewProofTitle{
+  font-size:11px;
+  color:#8b8374;
+  margin-bottom:8px
+}
+
+.proofGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:8px
+}
+
+.proofItem{
+  background:#0b0b0c;
+  border:
+  1px solid
+  rgba(255,255,255,.055);
+  border-radius:12px;
+  overflow:hidden
+}
+
+.proofItem img{
+  width:100%;
+  display:block;
+  max-height:420px;
+  object-fit:contain;
+  background:#080809
+}
+
+.proofCaption{
+  padding:8px;
+  color:#777166;
+  font-size:9px;
+  line-height:1.5;
+  word-break:break-all
+}
+
+.reviewNote{
+  color:#81796b;
+  font-size:11px;
+  line-height:1.7;
+  margin-top:11px;
+  word-break:break-word
+}
+
+.reviewButtons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px
+}
+
+
+/* =====================================
    SETTLEMENT
 ===================================== */
 
@@ -620,6 +822,11 @@ button:disabled{
   color:#e2c870
 }
 
+.financeBadge.partial{
+  background:#2d2918;
+  color:#e6ca78
+}
+
 .financeBadge.overdue{
   background:#391818;
   color:#ed9b9b
@@ -676,44 +883,6 @@ button:disabled{
   color:#7bdba8
 }
 
-.settlementInputWrap{
-  margin-top:13px;
-  padding-top:13px;
-  border-top:
-  1px solid
-  rgba(255,255,255,.06)
-}
-
-.settlementInputLabel{
-  color:#8b8374;
-  font-size:10px;
-  margin-bottom:7px
-}
-
-.settlementInputRow{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px
-}
-
-.settlementInputRow button{
-  min-width:120px
-}
-
-.settlementButtons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:9px
-}
-
-.settlementNote{
-  color:#746e63;
-  font-size:10px;
-  line-height:1.7;
-  margin-top:10px
-}
-
 .roundFilter{
   display:grid;
   grid-template-columns:1fr auto;
@@ -732,14 +901,23 @@ button:disabled{
   line-height:1.6
 }
 
+.settlementNote{
+  color:#746e63;
+  font-size:10px;
+  line-height:1.7;
+  margin-top:10px
+}
+
 @media(max-width:700px){
 
-  .settlementStats{
+  .settlementStats,
+  .reviewStats{
     grid-template-columns:
     1fr 1fr
   }
 
-  .settlementGrid{
+  .settlementGrid,
+  .reviewGrid{
     grid-template-columns:
     1fr 1fr
   }
@@ -764,19 +942,15 @@ button:disabled{
     grid-template-columns:1fr 1fr
   }
 
-  .settlementInputRow{
-    grid-template-columns:1fr
-  }
-
-  .settlementInputRow button{
-    width:100%
-  }
-
-  .settlementButtons{
-    grid-template-columns:1fr
-  }
-
   .accountButtons{
+    grid-template-columns:1fr
+  }
+
+  .reviewButtons{
+    grid-template-columns:1fr
+  }
+
+  .proofGrid{
     grid-template-columns:1fr
   }
 
@@ -786,11 +960,9 @@ button:disabled{
 
 </head>
 
-
 <body>
 
 <div class="wrap">
-
 
   <div class="header">
 
@@ -805,7 +977,6 @@ button:disabled{
       </div>
 
     </div>
-
 
     <button
       class="dark"
@@ -829,16 +1000,13 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       CREATE AGENT
-  ================================== -->
+  <!-- CREATE AGENT -->
 
   <div class="card">
 
     <div class="title">
       ＋ 创建新代理
     </div>
-
 
     <div class="formGrid">
 
@@ -869,7 +1037,6 @@ button:disabled{
 
     </div>
 
-
     <button
       id="createBtn"
       class="gold"
@@ -880,12 +1047,10 @@ button:disabled{
 
     </button>
 
-
     <div
       class="msg"
       id="createMsg">
     </div>
-
 
     <div class="hint">
 
@@ -900,9 +1065,7 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       AGENT STATS
-  ================================== -->
+  <!-- STATS -->
 
   <div class="card">
 
@@ -910,14 +1073,11 @@ button:disabled{
       代理概况
     </div>
 
-
     <div class="stats">
 
       <div class="stat">
 
-        <small>
-          代理总数
-        </small>
+        <small>代理总数</small>
 
         <strong id="totalAgents">
           0
@@ -925,12 +1085,9 @@ button:disabled{
 
       </div>
 
-
       <div class="stat">
 
-        <small>
-          正常
-        </small>
+        <small>正常</small>
 
         <strong id="activeAgents">
           0
@@ -938,12 +1095,9 @@ button:disabled{
 
       </div>
 
-
       <div class="stat">
 
-        <small>
-          暂停 / 限制
-        </small>
+        <small>暂停 / 限制</small>
 
         <strong id="inactiveAgents">
           0
@@ -956,9 +1110,7 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       PAYMENT ACCOUNTS
-  ================================== -->
+  <!-- PAYMENT ACCOUNTS -->
 
   <div class="card">
 
@@ -966,14 +1118,11 @@ button:disabled{
       🏦 平台收款账户管理
     </div>
 
-
     <div class="paymentAccountForm">
-
 
       <input
         id="paymentMethodName"
         placeholder="支付方式，例如：K Pay">
-
 
       <select id="paymentMethodType">
 
@@ -991,21 +1140,17 @@ button:disabled{
 
       </select>
 
-
       <input
         id="paymentAccountName"
         placeholder="收款人姓名">
-
 
       <input
         id="paymentAccountNumber"
         placeholder="电话号码 / 银行卡号 / 账号">
 
-
       <input
         id="paymentBankName"
         placeholder="银行名称，可不填">
-
 
       <input
         id="paymentSortOrder"
@@ -1014,11 +1159,9 @@ button:disabled{
         step="1"
         placeholder="排序数字">
 
-
       <textarea
         id="paymentNote"
         placeholder="给代理看的备注，例如：代理每期付款请转入此账户"></textarea>
-
 
       <div class="fileBox">
 
@@ -1049,7 +1192,6 @@ button:disabled{
 
       </div>
 
-
       <div class="hint">
 
         二维码单张最大 10MB。
@@ -1064,7 +1206,6 @@ button:disabled{
 
       </div>
 
-
       <button
         id="addPaymentAccountBtn"
         class="gold"
@@ -1074,7 +1215,6 @@ button:disabled{
 
       </button>
 
-
       <div
         id="paymentAccountMsg"
         class="msg">
@@ -1082,34 +1222,25 @@ button:disabled{
 
     </div>
 
-
     <div class="hint">
 
       这里设置的是代理付款时看到的平台收款方式。
 
       <br>
 
-      可以同时启用多个方式，例如 K Pay、Wave Pay、KBZ Bank。
+      可以同时启用多个收款方式。
 
       <br>
 
-      二维码存放在私有 Storage，不使用手机本地临时图片。
-
-      <br>
-
-      修改账户资料不会修改以前付款记录中已经保存的历史资料。
+      账户资料修改后，只影响之后的付款；已经提交过的付款记录会保留当时的账户快照。
 
     </div>
 
-
-    <div class="divider">
-    </div>
-
+    <div class="divider"></div>
 
     <div class="title">
       当前收款账户
     </div>
-
 
     <div id="paymentAccountList">
 
@@ -1122,16 +1253,133 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       SETTLEMENT
-  ================================== -->
+  <!-- PAYMENT REVIEW -->
+
+  <div
+    class="card"
+    id="paymentReviewCard">
+
+    <div class="title">
+      🧾 代理付款审核
+    </div>
+
+    <div class="reviewStats">
+
+      <div class="reviewStat">
+
+        <small>
+          待审核申请
+        </small>
+
+        <strong id="reviewPendingCount">
+          0
+        </strong>
+
+      </div>
+
+      <div class="reviewStat">
+
+        <small>
+          待审核金额
+        </small>
+
+        <strong id="reviewPendingAmount">
+          0
+        </strong>
+
+      </div>
+
+      <div class="reviewStat">
+
+        <small>
+          已批准金额
+        </small>
+
+        <strong id="reviewApprovedAmount">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="hint">
+
+      代理付款后，应由代理提交付款金额和付款截图。
+
+      <br>
+
+      管理员核对截图、收款账户和金额后，再点击「确认到账」。
+
+      <br>
+
+      只有管理员审核批准的付款，才会计入平台已确认到账金额。
+
+      <br>
+
+      如果代理分多次付款，可以提交多笔；全部批准金额达到本期应交金额后，系统才会正式标记为「已结款」。
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="roundFilter">
+
+      <select
+        id="paymentReviewStatusFilter"
+        onchange="renderPaymentReviews()">
+
+        <option value="pending">
+          只看待审核
+        </option>
+
+        <option value="all">
+          查看全部
+        </option>
+
+        <option value="approved">
+          只看已批准
+        </option>
+
+        <option value="rejected">
+          只看已驳回
+        </option>
+
+      </select>
+
+      <button
+        class="dark"
+        onclick="loadPaymentReviews(true)">
+
+        刷新
+
+      </button>
+
+    </div>
+
+    <div id="paymentReviewList">
+
+      <div class="empty">
+        正在读取付款申请...
+      </div>
+
+    </div>
+
+    <div
+      class="msg"
+      id="paymentReviewMsg">
+    </div>
+
+  </div>
+
+
+  <!-- SETTLEMENT -->
 
   <div class="card">
 
     <div class="title">
       💰 代理结款管理
     </div>
-
 
     <div class="roundFilter">
 
@@ -1145,17 +1393,15 @@ button:disabled{
 
       </select>
 
-
       <button
         class="dark"
-        onclick="loadSettlementData(true)">
+        onclick="refreshFinance(true)">
 
         刷新
 
       </button>
 
     </div>
-
 
     <div class="settlementStats">
 
@@ -1171,11 +1417,10 @@ button:disabled{
 
       </div>
 
-
       <div class="settlementStat">
 
         <small>
-          当前待结款
+          当前剩余待到账
         </small>
 
         <strong id="settlementPending">
@@ -1183,7 +1428,6 @@ button:disabled{
         </strong>
 
       </div>
-
 
       <div class="settlementStat">
 
@@ -1197,11 +1441,10 @@ button:disabled{
 
       </div>
 
-
       <div class="settlementStat">
 
         <small>
-          待结款代理
+          未结清代理
         </small>
 
         <strong id="settlementPendingAgents">
@@ -1212,37 +1455,29 @@ button:disabled{
 
     </div>
 
-
     <div class="hint">
 
-      系统只显示本期真正有提交金额的代理。
+      当前正式规则：代理需要先把本期收到的金额全部上交平台。
 
       <br>
 
-      本期提交总额为 0 的代理不会进入结款列表。
+      本期应交平台 = 本期提交总额。
 
       <br>
 
-      本期应交平台 = 本期提交总额 − 本期代理佣金。
+      代理佣金仍然独立计算并保存，但不会在代理付款时提前从应交金额里扣除。
 
       <br>
 
-      管理员收到代理转账后，输入实际到账金额。
+      平台已确认到账金额，只根据管理员批准的代理付款申请累计。
 
       <br>
 
-      只有实际到账金额与系统应交金额完全一致时，才允许确认到账。
-
-      <br>
-
-      确认成功后，系统会更新到账金额、付款状态、确认时间以及本期结算状态。
+      全部应交金额到账后，系统自动把该期标记为「已结款」。
 
     </div>
 
-
-    <div class="divider">
-    </div>
-
+    <div class="divider"></div>
 
     <div id="settlementList">
 
@@ -1252,7 +1487,6 @@ button:disabled{
 
     </div>
 
-
     <div
       class="msg"
       id="settlementMsg">
@@ -1261,9 +1495,7 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       SEARCH / AGENT LIST
-  ================================== -->
+  <!-- AGENT LIST -->
 
   <div class="card">
 
@@ -1271,14 +1503,12 @@ button:disabled{
       搜索代理
     </div>
 
-
     <div class="searchRow">
 
       <input
         id="searchInput"
         placeholder="输入代理名字搜索"
         oninput="renderAgents()">
-
 
       <button
         class="dark"
@@ -1290,15 +1520,11 @@ button:disabled{
 
     </div>
 
-
-    <div class="divider">
-    </div>
-
+    <div class="divider"></div>
 
     <div class="title">
       代理列表
     </div>
-
 
     <div id="agentList">
 
@@ -1308,7 +1534,6 @@ button:disabled{
 
     </div>
 
-
     <div
       class="msg"
       id="listMsg">
@@ -1317,16 +1542,13 @@ button:disabled{
   </div>
 
 
-  <!-- =================================
-       UPDATE RATE
-  ================================== -->
+  <!-- RATE -->
 
   <div class="card">
 
     <div class="title">
       修改代理比例
     </div>
-
 
     <div class="formGrid">
 
@@ -1338,7 +1560,6 @@ button:disabled{
 
       </select>
 
-
       <input
         id="rateInput"
         type="number"
@@ -1349,7 +1570,6 @@ button:disabled{
 
     </div>
 
-
     <button
       class="gold"
       style="width:100%;margin-top:10px"
@@ -1358,7 +1578,6 @@ button:disabled{
       保存代理比例
 
     </button>
-
 
     <div
       class="msg"
@@ -1381,7 +1600,6 @@ button:disabled{
 
   </div>
 
-
 </div>
 
 
@@ -1397,6 +1615,10 @@ const KEY =
 
 const QR_BUCKET =
 'payment-qr-codes';
+
+
+const PAYMENT_PROOF_BUCKET =
+'agent-payment-proofs';
 
 
 let token =
@@ -1431,10 +1653,6 @@ let settlementLoading =
 false;
 
 
-let settlementConfirming =
-false;
-
-
 let paymentAccounts =
 [];
 
@@ -1443,17 +1661,21 @@ let paymentAccountBusy =
 false;
 
 
-/*
-  非常重要：
+let paymentReviews =
+[];
 
-  图片文件不只依赖 <input type=file>。
 
-  iPhone 选择文件以后，
-  我们马上把 File 对象保存到 JS 变量。
+let paymentProofs =
+[];
 
-  因此即使页面某个区域重新渲染，
-  文件本身仍然在内存里。
-*/
+
+let paymentReviewLoading =
+false;
+
+
+let paymentReviewBusy =
+false;
+
 
 let newQrFile =
 null;
@@ -1468,6 +1690,10 @@ new Map();
 
 
 const qrDisplayUrls =
+new Map();
+
+
+const proofDisplayUrls =
 new Map();
 
 
@@ -1820,12 +2046,7 @@ async function createAgent(){
       :
       {};
 
-    }catch(e){
-
-      data =
-      {};
-
-    }
+    }catch(e){}
 
 
     if(!r.ok){
@@ -1921,11 +2142,11 @@ async function loadAgents(
   );
 
 
-  msg.className =
-  'msg';
-
-
   if(showMessage){
+
+    msg.className =
+    'msg';
+
 
     msg.textContent =
     '正在读取最新代理资料...';
@@ -1958,27 +2179,14 @@ async function loadAgents(
     }
 
 
-    let rows =
-    [];
-
-
-    try{
-
-      rows =
+    const rows =
+    text
+    ?
+    JSON.parse(
       text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      [];
-
-    }catch(e){
-
-      rows =
-      [];
-
-    }
+    )
+    :
+    [];
 
 
     if(
@@ -2015,29 +2223,6 @@ async function loadAgents(
 
       msg.textContent =
       '✓ 已读取最新代理资料';
-
-
-      setTimeout(
-        ()=>{
-
-          if(
-            msg.textContent ===
-            '✓ 已读取最新代理资料'
-          ){
-
-            msg.textContent =
-            '';
-
-          }
-
-        },
-        1800
-      );
-
-    }else{
-
-      msg.textContent =
-      '';
 
     }
 
@@ -2126,12 +2311,6 @@ function renderAgents(){
   list.map(
     a=>{
 
-      const statusText =
-      statusName(
-        a.status
-      );
-
-
       const rate =
       normalizeRate(
         a.commission_rate
@@ -2174,18 +2353,18 @@ function renderAgents(){
 
           </div>
 
-
           <div
             class="badge ${escapeHtml(a.status || 'blocked')}">
 
             ${escapeHtml(
-              statusText
+              statusName(
+                a.status
+              )
             )}
 
           </div>
 
         </div>
-
 
         <div class="actions">
 
@@ -2196,7 +2375,6 @@ function renderAgents(){
             修改比例
 
           </button>
-
 
           <button
             class="dark"
@@ -2220,7 +2398,6 @@ function renderAgents(){
             }
 
           </button>
-
 
           <button
             class="red"
@@ -2297,7 +2474,7 @@ function updateStats(){
 
 
 /* =====================================
-   BUILD AGENT SELECT
+   AGENT SELECT
 ===================================== */
 
 function buildSelect(){
@@ -2369,10 +2546,6 @@ function buildSelect(){
 
 }
 
-
-/* =====================================
-   CHOOSE AGENT
-===================================== */
 
 function chooseAgent(
   id
@@ -2493,34 +2666,24 @@ async function updateRate(){
 
   if(!agent){
 
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '没有找到该代理';
-
-
     return;
 
   }
 
 
-  const ok =
-  confirm(
-    '确定修改代理比例？\n\n'+
-    (
-      agent.display_name
-      ||
-      '未命名代理'
-    )+
-    '\n\n新比例：'+
-    rate+
-    '%'
-  );
-
-
-  if(!ok){
+  if(
+    !confirm(
+      '确定修改代理比例？\n\n'+
+      (
+        agent.display_name
+        ||
+        '未命名代理'
+      )+
+      '\n新比例：'+
+      rate+
+      '%'
+    )
+  ){
 
     return;
 
@@ -2635,7 +2798,7 @@ async function updateRate(){
 
 
 /* =====================================
-   SET STATUS
+   STATUS
 ===================================== */
 
 async function setStatus(
@@ -2652,10 +2815,6 @@ async function setStatus(
 
   if(!agent){
 
-    alert(
-      '没有找到该代理'
-    );
-
     return;
 
   }
@@ -2665,20 +2824,14 @@ async function setStatus(
   '恢复';
 
 
-  if(
-    status ===
-    'blocked'
-  ){
+  if(status === 'blocked'){
 
     action =
     '限制';
 
   }
 
-  else if(
-    status ===
-    'suspended'
-  ){
+  else if(status === 'suspended'){
 
     action =
     '暂停';
@@ -2686,20 +2839,18 @@ async function setStatus(
   }
 
 
-  const ok =
-  confirm(
-    '确定'+
-    action+
-    '这个代理？\n\n'+
-    (
-      agent.display_name
-      ||
-      '未命名代理'
+  if(
+    !confirm(
+      '确定'+
+      action+
+      '这个代理？\n\n'+
+      (
+        agent.display_name
+        ||
+        '未命名代理'
+      )
     )
-  );
-
-
-  if(!ok){
+  ){
 
     return;
 
@@ -2750,34 +2901,6 @@ async function setStatus(
     }
 
 
-    const rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-
-    if(
-      !Array.isArray(
-        rows
-      )
-      ||
-      !rows.length
-      ||
-      rows[0].status !==
-      status
-    ){
-
-      throw new Error(
-        '数据库没有确认状态修改'
-      );
-
-    }
-
-
     await loadAgents(
       false
     );
@@ -2803,7 +2926,7 @@ async function setStatus(
 
 
 /* =====================================
-   PAYMENT ACCOUNT FILE VALIDATION
+   QR FILE
 ===================================== */
 
 function validateQrFile(
@@ -2823,10 +2946,7 @@ function validateQrFile(
   1024;
 
 
-  if(
-    file.size >
-    maxSize
-  ){
+  if(file.size > maxSize){
 
     throw new Error(
       '二维码图片不能超过 10MB'
@@ -2882,12 +3002,6 @@ function validateQrFile(
 }
 
 
-/* =====================================
-   NEW QR CHANGE
-
-   第一次选图马上保存 File 对象。
-===================================== */
-
 function handleNewQrChange(
   input
 ){
@@ -2913,12 +3027,8 @@ function handleNewQrChange(
   try{
 
     const file =
-    input.files
-    &&
-    input.files[0]
-    ?
-    input.files[0]
-    :
+    input.files?.[0]
+    ||
     null;
 
 
@@ -2990,11 +3100,6 @@ function handleNewQrChange(
     img.onerror =
     ()=>{
 
-      /*
-        HEIC 在部分浏览器无法直接预览，
-        但文件仍然可以上传。
-      */
-
       preview.style.display =
       'none';
 
@@ -3037,10 +3142,6 @@ function handleNewQrChange(
 }
 
 
-/* =====================================
-   EDIT QR CHANGE
-===================================== */
-
 function handleEditQrChange(
   accountId,
   input
@@ -3058,12 +3159,8 @@ function handleEditQrChange(
   try{
 
     const file =
-    input.files
-    &&
-    input.files[0]
-    ?
-    input.files[0]
-    :
+    input.files?.[0]
+    ||
     null;
 
 
@@ -3072,18 +3169,6 @@ function handleEditQrChange(
       editQrFiles.delete(
         accountId
       );
-
-
-      if(state){
-
-        state.className =
-        'fileState';
-
-
-        state.textContent =
-        '没有选择新的二维码';
-
-      }
 
 
       return;
@@ -3159,30 +3244,13 @@ function handleEditQrChange(
     );
 
 
-    const qrBox =
-    document.getElementById(
-      'accountQrBox_'+
-      safeId(
-        accountId
-      )
-    );
-
-
-    if(
-      img
-      &&
-      qrBox
-    ){
+    if(img){
 
       img.src =
       url;
 
 
       img.style.display =
-      'block';
-
-
-      qrBox.style.display =
       'block';
 
     }
@@ -3218,7 +3286,7 @@ function handleEditQrChange(
 
 
 /* =====================================
-   STORAGE PATH
+   STORAGE
 ===================================== */
 
 function createQrStoragePath(
@@ -3278,10 +3346,6 @@ function createQrStoragePath(
 
 }
 
-
-/* =====================================
-   UPLOAD QR
-===================================== */
 
 async function uploadQrFile(
   accountId,
@@ -3347,12 +3411,10 @@ async function uploadQrFile(
 }
 
 
-/* =====================================
-   READ PRIVATE QR
-===================================== */
-
-async function getPrivateQrObjectUrl(
-  path
+async function getPrivateObjectUrl(
+  bucket,
+  path,
+  cache
 ){
 
   if(!path){
@@ -3363,12 +3425,12 @@ async function getPrivateQrObjectUrl(
 
 
   if(
-    qrDisplayUrls.has(
+    cache.has(
       path
     )
   ){
 
-    return qrDisplayUrls.get(
+    return cache.get(
       path
     );
 
@@ -3378,7 +3440,7 @@ async function getPrivateQrObjectUrl(
   const r =
   await api(
     '/storage/v1/object/authenticated/'+
-    QR_BUCKET+
+    bucket+
     '/'+
     encodeStoragePath(
       path
@@ -3389,7 +3451,7 @@ async function getPrivateQrObjectUrl(
   if(!r.ok){
 
     throw new Error(
-      '二维码读取失败'
+      '图片读取失败'
     );
 
   }
@@ -3405,7 +3467,7 @@ async function getPrivateQrObjectUrl(
   );
 
 
-  qrDisplayUrls.set(
+  cache.set(
     path,
     url
   );
@@ -3415,10 +3477,6 @@ async function getPrivateQrObjectUrl(
 
 }
 
-
-/* =====================================
-   OPTIONAL DELETE OLD QR
-===================================== */
 
 async function deleteQrFileQuietly(
   path
@@ -3456,7 +3514,6 @@ async function deleteQrFileQuietly(
   }catch(e){
 
     console.warn(
-      '旧二维码清理失败，但不影响新二维码保存',
       e
     );
 
@@ -3534,48 +3591,20 @@ async function addPaymentAccount(){
   );
 
 
-  msg.className =
-  'msg';
-
-
-  if(!methodName){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请输入支付方式名称';
-
-
-    return;
-
-  }
-
-
-  if(!accountName){
+  if(
+    !methodName
+    ||
+    !accountName
+    ||
+    !accountNumber
+  ){
 
     msg.className =
     'msg error';
 
 
     msg.textContent =
-    '请输入收款人姓名';
-
-
-    return;
-
-  }
-
-
-  if(!accountNumber){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请输入收款号码或账号';
+    '支付方式、收款人姓名和账号不能为空';
 
 
     return;
@@ -3602,23 +3631,14 @@ async function addPaymentAccount(){
   }
 
 
-  const ok =
-  confirm(
-    '确定添加这个收款账户？\n\n'+
-    '方式：'+methodName+
-    '\n收款人：'+accountName+
-    '\n账号：'+accountNumber+
-    (
-      newQrFile
-      ?
-      '\n二维码：已选择'
-      :
-      '\n二维码：未上传'
+  if(
+    !confirm(
+      '确定添加这个收款账户？\n\n'+
+      '方式：'+methodName+
+      '\n收款人：'+accountName+
+      '\n账号：'+accountNumber
     )
-  );
-
-
-  if(!ok){
+  ){
 
     return;
 
@@ -3644,6 +3664,10 @@ async function addPaymentAccount(){
 
 
     if(newQrFile){
+
+      msg.className =
+      'msg';
+
 
       msg.textContent =
       '正在上传收款二维码...';
@@ -3711,17 +3735,13 @@ async function addPaymentAccount(){
           ),
 
           created_by:
-          adminUser
-          ?
-          adminUser.id
-          :
+          adminUser?.id
+          ||
           null,
 
           updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
+          adminUser?.id
+          ||
           null
         })
       }
@@ -3738,31 +3758,6 @@ async function addPaymentAccount(){
         text
         ||
         '收款账户保存失败'
-      );
-
-    }
-
-
-    const rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-
-    if(
-      !Array.isArray(
-        rows
-      )
-      ||
-      !rows.length
-    ){
-
-      throw new Error(
-        '数据库没有确认收款账户'
       );
 
     }
@@ -3789,17 +3784,6 @@ async function addPaymentAccount(){
 
 
   }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    /*
-      如果图片已经上传，
-      但数据库新增失败，
-      尝试清理刚刚上传的孤立图片。
-    */
 
     if(uploadedPath){
 
@@ -3836,10 +3820,6 @@ async function addPaymentAccount(){
 
 }
 
-
-/* =====================================
-   CLEAR ADD FORM
-===================================== */
 
 function clearNewPaymentAccountForm(){
 
@@ -3908,24 +3888,11 @@ function clearNewPaymentAccountForm(){
   ).style.display =
   'none';
 
-
-  document.getElementById(
-    'newQrPreviewImg'
-  ).removeAttribute(
-    'src'
-  );
-
 }
 
 
 /* =====================================
-   LOAD PAYMENT ACCOUNTS
-
-   注意：
-   这个函数不会放进 20 秒自动刷新。
-
-   所以管理员选择图片后，
-   不会被结款自动刷新清掉。
+   PAYMENT ACCOUNTS
 ===================================== */
 
 async function loadPaymentAccounts(
@@ -3992,21 +3959,14 @@ async function loadPaymentAccounts(
     [];
 
 
-    if(
-      !Array.isArray(
-        rows
-      )
-    ){
-
-      throw new Error(
-        '收款账户数据格式错误'
-      );
-
-    }
-
-
     paymentAccounts =
-    rows;
+    Array.isArray(
+      rows
+    )
+    ?
+    rows
+    :
+    [];
 
 
     renderPaymentAccounts();
@@ -4026,11 +3986,6 @@ async function loadPaymentAccounts(
 
   }catch(e){
 
-    console.error(
-      e
-    );
-
-
     msg.className =
     'msg error';
 
@@ -4043,22 +3998,10 @@ async function loadPaymentAccounts(
       '未知错误'
     );
 
-
-    document.getElementById(
-      'paymentAccountList'
-    ).innerHTML =
-    '<div class="empty">'+
-    '暂时无法读取收款账户'+
-    '</div>';
-
   }
 
 }
 
-
-/* =====================================
-   RENDER PAYMENT ACCOUNTS
-===================================== */
 
 function renderPaymentAccounts(){
 
@@ -4102,7 +4045,6 @@ function renderPaymentAccounts(){
           'disabledAccount'
         }">
 
-
         <div class="paymentAccountHead">
 
           <div>
@@ -4132,7 +4074,6 @@ function renderPaymentAccounts(){
 
           </div>
 
-
           <div
             class="accountStatus ${
               account.is_active
@@ -4154,7 +4095,6 @@ function renderPaymentAccounts(){
 
         </div>
 
-
         <div class="paymentGrid">
 
           <div class="paymentBox">
@@ -4171,7 +4111,6 @@ function renderPaymentAccounts(){
 
           </div>
 
-
           <div class="paymentBox">
 
             <small>
@@ -4185,7 +4124,6 @@ function renderPaymentAccounts(){
             </strong>
 
           </div>
-
 
           <div class="paymentBox">
 
@@ -4202,7 +4140,6 @@ function renderPaymentAccounts(){
             </strong>
 
           </div>
-
 
           <div class="paymentBox">
 
@@ -4224,7 +4161,6 @@ function renderPaymentAccounts(){
 
         </div>
 
-
         ${
           account.note
           ?
@@ -4244,17 +4180,9 @@ function renderPaymentAccounts(){
           ''
         }
 
-
         <div
           id="accountQrBox_${id}"
-          class="accountQr"
-          ${
-            account.qr_storage_path
-            ?
-            ''
-            :
-            'style="display:block"'
-          }>
+          class="accountQr">
 
           ${
             account.qr_storage_path
@@ -4289,13 +4217,11 @@ function renderPaymentAccounts(){
 
         </div>
 
-
         <div class="editAccountBox">
 
           <div class="editAccountTitle">
             修改此收款账户
           </div>
-
 
           <div class="paymentAccountForm">
 
@@ -4304,74 +4230,60 @@ function renderPaymentAccounts(){
               value="${escapeHtmlAttr(account.method_name)}"
               placeholder="支付方式">
 
-
             <select id="editMethodType_${id}">
 
               <option
                 value="wallet"
                 ${
-                  account.method_type ===
-                  'wallet'
+                  account.method_type === 'wallet'
                   ?
                   'selected'
                   :
                   ''
                 }>
-
                 电子钱包
-
               </option>
 
               <option
                 value="bank"
                 ${
-                  account.method_type ===
-                  'bank'
+                  account.method_type === 'bank'
                   ?
                   'selected'
                   :
                   ''
                 }>
-
                 银行卡 / 银行账户
-
               </option>
 
               <option
                 value="other"
                 ${
-                  account.method_type ===
-                  'other'
+                  account.method_type === 'other'
                   ?
                   'selected'
                   :
                   ''
                 }>
-
                 其他支付方式
-
               </option>
 
             </select>
-
 
             <input
               id="editAccountName_${id}"
               value="${escapeHtmlAttr(account.account_name)}"
               placeholder="收款人姓名">
 
-
             <input
               id="editAccountNumber_${id}"
               value="${escapeHtmlAttr(account.account_number)}"
               placeholder="收款号码 / 账号">
 
-
             <input
               id="editBankName_${id}"
               value="${escapeHtmlAttr(account.bank_name || '')}"
               placeholder="银行名称，可不填">
-
 
             <input
               id="editSortOrder_${id}"
@@ -4380,11 +4292,9 @@ function renderPaymentAccounts(){
               step="1"
               placeholder="排序">
 
-
             <textarea
               id="editNote_${id}"
               placeholder="给代理看的备注">${escapeHtml(account.note || '')}</textarea>
-
 
             <div class="fileBox">
 
@@ -4396,7 +4306,6 @@ function renderPaymentAccounts(){
                   '${escapeJs(account.id)}',
                   this
                 )">
-
 
               <div
                 id="editQrState_${id}"
@@ -4414,7 +4323,6 @@ function renderPaymentAccounts(){
 
             </div>
 
-
             <div class="accountButtons">
 
               <button
@@ -4426,7 +4334,6 @@ function renderPaymentAccounts(){
                 保存修改
 
               </button>
-
 
               <button
                 class="${
@@ -4458,7 +4365,6 @@ function renderPaymentAccounts(){
               </button>
 
             </div>
-
 
             ${
               account.qr_storage_path
@@ -4493,16 +4399,10 @@ function renderPaymentAccounts(){
   .join('');
 
 
-  /*
-    DOM 建好以后再读取私有二维码。
-  */
-
   paymentAccounts.forEach(
     account=>{
 
-      if(
-        account.qr_storage_path
-      ){
+      if(account.qr_storage_path){
 
         loadQrIntoAccount(
           account
@@ -4516,10 +4416,6 @@ function renderPaymentAccounts(){
 }
 
 
-/* =====================================
-   LOAD QR INTO ACCOUNT
-===================================== */
-
 async function loadQrIntoAccount(
   account
 ){
@@ -4532,15 +4428,13 @@ async function loadQrIntoAccount(
 
   const loading =
   document.getElementById(
-    'accountQrLoading_'+
-    id
+    'accountQrLoading_'+id
   );
 
 
   const img =
   document.getElementById(
-    'accountQrImg_'+
-    id
+    'accountQrImg_'+id
   );
 
 
@@ -4564,39 +4458,18 @@ async function loadQrIntoAccount(
       img.src =
       preview;
 
-
-      img.style.display =
-      'block';
-
-
-      if(loading){
-
-        loading.style.display =
-        'none';
-
-      }
-
-
-      return;
-
     }
 
+    else{
 
-    const url =
-    await getPrivateQrObjectUrl(
-      account.qr_storage_path
-    );
-
-
-    if(!url){
-
-      return;
+      img.src =
+      await getPrivateObjectUrl(
+        QR_BUCKET,
+        account.qr_storage_path,
+        qrDisplayUrls
+      );
 
     }
-
-
-    img.src =
-    url;
 
 
     img.style.display =
@@ -4613,11 +4486,6 @@ async function loadQrIntoAccount(
 
   }catch(e){
 
-    console.error(
-      e
-    );
-
-
     if(loading){
 
       loading.textContent =
@@ -4629,10 +4497,6 @@ async function loadQrIntoAccount(
 
 }
 
-
-/* =====================================
-   SAVE PAYMENT ACCOUNT
-===================================== */
 
 async function savePaymentAccount(
   accountId
@@ -4744,23 +4608,14 @@ async function savePaymentAccount(
   null;
 
 
-  const ok =
-  confirm(
-    '确定保存修改？\n\n'+
-    '支付方式：'+methodName+
-    '\n收款人：'+accountName+
-    '\n账号：'+accountNumber+
-    (
-      newFile
-      ?
-      '\n二维码：将更换为新图片'
-      :
-      '\n二维码：保持目前图片'
+  if(
+    !confirm(
+      '确定保存修改？\n\n'+
+      '支付方式：'+methodName+
+      '\n收款人：'+accountName+
+      '\n账号：'+accountNumber
     )
-  );
-
-
-  if(!ok){
+  ){
 
     return;
 
@@ -4804,10 +4659,6 @@ async function savePaymentAccount(
       uploadedPath;
 
     }
-
-
-    msg.textContent =
-    '正在保存账户修改...';
 
 
     const r =
@@ -4857,10 +4708,8 @@ async function savePaymentAccount(
           finalQrPath,
 
           updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
+          adminUser?.id
+          ||
           null,
 
           updated_at:
@@ -4886,31 +4735,6 @@ async function savePaymentAccount(
     }
 
 
-    const rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-
-    if(
-      !Array.isArray(
-        rows
-      )
-      ||
-      !rows.length
-    ){
-
-      throw new Error(
-        '数据库没有确认账户修改'
-      );
-
-    }
-
-
     const oldPath =
     account.qr_storage_path;
 
@@ -4918,26 +4742,6 @@ async function savePaymentAccount(
     editQrFiles.delete(
       accountId
     );
-
-
-    const previewUrl =
-    editQrPreviewUrls.get(
-      accountId
-    );
-
-
-    if(previewUrl){
-
-      /*
-        render 完再统一更新，
-        不在此处立即 revoke。
-      */
-
-      editQrPreviewUrls.delete(
-        accountId
-      );
-
-    }
 
 
     msg.className =
@@ -4957,21 +4761,12 @@ async function savePaymentAccount(
     );
 
 
-    /*
-      数据库已经指向新二维码后，
-      才清理旧二维码。
-
-      所以即使上传或保存中途失败，
-      原二维码也不会先被删除。
-    */
-
     if(
       uploadedPath
       &&
       oldPath
       &&
-      oldPath !==
-      uploadedPath
+      uploadedPath !== oldPath
     ){
 
       await deleteQrFileQuietly(
@@ -4982,17 +4777,6 @@ async function savePaymentAccount(
 
 
   }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    /*
-      如果新图已经上传成功，
-      但数据库保存失败，
-      删除这张没有被数据库使用的新图。
-    */
 
     if(uploadedPath){
 
@@ -5026,10 +4810,6 @@ async function savePaymentAccount(
 }
 
 
-/* =====================================
-   TOGGLE PAYMENT ACCOUNT
-===================================== */
-
 async function togglePaymentAccount(
   accountId,
   newState
@@ -5056,26 +4836,19 @@ async function togglePaymentAccount(
   }
 
 
-  const action =
-  newState
-  ?
-  '重新启用'
-  :
-  '停用';
-
-
-  const ok =
-  confirm(
-    '确定'+
-    action+
-    '这个收款账户？\n\n'+
-    account.method_name+
-    '\n'+
-    account.account_number
-  );
-
-
-  if(!ok){
+  if(
+    !confirm(
+      '确定'+
+      (
+        newState
+        ?
+        '重新启用'
+        :
+        '停用'
+      )+
+      '这个收款账户？'
+    )
+  ){
 
     return;
 
@@ -5093,14 +4866,6 @@ async function togglePaymentAccount(
 
 
   try{
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在保存状态...';
-
 
     const r =
     await api(
@@ -5128,10 +4893,8 @@ async function togglePaymentAccount(
           ),
 
           updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
+          adminUser?.id
+          ||
           null,
 
           updated_at:
@@ -5142,16 +4905,10 @@ async function togglePaymentAccount(
     );
 
 
-    const text =
-    await r.text();
-
-
     if(!r.ok){
 
       throw new Error(
-        text
-        ||
-        '状态修改失败'
+        await r.text()
       );
 
     }
@@ -5199,10 +4956,6 @@ async function togglePaymentAccount(
 }
 
 
-/* =====================================
-   REMOVE PAYMENT QR
-===================================== */
-
 async function removePaymentQr(
   accountId
 ){
@@ -5232,14 +4985,11 @@ async function removePaymentQr(
   }
 
 
-  const ok =
-  confirm(
-    '确定删除这个账户当前的二维码？\n\n'+
-    '账户号码仍会保留，只删除二维码图片。'
-  );
-
-
-  if(!ok){
+  if(
+    !confirm(
+      '确定删除这个账户当前的二维码？'
+    )
+  ){
 
     return;
 
@@ -5261,20 +5011,6 @@ async function removePaymentQr(
 
 
   try{
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在移除二维码...';
-
-
-    /*
-      先清除数据库路径。
-
-      数据库成功之后才删除 Storage 文件。
-    */
 
     const r =
     await api(
@@ -5300,10 +5036,8 @@ async function removePaymentQr(
           null,
 
           updated_by:
-          adminUser
-          ?
-          adminUser.id
-          :
+          adminUser?.id
+          ||
           null,
 
           updated_at:
@@ -5314,16 +5048,10 @@ async function removePaymentQr(
     );
 
 
-    const text =
-    await r.text();
-
-
     if(!r.ok){
 
       throw new Error(
-        text
-        ||
-        '数据库修改失败'
+        await r.text()
       );
 
     }
@@ -5331,11 +5059,6 @@ async function removePaymentQr(
 
     await deleteQrFileQuietly(
       oldPath
-    );
-
-
-    editQrFiles.delete(
-      accountId
     );
 
 
@@ -5378,7 +5101,1103 @@ async function removePaymentQr(
 
 
 /* =====================================
-   REAL SETTLEMENT ROW
+   PAYMENT REVIEW
+===================================== */
+
+async function loadPaymentReviews(
+  showMessage=false
+){
+
+  if(
+    paymentReviewLoading
+    ||
+    paymentReviewBusy
+  ){
+
+    return;
+
+  }
+
+
+  paymentReviewLoading =
+  true;
+
+
+  const msg =
+  document.getElementById(
+    'paymentReviewMsg'
+  );
+
+
+  if(showMessage){
+
+    msg.className =
+    'msg';
+
+
+    msg.textContent =
+    '正在读取最新付款申请...';
+
+  }
+
+
+  try{
+
+    const paymentRes =
+    await api(
+      '/rest/v1/agent_payment_submissions'+
+      '?select=id,round_id,agent_id,payment_account_id,declared_amount,confirmed_amount,status,method_name_snapshot,method_type_snapshot,account_name_snapshot,account_number_snapshot,bank_name_snapshot,qr_storage_path_snapshot,account_note_snapshot,agent_note,submitted_at,reviewed_at,reviewed_by,rejection_reason,updated_at'+
+      '&order=submitted_at.desc'+
+      '&limit=300'
+    );
+
+
+    if(!paymentRes.ok){
+
+      throw new Error(
+        await paymentRes.text()
+      );
+
+    }
+
+
+    const proofRes =
+    await api(
+      '/rest/v1/agent_payment_proofs'+
+      '?select=id,payment_submission_id,agent_id,storage_path,original_name,mime_type,file_size,created_at'+
+      '&order=created_at.asc'+
+      '&limit=1000'
+    );
+
+
+    if(!proofRes.ok){
+
+      throw new Error(
+        await proofRes.text()
+      );
+
+    }
+
+
+    paymentReviews =
+    await paymentRes.json();
+
+
+    paymentProofs =
+    await proofRes.json();
+
+
+    if(
+      !Array.isArray(
+        paymentReviews
+      )
+    ){
+
+      paymentReviews =
+      [];
+
+    }
+
+
+    if(
+      !Array.isArray(
+        paymentProofs
+      )
+    ){
+
+      paymentProofs =
+      [];
+
+    }
+
+
+    updatePaymentReviewStats();
+
+
+    renderPaymentReviews();
+
+
+    if(showMessage){
+
+      msg.className =
+      'msg success';
+
+
+      msg.textContent =
+      '✓ 付款申请已刷新';
+
+    }
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '付款申请读取失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
+
+
+    document.getElementById(
+      'paymentReviewList'
+    ).innerHTML =
+    '<div class="empty">'+
+    '暂时无法读取付款申请'+
+    '</div>';
+
+
+  }finally{
+
+    paymentReviewLoading =
+    false;
+
+  }
+
+}
+
+
+function updatePaymentReviewStats(){
+
+  let pendingCount =
+  0;
+
+
+  let pendingAmount =
+  0;
+
+
+  let approvedAmount =
+  0;
+
+
+  paymentReviews.forEach(
+    row=>{
+
+      if(row.status === 'pending'){
+
+        pendingCount++;
+
+
+        pendingAmount +=
+        Number(
+          row.declared_amount || 0
+        );
+
+      }
+
+
+      if(row.status === 'approved'){
+
+        approvedAmount +=
+        Number(
+          row.confirmed_amount || 0
+        );
+
+      }
+
+    }
+  );
+
+
+  document.getElementById(
+    'reviewPendingCount'
+  ).textContent =
+  pendingCount;
+
+
+  document.getElementById(
+    'reviewPendingAmount'
+  ).textContent =
+  formatNumber(
+    pendingAmount
+  );
+
+
+  document.getElementById(
+    'reviewApprovedAmount'
+  ).textContent =
+  formatNumber(
+    approvedAmount
+  );
+
+}
+
+
+function renderPaymentReviews(){
+
+  const filter =
+  document.getElementById(
+    'paymentReviewStatusFilter'
+  ).value;
+
+
+  const box =
+  document.getElementById(
+    'paymentReviewList'
+  );
+
+
+  let rows =
+  [...paymentReviews];
+
+
+  if(filter !== 'all'){
+
+    rows =
+    rows.filter(
+      row =>
+      row.status === filter
+    );
+
+  }
+
+
+  rows.sort(
+    (
+      a,
+      b
+    )=>{
+
+      if(
+        a.status === 'pending'
+        &&
+        b.status !== 'pending'
+      ){
+
+        return -1;
+
+      }
+
+
+      if(
+        b.status === 'pending'
+        &&
+        a.status !== 'pending'
+      ){
+
+        return 1;
+
+      }
+
+
+      return (
+        new Date(
+          b.submitted_at
+        ).getTime()
+        -
+        new Date(
+          a.submitted_at
+        ).getTime()
+      );
+
+    }
+  );
+
+
+  if(!rows.length){
+
+    box.innerHTML =
+    '<div class="empty">'+
+    (
+      filter === 'pending'
+      ?
+      '目前没有待审核付款申请'
+      :
+      '没有符合条件的付款申请'
+    )+
+    '</div>';
+
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+  rows.map(
+    row=>{
+
+      const agent =
+      agents.find(
+        x =>
+        x.id ===
+        row.agent_id
+      );
+
+
+      const round =
+      settlementRounds.find(
+        x =>
+        x.id ===
+        row.round_id
+      );
+
+
+      const proofs =
+      paymentProofs.filter(
+        x =>
+        x.payment_submission_id ===
+        row.id
+      );
+
+
+      const name =
+      agent?.display_name
+      ||
+      '未知代理';
+
+
+      const roundText =
+      round
+      ?
+      round.round_date+
+      ' · '+
+      periodName(
+        round.round_code
+      )
+      :
+      '未知期数';
+
+
+      return `
+
+      <div
+        id="paymentReview_${safeId(row.id)}"
+        class="paymentReviewItem ${
+          row.status === 'pending'
+          ?
+          'pendingReview'
+          :
+          row.status === 'approved'
+          ?
+          'approvedReview'
+          :
+          'rejectedReview'
+        }">
+
+        <div class="reviewHead">
+
+          <div>
+
+            <div class="reviewName">
+
+              ${escapeHtml(
+                name
+              )}
+
+            </div>
+
+            <div class="reviewMeta">
+
+              ${escapeHtml(
+                roundText
+              )}
+
+              <br>
+
+              提交时间：
+              ${escapeHtml(
+                formatDate(
+                  row.submitted_at
+                )
+              )}
+
+            </div>
+
+          </div>
+
+          <div
+            class="reviewBadge ${escapeHtml(row.status)}">
+
+            ${escapeHtml(
+              paymentReviewStatusName(
+                row.status
+              )
+            )}
+
+          </div>
+
+        </div>
+
+        <div class="reviewGrid">
+
+          <div class="reviewBox">
+
+            <small>
+              代理申报付款
+            </small>
+
+            <strong>
+              ${formatNumber(
+                row.declared_amount
+              )}
+            </strong>
+
+          </div>
+
+          <div class="reviewBox">
+
+            <small>
+              已确认金额
+            </small>
+
+            <strong>
+              ${formatNumber(
+                row.confirmed_amount
+              )}
+            </strong>
+
+          </div>
+
+          <div class="reviewBox">
+
+            <small>
+              支付方式
+            </small>
+
+            <strong>
+              ${escapeHtml(
+                row.method_name_snapshot
+                ||
+                '—'
+              )}
+            </strong>
+
+          </div>
+
+          <div class="reviewBox">
+
+            <small>
+              付款到账号
+            </small>
+
+            <strong>
+              ${escapeHtml(
+                row.account_number_snapshot
+                ||
+                '—'
+              )}
+            </strong>
+
+          </div>
+
+          <div class="reviewBox">
+
+            <small>
+              收款人
+            </small>
+
+            <strong>
+              ${escapeHtml(
+                row.account_name_snapshot
+                ||
+                '—'
+              )}
+            </strong>
+
+          </div>
+
+          <div class="reviewBox">
+
+            <small>
+              银行 / 钱包
+            </small>
+
+            <strong>
+              ${escapeHtml(
+                row.bank_name_snapshot
+                ||
+                row.method_name_snapshot
+                ||
+                '—'
+              )}
+            </strong>
+
+          </div>
+
+        </div>
+
+        ${
+          row.agent_note
+          ?
+          `
+
+          <div class="reviewNote">
+
+            代理备注：
+            ${escapeHtml(
+              row.agent_note
+            )}
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+        <div class="reviewProofs">
+
+          <div class="reviewProofTitle">
+
+            付款截图
+            ${
+              proofs.length
+              ?
+              ' · '+proofs.length+' 张'
+              :
+              ''
+            }
+
+          </div>
+
+          ${
+            proofs.length
+            ?
+            `
+
+            <div class="proofGrid">
+
+              ${
+                proofs.map(
+                  proof=>`
+
+                  <div class="proofItem">
+
+                    <div
+                      id="proofLoading_${safeId(proof.id)}"
+                      class="accountQrLoading">
+
+                      正在读取截图...
+
+                    </div>
+
+                    <img
+                      id="proofImg_${safeId(proof.id)}"
+                      alt="付款截图"
+                      style="display:none">
+
+                    <div class="proofCaption">
+
+                      ${escapeHtml(
+                        proof.original_name
+                        ||
+                        '付款截图'
+                      )}
+
+                    </div>
+
+                  </div>
+
+                  `
+                )
+                .join('')
+              }
+
+            </div>
+
+            `
+            :
+            `
+
+            <div class="empty">
+              本次付款申请暂时没有截图
+            </div>
+
+            `
+          }
+
+        </div>
+
+        ${
+          row.status === 'pending'
+          ?
+          `
+
+          <div class="reviewButtons">
+
+            <button
+              class="greenBtn"
+              onclick="reviewPaymentSubmission(
+                '${escapeJs(row.id)}',
+                'approved'
+              )">
+
+              ✓ 确认到账
+
+            </button>
+
+            <button
+              class="red"
+              onclick="reviewPaymentSubmission(
+                '${escapeJs(row.id)}',
+                'rejected'
+              )">
+
+              驳回付款申请
+
+            </button>
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+        ${
+          row.status === 'rejected'
+          &&
+          row.rejection_reason
+          ?
+          `
+
+          <div class="reviewNote">
+
+            驳回原因：
+            ${escapeHtml(
+              row.rejection_reason
+            )}
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+        ${
+          row.reviewed_at
+          ?
+          `
+
+          <div class="reviewNote">
+
+            审核时间：
+            ${escapeHtml(
+              formatDate(
+                row.reviewed_at
+              )
+            )}
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+      </div>
+
+      `;
+
+    }
+  )
+  .join('');
+
+
+  rows.forEach(
+    row=>{
+
+      paymentProofs
+      .filter(
+        proof =>
+        proof.payment_submission_id ===
+        row.id
+      )
+      .forEach(
+        proof =>
+        loadPaymentProof(
+          proof
+        )
+      );
+
+    }
+  );
+
+}
+
+
+async function loadPaymentProof(
+  proof
+){
+
+  const loading =
+  document.getElementById(
+    'proofLoading_'+
+    safeId(
+      proof.id
+    )
+  );
+
+
+  const img =
+  document.getElementById(
+    'proofImg_'+
+    safeId(
+      proof.id
+    )
+  );
+
+
+  if(!img){
+
+    return;
+
+  }
+
+
+  try{
+
+    const url =
+    await getPrivateObjectUrl(
+      PAYMENT_PROOF_BUCKET,
+      proof.storage_path,
+      proofDisplayUrls
+    );
+
+
+    img.src =
+    url;
+
+
+    img.style.display =
+    'block';
+
+
+    if(loading){
+
+      loading.style.display =
+      'none';
+
+    }
+
+
+  }catch(e){
+
+    if(loading){
+
+      loading.textContent =
+      '付款截图暂时无法读取';
+
+    }
+
+  }
+
+}
+
+
+async function reviewPaymentSubmission(
+  submissionId,
+  action
+){
+
+  if(paymentReviewBusy){
+
+    return;
+
+  }
+
+
+  const row =
+  paymentReviews.find(
+    x =>
+    x.id === submissionId
+  );
+
+
+  if(!row){
+
+    return;
+
+  }
+
+
+  const agent =
+  agents.find(
+    x =>
+    x.id === row.agent_id
+  );
+
+
+  const name =
+  agent?.display_name
+  ||
+  '未知代理';
+
+
+  let rejectionReason =
+  null;
+
+
+  if(action === 'approved'){
+
+    const ok =
+    confirm(
+      '请确认已经真实收到这笔付款。\n\n'+
+      '代理：'+name+
+      '\n申报金额：'+
+      formatNumber(
+        row.declared_amount
+      )+
+      '\n支付方式：'+
+      (
+        row.method_name_snapshot
+        ||
+        '—'
+      )+
+      '\n收款账号：'+
+      (
+        row.account_number_snapshot
+        ||
+        '—'
+      )+
+      '\n\n确认后，该金额会正式计入平台已到账。'
+    );
+
+
+    if(!ok){
+
+      return;
+
+    }
+
+  }
+
+  else{
+
+    rejectionReason =
+    prompt(
+      '请输入驳回原因：',
+      '付款资料或金额需要重新核对'
+    );
+
+
+    if(
+      rejectionReason === null
+    ){
+
+      return;
+
+    }
+
+
+    rejectionReason =
+    rejectionReason.trim();
+
+
+    if(!rejectionReason){
+
+      alert(
+        '请输入驳回原因'
+      );
+
+
+      return;
+
+    }
+
+  }
+
+
+  paymentReviewBusy =
+  true;
+
+
+  const msg =
+  document.getElementById(
+    'paymentReviewMsg'
+  );
+
+
+  msg.className =
+  'msg';
+
+
+  msg.textContent =
+  action === 'approved'
+  ?
+  '正在确认到账...'
+  :
+  '正在驳回付款申请...';
+
+
+  try{
+
+    const r =
+    await api(
+      '/rest/v1/rpc/admin_review_agent_payment',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_submission_id:
+          submissionId,
+
+          p_action:
+          action,
+
+          p_rejection_reason:
+          rejectionReason
+        })
+      }
+    );
+
+
+    const text =
+    await r.text();
+
+
+    if(!r.ok){
+
+      let errorMessage =
+      text
+      ||
+      '审核失败';
+
+
+      if(
+        errorMessage.includes(
+          'PAYMENT_ALREADY_REVIEWED'
+        )
+      ){
+
+        errorMessage =
+        '这笔付款已经被审核，请刷新页面';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'APPROVED_AMOUNT_EXCEEDS_AMOUNT_DUE'
+        )
+      ){
+
+        errorMessage =
+        '批准后金额会超过本期应交金额，不能确认';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'ROUND_SETTLEMENT_NOT_FOUND'
+        )
+      ){
+
+        errorMessage =
+        '没有找到对应的本期结款记录';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'NOT_ADMIN'
+        )
+      ){
+
+        errorMessage =
+        '当前账号没有管理员权限';
+
+      }
+
+
+      throw new Error(
+        errorMessage
+      );
+
+    }
+
+
+    /*
+      关键修复：
+
+      先结束 busy 状态，
+      再重新读取付款申请和结款。
+
+      这样成功以后页面会立即更新，
+      不会再出现“按了确认但是页面没反应”。
+    */
+
+    paymentReviewBusy =
+    false;
+
+
+    msg.className =
+    'msg success';
+
+
+    msg.textContent =
+    action === 'approved'
+    ?
+    '✓ 已确认到账：'+
+    name+
+    ' · '+
+    formatNumber(
+      row.declared_amount
+    )
+    :
+    '✓ 已驳回付款申请';
+
+
+    await loadPaymentReviews(
+      false
+    );
+
+
+    await loadSettlementData(
+      false
+    );
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '审核失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
+
+
+  }finally{
+
+    paymentReviewBusy =
+    false;
+
+  }
+
+}
+
+
+/* =====================================
+   SETTLEMENT
 ===================================== */
 
 function isMeaningfulSettlementRow(
@@ -5409,19 +6228,11 @@ function isMeaningfulSettlementRow(
 }
 
 
-/* =====================================
-   LOAD SETTLEMENT DATA
-===================================== */
-
 async function loadSettlementData(
   showMessage=false
 ){
 
-  if(
-    settlementLoading
-    ||
-    settlementConfirming
-  ){
+  if(settlementLoading){
 
     return;
 
@@ -5477,7 +6288,7 @@ async function loadSettlementData(
     const totalRes =
     await api(
       '/rest/v1/agent_round_totals'+
-      '?select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,result_payout,final_balance,settlement_status,completed_at,updated_at'+
+      '?select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,payment_confirmed_by,result_payout,final_balance,settlement_status,completed_at,updated_at'+
       '&submitted_total=gt.0'+
       '&order=updated_at.desc'
     );
@@ -5496,23 +6307,16 @@ async function loadSettlementData(
     await totalRes.json();
 
 
-    if(
-      !Array.isArray(
-        rawRows
-      )
-    ){
-
-      throw new Error(
-        '结款数据格式错误'
-      );
-
-    }
-
-
     settlementRows =
+    Array.isArray(
+      rawRows
+    )
+    ?
     rawRows.filter(
       isMeaningfulSettlementRow
-    );
+    )
+    :
+    [];
 
 
     buildSettlementRoundSelect();
@@ -5529,24 +6333,6 @@ async function loadSettlementData(
 
       msg.textContent =
       '✓ 已读取最新结款资料';
-
-
-      setTimeout(
-        ()=>{
-
-          if(
-            msg.textContent ===
-            '✓ 已读取最新结款资料'
-          ){
-
-            msg.textContent =
-            '';
-
-          }
-
-        },
-        1800
-      );
 
     }
 
@@ -5571,14 +6357,6 @@ async function loadSettlementData(
     );
 
 
-    document.getElementById(
-      'settlementList'
-    ).innerHTML =
-    '<div class="empty">'+
-    '暂时无法读取结款资料'+
-    '</div>';
-
-
   }finally{
 
     settlementLoading =
@@ -5588,10 +6366,6 @@ async function loadSettlementData(
 
 }
 
-
-/* =====================================
-   BUILD SETTLEMENT ROUND SELECT
-===================================== */
 
 function buildSettlementRoundSelect(){
 
@@ -5616,10 +6390,6 @@ function buildSettlementRoundSelect(){
       row =>
       row.round_id ===
       round.id
-      &&
-      isMeaningfulSettlementRow(
-        row
-      )
     )
   );
 
@@ -5703,10 +6473,6 @@ function buildSettlementRoundSelect(){
       row.round_id ===
       round.id
       &&
-      Number(
-        row.amount_due || 0
-      ) > 0
-      &&
       row.payment_status !==
       'paid'
     )
@@ -5723,10 +6489,6 @@ function buildSettlementRoundSelect(){
 }
 
 
-/* =====================================
-   RENDER SETTLEMENTS
-===================================== */
-
 function renderSettlements(){
 
   const roundId =
@@ -5735,7 +6497,7 @@ function renderSettlements(){
   ).value;
 
 
-  const listBox =
+  const box =
   document.getElementById(
     'settlementList'
   );
@@ -5743,7 +6505,7 @@ function renderSettlements(){
 
   if(!roundId){
 
-    listBox.innerHTML =
+    box.innerHTML =
     '<div class="empty">'+
     '暂无可显示的期数'+
     '</div>';
@@ -5759,21 +6521,12 @@ function renderSettlements(){
 
   const round =
   settlementRounds.find(
-    r =>
-    r.id === roundId
+    x =>
+    x.id === roundId
   );
 
 
   if(!round){
-
-    listBox.innerHTML =
-    '<div class="empty">'+
-    '没有找到该期数'+
-    '</div>';
-
-
-    resetSettlementStats();
-
 
     return;
 
@@ -5786,16 +6539,12 @@ function renderSettlements(){
     row =>
     row.round_id ===
     roundId
-    &&
-    isMeaningfulSettlementRow(
-      row
-    )
   )
   .sort(
     (
       a,
       b
-    ) =>{
+    )=>{
 
       const aPaid =
       a.payment_status ===
@@ -5807,10 +6556,7 @@ function renderSettlements(){
       'paid';
 
 
-      if(
-        aPaid !==
-        bPaid
-      ){
+      if(aPaid !== bPaid){
 
         return aPaid
         ?
@@ -5821,12 +6567,14 @@ function renderSettlements(){
       }
 
 
-      return Number(
-        b.amount_due || 0
-      )
-      -
-      Number(
-        a.amount_due || 0
+      return (
+        remainingAmount(
+          b
+        )
+        -
+        remainingAmount(
+          a
+        )
       );
 
     }
@@ -5840,7 +6588,7 @@ function renderSettlements(){
 
   if(!rows.length){
 
-    listBox.innerHTML =
+    box.innerHTML =
     '<div class="empty">'+
     '本期暂无需要结款的代理'+
     '</div>';
@@ -5851,27 +6599,20 @@ function renderSettlements(){
   }
 
 
-  listBox.innerHTML =
+  box.innerHTML =
   rows.map(
     row=>{
 
       const agent =
       agents.find(
-        a =>
-        a.id ===
-        row.agent_id
+        x =>
+        x.id === row.agent_id
       );
 
 
       const name =
-      agent
-      ?
-      (
-        agent.display_name
-        ||
-        '未命名代理'
-      )
-      :
+      agent?.display_name
+      ||
       '未知代理';
 
 
@@ -5885,13 +6626,9 @@ function renderSettlements(){
       Number(
         row.commission_rate_snapshot
         ??
-        (
-          agent
-          ?
-          normalizeRate(
-            agent.commission_rate
-          )
-          :
+        normalizeRate(
+          agent?.commission_rate
+          ||
           0
         )
       );
@@ -5915,17 +6652,28 @@ function renderSettlements(){
       );
 
 
-      const deadlinePassed =
-      Date.now()
-      >=
-      new Date(
-        round.deadline_at
-      ).getTime();
+      const remaining =
+      Math.max(
+        amountDue-
+        amountReceived,
+        0
+      );
 
 
       const isPaid =
       row.payment_status ===
       'paid';
+
+
+      const isPartial =
+      row.payment_status ===
+      'partial'
+      ||
+      (
+        !isPaid
+        &&
+        amountReceived > 0
+      );
 
 
       const dueTime =
@@ -5941,19 +6689,12 @@ function renderSettlements(){
       const isOverdue =
       !isPaid
       &&
-      (
-        row.payment_status ===
-        'overdue'
-        ||
-        (
-          Number.isFinite(
-            dueTime
-          )
-          &&
-          Date.now() >=
-          dueTime
-        )
-      );
+      Number.isFinite(
+        dueTime
+      )
+      &&
+      Date.now() >=
+      dueTime;
 
 
       let financeClass =
@@ -5961,7 +6702,7 @@ function renderSettlements(){
 
 
       let financeText =
-      '尚未截止';
+      '待结款';
 
 
       let itemClass =
@@ -5990,6 +6731,10 @@ function renderSettlements(){
 
 
         financeText =
+        isPartial
+        ?
+        '部分到账 / 已逾期'
+        :
         '逾期未结款';
 
 
@@ -5998,49 +6743,32 @@ function renderSettlements(){
 
       }
 
-      else if(deadlinePassed){
+      else if(isPartial){
+
+        financeClass =
+        'partial';
+
 
         financeText =
-        '待结款';
+        '部分到账';
 
       }
 
 
-      const inputId =
-      'settlementAmount_'+
-      safeId(
-        row.agent_id
+      const relatedPayments =
+      paymentReviews.filter(
+        p =>
+        p.round_id === row.round_id
+        &&
+        p.agent_id === row.agent_id
       );
 
 
-      const canSettle =
-      !isPaid
-      &&
-      amountDue > 0
-      &&
-      deadlinePassed;
-
-
-      const suspendText =
-      agent
-      &&
-      agent.status ===
-      'suspended'
-      ?
-      '恢复代理'
-      :
-      '暂停代理';
-
-
-      const suspendStatus =
-      agent
-      &&
-      agent.status ===
-      'suspended'
-      ?
-      'active'
-      :
-      'suspended';
+      const pendingSubmissions =
+      relatedPayments.filter(
+        p =>
+        p.status === 'pending'
+      );
 
 
       return `
@@ -6059,7 +6787,6 @@ function renderSettlements(){
               )}
 
             </div>
-
 
             <div class="settlementRound">
 
@@ -6101,7 +6828,6 @@ function renderSettlements(){
 
           </div>
 
-
           <div
             class="financeBadge ${financeClass}">
 
@@ -6112,7 +6838,6 @@ function renderSettlements(){
           </div>
 
         </div>
-
 
         <div class="settlementGrid">
 
@@ -6130,7 +6855,6 @@ function renderSettlements(){
 
           </div>
 
-
           <div class="financeBox commission">
 
             <small>
@@ -6145,7 +6869,6 @@ function renderSettlements(){
 
           </div>
 
-
           <div class="financeBox due">
 
             <small>
@@ -6159,7 +6882,6 @@ function renderSettlements(){
             </strong>
 
           </div>
-
 
           <div class="financeBox received">
 
@@ -6177,145 +6899,27 @@ function renderSettlements(){
 
         </div>
 
-
         ${
-          row.payment_confirmed_at
+          !isPaid
           ?
           `
 
-          <div class="settleTime">
+          <div class="settlementNote">
 
-            确认到账时间：
-            ${escapeHtml(
-              formatDate(
-                row.payment_confirmed_at
-              )
+            当前剩余待到账：
+            ${formatNumber(
+              remaining
             )}
 
             <br>
 
-            支付状态：
-            ${escapeHtml(
-              row.payment_status
-              ||
-              '—'
-            )}
-
-            ·
-
-            结算状态：
-            ${escapeHtml(
-              row.settlement_status
-              ||
-              '—'
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-
-        ${
-          !isPaid
-          &&
-          amountDue > 0
-          ?
-          `
-
-          <div class="settlementInputWrap">
-
-            <div class="settlementInputLabel">
-              实际到账金额
-            </div>
-
-
-            <div class="settlementInputRow">
-
-              <input
-                id="${inputId}"
-                type="number"
-                min="0"
-                step="0.01"
-                inputmode="decimal"
-                placeholder="请输入实际收到的金额">
-
-
-              <button
-                class="greenBtn"
-                ${
-                  canSettle
-                  ?
-                  ''
-                  :
-                  'disabled'
-                }
-                onclick="confirmSettlement(
-                  '${escapeJs(row.agent_id)}',
-                  '${escapeJs(round.id)}'
-                )">
-
-                确认到账
-
-              </button>
-
-            </div>
-
-
-            <div class="settlementButtons">
-
-              <button
-                class="dark"
-                onclick="fillSettlementAmount(
-                  '${escapeJs(row.agent_id)}',
-                  ${Number(amountDue)}
-                )">
-
-                填入系统应到账金额
-
-              </button>
-
-
-              <button
-                class="${
-                  suspendStatus ===
-                  'suspended'
-                  ?
-                  'red'
-                  :
-                  'dark'
-                }"
-                onclick="setStatus(
-                  '${escapeJs(row.agent_id)}',
-                  '${escapeJs(suspendStatus)}'
-                )">
-
-                ${escapeHtml(
-                  suspendText
-                )}
-
-              </button>
-
-            </div>
-
-
-            <div class="settlementNote">
-
-              ${
-                canSettle
-                ?
-                '系统应到账金额为 '+
-                formatNumber(
-                  amountDue
-                )+
-                '。只有实际到账金额完全一致，数据库才允许确认。'
-                :
-                '本期尚未截止，目前不能确认结款。'
-              }
-
-            </div>
+            ${
+              pendingSubmissions.length
+              ?
+              '该代理目前有 '+pendingSubmissions.length+' 笔付款申请等待管理员审核。'
+              :
+              '目前没有待审核付款申请。代理付款后，需要先提交付款资料和截图。'
+            }
 
           </div>
 
@@ -6324,10 +6928,33 @@ function renderSettlements(){
           `
 
           <div class="settlementNote">
-            ✓ 本期当前没有待结款金额。
+
+            ✓ 本期平台已经全额确认到账。
+
           </div>
 
           `
+        }
+
+        ${
+          row.payment_confirmed_at
+          ?
+          `
+
+          <div class="settleTime">
+
+            全额到账确认时间：
+            ${escapeHtml(
+              formatDate(
+                row.payment_confirmed_at
+              )
+            )}
+
+          </div>
+
+          `
+          :
+          ''
         }
 
       </div>
@@ -6341,9 +6968,23 @@ function renderSettlements(){
 }
 
 
-/* =====================================
-   SETTLEMENT STATS
-===================================== */
+function remainingAmount(
+  row
+){
+
+  return Math.max(
+    Number(
+      row.amount_due || 0
+    )
+    -
+    Number(
+      row.amount_received || 0
+    ),
+    0
+  );
+
+}
+
 
 function updateSettlementStats(
   rows
@@ -6357,7 +6998,7 @@ function updateSettlementStats(
   0;
 
 
-  let settled =
+  let received =
   0;
 
 
@@ -6365,52 +7006,32 @@ function updateSettlementStats(
   0;
 
 
-  rows
-  .filter(
-    isMeaningfulSettlementRow
-  )
-  .forEach(
+  rows.forEach(
     row=>{
 
-      const submitted =
+      total +=
       Number(
         row.submitted_total || 0
       );
 
 
-      const due =
-      Number(
-        row.amount_due || 0
-      );
-
-
-      const received =
+      received +=
       Number(
         row.amount_received || 0
       );
 
 
-      total +=
-      submitted;
+      const remaining =
+      remainingAmount(
+        row
+      );
 
 
-      if(
-        row.payment_status ===
-        'paid'
-      ){
+      pending +=
+      remaining;
 
-        settled +=
-        received;
 
-      }
-
-      else if(
-        due > 0
-      ){
-
-        pending +=
-        due;
-
+      if(remaining > 0){
 
         pendingAgents++;
 
@@ -6440,7 +7061,7 @@ function updateSettlementStats(
     'settlementSettled'
   ).textContent =
   formatNumber(
-    settled
+    received
   );
 
 
@@ -6481,473 +7102,34 @@ function resetSettlementStats(){
 
 
 /* =====================================
-   FILL SETTLEMENT
+   REFRESH ALL FINANCE
 ===================================== */
 
-function fillSettlementAmount(
-  agentId,
-  amount
+async function refreshFinance(
+  showMessage=false
 ){
-
-  const input =
-  document.getElementById(
-    'settlementAmount_'+
-    safeId(
-      agentId
-    )
-  );
-
-
-  if(input){
-
-    input.value =
-    Number(
-      amount || 0
-    );
-
-  }
-
-}
-
-
-/* =====================================
-   FRESH SETTLEMENT
-===================================== */
-
-async function getFreshSettlement(
-  agentId,
-  roundId
-){
-
-  const r =
-  await api(
-    '/rest/v1/agent_round_totals'+
-    '?agent_id=eq.'+
-    encodeURIComponent(
-      agentId
-    )+
-    '&round_id=eq.'+
-    encodeURIComponent(
-      roundId
-    )+
-    '&select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,settlement_status'+
-    '&limit=1'
-  );
-
-
-  if(!r.ok){
-
-    throw new Error(
-      await r.text()
-    );
-
-  }
-
-
-  const rows =
-  await r.json();
-
 
   if(
-    !Array.isArray(
-      rows
-    )
+    paymentReviewBusy
     ||
-    !rows.length
+    paymentReviewLoading
+    ||
+    settlementLoading
   ){
-
-    throw new Error(
-      '没有找到本期结款记录'
-    );
-
-  }
-
-
-  if(
-    !isMeaningfulSettlementRow(
-      rows[0]
-    )
-  ){
-
-    throw new Error(
-      '本期没有有效提交金额'
-    );
-
-  }
-
-
-  return rows[0];
-
-}
-
-
-/* =====================================
-   CONFIRM SETTLEMENT
-===================================== */
-
-async function confirmSettlement(
-  agentId,
-  roundId
-){
-
-  if(settlementConfirming){
 
     return;
 
   }
 
 
-  const msg =
-  document.getElementById(
-    'settlementMsg'
+  await loadPaymentReviews(
+    showMessage
   );
 
 
-  const agent =
-  agents.find(
-    a =>
-    a.id ===
-    agentId
+  await loadSettlementData(
+    showMessage
   );
-
-
-  const round =
-  settlementRounds.find(
-    r =>
-    r.id ===
-    roundId
-  );
-
-
-  if(
-    !agent
-    ||
-    !round
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '没有找到对应代理或期数';
-
-
-    return;
-
-  }
-
-
-  const input =
-  document.getElementById(
-    'settlementAmount_'+
-    safeId(
-      agentId
-    )
-  );
-
-
-  const receivedAmount =
-  Number(
-    input
-    ?
-    input.value
-    :
-    NaN
-  );
-
-
-  if(
-    !Number.isFinite(
-      receivedAmount
-    )
-    ||
-    receivedAmount < 0
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请输入正确的实际到账金额';
-
-
-    return;
-
-  }
-
-
-  settlementConfirming =
-  true;
-
-
-  msg.className =
-  'msg';
-
-
-  msg.textContent =
-  '正在重新核对系统应到账金额...';
-
-
-  try{
-
-    const fresh =
-    await getFreshSettlement(
-      agentId,
-      roundId
-    );
-
-
-    const submittedTotal =
-    Number(
-      fresh.submitted_total || 0
-    );
-
-
-    const commissionAmount =
-    Number(
-      fresh.commission_amount || 0
-    );
-
-
-    const amountDue =
-    Number(
-      fresh.amount_due || 0
-    );
-
-
-    if(
-      fresh.payment_status ===
-      'paid'
-    ){
-
-      throw new Error(
-        '本期已经确认到账'
-      );
-
-    }
-
-
-    if(
-      !moneyEqual(
-        receivedAmount,
-        amountDue
-      )
-    ){
-
-      throw new Error(
-        '金额不一致：系统应到账 '+
-        formatNumber(
-          amountDue
-        )+
-        '，你输入的是 '+
-        formatNumber(
-          receivedAmount
-        )
-      );
-
-    }
-
-
-    const ok =
-    confirm(
-      '请最后确认到账。\n\n'+
-      '代理：'+
-      (
-        agent.display_name
-        ||
-        '未命名代理'
-      )+
-      '\n期数：'+
-      round.round_date+
-      ' · '+
-      periodName(
-        round.round_code
-      )+
-      '\n\n本期提交总额：'+
-      formatNumber(
-        submittedTotal
-      )+
-      '\n代理佣金：'+
-      formatNumber(
-        commissionAmount
-      )+
-      '\n本期应交平台：'+
-      formatNumber(
-        amountDue
-      )+
-      '\n实际到账：'+
-      formatNumber(
-        receivedAmount
-      )+
-      '\n\n确认后将正式标记为「已结款」。'
-    );
-
-
-    if(!ok){
-
-      msg.textContent =
-      '';
-
-      return;
-
-    }
-
-
-    msg.textContent =
-    '正在提交数据库确认...';
-
-
-    const rpcRes =
-    await api(
-      '/rest/v1/rpc/admin_confirm_agent_settlement',
-      {
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
-
-        body:
-        JSON.stringify({
-          p_agent_id:
-          agentId,
-
-          p_round_id:
-          roundId,
-
-          p_amount_received:
-          receivedAmount
-        })
-      }
-    );
-
-
-    const text =
-    await rpcRes.text();
-
-
-    if(!rpcRes.ok){
-
-      let errorMessage =
-      text
-      ||
-      '数据库确认失败';
-
-
-      if(
-        errorMessage.includes(
-          'SETTLEMENT_AMOUNT_MISMATCH'
-        )
-      ){
-
-        errorMessage =
-        '实际到账金额与数据库应收金额不一致';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'SETTLEMENT_ALREADY_PAID'
-        )
-      ){
-
-        errorMessage =
-        '本期已经确认到账';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'SETTLEMENT_NOT_FOUND'
-        )
-      ){
-
-        errorMessage =
-        '没有找到本期结款记录';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'NOT_ADMIN'
-        )
-      ){
-
-        errorMessage =
-        '当前账号没有管理员权限';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'NOT_AUTHENTICATED'
-        )
-      ){
-
-        errorMessage =
-        '管理员登录已经失效';
-
-      }
-
-
-      throw new Error(
-        errorMessage
-      );
-
-    }
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    '✓ 已确认到账：'+
-    (
-      agent.display_name
-      ||
-      '未命名代理'
-    )+
-    ' · '+
-    formatNumber(
-      amountDue
-    );
-
-
-    await loadSettlementData(
-      false
-    );
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '确认失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    settlementConfirming =
-    false;
-
-  }
 
 }
 
@@ -6956,20 +7138,32 @@ async function confirmSettlement(
    HELPERS
 ===================================== */
 
-function moneyEqual(
-  a,
-  b
+function paymentReviewStatusName(
+  status
 ){
 
-  return (
-    Math.round(
-      Number(a || 0)*100
-    )
-    ===
-    Math.round(
-      Number(b || 0)*100
-    )
-  );
+  if(status === 'pending'){
+
+    return '待审核';
+
+  }
+
+
+  if(status === 'approved'){
+
+    return '已确认到账';
+
+  }
+
+
+  if(status === 'rejected'){
+
+    return '已驳回';
+
+  }
+
+
+  return status || '—';
 
 }
 
@@ -6978,20 +7172,14 @@ function periodName(
   code
 ){
 
-  if(
-    code ===
-    '1030'
-  ){
+  if(code === '1030'){
 
     return '上午 11:45';
 
   }
 
 
-  if(
-    code ===
-    '1530'
-  ){
+  if(code === '1530'){
 
     return '下午 15:45';
 
@@ -7038,30 +7226,21 @@ function roundStatusName(
   }
 
 
-  if(
-    round.status ===
-    'open'
-  ){
+  if(round.status === 'open'){
 
     return '开放中';
 
   }
 
 
-  if(
-    round.status ===
-    'closed'
-  ){
+  if(round.status === 'closed'){
 
     return '已关闭';
 
   }
 
 
-  if(
-    round.status ===
-    'settled'
-  ){
+  if(round.status === 'settled'){
 
     return '已结算';
 
@@ -7284,10 +7463,7 @@ function formatFileSize(
   );
 
 
-  if(
-    bytes <
-    1024
-  ){
+  if(bytes < 1024){
 
     return bytes+
     ' B';
@@ -7295,10 +7471,7 @@ function formatFileSize(
   }
 
 
-  if(
-    bytes <
-    1024*1024
-  ){
+  if(bytes < 1024*1024){
 
     return (
       bytes/
@@ -7466,7 +7639,7 @@ function escapeJs(
 
 
 /* =====================================
-   CLEAR SESSION
+   SESSION
 ===================================== */
 
 function clearAdminSession(){
@@ -7499,32 +7672,35 @@ function clearAdminSession(){
 
 /* =====================================
    AUTO REFRESH
-
-   这里只刷新结款。
-
-   故意不刷新 paymentAccounts。
-
-   这是解决 iPhone 选完图片后
-   文件自己消失的关键之一。
 ===================================== */
 
-function refreshWhenActive(){
+async function refreshWhenActive(){
 
   if(
-    token
-    &&
-    adminUser
-    &&
-    !settlementLoading
-    &&
-    !settlementConfirming
+    !token
+    ||
+    !adminUser
+    ||
+    paymentReviewBusy
+    ||
+    paymentReviewLoading
+    ||
+    settlementLoading
   ){
 
-    loadSettlementData(
-      false
-    );
+    return;
 
   }
+
+
+  await loadPaymentReviews(
+    false
+  );
+
+
+  await loadSettlementData(
+    false
+  );
 
 }
 
@@ -7565,38 +7741,34 @@ window.addEventListener(
 
 
 /* =====================================
-   CLEAN OBJECT URL
+   CLEAN OBJECT URLS
 ===================================== */
 
 window.addEventListener(
   'beforeunload',
   ()=>{
 
-    qrDisplayUrls.forEach(
-      url=>{
+    [
+      qrDisplayUrls,
+      proofDisplayUrls,
+      editQrPreviewUrls
+    ]
+    .forEach(
+      map=>{
 
-        try{
+        map.forEach(
+          url=>{
 
-          URL.revokeObjectURL(
-            url
-          );
+            try{
 
-        }catch(e){}
+              URL.revokeObjectURL(
+                url
+              );
 
-      }
-    );
+            }catch(e){}
 
-
-    editQrPreviewUrls.forEach(
-      url=>{
-
-        try{
-
-          URL.revokeObjectURL(
-            url
-          );
-
-        }catch(e){}
+          }
+        );
 
       }
     );
@@ -7639,9 +7811,29 @@ async function startPage(){
   );
 
 
+  /*
+    先读取期数和总账，
+    付款审核才能正确显示代理对应期数。
+  */
+
   await loadSettlementData(
     false
   );
+
+
+  await loadPaymentReviews(
+    false
+  );
+
+
+  /*
+    付款申请加载后，
+    再渲染一次结款，
+    这样结款卡片里可以显示
+    “有几笔付款正在等待审核”。
+  */
+
+  renderSettlements();
 
 }
 
@@ -7650,13 +7842,13 @@ startPage();
 
 
 /*
-  只有结款管理每 20 秒自动更新。
+  每 20 秒只自动刷新：
+  - 代理付款申请
+  - 结款总账
 
-  收款账户和二维码绝对不会因为
-  20 秒自动刷新重新渲染。
-
-  所以管理员选图期间，
-  图片不会再自己消失。
+  不重新渲染收款账户编辑区域，
+  避免管理员正在选择二维码时
+  iPhone 文件选择状态被刷新清空。
 */
 
 setInterval(
@@ -7667,12 +7859,14 @@ setInterval(
       &&
       adminUser
       &&
-      !settlementConfirming
+      !paymentReviewBusy
+      &&
+      !paymentReviewLoading
+      &&
+      !settlementLoading
     ){
 
-      loadSettlementData(
-        false
-      );
+      refreshWhenActive();
 
     }
 
