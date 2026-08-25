@@ -44,13 +44,27 @@
 <title>金满堂 · Agent Center</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box
+}
 
 body{
   margin:0;
-  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 40%,
+    #070708 100%
+  );
   color:#f7f0df;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif
 }
 
 .wrap{
@@ -94,8 +108,15 @@ body{
 }
 
 .card{
-  background:linear-gradient(180deg,#151515,#0d0d0e);
-  border:1px solid rgba(214,168,63,.30);
+  background:
+  linear-gradient(
+    180deg,
+    #151515,
+    #0d0d0e
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.30);
   border-radius:20px;
   padding:18px;
   margin-bottom:14px
@@ -117,7 +138,9 @@ select{
   width:100%;
   padding:12px;
   border-radius:11px;
-  border:1px solid rgba(214,168,63,.25);
+  border:
+  1px solid
+  rgba(214,168,63,.25);
   background:#101011;
   color:#fff;
   outline:none;
@@ -132,7 +155,12 @@ button{
   margin-top:10px;
   font-weight:900;
   font-size:14px;
-  background:linear-gradient(180deg,#efd47c,#b87e1e);
+  background:
+  linear-gradient(
+    180deg,
+    #efd47c,
+    #b87e1e
+  );
   color:#171109;
   cursor:pointer
 }
@@ -145,7 +173,9 @@ button:disabled{
 .secondary{
   background:#171718;
   color:#dac477;
-  border:1px solid rgba(214,168,63,.23)
+  border:
+  1px solid
+  rgba(214,168,63,.23)
 }
 
 .langWrap{
@@ -166,7 +196,9 @@ button:disabled{
 
 .box{
   background:#101011;
-  border:1px solid rgba(255,255,255,.06);
+  border:
+  1px solid
+  rgba(255,255,255,.06);
   border-radius:13px;
   padding:13px;
   min-height:90px
@@ -190,12 +222,19 @@ button:disabled{
 
 .box.highlight{
   background:#15130e;
-  border-color:rgba(214,168,63,.30)
+  border-color:
+  rgba(214,168,63,.30)
 }
 
 .box.commission strong{
   color:#70d39d;
   font-size:19px
+}
+
+.box.dangerBox{
+  background:#171111;
+  border-color:
+  rgba(200,100,100,.24)
 }
 
 .statusOpen{
@@ -206,22 +245,38 @@ button:disabled{
   color:#e58e8e!important
 }
 
+.statusPending{
+  color:#e8c86e!important
+}
+
+.statusPaid{
+  color:#70d39d!important
+}
+
+.statusOverdue{
+  color:#e58e8e!important
+}
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+  repeat(2,1fr);
   gap:8px
 }
 
 .num{
   background:#101011;
-  border:1px solid rgba(255,255,255,.06);
+  border:
+  1px solid
+  rgba(255,255,255,.06);
   border-radius:11px;
   padding:10px;
   transition:.2s
 }
 
 .num.changed{
-  border-color:rgba(214,168,63,.62);
+  border-color:
+  rgba(214,168,63,.62);
   background:#19160f
 }
 
@@ -242,7 +297,9 @@ button:disabled{
   background:#101011;
   border-radius:14px;
   padding:15px;
-  border:1px solid rgba(214,168,63,.15);
+  border:
+  1px solid
+  rgba(214,168,63,.15);
   margin-top:13px
 }
 
@@ -294,6 +351,33 @@ button:disabled{
   text-align:center
 }
 
+.settlementNotice{
+  margin-top:12px;
+  border-radius:13px;
+  padding:13px;
+  font-size:11px;
+  line-height:1.7;
+  background:#101011;
+  border:
+  1px solid
+  rgba(214,168,63,.14);
+  color:#928b7d
+}
+
+.settlementNotice.overdue{
+  color:#dba0a0;
+  border-color:
+  rgba(200,100,100,.24);
+  background:#171111
+}
+
+.settlementNotice.paid{
+  color:#8dd8ad;
+  border-color:
+  rgba(100,200,145,.20);
+  background:#101713
+}
+
 .foot{
   text-align:center;
   color:#6f6a61;
@@ -302,40 +386,91 @@ button:disabled{
 }
 
 @media(max-width:420px){
+
   .info{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:
+    1fr 1fr
   }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="wrap">
 
+
   <div class="brand">
-    <div class="mark">金</div>
-    <div class="cn">金满堂</div>
-    <div class="en">AGENT CENTER</div>
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      AGENT CENTER
+    </div>
+
   </div>
+
 
   <div class="langWrap">
-    <select id="langSelect" onchange="changeLanguage(this.value)">
-      <option value="zh">中文</option>
-      <option value="my">မြန်မာ</option>
-      <option value="en">English</option>
-      <option value="th">ไทย</option>
-      <option value="ms">Bahasa Melayu</option>
-      <option value="vi">Tiếng Việt</option>
-      <option value="id">Bahasa Indonesia</option>
+
+    <select
+      id="langSelect"
+      onchange="changeLanguage(this.value)">
+
+      <option value="zh">
+        中文
+      </option>
+
+      <option value="my">
+        မြန်မာ
+      </option>
+
+      <option value="en">
+        English
+      </option>
+
+      <option value="th">
+        ไทย
+      </option>
+
+      <option value="ms">
+        Bahasa Melayu
+      </option>
+
+      <option value="vi">
+        Tiếng Việt
+      </option>
+
+      <option value="id">
+        Bahasa Indonesia
+      </option>
+
     </select>
+
   </div>
 
-  <div class="card" id="loginBox">
 
-    <div class="title" data-i18n="loginTitle">
+  <div
+    class="card"
+    id="loginBox">
+
+    <div
+      class="title"
+      data-i18n="loginTitle">
+
       代理登录
+
     </div>
+
 
     <input
       id="email"
@@ -343,7 +478,9 @@ button:disabled{
       data-ph="email"
       placeholder="代理邮箱">
 
+
     <div style="height:9px"></div>
+
 
     <input
       id="password"
@@ -351,443 +488,1404 @@ button:disabled{
       data-ph="password"
       placeholder="密码">
 
-    <button onclick="signIn()" data-i18n="loginBtn">
+
+    <button
+      onclick="signIn()"
+      data-i18n="loginBtn">
+
       登录代理中心
+
     </button>
 
-    <div class="msg" id="loginMsg"></div>
+
+    <div
+      class="msg"
+      id="loginMsg">
+    </div>
 
   </div>
 
-  <div id="agentBox" class="hidden">
+
+  <div
+    id="agentBox"
+    class="hidden">
+
 
     <div class="card">
 
-      <div class="title" data-i18n="agentInfo">
+      <div
+        class="title"
+        data-i18n="agentInfo">
+
         我的代理资料
+
       </div>
+
 
       <div class="info">
 
         <div class="box">
-          <small data-i18n="agentName">代理名称</small>
-          <strong id="agentName">—</strong>
+
+          <small data-i18n="agentName">
+            代理名称
+          </small>
+
+          <strong id="agentName">
+            —
+          </strong>
+
         </div>
 
-        <div class="box">
-          <small data-i18n="agentRate">代理比例</small>
-          <strong id="commissionRate">—</strong>
-        </div>
 
         <div class="box">
-          <small data-i18n="accountStatus">账号状态</small>
-          <strong id="agentStatus">—</strong>
+
+          <small data-i18n="agentRate">
+            代理比例
+          </small>
+
+          <strong id="commissionRate">
+            —
+          </strong>
+
         </div>
 
+
         <div class="box">
-          <small>Myanmar Time</small>
-          <strong id="mmtClock">—</strong>
+
+          <small data-i18n="accountStatus">
+            账号状态
+          </small>
+
+          <strong id="agentStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            Myanmar Time
+          </small>
+
+          <strong id="mmtClock">
+            —
+          </strong>
+
         </div>
 
       </div>
 
     </div>
 
+
     <div class="card">
 
-      <div class="title" data-i18n="currentRound">
+      <div
+        class="title"
+        data-i18n="currentRound">
+
         当前期数
+
       </div>
+
 
       <div class="info">
 
         <div class="box">
-          <small data-i18n="round">期数</small>
-          <strong id="roundName">—</strong>
+
+          <small data-i18n="round">
+            期数
+          </small>
+
+          <strong id="roundName">
+            —
+          </strong>
+
         </div>
 
-        <div class="box">
-          <small data-i18n="submitStatus">提交状态</small>
-          <strong id="roundStatus">—</strong>
-        </div>
 
         <div class="box">
-          <small data-i18n="deadline">截止时间</small>
-          <strong id="deadlineText">—</strong>
+
+          <small data-i18n="submitStatus">
+            提交状态
+          </small>
+
+          <strong id="roundStatus">
+            —
+          </strong>
+
         </div>
 
+
         <div class="box">
-          <small data-i18n="timeLeft">距离截止</small>
-          <strong id="countdown">—</strong>
+
+          <small data-i18n="deadline">
+            截止时间
+          </small>
+
+          <strong id="deadlineText">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="timeLeft">
+            距离截止
+          </small>
+
+          <strong id="countdown">
+            —
+          </strong>
+
         </div>
 
       </div>
 
-      <div class="note" data-i18n="serverNote">
+
+      <div
+        class="note"
+        data-i18n="serverNote">
+
         截止时间以前可以增加或修改数据；截止以后系统自动锁定。
+
       </div>
 
     </div>
 
+
     <div class="card">
 
-      <div class="title" data-i18n="submitTitle">
+      <div
+        class="title"
+        data-i18n="submitTitle">
+
         00–99 本期积分提交
+
       </div>
 
-      <div class="grid" id="numberGrid"></div>
+
+      <div
+        class="grid"
+        id="numberGrid">
+      </div>
+
 
       <div class="total">
+
         <small data-i18n="totalPoints">
           当前输入总额
         </small>
-        <strong id="totalPoints">0</strong>
+
+        <strong id="totalPoints">
+          0
+        </strong>
+
       </div>
+
 
       <button
         id="submitBtn"
         onclick="submitRound()"
         data-i18n="submitBtn">
+
         保存本期数据
+
       </button>
+
 
       <button
         class="secondary"
         onclick="loadExisting(true)"
         data-i18n="reloadBtn">
+
         重新读取已保存数据
+
       </button>
 
-      <div class="msg" id="submitMsg"></div>
 
-      <div class="note" data-i18n="editNote">
+      <div
+        class="msg"
+        id="submitMsg">
+      </div>
+
+
+      <div
+        class="note"
+        data-i18n="editNote">
+
         已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。
+
       </div>
 
     </div>
 
+
     <div class="card">
 
-      <div class="title" data-i18n="resultTitle">
-        本期结果
+      <div
+        class="title"
+        data-i18n="settlementTitle">
+
+        本期结款
+
       </div>
+
 
       <div class="info">
 
-        <div class="box">
-          <small data-i18n="resultNumber">开奖号码</small>
-          <strong id="resultNumber">等待开奖</strong>
-        </div>
 
         <div class="box">
-          <small data-i18n="submittedTotal">本期提交总额</small>
-          <strong id="resultSubmittedTotal">0</strong>
+
+          <small data-i18n="submittedTotal">
+            本期提交总额
+          </small>
+
+          <strong id="settlementSubmittedTotal">
+            0
+          </strong>
+
         </div>
 
-        <div class="box">
-          <small data-i18n="agentRate">代理比例</small>
-          <strong id="resultRate">—</strong>
-        </div>
 
         <div class="box commission highlight">
-          <small data-i18n="commission">本期代理佣金</small>
-          <strong id="resultCommission">0</strong>
+
+          <small data-i18n="commission">
+            本期代理佣金
+          </small>
+
+          <strong id="settlementCommission">
+            0
+          </strong>
+
         </div>
 
+
         <div class="box highlight">
-          <small data-i18n="winningAmount">本期中奖金额</small>
-          <strong id="winningAmount">等待开奖</strong>
+
+          <small data-i18n="amountDue">
+            本期应交平台
+          </small>
+
+          <strong id="amountDue">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="amountReceived">
+            平台已确认到账
+          </small>
+
+          <strong id="amountReceived">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="paymentStatus">
+            结款状态
+          </small>
+
+          <strong id="paymentStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="paymentDue">
+            付款截止
+          </small>
+
+          <strong id="paymentDueAt">
+            —
+          </strong>
+
         </div>
 
       </div>
 
-      <div class="resultNote" data-i18n="commissionNote">
-        代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。
+
+      <div
+        class="settlementNotice"
+        id="settlementNotice">
+
+        —
+
       </div>
 
     </div>
 
+
     <div class="card">
+
+      <div
+        class="title"
+        data-i18n="resultTitle">
+
+        本期结果
+
+      </div>
+
+
+      <div class="info">
+
+
+        <div class="box">
+
+          <small data-i18n="resultNumber">
+            开奖号码
+          </small>
+
+          <strong id="resultNumber">
+            等待开奖
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="submittedTotal">
+            本期提交总额
+          </small>
+
+          <strong id="resultSubmittedTotal">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="agentRate">
+            代理比例
+          </small>
+
+          <strong id="resultRate">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box commission highlight">
+
+          <small data-i18n="commission">
+            本期代理佣金
+          </small>
+
+          <strong id="resultCommission">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box highlight">
+
+          <small data-i18n="winningAmount">
+            本期中奖金额
+          </small>
+
+          <strong id="winningAmount">
+            等待开奖
+          </strong>
+
+        </div>
+
+
+        <div class="box highlight">
+
+          <small data-i18n="finalBalance">
+            最终结算差额
+          </small>
+
+          <strong id="finalBalance">
+            等待开奖
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="resultNote"
+        data-i18n="commissionNote">
+
+        代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
       <button
         class="secondary"
         onclick="logout()"
         data-i18n="logout">
+
         退出登录
+
       </button>
+
     </div>
 
+
   </div>
+
 
   <div class="foot">
+
     © 2022 JIN MANTANG · AGENT SYSTEM
+
   </div>
 
+
 </div>
+
 
 <script>
 
 const BASE =
 'https://veserwfjxglxieehfggy.supabase.co';
 
+
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
 
 const MULTIPLIER =
 80;
 
+
 let token =
-localStorage.getItem('jmt_agent_token')
+localStorage.getItem(
+  'jmt_agent_token'
+)
 ||
-sessionStorage.getItem('jmt_agent_token')
+sessionStorage.getItem(
+  'jmt_agent_token'
+)
 ||
 '';
+
 
 let agent =
 null;
 
+
 let currentRound =
 null;
+
+
+let settlement =
+null;
+
 
 let submittedNumbers =
 {};
 
+
 let submittedTotal =
 0;
+
 
 let existingCodes =
 new Set();
 
+
 let isSaving =
 false;
+
 
 let isRefreshingRound =
 false;
 
+
 let currentLang =
-localStorage.getItem('jmt_agent_lang')
+localStorage.getItem(
+  'jmt_agent_lang'
+)
 ||
 'zh';
 
 
+
+/* =========================================================
+   TRANSLATIONS
+========================================================= */
+
 const T = {
 
+
 zh:{
-loginTitle:'代理登录',
-email:'代理邮箱',
-password:'密码',
-loginBtn:'登录代理中心',
-agentInfo:'我的代理资料',
-agentName:'代理名称',
-agentRate:'代理比例',
-accountStatus:'账号状态',
-normal:'正常',
-suspended:'已暂停',
-blocked:'已限制',
-currentRound:'当前期数',
-round:'期数',
-submitStatus:'提交状态',
-deadline:'截止时间',
-timeLeft:'距离截止',
-serverNote:'截止时间以前可以增加或修改数据；截止以后系统自动锁定。',
-submitTitle:'00–99 本期积分提交',
-totalPoints:'当前输入总额',
-submitBtn:'保存本期数据',
-reloadBtn:'重新读取已保存数据',
-editNote:'已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。',
-resultTitle:'本期结果',
-resultNumber:'开奖号码',
-submittedTotal:'本期提交总额',
-commission:'本期代理佣金',
-winningAmount:'本期中奖金额',
-commissionNote:'代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。',
-logout:'退出登录',
-loginMissing:'请输入代理邮箱和密码',
-logging:'正在登录...',
-loginFail:'登录失败，请检查账号或密码',
-noAgent:'该账号没有有效代理权限',
-noRound:'暂无开放期',
-canSubmit:'可以提交 / 修改',
-closed:'本期已截止',
-closedShort:'已关闭',
-minutes:'分',
-seconds:'秒',
-saving:'正在保存，请稍候...',
-noSubmitRound:'当前没有可以提交的期数',
-accountCannot:'你的代理账号目前无法提交',
-serverRejected:'本期已经截止，服务器已拒绝修改',
-saveFail:'保存失败',
-networkError:'网络异常，请重新提交',
-saveSuccess:'✓ 保存成功 · 本期总额 ',
-noChange:'✓ 没有需要保存的修改',
-reloaded:'✓ 已重新读取最新数据',
-waitingResult:'等待开奖',
-morning:'上午 11:45',
-afternoon:'下午 15:45'
+
+loginTitle:
+'代理登录',
+
+email:
+'代理邮箱',
+
+password:
+'密码',
+
+loginBtn:
+'登录代理中心',
+
+agentInfo:
+'我的代理资料',
+
+agentName:
+'代理名称',
+
+agentRate:
+'代理比例',
+
+accountStatus:
+'账号状态',
+
+normal:
+'正常',
+
+suspended:
+'已暂停',
+
+blocked:
+'已限制',
+
+currentRound:
+'当前期数',
+
+round:
+'期数',
+
+submitStatus:
+'提交状态',
+
+deadline:
+'截止时间',
+
+timeLeft:
+'距离截止',
+
+serverNote:
+'截止时间以前可以增加或修改数据；截止以后系统自动锁定。',
+
+submitTitle:
+'00–99 本期积分提交',
+
+totalPoints:
+'当前输入总额',
+
+submitBtn:
+'保存本期数据',
+
+reloadBtn:
+'重新读取已保存数据',
+
+editNote:
+'已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。',
+
+settlementTitle:
+'本期结款',
+
+amountDue:
+'本期应交平台',
+
+amountReceived:
+'平台已确认到账',
+
+paymentStatus:
+'结款状态',
+
+paymentDue:
+'付款截止',
+
+pendingPayment:
+'待结款',
+
+paidPayment:
+'已结款',
+
+overduePayment:
+'逾期未结款',
+
+noSettlement:
+'暂无结款数据',
+
+settlementWaiting:
+'本期数据提交后，系统会自动计算应交金额。',
+
+settlementPending:
+'本期仍待结款。请在付款截止时间前完成转账，并等待平台确认。',
+
+settlementPaid:
+'✓ 本期已经由平台确认结款。',
+
+settlementOverdue:
+'本期已经超过付款截止时间且尚未确认到账。请先完成欠款结算，逾期欠款可能暂停下一期提交。',
+
+resultTitle:
+'本期结果',
+
+resultNumber:
+'开奖号码',
+
+submittedTotal:
+'本期提交总额',
+
+commission:
+'本期代理佣金',
+
+winningAmount:
+'本期中奖金额',
+
+finalBalance:
+'最终结算差额',
+
+commissionNote:
+'代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。最终结算差额 = 本期应交平台 − 本期中奖金额。',
+
+logout:
+'退出登录',
+
+loginMissing:
+'请输入代理邮箱和密码',
+
+logging:
+'正在登录...',
+
+loginFail:
+'登录失败，请检查账号或密码',
+
+noAgent:
+'该账号没有有效代理权限',
+
+noRound:
+'暂无开放期',
+
+canSubmit:
+'可以提交 / 修改',
+
+closed:
+'本期已截止',
+
+closedShort:
+'已关闭',
+
+minutes:
+'分',
+
+seconds:
+'秒',
+
+saving:
+'正在保存，请稍候...',
+
+noSubmitRound:
+'当前没有可以提交的期数',
+
+accountCannot:
+'你的代理账号目前无法提交',
+
+serverRejected:
+'本期已经截止，服务器已拒绝修改',
+
+previousPaymentOverdue:
+'存在上一期逾期未结款，请先完成结算',
+
+saveFail:
+'保存失败',
+
+networkError:
+'网络异常，请重新提交',
+
+saveSuccess:
+'✓ 保存成功 · 本期总额 ',
+
+noChange:
+'✓ 没有需要保存的修改',
+
+reloaded:
+'✓ 已重新读取最新数据',
+
+waitingResult:
+'等待开奖',
+
+morning:
+'上午 11:45',
+
+afternoon:
+'下午 15:45',
+
+platformReceives:
+'代理应付平台',
+
+platformPays:
+'平台应付代理',
+
+balanced:
+'已结清'
+
 },
+
 
 my:{
-loginTitle:'ကိုယ်စားလှယ် ဝင်ရောက်ရန်',
-email:'ကိုယ်စားလှယ် Email',
-password:'စကားဝှက်',
-loginBtn:'ကိုယ်စားလှယ်စနစ်သို့ ဝင်မည်',
-agentInfo:'ကျွန်ုပ်၏ ကိုယ်စားလှယ်အချက်အလက်',
-agentName:'ကိုယ်စားလှယ်အမည်',
-agentRate:'ကိုယ်စားလှယ် ရာခိုင်နှုန်း',
-accountStatus:'အကောင့်အခြေအနေ',
-normal:'ပုံမှန်',
-suspended:'ယာယီရပ်ထား',
-blocked:'ကန့်သတ်ထား',
-currentRound:'လက်ရှိအကြိမ်',
-round:'အကြိမ်',
-submitStatus:'တင်သွင်းမှုအခြေအနေ',
-deadline:'နောက်ဆုံးအချိန်',
-timeLeft:'ကျန်ရှိချိန်',
-serverNote:'ပိတ်ချိန်မတိုင်မီ ဒေတာထည့်ခြင်းနှင့် ပြင်ခြင်း ပြုလုပ်နိုင်သည်။ ပိတ်ချိန်ကျော်ပါက စနစ်က အလိုအလျောက်ပိတ်မည်။',
-submitTitle:'00–99 လက်ရှိအကြိမ် Point တင်သွင်းမှု',
-totalPoints:'လက်ရှိစုစုပေါင်း',
-submitBtn:'ဒေတာသိမ်းမည်',
-reloadBtn:'သိမ်းထားသောဒေတာ ပြန်ဖတ်မည်',
-editNote:'ပိတ်ချိန်မတိုင်မီ သိမ်းထားသော နံပါတ်များကို ပြန်ပြင်နိုင်သည်။ 0 ပြောင်းပြီး သိမ်းပါက 0 ဖြစ်သွားမည်။',
-resultTitle:'လက်ရှိအကြိမ် ရလဒ်',
-resultNumber:'ရလဒ်နံပါတ်',
-submittedTotal:'တင်ထားသော စုစုပေါင်း',
-commission:'ကိုယ်စားလှယ် ကော်မရှင်',
-winningAmount:'အနိုင်ရငွေ',
-commissionNote:'ကော်မရှင်ကို စနစ်ထဲတွင် အမှန်တကယ်သိမ်းထားသော စုစုပေါင်းနှင့် ကိုယ်စားလှယ်ရာခိုင်နှုန်းအလိုက် တွက်သည်။',
-logout:'ထွက်မည်',
-loginMissing:'Email နှင့် စကားဝှက်ထည့်ပါ',
-logging:'ဝင်ရောက်နေသည်...',
-loginFail:'ဝင်မရပါ။ Email/စကားဝှက်စစ်ပါ',
-noAgent:'ဤအကောင့်တွင် ကိုယ်စားလှယ်ခွင့်မရှိပါ',
-noRound:'ဖွင့်ထားသောအကြိမ်မရှိပါ',
-canSubmit:'တင် / ပြင်နိုင်သည်',
-closed:'လက်ရှိအကြိမ် ပိတ်ပြီးပါပြီ',
-closedShort:'ပိတ်ပြီး',
-minutes:'မိနစ်',
-seconds:'စက္ကန့်',
-saving:'သိမ်းနေသည်...',
-noSubmitRound:'တင်နိုင်သောအကြိမ်မရှိပါ',
-accountCannot:'ဤအကောင့်ဖြင့် လက်ရှိတင်မရပါ',
-serverRejected:'နောက်ဆုံးအချိန်ကျော်သွားသဖြင့် ပြင်ဆင်၍မရပါ',
-saveFail:'သိမ်းမရပါ',
-networkError:'Network အမှား',
-saveSuccess:'✓ သိမ်းပြီး · စုစုပေါင်း ',
-noChange:'✓ ပြောင်းလဲမှုမရှိပါ',
-reloaded:'✓ ဒေတာပြန်ဖတ်ပြီး',
-waitingResult:'ရလဒ်စောင့်နေသည်',
-morning:'မနက် 11:45',
-afternoon:'နေ့လယ် 15:45'
+
+loginTitle:
+'ကိုယ်စားလှယ် ဝင်ရောက်ရန်',
+
+email:
+'ကိုယ်စားလှယ် Email',
+
+password:
+'စကားဝှက်',
+
+loginBtn:
+'ကိုယ်စားလှယ်စနစ်သို့ ဝင်မည်',
+
+agentInfo:
+'ကျွန်ုပ်၏ ကိုယ်စားလှယ်အချက်အလက်',
+
+agentName:
+'ကိုယ်စားလှယ်အမည်',
+
+agentRate:
+'ကိုယ်စားလှယ် ရာခိုင်နှုန်း',
+
+accountStatus:
+'အကောင့်အခြေအနေ',
+
+normal:
+'ပုံမှန်',
+
+suspended:
+'ယာယီရပ်ထား',
+
+blocked:
+'ကန့်သတ်ထား',
+
+currentRound:
+'လက်ရှိအကြိမ်',
+
+round:
+'အကြိမ်',
+
+submitStatus:
+'တင်သွင်းမှုအခြေအနေ',
+
+deadline:
+'နောက်ဆုံးအချိန်',
+
+timeLeft:
+'ကျန်ရှိချိန်',
+
+serverNote:
+'ပိတ်ချိန်မတိုင်မီ ဒေတာထည့်ခြင်းနှင့် ပြင်ခြင်း ပြုလုပ်နိုင်သည်။ ပိတ်ချိန်ကျော်ပါက စနစ်က အလိုအလျောက်ပိတ်မည်။',
+
+submitTitle:
+'00–99 လက်ရှိအကြိမ် Point တင်သွင်းမှု',
+
+totalPoints:
+'လက်ရှိစုစုပေါင်း',
+
+submitBtn:
+'ဒေတာသိမ်းမည်',
+
+reloadBtn:
+'သိမ်းထားသောဒေတာ ပြန်ဖတ်မည်',
+
+editNote:
+'ပိတ်ချိန်မတိုင်မီ သိမ်းထားသော နံပါတ်များကို ပြန်ပြင်နိုင်သည်။ 0 ပြောင်းပြီး သိမ်းပါက 0 ဖြစ်သွားမည်။',
+
+settlementTitle:
+'လက်ရှိအကြိမ် ငွေစာရင်း',
+
+amountDue:
+'Platform သို့ ပေးရမည့်ငွေ',
+
+amountReceived:
+'Platform အတည်ပြုလက်ခံငွေ',
+
+paymentStatus:
+'ငွေပေးချေမှုအခြေအနေ',
+
+paymentDue:
+'ငွေပေးချေရမည့် နောက်ဆုံးအချိန်',
+
+pendingPayment:
+'ငွေပေးချေရန်ကျန်',
+
+paidPayment:
+'ငွေရှင်းပြီး',
+
+overduePayment:
+'ငွေပေးချေမှုနောက်ကျ',
+
+noSettlement:
+'ငွေစာရင်းမရှိသေးပါ',
+
+settlementWaiting:
+'အချက်အလက်တင်ပြီးနောက် စနစ်က ပေးရမည့်ငွေကို အလိုအလျောက်တွက်ပေးမည်။',
+
+settlementPending:
+'ယခုအကြိမ် ငွေရှင်းရန်ကျန်ရှိနေသည်။ သတ်မှတ်ချိန်မတိုင်မီ လွှဲပြီး Platform အတည်ပြုချက်ကို စောင့်ပါ။',
+
+settlementPaid:
+'✓ ယခုအကြိမ် ငွေရှင်းပြီးဖြစ်သည်။',
+
+settlementOverdue:
+'ငွေပေးချေရမည့်အချိန်ကျော်ပြီး အတည်ပြုမရသေးပါ။ အရင်အကြွေးကို ရှင်းပြီးမှ နောက်အကြိမ်တင်နိုင်မည်။',
+
+resultTitle:
+'လက်ရှိအကြိမ် ရလဒ်',
+
+resultNumber:
+'ရလဒ်နံပါတ်',
+
+submittedTotal:
+'တင်ထားသော စုစုပေါင်း',
+
+commission:
+'ကိုယ်စားလှယ် ကော်မရှင်',
+
+winningAmount:
+'အနိုင်ရငွေ',
+
+finalBalance:
+'နောက်ဆုံးရှင်းတမ်း',
+
+commissionNote:
+'ကော်မရှင်ကို အမှန်တကယ်သိမ်းထားသော စုစုပေါင်းနှင့် ကိုယ်စားလှယ်ရာခိုင်နှုန်းအလိုက် တွက်သည်။',
+
+logout:
+'ထွက်မည်',
+
+loginMissing:
+'Email နှင့် စကားဝှက်ထည့်ပါ',
+
+logging:
+'ဝင်ရောက်နေသည်...',
+
+loginFail:
+'ဝင်မရပါ။ Email/စကားဝှက်စစ်ပါ',
+
+noAgent:
+'ဤအကောင့်တွင် ကိုယ်စားလှယ်ခွင့်မရှိပါ',
+
+noRound:
+'ဖွင့်ထားသောအကြိမ်မရှိပါ',
+
+canSubmit:
+'တင် / ပြင်နိုင်သည်',
+
+closed:
+'လက်ရှိအကြိမ် ပိတ်ပြီးပါပြီ',
+
+closedShort:
+'ပိတ်ပြီး',
+
+minutes:
+'မိနစ်',
+
+seconds:
+'စက္ကန့်',
+
+saving:
+'သိမ်းနေသည်...',
+
+noSubmitRound:
+'တင်နိုင်သောအကြိမ်မရှိပါ',
+
+accountCannot:
+'ဤအကောင့်ဖြင့် လက်ရှိတင်မရပါ',
+
+serverRejected:
+'နောက်ဆုံးအချိန်ကျော်သွားသဖြင့် ပြင်ဆင်၍မရပါ',
+
+previousPaymentOverdue:
+'အရင်အကြိမ် ငွေရှင်းရန်ကျန်ရှိနေသည်',
+
+saveFail:
+'သိမ်းမရပါ',
+
+networkError:
+'Network အမှား',
+
+saveSuccess:
+'✓ သိမ်းပြီး · စုစုပေါင်း ',
+
+noChange:
+'✓ ပြောင်းလဲမှုမရှိပါ',
+
+reloaded:
+'✓ ဒေတာပြန်ဖတ်ပြီး',
+
+waitingResult:
+'ရလဒ်စောင့်နေသည်',
+
+morning:
+'မနက် 11:45',
+
+afternoon:
+'နေ့လယ် 15:45',
+
+platformReceives:
+'Platform သို့ ပေးရန်',
+
+platformPays:
+'Platform မှ ရရန်',
+
+balanced:
+'ရှင်းပြီး'
+
 },
+
 
 en:{
-loginTitle:'Agent Login',
-email:'Agent Email',
-password:'Password',
-loginBtn:'Login to Agent Center',
-agentInfo:'My Agent Profile',
-agentName:'Agent Name',
-agentRate:'Agent Rate',
-accountStatus:'Account Status',
-normal:'Active',
-suspended:'Suspended',
-blocked:'Restricted',
-currentRound:'Current Round',
-round:'Round',
-submitStatus:'Submission Status',
-deadline:'Deadline',
-timeLeft:'Time Remaining',
-serverNote:'Data may be added or edited before the deadline. The system locks automatically after the deadline.',
-submitTitle:'00–99 Round Submission',
-totalPoints:'Current Input Total',
-submitBtn:'Save Round Data',
-reloadBtn:'Reload Saved Data',
-editNote:'Saved numbers can still be edited before the deadline. Clear an amount or enter 0 and save again to set it to 0.',
-resultTitle:'Round Result',
-resultNumber:'Result Number',
-submittedTotal:'Submitted Total',
-commission:'Agent Commission',
-winningAmount:'Winning Amount',
-commissionNote:'Commission is automatically calculated from the actual saved total and agent rate.',
-logout:'Logout',
-loginMissing:'Please enter agent email and password',
-logging:'Logging in...',
-loginFail:'Login failed. Check email or password',
-noAgent:'This account has no valid agent access',
-noRound:'No open round',
-canSubmit:'Open / Editable',
-closed:'Round Closed',
-closedShort:'Closed',
-minutes:'min',
-seconds:'sec',
-saving:'Saving...',
-noSubmitRound:'No round available',
-accountCannot:'Your account cannot submit now',
-serverRejected:'Deadline passed. Changes are no longer accepted',
-saveFail:'Save failed',
-networkError:'Network error',
-saveSuccess:'✓ Saved · Total ',
-noChange:'✓ No changes to save',
-reloaded:'✓ Latest saved data loaded',
-waitingResult:'Waiting for result',
-morning:'Morning 11:45',
-afternoon:'Afternoon 15:45'
+
+loginTitle:
+'Agent Login',
+
+email:
+'Agent Email',
+
+password:
+'Password',
+
+loginBtn:
+'Login to Agent Center',
+
+agentInfo:
+'My Agent Profile',
+
+agentName:
+'Agent Name',
+
+agentRate:
+'Agent Rate',
+
+accountStatus:
+'Account Status',
+
+normal:
+'Active',
+
+suspended:
+'Suspended',
+
+blocked:
+'Restricted',
+
+currentRound:
+'Current Round',
+
+round:
+'Round',
+
+submitStatus:
+'Submission Status',
+
+deadline:
+'Deadline',
+
+timeLeft:
+'Time Remaining',
+
+serverNote:
+'Data may be added or edited before the deadline. The system locks automatically after the deadline.',
+
+submitTitle:
+'00–99 Round Submission',
+
+totalPoints:
+'Current Input Total',
+
+submitBtn:
+'Save Round Data',
+
+reloadBtn:
+'Reload Saved Data',
+
+editNote:
+'Saved numbers can still be edited before the deadline. Clear an amount or enter 0 and save again to set it to 0.',
+
+settlementTitle:
+'Round Settlement',
+
+amountDue:
+'Amount Due to Platform',
+
+amountReceived:
+'Confirmed Received',
+
+paymentStatus:
+'Payment Status',
+
+paymentDue:
+'Payment Deadline',
+
+pendingPayment:
+'Pending Payment',
+
+paidPayment:
+'Paid',
+
+overduePayment:
+'Overdue',
+
+noSettlement:
+'No settlement data',
+
+settlementWaiting:
+'The amount due will be calculated automatically after round data is submitted.',
+
+settlementPending:
+'Payment is still pending. Please transfer before the payment deadline and wait for platform confirmation.',
+
+settlementPaid:
+'✓ This round has been confirmed as paid.',
+
+settlementOverdue:
+'Payment is overdue and has not been confirmed. Please settle the outstanding amount before submitting the next round.',
+
+resultTitle:
+'Round Result',
+
+resultNumber:
+'Result Number',
+
+submittedTotal:
+'Submitted Total',
+
+commission:
+'Agent Commission',
+
+winningAmount:
+'Winning Amount',
+
+finalBalance:
+'Final Settlement Balance',
+
+commissionNote:
+'Commission is automatically calculated from the actual saved total and agent rate. Final balance = amount due − winning amount.',
+
+logout:
+'Logout',
+
+loginMissing:
+'Please enter agent email and password',
+
+logging:
+'Logging in...',
+
+loginFail:
+'Login failed. Check email or password',
+
+noAgent:
+'This account has no valid agent access',
+
+noRound:
+'No open round',
+
+canSubmit:
+'Open / Editable',
+
+closed:
+'Round Closed',
+
+closedShort:
+'Closed',
+
+minutes:
+'min',
+
+seconds:
+'sec',
+
+saving:
+'Saving...',
+
+noSubmitRound:
+'No round available',
+
+accountCannot:
+'Your account cannot submit now',
+
+serverRejected:
+'Deadline passed. Changes are no longer accepted',
+
+previousPaymentOverdue:
+'Previous round payment is overdue',
+
+saveFail:
+'Save failed',
+
+networkError:
+'Network error',
+
+saveSuccess:
+'✓ Saved · Total ',
+
+noChange:
+'✓ No changes to save',
+
+reloaded:
+'✓ Latest saved data loaded',
+
+waitingResult:
+'Waiting for result',
+
+morning:
+'Morning 11:45',
+
+afternoon:
+'Afternoon 15:45',
+
+platformReceives:
+'Agent Pays Platform',
+
+platformPays:
+'Platform Pays Agent',
+
+balanced:
+'Balanced'
+
 },
+
 
 th:{
-loginTitle:'เข้าสู่ระบบตัวแทน',
-email:'อีเมลตัวแทน',
-password:'รหัสผ่าน',
-loginBtn:'เข้าสู่ศูนย์ตัวแทน',
-agentInfo:'ข้อมูลตัวแทนของฉัน',
-agentName:'ชื่อตัวแทน',
-agentRate:'อัตราตัวแทน',
-accountStatus:'สถานะบัญชี',
-normal:'ปกติ',
-suspended:'ระงับชั่วคราว',
-blocked:'ถูกจำกัด',
-currentRound:'รอบปัจจุบัน',
-round:'รอบ',
-submitStatus:'สถานะการส่ง',
-deadline:'เวลาปิดรับ',
-timeLeft:'เวลาที่เหลือ',
-serverNote:'ก่อนเวลาปิดสามารถเพิ่มหรือแก้ไขข้อมูลได้ หลังเวลาปิดระบบจะล็อกอัตโนมัติ',
-submitTitle:'ส่งข้อมูล 00–99',
-totalPoints:'ยอดรวมปัจจุบัน',
-submitBtn:'บันทึกข้อมูล',
-reloadBtn:'โหลดข้อมูลที่บันทึก',
-editNote:'ข้อมูลเดิมสามารถแก้ไขได้ก่อนเวลาปิด ใส่ 0 แล้วบันทึกเพื่อเปลี่ยนยอดเป็น 0',
-resultTitle:'ผลรอบนี้',
-resultNumber:'หมายเลขผล',
-submittedTotal:'ยอดส่งทั้งหมด',
-commission:'ค่าคอมมิชชั่นตัวแทน',
-winningAmount:'ยอดเงินรางวัล',
-commissionNote:'ค่าคอมมิชชั่นคำนวณจากยอดที่บันทึกจริงและอัตราตัวแทน',
-logout:'ออกจากระบบ',
-loginMissing:'กรุณากรอกอีเมลและรหัสผ่าน',
-logging:'กำลังเข้าสู่ระบบ...',
-loginFail:'เข้าสู่ระบบไม่สำเร็จ',
-noAgent:'บัญชีนี้ไม่มีสิทธิ์ตัวแทน',
-noRound:'ไม่มีรอบที่เปิด',
-canSubmit:'ส่ง / แก้ไขได้',
-closed:'ปิดรอบแล้ว',
-closedShort:'ปิดแล้ว',
-minutes:'นาที',
-seconds:'วินาที',
-saving:'กำลังบันทึก...',
-noSubmitRound:'ไม่มีรอบ',
-accountCannot:'บัญชีนี้ไม่สามารถส่งได้',
-serverRejected:'เกินเวลาปิดรับแล้ว',
-saveFail:'บันทึกไม่สำเร็จ',
-networkError:'เครือข่ายผิดพลาด',
-saveSuccess:'✓ บันทึกสำเร็จ · รวม ',
-noChange:'✓ ไม่มีการเปลี่ยนแปลง',
-reloaded:'✓ โหลดข้อมูลล่าสุดแล้ว',
-waitingResult:'รอผล',
-morning:'ช่วงเช้า 11:45',
-afternoon:'ช่วงบ่าย 15:45'
+
+loginTitle:
+'เข้าสู่ระบบตัวแทน',
+
+email:
+'อีเมลตัวแทน',
+
+password:
+'รหัสผ่าน',
+
+loginBtn:
+'เข้าสู่ศูนย์ตัวแทน',
+
+agentInfo:
+'ข้อมูลตัวแทนของฉัน',
+
+agentName:
+'ชื่อตัวแทน',
+
+agentRate:
+'อัตราตัวแทน',
+
+accountStatus:
+'สถานะบัญชี',
+
+normal:
+'ปกติ',
+
+suspended:
+'ระงับชั่วคราว',
+
+blocked:
+'ถูกจำกัด',
+
+currentRound:
+'รอบปัจจุบัน',
+
+round:
+'รอบ',
+
+submitStatus:
+'สถานะการส่ง',
+
+deadline:
+'เวลาปิดรับ',
+
+timeLeft:
+'เวลาที่เหลือ',
+
+serverNote:
+'ก่อนเวลาปิดสามารถเพิ่มหรือแก้ไขข้อมูลได้ หลังเวลาปิดระบบจะล็อกอัตโนมัติ',
+
+submitTitle:
+'ส่งข้อมูล 00–99',
+
+totalPoints:
+'ยอดรวมปัจจุบัน',
+
+submitBtn:
+'บันทึกข้อมูล',
+
+reloadBtn:
+'โหลดข้อมูลที่บันทึก',
+
+editNote:
+'ข้อมูลเดิมสามารถแก้ไขได้ก่อนเวลาปิด ใส่ 0 แล้วบันทึกเพื่อเปลี่ยนยอดเป็น 0',
+
+settlementTitle:
+'การชำระรอบนี้',
+
+amountDue:
+'ยอดที่ต้องชำระให้แพลตฟอร์ม',
+
+amountReceived:
+'ยอดที่แพลตฟอร์มยืนยัน',
+
+paymentStatus:
+'สถานะชำระเงิน',
+
+paymentDue:
+'กำหนดชำระ',
+
+pendingPayment:
+'รอชำระ',
+
+paidPayment:
+'ชำระแล้ว',
+
+overduePayment:
+'ค้างชำระ',
+
+noSettlement:
+'ยังไม่มีข้อมูลการชำระ',
+
+settlementWaiting:
+'ระบบจะคำนวณยอดชำระอัตโนมัติหลังบันทึกข้อมูล',
+
+settlementPending:
+'ยังรอการชำระ กรุณาโอนก่อนกำหนดและรอแพลตฟอร์มยืนยัน',
+
+settlementPaid:
+'✓ รอบนี้ได้รับการยืนยันว่าชำระแล้ว',
+
+settlementOverdue:
+'เกินกำหนดชำระและยังไม่ได้รับการยืนยัน กรุณาชำระยอดค้างก่อนส่งรอบถัดไป',
+
+resultTitle:
+'ผลรอบนี้',
+
+resultNumber:
+'หมายเลขผล',
+
+submittedTotal:
+'ยอดส่งทั้งหมด',
+
+commission:
+'ค่าคอมมิชชั่นตัวแทน',
+
+winningAmount:
+'ยอดเงินรางวัล',
+
+finalBalance:
+'ยอดสุทธิที่ต้องชำระ',
+
+commissionNote:
+'ค่าคอมมิชชั่นคำนวณจากยอดที่บันทึกจริงและอัตราตัวแทน',
+
+logout:
+'ออกจากระบบ',
+
+loginMissing:
+'กรุณากรอกอีเมลและรหัสผ่าน',
+
+logging:
+'กำลังเข้าสู่ระบบ...',
+
+loginFail:
+'เข้าสู่ระบบไม่สำเร็จ',
+
+noAgent:
+'บัญชีนี้ไม่มีสิทธิ์ตัวแทน',
+
+noRound:
+'ไม่มีรอบที่เปิด',
+
+canSubmit:
+'ส่ง / แก้ไขได้',
+
+closed:
+'ปิดรอบแล้ว',
+
+closedShort:
+'ปิดแล้ว',
+
+minutes:
+'นาที',
+
+seconds:
+'วินาที',
+
+saving:
+'กำลังบันทึก...',
+
+noSubmitRound:
+'ไม่มีรอบ',
+
+accountCannot:
+'บัญชีนี้ไม่สามารถส่งได้',
+
+serverRejected:
+'เกินเวลาปิดรับแล้ว',
+
+previousPaymentOverdue:
+'มีรายการค้างชำระจากรอบก่อน',
+
+saveFail:
+'บันทึกไม่สำเร็จ',
+
+networkError:
+'เครือข่ายผิดพลาด',
+
+saveSuccess:
+'✓ บันทึกสำเร็จ · รวม ',
+
+noChange:
+'✓ ไม่มีการเปลี่ยนแปลง',
+
+reloaded:
+'✓ โหลดข้อมูลล่าสุดแล้ว',
+
+waitingResult:
+'รอผล',
+
+morning:
+'ช่วงเช้า 11:45',
+
+afternoon:
+'ช่วงบ่าย 15:45',
+
+platformReceives:
+'ตัวแทนจ่ายแพลตฟอร์ม',
+
+platformPays:
+'แพลตฟอร์มจ่ายตัวแทน',
+
+balanced:
+'เคลียร์แล้ว'
+
 },
 
+
 ms:{
+
 loginTitle:'Log Masuk Ejen',
 email:'E-mel Ejen',
 password:'Kata Laluan',
@@ -810,11 +1908,25 @@ totalPoints:'Jumlah Input',
 submitBtn:'Simpan Data',
 reloadBtn:'Muat Semula Data',
 editNote:'Data yang telah disimpan boleh diubah sebelum masa tutup. Masukkan 0 dan simpan untuk menjadikannya 0.',
+settlementTitle:'Penyelesaian Pusingan',
+amountDue:'Jumlah Perlu Dibayar',
+amountReceived:'Jumlah Disahkan',
+paymentStatus:'Status Bayaran',
+paymentDue:'Tarikh Akhir Bayaran',
+pendingPayment:'Menunggu Bayaran',
+paidPayment:'Sudah Dibayar',
+overduePayment:'Bayaran Lewat',
+noSettlement:'Tiada data penyelesaian',
+settlementWaiting:'Jumlah perlu dibayar akan dikira secara automatik selepas data dihantar.',
+settlementPending:'Bayaran masih belum selesai. Sila bayar sebelum tarikh akhir.',
+settlementPaid:'✓ Bayaran pusingan ini telah disahkan.',
+settlementOverdue:'Bayaran telah lewat. Selesaikan bayaran tertunggak sebelum pusingan seterusnya.',
 resultTitle:'Keputusan',
 resultNumber:'Nombor Keputusan',
 submittedTotal:'Jumlah Dihantar',
 commission:'Komisen Ejen',
 winningAmount:'Jumlah Menang',
+finalBalance:'Baki Penyelesaian',
 commissionNote:'Komisen dikira berdasarkan jumlah sebenar yang disimpan dan kadar ejen.',
 logout:'Log Keluar',
 loginMissing:'Masukkan e-mel dan kata laluan',
@@ -831,6 +1943,7 @@ saving:'Menyimpan...',
 noSubmitRound:'Tiada pusingan',
 accountCannot:'Akaun tidak boleh menghantar',
 serverRejected:'Masa tutup telah tamat',
+previousPaymentOverdue:'Bayaran pusingan sebelumnya tertunggak',
 saveFail:'Gagal menyimpan',
 networkError:'Ralat rangkaian',
 saveSuccess:'✓ Berjaya · Jumlah ',
@@ -838,10 +1951,15 @@ noChange:'✓ Tiada perubahan',
 reloaded:'✓ Data terkini dimuatkan',
 waitingResult:'Menunggu keputusan',
 morning:'Pagi 11:45',
-afternoon:'Petang 15:45'
+afternoon:'Petang 15:45',
+platformReceives:'Ejen Bayar Platform',
+platformPays:'Platform Bayar Ejen',
+balanced:'Selesai'
 },
 
+
 vi:{
+
 loginTitle:'Đăng nhập đại lý',
 email:'Email đại lý',
 password:'Mật khẩu',
@@ -864,11 +1982,25 @@ totalPoints:'Tổng đang nhập',
 submitBtn:'Lưu dữ liệu',
 reloadBtn:'Tải lại dữ liệu',
 editNote:'Dữ liệu đã lưu vẫn có thể sửa trước hạn. Nhập 0 và lưu để đưa số tiền về 0.',
+settlementTitle:'Thanh toán kỳ này',
+amountDue:'Số tiền phải trả nền tảng',
+amountReceived:'Nền tảng đã xác nhận',
+paymentStatus:'Trạng thái thanh toán',
+paymentDue:'Hạn thanh toán',
+pendingPayment:'Chờ thanh toán',
+paidPayment:'Đã thanh toán',
+overduePayment:'Quá hạn',
+noSettlement:'Chưa có dữ liệu thanh toán',
+settlementWaiting:'Hệ thống sẽ tự động tính số tiền phải thanh toán sau khi lưu dữ liệu.',
+settlementPending:'Khoản thanh toán đang chờ. Vui lòng chuyển trước hạn.',
+settlementPaid:'✓ Kỳ này đã được xác nhận thanh toán.',
+settlementOverdue:'Khoản thanh toán đã quá hạn. Vui lòng thanh toán trước khi gửi kỳ tiếp theo.',
 resultTitle:'Kết quả',
 resultNumber:'Số kết quả',
 submittedTotal:'Tổng đã gửi',
 commission:'Hoa hồng đại lý',
 winningAmount:'Tiền trúng',
+finalBalance:'Số dư quyết toán',
 commissionNote:'Hoa hồng được tính theo tổng thực tế đã lưu và tỷ lệ đại lý.',
 logout:'Đăng xuất',
 loginMissing:'Nhập email và mật khẩu',
@@ -885,6 +2017,7 @@ saving:'Đang lưu...',
 noSubmitRound:'Không có kỳ',
 accountCannot:'Không thể gửi',
 serverRejected:'Đã quá hạn',
+previousPaymentOverdue:'Kỳ trước còn nợ thanh toán',
 saveFail:'Lưu thất bại',
 networkError:'Lỗi mạng',
 saveSuccess:'✓ Đã lưu · Tổng ',
@@ -892,10 +2025,15 @@ noChange:'✓ Không có thay đổi',
 reloaded:'✓ Đã tải dữ liệu mới nhất',
 waitingResult:'Chờ kết quả',
 morning:'Sáng 11:45',
-afternoon:'Chiều 15:45'
+afternoon:'Chiều 15:45',
+platformReceives:'Đại lý trả nền tảng',
+platformPays:'Nền tảng trả đại lý',
+balanced:'Đã cân bằng'
 },
 
+
 id:{
+
 loginTitle:'Login Agen',
 email:'Email Agen',
 password:'Kata Sandi',
@@ -918,11 +2056,25 @@ totalPoints:'Total Input',
 submitBtn:'Simpan Data',
 reloadBtn:'Muat Ulang Data',
 editNote:'Data yang sudah tersimpan dapat diubah sebelum batas waktu. Masukkan 0 lalu simpan untuk menjadikannya 0.',
+settlementTitle:'Penyelesaian Putaran',
+amountDue:'Jumlah Harus Dibayar',
+amountReceived:'Dikonfirmasi Platform',
+paymentStatus:'Status Pembayaran',
+paymentDue:'Batas Pembayaran',
+pendingPayment:'Menunggu Pembayaran',
+paidPayment:'Sudah Dibayar',
+overduePayment:'Terlambat',
+noSettlement:'Belum ada data pembayaran',
+settlementWaiting:'Jumlah pembayaran akan dihitung otomatis setelah data disimpan.',
+settlementPending:'Pembayaran masih menunggu. Silakan transfer sebelum batas waktu.',
+settlementPaid:'✓ Pembayaran putaran ini telah dikonfirmasi.',
+settlementOverdue:'Pembayaran telah melewati batas waktu. Selesaikan tunggakan sebelum putaran berikutnya.',
 resultTitle:'Hasil Putaran',
 resultNumber:'Nomor Hasil',
 submittedTotal:'Total Dikirim',
 commission:'Komisi Agen',
 winningAmount:'Jumlah Menang',
+finalBalance:'Saldo Penyelesaian',
 commissionNote:'Komisi dihitung dari total yang benar-benar tersimpan dan persentase agen.',
 logout:'Keluar',
 loginMissing:'Masukkan email dan kata sandi',
@@ -939,6 +2091,7 @@ saving:'Menyimpan...',
 noSubmitRound:'Tidak ada putaran',
 accountCannot:'Akun tidak bisa mengirim',
 serverRejected:'Batas waktu telah lewat',
+previousPaymentOverdue:'Pembayaran putaran sebelumnya masih tertunggak',
 saveFail:'Gagal menyimpan',
 networkError:'Kesalahan jaringan',
 saveSuccess:'✓ Tersimpan · Total ',
@@ -946,24 +2099,47 @@ noChange:'✓ Tidak ada perubahan',
 reloaded:'✓ Data terbaru dimuat',
 waitingResult:'Menunggu hasil',
 morning:'Pagi 11:45',
-afternoon:'Sore 15:45'
+afternoon:'Sore 15:45',
+platformReceives:'Agen Bayar Platform',
+platformPays:'Platform Bayar Agen',
+balanced:'Selesai'
 }
 
 };
 
 
-function tr(key){
 
-  return T[currentLang]?.[key]
-  ||
-  T.zh[key]
-  ||
-  key;
+/* =========================================================
+   TRANSLATION HELPER
+========================================================= */
+
+function tr(
+  key
+){
+
+  return (
+    T[currentLang]?.[
+      key
+    ]
+    ||
+    T.zh[
+      key
+    ]
+    ||
+    key
+  );
 
 }
 
 
-function normalizeRate(value){
+
+/* =========================================================
+   RATE
+========================================================= */
+
+function normalizeRate(
+  value
+){
 
   let rate =
   Number(
@@ -1000,7 +2176,9 @@ function normalizeRate(value){
 }
 
 
-function formatRate(value){
+function formatRate(
+  value
+){
 
   return Number(
     value || 0
@@ -1015,7 +2193,14 @@ function formatRate(value){
 }
 
 
-function changeLanguage(lang){
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function changeLanguage(
+  lang
+){
 
   currentLang =
   lang;
@@ -1077,12 +2262,22 @@ function changeLanguage(lang){
 
   renderAgentStatus();
 
+
   renderRound();
+
+
+  renderSettlement();
+
 
   renderAgentFinance();
 
 }
 
+
+
+/* =========================================================
+   RESET SUBMISSION DATA
+========================================================= */
 
 function resetSubmittedData(){
 
@@ -1121,6 +2316,11 @@ function resetSubmittedData(){
 
 }
 
+
+
+/* =========================================================
+   BUILD 00–99
+========================================================= */
 
 function buildGrid(){
 
@@ -1189,7 +2389,14 @@ function buildGrid(){
 }
 
 
-function parsePoints(value){
+
+/* =========================================================
+   POINTS
+========================================================= */
+
+function parsePoints(
+  value
+){
 
   const n =
   Number(
@@ -1198,7 +2405,9 @@ function parsePoints(value){
 
 
   if(
-    !Number.isFinite(n)
+    !Number.isFinite(
+      n
+    )
     ||
     n<0
   ){
@@ -1213,7 +2422,9 @@ function parsePoints(value){
 }
 
 
-function inputChanged(code){
+function inputChanged(
+  code
+){
 
   const newValue =
   parsePoints(
@@ -1255,7 +2466,9 @@ function inputChanged(code){
 }
 
 
-function getInputValue(code){
+function getInputValue(
+  code
+){
 
   return parsePoints(
     document.getElementById(
@@ -1311,6 +2524,11 @@ function updateInputTotal(){
 }
 
 
+
+/* =========================================================
+   SIGN IN
+========================================================= */
+
 async function signIn(){
 
   const email =
@@ -1365,10 +2583,12 @@ async function signIn(){
 
         headers:{
           apikey:KEY,
-          'Content-Type':'application/json'
+          'Content-Type':
+          'application/json'
         },
 
-        body:JSON.stringify({
+        body:
+        JSON.stringify({
           email,
           password
         })
@@ -1421,6 +2641,11 @@ async function signIn(){
 
 }
 
+
+
+/* =========================================================
+   START AGENT
+========================================================= */
 
 async function startAgent(){
 
@@ -1525,6 +2750,11 @@ async function startAgent(){
 }
 
 
+
+/* =========================================================
+   AGENT STATUS
+========================================================= */
+
 function renderAgentStatus(){
 
   if(!agent){
@@ -1588,9 +2818,10 @@ function renderAgentStatus(){
 }
 
 
-/* =========================
+
+/* =========================================================
    CHOOSE CURRENT ROUND
-========================= */
+========================================================= */
 
 function chooseBestRound(
   rounds
@@ -1604,18 +2835,22 @@ function chooseBestRound(
 
     rounds.find(
       x=>
-      x.status==='open'
+      x.status===
+      'open'
       &&
       new Date(
         x.deadline_at
-      ).getTime()>now
+      ).getTime()
+      >
+      now
     )
 
     ||
 
     rounds.find(
       x=>
-      x.status==='open'
+      x.status===
+      'open'
     )
 
     ||
@@ -1631,9 +2866,10 @@ function chooseBestRound(
 }
 
 
-/* =========================
+
+/* =========================================================
    LOAD ROUND
-========================= */
+========================================================= */
 
 async function loadRound(){
 
@@ -1678,7 +2914,14 @@ async function loadRound(){
 
   if(!currentRound){
 
+    settlement =
+    null;
+
+
     resetSubmittedData();
+
+
+    renderSettlement();
 
 
     renderAgentFinance();
@@ -1699,14 +2942,24 @@ async function loadRound(){
   );
 
 
+  await loadSettlement();
+
+
   updateDeadlineUI();
 
 }
 
 
+
+/* =========================================================
+   ROUND DISPLAY
+========================================================= */
+
 function renderRound(){
 
-  if(!currentRound){
+  if(
+    !currentRound
+  ){
 
     document.getElementById(
       'roundName'
@@ -1819,6 +3072,11 @@ function renderRound(){
 }
 
 
+
+/* =========================================================
+   LOAD EXISTING SUBMISSIONS
+========================================================= */
+
 async function loadExisting(
   showMessage=false
 ){
@@ -1909,7 +3167,6 @@ async function loadExisting(
   rows.forEach(
     row=>{
 
-
       const code =
       String(
         row.number_code
@@ -1922,7 +3179,9 @@ async function loadExisting(
 
       const points =
       Number(
-        row.points || 0
+        row.points
+        ||
+        0
       );
 
 
@@ -1968,7 +3227,12 @@ async function loadExisting(
   renderAgentFinance();
 
 
-  if(showMessage){
+  await loadSettlement();
+
+
+  if(
+    showMessage
+  ){
 
     const msg =
     document.getElementById(
@@ -1990,9 +3254,385 @@ async function loadExisting(
 }
 
 
+
+/* =========================================================
+   LOAD SETTLEMENT
+========================================================= */
+
+async function loadSettlement(){
+
+  if(
+    !agent
+    ||
+    !currentRound
+  ){
+
+    settlement =
+    null;
+
+
+    renderSettlement();
+
+
+    return;
+
+  }
+
+
+  try{
+
+    const r =
+    await fetch(
+      BASE+
+      '/rest/v1/agent_round_totals'+
+      '?round_id=eq.'+
+      encodeURIComponent(
+        currentRound.id
+      )+
+      '&agent_id=eq.'+
+      encodeURIComponent(
+        agent.id
+      )+
+      '&select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,result_payout,final_balance,settlement_status,completed_at,updated_at'+
+      '&limit=1',
+      {
+        headers:{
+          apikey:KEY,
+          Authorization:
+          'Bearer '+token
+        }
+      }
+    );
+
+
+    if(
+      !r.ok
+    ){
+
+      return;
+
+    }
+
+
+    const rows =
+    await r.json();
+
+
+    settlement =
+    rows.length
+    ?
+    rows[0]
+    :
+    null;
+
+
+    renderSettlement();
+
+
+    renderAgentFinance();
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   SETTLEMENT DISPLAY
+========================================================= */
+
+function renderSettlement(){
+
+  const totalEl =
+  document.getElementById(
+    'settlementSubmittedTotal'
+  );
+
+
+  const commissionEl =
+  document.getElementById(
+    'settlementCommission'
+  );
+
+
+  const dueEl =
+  document.getElementById(
+    'amountDue'
+  );
+
+
+  const receivedEl =
+  document.getElementById(
+    'amountReceived'
+  );
+
+
+  const statusEl =
+  document.getElementById(
+    'paymentStatus'
+  );
+
+
+  const dueAtEl =
+  document.getElementById(
+    'paymentDueAt'
+  );
+
+
+  const notice =
+  document.getElementById(
+    'settlementNotice'
+  );
+
+
+  if(
+    !settlement
+  ){
+
+    totalEl.textContent =
+    formatNumber(
+      submittedTotal
+    );
+
+
+    const rate =
+    agent
+    ?
+    normalizeRate(
+      agent.commission_rate
+    )
+    :
+    0;
+
+
+    const commission =
+    submittedTotal*
+    rate/
+    100;
+
+
+    commissionEl.textContent =
+    formatNumber(
+      commission
+    );
+
+
+    dueEl.textContent =
+    formatNumber(
+      Math.max(
+        submittedTotal-
+        commission,
+        0
+      )
+    );
+
+
+    receivedEl.textContent =
+    '0';
+
+
+    statusEl.textContent =
+    tr(
+      'noSettlement'
+    );
+
+
+    statusEl.className =
+    'statusPending';
+
+
+    dueAtEl.textContent =
+    '—';
+
+
+    notice.className =
+    'settlementNotice';
+
+
+    notice.textContent =
+    tr(
+      'settlementWaiting'
+    );
+
+
+    return;
+
+  }
+
+
+  totalEl.textContent =
+  formatNumber(
+    settlement.submitted_total
+  );
+
+
+  commissionEl.textContent =
+  formatNumber(
+    settlement.commission_amount
+  );
+
+
+  dueEl.textContent =
+  formatNumber(
+    settlement.amount_due
+  );
+
+
+  receivedEl.textContent =
+  formatNumber(
+    settlement.amount_received
+  );
+
+
+  dueAtEl.textContent =
+  settlement.payment_due_at
+  ?
+  formatMMT(
+    settlement.payment_due_at
+  )
+  :
+  '—';
+
+
+  const isPaid =
+  settlement.payment_status===
+  'paid';
+
+
+  const dueTime =
+  settlement.payment_due_at
+  ?
+  new Date(
+    settlement.payment_due_at
+  ).getTime()
+  :
+  NaN;
+
+
+  const isOverdue =
+  !isPaid
+  &&
+  Number.isFinite(
+    dueTime
+  )
+  &&
+  Date.now()>=
+  dueTime;
+
+
+  if(
+    isPaid
+  ){
+
+    statusEl.textContent =
+    tr(
+      'paidPayment'
+    );
+
+
+    statusEl.className =
+    'statusPaid';
+
+
+    notice.className =
+    'settlementNotice paid';
+
+
+    notice.textContent =
+    tr(
+      'settlementPaid'
+    );
+
+
+    return;
+
+  }
+
+
+  if(
+    isOverdue
+  ){
+
+    statusEl.textContent =
+    tr(
+      'overduePayment'
+    );
+
+
+    statusEl.className =
+    'statusOverdue';
+
+
+    notice.className =
+    'settlementNotice overdue';
+
+
+    notice.textContent =
+    tr(
+      'settlementOverdue'
+    );
+
+
+    return;
+
+  }
+
+
+  statusEl.textContent =
+  tr(
+    'pendingPayment'
+  );
+
+
+  statusEl.className =
+  'statusPending';
+
+
+  notice.className =
+  'settlementNotice';
+
+
+  notice.textContent =
+  tr(
+    'settlementPending'
+  );
+
+}
+
+
+
+/* =========================================================
+   RESULT / FINANCE
+========================================================= */
+
 function renderAgentFinance(){
 
   const rate =
+
+  settlement
+  &&
+  settlement.commission_rate_snapshot
+  !==
+  null
+  &&
+  settlement.commission_rate_snapshot
+  !==
+  undefined
+
+  ?
+
+  Number(
+    settlement.commission_rate_snapshot
+  )
+
+  :
 
   agent
 
@@ -2007,8 +3647,28 @@ function renderAgentFinance(){
   0;
 
 
+  const total =
+  settlement
+  ?
+  Number(
+    settlement.submitted_total
+    ||
+    0
+  )
+  :
+  submittedTotal;
+
+
   const commission =
-  submittedTotal*
+  settlement
+  ?
+  Number(
+    settlement.commission_amount
+    ||
+    0
+  )
+  :
+  total*
   rate/
   100;
 
@@ -2017,7 +3677,7 @@ function renderAgentFinance(){
     'resultSubmittedTotal'
   ).textContent =
   formatNumber(
-    submittedTotal
+    total
   );
 
 
@@ -2055,34 +3715,63 @@ function renderAgentFinance(){
     );
 
 
+    document.getElementById(
+      'finalBalance'
+    ).textContent =
+    tr(
+      'waitingResult'
+    );
+
+
     return;
 
   }
 
 
-  const resultCode =
-  String(
-    currentRound.result_number
-  )
-  .padStart(
-    2,
-    '0'
-  );
+  let winningAmount =
+  0;
 
 
-  const winningPoints =
-  Number(
-    submittedNumbers[
-      resultCode
-    ]
-    ||
-    0
-  );
+  if(
+    settlement
+  ){
+
+    winningAmount =
+    Number(
+      settlement.result_payout
+      ||
+      0
+    );
+
+  }
+
+  else{
+
+    const resultCode =
+    String(
+      currentRound.result_number
+    )
+    .padStart(
+      2,
+      '0'
+    );
 
 
-  const winningAmount =
-  winningPoints*
-  MULTIPLIER;
+    const winningPoints =
+    Number(
+      submittedNumbers[
+        resultCode
+      ]
+      ||
+      0
+    );
+
+
+    winningAmount =
+    winningPoints*
+    MULTIPLIER;
+
+  }
 
 
   document.getElementById(
@@ -2092,8 +3781,114 @@ function renderAgentFinance(){
     winningAmount
   );
 
+
+  const amountDue =
+  settlement
+  ?
+  Number(
+    settlement.amount_due
+    ||
+    0
+  )
+  :
+  Math.max(
+    total-
+    commission,
+    0
+  );
+
+
+  const finalBalance =
+  settlement
+  &&
+  settlement.final_balance
+  !==
+  null
+  &&
+  settlement.final_balance
+  !==
+  undefined
+
+  ?
+
+  Number(
+    settlement.final_balance
+  )
+
+  :
+
+  amountDue-
+  winningAmount;
+
+
+  const finalEl =
+  document.getElementById(
+    'finalBalance'
+  );
+
+
+  if(
+    finalBalance>0
+  ){
+
+    finalEl.textContent =
+    tr(
+      'platformReceives'
+    )
+    +
+    ' '+
+    formatNumber(
+      finalBalance
+    );
+
+
+    finalEl.className =
+    'statusPending';
+
+  }
+
+  else if(
+    finalBalance<0
+  ){
+
+    finalEl.textContent =
+    tr(
+      'platformPays'
+    )
+    +
+    ' '+
+    formatNumber(
+      Math.abs(
+        finalBalance
+      )
+    );
+
+
+    finalEl.className =
+    'statusPaid';
+
+  }
+
+  else{
+
+    finalEl.textContent =
+    tr(
+      'balanced'
+    );
+
+
+    finalEl.className =
+    'statusPaid';
+
+  }
+
 }
 
+
+
+/* =========================================================
+   UPDATE EXISTING NUMBER
+========================================================= */
 
 async function updateExistingCode(
   code,
@@ -2129,7 +3924,8 @@ async function updateExistingCode(
         'return=representation'
       },
 
-      body:JSON.stringify({
+      body:
+      JSON.stringify({
         points:
         points,
 
@@ -2145,13 +3941,14 @@ async function updateExistingCode(
   await r.text();
 
 
-  if(!r.ok){
+  if(
+    !r.ok
+  ){
 
     throw new Error(
-      '号码 '+
-      code+
-      ' 修改失败：'+
       text
+      ||
+      'UPDATE_FAILED'
     );
 
   }
@@ -2185,19 +3982,23 @@ async function updateExistingCode(
       rows
     )
     ||
-    rows.length===0
+    rows.length===
+    0
   ){
 
     throw new Error(
-      '号码 '+
-      code+
-      ' 没有成功更新'
+      'UPDATE_NOT_APPLIED'
     );
 
   }
 
 }
 
+
+
+/* =========================================================
+   INSERT NEW NUMBER
+========================================================= */
 
 async function insertNewCode(
   code,
@@ -2221,7 +4022,8 @@ async function insertNewCode(
         'return=representation'
       },
 
-      body:JSON.stringify({
+      body:
+      JSON.stringify({
         round_id:
         currentRound.id,
 
@@ -2242,13 +4044,14 @@ async function insertNewCode(
   await r.text();
 
 
-  if(!r.ok){
+  if(
+    !r.ok
+  ){
 
     throw new Error(
-      '号码 '+
-      code+
-      ' 新增失败：'+
       text
+      ||
+      'INSERT_FAILED'
     );
 
   }
@@ -2256,9 +4059,16 @@ async function insertNewCode(
 }
 
 
+
+/* =========================================================
+   SUBMIT ROUND
+========================================================= */
+
 async function submitRound(){
 
-  if(isSaving){
+  if(
+    isSaving
+  ){
 
     return;
 
@@ -2479,6 +4289,9 @@ async function submitRound(){
     );
 
 
+    await loadSettlement();
+
+
     msg.className =
     'msg success';
 
@@ -2504,20 +4317,45 @@ async function submitRound(){
     'msg error';
 
 
-    msg.textContent =
-    tr(
-      'saveFail'
-    )
-    +
-    '：'
-    +
-    (
+    const errorText =
+    String(
       e.message
       ||
-      tr(
-        'networkError'
-      )
+      ''
     );
+
+
+    if(
+      errorText.includes(
+        'AGENT_PREVIOUS_PAYMENT_OVERDUE'
+      )
+    ){
+
+      msg.textContent =
+      tr(
+        'previousPaymentOverdue'
+      );
+
+    }
+
+    else{
+
+      msg.textContent =
+      tr(
+        'saveFail'
+      )
+      +
+      '：'
+      +
+      (
+        errorText
+        ||
+        tr(
+          'networkError'
+        )
+      );
+
+    }
 
 
   }finally{
@@ -2533,9 +4371,16 @@ async function submitRound(){
 }
 
 
+
+/* =========================================================
+   DEADLINE UI
+========================================================= */
+
 function updateDeadlineUI(){
 
-  if(!currentRound){
+  if(
+    !currentRound
+  ){
 
     return;
 
@@ -2590,6 +4435,9 @@ function updateDeadlineUI(){
     );
 
 
+    renderSettlement();
+
+
     return;
 
   }
@@ -2616,7 +4464,8 @@ function updateDeadlineUI(){
 
   const hours =
   Math.floor(
-    totalSeconds/3600
+    totalSeconds/
+    3600
   );
 
 
@@ -2626,12 +4475,14 @@ function updateDeadlineUI(){
 
   const minutes =
   Math.floor(
-    totalSeconds/60
+    totalSeconds/
+    60
   );
 
 
   const seconds =
-  totalSeconds%60;
+  totalSeconds%
+  60;
 
 
   if(
@@ -2639,7 +4490,9 @@ function updateDeadlineUI(){
   ){
 
     countdown.textContent =
-    String(hours)
+    String(
+      hours
+    )
     .padStart(
       2,
       '0'
@@ -2647,7 +4500,9 @@ function updateDeadlineUI(){
     +
     ':'
     +
-    String(minutes)
+    String(
+      minutes
+    )
     .padStart(
       2,
       '0'
@@ -2655,7 +4510,9 @@ function updateDeadlineUI(){
     +
     ':'
     +
-    String(seconds)
+    String(
+      seconds
+    )
     .padStart(
       2,
       '0'
@@ -2696,8 +4553,16 @@ function updateDeadlineUI(){
 
   }
 
+
+  renderSettlement();
+
 }
 
+
+
+/* =========================================================
+   DISABLE INPUTS
+========================================================= */
 
 function disableInputs(
   disabled
@@ -2710,34 +4575,80 @@ function disableInputs(
   ){
 
     const code =
-    String(i)
+    String(
+      i
+    )
     .padStart(
       2,
       '0'
     );
 
 
+    const input =
     document.getElementById(
       'n'+code
-    ).disabled =
-    disabled;
+    );
+
+
+    if(
+      input
+    ){
+
+      input.disabled =
+      disabled;
+
+    }
 
   }
 
 
+  const submitButton =
   document.getElementById(
     'submitBtn'
-  ).disabled =
-  disabled;
+  );
+
+
+  if(
+    submitButton
+  ){
+
+    submitButton.disabled =
+    disabled;
+
+  }
 
 }
 
+
+
+/* =========================================================
+   FORMAT MMT
+========================================================= */
 
 function formatMMT(
   iso
 ){
 
-  if(!iso){
+  if(
+    !iso
+  ){
+
+    return '—';
+
+  }
+
+
+  const d =
+  new Date(
+    iso
+  );
+
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
 
     return '—';
 
@@ -2750,27 +4661,41 @@ function formatMMT(
       timeZone:
       'Asia/Yangon',
 
-      year:'numeric',
-      month:'2-digit',
-      day:'2-digit',
+      year:
+      'numeric',
 
-      hour:'2-digit',
-      minute:'2-digit',
-      second:'2-digit',
+      month:
+      '2-digit',
 
-      hour12:false
+      day:
+      '2-digit',
+
+      hour:
+      '2-digit',
+
+      minute:
+      '2-digit',
+
+      second:
+      '2-digit',
+
+      hour12:
+      false
     }
   )
   .format(
-    new Date(
-      iso
-    )
+    d
   )
   +
   ' MMT';
 
 }
 
+
+
+/* =========================================================
+   FORMAT NUMBER
+========================================================= */
 
 function formatNumber(
   value
@@ -2782,12 +4707,18 @@ function formatNumber(
   .toLocaleString(
     'en-US',
     {
-      maximumFractionDigits:2
+      maximumFractionDigits:
+      2
     }
   );
 
 }
 
+
+
+/* =========================================================
+   RESULT EXISTS
+========================================================= */
 
 function hasResult(
   value
@@ -2807,6 +4738,11 @@ function hasResult(
 }
 
 
+
+/* =========================================================
+   CLOCK
+========================================================= */
+
 function updateClock(){
 
   const el =
@@ -2815,7 +4751,9 @@ function updateClock(){
   );
 
 
-  if(!el){
+  if(
+    !el
+  ){
 
     return;
 
@@ -2829,11 +4767,17 @@ function updateClock(){
       timeZone:
       'Asia/Yangon',
 
-      hour:'2-digit',
-      minute:'2-digit',
-      second:'2-digit',
+      hour:
+      '2-digit',
 
-      hour12:false
+      minute:
+      '2-digit',
+
+      second:
+      '2-digit',
+
+      hour12:
+      false
     }
   )
   .format(
@@ -2843,19 +4787,19 @@ function updateClock(){
 }
 
 
-/* =========================
+
+/* =========================================================
    AUTO ROUND REFRESH
 
-   每 20 秒重新检查最新期数。
+   每 20 秒重新检查数据库。
 
-   如果发现新一期：
-   自动切换到新一期，
-   自动读取新一期数据。
+   新一期出现：
+   自动切换。
 
-   如果还是同一期：
-   只更新状态和开奖结果，
-   不覆盖代理正在填写的内容。
-========================= */
+   同一期：
+   更新状态、开奖结果、结款状态，
+   不覆盖代理正在填写但尚未保存的号码。
+========================================================= */
 
 async function refreshRoundOnly(){
 
@@ -2897,7 +4841,9 @@ async function refreshRoundOnly(){
     );
 
 
-    if(!r.ok){
+    if(
+      !r.ok
+    ){
 
       return;
 
@@ -2914,13 +4860,15 @@ async function refreshRoundOnly(){
     );
 
 
-    /*
-      数据库里完全没有期数。
-    */
-
-    if(!latestRound){
+    if(
+      !latestRound
+    ){
 
       currentRound =
+      null;
+
+
+      settlement =
       null;
 
 
@@ -2928,6 +4876,9 @@ async function refreshRoundOnly(){
 
 
       renderRound();
+
+
+      renderSettlement();
 
 
       renderAgentFinance();
@@ -2952,20 +4903,14 @@ async function refreshRoundOnly(){
 
 
     const isNewRound =
-    oldRoundId !==
+    oldRoundId
+    !==
     latestRound.id;
 
 
-    /*
-      发现管理员已经开启新一期。
-    */
-
-    if(isNewRound){
-
-      /*
-        切换期间先锁定输入框，
-        防止新旧期交叉保存。
-      */
+    if(
+      isNewRound
+    ){
 
       disableInputs(
         true
@@ -2976,13 +4921,19 @@ async function refreshRoundOnly(){
       latestRound;
 
 
+      settlement =
+      null;
+
+
       const msg =
       document.getElementById(
         'submitMsg'
       );
 
 
-      if(msg){
+      if(
+        msg
+      ){
 
         msg.className =
         'msg';
@@ -2997,14 +4948,12 @@ async function refreshRoundOnly(){
       renderRound();
 
 
-      /*
-        自动清除旧期页面数据，
-        并读取新一期属于该代理的数据。
-      */
-
       await loadExisting(
         false
       );
+
+
+      await loadSettlement();
 
 
       updateDeadlineUI();
@@ -3015,24 +4964,14 @@ async function refreshRoundOnly(){
     }
 
 
-    /*
-      还是原来这一期。
-
-      这里只更新：
-      - status
-      - result_number
-      - deadline
-      - 倒计时
-
-      不重新 loadExisting，
-      所以不会覆盖代理尚未保存的输入。
-    */
-
     currentRound =
     latestRound;
 
 
     renderRound();
+
+
+    await loadSettlement();
 
 
     renderAgentFinance();
@@ -3058,14 +4997,10 @@ async function refreshRoundOnly(){
 }
 
 
-/* =========================
+
+/* =========================================================
    PWA / SAFARI RESUME
-
-   iPhone 把网页或 PWA 放后台时，
-   JavaScript 定时器可能暂停。
-
-   用户重新打开时立即检查新一期。
-========================= */
+========================================================= */
 
 function checkRoundWhenActive(){
 
@@ -3084,10 +5019,6 @@ function checkRoundWhenActive(){
 }
 
 
-/*
-  Safari / PWA 从后台回到前台。
-*/
-
 document.addEventListener(
   'visibilitychange',
   ()=>{
@@ -3105,20 +5036,11 @@ document.addEventListener(
 );
 
 
-/*
-  页面重新取得焦点。
-*/
-
 window.addEventListener(
   'focus',
   checkRoundWhenActive
 );
 
-
-/*
-  Safari Back/Forward Cache
-  或 PWA 页面重新显示。
-*/
 
 window.addEventListener(
   'pageshow',
@@ -3126,16 +5048,16 @@ window.addEventListener(
 );
 
 
-/*
-  网络断开后重新连接时，
-  立即检查新一期。
-*/
-
 window.addEventListener(
   'online',
   checkRoundWhenActive
 );
 
+
+
+/* =========================================================
+   SESSION
+========================================================= */
 
 function clearAgentSession(){
 
@@ -3155,6 +5077,11 @@ function clearAgentSession(){
 }
 
 
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
 function logout(){
 
   clearAgentSession();
@@ -3165,9 +5092,10 @@ function logout(){
 }
 
 
-/* =========================
+
+/* =========================================================
    START
-========================= */
+========================================================= */
 
 resetSubmittedData();
 
@@ -3202,8 +5130,11 @@ setInterval(
 
 
 /*
-  网页/PWA 正常打开期间：
-  每 20 秒检查一次有没有新一期。
+  网页和 PWA 打开期间，
+  每 20 秒同步：
+  - 新一期
+  - 开奖结果
+  - 结款状态
 */
 
 setInterval(
@@ -3212,7 +5143,9 @@ setInterval(
 );
 
 
-if(token){
+if(
+  token
+){
 
   startAgent();
 
