@@ -6983,7 +6983,228 @@ ${isOverdue && remaining > 0
 
 }
 
+async function manualConfirmSettlement(
+  agentId,
+  roundId,
+  remaining
+){
 
+  const agent =
+  agents.find(
+    x =>
+    x.id === agentId
+  );
+
+
+  const name =
+  agent?.display_name
+  ||
+  '未知代理';
+
+
+  if(
+    !confirm(
+      '确定手动确认已经收到该代理本期全部剩余款项？\n\n'+
+      '代理：'+name+
+      '\n剩余金额：'+
+      formatNumber(
+        remaining
+      )+
+      '\n\n确认后，本期会直接标记为「已结款」。\n此操作只应在你已经真实收到款项时使用。'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const msg =
+  document.getElementById(
+    'settlementMsg'
+  );
+
+
+  msg.className =
+  'msg';
+
+
+  msg.textContent =
+  '正在确认结款...';
+
+
+  try{
+
+    const row =
+    settlementRows.find(
+      x =>
+      x.agent_id === agentId
+      &&
+      x.round_id === roundId
+    );
+
+
+    if(!row){
+
+      throw new Error(
+        '没有找到对应的结款记录'
+      );
+
+    }
+
+
+    const amountDue =
+    Number(
+      row.amount_due || 0
+    );
+
+
+    if(
+      !Number.isFinite(
+        amountDue
+      )
+      ||
+      amountDue <= 0
+    ){
+
+      throw new Error(
+        '本期应交金额不正确'
+      );
+
+    }
+
+
+    const r =
+    await api(
+      '/rest/v1/rpc/admin_confirm_agent_settlement',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_agent_id:
+          agentId,
+
+          p_round_id:
+          roundId,
+
+          p_amount_received:
+          amountDue
+        })
+      }
+    );
+
+
+    const text =
+    await r.text();
+
+
+    if(!r.ok){
+
+      let errorMessage =
+      text
+      ||
+      '确认失败';
+
+
+      if(
+        errorMessage.includes(
+          'SETTLEMENT_ALREADY_PAID'
+        )
+      ){
+
+        errorMessage =
+        '这一期已经结清，请刷新页面';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'SETTLEMENT_AMOUNT_MISMATCH'
+        )
+      ){
+
+        errorMessage =
+        '结款金额与数据库应交金额不一致';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'SETTLEMENT_NOT_FOUND'
+        )
+      ){
+
+        errorMessage =
+        '没有找到这笔结款记录';
+
+      }
+
+      else if(
+        errorMessage.includes(
+          'NOT_ADMIN'
+        )
+      ){
+
+        errorMessage =
+        '当前账号没有管理员权限';
+
+      }
+
+
+      throw new Error(
+        errorMessage
+      );
+
+    }
+
+
+    msg.className =
+    'msg success';
+
+
+    msg.textContent =
+    '✓ 已手动确认收齐：'+
+    name;
+
+
+    await loadSettlementData(
+      false
+    );
+
+
+    await loadPaymentReviews(
+      false
+    );
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '确认失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
+
+  }
+
+}
 function remainingAmount(
   row
 ){
