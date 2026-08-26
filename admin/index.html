@@ -1424,34 +1424,26 @@ async function startAdminMfa(){
   '正在检查二次验证...';
 
 
-  const factorsRes =
-  await api(
-    '/auth/v1/factors'
+  const userRes =
+await api(
+  '/auth/v1/user'
+);
+
+if(!userRes.ok){
+
+  throw new Error(
+    'MFA_USER_FAILED'
   );
 
-  if(!factorsRes.ok){
+}
 
-    throw new Error(
-      'MFA_FACTORS_FAILED'
-    );
+const userData =
+await userRes.json();
 
-  }
-
-
-  const factorsData =
-  await factorsRes.json();
-
-  const factors =
-  Array.isArray(factorsData)
-    ? factorsData
-    : (
-        factorsData.all
-        ||
-        factorsData.totp
-        ||
-        []
-      );
-
+const factors =
+Array.isArray(userData.factors)
+  ? userData.factors
+  : [];
 
   const verifiedFactor =
   factors.find(
