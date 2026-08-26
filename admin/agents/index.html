@@ -4023,9 +4023,31 @@ function renderPaymentAccounts(){
 
   }
 
+  const activeAccounts =
+  paymentAccounts.filter(
+    account =>
+    account.is_active
+  );
 
+
+  const inactiveAccounts =
+  paymentAccounts.filter(
+    account =>
+    !account.is_active
+  );
+
+
+  const visibleAccounts =
+  window.jmtShowInactivePaymentAccounts
+  ?
+  [
+    ...activeAccounts,
+    ...inactiveAccounts
+  ]
+  :
+  activeAccounts;
   box.innerHTML =
-  paymentAccounts.map(
+    visibleAccounts.map(
     account=>{
 
       const id =
@@ -4398,7 +4420,33 @@ function renderPaymentAccounts(){
   )
   .join('');
 
+  if(inactiveAccounts.length){
 
+    box.insertAdjacentHTML(
+      'beforeend',
+      `
+      <button
+        class="dark"
+        style="width:100%;margin-top:12px"
+        onclick="
+          window.jmtShowInactivePaymentAccounts =
+          !window.jmtShowInactivePaymentAccounts;
+          renderPaymentAccounts();
+        ">
+
+        ${
+          window.jmtShowInactivePaymentAccounts
+          ?
+          '收起已停用收款账户'
+          :
+          '已停用收款账户（'+inactiveAccounts.length+'）'
+        }
+
+      </button>
+      `
+    );
+
+  }
   paymentAccounts.forEach(
     account=>{
 
