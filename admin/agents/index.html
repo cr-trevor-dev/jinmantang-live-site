@@ -3235,26 +3235,60 @@ function handleEditQrChange(
     );
 
 
-    const img =
-    document.getElementById(
-      'accountQrImg_'+
-      safeId(
-        accountId
-      )
-    );
+    const box =
+document.getElementById(
+  'accountQrBox_'+
+  safeId(
+    accountId
+  )
+);
 
 
-    if(img){
+let img =
+document.getElementById(
+  'accountQrImg_'+
+  safeId(
+    accountId
+  )
+);
 
-      img.src =
-      url;
+
+if(
+  !img
+  &&
+  box
+){
+
+  box.innerHTML =
+  `
+    <img
+      id="accountQrImg_${safeId(accountId)}"
+      alt="收款二维码"
+      style="display:block">
+  `;
 
 
-      img.style.display =
-      'block';
+  img =
+  document.getElementById(
+    'accountQrImg_'+
+    safeId(
+      accountId
+    )
+  );
 
-    }
+}
 
+
+if(img){
+
+  img.src =
+  url;
+
+
+  img.style.display =
+  'block';
+
+}
 
   }catch(e){
 
