@@ -6922,7 +6922,23 @@ function renderSettlements(){
             }
 
           </div>
+${isOverdue && remaining > 0
+  ? `
+    <button
+      class="greenBtn"
+      style="width:100%;margin-top:10px"
+      onclick="manualConfirmSettlement(
+        '${escapeJs(row.agent_id)}',
+        '${escapeJs(row.round_id)}',
+        ${remaining}
+      )">
 
+      ✓ 手动确认已收齐
+
+    </button>
+  `
+  : ''
+}
           `
           :
           `
