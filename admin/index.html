@@ -591,7 +591,48 @@ button.danger{
     <div class="msg" id="loginMsg"></div>
 
   </div>
+<div id="mfaBox" class="card hidden">
 
+  <div class="title">
+    管理员二次验证
+  </div>
+
+  <div id="mfaSetup" class="hidden">
+    <div class="note">
+      首次启用，请把下面的密钥添加到 Google Authenticator、
+      Microsoft Authenticator 或其他验证器。
+    </div>
+
+    <div
+      id="mfaSecret"
+      style="word-break:break-all;margin:14px 0;font-weight:700;">
+    </div>
+
+    <button
+      type="button"
+      onclick="copyMfaSecret()">
+      复制验证器密钥
+    </button>
+  </div>
+
+  <input
+    id="mfaCode"
+    inputmode="numeric"
+    maxlength="6"
+    placeholder="输入验证器 6 位验证码">
+
+  <button
+    type="button"
+    onclick="verifyMfaCode()">
+    验证并进入管理中心
+  </button>
+
+  <div
+    class="msg"
+    id="mfaMsg">
+  </div>
+
+</div>
   <div id="adminBox" class="hidden">
 
     <div class="card">
