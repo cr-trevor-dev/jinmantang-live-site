@@ -8029,6 +8029,7 @@ async function refreshWhenActive(){
 
 
   const editingPaymentAccount =
+(
   activeElement
   &&
   (
@@ -8039,7 +8040,10 @@ async function refreshWhenActive(){
     activeElement.closest?.(
       '.editAccountBox'
     )
-  );
+  )
+)
+||
+editQrFiles.size > 0;
 
 
   if(
