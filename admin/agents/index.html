@@ -3896,10 +3896,15 @@ function clearNewPaymentAccountForm(){
 ===================================== */
 
 async function loadPaymentAccounts(
-  showMessage=false
+  showMessage=false,
+  force=false
 ){
 
-  if(paymentAccountBusy){
+  if(
+    paymentAccountBusy
+    &&
+    !force
+  ){
 
     return;
 
@@ -4805,8 +4810,9 @@ async function savePaymentAccount(
 
 
     await loadPaymentAccounts(
-      false
-    );
+  false,
+  true
+);
 
 
     if(
@@ -4975,8 +4981,9 @@ async function togglePaymentAccount(
 
 
     await loadPaymentAccounts(
-      false
-    );
+  false,
+  true
+);
 
 
   }catch(e){
@@ -5119,8 +5126,9 @@ async function removePaymentQr(
 
 
     await loadPaymentAccounts(
-      false
-    );
+  false,
+  true
+);
 
 
   }catch(e){
@@ -7977,7 +7985,40 @@ async function refreshWhenActive(){
 
   }
 
+  await loadAgents(
+    false
+  );
 
+
+  const activeElement =
+  document.activeElement;
+
+
+  const editingPaymentAccount =
+  activeElement
+  &&
+  (
+    activeElement.closest?.(
+      '.paymentAccountForm'
+    )
+    ||
+    activeElement.closest?.(
+      '.editAccountBox'
+    )
+  );
+
+
+  if(
+    !paymentAccountBusy
+    &&
+    !editingPaymentAccount
+  ){
+
+    await loadPaymentAccounts(
+      false
+    );
+
+  }
   await loadPaymentReviews(
     false
   );
