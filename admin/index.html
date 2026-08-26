@@ -1070,7 +1070,9 @@ null;
 
 let testRounds =
 [];
-
+let mfaFactorId = '';
+let mfaChallengeId = '';
+let mfaEnrollSecret = '';
 
 /* =========================
    API
@@ -1276,10 +1278,7 @@ if(!captchaToken){
     }
 
 
-    showAdmin();
-
-
-    await loadEverything();
+    await startAdminMfa();
 
 
   }catch(e){
@@ -1316,10 +1315,7 @@ async function verifySession(){
     }
 
 
-    showAdmin();
-
-
-    await loadEverything();
+    await startAdminMfa();
 
 
   }catch(e){
@@ -1332,7 +1328,396 @@ async function verifySession(){
 
 }
 
+/* =========================
+   ADMIN MFA
+========================= */
 
+function getJwtPayload(){
+
+  try{
+
+    let part =
+    token.split('.')[1]
+      .replace(/-/g,'+')
+      .replace(/_/g,'/');
+
+    while(part.length % 4){
+      part += '=';
+    }
+
+    return JSON.parse(
+      decodeURIComponent(
+        atob(part)
+          .split('')
+          .map(
+            c =>
+            '%' +
+            ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+          )
+          .join('')
+      )
+    );
+
+  }catch(e){
+
+    return {};
+
+  }
+
+}
+
+
+async function enterAdminAfterMfa(){
+
+  document.getElementById(
+    'mfaBox'
+  ).classList.add(
+    'hidden'
+  );
+
+  showAdmin();
+
+  await loadEverything();
+
+}
+
+
+async function startAdminMfa(){
+
+  const payload =
+  getJwtPayload();
+
+  if(payload.aal === 'aal2'){
+
+    await enterAdminAfterMfa();
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    'loginBox'
+  ).classList.add(
+    'hidden'
+  );
+
+  document.getElementById(
+    'adminBox'
+  ).classList.add(
+    'hidden'
+  );
+
+  document.getElementById(
+    'mfaBox'
+  ).classList.remove(
+    'hidden'
+  );
+
+
+  const msg =
+  document.getElementById(
+    'mfaMsg'
+  );
+
+  msg.textContent =
+  '正在检查二次验证...';
+
+
+  const factorsRes =
+  await api(
+    '/auth/v1/factors'
+  );
+
+  if(!factorsRes.ok){
+
+    throw new Error(
+      'MFA_FACTORS_FAILED'
+    );
+
+  }
+
+
+  const factorsData =
+  await factorsRes.json();
+
+  const factors =
+  Array.isArray(factorsData)
+    ? factorsData
+    : (
+        factorsData.all
+        ||
+        factorsData.totp
+        ||
+        []
+      );
+
+
+  const verifiedFactor =
+  factors.find(
+    f =>
+    f.factor_type === 'totp'
+    &&
+    f.status === 'verified'
+  );
+
+
+  if(verifiedFactor){
+
+    mfaFactorId =
+    verifiedFactor.id;
+
+    document.getElementById(
+      'mfaSetup'
+    ).classList.add(
+      'hidden'
+    );
+
+    await createMfaChallenge();
+
+    msg.textContent =
+    '请输入验证器中的 6 位验证码';
+
+    return;
+
+  }
+
+
+  const enrollRes =
+  await api(
+    '/auth/v1/factors',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':'application/json'
+      },
+
+      body:JSON.stringify({
+        factor_type:'totp',
+        friendly_name:'Jin Mantang Admin'
+      })
+    }
+  );
+
+
+  const enrollData =
+  await enrollRes.json();
+
+  if(!enrollRes.ok){
+
+    throw new Error(
+      'MFA_ENROLL_FAILED'
+    );
+
+  }
+
+
+  mfaFactorId =
+  enrollData.id;
+
+  mfaEnrollSecret =
+  enrollData.totp?.secret || '';
+
+
+  document.getElementById(
+    'mfaSecret'
+  ).textContent =
+  mfaEnrollSecret;
+
+
+  document.getElementById(
+    'mfaSetup'
+  ).classList.remove(
+    'hidden'
+  );
+
+
+  await createMfaChallenge();
+
+  msg.textContent =
+  '请把密钥加入验证器，再输入 6 位验证码';
+
+}
+
+
+async function createMfaChallenge(){
+
+  const r =
+  await api(
+    '/auth/v1/factors/' +
+    encodeURIComponent(
+      mfaFactorId
+    ) +
+    '/challenge',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':'application/json'
+      },
+
+      body:'{}'
+    }
+  );
+
+
+  const d =
+  await r.json();
+
+  if(!r.ok || !d.id){
+
+    throw new Error(
+      'MFA_CHALLENGE_FAILED'
+    );
+
+  }
+
+  mfaChallengeId =
+  d.id;
+
+}
+
+
+async function verifyMfaCode(){
+
+  const code =
+  document.getElementById(
+    'mfaCode'
+  ).value.trim();
+
+
+  const msg =
+  document.getElementById(
+    'mfaMsg'
+  );
+
+
+  if(!/^\d{6}$/.test(code)){
+
+    msg.textContent =
+    '请输入 6 位验证码';
+
+    return;
+
+  }
+
+
+  msg.textContent =
+  '正在验证...';
+
+
+  try{
+
+    if(!mfaChallengeId){
+
+      await createMfaChallenge();
+
+    }
+
+
+    const r =
+    await api(
+      '/auth/v1/factors/' +
+      encodeURIComponent(
+        mfaFactorId
+      ) +
+      '/verify',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+          challenge_id:mfaChallengeId,
+          code:code
+        })
+      }
+    );
+
+
+    const d =
+    await r.json();
+
+
+    if(!r.ok){
+
+      throw new Error(
+        'MFA_VERIFY_FAILED'
+      );
+
+    }
+
+
+    if(d.access_token){
+
+      token =
+      d.access_token;
+
+      localStorage.setItem(
+        'jmt_access_token',
+        token
+      );
+
+      sessionStorage.setItem(
+        'jmt_access_token',
+        token
+      );
+
+    }
+
+
+    document.getElementById(
+      'mfaCode'
+    ).value = '';
+
+    msg.textContent =
+    '验证成功';
+
+    await enterAdminAfterMfa();
+
+
+  }catch(e){
+
+    mfaChallengeId = '';
+
+    msg.textContent =
+    '验证码错误或已过期，请重新输入';
+
+  }
+
+}
+
+
+async function copyMfaSecret(){
+
+  if(!mfaEnrollSecret){
+    return;
+  }
+
+  try{
+
+    await navigator.clipboard.writeText(
+      mfaEnrollSecret
+    );
+
+    document.getElementById(
+      'mfaMsg'
+    ).textContent =
+    '密钥已复制';
+
+  }catch(e){
+
+    document.getElementById(
+      'mfaMsg'
+    ).textContent =
+    '请长按上面的密钥手动复制';
+
+  }
+
+}
 /* =========================
    SHOW ADMIN
 ========================= */
