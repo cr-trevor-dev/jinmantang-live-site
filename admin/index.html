@@ -561,6 +561,7 @@ button.danger{
   }
 }
 </style>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>  
 </head>
 
 <body>
@@ -579,7 +580,10 @@ button.danger{
 
     <input id="email" type="email" placeholder="管理员邮箱">
     <input id="password" type="password" placeholder="管理员密码">
-
+<div
+  class="h-captcha"
+  data-sitekey="a71ac782-e490-452a-8e7c-825e176e9098">
+</div>
     <button onclick="signIn()">
       登录管理中心
     </button>
@@ -1153,7 +1157,12 @@ async function signIn(){
 
   msg.textContent =
   '正在登录...';
+const captchaToken = hcaptcha.getResponse();
 
+if(!captchaToken){
+  msg.textContent = '请先完成人机验证';
+  return;
+}
 
   try{
 
@@ -1170,9 +1179,12 @@ async function signIn(){
         },
 
         body:JSON.stringify({
-          email,
-          password
-        })
+  email,
+  password,
+  gotrue_meta_security:{
+    captcha_token:captchaToken
+  }
+})
       }
     );
 
