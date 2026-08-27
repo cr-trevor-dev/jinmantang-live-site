@@ -792,7 +792,20 @@ sessionStorage.getItem(
 ||
 
 '';
+let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
 
+
+let refreshSessionPromise =
+null;
 
 let currentRound =
 null;
@@ -808,16 +821,108 @@ let submissions =
    API
 ========================= */
 
+async function refreshAdminChildSession(){
+
+  if(!refreshToken){
+    return false;
+  }
+
+  if(refreshSessionPromise){
+    return refreshSessionPromise;
+  }
+
+  refreshSessionPromise =
+  (async()=>{
+
+    try{
+
+      const r =
+      await fetch(
+        BASE+
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:'POST',
+          headers:{
+            apikey:KEY,
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+            refresh_token:refreshToken
+          })
+        }
+      );
+
+      if(!r.ok){
+        return false;
+      }
+
+      const data =
+      await r.json();
+
+      if(!data.access_token){
+        return false;
+      }
+
+      token =
+      data.access_token;
+
+      localStorage.setItem(
+        'jmt_access_token',
+        token
+      );
+
+      sessionStorage.setItem(
+        'jmt_access_token',
+        token
+      );
+
+      if(data.refresh_token){
+
+        refreshToken =
+        data.refresh_token;
+
+        localStorage.setItem(
+          'jmt_refresh_token',
+          refreshToken
+        );
+
+        sessionStorage.setItem(
+          'jmt_refresh_token',
+          refreshToken
+        );
+
+      }
+
+      return true;
+
+    }catch(e){
+
+      return false;
+
+    }finally{
+
+      refreshSessionPromise =
+      null;
+
+    }
+
+  })();
+
+  return refreshSessionPromise;
+
+}
+
+
 async function api(
   path,
   options={}
 ){
 
-  return fetch(
+  const request =
+  ()=>fetch(
     BASE+path,
     {
       ...options,
-
       headers:{
         apikey:KEY,
         Authorization:
@@ -826,6 +931,22 @@ async function api(
       }
     }
   );
+
+  let response =
+  await request();
+
+  if(response.status!==401){
+    return response;
+  }
+
+  const refreshed =
+  await refreshAdminChildSession();
+
+  if(!refreshed){
+    return response;
+  }
+
+  return request();
 
 }
 
@@ -946,13 +1067,103 @@ async function verifyAdmin(){
 
   try{
 
-    const r =
+    const userRes =
     await api(
       '/auth/v1/user'
     );
 
 
-    if(!r.ok){
+    if(!userRes.ok){
+
+      throw new Error();
+
+    }
+
+
+    const user =
+    await userRes.json();
+
+
+    const adminRes =
+    await api(
+      '/rest/v1/admin_users'+
+      '?auth_user_id=eq.'+
+      encodeURIComponent(
+        user.id
+      )+
+      '&select=auth_user_id'+
+      '&limit=1'
+    );
+
+
+    if(!adminRes.ok){
+
+      throw new Error();
+
+    }
+
+
+    const admins =
+    await adminRes.json();
+
+
+    if(!admins.length){
+
+      throw new Error();
+
+    }
+
+
+    const payloadPart =
+    token.split('.')[1];
+
+
+    if(!payloadPart){
+
+      throw new Error();
+
+    }
+
+
+    let payloadText =
+    payloadPart
+    .replace(/-/g,'+')
+    .replace(/_/g,'/');
+
+
+    while(
+      payloadText.length % 4
+    ){
+
+      payloadText += '=';
+
+    }
+
+
+    const payload =
+    JSON.parse(
+      decodeURIComponent(
+        atob(
+          payloadText
+        )
+        .split('')
+        .map(
+          c =>
+          '%'+
+          ('00'+
+          c.charCodeAt(0)
+          .toString(16))
+          .slice(-2)
+        )
+        .join('')
+      )
+    );
+
+
+    if(
+      payload.aal !==
+      'aal2'
+    ){
 
       throw new Error();
 
@@ -964,19 +1175,8 @@ async function verifyAdmin(){
 
   }catch(e){
 
-    localStorage.removeItem(
-      'jmt_access_token'
-    );
-
-
-    sessionStorage.removeItem(
-      'jmt_access_token'
-    );
-
-
     location.href =
     '/admin/';
-
 
     return false;
 
