@@ -1057,6 +1057,20 @@ sessionStorage.getItem(
 )
 ||
 '';
+ let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
+
+
+let refreshSessionPromise =
+null; 
 
 
 let pendingLogo =
@@ -1078,23 +1092,208 @@ let mfaEnrollSecret = '';
    API
 ========================= */
 
+function saveAdminSession(
+  data
+){
+
+  if(
+    data
+    &&
+    data.access_token
+  ){
+
+    token =
+    data.access_token;
+
+    localStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+    sessionStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+  }
+
+
+  if(
+    data
+    &&
+    data.refresh_token
+  ){
+
+    refreshToken =
+    data.refresh_token;
+
+    localStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+    sessionStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+async function refreshAdminSession(){
+
+  if(
+    !refreshToken
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    refreshSessionPromise
+  ){
+
+    return refreshSessionPromise;
+
+  }
+
+
+  refreshSessionPromise =
+  (async()=>{
+
+    try{
+
+      const r =
+      await fetch(
+        BASE+
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:'POST',
+
+          headers:{
+            apikey:KEY,
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            refresh_token:
+            refreshToken
+          })
+        }
+      );
+
+
+      if(!r.ok){
+
+        return false;
+
+      }
+
+
+      const data =
+      await r.json();
+
+
+      if(
+        !data.access_token
+      ){
+
+        return false;
+
+      }
+
+
+      saveAdminSession(
+        data
+      );
+
+
+      return true;
+
+
+    }catch(e){
+
+      console.error(
+        'ADMIN_SESSION_REFRESH_FAILED',
+        e
+      );
+
+      return false;
+
+
+    }finally{
+
+      refreshSessionPromise =
+      null;
+
+    }
+
+  })();
+
+
+  return refreshSessionPromise;
+
+}
+
+
 async function api(
   path,
   options={}
 ){
 
-  return fetch(
+  const request =
+  ()=>fetch(
     BASE+path,
     {
       ...options,
 
       headers:{
         apikey:KEY,
-        Authorization:'Bearer '+token,
+        Authorization:
+        'Bearer '+token,
         ...(options.headers || {})
       }
     }
   );
+
+
+  let response =
+  await request();
+
+
+  if(
+    response.status!==401
+  ){
+
+    return response;
+
+  }
+
+
+  const refreshed =
+  await refreshAdminSession();
+
+
+  if(
+    !refreshed
+  ){
+
+    return response;
+
+  }
+
+
+  response =
+  await request();
+
+
+  return response;
 
 }
 
@@ -1247,20 +1446,9 @@ if(!captchaToken){
     }
 
 
-    token =
-    d.access_token;
-
-
-    localStorage.setItem(
-      'jmt_access_token',
-      token
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_access_token',
-      token
-    );
+    saveAdminSession(
+  d
+);
 
 
     const isAdmin =
@@ -1645,20 +1833,11 @@ async function verifyMfaCode(){
 
     if(d.access_token){
 
-      token =
-      d.access_token;
+  saveAdminSession(
+    d
+  );
 
-      localStorage.setItem(
-        'jmt_access_token',
-        token
-      );
-
-      sessionStorage.setItem(
-        'jmt_access_token',
-        token
-      );
-
-    }
+}
 
 
     document.getElementById(
@@ -4095,13 +4274,22 @@ function clearSession(){
     'jmt_access_token'
   );
 
-
   sessionStorage.removeItem(
     'jmt_access_token'
   );
 
+  localStorage.removeItem(
+    'jmt_refresh_token'
+  );
+
+  sessionStorage.removeItem(
+    'jmt_refresh_token'
+  );
 
   token =
+  '';
+
+  refreshToken =
   '';
 
 }
