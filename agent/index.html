@@ -7943,10 +7943,26 @@ disableInputs(true);
 
 try{
 
-for(const ch of changes)
-ch.type==='update'
-?await updateExistingCode(ch.code,ch.points)
-:await insertNewCode(ch.code,ch.points);
+const r=await api(
+'/rest/v1/rpc/agent_save_round_changes',
+{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+p_round_id:currentRound.id,
+p_changes:changes.map(ch=>({
+number_code:ch.code,
+points:ch.points
+}))
+})
+}
+);
+
+const responseText=await r.text();
+
+if(!r.ok){
+throw new Error(responseText||'SAVE_TRANSACTION_FAILED');
+}
 
 await loadExisting(false);
 await loadSettlement();
