@@ -327,7 +327,17 @@ button:disabled{
   padding:9px;
   font-size:14px
 }
+.numLock{
+  margin-top:7px;
+  min-height:16px;
+  font-size:9px;
+  line-height:1.5;
+  color:#777166
+}
 
+.numLock.hasLocked{
+  color:#d8bd68
+}
 .total{
   text-align:center;
   background:#101011;
@@ -3050,7 +3060,10 @@ function buildGrid(){
         inputmode="numeric"
         placeholder="0"
         oninput="inputChanged('${code}')">
-
+<div
+  class="numLock"
+  id="lock${code}">
+</div>
     `;
 
 
@@ -3135,11 +3148,121 @@ function inputChanged(
   }
 
 
-  updateInputTotal();
+  updateNumberLockInfo(
+  code,
+  newValue
+);
+
+updateInputTotal();
 
 }
 
+function updateNumberLockInfo(
+  code,
+  currentValue
+){
 
+  const input =
+  document.getElementById(
+    'n'+code
+  );
+
+  const el =
+  document.getElementById(
+    'lock'+code
+  );
+
+  if(
+    !input
+    ||
+    !el
+  ){
+    return;
+  }
+
+  const confirmed =
+  Number(
+    input.dataset.confirmed
+    ||
+    0
+  );
+
+  const pending =
+  Number(
+    input.dataset.pending
+    ||
+    0
+  );
+
+  const total =
+  Number(
+    currentValue
+    ||
+    0
+  );
+
+  const editable =
+  Math.max(
+    total-confirmed-pending,
+    0
+  );
+
+  if(
+    confirmed<=0
+    &&
+    pending<=0
+  ){
+
+    el.textContent =
+    '';
+
+    el.className =
+    'numLock';
+
+    return;
+  }
+
+  const parts =
+  [];
+
+  if(confirmed>0){
+
+    parts.push(
+      '🔒 已确认 '+
+      formatNumber(
+        confirmed
+      )
+    );
+
+  }
+
+  if(pending>0){
+
+    parts.push(
+      '⏳ 待审核 '+
+      formatNumber(
+        pending
+      )
+    );
+
+  }
+
+  parts.push(
+    '✏️ 可新增 '+
+    formatNumber(
+      editable
+    )
+  );
+
+  el.textContent =
+  parts.join(
+    ' · '
+  );
+
+  el.className =
+  'numLock hasLocked';
+
+}
 function getInputValue(
   code
 ){
@@ -3798,7 +3921,7 @@ async function loadExisting(
     encodeURIComponent(
       agent.id
     )+
-    '&select=number_code,points'
+    '&select=number_code,points,confirmed_points,pending_points'
   );
 
 
@@ -3840,7 +3963,16 @@ async function loadExisting(
 
     input.value =
     '';
+input.dataset.confirmed =
+'0';
 
+input.dataset.pending =
+'0';
+
+updateNumberLockInfo(
+  code,
+  0
+);
 
     document.getElementById(
       'box'+code
@@ -3870,6 +4002,19 @@ async function loadExisting(
         ||
         0
       );
+      const confirmed =
+Number(
+  row.confirmed_points
+  ||
+  0
+);
+
+const pending =
+Number(
+  row.pending_points
+  ||
+  0
+);
 
 
       existingCodes.add(
@@ -3895,14 +4040,25 @@ async function loadExisting(
 
       if(input){
 
-        input.value =
-        points>0
-        ?
-        points
-        :
-        '';
+  input.value =
+  points>0
+  ?
+  points
+  :
+  '';
 
-      }
+  input.dataset.confirmed =
+  confirmed;
+
+  input.dataset.pending =
+  pending;
+
+  updateNumberLockInfo(
+    code,
+    points
+  );
+
+}
 
     }
   );
