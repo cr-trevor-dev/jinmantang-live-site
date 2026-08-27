@@ -1720,7 +1720,24 @@ sessionStorage.getItem(
 ||
 '';
 
+let refreshToken =
+localStorage.getItem(
+  'jmt_agent_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_agent_refresh_token'
+)
+||
+'';
 
+
+let isRefreshingSession =
+false;
+
+
+let refreshSessionPromise =
+null;
 let agent =
 null;
 
@@ -2769,12 +2786,177 @@ balanced:'Selesai'
    API HELPER
 ========================================================= */
 
+function saveAgentSession(
+  data
+){
+
+  if(
+    data
+    &&
+    data.access_token
+  ){
+
+    token =
+    data.access_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+  }
+
+
+  if(
+    data
+    &&
+    data.refresh_token
+  ){
+
+    refreshToken =
+    data.refresh_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_refresh_token',
+      refreshToken
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_agent_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+async function refreshAgentSession(){
+
+  if(
+    !refreshToken
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    refreshSessionPromise
+  ){
+
+    return refreshSessionPromise;
+
+  }
+
+
+  refreshSessionPromise =
+  (async()=>{
+
+    isRefreshingSession =
+    true;
+
+
+    try{
+
+      const r =
+      await fetch(
+        BASE+
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:'POST',
+
+          headers:{
+            apikey:KEY,
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            refresh_token:
+            refreshToken
+          })
+        }
+      );
+
+
+      if(
+        !r.ok
+      ){
+
+        return false;
+
+      }
+
+
+      const data =
+      await r.json();
+
+
+      if(
+        !data.access_token
+      ){
+
+        return false;
+
+      }
+
+
+      saveAgentSession(
+        data
+      );
+
+
+      return true;
+
+
+    }catch(e){
+
+      console.error(
+        'SESSION_REFRESH_FAILED',
+        e
+      );
+
+
+      return false;
+
+
+    }finally{
+
+      isRefreshingSession =
+      false;
+
+      refreshSessionPromise =
+      null;
+
+    }
+
+  })();
+
+
+  return refreshSessionPromise;
+
+}
+
+
 async function api(
   path,
   options={}
 ){
 
-  return fetch(
+  const request =
+  ()=>fetch(
     BASE+path,
     {
       ...options,
@@ -2787,6 +2969,39 @@ async function api(
       }
     }
   );
+
+
+  let response =
+  await request();
+
+
+  if(
+    response.status!==401
+  ){
+
+    return response;
+
+  }
+
+
+  const refreshed =
+  await refreshAgentSession();
+
+
+  if(
+    !refreshed
+  ){
+
+    return response;
+
+  }
+
+
+  response =
+  await request();
+
+
+  return response;
 
 }
 
@@ -3416,21 +3631,9 @@ if(!captchaToken){
     }
 
 
-    token =
-    d.access_token;
-
-
-    localStorage.setItem(
-      'jmt_agent_token',
-      token
-    );
-
-
-    sessionStorage.setItem(
-      'jmt_agent_token',
-      token
-    );
-
+    saveAgentSession(
+  d
+);
 
     await startAgent();
 
@@ -8662,7 +8865,12 @@ function clearAgentSession(){
 localStorage.removeItem('jmt_agent_token');
 sessionStorage.removeItem('jmt_agent_token');
 
-token=''
+localStorage.removeItem('jmt_agent_refresh_token');
+sessionStorage.removeItem('jmt_agent_refresh_token');
+
+token='';
+refreshToken='';
+
 }
 
 function logout(){
