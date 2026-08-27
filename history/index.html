@@ -492,7 +492,20 @@ sessionStorage.getItem(
 ||
 
 '';
+let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
 
+
+let refreshSessionPromise =
+null;
 
 let rounds =
 [];
@@ -505,16 +518,108 @@ let agentsMap =
    API
 ========================= */
 
+async function refreshAdminChildSession(){
+
+  if(!refreshToken){
+    return false;
+  }
+
+  if(refreshSessionPromise){
+    return refreshSessionPromise;
+  }
+
+  refreshSessionPromise =
+  (async()=>{
+
+    try{
+
+      const r =
+      await fetch(
+        BASE+
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:'POST',
+          headers:{
+            apikey:KEY,
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+            refresh_token:refreshToken
+          })
+        }
+      );
+
+      if(!r.ok){
+        return false;
+      }
+
+      const data =
+      await r.json();
+
+      if(!data.access_token){
+        return false;
+      }
+
+      token =
+      data.access_token;
+
+      localStorage.setItem(
+        'jmt_access_token',
+        token
+      );
+
+      sessionStorage.setItem(
+        'jmt_access_token',
+        token
+      );
+
+      if(data.refresh_token){
+
+        refreshToken =
+        data.refresh_token;
+
+        localStorage.setItem(
+          'jmt_refresh_token',
+          refreshToken
+        );
+
+        sessionStorage.setItem(
+          'jmt_refresh_token',
+          refreshToken
+        );
+
+      }
+
+      return true;
+
+    }catch(e){
+
+      return false;
+
+    }finally{
+
+      refreshSessionPromise =
+      null;
+
+    }
+
+  })();
+
+  return refreshSessionPromise;
+
+}
+
+
 async function api(
   path,
   options={}
 ){
 
-  return fetch(
+  const request =
+  ()=>fetch(
     BASE+path,
     {
       ...options,
-
       headers:{
         apikey:KEY,
         Authorization:
@@ -523,6 +628,22 @@ async function api(
       }
     }
   );
+
+  let response =
+  await request();
+
+  if(response.status!==401){
+    return response;
+  }
+
+  const refreshed =
+  await refreshAdminChildSession();
+
+  if(!refreshed){
+    return response;
+  }
+
+  return request();
 
 }
 
