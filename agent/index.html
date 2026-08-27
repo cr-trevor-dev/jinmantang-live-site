@@ -1378,13 +1378,13 @@ button:disabled{
 
 
         <input
-          id="paymentAmountInput"
-          type="number"
-          min="0.01"
-          step="0.01"
-          inputmode="decimal"
-          placeholder="请输入实际转账金额">
-
+  id="paymentAmountInput"
+  type="number"
+  min="0.01"
+  step="0.01"
+  inputmode="decimal"
+  oninput="this.dataset.manual='1'"
+  placeholder="请输入实际转账金额">
 
         <div class="note">
 
@@ -6141,33 +6141,47 @@ function renderPaymentCenter(){
       );
 
 
-      /*
-        只在输入为空或输入大于当前余额时
-        自动调整。
+            /*
+        如果代理还没有手动修改实际转账金额，
+        金额自动跟随最新可提交余额。
 
-        用户自己输入 3000、5000 等部分付款金额，
-        系统不会再强制改回全部余额。
+        一旦代理自己修改过金额，
+        就保留代理自己填写的部分付款金额。
       */
 
-      if(
-        amountInput
-        &&
-        (
-          !amountInput.value
-          ||
-          Number(
-            amountInput.value
-          )>
-          remaining
-        )
-      ){
+      if(amountInput){
 
-        amountInput.value =
-        remaining>0
-        ?
-        remaining
-        :
-        '';
+        const manual =
+        amountInput.dataset.manual ===
+        '1';
+
+        if(!manual){
+
+          amountInput.value =
+          remaining>0
+          ?
+          remaining
+          :
+          '';
+
+        }
+
+        else if(
+          Number(amountInput.value) >
+          remaining
+        ){
+
+          amountInput.value =
+          remaining>0
+          ?
+          remaining
+          :
+          '';
+
+          amountInput.dataset.manual =
+          '0';
+
+        }
 
       }
 
