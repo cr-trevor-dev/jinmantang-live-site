@@ -7171,6 +7171,197 @@ async function uploadSinglePaymentProof(
 
 
 /* =========================================================
+   COMPRESS PAYMENT PROOF
+========================================================= */
+
+async function compressPaymentProofFile(
+  file
+){
+
+  try{
+
+    if(
+      !file
+      ||
+      ![
+        'image/jpeg',
+        'image/png',
+        'image/webp'
+      ].includes(
+        file.type
+      )
+    ){
+
+      return file;
+
+    }
+
+
+    if(
+      Number(
+        file.size || 0
+      )
+      <=
+      700 * 1024
+    ){
+
+      return file;
+
+    }
+
+
+    const bitmap =
+    await createImageBitmap(
+      file
+    );
+
+
+    const maxSide =
+    1600;
+
+
+    const scale =
+    Math.min(
+      1,
+      maxSide /
+      Math.max(
+        bitmap.width,
+        bitmap.height
+      )
+    );
+
+
+    const width =
+    Math.max(
+      1,
+      Math.round(
+        bitmap.width *
+        scale
+      )
+    );
+
+
+    const height =
+    Math.max(
+      1,
+      Math.round(
+        bitmap.height *
+        scale
+      )
+    );
+
+
+    const canvas =
+    document.createElement(
+      'canvas'
+    );
+
+
+    canvas.width =
+    width;
+
+
+    canvas.height =
+    height;
+
+
+    const ctx =
+    canvas.getContext(
+      '2d',
+      {
+        alpha:false
+      }
+    );
+
+
+    if(!ctx){
+
+      if(bitmap.close){
+        bitmap.close();
+      }
+
+      return file;
+
+    }
+
+
+    ctx.drawImage(
+      bitmap,
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    if(bitmap.close){
+      bitmap.close();
+    }
+
+
+    const blob =
+    await new Promise(
+      resolve =>
+
+      canvas.toBlob(
+        resolve,
+        'image/jpeg',
+        0.82
+      )
+    );
+
+
+    if(
+      !blob
+      ||
+      blob.size >=
+      file.size
+    ){
+
+      return file;
+
+    }
+
+
+    const baseName =
+    String(
+      file.name ||
+      'payment-proof'
+    )
+    .replace(
+      /\.[^.]+$/,
+      ''
+    );
+
+
+    return new File(
+      [blob],
+      baseName+'.jpg',
+      {
+        type:'image/jpeg',
+        lastModified:
+        file.lastModified ||
+        Date.now()
+      }
+    );
+
+
+  }catch(e){
+
+    console.warn(
+      'PROOF_COMPRESSION_FALLBACK',
+      e
+    );
+
+
+    return file;
+
+  }
+
+}
+
+
+/* =========================================================
    UPLOAD MULTIPLE PAYMENT PROOFS
 ========================================================= */
 
@@ -7184,23 +7375,68 @@ async function uploadPaymentProofFiles(
     files || []
   );
 
+
   validateProofFiles(
     list
   );
 
+
   const uploaded =
   [];
 
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+
   for(
-    const file
-    of list
+    let i=0;
+    i<list.length;
+    i++
   ){
+
+    const originalFile =
+    list[i];
+
+
+    if(msg){
+
+      msg.className =
+      'msg';
+
+
+      msg.textContent =
+      currentLang==='zh'
+      ?
+      '正在处理并上传第 '+
+      (i+1)+
+      '/'+
+      list.length+
+      ' 张付款截图…'
+      :
+      'Uploading payment proof '+
+      (i+1)+
+      '/'+
+      list.length+
+      '…';
+
+    }
+
+
+    const file =
+    await compressPaymentProofFile(
+      originalFile
+    );
+
 
     const path =
     await uploadSinglePaymentProof(
       submissionId,
       file
     );
+
 
     uploaded.push({
       name:
@@ -7211,10 +7447,10 @@ async function uploadPaymentProofFiles(
 
   }
 
+
   return uploaded;
 
 }
-
 
 
 /* =========================================================
