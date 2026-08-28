@@ -3214,7 +3214,7 @@ function resetSubmittedData(){
 
 
 /* =========================================================
-   BUILD 00–99
+   BUILD ZODIAC
 ========================================================= */
 
 function buildGrid(){
@@ -3224,14 +3224,27 @@ function buildGrid(){
     'numberGrid'
   );
 
+  const zodiacNames = [
+    '鼠',
+    '牛',
+    '虎',
+    '兔',
+    '龙',
+    '蛇',
+    '马',
+    '羊',
+    '猴',
+    '鸡',
+    '狗',
+    '猪'
+  ];
 
   grid.innerHTML =
   '';
 
-
   for(
-    let i=0;
-    i<=99;
+    let i=1;
+    i<=12;
     i++
   ){
 
@@ -3242,25 +3255,24 @@ function buildGrid(){
       '0'
     );
 
+    const zodiac =
+    zodiacNames[i - 1];
 
     const div =
     document.createElement(
       'div'
     );
 
-
     div.className =
     'num';
-
 
     div.id =
     'box'+code;
 
-
     div.innerHTML = `
 
       <div class="numLabel">
-        ${code}
+        ${zodiac}
       </div>
 
       <input
@@ -3271,12 +3283,13 @@ function buildGrid(){
         inputmode="numeric"
         placeholder="0"
         oninput="inputChanged('${code}')">
-<div
-  class="numLock"
-  id="lock${code}">
-</div>
-    `;
 
+      <div
+        class="numLock"
+        id="lock${code}">
+      </div>
+
+    `;
 
     grid.appendChild(
       div
