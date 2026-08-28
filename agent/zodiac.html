@@ -4154,8 +4154,8 @@ async function loadExisting(
 
 
   for(
-    let i=0;
-    i<=99;
+    let i=1;
+    i<=12;
     i++
   ){
 
@@ -8543,7 +8543,7 @@ return
 
 const changes=[];
 
-for(let i=0;i<=99;i++){
+for(let i=1;i<=12;i++){
 const c=String(i).padStart(2,'0'),
 o=Number(submittedNumbers[c]||0),
 n=getInputValue(c);
@@ -8658,7 +8658,7 @@ disableInputs(false)
 
 function disableInputs(disabled){
 
-for(let i=0;i<=99;i++){
+for(let i=1;i<=12;i++){
 
 const x=document.getElementById(
 'n'+String(i).padStart(2,'0')
