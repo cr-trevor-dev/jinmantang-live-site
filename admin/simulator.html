@@ -637,7 +637,7 @@ button:active{
       <div class="financeBox">
 
         <small>
-          有数据号码
+          有数据生肖
         </small>
 
         <strong id="activeNumbers">
@@ -653,7 +653,7 @@ button:active{
         </small>
 
         <strong>
-          80倍
+          10倍
         </strong>
 
       </div>
@@ -702,7 +702,7 @@ button:active{
       本页面每 20 秒自动同步一次。
       代理提交或修改本期数据后，
       本期提交总额、代理佣金、扣佣后净额以及
-      00–99 汇总都会重新计算。
+      十二生肖汇总都会重新计算。
     </div>
 
   </div>
@@ -711,7 +711,7 @@ button:active{
   <div class="card">
 
     <div class="title">
-      00–99 本期实时汇总
+      十二生肖 本期实时汇总
     </div>
 
     <div
@@ -720,8 +720,8 @@ button:active{
     </div>
 
     <div class="note">
-      「提交总额」为所有代理在该号码上的提交合计；
-      「80倍金额」= 该号码提交总额 × 80。
+      「提交总额」为所有代理在该生肖上的提交合计；
+      「10倍金额」= 该生肖提交总额 × 10。
     </div>
 
   </div>
@@ -774,7 +774,42 @@ const KEY =
 
 
 const MULTIPLIER =
-80;
+10;
+const ZODIAC_NAMES = [
+  '鼠',
+  '牛',
+  '虎',
+  '兔',
+  '龙',
+  '蛇',
+  '马',
+  '羊',
+  '猴',
+  '鸡',
+  '狗',
+  '猪'
+];
+
+
+function getZodiacName(
+  code
+){
+
+  const index =
+  Number(
+    code
+  )
+  -
+  1;
+
+
+  return (
+    ZODIAC_NAMES[index]
+    ||
+    '—'
+  );
+
+}
 
 
 let token =
@@ -952,7 +987,7 @@ async function api(
 
 
 /* =========================
-   BUILD 00–99
+   BUILD ZODIAC
 ========================= */
 
 function buildNumberGrid(){
@@ -968,8 +1003,8 @@ function buildNumberGrid(){
 
 
   for(
-    let i=0;
-    i<=99;
+    let i=1;
+    i<=12;
     i++
   ){
 
@@ -1000,7 +1035,9 @@ function buildNumberGrid(){
       <div class="numTop">
 
         <div class="code">
-          ${n}
+          ${escapeHtml(
+            getZodiacName(n)
+          )}
         </div>
 
         <div class="activeBadge">
@@ -1026,7 +1063,7 @@ function buildNumberGrid(){
         <div class="numDataBox">
 
           <small>
-            80倍金额
+            10倍金额
           </small>
 
           <strong id="numPayout${n}">
@@ -1403,8 +1440,8 @@ function calculate(){
 
 
   for(
-    let i=0;
-    i<=99;
+    let i=1;
+    i<=12;
     i++
   ){
 
@@ -1480,8 +1517,8 @@ function calculate(){
 
 
         for(
-          let i=0;
-          i<=99;
+          let i=1;
+          i<=12;
           i++
         ){
 
@@ -1908,7 +1945,7 @@ function renderAgents(
           <div class="detailNum${active}">
 
             <span>
-              ${code}
+              ${escapeHtml(getZodiacName(code))}
             </span>
 
             <span>
@@ -2012,7 +2049,7 @@ function renderAgents(
         <button
           class="dark detailButton"
           onclick="toggleAgentDetail('${a.id}',this)">
-          查看 00–99 明细
+          查看十二生肖明细
         </button>
 
 
@@ -2028,7 +2065,7 @@ function renderAgents(
               '未命名代理'
             )}
 
-            · 本期 00–99 明细
+            · 本期十二生肖明细
 
           </div>
 
@@ -2085,11 +2122,11 @@ function toggleAgentDetail(
 
 
   button.textContent =
-  isOpen
-  ?
-  '查看 00–99 明细'
-  :
-  '收起 00–99 明细';
+isOpen
+?
+'查看十二生肖明细'
+:
+'收起十二生肖明细';
 
 }
 
