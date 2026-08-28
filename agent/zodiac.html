@@ -1689,7 +1689,7 @@ const KEY =
 
 
 const MULTIPLIER =
-80;
+10;
 
 
 const PAYMENT_QR_BUCKET =
@@ -3183,18 +3183,15 @@ function resetSubmittedData(){
   submittedNumbers =
   {};
 
-
   submittedTotal =
   0;
-
 
   existingCodes =
   new Set();
 
-
   for(
-    let i=0;
-    i<=99;
+    let i=1;
+    i<=12;
     i++
   ){
 
@@ -3204,7 +3201,6 @@ function resetSubmittedData(){
       2,
       '0'
     );
-
 
     submittedNumbers[
       code
