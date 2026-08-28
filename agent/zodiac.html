@@ -361,33 +361,25 @@ button:disabled{
   rgba(213,164,49,.20)
 }
 .zodiacVisual{
-  width:92px;
-  height:92px;
-  margin:4px auto 10px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:54px;
-  line-height:1;
-  background:
-  radial-gradient(
-    circle at 35% 28%,
-    rgba(255,224,135,.20),
-    transparent 35%
-  ),
-  linear-gradient(
-    180deg,
-    #21190c,
-    #0b0b0c
-  );
+  width:100%;
+  aspect-ratio:1/1;
+  margin:0 auto 10px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#09090a;
   border:
   1px solid
   rgba(230,190,88,.34);
   box-shadow:
-  inset 0 0 22px
-  rgba(218,166,53,.10),
   0 8px 22px
   rgba(0,0,0,.32)
+}
+
+.zodiacVisual img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
 }
 .num input{
   padding:11px;
