@@ -476,7 +476,62 @@ select{
   font-weight:900;
   color:#e8c86e
 }
+.zodiacLatest{
+  margin:18px auto 10px;
+  background:none;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  color:inherit;
+  letter-spacing:0
+}
 
+.zodiacLatest img{
+  width:min(100%,320px);
+  aspect-ratio:1/1;
+  display:block;
+  object-fit:cover;
+  margin:0 auto;
+  border-radius:22px;
+  border:
+  1px solid
+  rgba(214,168,63,.40);
+  box-shadow:
+  0 18px 45px
+  rgba(0,0,0,.42)
+}
+
+.zodiacCaption{
+  margin-top:12px;
+  text-align:center;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:#b7a879
+}
+
+.zodiacHistoryResult{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  letter-spacing:0
+}
+
+.zodiacHistoryResult img{
+  width:58px;
+  height:58px;
+  flex:none;
+  object-fit:cover;
+  border-radius:12px;
+  border:
+  1px solid
+  rgba(214,168,63,.28)
+}
+
+.zodiacHistoryResult span{
+  font-size:20px;
+  font-weight:900;
+  color:#e8c86e
+}
 .item .d{
   font-size:11px;
   color:#8e897f;
@@ -736,7 +791,7 @@ select{
       class="label"
       id="latestLabel">
 
-      最新数字公告 · LATEST RESULT
+      最新开奖结果 · LATEST RESULT
 
     </div>
 
@@ -873,7 +928,7 @@ const T = {
 zh:{
 
 latest:
-'最新数字公告 · LATEST RESULT',
+'最新开奖结果 · LATEST RESULT',
 
 connecting:
 '正在连接...',
@@ -991,7 +1046,7 @@ lastSync:
 my:{
 
 latest:
-'နောက်ဆုံးဂဏန်းကြေညာချက် · LATEST RESULT',
+'နောက်ဆုံးရလဒ်ကြေညာချက် · LATEST RESULT',
 
 connecting:
 'ချိတ်ဆက်နေသည်...',
@@ -1387,6 +1442,185 @@ function normalizeResult(
 
 
   return text;
+
+}
+  const ZODIAC_NAMES = [
+  '鼠',
+  '牛',
+  '虎',
+  '兔',
+  '龙',
+  '蛇',
+  '马',
+  '羊',
+  '猴',
+  '鸡',
+  '狗',
+  '猪'
+];
+
+
+const ZODIAC_IMAGES = [
+  '/agent/287422DA-463C-421B-9257-E9BC27BF4A36.png',
+  '/agent/1A0DF767-06F9-4C2D-95CE-84E62442D9D1.png',
+  '/agent/760CCCAD-C85A-4D2C-8D40-CEADC692BEC3.png',
+  '/agent/0BD607BF-D242-4DC7-8011-8F3BFD2B2F2E.png',
+  '/agent/61676ED4-E523-4AC1-902B-06B841546DC8.png',
+  '/agent/82112254-9DC3-4CAB-A010-2B753DAE4FF5.png',
+  '/agent/A20A3141-3290-4368-8914-D21B2DA34B81.png',
+  '/agent/EE289B75-3AB3-41DB-9497-F6142A4AC15B.png',
+  '/agent/9202793F-F959-488B-B1D3-6F8F000BF44B.png',
+  '/agent/3A4F6BEE-09E7-4DE1-8804-00A24EEFEB0A.png',
+  '/agent/32C90A85-8BBA-4DFF-8DFB-B358DCA7C999.png',
+  '/agent/AC5C521B-7627-4F4B-A563-C55A326C9244.png'
+];
+
+
+const ZODIAC_CAPTIONS = {
+  zh:'本期开奖生肖',
+  th:'นักษัตรที่ออกงวดนี้',
+  my:'ယခုအကြိမ် ပေါက်သော ရာသီခွင်',
+  en:'Winning Zodiac',
+  ms:'Zodiak Pemenang',
+  vi:'Con Giáp Trúng Kỳ Này',
+  id:'Shio Pemenang'
+};
+
+
+function getZodiacName(
+  value
+){
+
+  const index =
+  Number(
+    value
+  )
+  -
+  1;
+
+  return (
+    ZODIAC_NAMES[index]
+    ||
+    ''
+  );
+
+}
+
+
+function getZodiacImage(
+  value
+){
+
+  const index =
+  Number(
+    value
+  )
+  -
+  1;
+
+  return (
+    ZODIAC_IMAGES[index]
+    ||
+    ''
+  );
+
+}
+
+
+function renderLatestResult(
+  item
+){
+
+  const latest =
+  document.getElementById(
+    'latest'
+  );
+
+  latest.innerHTML =
+  '';
+
+  latest.className =
+  'number';
+
+  if(
+    !item
+    ||
+    !hasResult(
+      item.result_number
+    )
+  ){
+
+    latest.textContent =
+    '--';
+
+    return;
+
+  }
+
+
+  if(
+    item.game_mode !==
+    'zodiac'
+  ){
+
+    latest.textContent =
+    normalizeResult(
+      item.result_number
+    );
+
+    return;
+
+  }
+
+
+  const zodiacName =
+  getZodiacName(
+    item.result_number
+  );
+
+  const zodiacImage =
+  getZodiacImage(
+    item.result_number
+  );
+
+
+  latest.className =
+  'number zodiacLatest';
+
+
+  const img =
+  document.createElement(
+    'img'
+  );
+
+  img.src =
+  zodiacImage;
+
+  img.alt =
+  zodiacName;
+
+
+  const caption =
+  document.createElement(
+    'div'
+  );
+
+  caption.className =
+  'zodiacCaption';
+
+  caption.textContent =
+  ZODIAC_CAPTIONS[currentLang]
+  ||
+  ZODIAC_CAPTIONS.zh;
+
+
+  latest.appendChild(
+    img
+  );
+
+  latest.appendChild(
+    caption
+  );
 
 }
 
@@ -2068,7 +2302,7 @@ async function loadResults(
     const url =
     BASE+
     '/rest/v1/results'+
-    '?select=id,result_number,published_at'+
+    '?select=id,result_number,published_at,game_mode'+
     '&published_at=gte.'+
     encodeURIComponent(
       cutoff
@@ -2125,25 +2359,9 @@ async function loadResults(
     null;
 
 
-    document.getElementById(
-      'latest'
-    ).textContent =
-
-    latest
-    &&
-    hasResult(
-      latest.result_number
-    )
-
-    ?
-
-    normalizeResult(
-      latest.result_number
-    )
-
-    :
-
-    '--';
+    renderLatestResult(
+  latest
+);
 
 
     document.getElementById(
@@ -2360,10 +2578,61 @@ function renderHistory(
       'n';
 
 
-      n.textContent =
-      normalizeResult(
-        item.result_number
-      );
+      if(
+  item.game_mode ===
+  'zodiac'
+){
+
+  const zodiacName =
+  getZodiacName(
+    item.result_number
+  );
+
+  const zodiacImage =
+  getZodiacImage(
+    item.result_number
+  );
+
+  n.className =
+  'n zodiacHistoryResult';
+
+  const img =
+  document.createElement(
+    'img'
+  );
+
+  img.src =
+  zodiacImage;
+
+  img.alt =
+  zodiacName;
+
+  const name =
+  document.createElement(
+    'span'
+  );
+
+  name.textContent =
+  zodiacName;
+
+  n.appendChild(
+    img
+  );
+
+  n.appendChild(
+    name
+  );
+
+}
+
+else{
+
+  n.textContent =
+  normalizeResult(
+    item.result_number
+  );
+
+}
 
 
       const d =
