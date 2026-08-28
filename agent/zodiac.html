@@ -3417,13 +3417,49 @@ function inputChanged(
   code
 ){
 
-  const newValue =
-  parsePoints(
-    document.getElementById(
-      'n'+code
-    ).value
+  const input =
+  document.getElementById(
+    'n'+code
   );
 
+  let newValue =
+  parsePoints(
+    input.value
+  );
+
+  const confirmed =
+  Number(
+    input.dataset.confirmed
+    ||
+    0
+  );
+
+  const pending =
+  Number(
+    input.dataset.pending
+    ||
+    0
+  );
+
+  const locked =
+  confirmed+
+  pending;
+
+  if(
+    newValue<
+    locked
+  ){
+
+    newValue =
+    locked;
+
+    input.value =
+    locked>0
+    ?
+    locked
+    :
+    '';
+  }
 
   const oldValue =
   Number(
@@ -3434,12 +3470,10 @@ function inputChanged(
     0
   );
 
-
   const box =
   document.getElementById(
     'box'+code
   );
-
 
   if(box){
 
@@ -3451,13 +3485,12 @@ function inputChanged(
 
   }
 
-
   updateNumberLockInfo(
-  code,
-  newValue
-);
+    code,
+    newValue
+  );
 
-updateInputTotal();
+  updateInputTotal();
 
 }
 
