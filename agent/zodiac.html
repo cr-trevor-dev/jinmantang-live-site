@@ -1,0 +1,8942 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<link
+  rel="manifest"
+  href="/agent/manifest.webmanifest">
+
+<link
+  rel="apple-touch-icon"
+  href="/IMG_0780.png">
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="192x192"
+  href="/IMG_0779.png">
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="512x512"
+  href="/IMG_0780.png">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black">
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="金满堂代理">
+
+<meta
+  name="mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="application-name"
+  content="金满堂代理">
+
+<title>金满堂 · Agent Center</title>
+
+
+<style>
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 40%,
+    #070708 100%
+  );
+  color:#f7f0df;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif
+}
+
+.wrap{
+  max-width:650px;
+  margin:auto;
+  min-height:100vh;
+  padding:20px 14px 50px
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:18px
+}
+
+.mark{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 9px;
+  font-weight:900;
+  font-size:23px;
+  color:#f3d681;
+  border:1px solid #b98a2c;
+  background:#191208
+}
+
+.cn{
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#f1d47b
+}
+
+.en{
+  font-size:10px;
+  color:#998b68;
+  letter-spacing:3px;
+  margin-top:4px
+}
+
+.card{
+  background:
+  linear-gradient(
+    180deg,
+    #151515,
+    #0d0d0e
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.30);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px
+}
+
+.title{
+  font-size:15px;
+  font-weight:900;
+  color:#dec372;
+  margin-bottom:14px
+}
+
+.hidden{
+  display:none!important
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:12px;
+  border-radius:11px;
+  border:
+  1px solid
+  rgba(214,168,63,.25);
+  background:#101011;
+  color:#fff;
+  outline:none;
+  font-size:15px;
+  font-family:inherit
+}
+
+textarea{
+  min-height:95px;
+  resize:vertical;
+  line-height:1.55
+}
+
+input[type="file"]{
+  padding:11px;
+  font-size:12px
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  margin-top:10px;
+  font-weight:900;
+  font-size:14px;
+  background:
+  linear-gradient(
+    180deg,
+    #efd47c,
+    #b87e1e
+  );
+  color:#171109;
+  cursor:pointer
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed
+}
+
+.secondary{
+  background:#171718;
+  color:#dac477;
+  border:
+  1px solid
+  rgba(214,168,63,.23)
+}
+
+.greenBtn{
+  background:#173326;
+  color:#7bdba8;
+  border:
+  1px solid
+  rgba(80,200,130,.26)
+}
+
+.redBtn{
+  background:#351616;
+  color:#e9a0a0;
+  border:
+  1px solid
+  rgba(220,90,90,.25)
+}
+
+.langWrap{
+  margin-bottom:14px
+}
+
+.langWrap select{
+  text-align:center;
+  color:#ecd277;
+  font-weight:800
+}
+
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px
+}
+
+.box{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px;
+  min-height:90px
+}
+
+.box small{
+  display:block;
+  color:#817b71;
+  font-size:10px;
+  margin-bottom:6px;
+  line-height:1.4
+}
+
+.box strong{
+  display:block;
+  color:#e7cb74;
+  font-size:16px;
+  line-height:1.4;
+  word-break:break-word
+}
+
+.box.highlight{
+  background:#15130e;
+  border-color:
+  rgba(214,168,63,.30)
+}
+
+.box.commission strong{
+  color:#70d39d;
+  font-size:19px
+}
+
+.statusOpen{
+  color:#6fd09a!important
+}
+
+.statusClosed{
+  color:#e58e8e!important
+}
+
+.statusPending{
+  color:#e8c86e!important
+}
+
+.statusPaid{
+  color:#70d39d!important
+}
+
+.statusOverdue{
+  color:#e58e8e!important
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:8px
+}
+
+.num{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:11px;
+  padding:10px;
+  transition:.2s
+}
+
+.num.changed{
+  border-color:
+  rgba(214,168,63,.62);
+  background:#19160f
+}
+
+.numLabel{
+  font-size:18px;
+  font-weight:900;
+  color:#dec16a;
+  margin-bottom:7px
+}
+
+.num input{
+  padding:9px;
+  font-size:14px
+}
+.numLock{
+  margin-top:7px;
+  min-height:16px;
+  font-size:9px;
+  line-height:1.5;
+  color:#777166
+}
+
+.numLock.hasLocked{
+  color:#d8bd68
+}
+.total{
+  text-align:center;
+  background:#101011;
+  border-radius:14px;
+  padding:15px;
+  border:
+  1px solid
+  rgba(214,168,63,.15);
+  margin-top:13px
+}
+
+.total small{
+  display:block;
+  color:#817b71;
+  font-size:10px
+}
+
+.total strong{
+  display:block;
+  color:#efcf70;
+  font-size:28px;
+  margin-top:5px
+}
+
+.msg{
+  text-align:center;
+  min-height:20px;
+  margin-top:11px;
+  font-size:12px;
+  color:#a49c8b;
+  line-height:1.6;
+  word-break:break-word
+}
+
+.success{
+  color:#70d39d!important
+}
+
+.error{
+  color:#e58e8e!important
+}
+
+.note{
+  font-size:11px;
+  color:#777166;
+  line-height:1.65;
+  margin-top:10px
+}
+
+.resultNote{
+  margin-top:12px;
+  background:#101011;
+  border-radius:12px;
+  padding:12px;
+  color:#817b71;
+  font-size:10px;
+  line-height:1.65;
+  text-align:center
+}
+
+.settlementNotice{
+  margin-top:12px;
+  border-radius:13px;
+  padding:13px;
+  font-size:11px;
+  line-height:1.7;
+  background:#101011;
+  border:
+  1px solid
+  rgba(214,168,63,.14);
+  color:#928b7d
+}
+
+.settlementNotice.overdue{
+  color:#dba0a0;
+  border-color:
+  rgba(200,100,100,.24);
+  background:#171111
+}
+
+.settlementNotice.paid{
+  color:#8dd8ad;
+  border-color:
+  rgba(100,200,145,.20);
+  background:#101713
+}
+
+
+/* =========================================================
+   PAYMENT CENTER
+========================================================= */
+
+.paymentAccount{
+  background:
+  linear-gradient(
+    180deg,
+    #121213,
+    #0d0d0e
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.20);
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:10px;
+  cursor:pointer
+}
+
+.paymentAccount.selected{
+  border-color:
+  rgba(238,205,108,.70);
+  background:#17140d
+}
+
+.paymentAccountHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px
+}
+
+.paymentAccountName{
+  color:#f0d27a;
+  font-size:17px;
+  font-weight:900;
+  word-break:break-word
+}
+
+.paymentType{
+  background:#25200e;
+  color:#ddc371;
+  padding:5px 9px;
+  border-radius:99px;
+  font-size:10px;
+  white-space:nowrap
+}
+
+.paymentAccountGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px
+}
+
+.paymentDetail{
+  background:#0d0d0e;
+  border:
+  1px solid
+  rgba(255,255,255,.05);
+  border-radius:11px;
+  padding:11px
+}
+
+.paymentDetail small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px
+}
+
+.paymentDetail strong{
+  display:block;
+  color:#e9cd75;
+  font-size:14px;
+  line-height:1.45;
+  word-break:break-word
+}
+
+.paymentQr{
+  margin-top:12px;
+  background:#0b0b0c;
+  border:
+  1px solid
+  rgba(255,255,255,.055);
+  border-radius:14px;
+  padding:12px;
+  text-align:center
+}
+
+.paymentQr img{
+  width:auto;
+  max-width:100%;
+  max-height:420px;
+  border-radius:10px;
+  display:block;
+  margin:auto
+}
+
+.paymentQrEmpty{
+  color:#777166;
+  font-size:11px;
+  padding:22px 8px;
+  text-align:center
+}
+
+.paymentForm{
+  margin-top:15px;
+  padding-top:15px;
+  border-top:
+  1px solid
+  rgba(255,255,255,.07)
+}
+
+.paymentLabel{
+  color:#8e8677;
+  font-size:11px;
+  line-height:1.5;
+  margin-bottom:7px
+}
+
+.paymentAmountBox{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:13px
+}
+
+.paymentAmountInfo{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.055);
+  border-radius:12px;
+  padding:12px
+}
+
+.paymentAmountInfo small{
+  display:block;
+  color:#777166;
+  font-size:9px
+}
+
+.paymentAmountInfo strong{
+  display:block;
+  margin-top:6px;
+  color:#efcf70;
+  font-size:19px
+}
+
+.paymentAmountInfo.pending strong{
+  color:#e8c86e
+}
+
+
+/* =========================================================
+   NEW: SELECTED PROOF PREVIEW
+========================================================= */
+
+.selectedProofWrap{
+  margin-top:12px
+}
+
+.selectedProofHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px
+}
+
+.selectedProofTitle{
+  color:#d8c277;
+  font-size:11px;
+  font-weight:800
+}
+
+.selectedProofCount{
+  color:#777166;
+  font-size:10px
+}
+
+.selectedProofGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:8px
+}
+
+.selectedProofItem{
+  position:relative;
+  overflow:hidden;
+  background:#09090a;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  border-radius:12px;
+  min-height:130px
+}
+
+.selectedProofItem img{
+  display:block;
+  width:100%;
+  height:170px;
+  object-fit:contain;
+  background:#080809
+}
+
+.selectedProofMeta{
+  padding:8px 9px 9px;
+  color:#817b71;
+  font-size:9px;
+  line-height:1.45;
+  word-break:break-word
+}
+
+.removeSelectedProof{
+  position:absolute;
+  right:7px;
+  top:7px;
+  width:30px;
+  height:30px;
+  padding:0;
+  margin:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:17px;
+  line-height:1;
+  background:rgba(57,24,24,.95);
+  color:#f1a2a2;
+  border:
+  1px solid
+  rgba(230,110,110,.35);
+  z-index:2
+}
+
+.addProofButton{
+  margin-top:8px
+}
+
+.clearProofButton{
+  margin-top:8px
+}
+
+
+/* =========================================================
+   PAYMENT HISTORY
+========================================================= */
+
+.paymentHistoryItem{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:10px
+}
+
+.paymentHistoryItem.pending{
+  border-color:
+  rgba(214,168,63,.25)
+}
+
+.paymentHistoryItem.approved{
+  border-color:
+  rgba(90,200,135,.25)
+}
+
+.paymentHistoryItem.rejected{
+  border-color:
+  rgba(215,99,99,.28)
+}
+
+.paymentHistoryHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px
+}
+
+.paymentHistoryMethod{
+  font-size:15px;
+  color:#ecd076;
+  font-weight:900
+}
+
+.paymentHistoryTime{
+  color:#777166;
+  font-size:10px;
+  margin-top:4px
+}
+
+.paymentStatusBadge{
+  border-radius:99px;
+  padding:6px 9px;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap
+}
+
+.paymentStatusBadge.pending{
+  background:#352d13;
+  color:#e2c870
+}
+
+.paymentStatusBadge.approved{
+  background:#153124;
+  color:#79d6a2
+}
+
+.paymentStatusBadge.rejected{
+  background:#391818;
+  color:#ed9b9b
+}
+
+.paymentHistoryGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:11px
+}
+
+.paymentProofGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:8px;
+  margin-top:11px
+}
+
+.paymentProof{
+  background:#09090a;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:10px;
+  overflow:hidden;
+  min-height:120px;
+  display:grid;
+  place-items:center
+}
+
+.paymentProof img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:300px;
+  object-fit:contain
+}
+
+.paymentProofLoading{
+  color:#777;
+  font-size:10px;
+  padding:15px;
+  text-align:center
+}
+
+.rejectionReason{
+  margin-top:10px;
+  padding:10px;
+  border-radius:10px;
+  background:#171111;
+  color:#dba0a0;
+  font-size:10px;
+  line-height:1.6
+}
+
+.retryProof{
+  margin-top:11px;
+  padding-top:11px;
+  border-top:
+  1px solid
+  rgba(255,255,255,.06)
+}
+
+.smallBtn{
+  padding:10px;
+  font-size:11px
+}
+
+.foot{
+  text-align:center;
+  color:#6f6a61;
+  font-size:10px;
+  margin-top:22px
+}
+
+@media(max-width:420px){
+
+  .info{
+    grid-template-columns:
+    1fr 1fr
+  }
+
+  .paymentAccountGrid,
+  .paymentHistoryGrid,
+  .paymentAmountBox{
+    grid-template-columns:
+    1fr 1fr
+  }
+
+  .selectedProofGrid{
+    grid-template-columns:
+    1fr 1fr
+  }
+
+}
+
+</style>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+
+  <div class="brand">
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      AGENT CENTER
+    </div>
+
+  </div>
+
+
+  <div class="langWrap">
+
+    <select
+      id="langSelect"
+      onchange="changeLanguage(this.value)">
+
+      <option value="zh">
+        中文
+      </option>
+
+      <option value="my">
+        မြန်မာ
+      </option>
+
+      <option value="en">
+        English
+      </option>
+
+      <option value="th">
+        ไทย
+      </option>
+
+      <option value="ms">
+        Bahasa Melayu
+      </option>
+
+      <option value="vi">
+        Tiếng Việt
+      </option>
+
+      <option value="id">
+        Bahasa Indonesia
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div
+    class="card"
+    id="loginBox">
+
+    <div
+      class="title"
+      data-i18n="loginTitle">
+
+      代理登录
+
+    </div>
+
+
+    <input
+      id="email"
+      type="email"
+      data-ph="email"
+      placeholder="代理邮箱">
+
+
+    <div style="height:9px"></div>
+
+
+    <input
+      id="password"
+      type="password"
+      data-ph="password"
+      placeholder="密码">
+
+<div
+  class="h-captcha"
+  data-sitekey="a71ac782-e490-452a-8e7c-825e176e9098">
+</div>
+    <button
+      onclick="signIn()"
+      data-i18n="loginBtn">
+
+      登录代理中心
+
+    </button>
+
+
+    <div
+      class="msg"
+      id="loginMsg">
+    </div>
+
+  </div>
+
+
+  <div
+    id="agentBox"
+    class="hidden">
+
+
+    <div class="card">
+
+      <div
+        class="title"
+        data-i18n="agentInfo">
+
+        我的代理资料
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="box">
+
+          <small data-i18n="agentName">
+            代理名称
+          </small>
+
+          <strong id="agentName">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="agentRate">
+            代理比例
+          </small>
+
+          <strong id="commissionRate">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="accountStatus">
+            账号状态
+          </small>
+
+          <strong id="agentStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            Myanmar Time
+          </small>
+
+          <strong id="mmtClock">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div
+        class="title"
+        data-i18n="currentRound">
+
+        当前期数
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="box">
+
+          <small data-i18n="round">
+            期数
+          </small>
+
+          <strong id="roundName">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="submitStatus">
+            提交状态
+          </small>
+
+          <strong id="roundStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="deadline">
+            截止时间
+          </small>
+
+          <strong id="deadlineText">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="timeLeft">
+            距离截止
+          </small>
+
+          <strong id="countdown">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="note"
+        data-i18n="serverNote">
+
+        截止时间以前可以增加或修改数据；截止以后系统自动锁定。
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div
+        class="title"
+        data-i18n="submitTitle">
+
+        00–99 本期积分提交
+
+      </div>
+
+
+      <div
+        class="grid"
+        id="numberGrid">
+      </div>
+
+
+      <div class="total">
+
+        <small data-i18n="totalPoints">
+          当前输入总额
+        </small>
+
+        <strong id="totalPoints">
+          0
+        </strong>
+
+      </div>
+
+
+      <button
+        id="submitBtn"
+        onclick="submitRound()"
+        data-i18n="submitBtn">
+
+        保存本期数据
+
+      </button>
+
+
+      <button
+        class="secondary"
+        onclick="loadExisting(true)"
+        data-i18n="reloadBtn">
+
+        重新读取已保存数据
+
+      </button>
+
+
+      <div
+        class="msg"
+        id="submitMsg">
+      </div>
+
+
+      <div
+        class="note"
+        data-i18n="editNote">
+
+        已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div
+        class="title"
+        data-i18n="settlementTitle">
+
+        本期结款
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="box">
+
+          <small data-i18n="submittedTotal">
+            本期提交总额
+          </small>
+
+          <strong id="settlementSubmittedTotal">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box commission highlight">
+
+          <small data-i18n="commission">
+            本期代理佣金
+          </small>
+
+          <strong id="settlementCommission">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box highlight">
+
+          <small data-i18n="amountDue">
+            本期应交平台
+          </small>
+
+          <strong id="amountDue">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="amountReceived">
+            平台已确认到账
+          </small>
+
+          <strong id="amountReceived">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="paymentStatus">
+            结款状态
+          </small>
+
+          <strong id="paymentStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="paymentDue">
+            付款截止
+          </small>
+
+          <strong id="paymentDueAt">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="settlementNotice"
+        id="settlementNotice">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div
+        class="title"
+        data-i18n="paymentCenter">
+
+        💳 平台收款 / 提交付款凭证
+
+      </div>
+
+
+      <div class="paymentAmountBox">
+
+        <div class="paymentAmountInfo">
+
+          <small data-i18n="paymentRequired">
+            本期系统应付款
+          </small>
+
+          <strong id="paymentRequiredAmount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="paymentAmountInfo pending">
+
+          <small data-i18n="paymentRemaining">
+            当前可提交余额
+          </small>
+
+          <strong id="paymentRemainingAmount">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="note"
+        data-i18n="paymentIntro">
+
+        请先选择平台当前启用的收款方式，完成转账后提交实际转账金额及付款截图。管理员核实后才会正式确认到账。
+
+      </div>
+
+
+      <div
+        class="title"
+        style="margin-top:18px"
+        data-i18n="paymentAccountsTitle">
+
+        选择平台收款账户
+
+      </div>
+
+
+      <div id="paymentAccounts">
+
+        <div class="paymentQrEmpty">
+          正在读取收款账户...
+        </div>
+
+      </div>
+
+
+      <div
+        id="paymentForm"
+        class="paymentForm hidden">
+
+
+        <div
+          class="paymentLabel"
+          data-i18n="selectedPaymentMethod">
+
+          已选择收款方式
+
+        </div>
+
+
+        <input
+          id="selectedPaymentDisplay"
+          readonly
+          value="">
+
+
+        <div style="height:10px"></div>
+
+
+        <div
+          class="paymentLabel"
+          data-i18n="transferAmount">
+
+          实际转账金额
+
+        </div>
+
+
+        <input
+  id="paymentAmountInput"
+  type="number"
+  min="0.01"
+  step="0.01"
+  inputmode="decimal"
+  oninput="this.dataset.manual='1'"
+  placeholder="请输入实际转账金额">
+
+        <div class="note">
+
+          实际转账金额可以自行修改，但不能超过当前可提交余额。
+
+        </div>
+
+
+        <div style="height:10px"></div>
+
+
+        <div
+          class="paymentLabel"
+          data-i18n="paymentNote">
+
+          付款备注，可不填
+
+        </div>
+
+
+        <textarea
+          id="paymentNoteInput"
+          data-ph="paymentNotePlaceholder"
+          placeholder="例如：已通过 K Pay 转账，请核实"></textarea>
+
+
+        <div style="height:10px"></div>
+
+
+        <div
+          class="paymentLabel"
+          data-i18n="paymentProof">
+
+          付款截图 / 凭证
+
+        </div>
+
+
+        <!--
+          真正的 file input 保留，
+          但选中的 File 会马上保存进 JS 数组。
+        -->
+
+        <input
+          id="paymentProofFiles"
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
+          multiple
+          onchange="handlePaymentProofSelection(this)">
+
+
+        <div
+          class="note"
+          data-i18n="proofNote">
+
+          必须至少上传 1 张付款凭证。可以一次选择多张图片，每张最大 10MB。
+
+        </div>
+
+
+        <div
+          id="selectedProofWrap"
+          class="selectedProofWrap hidden">
+
+          <div class="selectedProofHeader">
+
+            <div
+              class="selectedProofTitle"
+              data-i18n="selectedProofTitle">
+
+              已选择的付款凭证
+
+            </div>
+
+            <div
+              id="selectedProofCount"
+              class="selectedProofCount">
+
+              0
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="selectedProofGrid"
+            class="selectedProofGrid">
+          </div>
+
+
+          <button
+            type="button"
+            class="secondary addProofButton"
+            onclick="openMorePaymentProofs()"
+            data-i18n="addMoreProof">
+
+            ＋ 继续添加图片
+
+          </button>
+
+
+          <button
+            type="button"
+            class="redBtn clearProofButton"
+            onclick="clearSelectedPaymentProofs()"
+            data-i18n="clearSelectedProof">
+
+            清空已选图片
+
+          </button>
+
+        </div>
+
+
+        <button
+          id="paymentSubmitBtn"
+          class="greenBtn"
+          onclick="submitPaymentProof()"
+          data-i18n="submitPaymentProof">
+
+          提交付款凭证
+
+        </button>
+
+
+        <div
+          class="msg"
+          id="paymentMsg">
+        </div>
+
+      </div>
+
+
+      <div class="paymentForm">
+
+        <div
+          class="title"
+          data-i18n="paymentHistory">
+
+          本期付款记录
+
+        </div>
+
+
+        <div id="paymentHistoryList">
+
+          <div class="paymentQrEmpty">
+            暂无付款记录
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div
+        class="title"
+        data-i18n="resultTitle">
+
+        本期结果
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="box">
+
+          <small data-i18n="resultNumber">
+            开奖号码
+          </small>
+
+          <strong id="resultNumber">
+            等待开奖
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="submittedTotal">
+            本期提交总额
+          </small>
+
+          <strong id="resultSubmittedTotal">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small data-i18n="agentRate">
+            代理比例
+          </small>
+
+          <strong id="resultRate">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box commission highlight">
+
+          <small data-i18n="commission">
+            本期代理佣金
+          </small>
+
+          <strong id="resultCommission">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box highlight">
+
+          <small data-i18n="winningAmount">
+            本期中奖金额
+          </small>
+
+          <strong id="winningAmount">
+            等待开奖
+          </strong>
+
+        </div>
+
+
+        <div class="box highlight">
+
+          <small data-i18n="finalBalance">
+            最终结算差额
+          </small>
+
+          <strong id="finalBalance">
+            等待开奖
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="resultNote"
+        data-i18n="commissionNote">
+
+        代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <button
+        class="secondary"
+        onclick="logout()"
+        data-i18n="logout">
+
+        退出登录
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="foot">
+
+    © 2022 JIN MANTANG · AGENT SYSTEM
+
+  </div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const BASE =
+'https://veserwfjxglxieehfggy.supabase.co';
+
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+const MULTIPLIER =
+80;
+
+
+const PAYMENT_QR_BUCKET =
+'payment-qr-codes';
+
+
+const PAYMENT_PROOF_BUCKET =
+'agent-payment-proofs';
+
+
+const MAX_IMAGE_SIZE =
+10 * 1024 * 1024;
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let token =
+localStorage.getItem(
+  'jmt_agent_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_agent_token'
+)
+||
+'';
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_agent_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_agent_refresh_token'
+)
+||
+'';
+
+
+let isRefreshingSession =
+false;
+
+
+let refreshSessionPromise =
+null;
+let agent =
+null;
+
+
+let currentRound =
+null;
+
+
+let settlement =
+null;
+
+
+let submittedNumbers =
+{};
+
+
+let submittedTotal =
+0;
+
+
+let existingCodes =
+new Set();
+
+
+let isSaving =
+false;
+
+
+let isRefreshingRound =
+false;
+
+
+let currentLang =
+localStorage.getItem(
+  'jmt_agent_lang'
+)
+||
+'zh';
+
+
+let paymentAccounts =
+[];
+
+
+let selectedPaymentAccountId =
+'';
+
+
+let paymentSubmissions =
+[];
+
+
+let paymentProofs =
+[];
+
+
+let isSubmittingPayment =
+false;
+
+
+let isLoadingPaymentCenter =
+false;
+
+
+let paymentCenterSignature =
+'';
+
+
+/*
+  新增：
+  代理当前准备提交、但尚未真正上传的付款图片。
+
+  不依赖 input.files。
+  因此：
+  - 20秒刷新不会丢
+  - 可以多次追加
+  - 可以删除某一张
+  - 可以清空全部
+*/
+
+let selectedPaymentProofFiles =
+[];
+
+
+const selectedPaymentProofPreviewUrls =
+new Map();
+
+
+/*
+  私有 Storage 图片通过登录 token
+  直接读取 Blob 后生成 object URL。
+
+  这里保存 URL，
+  避免页面重复下载同一张图片。
+*/
+
+const privateImageObjectUrls =
+new Map();
+
+
+
+/* =========================================================
+   TRANSLATIONS
+========================================================= */
+
+const T = {
+
+zh:{
+
+loginTitle:'代理登录',
+email:'代理邮箱',
+password:'密码',
+loginBtn:'登录代理中心',
+
+agentInfo:'我的代理资料',
+agentName:'代理名称',
+agentRate:'代理比例',
+accountStatus:'账号状态',
+normal:'正常',
+suspended:'已暂停',
+blocked:'已限制',
+
+currentRound:'当前期数',
+round:'期数',
+submitStatus:'提交状态',
+deadline:'截止时间',
+timeLeft:'距离截止',
+serverNote:'截止时间以前可以增加或修改数据；截止以后系统自动锁定。',
+
+submitTitle:'00–99 本期积分提交',
+totalPoints:'当前输入总额',
+submitBtn:'保存本期数据',
+reloadBtn:'重新读取已保存数据',
+editNote:'已保存的号码在截止前仍可修改。将金额清空或改成 0 后再次保存，该号码金额会变成 0。',
+
+settlementTitle:'本期结款',
+amountDue:'本期应交平台',
+amountReceived:'平台已确认到账',
+paymentStatus:'结款状态',
+paymentDue:'付款截止',
+pendingPayment:'待结款',
+paidPayment:'已结款',
+overduePayment:'逾期未结款',
+noSettlement:'暂无结款数据',
+settlementWaiting:'本期数据提交后，系统会自动生成本期应付款金额。',
+settlementPending:'本期仍待结款。请根据平台收款账户完成转账，并提交付款凭证等待管理员确认。',
+settlementPaid:'✓ 本期已经由平台确认结款。',
+settlementOverdue:'本期已经超过付款截止时间且尚未确认到账，请尽快完成付款并提交凭证。',
+
+paymentCenter:'💳 平台收款 / 提交付款凭证',
+paymentRequired:'本期系统应付款',
+paymentRemaining:'当前可提交余额',
+paymentIntro:'请先选择平台当前启用的收款方式，完成转账后提交实际转账金额及付款截图。管理员核实后才会正式确认到账。',
+paymentAccountsTitle:'选择平台收款账户',
+selectedPaymentMethod:'已选择收款方式',
+transferAmount:'实际转账金额',
+paymentNote:'付款备注，可不填',
+paymentNotePlaceholder:'例如：已通过 K Pay 转账，请核实',
+paymentProof:'付款截图 / 凭证',
+proofNote:'必须至少上传 1 张付款凭证。可以一次选择多张图片，每张最大 10MB。',
+selectedProofTitle:'已选择的付款凭证',
+addMoreProof:'＋ 继续添加图片',
+clearSelectedProof:'清空已选图片',
+removeProof:'删除',
+submitPaymentProof:'提交付款凭证',
+paymentHistory:'本期付款记录',
+noPaymentAccount:'目前没有可使用的平台收款账户',
+selectPaymentAccount:'请先选择平台收款账户',
+invalidPaymentAmount:'请输入正确的转账金额',
+paymentAmountTooHigh:'本次提交金额超过当前可提交余额',
+proofRequired:'请至少选择 1 张付款截图',
+invalidProof:'付款凭证必须为图片格式',
+proofTooLarge:'单张图片不能超过 10MB',
+paymentSubmitting:'正在建立付款记录...',
+paymentUploading:'正在上传付款截图...',
+paymentSuccess:'✓ 付款凭证提交成功，等待管理员核实',
+paymentRecordCreatedProofFailed:'付款记录已经建立，但截图上传未全部完成。请在下方付款记录中重新上传凭证。',
+paymentSubmitFail:'付款提交失败',
+proofUploadFail:'凭证上传失败',
+retryProof:'补充 / 重新上传付款凭证',
+uploadMoreProof:'上传所选凭证',
+pendingReview:'等待审核',
+approved:'已确认',
+rejected:'已拒绝',
+declaredAmount:'申报金额',
+confirmedAmount:'确认金额',
+submittedAt:'提交时间',
+paymentAccountLabel:'收款账户',
+accountHolder:'收款人',
+accountNumber:'收款号码 / 账号',
+bankName:'银行 / 钱包',
+accountNote:'备注',
+noQr:'暂无收款二维码',
+proofCount:'付款凭证',
+noProof:'暂未上传付款凭证',
+rejectionReason:'拒绝原因',
+allAmountSubmitted:'本期待付款金额已经全部提交审核或确认，不需要重复提交。',
+paymentNotReady:'本期暂时没有需要付款的金额。',
+paymentLoading:'正在读取付款资料...',
+paymentRefreshFail:'付款资料读取失败',
+
+resultTitle:'本期结果',
+resultNumber:'开奖号码',
+submittedTotal:'本期提交总额',
+commission:'本期代理佣金',
+winningAmount:'本期中奖金额',
+finalBalance:'最终结算差额',
+commissionNote:'代理佣金按照系统内真正保存的本期提交总额和代理比例自动计算。最终结算差额由数据库本期结算结果为准。',
+
+logout:'退出登录',
+
+loginMissing:'请输入代理邮箱和密码',
+logging:'正在登录...',
+loginFail:'登录失败，请检查账号或密码',
+noAgent:'该账号没有有效代理权限',
+noRound:'暂无开放期',
+canSubmit:'可以提交 / 修改',
+closed:'本期已截止',
+closedShort:'已关闭',
+minutes:'分',
+seconds:'秒',
+saving:'正在保存，请稍候...',
+noSubmitRound:'当前没有可以提交的期数',
+accountCannot:'你的代理账号目前无法提交',
+serverRejected:'本期已经截止，服务器已拒绝修改',
+previousPaymentOverdue:'存在上一期逾期未结款，请先完成结算',
+saveFail:'保存失败',
+networkError:'网络异常，请重新提交',
+saveSuccess:'✓ 保存成功 · 本期总额 ',
+noChange:'✓ 没有需要保存的修改',
+reloaded:'✓ 已重新读取最新数据',
+waitingResult:'等待开奖',
+morning:'上午 11:45',
+afternoon:'下午 15:45',
+platformReceives:'代理应付平台',
+platformPays:'平台应付代理',
+balanced:'已结清'
+
+},
+
+my:{
+
+loginTitle:'ကိုယ်စားလှယ် ဝင်ရောက်ရန်',
+email:'ကိုယ်စားလှယ် Email',
+password:'စကားဝှက်',
+loginBtn:'ကိုယ်စားလှယ်စနစ်သို့ ဝင်မည်',
+
+agentInfo:'ကျွန်ုပ်၏ ကိုယ်စားလှယ်အချက်အလက်',
+agentName:'ကိုယ်စားလှယ်အမည်',
+agentRate:'ကိုယ်စားလှယ် ရာခိုင်နှုန်း',
+accountStatus:'အကောင့်အခြေအနေ',
+normal:'ပုံမှန်',
+suspended:'ယာယီရပ်ထား',
+blocked:'ကန့်သတ်ထား',
+
+currentRound:'လက်ရှိအကြိမ်',
+round:'အကြိမ်',
+submitStatus:'တင်သွင်းမှုအခြေအနေ',
+deadline:'နောက်ဆုံးအချိန်',
+timeLeft:'ကျန်ရှိချိန်',
+serverNote:'ပိတ်ချိန်မတိုင်မီ ဒေတာထည့်ခြင်းနှင့် ပြင်ခြင်း ပြုလုပ်နိုင်သည်။ ပိတ်ချိန်ကျော်ပါက စနစ်က အလိုအလျောက်ပိတ်မည်။',
+
+submitTitle:'00–99 လက်ရှိအကြိမ် Point တင်သွင်းမှု',
+totalPoints:'လက်ရှိစုစုပေါင်း',
+submitBtn:'ဒေတာသိမ်းမည်',
+reloadBtn:'သိမ်းထားသောဒေတာ ပြန်ဖတ်မည်',
+editNote:'ပိတ်ချိန်မတိုင်မီ သိမ်းထားသော နံပါတ်များကို ပြန်ပြင်နိုင်သည်။ 0 ပြောင်းပြီး သိမ်းပါက 0 ဖြစ်သွားမည်။',
+
+settlementTitle:'လက်ရှိအကြိမ် ငွေစာရင်း',
+amountDue:'Platform သို့ ပေးရမည့်ငွေ',
+amountReceived:'Platform အတည်ပြုလက်ခံငွေ',
+paymentStatus:'ငွေပေးချေမှုအခြေအနေ',
+paymentDue:'ငွေပေးချေရမည့် နောက်ဆုံးအချိန်',
+pendingPayment:'ငွေပေးချေရန်ကျန်',
+paidPayment:'ငွေရှင်းပြီး',
+overduePayment:'ငွေပေးချေမှုနောက်ကျ',
+noSettlement:'ငွေစာရင်းမရှိသေးပါ',
+settlementWaiting:'ဒေတာတင်ပြီးနောက် ပေးရမည့်ငွေကို စနစ်က အလိုအလျောက်တွက်ပေးမည်။',
+settlementPending:'ငွေပေးချေရန်ကျန်ရှိနေသည်။ Platform account သို့လွှဲပြီး ငွေလွှဲအထောက်အထားတင်ပါ။',
+settlementPaid:'✓ ယခုအကြိမ် ငွေရှင်းပြီးဖြစ်သည်။',
+settlementOverdue:'ငွေပေးချေရမည့်အချိန်ကျော်ပြီး အတည်ပြုမရသေးပါ။ အမြန်ဆုံးငွေလွှဲပြီး အထောက်အထားတင်ပါ။',
+
+paymentCenter:'💳 Platform ငွေလက်ခံ / ငွေလွှဲအထောက်အထား',
+paymentRequired:'ယခုအကြိမ် ပေးရမည့်ငွေ',
+paymentRemaining:'တင်နိုင်သေးသော လက်ကျန်',
+paymentIntro:'အသုံးပြုနိုင်သော Platform ငွေလက်ခံနည်းကိုရွေးပြီး ငွေလွှဲပါ။ ထို့နောက် ငွေပမာဏနှင့် screenshot များတင်ပါ။',
+paymentAccountsTitle:'Platform ငွေလက်ခံ Account ရွေးပါ',
+selectedPaymentMethod:'ရွေးထားသော ငွေပေးနည်း',
+transferAmount:'အမှန်တကယ်လွှဲသောငွေ',
+paymentNote:'မှတ်ချက်၊ မဖြည့်လည်းရသည်',
+paymentNotePlaceholder:'ဥပမာ - K Pay ဖြင့်လွှဲပြီးပါပြီ',
+paymentProof:'ငွေလွှဲ Screenshot',
+proofNote:'အနည်းဆုံး screenshot ၁ ပုံတင်ရမည်။ ပုံများစွာရွေးနိုင်ပြီး တစ်ပုံ 10MB အများဆုံးဖြစ်သည်။',
+selectedProofTitle:'ရွေးထားသော Screenshot များ',
+addMoreProof:'＋ ပုံထပ်ထည့်မည်',
+clearSelectedProof:'ရွေးထားသမျှရှင်းမည်',
+removeProof:'ဖျက်မည်',
+submitPaymentProof:'ငွေလွှဲအထောက်အထားတင်မည်',
+paymentHistory:'ယခုအကြိမ် ငွေပေးချေမှုမှတ်တမ်း',
+noPaymentAccount:'လက်ရှိအသုံးပြုနိုင်သော ငွေလက်ခံ account မရှိပါ',
+selectPaymentAccount:'ငွေလက်ခံ account ကိုရွေးပါ',
+invalidPaymentAmount:'မှန်ကန်သောငွေပမာဏထည့်ပါ',
+paymentAmountTooHigh:'တင်သောငွေပမာဏသည် လက်ကျန်ထက်များနေသည်',
+proofRequired:'အနည်းဆုံး screenshot ၁ ပုံရွေးပါ',
+invalidProof:'ငွေပေးချေမှုအထောက်အထားသည် ပုံဖြစ်ရမည်',
+proofTooLarge:'တစ်ပုံ 10MB ထက်မကျော်ရ',
+paymentSubmitting:'ငွေပေးချေမှုမှတ်တမ်း ဖန်တီးနေသည်...',
+paymentUploading:'Screenshot များတင်နေသည်...',
+paymentSuccess:'✓ တင်ပြီးပါပြီ။ Admin အတည်ပြုချက်ကိုစောင့်ပါ',
+paymentRecordCreatedProofFailed:'ငွေပေးချေမှုမှတ်တမ်း ဖန်တီးပြီးသော်လည်း screenshot အားလုံးမတင်နိုင်ပါ။ အောက်တွင် ပြန်တင်ပါ။',
+paymentSubmitFail:'ငွေပေးချေမှုတင်မရပါ',
+proofUploadFail:'Screenshot တင်မရပါ',
+retryProof:'Screenshot ထပ်တင်ရန်',
+uploadMoreProof:'ရွေးထားသော Screenshot တင်မည်',
+pendingReview:'စစ်ဆေးနေသည်',
+approved:'အတည်ပြုပြီး',
+rejected:'ငြင်းပယ်ထား',
+declaredAmount:'တင်ပြငွေ',
+confirmedAmount:'အတည်ပြုငွေ',
+submittedAt:'တင်သည့်အချိန်',
+paymentAccountLabel:'ငွေလက်ခံ Account',
+accountHolder:'ငွေလက်ခံသူ',
+accountNumber:'ဖုန်း / Account',
+bankName:'Bank / Wallet',
+accountNote:'မှတ်ချက်',
+noQr:'QR မရှိသေးပါ',
+proofCount:'အထောက်အထား',
+noProof:'Screenshot မရှိသေးပါ',
+rejectionReason:'ငြင်းပယ်ရခြင်း',
+allAmountSubmitted:'ပေးရမည့်ငွေအားလုံးကို စစ်ဆေးရန်တင်ပြီး သို့မဟုတ် အတည်ပြုပြီးပါပြီ။',
+paymentNotReady:'ယခုအကြိမ် ပေးရန်ငွေမရှိသေးပါ။',
+paymentLoading:'ငွေပေးချေမှုဒေတာ ဖတ်နေသည်...',
+paymentRefreshFail:'ငွေပေးချေမှုဒေတာဖတ်မရပါ',
+
+resultTitle:'လက်ရှိအကြိမ် ရလဒ်',
+resultNumber:'ရလဒ်နံပါတ်',
+submittedTotal:'တင်ထားသော စုစုပေါင်း',
+commission:'ကိုယ်စားလှယ် ကော်မရှင်',
+winningAmount:'အနိုင်ရငွေ',
+finalBalance:'နောက်ဆုံးရှင်းတမ်း',
+commissionNote:'ကော်မရှင်ကို အမှန်တကယ်သိမ်းထားသော စုစုပေါင်းနှင့် ကိုယ်စားလှယ်ရာခိုင်နှုန်းအလိုက် တွက်သည်။',
+
+logout:'ထွက်မည်',
+
+loginMissing:'Email နှင့် စကားဝှက်ထည့်ပါ',
+logging:'ဝင်ရောက်နေသည်...',
+loginFail:'ဝင်မရပါ။ Email/စကားဝှက်စစ်ပါ',
+noAgent:'ဤအကောင့်တွင် ကိုယ်စားလှယ်ခွင့်မရှိပါ',
+noRound:'ဖွင့်ထားသောအကြိမ်မရှိပါ',
+canSubmit:'တင် / ပြင်နိုင်သည်',
+closed:'လက်ရှိအကြိမ် ပိတ်ပြီးပါပြီ',
+closedShort:'ပိတ်ပြီး',
+minutes:'မိနစ်',
+seconds:'စက္ကန့်',
+saving:'သိမ်းနေသည်...',
+noSubmitRound:'တင်နိုင်သောအကြိမ်မရှိပါ',
+accountCannot:'ဤအကောင့်ဖြင့် လက်ရှိတင်မရပါ',
+serverRejected:'နောက်ဆုံးအချိန်ကျော်သွားသဖြင့် ပြင်ဆင်၍မရပါ',
+previousPaymentOverdue:'အရင်အကြိမ် ငွေရှင်းရန်ကျန်ရှိနေသည်',
+saveFail:'သိမ်းမရပါ',
+networkError:'Network အမှား',
+saveSuccess:'✓ သိမ်းပြီး · စုစုပေါင်း ',
+noChange:'✓ ပြောင်းလဲမှုမရှိပါ',
+reloaded:'✓ ဒေတာပြန်ဖတ်ပြီး',
+waitingResult:'ရလဒ်စောင့်နေသည်',
+morning:'မနက် 11:45',
+afternoon:'နေ့လယ် 15:45',
+platformReceives:'Platform သို့ ပေးရန်',
+platformPays:'Platform မှ ရရန်',
+balanced:'ရှင်းပြီး'
+
+},
+
+en:{
+
+loginTitle:'Agent Login',
+email:'Agent Email',
+password:'Password',
+loginBtn:'Login to Agent Center',
+
+agentInfo:'My Agent Profile',
+agentName:'Agent Name',
+agentRate:'Agent Rate',
+accountStatus:'Account Status',
+normal:'Active',
+suspended:'Suspended',
+blocked:'Restricted',
+
+currentRound:'Current Round',
+round:'Round',
+submitStatus:'Submission Status',
+deadline:'Deadline',
+timeLeft:'Time Remaining',
+serverNote:'Data may be added or edited before the deadline. The system locks automatically after the deadline.',
+
+submitTitle:'00–99 Round Submission',
+totalPoints:'Current Input Total',
+submitBtn:'Save Round Data',
+reloadBtn:'Reload Saved Data',
+editNote:'Saved numbers can still be edited before the deadline. Enter 0 and save again to set the amount to 0.',
+
+settlementTitle:'Round Settlement',
+amountDue:'Amount Due to Platform',
+amountReceived:'Confirmed Received',
+paymentStatus:'Payment Status',
+paymentDue:'Payment Deadline',
+pendingPayment:'Pending Payment',
+paidPayment:'Paid',
+overduePayment:'Overdue',
+noSettlement:'No settlement data',
+settlementWaiting:'The amount due will be generated automatically after the round data is saved.',
+settlementPending:'Payment is still pending. Transfer to an available platform account and submit your payment proof.',
+settlementPaid:'✓ This round has been confirmed as paid.',
+settlementOverdue:'Payment is overdue and has not been confirmed. Please transfer and submit your proof as soon as possible.',
+
+paymentCenter:'💳 Platform Payment / Submit Proof',
+paymentRequired:'Amount Required This Round',
+paymentRemaining:'Available Amount to Submit',
+paymentIntro:'Choose an active platform receiving account, complete the transfer, then submit the transferred amount and payment screenshots. Payment is only confirmed after admin review.',
+paymentAccountsTitle:'Choose Platform Account',
+selectedPaymentMethod:'Selected Payment Method',
+transferAmount:'Actual Transfer Amount',
+paymentNote:'Payment Note · Optional',
+paymentNotePlaceholder:'Example: Transferred via K Pay, please verify',
+paymentProof:'Payment Screenshots / Proof',
+proofNote:'At least 1 payment proof image is required. Multiple images are allowed. Maximum 10MB per image.',
+selectedProofTitle:'Selected Payment Proofs',
+addMoreProof:'＋ Add More Images',
+clearSelectedProof:'Clear Selected Images',
+removeProof:'Remove',
+submitPaymentProof:'Submit Payment Proof',
+paymentHistory:'Payment History for This Round',
+noPaymentAccount:'No platform payment account is currently available',
+selectPaymentAccount:'Please select a platform receiving account',
+invalidPaymentAmount:'Enter a valid transfer amount',
+paymentAmountTooHigh:'The submitted amount exceeds the available remaining balance',
+proofRequired:'Please select at least 1 payment screenshot',
+invalidProof:'Payment proof must be an image',
+proofTooLarge:'Each image must be 10MB or less',
+paymentSubmitting:'Creating payment record...',
+paymentUploading:'Uploading payment screenshots...',
+paymentSuccess:'✓ Payment proof submitted. Waiting for admin review.',
+paymentRecordCreatedProofFailed:'The payment record was created, but not all screenshots were uploaded. Please retry from the payment record below.',
+paymentSubmitFail:'Payment submission failed',
+proofUploadFail:'Proof upload failed',
+retryProof:'Add / Retry Payment Proof',
+uploadMoreProof:'Upload Selected Proof',
+pendingReview:'Pending Review',
+approved:'Confirmed',
+rejected:'Rejected',
+declaredAmount:'Declared Amount',
+confirmedAmount:'Confirmed Amount',
+submittedAt:'Submitted At',
+paymentAccountLabel:'Receiving Account',
+accountHolder:'Account Holder',
+accountNumber:'Phone / Account',
+bankName:'Bank / Wallet',
+accountNote:'Note',
+noQr:'No QR code available',
+proofCount:'Payment Proof',
+noProof:'No payment proof uploaded yet',
+rejectionReason:'Rejection Reason',
+allAmountSubmitted:'The full amount has already been submitted for review or confirmed.',
+paymentNotReady:'There is currently no amount due for this round.',
+paymentLoading:'Loading payment information...',
+paymentRefreshFail:'Unable to load payment information',
+
+resultTitle:'Round Result',
+resultNumber:'Result Number',
+submittedTotal:'Submitted Total',
+commission:'Agent Commission',
+winningAmount:'Winning Amount',
+finalBalance:'Final Settlement Balance',
+commissionNote:'Commission is calculated automatically from the actual saved round total and agent rate. Final settlement follows the database settlement record.',
+
+logout:'Logout',
+
+loginMissing:'Please enter agent email and password',
+logging:'Logging in...',
+loginFail:'Login failed. Check email or password',
+noAgent:'This account has no valid agent access',
+noRound:'No open round',
+canSubmit:'Open / Editable',
+closed:'Round Closed',
+closedShort:'Closed',
+minutes:'min',
+seconds:'sec',
+saving:'Saving...',
+noSubmitRound:'No round available',
+accountCannot:'Your account cannot submit now',
+serverRejected:'Deadline passed. Changes are no longer accepted',
+previousPaymentOverdue:'Previous round payment is overdue',
+saveFail:'Save failed',
+networkError:'Network error',
+saveSuccess:'✓ Saved · Total ',
+noChange:'✓ No changes to save',
+reloaded:'✓ Latest saved data loaded',
+waitingResult:'Waiting for result',
+morning:'Morning 11:45',
+afternoon:'Afternoon 15:45',
+platformReceives:'Agent Pays Platform',
+platformPays:'Platform Pays Agent',
+balanced:'Balanced'
+
+},
+th:{
+
+loginTitle:'เข้าสู่ระบบตัวแทน',
+email:'อีเมลตัวแทน',
+password:'รหัสผ่าน',
+loginBtn:'เข้าสู่ศูนย์ตัวแทน',
+
+agentInfo:'ข้อมูลตัวแทนของฉัน',
+agentName:'ชื่อตัวแทน',
+agentRate:'อัตราตัวแทน',
+accountStatus:'สถานะบัญชี',
+normal:'ปกติ',
+suspended:'ระงับชั่วคราว',
+blocked:'ถูกจำกัด',
+
+currentRound:'รอบปัจจุบัน',
+round:'รอบ',
+submitStatus:'สถานะการส่ง',
+deadline:'เวลาปิดรับ',
+timeLeft:'เวลาที่เหลือ',
+serverNote:'ก่อนเวลาปิดสามารถเพิ่มหรือแก้ไขข้อมูลได้ หลังเวลาปิดระบบจะล็อกอัตโนมัติ',
+
+submitTitle:'ส่งข้อมูล 00–99',
+totalPoints:'ยอดรวมปัจจุบัน',
+submitBtn:'บันทึกข้อมูล',
+reloadBtn:'โหลดข้อมูลที่บันทึก',
+editNote:'ข้อมูลเดิมสามารถแก้ไขได้ก่อนเวลาปิด ใส่ 0 แล้วบันทึกเพื่อเปลี่ยนยอดเป็น 0',
+
+settlementTitle:'การชำระรอบนี้',
+amountDue:'ยอดที่ต้องชำระให้แพลตฟอร์ม',
+amountReceived:'ยอดที่แพลตฟอร์มยืนยัน',
+paymentStatus:'สถานะชำระเงิน',
+paymentDue:'กำหนดชำระ',
+pendingPayment:'รอชำระ',
+paidPayment:'ชำระแล้ว',
+overduePayment:'ค้างชำระ',
+noSettlement:'ยังไม่มีข้อมูลการชำระ',
+settlementWaiting:'ระบบจะสร้างยอดชำระอัตโนมัติหลังบันทึกข้อมูล',
+settlementPending:'ยังรอชำระ กรุณาโอนไปยังบัญชีของแพลตฟอร์มและส่งหลักฐานการชำระเงิน',
+settlementPaid:'✓ รอบนี้ได้รับการยืนยันว่าชำระแล้ว',
+settlementOverdue:'เกินกำหนดชำระและยังไม่ได้รับการยืนยัน กรุณาโอนและส่งหลักฐานโดยเร็ว',
+
+paymentCenter:'💳 ชำระเงินให้แพลตฟอร์ม / ส่งหลักฐาน',
+paymentRequired:'ยอดที่ต้องชำระรอบนี้',
+paymentRemaining:'ยอดคงเหลือที่ส่งได้',
+paymentIntro:'เลือกบัญชีรับเงินของแพลตฟอร์ม โอนเงินแล้วส่งยอดจริงและภาพหลักฐาน ระบบจะยืนยันหลังผู้ดูแลตรวจสอบ',
+paymentAccountsTitle:'เลือกบัญชีรับเงิน',
+selectedPaymentMethod:'ช่องทางที่เลือก',
+transferAmount:'ยอดโอนจริง',
+paymentNote:'หมายเหตุ ไม่บังคับ',
+paymentNotePlaceholder:'เช่น โอนผ่าน K Pay แล้ว กรุณาตรวจสอบ',
+paymentProof:'ภาพหลักฐานการชำระ',
+proofNote:'ต้องมีภาพหลักฐานอย่างน้อย 1 ภาพ เลือกหลายภาพได้ ภาพละไม่เกิน 10MB',
+selectedProofTitle:'ภาพหลักฐานที่เลือก',
+addMoreProof:'＋ เพิ่มรูปภาพ',
+clearSelectedProof:'ล้างรูปภาพที่เลือก',
+removeProof:'ลบ',
+submitPaymentProof:'ส่งหลักฐานการชำระ',
+paymentHistory:'ประวัติการชำระรอบนี้',
+noPaymentAccount:'ขณะนี้ไม่มีบัญชีรับเงินที่ใช้งานได้',
+selectPaymentAccount:'กรุณาเลือกบัญชีรับเงิน',
+invalidPaymentAmount:'กรุณากรอกยอดโอนที่ถูกต้อง',
+paymentAmountTooHigh:'ยอดที่ส่งเกินยอดคงเหลือ',
+proofRequired:'กรุณาเลือกภาพหลักฐานอย่างน้อย 1 ภาพ',
+invalidProof:'หลักฐานต้องเป็นไฟล์รูปภาพ',
+proofTooLarge:'รูปแต่ละไฟล์ต้องไม่เกิน 10MB',
+paymentSubmitting:'กำลังสร้างรายการชำระ...',
+paymentUploading:'กำลังอัปโหลดหลักฐาน...',
+paymentSuccess:'✓ ส่งหลักฐานแล้ว รอผู้ดูแลตรวจสอบ',
+paymentRecordCreatedProofFailed:'สร้างรายการแล้ว แต่ภาพอัปโหลดไม่ครบ กรุณาอัปโหลดใหม่จากรายการด้านล่าง',
+paymentSubmitFail:'ส่งรายการไม่สำเร็จ',
+proofUploadFail:'อัปโหลดหลักฐานไม่สำเร็จ',
+retryProof:'เพิ่ม / อัปโหลดหลักฐานใหม่',
+uploadMoreProof:'อัปโหลดหลักฐานที่เลือก',
+pendingReview:'รอตรวจสอบ',
+approved:'ยืนยันแล้ว',
+rejected:'ถูกปฏิเสธ',
+declaredAmount:'ยอดแจ้งโอน',
+confirmedAmount:'ยอดยืนยัน',
+submittedAt:'เวลาส่ง',
+paymentAccountLabel:'บัญชีรับเงิน',
+accountHolder:'ชื่อผู้รับ',
+accountNumber:'เบอร์ / เลขบัญชี',
+bankName:'ธนาคาร / Wallet',
+accountNote:'หมายเหตุ',
+noQr:'ไม่มี QR',
+proofCount:'หลักฐาน',
+noProof:'ยังไม่มีหลักฐาน',
+rejectionReason:'เหตุผลที่ปฏิเสธ',
+allAmountSubmitted:'ยอดทั้งหมดถูกส่งตรวจสอบหรือยืนยันแล้ว',
+paymentNotReady:'ขณะนี้ไม่มียอดที่ต้องชำระ',
+paymentLoading:'กำลังโหลดข้อมูลการชำระ...',
+paymentRefreshFail:'โหลดข้อมูลการชำระไม่สำเร็จ',
+
+resultTitle:'ผลรอบนี้',
+resultNumber:'หมายเลขผล',
+submittedTotal:'ยอดส่งทั้งหมด',
+commission:'ค่าคอมมิชชั่นตัวแทน',
+winningAmount:'ยอดเงินรางวัล',
+finalBalance:'ยอดสุทธิที่ต้องชำระ',
+commissionNote:'ค่าคอมมิชชั่นคำนวณจากยอดที่บันทึกจริงและอัตราตัวแทน',
+
+logout:'ออกจากระบบ',
+
+loginMissing:'กรุณากรอกอีเมลและรหัสผ่าน',
+logging:'กำลังเข้าสู่ระบบ...',
+loginFail:'เข้าสู่ระบบไม่สำเร็จ',
+noAgent:'บัญชีนี้ไม่มีสิทธิ์ตัวแทน',
+noRound:'ไม่มีรอบที่เปิด',
+canSubmit:'ส่ง / แก้ไขได้',
+closed:'ปิดรอบแล้ว',
+closedShort:'ปิดแล้ว',
+minutes:'นาที',
+seconds:'วินาที',
+saving:'กำลังบันทึก...',
+noSubmitRound:'ไม่มีรอบ',
+accountCannot:'บัญชีนี้ไม่สามารถส่งได้',
+serverRejected:'เกินเวลาปิดรับแล้ว',
+previousPaymentOverdue:'มีรายการค้างชำระจากรอบก่อน',
+saveFail:'บันทึกไม่สำเร็จ',
+networkError:'เครือข่ายผิดพลาด',
+saveSuccess:'✓ บันทึกสำเร็จ · รวม ',
+noChange:'✓ ไม่มีการเปลี่ยนแปลง',
+reloaded:'✓ โหลดข้อมูลล่าสุดแล้ว',
+waitingResult:'รอผล',
+morning:'ช่วงเช้า 11:45',
+afternoon:'ช่วงบ่าย 15:45',
+platformReceives:'ตัวแทนจ่ายแพลตฟอร์ม',
+platformPays:'แพลตฟอร์มจ่ายตัวแทน',
+balanced:'เคลียร์แล้ว'
+
+},
+
+
+ms:{
+
+loginTitle:'Log Masuk Ejen',
+email:'E-mel Ejen',
+password:'Kata Laluan',
+loginBtn:'Log Masuk Pusat Ejen',
+
+agentInfo:'Profil Ejen Saya',
+agentName:'Nama Ejen',
+agentRate:'Kadar Ejen',
+accountStatus:'Status Akaun',
+normal:'Aktif',
+suspended:'Digantung',
+blocked:'Disekat',
+
+currentRound:'Pusingan Semasa',
+round:'Pusingan',
+submitStatus:'Status Hantaran',
+deadline:'Masa Tutup',
+timeLeft:'Masa Baki',
+serverNote:'Data boleh ditambah atau diubah sebelum masa tutup. Sistem akan dikunci selepas masa tutup.',
+
+submitTitle:'Hantaran 00–99',
+totalPoints:'Jumlah Input',
+submitBtn:'Simpan Data',
+reloadBtn:'Muat Semula Data',
+editNote:'Data yang telah disimpan boleh diubah sebelum masa tutup. Masukkan 0 dan simpan untuk menjadikannya 0.',
+
+settlementTitle:'Penyelesaian Pusingan',
+amountDue:'Jumlah Perlu Dibayar',
+amountReceived:'Jumlah Disahkan',
+paymentStatus:'Status Bayaran',
+paymentDue:'Tarikh Akhir Bayaran',
+pendingPayment:'Menunggu Bayaran',
+paidPayment:'Sudah Dibayar',
+overduePayment:'Bayaran Lewat',
+noSettlement:'Tiada data penyelesaian',
+settlementWaiting:'Jumlah perlu dibayar akan dijana selepas data disimpan.',
+settlementPending:'Bayaran masih belum selesai. Sila pindahkan ke akaun platform dan hantar bukti pembayaran.',
+settlementPaid:'✓ Bayaran pusingan ini telah disahkan.',
+settlementOverdue:'Bayaran telah lewat. Sila pindahkan dan hantar bukti pembayaran secepat mungkin.',
+
+paymentCenter:'💳 Bayaran Platform / Hantar Bukti',
+paymentRequired:'Jumlah Perlu Dibayar',
+paymentRemaining:'Baki Boleh Dihantar',
+paymentIntro:'Pilih akaun penerimaan platform, buat pindahan, kemudian hantar jumlah sebenar dan gambar bukti pembayaran.',
+paymentAccountsTitle:'Pilih Akaun Platform',
+selectedPaymentMethod:'Kaedah Dipilih',
+transferAmount:'Jumlah Pindahan Sebenar',
+paymentNote:'Nota Bayaran · Pilihan',
+paymentNotePlaceholder:'Contoh: Sudah pindah melalui K Pay',
+paymentProof:'Gambar Bukti Bayaran',
+proofNote:'Sekurang-kurangnya 1 gambar diperlukan. Boleh pilih banyak gambar. Maksimum 10MB setiap gambar.',
+selectedProofTitle:'Bukti Bayaran Dipilih',
+addMoreProof:'＋ Tambah Gambar',
+clearSelectedProof:'Kosongkan Gambar Dipilih',
+removeProof:'Buang',
+submitPaymentProof:'Hantar Bukti Bayaran',
+paymentHistory:'Sejarah Bayaran Pusingan Ini',
+noPaymentAccount:'Tiada akaun pembayaran platform yang tersedia',
+selectPaymentAccount:'Sila pilih akaun penerimaan',
+invalidPaymentAmount:'Masukkan jumlah yang sah',
+paymentAmountTooHigh:'Jumlah melebihi baki yang tersedia',
+proofRequired:'Pilih sekurang-kurangnya 1 gambar bukti',
+invalidProof:'Bukti mestilah gambar',
+proofTooLarge:'Setiap gambar maksimum 10MB',
+paymentSubmitting:'Mencipta rekod bayaran...',
+paymentUploading:'Memuat naik bukti...',
+paymentSuccess:'✓ Bukti dihantar. Menunggu semakan admin.',
+paymentRecordCreatedProofFailed:'Rekod telah dibuat tetapi gambar tidak lengkap. Sila cuba muat naik semula di bawah.',
+paymentSubmitFail:'Gagal menghantar bayaran',
+proofUploadFail:'Gagal memuat naik bukti',
+retryProof:'Tambah / Cuba Semula Bukti',
+uploadMoreProof:'Muat Naik Bukti Dipilih',
+pendingReview:'Menunggu Semakan',
+approved:'Disahkan',
+rejected:'Ditolak',
+declaredAmount:'Jumlah Diisytihar',
+confirmedAmount:'Jumlah Disahkan',
+submittedAt:'Masa Hantar',
+paymentAccountLabel:'Akaun Penerimaan',
+accountHolder:'Pemilik Akaun',
+accountNumber:'Telefon / Akaun',
+bankName:'Bank / Wallet',
+accountNote:'Nota',
+noQr:'Tiada QR',
+proofCount:'Bukti Bayaran',
+noProof:'Belum ada bukti',
+rejectionReason:'Sebab Ditolak',
+allAmountSubmitted:'Jumlah penuh telah dihantar untuk semakan atau disahkan.',
+paymentNotReady:'Tiada jumlah perlu dibayar sekarang.',
+paymentLoading:'Memuatkan maklumat bayaran...',
+paymentRefreshFail:'Tidak dapat memuatkan maklumat bayaran',
+
+resultTitle:'Keputusan',
+resultNumber:'Nombor Keputusan',
+submittedTotal:'Jumlah Dihantar',
+commission:'Komisen Ejen',
+winningAmount:'Jumlah Menang',
+finalBalance:'Baki Penyelesaian',
+commissionNote:'Komisen dikira berdasarkan jumlah sebenar yang disimpan dan kadar ejen.',
+
+logout:'Log Keluar',
+
+loginMissing:'Masukkan e-mel dan kata laluan',
+logging:'Sedang log masuk...',
+loginFail:'Log masuk gagal',
+noAgent:'Tiada akses ejen',
+noRound:'Tiada pusingan terbuka',
+canSubmit:'Boleh Hantar / Ubah',
+closed:'Pusingan Ditutup',
+closedShort:'Ditutup',
+minutes:'min',
+seconds:'saat',
+saving:'Menyimpan...',
+noSubmitRound:'Tiada pusingan',
+accountCannot:'Akaun tidak boleh menghantar',
+serverRejected:'Masa tutup telah tamat',
+previousPaymentOverdue:'Bayaran pusingan sebelumnya tertunggak',
+saveFail:'Gagal menyimpan',
+networkError:'Ralat rangkaian',
+saveSuccess:'✓ Berjaya · Jumlah ',
+noChange:'✓ Tiada perubahan',
+reloaded:'✓ Data terkini dimuatkan',
+waitingResult:'Menunggu keputusan',
+morning:'Pagi 11:45',
+afternoon:'Petang 15:45',
+platformReceives:'Ejen Bayar Platform',
+platformPays:'Platform Bayar Ejen',
+balanced:'Selesai'
+
+},
+
+
+vi:{
+
+loginTitle:'Đăng nhập đại lý',
+email:'Email đại lý',
+password:'Mật khẩu',
+loginBtn:'Đăng nhập trung tâm đại lý',
+
+agentInfo:'Thông tin đại lý',
+agentName:'Tên đại lý',
+agentRate:'Tỷ lệ đại lý',
+accountStatus:'Trạng thái',
+normal:'Hoạt động',
+suspended:'Tạm dừng',
+blocked:'Hạn chế',
+
+currentRound:'Kỳ hiện tại',
+round:'Kỳ',
+submitStatus:'Trạng thái gửi',
+deadline:'Hạn chót',
+timeLeft:'Thời gian còn lại',
+serverNote:'Có thể thêm hoặc sửa dữ liệu trước hạn chót. Sau hạn hệ thống sẽ tự khóa.',
+
+submitTitle:'Gửi dữ liệu 00–99',
+totalPoints:'Tổng đang nhập',
+submitBtn:'Lưu dữ liệu',
+reloadBtn:'Tải lại dữ liệu',
+editNote:'Dữ liệu đã lưu vẫn có thể sửa trước hạn. Nhập 0 và lưu để đưa số tiền về 0.',
+
+settlementTitle:'Thanh toán kỳ này',
+amountDue:'Số tiền phải trả nền tảng',
+amountReceived:'Nền tảng đã xác nhận',
+paymentStatus:'Trạng thái thanh toán',
+paymentDue:'Hạn thanh toán',
+pendingPayment:'Chờ thanh toán',
+paidPayment:'Đã thanh toán',
+overduePayment:'Quá hạn',
+noSettlement:'Chưa có dữ liệu thanh toán',
+settlementWaiting:'Hệ thống sẽ tạo số tiền phải thanh toán sau khi dữ liệu được lưu.',
+settlementPending:'Khoản thanh toán đang chờ. Vui lòng chuyển vào tài khoản nền tảng và gửi chứng từ.',
+settlementPaid:'✓ Kỳ này đã được xác nhận thanh toán.',
+settlementOverdue:'Khoản thanh toán đã quá hạn. Vui lòng chuyển và gửi chứng từ sớm nhất.',
+
+paymentCenter:'💳 Thanh toán nền tảng / Gửi chứng từ',
+paymentRequired:'Số tiền phải thanh toán',
+paymentRemaining:'Số dư có thể gửi',
+paymentIntro:'Chọn tài khoản nhận tiền của nền tảng, chuyển khoản rồi gửi số tiền thực tế và ảnh chứng từ.',
+paymentAccountsTitle:'Chọn tài khoản nền tảng',
+selectedPaymentMethod:'Phương thức đã chọn',
+transferAmount:'Số tiền chuyển thực tế',
+paymentNote:'Ghi chú · Không bắt buộc',
+paymentNotePlaceholder:'Ví dụ: Đã chuyển qua K Pay',
+paymentProof:'Ảnh chứng từ thanh toán',
+proofNote:'Bắt buộc ít nhất 1 ảnh. Có thể chọn nhiều ảnh, tối đa 10MB mỗi ảnh.',
+selectedProofTitle:'Ảnh chứng từ đã chọn',
+addMoreProof:'＋ Thêm ảnh',
+clearSelectedProof:'Xóa ảnh đã chọn',
+removeProof:'Xóa',
+submitPaymentProof:'Gửi chứng từ thanh toán',
+paymentHistory:'Lịch sử thanh toán kỳ này',
+noPaymentAccount:'Hiện không có tài khoản nhận tiền khả dụng',
+selectPaymentAccount:'Vui lòng chọn tài khoản nhận tiền',
+invalidPaymentAmount:'Nhập số tiền hợp lệ',
+paymentAmountTooHigh:'Số tiền vượt quá số dư có thể gửi',
+proofRequired:'Vui lòng chọn ít nhất 1 ảnh chứng từ',
+invalidProof:'Chứng từ phải là hình ảnh',
+proofTooLarge:'Mỗi ảnh không được quá 10MB',
+paymentSubmitting:'Đang tạo giao dịch...',
+paymentUploading:'Đang tải ảnh chứng từ...',
+paymentSuccess:'✓ Đã gửi chứng từ. Chờ quản trị viên xác nhận.',
+paymentRecordCreatedProofFailed:'Giao dịch đã được tạo nhưng ảnh chưa tải đủ. Vui lòng thử tải lại bên dưới.',
+paymentSubmitFail:'Gửi thanh toán thất bại',
+proofUploadFail:'Tải chứng từ thất bại',
+retryProof:'Thêm / Tải lại chứng từ',
+uploadMoreProof:'Tải chứng từ đã chọn',
+pendingReview:'Chờ duyệt',
+approved:'Đã xác nhận',
+rejected:'Bị từ chối',
+declaredAmount:'Số tiền khai báo',
+confirmedAmount:'Số tiền xác nhận',
+submittedAt:'Thời gian gửi',
+paymentAccountLabel:'Tài khoản nhận',
+accountHolder:'Người nhận',
+accountNumber:'Điện thoại / Tài khoản',
+bankName:'Ngân hàng / Ví',
+accountNote:'Ghi chú',
+noQr:'Không có QR',
+proofCount:'Chứng từ',
+noProof:'Chưa có chứng từ',
+rejectionReason:'Lý do từ chối',
+allAmountSubmitted:'Toàn bộ số tiền đã được gửi để duyệt hoặc đã xác nhận.',
+paymentNotReady:'Hiện chưa có số tiền cần thanh toán.',
+paymentLoading:'Đang tải thông tin thanh toán...',
+paymentRefreshFail:'Không tải được thông tin thanh toán',
+
+resultTitle:'Kết quả',
+resultNumber:'Số kết quả',
+submittedTotal:'Tổng đã gửi',
+commission:'Hoa hồng đại lý',
+winningAmount:'Tiền trúng',
+finalBalance:'Số dư quyết toán',
+commissionNote:'Hoa hồng được tính theo tổng thực tế đã lưu và tỷ lệ đại lý.',
+
+logout:'Đăng xuất',
+
+loginMissing:'Nhập email và mật khẩu',
+logging:'Đang đăng nhập...',
+loginFail:'Đăng nhập thất bại',
+noAgent:'Không có quyền đại lý',
+noRound:'Không có kỳ đang mở',
+canSubmit:'Có thể gửi / sửa',
+closed:'Đã đóng',
+closedShort:'Đã đóng',
+minutes:'phút',
+seconds:'giây',
+saving:'Đang lưu...',
+noSubmitRound:'Không có kỳ',
+accountCannot:'Không thể gửi',
+serverRejected:'Đã quá hạn',
+previousPaymentOverdue:'Kỳ trước còn nợ thanh toán',
+saveFail:'Lưu thất bại',
+networkError:'Lỗi mạng',
+saveSuccess:'✓ Đã lưu · Tổng ',
+noChange:'✓ Không có thay đổi',
+reloaded:'✓ Đã tải dữ liệu mới nhất',
+waitingResult:'Chờ kết quả',
+morning:'Sáng 11:45',
+afternoon:'Chiều 15:45',
+platformReceives:'Đại lý trả nền tảng',
+platformPays:'Nền tảng trả đại lý',
+balanced:'Đã cân bằng'
+
+},
+
+
+id:{
+
+loginTitle:'Login Agen',
+email:'Email Agen',
+password:'Kata Sandi',
+loginBtn:'Masuk Pusat Agen',
+
+agentInfo:'Profil Agen',
+agentName:'Nama Agen',
+agentRate:'Persentase Agen',
+accountStatus:'Status Akun',
+normal:'Aktif',
+suspended:'Ditangguhkan',
+blocked:'Dibatasi',
+
+currentRound:'Putaran Saat Ini',
+round:'Putaran',
+submitStatus:'Status',
+deadline:'Batas Waktu',
+timeLeft:'Sisa Waktu',
+serverNote:'Data dapat ditambah atau diubah sebelum batas waktu. Sistem terkunci otomatis setelah batas waktu.',
+
+submitTitle:'Kirim Data 00–99',
+totalPoints:'Total Input',
+submitBtn:'Simpan Data',
+reloadBtn:'Muat Ulang Data',
+editNote:'Data yang sudah tersimpan dapat diubah sebelum batas waktu. Masukkan 0 lalu simpan untuk menjadikannya 0.',
+
+settlementTitle:'Penyelesaian Putaran',
+amountDue:'Jumlah Harus Dibayar',
+amountReceived:'Dikonfirmasi Platform',
+paymentStatus:'Status Pembayaran',
+paymentDue:'Batas Pembayaran',
+pendingPayment:'Menunggu Pembayaran',
+paidPayment:'Sudah Dibayar',
+overduePayment:'Terlambat',
+noSettlement:'Belum ada data pembayaran',
+settlementWaiting:'Jumlah pembayaran dibuat otomatis setelah data disimpan.',
+settlementPending:'Pembayaran masih tertunda. Transfer ke akun platform lalu kirim bukti pembayaran.',
+settlementPaid:'✓ Pembayaran putaran ini telah dikonfirmasi.',
+settlementOverdue:'Pembayaran telah melewati batas waktu. Segera transfer dan kirim bukti pembayaran.',
+
+paymentCenter:'💳 Pembayaran Platform / Kirim Bukti',
+paymentRequired:'Jumlah Wajib Dibayar',
+paymentRemaining:'Sisa yang Dapat Dikirim',
+paymentIntro:'Pilih akun penerimaan platform, lakukan transfer, lalu kirim jumlah aktual dan gambar bukti pembayaran.',
+paymentAccountsTitle:'Pilih Akun Platform',
+selectedPaymentMethod:'Metode Dipilih',
+transferAmount:'Jumlah Transfer Aktual',
+paymentNote:'Catatan · Opsional',
+paymentNotePlaceholder:'Contoh: Sudah transfer melalui K Pay',
+paymentProof:'Screenshot / Bukti Pembayaran',
+proofNote:'Minimal 1 gambar bukti wajib. Bisa memilih banyak gambar. Maksimum 10MB per gambar.',
+selectedProofTitle:'Bukti Pembayaran Dipilih',
+addMoreProof:'＋ Tambah Gambar',
+clearSelectedProof:'Hapus Gambar Dipilih',
+removeProof:'Hapus',
+submitPaymentProof:'Kirim Bukti Pembayaran',
+paymentHistory:'Riwayat Pembayaran Putaran Ini',
+noPaymentAccount:'Tidak ada akun penerimaan yang tersedia',
+selectPaymentAccount:'Silakan pilih akun penerimaan',
+invalidPaymentAmount:'Masukkan jumlah transfer yang valid',
+paymentAmountTooHigh:'Jumlah melebihi sisa yang tersedia',
+proofRequired:'Pilih minimal 1 gambar bukti',
+invalidProof:'Bukti pembayaran harus berupa gambar',
+proofTooLarge:'Setiap gambar maksimal 10MB',
+paymentSubmitting:'Membuat catatan pembayaran...',
+paymentUploading:'Mengunggah bukti pembayaran...',
+paymentSuccess:'✓ Bukti dikirim. Menunggu pemeriksaan admin.',
+paymentRecordCreatedProofFailed:'Catatan sudah dibuat tetapi gambar belum lengkap. Silakan unggah ulang di bawah.',
+paymentSubmitFail:'Pengiriman pembayaran gagal',
+proofUploadFail:'Unggah bukti gagal',
+retryProof:'Tambah / Ulangi Bukti',
+uploadMoreProof:'Unggah Bukti Terpilih',
+pendingReview:'Menunggu Pemeriksaan',
+approved:'Dikonfirmasi',
+rejected:'Ditolak',
+declaredAmount:'Jumlah Dilaporkan',
+confirmedAmount:'Jumlah Dikonfirmasi',
+submittedAt:'Waktu Kirim',
+paymentAccountLabel:'Akun Penerimaan',
+accountHolder:'Penerima',
+accountNumber:'Telepon / Akun',
+bankName:'Bank / Wallet',
+accountNote:'Catatan',
+noQr:'Tidak ada QR',
+proofCount:'Bukti Pembayaran',
+noProof:'Belum ada bukti pembayaran',
+rejectionReason:'Alasan Penolakan',
+allAmountSubmitted:'Seluruh jumlah sudah dikirim untuk diperiksa atau dikonfirmasi.',
+paymentNotReady:'Belum ada jumlah yang perlu dibayar.',
+paymentLoading:'Memuat informasi pembayaran...',
+paymentRefreshFail:'Gagal memuat informasi pembayaran',
+
+resultTitle:'Hasil Putaran',
+resultNumber:'Nomor Hasil',
+submittedTotal:'Total Dikirim',
+commission:'Komisi Agen',
+winningAmount:'Jumlah Menang',
+finalBalance:'Saldo Penyelesaian',
+commissionNote:'Komisi dihitung dari total yang benar-benar tersimpan dan persentase agen.',
+
+logout:'Keluar',
+
+loginMissing:'Masukkan email dan kata sandi',
+logging:'Sedang login...',
+loginFail:'Login gagal',
+noAgent:'Tidak ada akses agen',
+noRound:'Tidak ada putaran terbuka',
+canSubmit:'Bisa Kirim / Ubah',
+closed:'Putaran Ditutup',
+closedShort:'Ditutup',
+minutes:'mnt',
+seconds:'dtk',
+saving:'Menyimpan...',
+noSubmitRound:'Tidak ada putaran',
+accountCannot:'Akun tidak bisa mengirim',
+serverRejected:'Batas waktu telah lewat',
+previousPaymentOverdue:'Pembayaran putaran sebelumnya masih tertunggak',
+saveFail:'Gagal menyimpan',
+networkError:'Kesalahan jaringan',
+saveSuccess:'✓ Tersimpan · Total ',
+noChange:'✓ Tidak ada perubahan',
+reloaded:'✓ Data terbaru dimuat',
+waitingResult:'Menunggu hasil',
+morning:'Pagi 11:45',
+afternoon:'Sore 15:45',
+platformReceives:'Agen Bayar Platform',
+platformPays:'Platform Bayar Agen',
+balanced:'Selesai'
+
+}
+
+};
+
+
+
+/* =========================================================
+   API HELPER
+========================================================= */
+
+function saveAgentSession(
+  data
+){
+
+  if(
+    data
+    &&
+    data.access_token
+  ){
+
+    token =
+    data.access_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+  }
+
+
+  if(
+    data
+    &&
+    data.refresh_token
+  ){
+
+    refreshToken =
+    data.refresh_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_refresh_token',
+      refreshToken
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_agent_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+async function refreshAgentSession(){
+
+  if(
+    !refreshToken
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    refreshSessionPromise
+  ){
+
+    return refreshSessionPromise;
+
+  }
+
+
+  refreshSessionPromise =
+  (async()=>{
+
+    isRefreshingSession =
+    true;
+
+
+    try{
+
+      const r =
+      await fetch(
+        BASE+
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:'POST',
+
+          headers:{
+            apikey:KEY,
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            refresh_token:
+            refreshToken
+          })
+        }
+      );
+
+
+      if(
+        !r.ok
+      ){
+
+        return false;
+
+      }
+
+
+      const data =
+      await r.json();
+
+
+      if(
+        !data.access_token
+      ){
+
+        return false;
+
+      }
+
+
+      saveAgentSession(
+        data
+      );
+
+
+      return true;
+
+
+    }catch(e){
+
+      console.error(
+        'SESSION_REFRESH_FAILED',
+        e
+      );
+
+
+      return false;
+
+
+    }finally{
+
+      isRefreshingSession =
+      false;
+
+      refreshSessionPromise =
+      null;
+
+    }
+
+  })();
+
+
+  return refreshSessionPromise;
+
+}
+
+
+async function api(
+  path,
+  options={}
+){
+
+  const request =
+  ()=>fetch(
+    BASE+path,
+    {
+      ...options,
+
+      headers:{
+        apikey:KEY,
+        Authorization:
+        'Bearer '+token,
+        ...(options.headers || {})
+      }
+    }
+  );
+
+
+  let response =
+  await request();
+
+
+  if(
+    response.status!==401
+  ){
+
+    return response;
+
+  }
+
+
+  const refreshed =
+  await refreshAgentSession();
+
+
+  if(
+    !refreshed
+  ){
+
+    return response;
+
+  }
+
+
+  response =
+  await request();
+
+
+  return response;
+
+}
+
+
+
+/* =========================================================
+   TRANSLATION
+========================================================= */
+
+function tr(
+  key
+){
+
+  return (
+    T[currentLang]?.[
+      key
+    ]
+    ||
+    T.zh[
+      key
+    ]
+    ||
+    key
+  );
+
+}
+
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function changeLanguage(
+  lang
+){
+
+  currentLang =
+  lang;
+
+
+  localStorage.setItem(
+    'jmt_agent_lang',
+    lang
+  );
+
+
+  document.documentElement.lang =
+  lang;
+
+
+  document
+  .querySelectorAll(
+    '[data-i18n]'
+  )
+  .forEach(
+    el=>{
+
+      const key =
+      el.getAttribute(
+        'data-i18n'
+      );
+
+
+      el.textContent =
+      tr(
+        key
+      );
+
+    }
+  );
+
+
+  document
+  .querySelectorAll(
+    '[data-ph]'
+  )
+  .forEach(
+    el=>{
+
+      const key =
+      el.getAttribute(
+        'data-ph'
+      );
+
+
+      el.placeholder =
+      tr(
+        key
+      );
+
+    }
+  );
+
+
+  renderAgentStatus();
+
+  renderRound();
+
+  renderSettlement();
+
+  renderAgentFinance();
+
+  renderPaymentCenter();
+
+  renderSelectedPaymentProofs();
+
+}
+
+
+
+/* =========================================================
+   RATE
+========================================================= */
+
+function normalizeRate(
+  value
+){
+
+  let rate =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(
+      rate
+    )
+  ){
+
+    rate =
+    0;
+
+  }
+
+
+  if(
+    rate>0
+    &&
+    rate<=1
+  ){
+
+    rate *=
+    100;
+
+  }
+
+
+  return rate;
+
+}
+
+
+function formatRate(
+  value
+){
+
+  return Number(
+    value || 0
+  )
+  .toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   RESET SUBMISSION DATA
+========================================================= */
+
+function resetSubmittedData(){
+
+  submittedNumbers =
+  {};
+
+
+  submittedTotal =
+  0;
+
+
+  existingCodes =
+  new Set();
+
+
+  for(
+    let i=0;
+    i<=99;
+    i++
+  ){
+
+    const code =
+    String(i)
+    .padStart(
+      2,
+      '0'
+    );
+
+
+    submittedNumbers[
+      code
+    ] =
+    0;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   BUILD 00–99
+========================================================= */
+
+function buildGrid(){
+
+  const grid =
+  document.getElementById(
+    'numberGrid'
+  );
+
+
+  grid.innerHTML =
+  '';
+
+
+  for(
+    let i=0;
+    i<=99;
+    i++
+  ){
+
+    const code =
+    String(i)
+    .padStart(
+      2,
+      '0'
+    );
+
+
+    const div =
+    document.createElement(
+      'div'
+    );
+
+
+    div.className =
+    'num';
+
+
+    div.id =
+    'box'+code;
+
+
+    div.innerHTML = `
+
+      <div class="numLabel">
+        ${code}
+      </div>
+
+      <input
+        id="n${code}"
+        type="number"
+        min="0"
+        step="1"
+        inputmode="numeric"
+        placeholder="0"
+        oninput="inputChanged('${code}')">
+<div
+  class="numLock"
+  id="lock${code}">
+</div>
+    `;
+
+
+    grid.appendChild(
+      div
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   POINTS
+========================================================= */
+
+function parsePoints(
+  value
+){
+
+  const n =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(
+      n
+    )
+    ||
+    n<0
+  ){
+
+    return 0;
+
+  }
+
+
+  return n;
+
+}
+
+
+function inputChanged(
+  code
+){
+
+  const newValue =
+  parsePoints(
+    document.getElementById(
+      'n'+code
+    ).value
+  );
+
+
+  const oldValue =
+  Number(
+    submittedNumbers[
+      code
+    ]
+    ||
+    0
+  );
+
+
+  const box =
+  document.getElementById(
+    'box'+code
+  );
+
+
+  if(box){
+
+    box.classList.toggle(
+      'changed',
+      newValue !==
+      oldValue
+    );
+
+  }
+
+
+  updateNumberLockInfo(
+  code,
+  newValue
+);
+
+updateInputTotal();
+
+}
+
+function updateNumberLockInfo(
+  code,
+  currentValue
+){
+
+  const input =
+  document.getElementById(
+    'n'+code
+  );
+
+  const el =
+  document.getElementById(
+    'lock'+code
+  );
+
+  if(
+    !input
+    ||
+    !el
+  ){
+    return;
+  }
+
+  const confirmed =
+  Number(
+    input.dataset.confirmed
+    ||
+    0
+  );
+
+  const pending =
+  Number(
+    input.dataset.pending
+    ||
+    0
+  );
+
+  const total =
+  Number(
+    currentValue
+    ||
+    0
+  );
+
+  const editable =
+  Math.max(
+    total-confirmed-pending,
+    0
+  );
+
+  if(
+    confirmed<=0
+    &&
+    pending<=0
+  ){
+
+    el.textContent =
+    '';
+
+    el.className =
+    'numLock';
+
+    return;
+  }
+
+  const parts =
+  [];
+
+  if(confirmed>0){
+
+    parts.push(
+      '🔒 已确认 '+
+      formatNumber(
+        confirmed
+      )
+    );
+
+  }
+
+  if(pending>0){
+
+    parts.push(
+      '⏳ 待审核 '+
+      formatNumber(
+        pending
+      )
+    );
+
+  }
+
+  parts.push(
+    '✏️ 可新增 '+
+    formatNumber(
+      editable
+    )
+  );
+
+  el.textContent =
+  parts.join(
+    ' · '
+  );
+
+  el.className =
+  'numLock hasLocked';
+
+}
+function getInputValue(
+  code
+){
+
+  return parsePoints(
+    document.getElementById(
+      'n'+code
+    ).value
+  );
+
+}
+
+
+function getInputTotal(){
+
+  let total =
+  0;
+
+
+  for(
+    let i=0;
+    i<=99;
+    i++
+  ){
+
+    const code =
+    String(i)
+    .padStart(
+      2,
+      '0'
+    );
+
+
+    total +=
+    getInputValue(
+      code
+    );
+
+  }
+
+
+  return total;
+
+}
+
+
+function updateInputTotal(){
+
+  document.getElementById(
+    'totalPoints'
+  ).textContent =
+  formatNumber(
+    getInputTotal()
+  );
+
+}
+
+
+
+/* =========================================================
+   SIGN IN
+========================================================= */
+
+async function signIn(){
+
+  const email =
+  document.getElementById(
+    'email'
+  ).value.trim();
+
+
+  const password =
+  document.getElementById(
+    'password'
+  ).value;
+
+
+  const msg =
+  document.getElementById(
+    'loginMsg'
+  );
+
+
+  if(
+    !email
+    ||
+    !password
+  ){
+
+    msg.textContent =
+    tr(
+      'loginMissing'
+    );
+
+
+    return;
+
+  }
+
+
+  msg.textContent =
+  tr(
+    'logging'
+  );
+
+const captchaToken = hcaptcha.getResponse();
+
+if(!captchaToken){
+  msg.textContent = '请先完成人机验证';
+  return;
+}
+  try{
+
+    const r =
+    await fetch(
+      BASE+
+      '/auth/v1/token?grant_type=password',
+      {
+        method:'POST',
+
+        headers:{
+          apikey:KEY,
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          email,
+          password,
+          gotrue_meta_security:{
+  captcha_token:hcaptcha.getResponse()
+}
+        })
+      }
+    );
+
+
+    const d =
+    await r.json();
+
+
+    if(
+      !r.ok
+      ||
+      !d.access_token
+    ){
+
+      throw new Error();
+
+    }
+
+
+    saveAgentSession(
+  d
+);
+
+    await startAgent();
+
+
+  }catch(e){
+
+    msg.textContent =
+    tr(
+      'loginFail'
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   START AGENT
+========================================================= */
+
+async function startAgent(){
+
+  try{
+
+    const r =
+    await api(
+      '/rest/v1/agents'+
+      '?select=id,display_name,commission_rate,status'+
+      '&limit=1'
+    );
+
+
+    if(!r.ok){
+
+      throw new Error();
+
+    }
+
+
+    const rows =
+    await r.json();
+
+
+    if(
+      !rows.length
+    ){
+
+      throw new Error();
+
+    }
+
+
+    agent =
+    rows[0];
+
+
+    document.getElementById(
+      'loginBox'
+    ).classList.add(
+      'hidden'
+    );
+
+
+    document.getElementById(
+      'agentBox'
+    ).classList.remove(
+      'hidden'
+    );
+
+
+    document.getElementById(
+      'agentName'
+    ).textContent =
+    agent.display_name
+    ||
+    '—';
+
+
+    document.getElementById(
+      'commissionRate'
+    ).textContent =
+    formatRate(
+      normalizeRate(
+        agent.commission_rate
+      )
+    )
+    +
+    '%';
+
+
+    renderAgentStatus();
+
+
+    await loadRound();
+
+
+  }catch(e){
+
+    clearAgentSession();
+
+
+    alert(
+      tr(
+        'noAgent'
+      )
+    );
+
+
+    location.reload();
+
+  }
+
+}
+
+
+
+/* =========================================================
+   AGENT STATUS
+========================================================= */
+
+function renderAgentStatus(){
+
+  if(!agent){
+
+    return;
+
+  }
+
+
+  const el =
+  document.getElementById(
+    'agentStatus'
+  );
+
+
+  if(
+    agent.status===
+    'active'
+  ){
+
+    el.textContent =
+    tr(
+      'normal'
+    );
+
+
+    el.className =
+    'statusOpen';
+
+  }
+
+  else if(
+    agent.status===
+    'suspended'
+  ){
+
+    el.textContent =
+    tr(
+      'suspended'
+    );
+
+
+    el.className =
+    'statusClosed';
+
+  }
+
+  else{
+
+    el.textContent =
+    tr(
+      'blocked'
+    );
+
+
+    el.className =
+    'statusClosed';
+
+  }
+
+}
+
+
+
+/* =========================================================
+   CHOOSE CURRENT ROUND
+========================================================= */
+
+function chooseBestRound(
+  rounds
+){
+
+  const now =
+  Date.now();
+
+
+  return (
+
+    rounds.find(
+      x=>
+      x.status===
+      'open'
+      &&
+      new Date(
+        x.deadline_at
+      ).getTime()
+      >
+      now
+    )
+
+    ||
+
+    rounds.find(
+      x=>
+      x.status===
+      'open'
+    )
+
+    ||
+
+    rounds[0]
+
+    ||
+
+    null
+
+  );
+
+}
+
+
+
+/* =========================================================
+   LOAD ROUND
+========================================================= */
+
+async function loadRound(){
+
+  const r =
+  await api(
+    '/rest/v1/rounds'+
+    '?select=id,round_date,round_code,deadline_at,result_number,status,created_at'+
+    '&order=created_at.desc'+
+    '&limit=30'
+  );
+
+
+  if(!r.ok){
+
+    throw new Error(
+      '无法读取期数'
+    );
+
+  }
+
+
+  const rounds =
+  await r.json();
+
+
+  currentRound =
+  chooseBestRound(
+    rounds
+  );
+
+
+  renderRound();
+
+
+  if(!currentRound){
+
+    settlement =
+    null;
+
+
+    resetSubmittedData();
+
+
+    paymentAccounts =
+    [];
+
+
+    paymentSubmissions =
+    [];
+
+
+    paymentProofs =
+    [];
+
+
+    selectedPaymentAccountId =
+    '';
+
+
+    clearSelectedPaymentProofs(
+      false
+    );
+
+
+    renderSettlement();
+
+
+    renderAgentFinance();
+
+
+    renderPaymentCenter();
+
+
+    disableInputs(
+      true
+    );
+
+
+    return;
+
+  }
+
+
+  await loadExisting(
+    false
+  );
+
+
+  await loadSettlement();
+
+
+  await loadPaymentCenter(
+    false
+  );
+
+
+  updateDeadlineUI();
+
+}
+
+
+
+/* =========================================================
+   ROUND DISPLAY
+========================================================= */
+
+function renderRound(){
+
+  if(
+    !currentRound
+  ){
+
+    document.getElementById(
+      'roundName'
+    ).textContent =
+    '—';
+
+
+    document.getElementById(
+      'roundStatus'
+    ).textContent =
+    tr(
+      'noRound'
+    );
+
+
+    document.getElementById(
+      'deadlineText'
+    ).textContent =
+    '—';
+
+
+    document.getElementById(
+      'countdown'
+    ).textContent =
+    '—';
+
+
+    document.getElementById(
+      'resultNumber'
+    ).textContent =
+    tr(
+      'waitingResult'
+    );
+
+
+    return;
+
+  }
+
+
+  let period =
+  currentRound.round_code;
+
+
+  if(
+    currentRound.round_code===
+    '1030'
+  ){
+
+    period =
+    tr(
+      'morning'
+    );
+
+  }
+
+  else if(
+    currentRound.round_code===
+    '1530'
+  ){
+
+    period =
+    tr(
+      'afternoon'
+    );
+
+  }
+
+
+  document.getElementById(
+    'roundName'
+  ).textContent =
+  currentRound.round_date+
+  ' · '+
+  period;
+
+
+  document.getElementById(
+    'deadlineText'
+  ).textContent =
+  formatMMT(
+    currentRound.deadline_at
+  );
+
+
+  document.getElementById(
+    'resultNumber'
+  ).textContent =
+
+  hasResult(
+    currentRound.result_number
+  )
+
+  ?
+
+  String(
+    currentRound.result_number
+  )
+  .padStart(
+    2,
+    '0'
+  )
+
+  :
+
+  tr(
+    'waitingResult'
+  );
+
+}
+
+
+
+/* =========================================================
+   LOAD EXISTING SUBMISSIONS
+========================================================= */
+
+async function loadExisting(
+  showMessage=false
+){
+
+  if(
+    !currentRound
+    ||
+    !agent
+  ){
+
+    return;
+
+  }
+
+
+  const r =
+  await api(
+    '/rest/v1/agent_submissions'+
+    '?round_id=eq.'+
+    encodeURIComponent(
+      currentRound.id
+    )+
+    '&agent_id=eq.'+
+    encodeURIComponent(
+      agent.id
+    )+
+    '&select=number_code,points,confirmed_points,pending_points'
+  );
+
+
+  if(!r.ok){
+
+    throw new Error(
+      '读取提交数据失败'
+    );
+
+  }
+
+
+  const rows =
+  await r.json();
+
+
+  resetSubmittedData();
+
+
+  for(
+    let i=0;
+    i<=99;
+    i++
+  ){
+
+    const code =
+    String(i)
+    .padStart(
+      2,
+      '0'
+    );
+
+
+    const input =
+    document.getElementById(
+      'n'+code
+    );
+
+
+    input.value =
+    '';
+input.dataset.confirmed =
+'0';
+
+input.dataset.pending =
+'0';
+
+updateNumberLockInfo(
+  code,
+  0
+);
+
+    document.getElementById(
+      'box'+code
+    ).classList.remove(
+      'changed'
+    );
+
+  }
+
+
+  rows.forEach(
+    row=>{
+
+      const code =
+      String(
+        row.number_code
+      )
+      .padStart(
+        2,
+        '0'
+      );
+
+
+      const points =
+      Number(
+        row.points
+        ||
+        0
+      );
+      const confirmed =
+Number(
+  row.confirmed_points
+  ||
+  0
+);
+
+const pending =
+Number(
+  row.pending_points
+  ||
+  0
+);
+
+
+      existingCodes.add(
+        code
+      );
+
+
+      submittedNumbers[
+        code
+      ] =
+      points;
+
+
+      submittedTotal +=
+      points;
+
+
+      const input =
+      document.getElementById(
+        'n'+code
+      );
+
+
+      if(input){
+
+  input.value =
+  points>0
+  ?
+  points
+  :
+  '';
+
+  input.dataset.confirmed =
+  confirmed;
+
+  input.dataset.pending =
+  pending;
+
+  updateNumberLockInfo(
+    code,
+    points
+  );
+
+}
+
+    }
+  );
+
+
+  updateInputTotal();
+
+
+  renderAgentFinance();
+
+
+  await loadSettlement();
+
+
+  await loadPaymentCenter(
+    false
+  );
+
+
+  if(
+    showMessage
+  ){
+
+    const msg =
+    document.getElementById(
+      'submitMsg'
+    );
+
+
+    msg.className =
+    'msg success';
+
+
+    msg.textContent =
+    tr(
+      'reloaded'
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   LOAD SETTLEMENT
+========================================================= */
+
+async function loadSettlement(){
+
+  if(
+    !agent
+    ||
+    !currentRound
+  ){
+
+    settlement =
+    null;
+
+
+    renderSettlement();
+
+
+    return;
+
+  }
+
+
+  try{
+
+    const r =
+    await api(
+      '/rest/v1/agent_round_totals'+
+      '?round_id=eq.'+
+      encodeURIComponent(
+        currentRound.id
+      )+
+      '&agent_id=eq.'+
+      encodeURIComponent(
+        agent.id
+      )+
+      '&select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,result_payout,final_balance,settlement_status,completed_at,updated_at'+
+      '&limit=1'
+    );
+
+
+    if(
+      !r.ok
+    ){
+
+      return;
+
+    }
+
+
+    const rows =
+    await r.json();
+
+
+    settlement =
+    rows.length
+    ?
+    rows[0]
+    :
+    null;
+
+
+    renderSettlement();
+
+
+    renderAgentFinance();
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   SETTLEMENT DISPLAY
+========================================================= */
+
+function renderSettlement(){
+
+  const totalEl =
+  document.getElementById(
+    'settlementSubmittedTotal'
+  );
+
+
+  const commissionEl =
+  document.getElementById(
+    'settlementCommission'
+  );
+
+
+  const dueEl =
+  document.getElementById(
+    'amountDue'
+  );
+
+
+  const receivedEl =
+  document.getElementById(
+    'amountReceived'
+  );
+
+
+  const statusEl =
+  document.getElementById(
+    'paymentStatus'
+  );
+
+
+  const dueAtEl =
+  document.getElementById(
+    'paymentDueAt'
+  );
+
+
+  const notice =
+  document.getElementById(
+    'settlementNotice'
+  );
+
+
+  if(
+    !settlement
+  ){
+
+    totalEl.textContent =
+    formatNumber(
+      submittedTotal
+    );
+
+
+    const rate =
+    agent
+    ?
+    normalizeRate(
+      agent.commission_rate
+    )
+    :
+    0;
+
+
+    const commission =
+    submittedTotal*
+    rate/
+    100;
+
+
+    commissionEl.textContent =
+    formatNumber(
+      commission
+    );
+
+
+    dueEl.textContent =
+    formatNumber(
+      submittedTotal
+    );
+
+
+    receivedEl.textContent =
+    '0';
+
+
+    statusEl.textContent =
+    tr(
+      'noSettlement'
+    );
+
+
+    statusEl.className =
+    'statusPending';
+
+
+    dueAtEl.textContent =
+    '—';
+
+
+    notice.className =
+    'settlementNotice';
+
+
+    notice.textContent =
+tr(
+  'settlementWaiting'
+);
+
+return;
+
+  }
+
+
+  totalEl.textContent =
+  formatNumber(
+    settlement.submitted_total
+  );
+
+
+  commissionEl.textContent =
+  formatNumber(
+    settlement.commission_amount
+  );
+
+
+  dueEl.textContent =
+  formatNumber(
+    settlement.amount_due
+  );
+
+
+  receivedEl.textContent =
+  formatNumber(
+    settlement.amount_received
+  );
+
+
+  dueAtEl.textContent =
+  settlement.payment_due_at
+  ?
+  formatMMT(
+    settlement.payment_due_at
+  )
+  :
+  '—';
+
+
+  const isPaid =
+  settlement.payment_status===
+  'paid';
+
+
+  const dueTime =
+  settlement.payment_due_at
+  ?
+  new Date(
+    settlement.payment_due_at
+  ).getTime()
+  :
+  NaN;
+
+
+  const isOverdue =
+  !isPaid
+  &&
+  (
+    settlement.payment_status===
+    'overdue'
+    ||
+    (
+      Number.isFinite(
+        dueTime
+      )
+      &&
+      Date.now()>=
+      dueTime
+    )
+  );
+
+
+  if(
+    isPaid
+  ){
+
+    statusEl.textContent =
+    tr(
+      'paidPayment'
+    );
+
+
+    statusEl.className =
+    'statusPaid';
+
+
+    notice.className =
+    'settlementNotice paid';
+
+
+    notice.textContent =
+tr(
+  'settlementPaid'
+);
+
+return;
+
+  }
+
+
+  if(
+    isOverdue
+  ){
+
+    statusEl.textContent =
+    tr(
+      'overduePayment'
+    );
+
+
+    statusEl.className =
+    'statusOverdue';
+
+
+    notice.className =
+    'settlementNotice overdue';
+
+
+    notice.textContent =
+tr(
+  'settlementOverdue'
+);
+
+return;
+
+  }
+
+
+  statusEl.textContent =
+  tr(
+    'pendingPayment'
+  );
+
+
+  statusEl.className =
+  'statusPending';
+
+
+  notice.className =
+  'settlementNotice';
+
+
+  notice.textContent =
+tr(
+  'settlementPending'
+);
+
+}
+
+
+
+/* =========================================================
+   PAYMENT TOTAL HELPERS
+========================================================= */
+
+function getPaymentApprovedTotal(){
+
+  return paymentSubmissions
+  .filter(
+    row =>
+    row.status===
+    'approved'
+  )
+  .reduce(
+    (
+      sum,
+      row
+    ) =>
+    sum+
+    Number(
+      row.confirmed_amount || 0
+    ),
+    0
+  );
+
+}
+
+
+function getPaymentPendingTotal(){
+
+  return paymentSubmissions
+  .filter(
+    row =>
+    row.status===
+    'pending'
+  )
+  .reduce(
+    (
+      sum,
+      row
+    ) =>
+    sum+
+    Number(
+      row.declared_amount || 0
+    ),
+    0
+  );
+
+}
+
+
+function getPaymentAmountDue(){
+
+  const settlementDue =
+  settlement
+  ?
+  Number(
+    settlement.amount_due || 0
+  )
+  :
+  0;
+
+
+  const submittedDue =
+  Number(
+    submittedTotal || 0
+  );
+
+
+  return Math.max(
+    settlementDue,
+    submittedDue,
+    0
+  );
+
+}
+
+
+function getPaymentRemaining(){
+
+  const due =
+  getPaymentAmountDue();
+
+
+  const approved =
+  getPaymentApprovedTotal();
+
+
+  const pending =
+  getPaymentPendingTotal();
+
+
+  return Math.max(
+    due-
+    approved-
+    pending,
+    0
+  );
+
+}
+
+
+
+/* =========================================================
+   PAYMENT PROOF FILE KEY
+========================================================= */
+
+function getProofFileKey(
+  file
+){
+
+  return [
+    file.name || '',
+    file.size || 0,
+    file.lastModified || 0
+  ]
+  .join(
+    '__'
+  );
+
+}
+
+
+
+/* =========================================================
+   VALIDATE IMAGE FILE
+========================================================= */
+
+function validateSingleProofFile(
+  file
+){
+
+  if(!file){
+
+    throw new Error(
+      'PROOF_REQUIRED'
+    );
+
+  }
+
+
+  const name =
+  String(
+    file.name || ''
+  )
+  .toLowerCase();
+
+
+  const allowedByType =
+  [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/heic',
+    'image/heif'
+  ]
+  .includes(
+    file.type
+  );
+
+
+  const allowedByExtension =
+  /\.(jpg|jpeg|png|webp|heic|heif)$/i
+  .test(
+    name
+  );
+
+
+  if(
+    !allowedByType
+    &&
+    !allowedByExtension
+  ){
+
+    throw new Error(
+      'INVALID_PROOF_TYPE'
+    );
+
+  }
+
+
+  if(
+    Number(
+      file.size || 0
+    )
+    >
+    MAX_IMAGE_SIZE
+  ){
+
+    throw new Error(
+      'PROOF_TOO_LARGE'
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   HANDLE PAYMENT PROOF SELECTION
+
+   这是这次重要修改之一：
+
+   每次选择文件，
+   马上把 File 保存进 selectedPaymentProofFiles。
+
+   不依赖 input.files 长期保存。
+========================================================= */
+
+function handlePaymentProofSelection(
+  input
+){
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+
+  try{
+
+    const files =
+    Array.from(
+      input.files || []
+    );
+
+
+    if(
+      !files.length
+    ){
+
+      return;
+
+    }
+
+
+    const existingKeys =
+    new Set(
+      selectedPaymentProofFiles.map(
+        file =>
+        getProofFileKey(
+          file
+        )
+      )
+    );
+
+
+    for(
+      const file
+      of files
+    ){
+
+      validateSingleProofFile(
+        file
+      );
+
+
+      const key =
+      getProofFileKey(
+        file
+      );
+
+
+      if(
+        existingKeys.has(
+          key
+        )
+      ){
+
+        continue;
+
+      }
+
+
+      selectedPaymentProofFiles.push(
+        file
+      );
+
+
+      existingKeys.add(
+        key
+      );
+
+
+      const url =
+      URL.createObjectURL(
+        file
+      );
+
+
+      selectedPaymentProofPreviewUrls.set(
+        key,
+        url
+      );
+
+    }
+
+
+    /*
+      清空原生 input。
+
+      这样用户下一次可以继续选择，
+      即使再次选择同一张图浏览器也会触发 change。
+    */
+
+    input.value =
+    '';
+
+
+    renderSelectedPaymentProofs();
+
+
+    if(msg){
+
+      msg.className =
+      'msg';
+
+
+      msg.textContent =
+      '';
+
+    }
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    input.value =
+    '';
+
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+
+      msg.textContent =
+      paymentErrorText(
+        e
+      );
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   OPEN MORE PAYMENT PROOFS
+========================================================= */
+
+function openMorePaymentProofs(){
+
+  const input =
+  document.getElementById(
+    'paymentProofFiles'
+  );
+
+
+  if(input){
+
+    input.click();
+
+  }
+
+}
+
+
+
+/* =========================================================
+   REMOVE ONE SELECTED PROOF
+========================================================= */
+
+function removeSelectedPaymentProof(
+  key
+){
+
+  const index =
+  selectedPaymentProofFiles
+  .findIndex(
+    file =>
+    getProofFileKey(
+      file
+    )===
+    key
+  );
+
+
+  if(
+    index<
+    0
+  ){
+
+    return;
+
+  }
+
+
+  selectedPaymentProofFiles.splice(
+    index,
+    1
+  );
+
+
+  const url =
+  selectedPaymentProofPreviewUrls.get(
+    key
+  );
+
+
+  if(url){
+
+    try{
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    }catch(e){}
+
+
+    selectedPaymentProofPreviewUrls.delete(
+      key
+    );
+
+  }
+
+
+  renderSelectedPaymentProofs();
+
+}
+
+
+
+/* =========================================================
+   CLEAR SELECTED PROOFS
+========================================================= */
+
+function clearSelectedPaymentProofs(
+  ask=true
+){
+
+  if(
+    ask
+    &&
+    selectedPaymentProofFiles.length
+  ){
+
+    const ok =
+    confirm(
+      currentLang===
+      'zh'
+      ?
+      '确定清空目前已经选择的付款图片？'
+      :
+      'Clear all selected payment images?'
+    );
+
+
+    if(!ok){
+
+      return;
+
+    }
+
+  }
+
+
+  selectedPaymentProofPreviewUrls
+  .forEach(
+    url=>{
+
+      try{
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      }catch(e){}
+
+    }
+  );
+
+
+  selectedPaymentProofPreviewUrls.clear();
+
+
+  selectedPaymentProofFiles =
+  [];
+
+
+  const input =
+  document.getElementById(
+    'paymentProofFiles'
+  );
+
+
+  if(input){
+
+    input.value =
+    '';
+
+  }
+
+
+  renderSelectedPaymentProofs();
+
+}
+
+
+
+/* =========================================================
+   RENDER SELECTED PROOFS
+========================================================= */
+
+function renderSelectedPaymentProofs(){
+
+  const wrap =
+  document.getElementById(
+    'selectedProofWrap'
+  );
+
+
+  const grid =
+  document.getElementById(
+    'selectedProofGrid'
+  );
+
+
+  const count =
+  document.getElementById(
+    'selectedProofCount'
+  );
+
+
+  if(
+    !wrap
+    ||
+    !grid
+    ||
+    !count
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !selectedPaymentProofFiles.length
+  ){
+
+    wrap.classList.add(
+      'hidden'
+    );
+
+
+    grid.innerHTML =
+    '';
+
+
+    count.textContent =
+    '0';
+
+
+    return;
+
+  }
+
+
+  wrap.classList.remove(
+    'hidden'
+  );
+
+
+  count.textContent =
+  selectedPaymentProofFiles.length;
+
+
+  grid.innerHTML =
+  selectedPaymentProofFiles
+  .map(
+    file=>{
+
+      const key =
+      getProofFileKey(
+        file
+      );
+
+
+      const url =
+      selectedPaymentProofPreviewUrls.get(
+        key
+      )
+      ||
+      '';
+
+
+      return `
+
+      <div class="selectedProofItem">
+
+        <button
+          type="button"
+          class="removeSelectedProof"
+          onclick="removeSelectedPaymentProof(
+            '${escapeJs(key)}'
+          )">
+
+          ×
+
+        </button>
+
+
+        ${
+          url
+          ?
+          `
+
+          <img
+            src="${escapeHtml(url)}"
+            alt="${escapeHtml(
+              file.name || 'proof'
+            )}">
+
+          `
+          :
+          `
+
+          <div class="paymentProofLoading">
+            ${escapeHtml(
+              file.name || 'Image'
+            )}
+          </div>
+
+          `
+        }
+
+
+        <div class="selectedProofMeta">
+
+          ${escapeHtml(
+            file.name || 'Image'
+          )}
+
+          <br>
+
+          ${escapeHtml(
+            formatFileSize(
+              file.size
+            )
+          )}
+
+        </div>
+
+      </div>
+
+      `;
+
+    }
+  )
+  .join('');
+
+}
+
+
+
+/* =========================================================
+   PRIVATE STORAGE OBJECT URL
+
+   这里不再依赖 signed URL。
+
+   已登录代理直接使用自己的 JWT
+   读取私有 Storage 对象。
+
+   Supabase 当前 RLS 已允许：
+   - payment-qr-codes 已登录用户读取
+   - agent-payment-proofs 当前代理读取自己的目录
+========================================================= */
+
+async function getPrivateStorageObjectUrl(
+  bucket,
+  path
+){
+
+  if(
+    !bucket
+    ||
+    !path
+  ){
+
+    return '';
+
+  }
+
+
+  const cacheKey =
+  bucket+
+  '::'+
+  path;
+
+
+  if(
+    privateImageObjectUrls.has(
+      cacheKey
+    )
+  ){
+
+    return privateImageObjectUrls.get(
+      cacheKey
+    );
+
+  }
+
+
+  const r =
+  await api(
+    '/storage/v1/object/authenticated/'+
+    encodeURIComponent(
+      bucket
+    )+
+    '/'+
+    encodeStoragePath(
+      path
+    )
+  );
+
+
+  if(
+    !r.ok
+  ){
+
+    const errorText =
+    await r.text();
+
+
+    throw new Error(
+      errorText
+      ||
+      'STORAGE_READ_FAILED'
+    );
+
+  }
+
+
+  const blob =
+  await r.blob();
+
+
+  const url =
+  URL.createObjectURL(
+    blob
+  );
+
+
+  privateImageObjectUrls.set(
+    cacheKey,
+    url
+  );
+
+
+  return url;
+
+}
+
+
+
+/* =========================================================
+   LOAD PAYMENT CENTER
+========================================================= */
+
+async function loadPaymentCenter(
+  showMessage=false
+){
+
+  if(
+    !agent
+    ||
+    !currentRound
+    ||
+    isLoadingPaymentCenter
+  ){
+
+    return;
+
+  }
+
+
+  isLoadingPaymentCenter =
+  true;
+
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+
+  if(
+    showMessage
+    &&
+    msg
+  ){
+
+    msg.className =
+    'msg';
+
+
+    msg.textContent =
+    tr(
+      'paymentLoading'
+    );
+
+  }
+
+
+  try{
+
+    const [
+      accountRes,
+      submissionRes,
+      proofRes
+    ] =
+    await Promise.all([
+
+      api(
+        '/rest/v1/payment_accounts'+
+        '?is_active=eq.true'+
+        '&select=id,method_name,method_type,account_name,account_number,bank_name,qr_storage_path,note,is_active,sort_order'+
+        '&order=sort_order.asc,created_at.asc'
+      ),
+
+      api(
+        '/rest/v1/agent_payment_submissions'+
+        '?round_id=eq.'+
+        encodeURIComponent(
+          currentRound.id
+        )+
+        '&agent_id=eq.'+
+        encodeURIComponent(
+          agent.id
+        )+
+        '&select=id,round_id,agent_id,payment_account_id,declared_amount,confirmed_amount,status,method_name_snapshot,method_type_snapshot,account_name_snapshot,account_number_snapshot,bank_name_snapshot,qr_storage_path_snapshot,account_note_snapshot,agent_note,submitted_at,reviewed_at,rejection_reason,updated_at'+
+        '&order=submitted_at.desc'
+      ),
+
+      api(
+        '/rest/v1/agent_payment_proofs'+
+        '?agent_id=eq.'+
+        encodeURIComponent(
+          agent.id
+        )+
+        '&select=id,payment_submission_id,agent_id,storage_path,original_name,mime_type,file_size,created_at'+
+        '&order=created_at.asc'
+      )
+
+    ]);
+
+
+    if(
+      !accountRes.ok
+    ){
+
+      throw new Error(
+        await accountRes.text()
+      );
+
+    }
+
+
+    if(
+      !submissionRes.ok
+    ){
+
+      throw new Error(
+        await submissionRes.text()
+      );
+
+    }
+
+
+    if(
+      !proofRes.ok
+    ){
+
+      throw new Error(
+        await proofRes.text()
+      );
+
+    }
+
+
+    const newPaymentAccounts =
+    await accountRes.json();
+
+
+    const newPaymentSubmissions =
+    await submissionRes.json();
+
+
+    const allProofs =
+    await proofRes.json();
+
+
+    const submissionIds =
+    new Set(
+      newPaymentSubmissions.map(
+        row =>
+        row.id
+      )
+    );
+
+
+    const newPaymentProofs =
+    allProofs.filter(
+      proof =>
+      submissionIds.has(
+        proof.payment_submission_id
+      )
+    );
+
+
+    /*
+      建立付款区域的数据指纹。
+
+      数据完全一样：
+      不重新 render，
+      不重新装载图片。
+
+      后台真的有修改：
+      才重新更新页面。
+    */
+
+    const newSignature =
+JSON.stringify({
+
+  round:
+  currentRound.id,
+
+  amountDue:
+  getPaymentAmountDue(),
+
+  paymentStatus:
+  settlement
+  ?
+  settlement.payment_status
+  :
+  '',
+
+  amountReceived:
+  settlement
+  ?
+  Number(
+    settlement.amount_received || 0
+  )
+  :
+  0,
+
+  accounts:
+  newPaymentAccounts,
+
+  submissions:
+  newPaymentSubmissions,
+
+  proofs:
+  newPaymentProofs
+
+});
+
+
+    const oldSignature =
+paymentCenterSignature
+||
+'';
+
+    const hasChanged =
+    newSignature!==
+    oldSignature;
+
+
+    /*
+      数据本身始终更新到最新版本。
+    */
+
+    paymentAccounts =
+    newPaymentAccounts;
+
+
+    paymentSubmissions =
+    newPaymentSubmissions;
+
+
+    paymentProofs =
+    newPaymentProofs;
+
+
+    if(
+      selectedPaymentAccountId
+      &&
+      !paymentAccounts.some(
+        row =>
+        row.id===
+        selectedPaymentAccountId
+      )
+    ){
+
+      selectedPaymentAccountId =
+      '';
+
+    }
+
+
+    /*
+      只有付款资料真正发生变化，
+      才重新生成付款页面。
+    */
+
+    if(
+      hasChanged
+    ){
+
+      paymentCenterSignature =
+      newSignature;
+
+
+      renderPaymentCenter();
+
+
+      /*
+        页面结构已经改变以后，
+        才重新读取 QR 和付款截图。
+      */
+
+      await refreshPaymentImages();
+
+
+      /*
+        用户当前自己选择、
+        尚未提交的付款截图继续保留。
+      */
+
+      renderSelectedPaymentProofs();
+await loadExisting(
+  false
+);
+    }
+
+
+    if(
+      showMessage
+      &&
+      msg
+    ){
+
+      msg.className =
+      'msg success';
+
+
+      msg.textContent =
+      '✓';
+
+
+      setTimeout(
+        ()=>{
+
+          if(
+            msg.textContent===
+            '✓'
+          ){
+
+            msg.textContent =
+            '';
+
+          }
+
+        },
+        1200
+      );
+
+    }
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+
+      msg.textContent =
+      tr(
+        'paymentRefreshFail'
+      )
+      +
+      '：'
+      +
+      paymentErrorText(
+        e
+      );
+
+    }
+
+
+  }finally{
+
+    isLoadingPaymentCenter =
+    false;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER PAYMENT CENTER
+========================================================= */
+
+function renderPaymentCenter(){
+
+  const requiredEl =
+  document.getElementById(
+    'paymentRequiredAmount'
+  );
+
+
+  const remainingEl =
+  document.getElementById(
+    'paymentRemainingAmount'
+  );
+
+
+  const accountsBox =
+  document.getElementById(
+    'paymentAccounts'
+  );
+
+
+  const form =
+  document.getElementById(
+    'paymentForm'
+  );
+
+
+  const historyBox =
+  document.getElementById(
+    'paymentHistoryList'
+  );
+
+
+  if(
+    !requiredEl
+    ||
+    !remainingEl
+    ||
+    !accountsBox
+    ||
+    !form
+    ||
+    !historyBox
+  ){
+
+    return;
+
+  }
+
+
+  const due =
+  getPaymentAmountDue();
+
+
+  const remaining =
+  getPaymentRemaining();
+
+
+  requiredEl.textContent =
+  formatNumber(
+    due
+  );
+
+
+  remainingEl.textContent =
+  formatNumber(
+    remaining
+  );
+
+
+  if(
+    !currentRound
+    ||
+    due<=0
+  ){
+
+    accountsBox.innerHTML =
+    '<div class="paymentQrEmpty">'+
+    escapeHtml(
+      tr(
+        'paymentNotReady'
+      )
+    )+
+    '</div>';
+
+
+    form.classList.add(
+      'hidden'
+    );
+
+  }
+
+  else if(
+    !paymentAccounts.length
+  ){
+
+    accountsBox.innerHTML =
+    '<div class="paymentQrEmpty">'+
+    escapeHtml(
+      tr(
+        'noPaymentAccount'
+      )
+    )+
+    '</div>';
+
+
+    form.classList.add(
+      'hidden'
+    );
+
+  }
+
+  else{
+
+    accountsBox.innerHTML =
+    paymentAccounts
+    .map(
+      account=>{
+
+        const selected =
+        account.id===
+        selectedPaymentAccountId;
+
+
+        return `
+
+        <div
+          class="paymentAccount ${
+            selected
+            ?
+            'selected'
+            :
+            ''
+          }"
+          onclick="selectPaymentAccount(
+            '${escapeJs(account.id)}'
+          )">
+
+          <div class="paymentAccountHead">
+
+            <div class="paymentAccountName">
+
+              ${escapeHtml(
+                account.method_name
+                ||
+                account.bank_name
+                ||
+                'Payment'
+              )}
+
+            </div>
+
+            <div class="paymentType">
+
+              ${escapeHtml(
+                paymentMethodTypeName(
+                  account.method_type
+                )
+              )}
+
+            </div>
+
+          </div>
+
+
+          <div class="paymentAccountGrid">
+
+            <div class="paymentDetail">
+
+              <small>
+                ${escapeHtml(
+                  tr(
+                    'accountHolder'
+                  )
+                )}
+              </small>
+
+              <strong>
+                ${escapeHtml(
+                  account.account_name
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="paymentDetail">
+
+              <small>
+                ${escapeHtml(
+                  tr(
+                    'accountNumber'
+                  )
+                )}
+              </small>
+
+              <strong>
+                ${escapeHtml(
+                  account.account_number
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="paymentDetail">
+
+              <small>
+                ${escapeHtml(
+                  tr(
+                    'bankName'
+                  )
+                )}
+              </small>
+
+              <strong>
+                ${escapeHtml(
+                  account.bank_name
+                  ||
+                  account.method_name
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="paymentDetail">
+
+              <small>
+                ${escapeHtml(
+                  tr(
+                    'accountNote'
+                  )
+                )}
+              </small>
+
+              <strong>
+                ${escapeHtml(
+                  account.note
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          ${
+            account.qr_storage_path
+            ?
+            `
+
+            <div class="paymentQr">
+
+              <div
+                class="paymentQrEmpty"
+                id="accountQr_${safeId(account.id)}">
+
+                ...
+
+              </div>
+
+            </div>
+
+            `
+            :
+            `
+
+            <div class="paymentQr">
+
+              <div class="paymentQrEmpty">
+
+                ${escapeHtml(
+                  tr(
+                    'noQr'
+                  )
+                )}
+
+              </div>
+
+            </div>
+
+            `
+          }
+
+        </div>
+
+        `;
+
+      }
+    )
+    .join('');
+
+
+    if(
+      selectedPaymentAccountId
+      &&
+      remaining>0
+    ){
+
+      form.classList.remove(
+        'hidden'
+      );
+
+
+      const selected =
+      paymentAccounts.find(
+        row =>
+        row.id===
+        selectedPaymentAccountId
+      );
+
+
+      document.getElementById(
+        'selectedPaymentDisplay'
+      ).value =
+      selected
+      ?
+      (
+        (
+          selected.method_name
+          ||
+          selected.bank_name
+          ||
+          'Payment'
+        )
+        +
+        ' · '
+        +
+        (
+          selected.account_name
+          ||
+          ''
+        )
+        +
+        ' · '
+        +
+        (
+          selected.account_number
+          ||
+          ''
+        )
+      )
+      :
+      '';
+
+
+      const amountInput =
+      document.getElementById(
+        'paymentAmountInput'
+      );
+
+
+            /*
+        如果代理还没有手动修改实际转账金额，
+        金额自动跟随最新可提交余额。
+
+        一旦代理自己修改过金额，
+        就保留代理自己填写的部分付款金额。
+      */
+
+      if(amountInput){
+
+        const manual =
+        amountInput.dataset.manual ===
+        '1';
+
+        if(!manual){
+
+          amountInput.value =
+          remaining>0
+          ?
+          remaining
+          :
+          '';
+
+        }
+
+        else if(
+          Number(amountInput.value) >
+          remaining
+        ){
+
+          amountInput.value =
+          remaining>0
+          ?
+          remaining
+          :
+          '';
+
+          amountInput.dataset.manual =
+          '0';
+
+        }
+
+      }
+
+    }
+
+    else{
+
+      form.classList.add(
+        'hidden'
+      );
+
+    }
+
+
+    if(
+      remaining<=0
+    ){
+
+      accountsBox.insertAdjacentHTML(
+        'beforeend',
+        '<div class="settlementNotice paid">'+
+        escapeHtml(
+          tr(
+            'allAmountSubmitted'
+          )
+        )+
+        '</div>'
+      );
+
+    }
+
+  }
+
+
+  renderPaymentHistory();
+
+
+  renderSelectedPaymentProofs();
+
+}
+
+
+
+/* =========================================================
+   PAYMENT HISTORY
+========================================================= */
+
+function renderPaymentHistory(){
+
+  const historyBox =
+  document.getElementById(
+    'paymentHistoryList'
+  );
+
+
+  if(!historyBox){
+
+    return;
+
+  }
+
+
+  if(
+    !paymentSubmissions.length
+  ){
+
+    historyBox.innerHTML =
+    '<div class="paymentQrEmpty">'+
+    escapeHtml(
+      tr(
+        'noSettlement'
+      )
+    )+
+    '</div>';
+
+
+    return;
+
+  }
+
+
+  historyBox.innerHTML =
+  paymentSubmissions
+  .map(
+    row=>{
+
+      const status =
+      paymentSubmissionStatus(
+        row.status
+      );
+
+
+      const proofs =
+      paymentProofs.filter(
+        proof =>
+        proof.payment_submission_id===
+        row.id
+      );
+
+
+      return `
+
+      <div
+        class="paymentHistoryItem ${escapeHtml(
+          row.status || 'pending'
+        )}">
+
+
+        <div class="paymentHistoryHead">
+
+          <div>
+
+            <div class="paymentHistoryMethod">
+
+              ${escapeHtml(
+                row.method_name_snapshot
+                ||
+                row.bank_name_snapshot
+                ||
+                'Payment'
+              )}
+
+            </div>
+
+
+            <div class="paymentHistoryTime">
+
+              ${escapeHtml(
+                tr(
+                  'submittedAt'
+                )
+              )}
+              ·
+              ${escapeHtml(
+                formatMMT(
+                  row.submitted_at
+                )
+              )}
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="paymentStatusBadge ${escapeHtml(
+              row.status || 'pending'
+            )}">
+
+            ${escapeHtml(
+              status
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div class="paymentHistoryGrid">
+
+
+          <div class="paymentDetail">
+
+            <small>
+              ${escapeHtml(
+                tr(
+                  'declaredAmount'
+                )
+              )}
+            </small>
+
+            <strong>
+              ${formatNumber(
+                row.declared_amount
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="paymentDetail">
+
+            <small>
+              ${escapeHtml(
+                tr(
+                  'confirmedAmount'
+                )
+              )}
+            </small>
+
+            <strong>
+              ${formatNumber(
+                row.confirmed_amount
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="paymentDetail">
+
+            <small>
+              ${escapeHtml(
+                tr(
+                  'accountHolder'
+                )
+              )}
+            </small>
+
+            <strong>
+              ${escapeHtml(
+                row.account_name_snapshot
+                ||
+                '—'
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="paymentDetail">
+
+            <small>
+              ${escapeHtml(
+                tr(
+                  'accountNumber'
+                )
+              )}
+            </small>
+
+            <strong>
+              ${escapeHtml(
+                row.account_number_snapshot
+                ||
+                '—'
+              )}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        ${
+          row.agent_note
+          ?
+          `
+
+          <div class="note">
+
+            ${escapeHtml(
+              row.agent_note
+            )}
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+
+        ${
+          row.status===
+          'rejected'
+          &&
+          row.rejection_reason
+          ?
+          `
+
+          <div class="rejectionReason">
+
+            ${escapeHtml(
+              tr(
+                'rejectionReason'
+              )
+            )}
+            ：
+            ${escapeHtml(
+              row.rejection_reason
+            )}
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+
+        <div
+          class="paymentProofGrid"
+          id="proofGrid_${safeId(row.id)}">
+
+          ${
+            proofs.length
+            ?
+            proofs.map(
+              proof =>`
+
+              <div
+                class="paymentProof"
+                id="proof_${safeId(proof.id)}">
+
+                <div class="paymentProofLoading">
+                  ...
+                </div>
+
+              </div>
+
+              `
+            )
+            .join('')
+            :
+            `
+
+            <div
+              class="paymentProof"
+              style="grid-column:1/-1">
+
+              <div class="paymentProofLoading">
+
+                ${escapeHtml(
+                  tr(
+                    'noProof'
+                  )
+                )}
+
+              </div>
+
+            </div>
+
+            `
+          }
+
+        </div>
+
+
+        ${
+          row.status===
+          'pending'
+          ?
+          `
+
+          <div class="retryProof">
+
+            <div class="paymentLabel">
+
+              ${escapeHtml(
+                tr(
+                  'retryProof'
+                )
+              )}
+
+            </div>
+
+
+            <input
+              id="retryProofInput_${safeId(row.id)}"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
+              multiple>
+
+
+            <button
+              class="secondary smallBtn"
+              onclick="uploadMoreProofs(
+                '${escapeJs(row.id)}'
+              )">
+
+              ${escapeHtml(
+                tr(
+                  'uploadMoreProof'
+                )
+              )}
+
+            </button>
+
+
+            <div
+              class="msg"
+              id="retryProofMsg_${safeId(row.id)}">
+            </div>
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+
+      </div>
+
+      `;
+
+    }
+  )
+  .join('');
+
+}
+
+
+
+/* =========================================================
+   SELECT PAYMENT ACCOUNT
+========================================================= */
+
+function selectPaymentAccount(
+  id
+){
+
+  if(
+    !paymentAccounts.some(
+      row =>
+      row.id===
+      id
+    )
+  ){
+
+    return;
+
+  }
+
+
+  selectedPaymentAccountId =
+  id;
+
+
+  renderPaymentCenter();
+
+
+  refreshPaymentImages();
+
+}
+
+
+
+/* =========================================================
+   PAYMENT METHOD NAME
+========================================================= */
+
+function paymentMethodTypeName(
+  type
+){
+
+  if(
+    type===
+    'wallet'
+  ){
+
+    return currentLang===
+    'zh'
+    ?
+    '电子钱包'
+    :
+    'Wallet';
+
+  }
+
+
+  if(
+    type===
+    'bank'
+  ){
+
+    return currentLang===
+    'zh'
+    ?
+    '银行账户'
+    :
+    'Bank';
+
+  }
+
+
+  return type || 'Payment';
+
+}
+
+
+
+/* =========================================================
+   PAYMENT STATUS NAME
+========================================================= */
+
+function paymentSubmissionStatus(
+  status
+){
+
+  if(
+    status===
+    'approved'
+  ){
+
+    return tr(
+      'approved'
+    );
+
+  }
+
+
+  if(
+    status===
+    'rejected'
+  ){
+
+    return tr(
+      'rejected'
+    );
+
+  }
+
+
+  return tr(
+    'pendingReview'
+  );
+
+}
+
+
+
+/* =========================================================
+   STORAGE PATH ENCODE
+========================================================= */
+
+function encodeStoragePath(
+  path
+){
+
+  return String(
+    path || ''
+  )
+  .split('/')
+  .map(
+    part =>
+    encodeURIComponent(
+      part
+    )
+  )
+  .join('/');
+
+}
+
+
+
+/* =========================================================
+   REFRESH PAYMENT IMAGES
+
+   修复后台 QR 在代理端只显示 "..." 的问题。
+
+   不创建 signed URL。
+   直接读取 authenticated private object。
+========================================================= */
+
+async function refreshPaymentImages(){
+
+  if(
+    !token
+  ){
+
+    return;
+
+  }
+
+
+  for(
+    const account
+    of paymentAccounts
+  ){
+
+    if(
+      !account.qr_storage_path
+    ){
+
+      continue;
+
+    }
+
+
+    const box =
+    document.getElementById(
+      'accountQr_'+
+      safeId(
+        account.id
+      )
+    );
+
+
+    if(!box){
+
+      continue;
+
+    }
+
+
+    try{
+
+      const url =
+      await getPrivateStorageObjectUrl(
+        PAYMENT_QR_BUCKET,
+        account.qr_storage_path
+      );
+
+
+      const img =
+      document.createElement(
+        'img'
+      );
+
+
+      img.id =
+      'accountQr_'+
+      safeId(
+        account.id
+      );
+
+
+      img.src =
+      url;
+
+
+      img.alt =
+      'QR';
+
+
+      box.replaceWith(
+        img
+      );
+
+
+    }catch(e){
+
+      console.error(
+        'QR_READ_ERROR',
+        e
+      );
+
+
+      box.textContent =
+      tr(
+        'noQr'
+      );
+
+    }
+
+  }
+
+
+  for(
+    const proof
+    of paymentProofs
+  ){
+
+    const box =
+    document.getElementById(
+      'proof_'+
+      safeId(
+        proof.id
+      )
+    );
+
+
+    if(!box){
+
+      continue;
+
+    }
+
+
+    try{
+
+      const url =
+      await getPrivateStorageObjectUrl(
+        PAYMENT_PROOF_BUCKET,
+        proof.storage_path
+      );
+
+
+      box.innerHTML =
+      '';
+
+
+      const img =
+      document.createElement(
+        'img'
+      );
+
+
+      img.src =
+      url;
+
+
+      img.alt =
+      proof.original_name
+      ||
+      'Payment Proof';
+
+
+      box.appendChild(
+        img
+      );
+
+
+    }catch(e){
+
+      console.error(
+        'PROOF_READ_ERROR',
+        e
+      );
+
+
+      box.innerHTML =
+      '<div class="paymentProofLoading">'+
+      escapeHtml(
+        tr(
+          'proofUploadFail'
+        )
+      )+
+      '</div>';
+
+    }
+
+  }
+
+} 
+/* =========================================================
+   PAYMENT SUBMISSION CORE
+========================================================= */
+
+function validateProofFiles(files){
+
+  const list =
+  Array.from(files || []);
+
+  if(!list.length){
+
+    throw new Error(
+      'PROOF_REQUIRED'
+    );
+
+  }
+
+  for(const file of list){
+
+    validateSingleProofFile(
+      file
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   FILE EXTENSION
+========================================================= */
+
+function getFileExtension(file){
+
+  const name =
+  String(
+    file?.name || ''
+  );
+
+  const match =
+  name.match(
+    /\.([a-zA-Z0-9]+)$/
+  );
+
+  if(match){
+
+    return match[1]
+    .toLowerCase();
+
+  }
+
+  if(
+    file?.type===
+    'image/png'
+  ){
+
+    return 'png';
+
+  }
+
+  if(
+    file?.type===
+    'image/webp'
+  ){
+
+    return 'webp';
+
+  }
+
+  if(
+    file?.type===
+    'image/heic'
+  ){
+
+    return 'heic';
+
+  }
+
+  if(
+    file?.type===
+    'image/heif'
+  ){
+
+    return 'heif';
+
+  }
+
+  return 'jpg';
+
+}
+
+
+
+/* =========================================================
+   RANDOM ID
+========================================================= */
+
+function randomId(){
+
+  if(
+    typeof crypto!==
+    'undefined'
+    &&
+    typeof crypto.randomUUID===
+    'function'
+  ){
+
+    return crypto.randomUUID();
+
+  }
+
+  return (
+    Date.now().toString(36)
+    +
+    '-'
+    +
+    Math.random()
+    .toString(36)
+    .slice(2)
+  );
+
+}
+
+
+
+/* =========================================================
+   CLEAN API ERROR
+========================================================= */
+
+function cleanApiError(value){
+
+  const raw =
+  String(
+    value || ''
+  );
+
+  if(!raw){
+
+    return '';
+
+  }
+
+  try{
+
+    const data =
+    JSON.parse(
+      raw
+    );
+
+    return (
+      data.message
+      ||
+      data.hint
+      ||
+      data.error
+      ||
+      raw
+    );
+
+  }catch(e){
+
+    return raw;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   PAYMENT ERROR TEXT
+========================================================= */
+
+function paymentErrorText(error){
+
+  const text =
+  String(
+    error?.message
+    ||
+    error
+    ||
+    ''
+  );
+
+  if(
+    text.includes(
+      'PROOF_REQUIRED'
+    )
+  ){
+
+    return tr(
+      'proofRequired'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'INVALID_PROOF_TYPE'
+    )
+  ){
+
+    return tr(
+      'invalidProof'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'PROOF_TOO_LARGE'
+    )
+  ){
+
+    return tr(
+      'proofTooLarge'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'INVALID_PAYMENT_AMOUNT'
+    )
+  ){
+
+    return tr(
+      'invalidPaymentAmount'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'PAYMENT_EXCEEDS_REMAINING_AMOUNT'
+    )
+  ){
+
+    return tr(
+      'paymentAmountTooHigh'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'PAYMENT_ACCOUNT_NOT_AVAILABLE'
+    )
+  ){
+
+    return tr(
+      'noPaymentAccount'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'ROUND_ALREADY_FULLY_PAID'
+    )
+  ){
+
+    return tr(
+      'allAmountSubmitted'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'ROUND_SETTLEMENT_NOT_FOUND'
+    )
+  ){
+
+    return tr(
+      'paymentNotReady'
+    );
+
+  }
+
+  if(
+    text.includes(
+      'NO_SUBMITTED_AMOUNT'
+    )
+  ){
+
+    return tr(
+      'paymentNotReady'
+    );
+
+  }
+
+  return (
+    cleanApiError(
+      text
+    )
+    ||
+    tr(
+      'networkError'
+    )
+  );
+
+}
+
+
+
+/* =========================================================
+   UPLOAD ONE PAYMENT PROOF
+========================================================= */
+
+async function uploadSinglePaymentProof(
+  submissionId,
+  file
+){
+
+  if(
+    !agent
+    ||
+    !submissionId
+    ||
+    !file
+  ){
+
+    throw new Error(
+      'INVALID_PAYMENT_PROOF_UPLOAD'
+    );
+
+  }
+
+  validateSingleProofFile(
+    file
+  );
+
+  const ext =
+  getFileExtension(
+    file
+  );
+
+  /*
+    Storage 第一层目录使用 agent.id
+  */
+
+  const storagePath =
+  agent.id+
+  '/'+
+  submissionId+
+  '/'+
+  Date.now()+
+  '-'+
+  randomId()+
+  '.'+
+  ext;
+
+  const uploadRes =
+  await api(
+    '/storage/v1/object/'+
+    PAYMENT_PROOF_BUCKET+
+    '/'+
+    encodeStoragePath(
+      storagePath
+    ),
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        file.type
+        ||
+        'application/octet-stream',
+
+        'x-upsert':
+        'false'
+      },
+
+      body:file
+    }
+  );
+
+  if(
+    !uploadRes.ok
+  ){
+
+    throw new Error(
+      await uploadRes.text()
+    );
+
+  }
+
+  const metaRes =
+  await api(
+    '/rest/v1/agent_payment_proofs',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        'application/json',
+
+        Prefer:
+        'return=representation'
+      },
+
+      body:
+      JSON.stringify({
+
+        payment_submission_id:
+        submissionId,
+
+        agent_id:
+        agent.id,
+
+        storage_path:
+        storagePath,
+
+        original_name:
+        file.name
+        ||
+        (
+          'payment-proof.'+
+          ext
+        ),
+
+        mime_type:
+        file.type
+        ||
+        null,
+
+        file_size:
+        Number(
+          file.size || 0
+        )
+
+      })
+    }
+  );
+
+  if(
+    !metaRes.ok
+  ){
+
+    /*
+      Storage 已上传但资料表写入失败。
+      尝试把刚上传的孤儿文件删除掉。
+    */
+
+    try{
+
+      await api(
+        '/storage/v1/object/'+
+        PAYMENT_PROOF_BUCKET+
+        '/'+
+        encodeStoragePath(
+          storagePath
+        ),
+        {
+          method:'DELETE'
+        }
+      );
+
+    }catch(e){
+
+      console.error(
+        'ORPHAN_PROOF_CLEANUP_FAILED',
+        e
+      );
+
+    }
+
+    throw new Error(
+      await metaRes.text()
+    );
+
+  }
+
+  return storagePath;
+
+}
+
+
+
+/* =========================================================
+   COMPRESS PAYMENT PROOF
+========================================================= */
+
+async function compressPaymentProofFile(
+  file
+){
+
+  try{
+
+    if(
+      !file
+      ||
+      ![
+        'image/jpeg',
+        'image/png',
+        'image/webp'
+      ].includes(
+        file.type
+      )
+    ){
+
+      return file;
+
+    }
+
+
+    if(
+      Number(
+        file.size || 0
+      )
+      <=
+      700 * 1024
+    ){
+
+      return file;
+
+    }
+
+
+    const bitmap =
+    await createImageBitmap(
+      file
+    );
+
+
+    const maxSide =
+    1600;
+
+
+    const scale =
+    Math.min(
+      1,
+      maxSide /
+      Math.max(
+        bitmap.width,
+        bitmap.height
+      )
+    );
+
+
+    const width =
+    Math.max(
+      1,
+      Math.round(
+        bitmap.width *
+        scale
+      )
+    );
+
+
+    const height =
+    Math.max(
+      1,
+      Math.round(
+        bitmap.height *
+        scale
+      )
+    );
+
+
+    const canvas =
+    document.createElement(
+      'canvas'
+    );
+
+
+    canvas.width =
+    width;
+
+
+    canvas.height =
+    height;
+
+
+    const ctx =
+    canvas.getContext(
+      '2d',
+      {
+        alpha:false
+      }
+    );
+
+
+    if(!ctx){
+
+      if(bitmap.close){
+        bitmap.close();
+      }
+
+      return file;
+
+    }
+
+
+    ctx.drawImage(
+      bitmap,
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    if(bitmap.close){
+      bitmap.close();
+    }
+
+
+    const blob =
+    await new Promise(
+      resolve =>
+
+      canvas.toBlob(
+        resolve,
+        'image/jpeg',
+        0.82
+      )
+    );
+
+
+    if(
+      !blob
+      ||
+      blob.size >=
+      file.size
+    ){
+
+      return file;
+
+    }
+
+
+    const baseName =
+    String(
+      file.name ||
+      'payment-proof'
+    )
+    .replace(
+      /\.[^.]+$/,
+      ''
+    );
+
+
+    return new File(
+      [blob],
+      baseName+'.jpg',
+      {
+        type:'image/jpeg',
+        lastModified:
+        file.lastModified ||
+        Date.now()
+      }
+    );
+
+
+  }catch(e){
+
+    console.warn(
+      'PROOF_COMPRESSION_FALLBACK',
+      e
+    );
+
+
+    return file;
+
+  }
+
+}
+
+
+/* =========================================================
+   UPLOAD MULTIPLE PAYMENT PROOFS
+========================================================= */
+
+async function uploadPaymentProofFiles(
+  submissionId,
+  files
+){
+
+  const list =
+  Array.from(
+    files || []
+  );
+
+
+  validateProofFiles(
+    list
+  );
+
+
+  const uploaded =
+  [];
+
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+
+  for(
+    let i=0;
+    i<list.length;
+    i++
+  ){
+
+    const originalFile =
+    list[i];
+
+
+    if(msg){
+
+      msg.className =
+      'msg';
+
+
+      msg.textContent =
+      currentLang==='zh'
+      ?
+      '正在处理并上传第 '+
+      (i+1)+
+      '/'+
+      list.length+
+      ' 张付款截图…'
+      :
+      'Uploading payment proof '+
+      (i+1)+
+      '/'+
+      list.length+
+      '…';
+
+    }
+
+
+    const file =
+    await compressPaymentProofFile(
+      originalFile
+    );
+
+
+    const path =
+    await uploadSinglePaymentProof(
+      submissionId,
+      file
+    );
+
+
+    uploaded.push({
+      name:
+      file.name,
+
+      path
+    });
+
+  }
+
+
+  return uploaded;
+
+}
+
+
+/* =========================================================
+   CREATE PAYMENT SUBMISSION
+========================================================= */
+
+async function createPaymentSubmission(
+  paymentAccountId,
+  amount,
+  note
+){
+
+  if(
+    !currentRound
+    ||
+    !agent
+  ){
+
+    throw new Error(
+      'ROUND_SETTLEMENT_NOT_FOUND'
+    );
+
+  }
+
+  const r =
+  await api(
+    '/rest/v1/rpc/agent_create_payment_submission',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        'application/json'
+      },
+
+      body:
+      JSON.stringify({
+
+        p_round_id:
+        currentRound.id,
+
+        p_payment_account_id:
+        paymentAccountId,
+
+        p_declared_amount:
+        Number(
+          amount
+        ),
+
+        p_agent_note:
+        note
+        ?
+        String(note)
+        :
+        null
+
+      })
+    }
+  );
+
+  const text =
+  await r.text();
+
+  if(
+    !r.ok
+  ){
+
+    throw new Error(
+      text
+      ||
+      'PAYMENT_SUBMISSION_FAILED'
+    );
+
+  }
+
+  let result =
+  null;
+
+  try{
+
+    result =
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    null;
+
+  }catch(e){
+
+    result =
+    null;
+
+  }
+
+  /*
+    RPC 正常版本返回：
+    { submission_id: "..." }
+  */
+
+  if(
+    result
+    &&
+    result.submission_id
+  ){
+
+    return result;
+
+  }
+
+  /*
+    兼容 RPC 偶尔直接返回 UUID 字符串
+  */
+
+  if(
+    typeof result===
+    'string'
+    &&
+    result
+  ){
+
+    return {
+      submission_id:
+      result
+    };
+
+  }
+
+  throw new Error(
+    'PAYMENT_SUBMISSION_ID_MISSING'
+  );
+
+}
+
+
+
+/* =========================================================
+   SUBMIT PAYMENT PROOF
+========================================================= */
+
+async function submitPaymentProof(){
+
+  if(
+    isSubmittingPayment
+  ){
+
+    return;
+
+  }
+
+  const msg =
+  document.getElementById(
+    'paymentMsg'
+  );
+
+  const btn =
+  document.getElementById(
+    'paymentSubmitBtn'
+  );
+
+  const amountInput =
+  document.getElementById(
+    'paymentAmountInput'
+  );
+
+  const noteInput =
+  document.getElementById(
+    'paymentNoteInput'
+  );
+
+  if(msg){
+
+    msg.className =
+    'msg';
+
+    msg.textContent =
+    '';
+
+  }
+
+  if(
+    !agent
+    ||
+    !currentRound
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'paymentNotReady'
+      );
+
+    }
+
+    return;
+
+  }
+
+  if(
+    !selectedPaymentAccountId
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'selectPaymentAccount'
+      );
+
+    }
+
+    return;
+
+  }
+
+  const selectedAccount =
+  paymentAccounts.find(
+    row =>
+    row.id===
+    selectedPaymentAccountId
+  );
+
+  if(
+    !selectedAccount
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'selectPaymentAccount'
+      );
+
+    }
+
+    return;
+
+  }
+
+  const amount =
+  Number(
+    amountInput?.value
+  );
+
+  const remaining =
+  getPaymentRemaining();
+
+  if(
+    !Number.isFinite(
+      amount
+    )
+    ||
+    amount<=0
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'invalidPaymentAmount'
+      );
+
+    }
+
+    return;
+
+  }
+
+  if(
+    amount>
+    remaining+
+    0.001
+  ){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'paymentAmountTooHigh'
+      );
+
+    }
+
+    return;
+
+  }
+
+  /*
+    这里使用我们自己保存的图片数组，
+    不再使用 paymentProofFiles.files。
+  */
+
+  const files =
+  Array.from(
+    selectedPaymentProofFiles
+  );
+
+  try{
+
+    validateProofFiles(
+      files
+    );
+
+  }catch(e){
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      paymentErrorText(
+        e
+      );
+
+    }
+
+    return;
+
+  }
+
+  const ok =
+  confirm(
+
+    currentLang===
+    'zh'
+
+    ?
+
+    (
+      '请确认付款资料：\n\n'+
+
+      '收款方式：'+
+      (
+        selectedAccount.method_name
+        ||
+        selectedAccount.bank_name
+        ||
+        '—'
+      )+
+
+      '\n收款人：'+
+      (
+        selectedAccount.account_name
+        ||
+        '—'
+      )+
+
+      '\n收款号码：'+
+      (
+        selectedAccount.account_number
+        ||
+        '—'
+      )+
+
+      '\n实际转账：'+
+      formatNumber(
+        amount
+      )+
+
+      '\n付款凭证：'+
+      files.length+
+      ' 张'+
+
+      '\n\n提交后将等待管理员核实。'
+    )
+
+    :
+
+    (
+      'Confirm payment submission?\n\n'+
+      (
+        selectedAccount.method_name
+        ||
+        selectedAccount.bank_name
+        ||
+        'Payment'
+      )+
+
+      '\nAmount: '+
+      formatNumber(
+        amount
+      )+
+
+      '\nProofs: '+
+      files.length
+    )
+
+  );
+
+  if(
+    !ok
+  ){
+
+    return;
+
+  }
+
+  isSubmittingPayment =
+  true;
+
+  if(btn){
+
+    btn.disabled =
+    true;
+
+  }
+
+  let submissionId =
+  '';
+
+  try{
+
+    if(msg){
+
+      msg.className =
+      'msg';
+
+      msg.textContent =
+      tr(
+        'paymentSubmitting'
+      );
+
+    }
+
+    /*
+      第一步：
+      建立付款申请记录
+    */
+
+    const result =
+    await createPaymentSubmission(
+      selectedPaymentAccountId,
+      amount,
+      noteInput
+      ?
+      noteInput.value.trim()
+      :
+      ''
+    );
+
+    submissionId =
+    result.submission_id;
+
+    if(msg){
+
+      msg.textContent =
+      tr(
+        'paymentUploading'
+      );
+
+    }
+
+    /*
+      第二步：
+      上传所有图片
+    */
+
+    try{
+
+      await uploadPaymentProofFiles(
+        submissionId,
+        files
+      );
+
+    }catch(uploadError){
+
+      console.error(
+        'PAYMENT_PROOF_UPLOAD_ERROR',
+        uploadError
+      );
+
+      await loadPaymentCenter(
+        false
+      );
+
+      if(msg){
+
+        msg.className =
+        'msg error';
+
+        msg.textContent =
+        tr(
+          'paymentRecordCreatedProofFailed'
+        )
+        +
+        '：'
+        +
+        paymentErrorText(
+          uploadError
+        );
+
+      }
+
+      return;
+
+    }
+
+    /*
+      第三步：
+      提交成功以后才清空填写资料
+    */
+
+    if(amountInput){
+
+  amountInput.value =
+  '';
+
+  amountInput.dataset.manual =
+  '0';
+
+}
+
+    if(noteInput){
+
+      noteInput.value =
+      '';
+
+    }
+
+    clearSelectedPaymentProofs(
+      false
+    );
+
+    selectedPaymentAccountId =
+    '';
+
+    /*
+      第四步：
+      重新读取数据库最新状态
+    */
+
+    await loadSettlement();
+
+    await loadPaymentCenter(
+      false
+    );
+
+    if(msg){
+
+      msg.className =
+      'msg success';
+
+      msg.textContent =
+      tr(
+        'paymentSuccess'
+      );
+
+    }
+
+  }catch(e){
+
+    console.error(
+      'PAYMENT_SUBMIT_ERROR',
+      e
+    );
+
+    if(msg){
+
+      msg.className =
+      'msg error';
+
+      msg.textContent =
+      tr(
+        'paymentSubmitFail'
+      )
+      +
+      '：'
+      +
+      paymentErrorText(
+        e
+      );
+
+    }
+
+  }finally{
+
+    isSubmittingPayment =
+    false;
+
+    if(btn){
+
+      btn.disabled =
+      false;
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   ADD / RETRY PAYMENT PROOFS
+========================================================= */
+
+async function uploadMoreProofs(
+  submissionId
+){
+
+  const input =
+  document.getElementById(
+    'retryProofInput_'+
+    safeId(
+      submissionId
+    )
+  );
+
+  const msg =
+  document.getElementById(
+    'retryProofMsg_'+
+    safeId(
+      submissionId
+    )
+  );
+
+  if(
+    !input
+    ||
+    !msg
+  ){
+
+    return;
+
+  }
+
+  const row =
+  paymentSubmissions.find(
+    item =>
+    item.id===
+    submissionId
+  );
+
+  if(
+    !row
+    ||
+    row.status!==
+    'pending'
+  ){
+
+    msg.className =
+    'msg error';
+
+    msg.textContent =
+    tr(
+      'paymentRefreshFail'
+    );
+
+    return;
+
+  }
+
+  const files =
+  Array.from(
+    input.files || []
+  );
+
+  try{
+
+    validateProofFiles(
+      files
+    );
+
+    msg.className =
+    'msg';
+
+    msg.textContent =
+    tr(
+      'paymentUploading'
+    );
+
+    await uploadPaymentProofFiles(
+      submissionId,
+      files
+    );
+
+    input.value =
+    '';
+
+    await loadPaymentCenter(
+      false
+    );
+
+    const newMsg =
+    document.getElementById(
+      'retryProofMsg_'+
+      safeId(
+        submissionId
+      )
+    );
+
+    if(newMsg){
+
+      newMsg.className =
+      'msg success';
+
+      newMsg.textContent =
+      '✓';
+
+    }
+
+  }catch(e){
+
+    console.error(
+      'RETRY_PROOF_UPLOAD_ERROR',
+      e
+    );
+
+    msg.className =
+    'msg error';
+
+    msg.textContent =
+    tr(
+      'proofUploadFail'
+    )
+    +
+    '：'
+    +
+    paymentErrorText(
+      e
+    );
+
+  }
+
+}
+function renderAgentFinance(){
+const rate=settlement&&settlement.commission_rate_snapshot!=null?Number(settlement.commission_rate_snapshot):agent?normalizeRate(agent.commission_rate):0,
+total=settlement?Number(settlement.submitted_total||0):submittedTotal,
+commission=settlement?Number(settlement.commission_amount||0):total*rate/100;
+
+document.getElementById('resultSubmittedTotal').textContent=formatNumber(total);
+document.getElementById('resultRate').textContent=formatRate(rate)+'%';
+document.getElementById('resultCommission').textContent=formatNumber(commission);
+
+if(!currentRound||!hasResult(currentRound.result_number)){
+document.getElementById('winningAmount').textContent=tr('waitingResult');
+document.getElementById('finalBalance').textContent=tr('waitingResult');
+return
+}
+
+let win=settlement
+?Number(settlement.result_payout||0)
+:Number(submittedNumbers[String(currentRound.result_number).padStart(2,'0')]||0)*MULTIPLIER;
+
+document.getElementById('winningAmount').textContent=formatNumber(win);
+
+const fb=settlement&&settlement.final_balance!=null
+?Number(settlement.final_balance)
+:Number(settlement?settlement.amount_due:total)-win,
+el=document.getElementById('finalBalance');
+
+if(fb>0){
+el.textContent=tr('platformReceives')+' '+formatNumber(fb);
+el.className='statusPending'
+}else if(fb<0){
+el.textContent=tr('platformPays')+' '+formatNumber(Math.abs(fb));
+el.className='statusPaid'
+}else{
+el.textContent=tr('balanced');
+el.className='statusPaid'
+}
+}
+
+async function updateExistingCode(c,p){
+const r=await api(
+'/rest/v1/agent_submissions?round_id=eq.'+
+encodeURIComponent(currentRound.id)+
+'&agent_id=eq.'+
+encodeURIComponent(agent.id)+
+'&number_code=eq.'+
+encodeURIComponent(c),
+{
+method:'PATCH',
+headers:{
+'Content-Type':'application/json',
+Prefer:'return=representation'
+},
+body:JSON.stringify({
+points:p,
+updated_at:new Date().toISOString()
+})
+}
+),
+t=await r.text();
+
+if(!r.ok)throw new Error(t||'UPDATE_FAILED');
+
+let rows=[];
+
+try{
+rows=t?JSON.parse(t):[]
+}catch(e){}
+
+if(!Array.isArray(rows)||!rows.length)
+throw new Error('UPDATE_NOT_APPLIED')
+}
+
+async function insertNewCode(c,p){
+const r=await api(
+'/rest/v1/agent_submissions',
+{
+method:'POST',
+headers:{
+'Content-Type':'application/json',
+Prefer:'return=representation'
+},
+body:JSON.stringify({
+round_id:currentRound.id,
+agent_id:agent.id,
+number_code:c,
+points:p
+})
+}
+),
+t=await r.text();
+
+if(!r.ok)throw new Error(t||'INSERT_FAILED')
+}
+
+async function submitRound(){
+if(isSaving)return;
+
+const m=document.getElementById('submitMsg');
+m.className='msg';
+
+if(!agent||!currentRound){
+m.textContent=tr('noSubmitRound');
+return
+}
+
+if(agent.status!=='active'){
+m.textContent=tr('accountCannot');
+return
+}
+
+if(
+currentRound.status!=='open'||
+Date.now()>=new Date(currentRound.deadline_at).getTime()
+){
+m.textContent=tr('serverRejected');
+disableInputs(true);
+return
+}
+
+const changes=[];
+
+for(let i=0;i<=99;i++){
+const c=String(i).padStart(2,'0'),
+o=Number(submittedNumbers[c]||0),
+n=getInputValue(c);
+
+if(existingCodes.has(c)&&n!==o)
+changes.push({type:'update',code:c,points:n});
+else if(!existingCodes.has(c)&&n>0)
+changes.push({type:'insert',code:c,points:n})
+}
+
+if(!changes.length){
+m.className='msg success';
+m.textContent=tr('noChange');
+return
+}
+
+isSaving=true;
+m.textContent=tr('saving');
+disableInputs(true);
+
+try{
+
+const r=await api(
+'/rest/v1/rpc/agent_save_round_changes',
+{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+p_round_id:currentRound.id,
+p_changes:changes.map(ch=>({
+number_code:ch.code,
+points:ch.points
+}))
+})
+}
+);
+
+const responseText=await r.text();
+
+if(!r.ok){
+throw new Error(responseText||'SAVE_TRANSACTION_FAILED');
+}
+
+await loadExisting(false);
+await loadSettlement();
+await loadPaymentCenter(false);
+
+m.className='msg success';
+m.textContent=tr('saveSuccess')+formatNumber(submittedTotal)
+
+}catch(e){
+
+const t=String(e.message||'');
+
+m.className='msg error';
+
+m.textContent=t.includes('AGENT_PREVIOUS_PAYMENT_OVERDUE')
+?tr('previousPaymentOverdue')
+:tr('saveFail')+'：'+(cleanApiError(t)||tr('networkError'))
+
+}finally{
+
+isSaving=false;
+updateDeadlineUI()
+
+}
+}
+
+function updateDeadlineUI(){
+
+if(!currentRound)return;
+
+const left=
+new Date(currentRound.deadline_at).getTime()-Date.now(),
+
+s=document.getElementById('roundStatus'),
+c=document.getElementById('countdown');
+
+if(left<=0||currentRound.status!=='open'){
+
+s.textContent=tr('closed');
+s.className='statusClosed';
+
+c.textContent=tr('closedShort');
+
+disableInputs(true);
+return
+}
+
+s.textContent=tr('canSubmit');
+s.className='statusOpen';
+
+let ts=Math.max(0,Math.floor(left/1000));
+
+const h=Math.floor(ts/3600);
+
+ts%=3600;
+
+const m=Math.floor(ts/60),
+sec=ts%60;
+
+c.textContent=
+h>0
+?String(h).padStart(2,'0')+
+':'+String(m).padStart(2,'0')+
+':'+String(sec).padStart(2,'0')
+:m+' '+tr('minutes')+' '+sec+' '+tr('seconds');
+
+if(agent&&agent.status==='active'&&!isSaving)
+disableInputs(false)
+}
+
+function disableInputs(disabled){
+
+for(let i=0;i<=99;i++){
+
+const x=document.getElementById(
+'n'+String(i).padStart(2,'0')
+);
+
+if(x)x.disabled=disabled
+}
+
+const b=document.getElementById('submitBtn');
+
+if(b)b.disabled=disabled
+}
+
+function formatMMT(iso){
+
+if(!iso)return'—';
+
+const d=new Date(iso);
+
+if(Number.isNaN(d.getTime()))return'—';
+
+return new Intl.DateTimeFormat(
+'zh-CN',
+{
+timeZone:'Asia/Yangon',
+year:'numeric',
+month:'2-digit',
+day:'2-digit',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit',
+hour12:false
+}
+).format(d)+' MMT'
+}
+
+function formatNumber(v){
+return Number(v||0).toLocaleString(
+'en-US',
+{maximumFractionDigits:2}
+)
+}
+
+function formatFileSize(s){
+
+const b=Number(s||0);
+
+return b<1024
+?b+' B'
+:b<1048576
+?(b/1024).toFixed(1)+' KB'
+:(b/1048576).toFixed(2)+' MB'
+}
+
+function hasResult(v){
+return v!==null&&v!==undefined&&v!==''
+}
+
+function escapeHtml(v){
+
+return String(v??'')
+.replaceAll('&','&amp;')
+.replaceAll('<','&lt;')
+.replaceAll('>','&gt;')
+.replaceAll('"','&quot;')
+.replaceAll("'",'&#039;')
+}
+
+function escapeJs(v){
+return String(v??'')
+.replaceAll('\\','\\\\')
+.replaceAll("'","\\'")
+}
+
+function safeId(v){
+return String(v||'')
+.replace(/[^a-zA-Z0-9_-]/g,'_')
+}
+
+function updateClock(){
+
+const e=document.getElementById('mmtClock');
+
+if(e)
+e.textContent=new Intl.DateTimeFormat(
+'zh-CN',
+{
+timeZone:'Asia/Yangon',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit',
+hour12:false
+}
+).format(new Date())
+}
+
+async function refreshRoundOnly(){
+
+if(
+!token||
+!agent||
+isSaving||
+isSubmittingPayment||
+isRefreshingRound
+)return;
+
+isRefreshingRound=true;
+
+try{
+
+const r=await api(
+'/rest/v1/rounds?select=id,round_date,round_code,deadline_at,result_number,status,created_at&order=created_at.desc&limit=30'
+);
+
+if(!r.ok)return;
+
+const latest=chooseBestRound(await r.json());
+
+if(!latest){
+
+currentRound=null;
+settlement=null;
+
+resetSubmittedData();
+
+paymentAccounts=[];
+paymentSubmissions=[];
+paymentProofs=[];
+
+selectedPaymentAccountId='';
+
+clearSelectedPaymentProofs();
+
+renderRound();
+renderSettlement();
+renderAgentFinance();
+renderPaymentCenter();
+
+disableInputs(true);
+
+return
+}
+
+const isNew=
+!currentRound||
+currentRound.id!==latest.id;
+
+if(isNew){
+
+disableInputs(true);
+
+currentRound=latest;
+settlement=null;
+
+paymentSubmissions=[];
+paymentProofs=[];
+
+selectedPaymentAccountId='';
+
+clearSelectedPaymentProofs(false);
+
+renderRound();
+
+await loadExisting(false);
+await loadSettlement();
+await loadPaymentCenter(false);
+
+updateDeadlineUI();
+
+return
+}
+
+currentRound=latest;
+
+renderRound();
+
+await loadSettlement();
+await loadPaymentCenter(false);
+
+renderAgentFinance();
+updateDeadlineUI()
+
+}catch(e){
+
+console.error(e)
+
+}finally{
+
+isRefreshingRound=false
+
+}
+}
+
+function checkRoundWhenActive(){
+
+if(
+token&&
+agent&&
+!isSaving&&
+!isSubmittingPayment
+)
+refreshRoundOnly()
+}
+
+document.addEventListener(
+'visibilitychange',
+()=>{
+if(document.visibilityState==='visible')
+checkRoundWhenActive()
+}
+);
+
+window.addEventListener(
+'focus',
+checkRoundWhenActive
+);
+
+window.addEventListener(
+'pageshow',
+checkRoundWhenActive
+);
+
+window.addEventListener(
+'online',
+checkRoundWhenActive
+);
+
+function clearAgentSession(){
+
+localStorage.removeItem('jmt_agent_token');
+sessionStorage.removeItem('jmt_agent_token');
+
+localStorage.removeItem('jmt_agent_refresh_token');
+sessionStorage.removeItem('jmt_agent_refresh_token');
+
+token='';
+refreshToken='';
+
+}
+
+function logout(){
+
+clearAgentSession();
+location.reload()
+}
+
+window.addEventListener(
+'beforeunload',
+()=>{
+
+selectedPaymentProofPreviewUrls.forEach(
+u=>{
+
+try{
+URL.revokeObjectURL(u)
+}catch(e){}
+
+}
+);
+
+privateImageObjectUrls.forEach(
+u=>{
+
+try{
+URL.revokeObjectURL(u)
+}catch(e){}
+
+}
+);
+
+}
+);
+resetSubmittedData();
+buildGrid();
+
+document.getElementById('langSelect').value=currentLang;
+
+changeLanguage(currentLang);
+
+updateClock();
+
+setInterval(updateClock,1000);
+setInterval(updateDeadlineUI,1000);
+setInterval(refreshRoundOnly,20000);
+
+if(token)startAgent();
+
+</script>
+</body>
+</html>
