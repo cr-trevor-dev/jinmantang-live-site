@@ -4085,13 +4085,9 @@ function renderRound(){
 
   ?
 
-  String(
-    currentRound.result_number
-  )
-  .padStart(
-    2,
-    '0'
-  )
+  ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][
+  Number(currentRound.result_number)-1
+]
 
   :
 
