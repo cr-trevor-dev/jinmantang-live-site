@@ -512,7 +512,8 @@ let rounds =
 
 let agentsMap =
 {};
-
+let currentDetailGameMode =
+'numbers';
 
 /* =========================
    API
@@ -739,7 +740,7 @@ async function loadAll(){
     const rr =
     await api(
       '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at'+
+      '?select=id,round_date,round_code,deadline_at,result_number,status,created_at,settled_at,game_mode,payout_multiplier'+
       '&order=round_date.desc,created_at.desc'
     );
 
@@ -928,26 +929,22 @@ function renderRounds(){
           结果：
 
           ${
-            hasResult(
-              round.result_number
-            )
+  hasResult(
+    round.result_number
+  )
 
-            ?
+  ?
 
-            escapeHtml(
-              String(
-                round.result_number
-              )
-              .padStart(
-                2,
-                '0'
-              )
-            )
+  escapeHtml(
+    formatRoundResult(
+      round
+    )
+  )
 
-            :
+  :
 
-            '—'
-          }
+  '—'
+}
 
         </div>
 
@@ -1128,7 +1125,26 @@ async function openDetail(
     return;
 
   }
+currentDetailGameMode =
+round.game_mode
+||
+'numbers';
 
+
+document.querySelector(
+  '#numbersCard .title'
+).textContent =
+
+currentDetailGameMode ===
+'zodiac'
+
+?
+
+'十二生肖 本期汇总'
+
+:
+
+'00–99 本期汇总';
 
   document.getElementById(
     'listCard'
@@ -1178,26 +1194,11 @@ async function openDetail(
 
 
   document.getElementById(
-    'detailResult'
-  ).textContent =
-
-  hasResult(
-    round.result_number
-  )
-
-  ?
-
-  String(
-    round.result_number
-  )
-  .padStart(
-    2,
-    '0'
-  )
-
-  :
-
-  '—';
+  'detailResult'
+).textContent =
+formatRoundResult(
+  round
+);
 
 
   document.getElementById(
@@ -1260,22 +1261,40 @@ async function loadDetailData(
   {};
 
 
-  for(
-    let i=0;
-    i<100;
-    i++
-  ){
+  const startCode =
+round.game_mode ===
+'zodiac'
+?
+1
+:
+0;
 
-    numbers[
-      String(i)
-      .padStart(
-        2,
-        '0'
-      )
-    ] =
-    0;
 
-  }
+const endCode =
+round.game_mode ===
+'zodiac'
+?
+12
+:
+99;
+
+
+for(
+  let i=startCode;
+  i<=endCode;
+  i++
+){
+
+  numbers[
+    String(i)
+    .padStart(
+      2,
+      '0'
+    )
+  ] =
+  0;
+
+}
 
 
   const grouped =
@@ -1437,7 +1456,7 @@ function renderNumbers(
       div.innerHTML = `
 
         <span class="num">
-          ${code}
+          ${escapeHtml(formatGameCode(code,currentDetailGameMode))}
         </span>
 
         <span class="points">
@@ -1620,17 +1639,14 @@ function renderAgents(
 
               <span>
 
-                ${
-                  escapeHtml(
-                    String(
-                      row.number_code
-                    )
-                    .padStart(
-                      2,
-                      '0'
-                    )
-                  )
-                }
+               ${
+  escapeHtml(
+    formatGameCode(
+      row.number_code,
+      currentDetailGameMode
+    )
+  )
+}
 
               </span>
 
@@ -1872,6 +1888,77 @@ function hasResult(
     value !== undefined
     &&
     value !== ''
+  );
+
+}
+const ZODIAC_NAMES = [
+  '鼠',
+  '牛',
+  '虎',
+  '兔',
+  '龙',
+  '蛇',
+  '马',
+  '羊',
+  '猴',
+  '鸡',
+  '狗',
+  '猪'
+];
+
+
+function formatGameCode(
+  code,
+  gameMode
+){
+
+  if(
+    gameMode ===
+    'zodiac'
+  ){
+
+    return (
+      ZODIAC_NAMES[
+        Number(code)-1
+      ]
+      ||
+      '—'
+    );
+
+  }
+
+
+  return String(
+    code ?? ''
+  )
+  .padStart(
+    2,
+    '0'
+  );
+
+}
+
+
+function formatRoundResult(
+  round
+){
+
+  if(
+    !round
+    ||
+    !hasResult(
+      round.result_number
+    )
+  ){
+
+    return '—';
+
+  }
+
+
+  return formatGameCode(
+    round.result_number,
+    round.game_mode
   );
 
 }
