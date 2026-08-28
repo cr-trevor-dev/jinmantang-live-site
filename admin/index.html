@@ -796,11 +796,21 @@ button.danger{
         <strong id="currentResult">--</strong>
       </div>
 
-      <input
-        id="resultInput"
-        inputmode="numeric"
-        maxlength="2"
-        placeholder="输入 00 - 99">
+            <select id="resultInput">
+        <option value="">请选择本期开奖生肖</option>
+        <option value="01">鼠</option>
+        <option value="02">牛</option>
+        <option value="03">虎</option>
+        <option value="04">兔</option>
+        <option value="05">龙</option>
+        <option value="06">蛇</option>
+        <option value="07">马</option>
+        <option value="08">羊</option>
+        <option value="09">猴</option>
+        <option value="10">鸡</option>
+        <option value="11">狗</option>
+        <option value="12">猪</option>
+      </select>
 
       <button
         id="publishButton"
@@ -844,11 +854,21 @@ button.danger{
         模拟开奖结果
       </label>
 
-      <input
-        id="testResultInput"
-        inputmode="numeric"
-        maxlength="2"
-        placeholder="例如：25">
+            <select id="testResultInput">
+        <option value="">请选择生肖</option>
+        <option value="01">鼠</option>
+        <option value="02">牛</option>
+        <option value="03">虎</option>
+        <option value="04">兔</option>
+        <option value="05">龙</option>
+        <option value="06">蛇</option>
+        <option value="07">马</option>
+        <option value="08">羊</option>
+        <option value="09">猴</option>
+        <option value="10">鸡</option>
+        <option value="11">狗</option>
+        <option value="12">猪</option>
+      </select>
 
       <button onclick="runPublishTest()">
         🧪 开始测试发布流程
@@ -896,7 +916,7 @@ button.danger{
         </div>
 
         <div class="testRow">
-          <span>模拟发布数字</span>
+        <span>模拟发布生肖</span>
           <strong id="testNewResult">—</strong>
         </div>
 
@@ -2388,12 +2408,9 @@ function renderPublishRound(){
     publishRound.result_number
   )
   ?
-  String(
-    publishRound.result_number
-  ).padStart(
-    2,
-    '0'
-  )
+    ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][
+    Number(publishRound.result_number)-1
+  ]
   :
   '--';
 
@@ -2902,13 +2919,13 @@ async function publishResult(){
 
 
   if(
-    !/^\d{1,2}$/.test(
+        !/^(0?[1-9]|1[0-2])$/.test(
       n
     )
   ){
 
     msg.textContent =
-    '请输入 00 到 99';
+        '请选择开奖生肖';
 
 
     return;
@@ -2932,7 +2949,7 @@ async function publishResult(){
       publishRound.round_code
     )+
     '\n\n开奖结果：'+
-    n
+        ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][Number(n)-1]
   );
 
 
@@ -3017,12 +3034,9 @@ async function publishResult(){
     document.getElementById(
       'currentResult'
     ).textContent =
-    String(
-      publishRound.result_number
-    ).padStart(
-      2,
-      '0'
-    );
+        ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][
+      Number(publishRound.result_number)-1
+    ];
 
 
     input.value =
@@ -3041,12 +3055,9 @@ async function publishResult(){
       publishRound.round_code
     )+
     ' → '+
-    String(
-      publishRound.result_number
-    ).padStart(
-      2,
-      '0'
-    );
+        ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][
+      Number(publishRound.result_number)-1
+    ];
 
 
     updatePublishState();
@@ -3205,13 +3216,13 @@ function runPublishTest(){
 
 
   if(
-    !/^\d{1,2}$/.test(
+        !/^(0?[1-9]|1[0-2])$/.test(
       n
     )
   ){
 
     msg.textContent =
-    '请输入 00 到 99 的测试数字';
+        '请选择测试开奖生肖';
 
 
     return;
@@ -3333,12 +3344,9 @@ function runPublishTest(){
     round.result_number
   )
   ?
-  String(
-    round.result_number
-  ).padStart(
-    2,
-    '0'
-  )
+    ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][
+    Number(round.result_number)-1
+  ]
   :
   '—';
 
@@ -3346,7 +3354,7 @@ function runPublishTest(){
   document.getElementById(
     'testNewResult'
   ).textContent =
-  n;
+    ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][Number(n)-1];
 
 
   const roundWrite =
@@ -3369,12 +3377,9 @@ function runPublishTest(){
 
     roundWrite.textContent =
     '正式模式会阻止：已有结果 '+
-    String(
-      round.result_number
-    ).padStart(
-      2,
-      '0'
-    );
+        ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][
+      Number(round.result_number)-1
+    ];
 
 
     roundWrite.className =
@@ -3466,7 +3471,7 @@ function runPublishTest(){
 
   roundWrite.textContent =
   '✓ 会绑定 result_number = '+
-  n;
+   ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][Number(n)-1];
 
 
   roundWrite.className =
@@ -3475,7 +3480,7 @@ function runPublishTest(){
 
   resultWrite.textContent =
   '✓ 会新增最新公开结果 '+
-  n;
+    ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'][Number(n)-1];
 
 
   resultWrite.className =
