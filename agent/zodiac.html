@@ -3310,19 +3310,19 @@ function buildGrid(){
     '狗',
     '猪'
   ];
-  const zodiacIcons = [
-  '🐭',
-  '🐮',
-  '🐯',
-  '🐰',
-  '🐲',
-  '🐍',
-  '🐴',
-  '🐑',
-  '🐵',
-  '🐔',
-  '🐶',
-  '🐷'
+  const zodiacImages = [
+  '287422DA-463C-421B-9257-E9BC27BF4A36.png',
+  '1A0DF767-06F9-4C2D-95CE-84E62442D9D1.png',
+  '760CCCAD-C85A-4D2C-8D40-CEADC692BEC3.png',
+  '0BD607BF-D242-4DC7-8011-8F3BFD2B2F2E.png',
+  '61676ED4-E523-4AC1-902B-06B841546DC8.png',
+  '82112254-9DC3-4CAB-A010-2B753DAE4FF5.png',
+  'A20A3141-3290-4368-8914-D21B2DA34B81.png',
+  'EE289B75-3AB3-41DB-9497-F6142A4AC15B.png',
+  '9202793F-F959-488B-B1D3-6F8F000BF44B.png',
+  '3A4F6BEE-09E7-4DE1-8804-00A24EEFEB0A.png',
+  '32C90A85-8BBA-4DFF-8DFB-B358DCA7C999.png',
+  'AC5C521B-7627-4F4B-A563-C55A326C9244.png'
 ];
 
   grid.innerHTML =
@@ -3343,8 +3343,8 @@ function buildGrid(){
 
     const zodiac =
     zodiacNames[i - 1];
-    const zodiacIcon =
-zodiacIcons[i - 1];
+    const zodiacImage =
+zodiacImages[i - 1];
 
     const div =
     document.createElement(
@@ -3359,8 +3359,8 @@ zodiacIcons[i - 1];
 
     div.innerHTML = `
 
-      <div class="zodiacVisual">
-  ${zodiacIcon}
+    <div class="zodiacVisual">
+  <img src="${zodiacImage}" alt="${zodiac}">
 </div>
 
 <div class="numLabel">
