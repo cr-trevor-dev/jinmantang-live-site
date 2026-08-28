@@ -297,35 +297,79 @@ button:disabled{
   display:grid;
   grid-template-columns:
   repeat(2,1fr);
-  gap:8px
+  gap:12px
 }
 
 .num{
-  background:#101011;
+  position:relative;
+  overflow:hidden;
+  min-height:150px;
+  padding:15px;
+  border-radius:18px;
+  background:
+  radial-gradient(
+    circle at top,
+    rgba(206,157,52,.16),
+    transparent 52%
+  ),
+  linear-gradient(
+    180deg,
+    #18140d,
+    #0b0b0c
+  );
   border:
   1px solid
-  rgba(255,255,255,.06);
-  border-radius:11px;
-  padding:10px;
+  rgba(222,181,79,.26);
+  box-shadow:
+  inset 0 1px 0
+  rgba(255,255,255,.04),
+  0 8px 24px
+  rgba(0,0,0,.28);
   transition:.2s
 }
 
 .num.changed{
   border-color:
-  rgba(214,168,63,.62);
-  background:#19160f
+  rgba(236,196,93,.78);
+  background:
+  radial-gradient(
+    circle at top,
+    rgba(224,174,61,.24),
+    transparent 55%
+  ),
+  linear-gradient(
+    180deg,
+    #211a0d,
+    #0c0c0d
+  );
+  box-shadow:
+  0 0 0 1px
+  rgba(224,174,61,.12),
+  0 10px 28px
+  rgba(0,0,0,.35)
 }
 
 .numLabel{
-  font-size:18px;
+  text-align:center;
+  font-size:30px;
+  line-height:1;
   font-weight:900;
-  color:#dec16a;
-  margin-bottom:7px
+  color:#f0cf72;
+  margin:10px 0 18px;
+  text-shadow:
+  0 2px 12px
+  rgba(213,164,49,.20)
 }
 
 .num input{
-  padding:9px;
-  font-size:14px
+  padding:11px;
+  font-size:15px;
+  text-align:center;
+  font-weight:800;
+  border-color:
+  rgba(221,177,70,.20);
+  background:
+  rgba(7,7,8,.72)
 }
 .numLock{
   margin-top:7px;
