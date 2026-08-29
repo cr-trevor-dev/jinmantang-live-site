@@ -94,17 +94,20 @@ body{
 }
 
 .mark{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  margin:0 auto 9px;
-  font-weight:900;
-  font-size:23px;
-  color:#f3d681;
+  width:88px;
+  height:88px;
+  border-radius:22px;
+  overflow:hidden;
+  margin:0 auto 12px;
   border:1px solid #b98a2c;
   background:#191208
+}
+
+.mark img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover
 }
 
 .cn{
@@ -915,8 +918,10 @@ button:disabled{
   <div class="brand">
 
     <div class="mark">
-      金
-    </div>
+  <img
+    src="/IMG_1430.png"
+    alt="金满堂">
+</div>
 
     <div class="cn">
       金满堂
