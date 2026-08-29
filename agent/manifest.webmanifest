@@ -2,7 +2,7 @@
   "id": "/agent/",
   "name": "金满堂代理",
   "short_name": "金满堂代理",
-  "start_url": "/agent/",
+  "start_url": "/agent/zodiac.html",
   "scope": "/agent/",
   "display": "standalone",
   "background_color": "#09090a",
