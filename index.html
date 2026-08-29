@@ -578,7 +578,205 @@ select{
   font-size:9px;
   margin-top:11px
 }
+/* =====================================
+   ZODIAC GUIDE
+===================================== */
 
+.zodiacGuideBtn{
+  position:fixed;
+  right:14px;
+  top:108px;
+  z-index:30;
+  border:
+  1px solid
+  rgba(214,168,63,.42);
+  border-radius:999px;
+  padding:10px 13px;
+  background:
+  linear-gradient(
+    145deg,
+    #2c210c,
+    #111112
+  );
+  color:#efd786;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.3px;
+  box-shadow:
+  0 10px 28px
+  rgba(0,0,0,.42);
+  cursor:pointer
+}
+
+
+.zodiacGuideBackdrop{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:
+  rgba(0,0,0,.68);
+  backdrop-filter:
+  blur(4px);
+  -webkit-backdrop-filter:
+  blur(4px);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+  opacity .22s ease,
+  visibility .22s ease
+}
+
+
+.zodiacGuideBackdrop.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto
+}
+
+
+.zodiacGuidePanel{
+  position:absolute;
+  right:0;
+  top:0;
+  width:min(88vw,390px);
+  height:100%;
+  height:100dvh;
+  overflow-y:auto;
+  padding:
+  max(20px,env(safe-area-inset-top))
+  16px
+  max(28px,env(safe-area-inset-bottom));
+  background:
+  radial-gradient(
+    circle at top,
+    #2a1d08 0,
+    #12110e 28%,
+    #09090a 70%
+  );
+  border-left:
+  1px solid
+  rgba(214,168,63,.34);
+  box-shadow:
+  -22px 0 60px
+  rgba(0,0,0,.52);
+  transform:
+  translateX(100%);
+  transition:
+  transform .26s ease
+}
+
+
+.zodiacGuideBackdrop.open
+.zodiacGuidePanel{
+  transform:
+  translateX(0)
+}
+
+
+.zodiacGuideHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px
+}
+
+
+.zodiacGuideTitle{
+  color:#f2da8e;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:1px
+}
+
+
+.zodiacGuideSubtitle{
+  margin-top:5px;
+  color:#8f856c;
+  font-size:11px;
+  line-height:1.5
+}
+
+
+.zodiacGuideClose{
+  width:36px;
+  height:36px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:
+  1px solid
+  rgba(214,168,63,.28);
+  border-radius:50%;
+  background:#15130f;
+  color:#d9bd70;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer
+}
+
+
+.zodiacGuideGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(2,minmax(0,1fr));
+  gap:10px
+}
+
+
+.zodiacGuideItem{
+  min-width:0;
+  overflow:hidden;
+  border:
+  1px solid
+  rgba(214,168,63,.22);
+  border-radius:16px;
+  background:
+  linear-gradient(
+    160deg,
+    #17150f,
+    #0e0e0f
+  );
+  box-shadow:
+  0 9px 22px
+  rgba(0,0,0,.24)
+}
+
+
+.zodiacGuideItem img{
+  display:block;
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover
+}
+
+
+.zodiacGuideName{
+  min-height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 6px;
+  color:#e7cd82;
+  font-size:12px;
+  font-weight:800;
+  text-align:center;
+  line-height:1.35
+}
+
+
+@media(max-width:380px){
+
+  .zodiacGuideBtn{
+    right:10px;
+    top:102px;
+    padding:9px 11px;
+    font-size:10px
+  }
+
+}
 @media(max-width:380px){
 
   .number{
@@ -696,7 +894,84 @@ select{
 
   </div>
 
+  <button
+    type="button"
+    class="zodiacGuideBtn"
+    id="zodiacGuideBtn"
+    onclick="toggleZodiacGuide(true)"
+    aria-label="Zodiac Guide">
 
+    ☰ 十二生肖
+
+  </button>
+
+
+  <div
+    class="zodiacGuideBackdrop"
+    id="zodiacGuideBackdrop"
+    aria-hidden="true"
+    onclick="
+      if(event.target===this){
+        toggleZodiacGuide(false)
+      }
+    ">
+
+
+    <aside
+      class="zodiacGuidePanel"
+      role="dialog"
+      aria-modal="true">
+
+
+      <div class="zodiacGuideHead">
+
+
+        <div>
+
+          <div
+            class="zodiacGuideTitle"
+            id="zodiacGuideTitle">
+
+            十二生肖
+
+          </div>
+
+
+          <div
+            class="zodiacGuideSubtitle"
+            id="zodiacGuideSubtitle">
+
+            查看十二生肖对应名称
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="zodiacGuideClose"
+          onclick="toggleZodiacGuide(false)"
+          aria-label="Close">
+
+          ×
+
+        </button>
+
+
+      </div>
+
+
+      <div
+        class="zodiacGuideGrid"
+        id="zodiacGuideGrid">
+      </div>
+
+
+    </aside>
+
+
+  </div>
   <div
     class="noticeWrap"
     id="noticeWrap">
@@ -1487,7 +1762,324 @@ const ZODIAC_CAPTIONS = {
   id:'Shio Pemenang'
 };
 
+const ZODIAC_GUIDE_TEXT = {
 
+  zh:{
+    button:'十二生肖',
+    title:'十二生肖',
+    subtitle:'查看十二生肖对应名称'
+  },
+
+  th:{
+    button:'12 นักษัตร',
+    title:'12 นักษัตรจีน',
+    subtitle:'ดูรายชื่อสัตว์ทั้ง 12 นักษัตร'
+  },
+
+  my:{
+    button:'၁၂ ရာသီခွင်',
+    title:'တရုတ် ၁၂ ရာသီခွင်',
+    subtitle:'ရာသီခွင် ၁၂ မျိုးကို ကြည့်ရှုပါ'
+  },
+
+  en:{
+    button:'12 Zodiacs',
+    title:'Chinese Zodiac',
+    subtitle:'View all 12 zodiac animals'
+  },
+
+  ms:{
+    button:'12 Zodiak',
+    title:'12 Zodiak Cina',
+    subtitle:'Lihat semua 12 haiwan zodiak'
+  },
+
+  vi:{
+    button:'12 Con Giáp',
+    title:'12 Con Giáp',
+    subtitle:'Xem đầy đủ 12 con giáp'
+  },
+
+  id:{
+    button:'12 Shio',
+    title:'12 Shio',
+    subtitle:'Lihat semua 12 hewan shio'
+  }
+
+};
+
+
+const ZODIAC_LOCAL_NAMES = {
+
+  zh:[
+    '鼠','牛','虎','兔',
+    '龙','蛇','马','羊',
+    '猴','鸡','狗','猪'
+  ],
+
+  th:[
+    'หนู','วัว','เสือ','กระต่าย',
+    'มังกร','งู','ม้า','แพะ',
+    'ลิง','ไก่','สุนัข','หมู'
+  ],
+
+  my:[
+    'ကြွက်','နွား','ကျား','ယုန်',
+    'နဂါး','မြွေ','မြင်း','ဆိတ်',
+    'မျောက်','ကြက်','ခွေး','ဝက်'
+  ],
+
+  en:[
+    'Rat','Ox','Tiger','Rabbit',
+    'Dragon','Snake','Horse','Goat',
+    'Monkey','Rooster','Dog','Pig'
+  ],
+
+  ms:[
+    'Tikus','Lembu','Harimau','Arnab',
+    'Naga','Ular','Kuda','Kambing',
+    'Monyet','Ayam','Anjing','Babi'
+  ],
+
+  vi:[
+    'Chuột','Trâu','Hổ','Thỏ',
+    'Rồng','Rắn','Ngựa','Dê',
+    'Khỉ','Gà','Chó','Heo'
+  ],
+
+  id:[
+    'Tikus','Kerbau','Harimau','Kelinci',
+    'Naga','Ular','Kuda','Kambing',
+    'Monyet','Ayam','Anjing','Babi'
+  ]
+
+};
+
+
+function renderZodiacGuide(){
+
+  const text =
+  ZODIAC_GUIDE_TEXT[currentLang]
+  ||
+  ZODIAC_GUIDE_TEXT.zh;
+
+
+  const names =
+  ZODIAC_LOCAL_NAMES[currentLang]
+  ||
+  ZODIAC_LOCAL_NAMES.zh;
+
+
+  const button =
+  document.getElementById(
+    'zodiacGuideBtn'
+  );
+
+
+  const title =
+  document.getElementById(
+    'zodiacGuideTitle'
+  );
+
+
+  const subtitle =
+  document.getElementById(
+    'zodiacGuideSubtitle'
+  );
+
+
+  const grid =
+  document.getElementById(
+    'zodiacGuideGrid'
+  );
+
+
+  if(
+    !button
+    ||
+    !title
+    ||
+    !subtitle
+    ||
+    !grid
+  ){
+    return;
+  }
+
+
+  button.textContent =
+  '☰ '+
+  text.button;
+
+
+  title.textContent =
+  text.title;
+
+
+  subtitle.textContent =
+  text.subtitle;
+
+
+  grid.innerHTML =
+  '';
+
+
+  ZODIAC_NAMES.forEach(
+    (
+      chineseName,
+      index
+    )=>{
+
+
+      const item =
+      document.createElement(
+        'div'
+      );
+
+
+      item.className =
+      'zodiacGuideItem';
+
+
+      const img =
+      document.createElement(
+        'img'
+      );
+
+
+      img.src =
+      ZODIAC_IMAGES[index];
+
+
+      img.alt =
+      chineseName;
+
+
+      const name =
+      document.createElement(
+        'div'
+      );
+
+
+      name.className =
+      'zodiacGuideName';
+
+
+      if(
+        currentLang ===
+        'zh'
+      ){
+
+        name.textContent =
+        chineseName;
+
+      }
+
+      else{
+
+        name.textContent =
+        names[index]+
+        ' · '+
+        chineseName;
+
+      }
+
+
+      item.appendChild(
+        img
+      );
+
+
+      item.appendChild(
+        name
+      );
+
+
+      grid.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+function toggleZodiacGuide(
+  force
+){
+
+  const backdrop =
+  document.getElementById(
+    'zodiacGuideBackdrop'
+  );
+
+
+  if(!backdrop){
+    return;
+  }
+
+
+  const shouldOpen =
+  typeof force ===
+  'boolean'
+
+  ?
+
+  force
+
+  :
+
+  !backdrop.classList.contains(
+    'open'
+  );
+
+
+  backdrop.classList.toggle(
+    'open',
+    shouldOpen
+  );
+
+
+  backdrop.setAttribute(
+    'aria-hidden',
+    shouldOpen
+    ?
+    'false'
+    :
+    'true'
+  );
+
+
+  document.body.style.overflow =
+  shouldOpen
+  ?
+  'hidden'
+  :
+  '';
+
+}
+
+
+document.addEventListener(
+  'keydown',
+  (
+    event
+  )=>{
+
+    if(
+      event.key ===
+      'Escape'
+    ){
+
+      toggleZodiacGuide(
+        false
+      );
+
+    }
+
+  }
+);
 function getZodiacName(
   value
 ){
@@ -1852,13 +2444,15 @@ function applyLanguage(){
   t.telegramSub;
 
 
-  document.getElementById(
+    document.getElementById(
     'footerText'
   ).textContent =
   t.footer;
 
-}
 
+  renderZodiacGuide();
+
+}
 
 /* =====================================
    TIME FORMAT
