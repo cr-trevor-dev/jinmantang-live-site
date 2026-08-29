@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>金满堂 · 客户中心</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:
+    radial-gradient(circle at top,#251b08 0,#0b0904 28%,#050505 70%);
+  color:#f5e7bd;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+body{
+  padding:
+    env(safe-area-inset-top)
+    14px
+    calc(30px + env(safe-area-inset-bottom));
+}
+
+.wrap{
+  width:min(720px,100%);
+  margin:0 auto;
+}
+
+.brand{
+  text-align:center;
+  padding:24px 10px 20px;
+}
+
+.brandMark{
+  width:76px;
+  height:76px;
+  margin:0 auto 12px;
+  border:1px solid #d7a72f;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:29px;
+  font-weight:800;
+  color:#f4ca61;
+  background:
+    radial-gradient(circle,#351d05,#080705 70%);
+  box-shadow:
+    0 0 28px rgba(218,170,51,.14);
+}
+
+.brand h1{
+  margin:0;
+  font-size:31px;
+  letter-spacing:5px;
+  color:#f1c85c;
+}
+
+.brand p{
+  margin:7px 0 0;
+  color:#9b8452;
+  font-size:12px;
+  letter-spacing:3px;
+}
+
+.card{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(27,22,13,.97),
+      rgba(9,9,8,.97)
+    );
+  border:1px solid rgba(212,169,59,.38);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:
+    0 16px 50px rgba(0,0,0,.26);
+}
+
+.cardTitle{
+  color:#efc45a;
+  font-weight:800;
+  font-size:18px;
+  margin-bottom:14px;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  padding:4px;
+  border:1px solid rgba(213,170,58,.25);
+  border-radius:13px;
+  margin-bottom:16px;
+}
+
+.tab{
+  border:0;
+  background:transparent;
+  color:#8f7b4b;
+  padding:12px;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:700;
+}
+
+.tab.active{
+  background:
+    linear-gradient(135deg,#c69024,#f1ca5d);
+  color:#140e02;
+}
+
+.panel{
+  display:none;
+}
+
+.panel.active{
+  display:block;
+}
+
+.field{
+  margin-bottom:13px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  color:#cab679;
+  font-size:13px;
+}
+
+input,
+select{
+  width:100%;
+  border:1px solid rgba(203,163,59,.33);
+  background:#090908;
+  color:#f8e9bd;
+  border-radius:12px;
+  padding:13px 14px;
+  font-size:16px;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#dda931;
+  box-shadow:
+    0 0 0 3px rgba(221,169,49,.09);
+}
+
+button.primary{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  font-size:16px;
+  font-weight:800;
+  color:#171001;
+  background:
+    linear-gradient(135deg,#c69324,#f4d06a);
+  margin-top:4px;
+}
+
+button.secondary{
+  width:100%;
+  border:1px solid rgba(215,173,65,.36);
+  border-radius:12px;
+  padding:13px;
+  font-size:15px;
+  font-weight:700;
+  color:#e7ca7d;
+  background:#0c0b09;
+}
+
+button.danger{
+  width:100%;
+  border:1px solid rgba(177,91,73,.35);
+  border-radius:12px;
+  padding:13px;
+  font-size:15px;
+  font-weight:700;
+  color:#e0a79b;
+  background:#100a09;
+}
+
+button:disabled{
+  opacity:.5;
+}
+
+.note{
+  color:#8e815e;
+  font-size:12px;
+  line-height:1.65;
+  margin-top:12px;
+}
+
+.msg{
+  display:none;
+  margin-top:12px;
+  border-radius:11px;
+  padding:11px 12px;
+  font-size:13px;
+  line-height:1.55;
+}
+
+.msg.show{
+  display:block;
+}
+
+.msg.ok{
+  background:rgba(65,138,87,.12);
+  border:1px solid rgba(86,171,109,.28);
+  color:#a9d9b5;
+}
+
+.msg.err{
+  background:rgba(158,65,59,.12);
+  border:1px solid rgba(188,83,74,.28);
+  color:#e1aaa5;
+}
+
+.dashboard{
+  display:none;
+}
+
+.dashboard.show{
+  display:block;
+}
+
+.profileTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.customerCode{
+  margin-top:5px;
+  color:#f0c75c;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+.status{
+  border:1px solid rgba(92,171,111,.32);
+  color:#9dd8ac;
+  background:rgba(65,135,82,.12);
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.accountBox{
+  border:1px solid rgba(211,168,59,.2);
+  border-radius:14px;
+  padding:14px;
+  margin-top:10px;
+  background:rgba(0,0,0,.18);
+}
+
+.accountHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.accountHead strong{
+  color:#e9c66c;
+}
+
+.verify{
+  font-size:11px;
+  border-radius:999px;
+  padding:5px 8px;
+}
+
+.verify.yes{
+  background:rgba(69,141,87,.14);
+  color:#9dd7aa;
+}
+
+.verify.no{
+  background:rgba(170,126,43,.13);
+  color:#d6b971;
+}
+
+.divider{
+  height:1px;
+  background:rgba(209,169,68,.15);
+  margin:18px 0;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.loader{
+  text-align:center;
+  color:#a79562;
+  padding:20px 0;
+}
+
+.foot{
+  text-align:center;
+  color:#675b3d;
+  font-size:11px;
+  letter-spacing:1.4px;
+  padding:16px 0 6px;
+}
+
+@media(max-width:520px){
+  .two{
+    grid-template-columns:1fr;
+  }
+
+  .brand h1{
+    font-size:27px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+    <div class="brandMark">金</div>
+    <h1>金满堂</h1>
+    <p>JIN MAN TANG · CUSTOMER</p>
+  </div>
+
+
+  <section
+    id="authCard"
+    class="card">
+
+    <div class="tabs">
+      <button
+        id="loginTab"
+        class="tab active"
+        onclick="showAuth('login')">
+        登录
+      </button>
+
+      <button
+        id="registerTab"
+        class="tab"
+        onclick="showAuth('register')">
+        注册
+      </button>
+    </div>
+
+
+    <div
+      id="loginPanel"
+      class="panel active">
+
+      <div class="cardTitle">
+        客户登录
+      </div>
+
+      <div class="field">
+        <label>
+          邮箱
+        </label>
+        <input
+          id="loginEmail"
+          type="email"
+          autocomplete="email"
+          placeholder="请输入邮箱">
+      </div>
+
+      <div class="field">
+        <label>
+          密码
+        </label>
+        <input
+          id="loginPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="请输入密码">
+      </div>
+
+      <button
+        id="loginBtn"
+        class="primary"
+        onclick="login()">
+        登录
+      </button>
+
+      <div
+        id="loginMsg"
+        class="msg">
+      </div>
+    </div>
+
+
+    <div
+      id="registerPanel"
+      class="panel">
+
+      <div class="cardTitle">
+        创建客户账户
+      </div>
+
+      <div class="field">
+        <label>
+          姓名
+        </label>
+        <input
+          id="regName"
+          type="text"
+          maxlength="80"
+          autocomplete="name"
+          placeholder="请输入姓名">
+      </div>
+
+      <div class="field">
+        <label>
+          联系电话
+        </label>
+        <input
+          id="regPhone"
+          type="tel"
+          maxlength="40"
+          autocomplete="tel"
+          placeholder="请输入联系电话">
+      </div>
+
+      <div class="field">
+        <label>
+          邮箱
+        </label>
+        <input
+          id="regEmail"
+          type="email"
+          autocomplete="email"
+          placeholder="请输入邮箱">
+      </div>
+
+      <div class="field">
+        <label>
+          密码
+        </label>
+        <input
+          id="regPassword"
+          type="password"
+          minlength="8"
+          autocomplete="new-password"
+          placeholder="至少 8 位">
+      </div>
+
+      <button
+        id="registerBtn"
+        class="primary"
+        onclick="registerCustomer()">
+        注册账户
+      </button>
+
+      <div
+        id="registerMsg"
+        class="msg">
+      </div>
+
+      <div class="note">
+        注册完成后，系统会自动生成您的金满堂客户编号。
+      </div>
+    </div>
+
+  </section>
+
+
+  <div
+    id="loading"
+    class="card hidden">
+
+    <div class="loader">
+      正在读取账户资料...
+    </div>
+
+  </div>
+
+
+  <main
+    id="dashboard"
+    class="dashboard">
+
+    <section class="card">
+
+      <div class="profileTop">
+
+        <div>
+          <div class="cardTitle">
+            我的账户
+          </div>
+
+          <div id="profileName">
+            —
+          </div>
+
+          <div
+            id="customerCode"
+            class="customerCode">
+            —
+          </div>
+        </div>
+
+        <div class="status">
+          正常
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="two">
+
+        <div class="field">
+          <label>
+            姓名
+          </label>
+          <input
+            id="profileNameInput"
+            type="text"
+            maxlength="80">
+        </div>
+
+        <div class="field">
+          <label>
+            联系电话
+          </label>
+          <input
+            id="profilePhoneInput"
+            type="tel"
+            maxlength="40">
+        </div>
+
+      </div>
+
+      <button
+        id="saveProfileBtn"
+        class="secondary"
+        onclick="saveProfile()">
+        保存个人资料
+      </button>
+
+      <div
+        id="profileMsg"
+        class="msg">
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div class="cardTitle">
+        我的收款方式
+      </div>
+
+      <div class="note">
+        可同时绑定 KPay 与银行账户。
+        修改收款资料后需要重新确认。
+      </div>
+
+
+      <div class="accountBox">
+
+        <div class="accountHead">
+          <strong>
+            KPay
+          </strong>
+
+          <span
+            id="kpayVerify"
+            class="verify no">
+            未绑定
+          </span>
+        </div>
+
+        <div class="field">
+          <label>
+            KPay 户名
+          </label>
+          <input
+            id="kpayName"
+            type="text"
+            maxlength="100"
+            placeholder="请输入 KPay 户名">
+        </div>
+
+        <div class="field">
+          <label>
+            KPay 手机号码
+          </label>
+          <input
+            id="kpayNumber"
+            type="tel"
+            maxlength="60"
+            placeholder="请输入 KPay 手机号码">
+        </div>
+
+        <button
+          id="saveKpayBtn"
+          class="secondary"
+          onclick="savePayoutAccount('kpay')">
+          保存 KPay
+        </button>
+
+      </div>
+
+
+      <div class="accountBox">
+
+        <div class="accountHead">
+          <strong>
+            银行账户
+          </strong>
+
+          <span
+            id="bankVerify"
+            class="verify no">
+            未绑定
+          </span>
+        </div>
+
+        <div class="field">
+          <label>
+            银行名称
+          </label>
+          <input
+            id="bankName"
+            type="text"
+            maxlength="100"
+            placeholder="例如 KBZ Bank">
+        </div>
+
+        <div class="field">
+          <label>
+            银行户名
+          </label>
+          <input
+            id="bankAccountName"
+            type="text"
+            maxlength="100"
+            placeholder="请输入银行户名">
+        </div>
+
+        <div class="field">
+          <label>
+            银行账号
+          </label>
+          <input
+            id="bankAccountNumber"
+            type="text"
+            maxlength="100"
+            placeholder="请输入银行账号">
+        </div>
+
+        <button
+          id="saveBankBtn"
+          class="secondary"
+          onclick="savePayoutAccount('bank')">
+          保存银行账户
+        </button>
+
+      </div>
+
+      <div
+        id="accountMsg"
+        class="msg">
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div class="cardTitle">
+        参与本期
+      </div>
+
+      <div class="note">
+        十二生肖下注、保存、提交付款与中奖记录将在下一阶段接入。
+        目前此入口暂未开放，不影响您的账户与收款资料。
+      </div>
+
+      <button
+        class="primary"
+        disabled>
+        即将开放
+      </button>
+
+    </section>
+
+
+    <section class="card">
+
+      <button
+        class="danger"
+        onclick="logout()">
+        退出登录
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <div class="foot">
+    © 2022 JIN MANTANG · CUSTOMER SYSTEM
+  </div>
+
+</div>
+
+
+<script>
+const BASE =
+location.origin + '/supabase';
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+let token =
+localStorage.getItem(
+  'jmt_customer_token'
+)
+||
+'';
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_customer_refresh_token'
+)
+||
+'';
+
+let profile =
+null;
+
+let payoutAccounts =
+[];
+
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+function showMessage(
+  id,
+  text,
+  type = 'err'
+){
+  const el =
+  document.getElementById(id);
+
+  el.textContent =
+  text;
+
+  el.className =
+  'msg show ' + type;
+}
+
+
+function clearMessage(id){
+  const el =
+  document.getElementById(id);
+
+  el.textContent =
+  '';
+
+  el.className =
+  'msg';
+}
+
+
+function setBusy(
+  buttonId,
+  busy,
+  normalText,
+  busyText
+){
+  const button =
+  document.getElementById(buttonId);
+
+  button.disabled =
+  busy;
+
+  button.textContent =
+  busy
+  ? busyText
+  : normalText;
+}
+
+
+function authHeaders(){
+  return {
+    'apikey':KEY,
+    'Authorization':
+    'Bearer ' + token,
+    'Content-Type':
+    'application/json'
+  };
+}
+
+
+async function parseResponse(res){
+  const text =
+  await res.text();
+
+  let data =
+  null;
+
+  try{
+    data =
+    text
+    ? JSON.parse(text)
+    : null;
+  }
+  catch{
+    data =
+    text;
+  }
+
+  if(!res.ok){
+    const message =
+    data?.message
+    ||
+    data?.error_description
+    ||
+    data?.error
+    ||
+    data?.hint
+    ||
+    '请求失败';
+
+    throw new Error(message);
+  }
+
+  return data;
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function showAuth(mode){
+
+  const login =
+  mode === 'login';
+
+  document
+  .getElementById(
+    'loginTab'
+  )
+  .classList
+  .toggle(
+    'active',
+    login
+  );
+
+  document
+  .getElementById(
+    'registerTab'
+  )
+  .classList
+  .toggle(
+    'active',
+    !login
+  );
+
+  document
+  .getElementById(
+    'loginPanel'
+  )
+  .classList
+  .toggle(
+    'active',
+    login
+  );
+
+  document
+  .getElementById(
+    'registerPanel'
+  )
+  .classList
+  .toggle(
+    'active',
+    !login
+  );
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+async function registerCustomer(){
+
+  clearMessage(
+    'registerMsg'
+  );
+
+  const name =
+  document
+  .getElementById(
+    'regName'
+  )
+  .value
+  .trim();
+
+  const phone =
+  document
+  .getElementById(
+    'regPhone'
+  )
+  .value
+  .trim();
+
+  const email =
+  document
+  .getElementById(
+    'regEmail'
+  )
+  .value
+  .trim()
+  .toLowerCase();
+
+  const password =
+  document
+  .getElementById(
+    'regPassword'
+  )
+  .value;
+
+
+  if(name.length < 2){
+    showMessage(
+      'registerMsg',
+      '请输入正确姓名。'
+    );
+    return;
+  }
+
+  if(!email){
+    showMessage(
+      'registerMsg',
+      '请输入邮箱。'
+    );
+    return;
+  }
+
+  if(password.length < 8){
+    showMessage(
+      'registerMsg',
+      '密码至少需要 8 位。'
+    );
+    return;
+  }
+
+
+  setBusy(
+    'registerBtn',
+    true,
+    '注册账户',
+    '正在注册...'
+  );
+
+
+  try{
+
+    const signupRes =
+    await fetch(
+      BASE + '/auth/v1/signup',
+      {
+        method:'POST',
+        headers:{
+          'apikey':KEY,
+          'Content-Type':
+          'application/json'
+        },
+        body:JSON.stringify({
+          email,
+          password,
+          data:{
+            display_name:name,
+            phone
+          }
+        })
+      }
+    );
+
+
+    const signup =
+    await parseResponse(
+      signupRes
+    );
+
+
+    if(
+      signup?.access_token
+    ){
+
+      token =
+      signup.access_token;
+
+      refreshToken =
+      signup.refresh_token
+      ||
+      '';
+
+      saveTokens();
+
+
+      await ensureProfile(
+        name,
+        phone
+      );
+
+
+      await loadDashboard();
+
+      return;
+    }
+
+
+    showMessage(
+      'registerMsg',
+      '注册成功。请先完成邮箱确认，然后返回登录。',
+      'ok'
+    );
+
+    showAuth(
+      'login'
+    );
+
+  }
+  catch(err){
+
+    showMessage(
+      'registerMsg',
+      translateError(
+        err.message
+      )
+    );
+
+  }
+  finally{
+
+    setBusy(
+      'registerBtn',
+      false,
+      '注册账户',
+      '正在注册...'
+    );
+
+  }
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(){
+
+  clearMessage(
+    'loginMsg'
+  );
+
+  const email =
+  document
+  .getElementById(
+    'loginEmail'
+  )
+  .value
+  .trim()
+  .toLowerCase();
+
+  const password =
+  document
+  .getElementById(
+    'loginPassword'
+  )
+  .value;
+
+
+  if(
+    !email
+    ||
+    !password
+  ){
+    showMessage(
+      'loginMsg',
+      '请输入邮箱和密码。'
+    );
+    return;
+  }
+
+
+  setBusy(
+    'loginBtn',
+    true,
+    '登录',
+    '正在登录...'
+  );
+
+
+  try{
+
+    const res =
+    await fetch(
+      BASE
+      +
+      '/auth/v1/token?grant_type=password',
+      {
+        method:'POST',
+        headers:{
+          'apikey':KEY,
+          'Content-Type':
+          'application/json'
+        },
+        body:JSON.stringify({
+          email,
+          password
+        })
+      }
+    );
+
+
+    const data =
+    await parseResponse(
+      res
+    );
+
+
+    token =
+    data.access_token;
+
+    refreshToken =
+    data.refresh_token
+    ||
+    '';
+
+    saveTokens();
+
+
+    const metadata =
+    data?.user?.user_metadata
+    ||
+    {};
+
+
+    await ensureProfile(
+      metadata.display_name
+      ||
+      email.split('@')[0],
+      metadata.phone
+      ||
+      ''
+    );
+
+
+    await loadDashboard();
+
+  }
+  catch(err){
+
+    clearTokens();
+
+    showMessage(
+      'loginMsg',
+      translateError(
+        err.message
+      )
+    );
+
+  }
+  finally{
+
+    setBusy(
+      'loginBtn',
+      false,
+      '登录',
+      '正在登录...'
+    );
+
+  }
+}
+
+
+/* =========================================================
+   TOKEN
+========================================================= */
+
+function saveTokens(){
+
+  localStorage.setItem(
+    'jmt_customer_token',
+    token
+  );
+
+  if(refreshToken){
+    localStorage.setItem(
+      'jmt_customer_refresh_token',
+      refreshToken
+    );
+  }
+}
+
+
+function clearTokens(){
+
+  token =
+  '';
+
+  refreshToken =
+  '';
+
+  localStorage.removeItem(
+    'jmt_customer_token'
+  );
+
+  localStorage.removeItem(
+    'jmt_customer_refresh_token'
+  );
+}
+
+
+async function refreshSession(){
+
+  if(!refreshToken){
+    return false;
+  }
+
+
+  try{
+
+    const res =
+    await fetch(
+      BASE
+      +
+      '/auth/v1/token?grant_type=refresh_token',
+      {
+        method:'POST',
+        headers:{
+          'apikey':KEY,
+          'Content-Type':
+          'application/json'
+        },
+        body:JSON.stringify({
+          refresh_token:
+          refreshToken
+        })
+      }
+    );
+
+
+    const data =
+    await parseResponse(
+      res
+    );
+
+
+    token =
+    data.access_token;
+
+    refreshToken =
+    data.refresh_token
+    ||
+    refreshToken;
+
+    saveTokens();
+
+    return true;
+
+  }
+  catch{
+
+    clearTokens();
+
+    return false;
+  }
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+async function ensureProfile(
+  name,
+  phone
+){
+
+  const res =
+  await fetch(
+    BASE
+    +
+    '/rest/v1/rpc/customer_ensure_profile',
+    {
+      method:'POST',
+      headers:
+      authHeaders(),
+      body:JSON.stringify({
+        p_display_name:
+        name,
+        p_phone:
+        phone
+        ||
+        null
+      })
+    }
+  );
+
+
+  profile =
+  await parseResponse(
+    res
+  );
+
+  return profile;
+}
+
+
+async function loadProfile(){
+
+  const res =
+  await fetch(
+    BASE
+    +
+    '/rest/v1/customer_profiles?select=id,customer_code,display_name,phone,status&limit=1',
+    {
+      headers:
+      authHeaders()
+    }
+  );
+
+
+  const rows =
+  await parseResponse(
+    res
+  );
+
+
+  if(
+    !Array.isArray(rows)
+    ||
+    !rows.length
+  ){
+    throw new Error(
+      'CUSTOMER_PROFILE_NOT_FOUND'
+    );
+  }
+
+
+  profile =
+  rows[0];
+
+  renderProfile();
+}
+
+
+function renderProfile(){
+
+  document
+  .getElementById(
+    'profileName'
+  )
+  .textContent =
+  profile.display_name
+  ||
+  '—';
+
+
+  document
+  .getElementById(
+    'customerCode'
+  )
+  .textContent =
+  profile.customer_code
+  ||
+  '—';
+
+
+  document
+  .getElementById(
+    'profileNameInput'
+  )
+  .value =
+  profile.display_name
+  ||
+  '';
+
+
+  document
+  .getElementById(
+    'profilePhoneInput'
+  )
+  .value =
+  profile.phone
+  ||
+  '';
+}
+
+
+async function saveProfile(){
+
+  clearMessage(
+    'profileMsg'
+  );
+
+
+  const name =
+  document
+  .getElementById(
+    'profileNameInput'
+  )
+  .value
+  .trim();
+
+
+  const phone =
+  document
+  .getElementById(
+    'profilePhoneInput'
+  )
+  .value
+  .trim();
+
+
+  if(name.length < 2){
+    showMessage(
+      'profileMsg',
+      '请输入正确姓名。'
+    );
+    return;
+  }
+
+
+  setBusy(
+    'saveProfileBtn',
+    true,
+    '保存个人资料',
+    '正在保存...'
+  );
+
+
+  try{
+
+    const res =
+    await fetch(
+      BASE
+      +
+      '/rest/v1/rpc/customer_update_profile',
+      {
+        method:'POST',
+        headers:
+        authHeaders(),
+        body:JSON.stringify({
+          p_display_name:
+          name,
+          p_phone:
+          phone
+          ||
+          null
+        })
+      }
+    );
+
+
+    profile =
+    await parseResponse(
+      res
+    );
+
+    renderProfile();
+
+
+    showMessage(
+      'profileMsg',
+      '个人资料已保存。',
+      'ok'
+    );
+
+  }
+  catch(err){
+
+    showMessage(
+      'profileMsg',
+      translateError(
+        err.message
+      )
+    );
+
+  }
+  finally{
+
+    setBusy(
+      'saveProfileBtn',
+      false,
+      '保存个人资料',
+      '正在保存...'
+    );
+
+  }
+}
+
+
+/* =========================================================
+   PAYOUT ACCOUNTS
+========================================================= */
+
+async function loadPayoutAccounts(){
+
+  const res =
+  await fetch(
+    BASE
+    +
+    '/rest/v1/customer_payout_accounts?select=id,method_type,account_name,account_number,bank_name,is_verified,is_active&is_active=eq.true&order=method_type.asc',
+    {
+      headers:
+      authHeaders()
+    }
+  );
+
+
+  payoutAccounts =
+  await parseResponse(
+    res
+  );
+
+  renderPayoutAccounts();
+}
+
+
+function renderPayoutAccounts(){
+
+  const kpay =
+  payoutAccounts.find(
+    x =>
+    x.method_type ===
+    'kpay'
+  );
+
+
+  const bank =
+  payoutAccounts.find(
+    x =>
+    x.method_type ===
+    'bank'
+  );
+
+
+  document
+  .getElementById(
+    'kpayName'
+  )
+  .value =
+  kpay?.account_name
+  ||
+  '';
+
+
+  document
+  .getElementById(
+    'kpayNumber'
+  )
+  .value =
+  kpay?.account_number
+  ||
+  '';
+
+
+  setVerifyBadge(
+    'kpayVerify',
+    kpay
+  );
+
+
+  document
+  .getElementById(
+    'bankName'
+  )
+  .value =
+  bank?.bank_name
+  ||
+  '';
+
+
+  document
+  .getElementById(
+    'bankAccountName'
+  )
+  .value =
+  bank?.account_name
+  ||
+  '';
+
+
+  document
+  .getElementById(
+    'bankAccountNumber'
+  )
+  .value =
+  bank?.account_number
+  ||
+  '';
+
+
+  setVerifyBadge(
+    'bankVerify',
+    bank
+  );
+}
+
+
+function setVerifyBadge(
+  id,
+  account
+){
+
+  const el =
+  document.getElementById(
+    id
+  );
+
+
+  if(!account){
+
+    el.textContent =
+    '未绑定';
+
+    el.className =
+    'verify no';
+
+    return;
+  }
+
+
+  if(account.is_verified){
+
+    el.textContent =
+    '已确认';
+
+    el.className =
+    'verify yes';
+
+  }
+  else{
+
+    el.textContent =
+    '待确认';
+
+    el.className =
+    'verify no';
+
+  }
+}
+
+
+async function savePayoutAccount(
+  method
+){
+
+  clearMessage(
+    'accountMsg'
+  );
+
+
+  let accountName =
+  '';
+
+  let accountNumber =
+  '';
+
+  let bankName =
+  null;
+
+
+  if(method === 'kpay'){
+
+    accountName =
+    document
+    .getElementById(
+      'kpayName'
+    )
+    .value
+    .trim();
+
+
+    accountNumber =
+    document
+    .getElementById(
+      'kpayNumber'
+    )
+    .value
+    .trim();
+
+  }
+  else{
+
+    bankName =
+    document
+    .getElementById(
+      'bankName'
+    )
+    .value
+    .trim();
+
+
+    accountName =
+    document
+    .getElementById(
+      'bankAccountName'
+    )
+    .value
+    .trim();
+
+
+    accountNumber =
+    document
+    .getElementById(
+      'bankAccountNumber'
+    )
+    .value
+    .trim();
+
+  }
+
+
+  if(accountName.length < 2){
+
+    showMessage(
+      'accountMsg',
+      '请输入正确的收款户名。'
+    );
+
+    return;
+  }
+
+
+  if(accountNumber.length < 5){
+
+    showMessage(
+      'accountMsg',
+      '请输入正确的收款号码或账号。'
+    );
+
+    return;
+  }
+
+
+  if(
+    method === 'bank'
+    &&
+    (!bankName || bankName.length < 2)
+  ){
+
+    showMessage(
+      'accountMsg',
+      '请输入银行名称。'
+    );
+
+    return;
+  }
+
+
+  const buttonId =
+  method === 'kpay'
+  ? 'saveKpayBtn'
+  : 'saveBankBtn';
+
+
+  const normalText =
+  method === 'kpay'
+  ? '保存 KPay'
+  : '保存银行账户';
+
+
+  setBusy(
+    buttonId,
+    true,
+    normalText,
+    '正在保存...'
+  );
+
+
+  try{
+
+    const res =
+    await fetch(
+      BASE
+      +
+      '/rest/v1/rpc/customer_upsert_payout_account',
+      {
+        method:'POST',
+        headers:
+        authHeaders(),
+        body:JSON.stringify({
+          p_method_type:
+          method,
+
+          p_account_name:
+          accountName,
+
+          p_account_number:
+          accountNumber,
+
+          p_bank_name:
+          method === 'bank'
+          ? bankName
+          : null
+        })
+      }
+    );
+
+
+    await parseResponse(
+      res
+    );
+
+
+    await loadPayoutAccounts();
+
+
+    showMessage(
+      'accountMsg',
+      method === 'kpay'
+      ? 'KPay 已保存，当前状态为待确认。'
+      : '银行账户已保存，当前状态为待确认。',
+      'ok'
+    );
+
+  }
+  catch(err){
+
+    showMessage(
+      'accountMsg',
+      translateError(
+        err.message
+      )
+    );
+
+  }
+  finally{
+
+    setBusy(
+      buttonId,
+      false,
+      normalText,
+      '正在保存...'
+    );
+
+  }
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+async function loadDashboard(){
+
+  document
+  .getElementById(
+    'authCard'
+  )
+  .classList
+  .add(
+    'hidden'
+  );
+
+
+  document
+  .getElementById(
+    'dashboard'
+  )
+  .classList
+  .remove(
+    'show'
+  );
+
+
+  document
+  .getElementById(
+    'loading'
+  )
+  .classList
+  .remove(
+    'hidden'
+  );
+
+
+  try{
+
+    await loadProfile();
+
+    await loadPayoutAccounts();
+
+
+    document
+    .getElementById(
+      'loading'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+    document
+    .getElementById(
+      'dashboard'
+    )
+    .classList
+    .add(
+      'show'
+    );
+
+  }
+  catch(err){
+
+    const refreshed =
+    await refreshSession();
+
+
+    if(refreshed){
+
+      try{
+
+        await loadProfile();
+
+        await loadPayoutAccounts();
+
+
+        document
+        .getElementById(
+          'loading'
+        )
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+        document
+        .getElementById(
+          'dashboard'
+        )
+        .classList
+        .add(
+          'show'
+        );
+
+
+        return;
+
+      }
+      catch{}
+    }
+
+
+    clearTokens();
+
+
+    document
+    .getElementById(
+      'loading'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+    document
+    .getElementById(
+      'dashboard'
+    )
+    .classList
+    .remove(
+      'show'
+    );
+
+
+    document
+    .getElementById(
+      'authCard'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+    showAuth(
+      'login'
+    );
+
+  }
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+  try{
+
+    if(token){
+
+      await fetch(
+        BASE
+        +
+        '/auth/v1/logout',
+        {
+          method:'POST',
+          headers:
+          authHeaders()
+        }
+      );
+
+    }
+
+  }
+  catch{}
+
+
+  clearTokens();
+
+  profile =
+  null;
+
+  payoutAccounts =
+  [];
+
+
+  document
+  .getElementById(
+    'dashboard'
+  )
+  .classList
+  .remove(
+    'show'
+  );
+
+
+  document
+  .getElementById(
+    'authCard'
+  )
+  .classList
+  .remove(
+    'hidden'
+  );
+
+
+  showAuth(
+    'login'
+  );
+}
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+function translateError(message){
+
+  const text =
+  String(
+    message
+    ||
+    ''
+  );
+
+
+  if(
+    text.includes(
+      'Invalid login credentials'
+    )
+  ){
+    return '邮箱或密码错误。';
+  }
+
+
+  if(
+    text.includes(
+      'Email not confirmed'
+    )
+  ){
+    return '请先完成邮箱确认。';
+  }
+
+
+  if(
+    text.includes(
+      'User already registered'
+    )
+  ){
+    return '此邮箱已经注册。';
+  }
+
+
+  if(
+    text.includes(
+      'Password should be'
+    )
+  ){
+    return '密码长度或强度不符合要求。';
+  }
+
+
+  if(
+    text.includes(
+      'ACCOUNT_ROLE_CONFLICT'
+    )
+  ){
+    return '此登录账户已经属于其他系统身份，不能再创建客户账户。';
+  }
+
+
+  if(
+    text.includes(
+      'CUSTOMER_NOT_ACTIVE'
+    )
+  ){
+    return '此客户账户当前不可使用，请联系管理员。';
+  }
+
+
+  if(
+    text.includes(
+      'DISPLAY_NAME_REQUIRED'
+    )
+  ){
+    return '请输入正确姓名。';
+  }
+
+
+  if(
+    text.includes(
+      'ACCOUNT_NAME_REQUIRED'
+    )
+  ){
+    return '请输入正确收款户名。';
+  }
+
+
+  if(
+    text.includes(
+      'ACCOUNT_NUMBER_REQUIRED'
+    )
+  ){
+    return '请输入正确收款号码或账号。';
+  }
+
+
+  if(
+    text.includes(
+      'BANK_NAME_REQUIRED'
+    )
+  ){
+    return '请输入银行名称。';
+  }
+
+
+  return text
+  ||
+  '操作失败，请稍后再试。';
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+(async function init(){
+
+  if(!token){
+
+    document
+    .getElementById(
+      'authCard'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+    return;
+  }
+
+
+  await loadDashboard();
+
+})();
+</script>
+
+</body>
+</html>
