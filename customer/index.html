@@ -726,22 +726,81 @@ button:disabled{
     </section>
 
 
-    <section class="card">
+        <section
+      id="roundCard"
+      class="card">
 
       <div class="cardTitle">
         参与本期
       </div>
 
-      <div class="note">
-        十二生肖下注、保存、提交付款与中奖记录将在下一阶段接入。
-        目前此入口暂未开放，不影响您的账户与收款资料。
+      <div
+        id="roundLoading"
+        class="note">
+        正在读取当前开放期...
       </div>
 
-      <button
-        class="primary"
-        disabled>
-        即将开放
-      </button>
+      <div
+        id="roundEmpty"
+        class="hidden">
+
+        <div class="note">
+          当前暂无开放期，请等待管理员开放下一期。
+        </div>
+
+      </div>
+
+      <div
+        id="roundContent"
+        class="hidden">
+
+        <div
+          id="roundTitle"
+          class="customerCode">
+          —
+        </div>
+
+        <div
+          id="roundDeadline"
+          class="note">
+          —
+        </div>
+
+        <div class="divider"></div>
+
+        <div
+          id="zodiacGrid"
+          class="zodiacGrid">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="roundSummary">
+          <span>本期合计</span>
+          <strong id="roundTotal">
+            0
+          </strong>
+        </div>
+
+        <div
+          id="roundLockedNote"
+          class="note">
+          保存后，在截止时间前仍可修改未锁定金额。
+        </div>
+
+        <button
+          id="saveRoundBtn"
+          class="primary"
+          onclick="saveRoundEntries()">
+          保存本期
+        </button>
+
+        <div
+          id="roundMsg"
+          class="msg">
+        </div>
+
+      </div>
 
     </section>
 
