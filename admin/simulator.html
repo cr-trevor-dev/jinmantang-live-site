@@ -698,11 +698,11 @@ button:active{
     </div>
 
 
-    <div class="note">
+        <div class="note">
       本页面每 20 秒自动同步一次。
-      代理提交或修改本期数据后，
-      本期提交总额、代理佣金、扣佣后净额以及
-      十二生肖汇总都会重新计算。
+      只有管理员已批准的金额才进入正式汇总；
+      待审核金额单独显示；
+      已驳回或仅保存的数据不会计入正式汇总。
     </div>
 
   </div>
@@ -719,9 +719,9 @@ button:active{
       id="numberGrid">
     </div>
 
-    <div class="note">
-      「提交总额」为所有代理在该生肖上的提交合计；
-      「10倍金额」= 该生肖提交总额 × 10。
+        <div class="note">
+      「已确认金额」只统计管理员已经批准的金额；
+      「待审核金额」只统计仍在等待审核的付款。
     </div>
 
   </div>
@@ -729,8 +729,8 @@ button:active{
 
   <div class="card">
 
-    <div class="title">
-      本期代理提交
+       <div class="title">
+      本期代理财务状态
     </div>
 
     <div id="agentList">
@@ -848,8 +848,8 @@ null;
 let agents =
 [];
 
-let submissions =
-[];
+let financeSummary =
+null;
 
 
 /* =========================
@@ -1051,7 +1051,7 @@ function buildNumberGrid(){
         <div class="numDataBox">
 
           <small>
-            提交总额
+                        已确认金额
           </small>
 
           <strong id="numAmount${n}">
@@ -1063,7 +1063,7 @@ function buildNumberGrid(){
         <div class="numDataBox">
 
           <small>
-            10倍金额
+                        待审核金额
           </small>
 
           <strong id="numPayout${n}">
@@ -1383,16 +1383,23 @@ async function loadAgents(){
 
 
 /* =========================
-   LOAD SUBMISSIONS
+   LOAD FINANCE SUMMARY
 ========================= */
 
-async function loadSubmissions(){
+async function loadFinanceSummary(){
 
   if(!currentRound){
 
-    submissions =
-    [];
-
+    financeSummary = {
+      confirmed_total:0,
+      pending_total:0,
+      editable_total:0,
+      confirmed_agent_count:0,
+      pending_agent_count:0,
+      editable_agent_count:0,
+      zodiac:[],
+      agents:[]
+    };
 
     return;
 
@@ -1401,25 +1408,32 @@ async function loadSubmissions(){
 
   const r =
   await api(
-    '/rest/v1/agent_submissions'+
-    '?round_id=eq.'+
-    encodeURIComponent(
-      currentRound.id
-    )+
-    '&select=agent_id,number_code,points,submitted_at,updated_at'
+    '/rest/v1/rpc/admin_round_finance_summary',
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':'application/json'
+      },
+
+      body:JSON.stringify({
+        p_round_id:
+        currentRound.id
+      })
+    }
   );
 
 
   if(!r.ok){
 
     throw new Error(
-      '无法读取代理提交'
+      '无法读取本期财务汇总'
     );
 
   }
 
 
-  submissions =
+  financeSummary =
   await r.json();
 
 }
@@ -1431,185 +1445,21 @@ async function loadSubmissions(){
 
 function calculate(){
 
-  const totals =
-  {};
-
-
-  const agentMap =
-  {};
-
-
-  for(
-    let i=1;
-    i<=12;
-    i++
-  ){
-
-    totals[
-      String(i)
-      .padStart(
-        2,
-        '0'
-      )
-    ] =
-    0;
-
-  }
-
-
-  submissions.forEach(
-    row=>{
-
-
-      const code =
-      String(
-        row.number_code
-      )
-      .padStart(
-        2,
-        '0'
-      );
-
-
-      const points =
-      Number(
-        row.points || 0
-      );
-
-
-      if(
-        Object.prototype
-        .hasOwnProperty
-        .call(
-          totals,
-          code
-        )
-      ){
-
-        totals[
-          code
-        ] +=
-        points;
-
-      }
-
-
-      if(
-        !agentMap[
-          row.agent_id
-        ]
-      ){
-
-        agentMap[
-          row.agent_id
-        ] = {
-
-          total:0,
-
-          lastTime:
-          row.updated_at
-          ||
-          row.submitted_at,
-
-          numbers:{}
-
-        };
-
-
-        for(
-          let i=1;
-          i<=12;
-          i++
-        ){
-
-          agentMap[
-            row.agent_id
-          ]
-          .numbers[
-            String(i)
-            .padStart(
-              2,
-              '0'
-            )
-          ] =
-          0;
-
-        }
-
-      }
-
-
-      agentMap[
-        row.agent_id
-      ].total +=
-      points;
-
-
-      if(
-        Object.prototype
-        .hasOwnProperty
-        .call(
-          agentMap[
-            row.agent_id
-          ].numbers,
-          code
-        )
-      ){
-
-        agentMap[
-          row.agent_id
-        ].numbers[
-          code
-        ] +=
-        points;
-
-      }
-
-
-      const thisTime =
-      row.updated_at
-      ||
-      row.submitted_at;
-
-
-      if(
-        thisTime
-        &&
-        (
-          !agentMap[
-            row.agent_id
-          ].lastTime
-
-          ||
-
-          new Date(
-            thisTime
-          )
-
-          >
-
-          new Date(
-            agentMap[
-              row.agent_id
-            ].lastTime
-          )
-        )
-      ){
-
-        agentMap[
-          row.agent_id
-        ].lastTime =
-        thisTime;
-
-      }
-
-    }
-  );
+  const summary =
+  financeSummary
+  ||
+  {
+    confirmed_total:0,
+    pending_total:0,
+    editable_total:0,
+    confirmed_agent_count:0,
+    zodiac:[],
+    agents:[]
+  };
 
 
   renderTotals(
-    totals,
-    agentMap
+    summary
   );
 
 }
@@ -1620,170 +1470,149 @@ function calculate(){
 ========================= */
 
 function renderTotals(
-  totals,
-  agentMap
+  summary
 ){
 
-  let grandTotal =
-  0;
+  const confirmedTotal =
+  Number(
+    summary.confirmed_total || 0
+  );
+
+
+  const pendingTotal =
+  Number(
+    summary.pending_total || 0
+  );
+
+
+  const editableTotal =
+  Number(
+    summary.editable_total || 0
+  );
+
+
+  const zodiacMap =
+  {};
+
+
+  (
+    summary.zodiac
+    ||
+    []
+  )
+  .forEach(
+    row=>{
+
+      zodiacMap[
+        String(
+          row.number_code
+        )
+        .padStart(
+          2,
+          '0'
+        )
+      ] =
+      row;
+
+    }
+  );
 
 
   let activeNumbers =
   0;
 
 
-  Object.entries(
-    totals
-  )
-  .forEach(
-    ([code,value])=>{
+  for(
+    let i=1;
+    i<=12;
+    i++
+  ){
+
+    const code =
+    String(i)
+    .padStart(
+      2,
+      '0'
+    );
 
 
-      const amount =
-      Number(
-        value || 0
-      );
+    const row =
+    zodiacMap[code]
+    ||
+    {};
 
 
-      const payout =
-      amount*
-      MULTIPLIER;
-
-
-      grandTotal +=
-      amount;
-
-
-      if(
-        amount>0
-      ){
-
-        activeNumbers++;
-
-      }
-
-
-      const amountEl =
-      document.getElementById(
-        'numAmount'+code
-      );
-
-
-      const payoutEl =
-      document.getElementById(
-        'numPayout'+code
-      );
-
-
-      const box =
-      document.getElementById(
-        'numBox'+code
-      );
-
-
-      if(amountEl){
-
-        amountEl.textContent =
-        formatNumber(
-          amount
-        );
-
-      }
-
-
-      if(payoutEl){
-
-        payoutEl.textContent =
-        formatNumber(
-          payout
-        );
-
-      }
-
-
-      if(box){
-
-        box.classList.toggle(
-          'nonzero',
-          amount>0
-        );
-
-      }
-
-    }
-  );
-
-
-  let commissionTotal =
-  0;
-
-
-  agents.forEach(
-    agent=>{
-
-
-      const data =
-      agentMap[
-        agent.id
-      ];
-
-
-      if(!data){
-
-        return;
-
-      }
-
-
-      const total =
-      Number(
-        data.total || 0
-      );
-
-
-      const rate =
-      normalizeRate(
-        agent.commission_rate
-      );
-
-
-      const commission =
-      total*
-      rate/
-      100;
-
-
-      data.commission =
-      commission;
-
-
-      data.rate =
-      rate;
-
-
-      commissionTotal +=
-      commission;
-
-    }
-  );
-
-
-  const netTotal =
-  grandTotal-
-  commissionTotal;
-
-
-  const submittedAgentIds =
-
-  Object.keys(
-    agentMap
-  )
-  .filter(
-    id=>
+    const confirmed =
     Number(
-      agentMap[id].total
-    )>0
-  );
+      row.confirmed_total || 0
+    );
+
+
+    const pending =
+    Number(
+      row.pending_total || 0
+    );
+
+
+    if(
+      confirmed>0
+    ){
+
+      activeNumbers++;
+
+    }
+
+
+    const amountEl =
+    document.getElementById(
+      'numAmount'+code
+    );
+
+
+    const pendingEl =
+    document.getElementById(
+      'numPayout'+code
+    );
+
+
+    const box =
+    document.getElementById(
+      'numBox'+code
+    );
+
+
+    if(amountEl){
+
+      amountEl.textContent =
+      formatNumber(
+        confirmed
+      );
+
+    }
+
+
+    if(pendingEl){
+
+      pendingEl.textContent =
+      formatNumber(
+        pending
+      );
+
+    }
+
+
+    if(box){
+
+      box.classList.toggle(
+        'nonzero',
+        confirmed>0
+        ||
+        pending>0
+      );
+
+    }
+
+  }
 
 
   const activeAgents =
@@ -1798,7 +1627,7 @@ function renderTotals(
     'grandTotal'
   ).textContent =
   formatNumber(
-    grandTotal
+    confirmedTotal
   );
 
 
@@ -1806,7 +1635,7 @@ function renderTotals(
     'commissionTotal'
   ).textContent =
   formatNumber(
-    commissionTotal
+    pendingTotal
   );
 
 
@@ -1814,14 +1643,18 @@ function renderTotals(
     'netTotal'
   ).textContent =
   formatNumber(
-    netTotal
+    editableTotal
   );
 
 
   document.getElementById(
     'agentCount'
   ).textContent =
-  submittedAgentIds.length+
+  Number(
+    summary.confirmed_agent_count
+    ||
+    0
+  )+
   ' / '+
   activeAgents.length;
 
@@ -1833,7 +1666,9 @@ function renderTotals(
 
 
   renderAgents(
-    agentMap
+    summary.agents
+    ||
+    []
   );
 
 }
@@ -1844,7 +1679,7 @@ function renderTotals(
 ========================= */
 
 function renderAgents(
-  agentMap
+  rows
 ){
 
   const box =
@@ -1854,35 +1689,61 @@ function renderAgents(
 
 
   const list =
-
-  agents
-
-  .map(
-    a=>({
-      ...a,
-      roundData:
-      agentMap[a.id]
-    })
-  )
-
-  .filter(
-    a=>
-    a.roundData
-    &&
-    Number(
-      a.roundData.total
-    )>0
-  )
-
+  [
+    ...rows
+  ]
   .sort(
-    (a,b)=>
-    Number(
-      b.roundData.total
-    )
-    -
-    Number(
-      a.roundData.total
-    )
+    (a,b)=>{
+
+      const confirmedDiff =
+      Number(
+        b.confirmed_total || 0
+      )
+      -
+      Number(
+        a.confirmed_total || 0
+      );
+
+
+      if(
+        confirmedDiff!==0
+      ){
+
+        return confirmedDiff;
+
+      }
+
+
+      const pendingDiff =
+      Number(
+        b.pending_total || 0
+      )
+      -
+      Number(
+        a.pending_total || 0
+      );
+
+
+      if(
+        pendingDiff!==0
+      ){
+
+        return pendingDiff;
+
+      }
+
+
+      return (
+        Number(
+          b.editable_total || 0
+        )
+        -
+        Number(
+          a.editable_total || 0
+        )
+      );
+
+    }
   );
 
 
@@ -1890,7 +1751,7 @@ function renderAgents(
 
     box.innerHTML =
     '<div class="empty">'+
-    '本期暂时没有代理提交'+
+    '本期暂时没有代理数据'+
     '</div>';
 
 
@@ -1904,6 +1765,23 @@ function renderAgents(
   list.map(
     a=>{
 
+      const confirmed =
+      Number(
+        a.confirmed_total || 0
+      );
+
+
+      const pending =
+      Number(
+        a.pending_total || 0
+      );
+
+
+      const editable =
+      Number(
+        a.editable_total || 0
+      );
+
 
       const rate =
       normalizeRate(
@@ -1911,54 +1789,34 @@ function renderAgents(
       );
 
 
-      const total =
-      Number(
-        a.roundData.total || 0
-      );
+      let badgeText =
+      '未确认';
 
 
-      const commission =
-      total*
-      rate/
-      100;
+      if(
+        pending>0
+      ){
 
+        badgeText =
+        '待审核';
 
-      const detailHtml =
+      }else if(
+        confirmed>0
+        &&
+        editable>0
+      ){
 
-      Object.entries(
-        a.roundData.numbers
-      )
-      .map(
-        ([code,value])=>{
+        badgeText =
+        '部分确认';
 
+      }else if(
+        confirmed>0
+      ){
 
-          const active =
-          Number(value)>0
-          ?
-          ' active'
-          :
-          '';
+        badgeText =
+        '已确认';
 
-
-          return `
-
-          <div class="detailNum${active}">
-
-            <span>
-              ${escapeHtml(getZodiacName(code))}
-            </span>
-
-            <span>
-              ${formatNumber(value)}
-            </span>
-
-          </div>
-
-          `;
-
-        }
-      )
-      .join('');
+      }
 
 
       return `
@@ -1989,7 +1847,7 @@ function renderAgents(
           </div>
 
           <div class="badge">
-            已提交
+            ${escapeHtml(badgeText)}
           </div>
 
         </div>
@@ -1997,48 +1855,40 @@ function renderAgents(
 
         <div class="agentStats">
 
-          <div class="agentStat">
-
-            <small>
-              本期提交总额
-            </small>
-
-            <strong>
-              ${formatNumber(total)}
-            </strong>
-
-          </div>
-
           <div class="agentStat commission">
 
             <small>
-              代理佣金
+              已确认金额
             </small>
 
             <strong>
-              ${formatNumber(commission)}
+              ${formatNumber(confirmed)}
             </strong>
 
           </div>
 
+
           <div class="agentStat">
 
             <small>
-              最后提交时间
+              待审核金额
             </small>
 
             <strong>
+              ${formatNumber(pending)}
+            </strong>
 
-              ${
-                a.roundData.lastTime
-                ?
-                formatMMTShort(
-                  a.roundData.lastTime
-                )
-                :
-                '—'
-              }
+          </div>
 
+
+          <div class="agentStat">
+
+            <small>
+              未确认 / 可修改
+            </small>
+
+            <strong>
+              ${formatNumber(editable)}
             </strong>
 
           </div>
@@ -2048,14 +1898,14 @@ function renderAgents(
 
         <button
           class="dark detailButton"
-          onclick="toggleAgentDetail('${a.id}',this)">
+          onclick="toggleAgentDetail('${a.agent_id}',this)">
           查看十二生肖明细
         </button>
 
 
         <div
           class="agentDetail"
-          id="detail-${a.id}">
+          id="detail-${a.agent_id}">
 
           <div class="detailTitle">
 
@@ -2065,13 +1915,17 @@ function renderAgents(
               '未命名代理'
             )}
 
-            · 本期十二生肖明细
+            · 本期十二生肖财务明细
 
           </div>
 
-          <div class="detailGrid">
+          <div
+            class="detailGrid"
+            id="detailGrid-${a.agent_id}">
 
-            ${detailHtml}
+            <div class="empty">
+              展开后读取明细
+            </div>
 
           </div>
 
@@ -2082,7 +1936,8 @@ function renderAgents(
       `;
 
     }
-  ).join('');
+  )
+  .join('');
 
 }
 
@@ -2091,7 +1946,7 @@ function renderAgents(
    DETAIL
 ========================= */
 
-function toggleAgentDetail(
+async function toggleAgentDetail(
   agentId,
   button
 ){
@@ -2102,7 +1957,17 @@ function toggleAgentDetail(
   );
 
 
-  if(!detail){
+  const grid =
+  document.getElementById(
+    'detailGrid-'+agentId
+  );
+
+
+  if(
+    !detail
+    ||
+    !grid
+  ){
 
     return;
 
@@ -2115,18 +1980,206 @@ function toggleAgentDetail(
   );
 
 
-  detail.classList.toggle(
-    'open',
-    !isOpen
+  if(isOpen){
+
+    detail.classList.remove(
+      'open'
+    );
+
+
+    button.textContent =
+    '查看十二生肖明细';
+
+
+    return;
+
+  }
+
+
+  detail.classList.add(
+    'open'
   );
 
 
   button.textContent =
-isOpen
-?
-'查看十二生肖明细'
-:
-'收起十二生肖明细';
+  '收起十二生肖明细';
+
+
+  if(
+    detail.dataset.loaded===
+    '1'
+  ){
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+  '<div class="empty">'+
+  '正在读取...'+
+  '</div>';
+
+
+  try{
+
+    const r =
+    await api(
+      '/rest/v1/agent_submissions'+
+      '?round_id=eq.'+
+      encodeURIComponent(
+        currentRound.id
+      )+
+      '&agent_id=eq.'+
+      encodeURIComponent(
+        agentId
+      )+
+      '&select=number_code,points,pending_points,confirmed_points'+
+      '&order=number_code.asc'
+    );
+
+
+    if(!r.ok){
+
+      throw new Error(
+        '明细读取失败'
+      );
+
+    }
+
+
+    const rows =
+    await r.json();
+
+
+    const rowMap =
+    {};
+
+
+    rows.forEach(
+      row=>{
+
+        rowMap[
+          String(
+            row.number_code
+          )
+          .padStart(
+            2,
+            '0'
+          )
+        ] =
+        row;
+
+      }
+    );
+
+
+    let html =
+    '';
+
+
+    for(
+      let i=1;
+      i<=12;
+      i++
+    ){
+
+      const code =
+      String(i)
+      .padStart(
+        2,
+        '0'
+      );
+
+
+      const row =
+      rowMap[code]
+      ||
+      {};
+
+
+      const points =
+      Number(
+        row.points || 0
+      );
+
+
+      const confirmed =
+      Number(
+        row.confirmed_points || 0
+      );
+
+
+      const pending =
+      Number(
+        row.pending_points || 0
+      );
+
+
+      const editable =
+      Math.max(
+        points
+        -
+        confirmed
+        -
+        pending,
+        0
+      );
+
+
+      const active =
+      (
+        confirmed>0
+        ||
+        pending>0
+        ||
+        editable>0
+      )
+      ?
+      ' active'
+      :
+      '';
+
+
+      html += `
+
+        <div class="detailNum${active}">
+
+          <span>
+            ${escapeHtml(
+              getZodiacName(code)
+            )}
+          </span>
+
+          <span>
+            确认 ${formatNumber(confirmed)}
+            · 待审 ${formatNumber(pending)}
+            · 可改 ${formatNumber(editable)}
+          </span>
+
+        </div>
+
+      `;
+
+    }
+
+
+    grid.innerHTML =
+    html;
+
+
+    detail.dataset.loaded =
+    '1';
+
+
+  }catch(e){
+
+    grid.innerHTML =
+    '<div class="empty">'+
+    '明细读取失败，请重新刷新页面'+
+    '</div>';
+
+  }
 
 }
 
@@ -2163,10 +2216,10 @@ async function loadAll(){
     await loadRound();
 
 
-    await loadAgents();
-
-
-    await loadSubmissions();
+    await Promise.all([
+      loadAgents(),
+      loadFinanceSummary()
+    ]);
 
 
     calculate();
