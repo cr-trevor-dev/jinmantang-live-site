@@ -1121,7 +1121,13 @@ async function login(){
     return;
   }
 
-
+  if(!captchaToken){
+    showMessage(
+      'loginMsg',
+      '请先完成人机验证。'
+    );
+    return;
+  }
   setBusy(
     'loginBtn',
     true,
@@ -1145,9 +1151,12 @@ async function login(){
           'application/json'
         },
         body:JSON.stringify({
-          email,
-          password
-        })
+  email,
+  password,
+  gotrue_meta_security:{
+    captcha_token:captchaToken
+  }
+})
       }
     );
 
