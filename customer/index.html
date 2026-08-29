@@ -773,7 +773,41 @@ location.origin + '/supabase';
 const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
+let captchaToken =
+'';
 
+
+function onCaptchaSuccess(value){
+  captchaToken =
+  value;
+}
+
+
+function onCaptchaExpired(){
+  captchaToken =
+  '';
+}
+
+
+function onCaptchaError(){
+  captchaToken =
+  '';
+}
+
+
+function resetCaptcha(){
+
+  captchaToken =
+  '';
+
+  if(window.turnstile){
+    try{
+      window.turnstile.reset();
+    }
+    catch{}
+  }
+
+}
 let token =
 localStorage.getItem(
   'jmt_customer_token'
@@ -955,6 +989,29 @@ async function registerCustomer(){
     'registerMsg'
   );
 
+  const username =
+  document
+  .getElementById(
+    'regUsername'
+  )
+  .value
+  .trim()
+  .toLowerCase();
+
+  const password =
+  document
+  .getElementById(
+    'regPassword'
+  )
+  .value;
+
+  const passwordConfirm =
+  document
+  .getElementById(
+    'regPasswordConfirm'
+  )
+  .value;
+
   const name =
   document
   .getElementById(
@@ -971,43 +1028,59 @@ async function registerCustomer(){
   .value
   .trim();
 
-  const email =
-  document
-  .getElementById(
-    'regEmail'
-  )
-  .value
-  .trim()
-  .toLowerCase();
 
-  const password =
-  document
-  .getElementById(
-    'regPassword'
-  )
-  .value;
-
-
-  if(name.length < 2){
+  if(
+    !/^[a-z0-9_]{4,20}$/
+    .test(username)
+  ){
     showMessage(
       'registerMsg',
-      '请输入正确姓名。'
+      '用户名必须是 4–20 位字母、数字或下划线。'
     );
     return;
   }
 
-  if(!email){
-    showMessage(
-      'registerMsg',
-      '请输入邮箱。'
-    );
-    return;
-  }
 
   if(password.length < 8){
     showMessage(
       'registerMsg',
       '密码至少需要 8 位。'
+    );
+    return;
+  }
+
+
+  if(password !== passwordConfirm){
+    showMessage(
+      'registerMsg',
+      '两次输入的密码不一致。'
+    );
+    return;
+  }
+
+
+  if(!name){
+    showMessage(
+      'registerMsg',
+      '请输入真实姓名。'
+    );
+    return;
+  }
+
+
+  if(phone.length < 6){
+    showMessage(
+      'registerMsg',
+      '请输入正确手机号码。'
+    );
+    return;
+  }
+
+
+  if(!captchaToken){
+    showMessage(
+      'registerMsg',
+      '请先完成人机验证。'
     );
     return;
   }
@@ -1023,9 +1096,9 @@ async function registerCustomer(){
 
   try{
 
-    const signupRes =
+    const res =
     await fetch(
-      BASE + '/auth/v1/signup',
+      BASE + '/functions/v1/customer-auth',
       {
         method:'POST',
         headers:{
@@ -1034,59 +1107,46 @@ async function registerCustomer(){
           'application/json'
         },
         body:JSON.stringify({
-          email,
+          action:'register',
+          username,
           password,
-          data:{
-            display_name:name,
-            phone
-          }
+          display_name:name,
+          phone,
+          captcha_token:captchaToken
         })
       }
     );
 
 
-    const signup =
+    const data =
     await parseResponse(
-      signupRes
+      res
     );
 
 
-    if(
-      signup?.access_token
-    ){
+    token =
+    data.access_token;
 
-      token =
-      signup.access_token;
+    refreshToken =
+    data.refresh_token
+    ||
+    '';
 
-      refreshToken =
-      signup.refresh_token
-      ||
-      '';
-
-      saveTokens();
-
-
-      await ensureProfile(
-        name,
-        phone
-      );
+    profile =
+    data.profile
+    ||
+    null;
 
 
-      await loadDashboard();
-
-      return;
-    }
-
+    saveTokens();
 
     showMessage(
       'registerMsg',
-      '注册成功。请先完成邮箱确认，然后返回登录。',
+      '注册成功，正在进入客户中心。',
       'ok'
     );
 
-    showAuth(
-      'login'
-    );
+    await loadDashboard();
 
   }
   catch(err){
@@ -1108,6 +1168,8 @@ async function registerCustomer(){
       '正在注册...'
     );
 
+    resetCaptcha();
+
   }
 }
 
@@ -1122,10 +1184,10 @@ async function login(){
     'loginMsg'
   );
 
-  const email =
+  const username =
   document
   .getElementById(
-    'loginEmail'
+    'loginUsername'
   )
   .value
   .trim()
@@ -1139,17 +1201,104 @@ async function login(){
   .value;
 
 
-  if(
-    !email
-    ||
-    !password
-  ){
+  if(!username || !password){
     showMessage(
       'loginMsg',
-      '请输入邮箱和密码。'
+      '请输入用户名和密码。'
     );
     return;
   }
+
+
+  if(!captchaToken){
+    showMessage(
+      'loginMsg',
+      '请先完成人机验证。'
+    );
+    return;
+  }
+
+
+  setBusy(
+    'loginBtn',
+    true,
+    '登录',
+    '正在登录...'
+  );
+
+
+  try{
+
+    const res =
+    await fetch(
+      BASE + '/functions/v1/customer-auth',
+      {
+        method:'POST',
+        headers:{
+          'apikey':KEY,
+          'Content-Type':
+          'application/json'
+        },
+        body:JSON.stringify({
+          action:'login',
+          username,
+          password,
+          captcha_token:captchaToken
+        })
+      }
+    );
+
+
+    const data =
+    await parseResponse(
+      res
+    );
+
+
+    token =
+    data.access_token;
+
+    refreshToken =
+    data.refresh_token
+    ||
+    '';
+
+    profile =
+    data.profile
+    ||
+    null;
+
+
+    saveTokens();
+
+    await loadDashboard();
+
+  }
+  catch(err){
+
+    clearTokens();
+
+    showMessage(
+      'loginMsg',
+      translateError(
+        err.message
+      )
+    );
+
+  }
+  finally{
+
+    setBusy(
+      'loginBtn',
+      false,
+      '登录',
+      '正在登录...'
+    );
+
+    resetCaptcha();
+
+  }
+}
 
   if(!captchaToken){
     showMessage(
