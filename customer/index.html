@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>金满堂 · 客户中心</title>
-
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
 <style>
 *{
   box-sizing:border-box;
@@ -373,6 +373,18 @@ button:disabled{
     </div>
 
 
+        <div
+      id="customerCaptcha"
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAAEhMpx8Y_UlrY5Cr"
+      data-theme="dark"
+      data-callback="onCaptchaSuccess"
+      data-expired-callback="onCaptchaExpired"
+      data-error-callback="onCaptchaError"
+      style="margin:0 0 18px;">
+    </div>
+
+
     <div
       id="loginPanel"
       class="panel active">
@@ -383,13 +395,15 @@ button:disabled{
 
       <div class="field">
         <label>
-          邮箱
+          用户名
         </label>
         <input
-          id="loginEmail"
-          type="email"
-          autocomplete="email"
-          placeholder="请输入邮箱">
+          id="loginUsername"
+          type="text"
+          maxlength="30"
+          autocomplete="username"
+          autocapitalize="none"
+          placeholder="请输入用户名">
       </div>
 
       <div class="field">
@@ -414,6 +428,7 @@ button:disabled{
         id="loginMsg"
         class="msg">
       </div>
+
     </div>
 
 
@@ -427,37 +442,15 @@ button:disabled{
 
       <div class="field">
         <label>
-          姓名
+          用户名
         </label>
         <input
-          id="regName"
+          id="regUsername"
           type="text"
-          maxlength="80"
-          autocomplete="name"
-          placeholder="请输入姓名">
-      </div>
-
-      <div class="field">
-        <label>
-          联系电话
-        </label>
-        <input
-          id="regPhone"
-          type="tel"
-          maxlength="40"
-          autocomplete="tel"
-          placeholder="请输入联系电话">
-      </div>
-
-      <div class="field">
-        <label>
-          邮箱
-        </label>
-        <input
-          id="regEmail"
-          type="email"
-          autocomplete="email"
-          placeholder="请输入邮箱">
+          maxlength="30"
+          autocomplete="username"
+          autocapitalize="none"
+          placeholder="4–30 位字母、数字或下划线">
       </div>
 
       <div class="field">
@@ -470,6 +463,42 @@ button:disabled{
           minlength="8"
           autocomplete="new-password"
           placeholder="至少 8 位">
+      </div>
+
+      <div class="field">
+        <label>
+          确认密码
+        </label>
+        <input
+          id="regPasswordConfirm"
+          type="password"
+          minlength="8"
+          autocomplete="new-password"
+          placeholder="请再次输入密码">
+      </div>
+
+      <div class="field">
+        <label>
+          真实姓名
+        </label>
+        <input
+          id="regName"
+          type="text"
+          maxlength="80"
+          autocomplete="name"
+          placeholder="请输入真实姓名">
+      </div>
+
+      <div class="field">
+        <label>
+          手机号码
+        </label>
+        <input
+          id="regPhone"
+          type="tel"
+          maxlength="40"
+          autocomplete="tel"
+          placeholder="请输入手机号码">
       </div>
 
       <button
@@ -485,8 +514,9 @@ button:disabled{
       </div>
 
       <div class="note">
-        注册完成后，系统会自动生成您的金满堂客户编号。
+        请牢记您的用户名和密码。注册成功后，系统会自动生成金满堂客户编号。
       </div>
+
     </div>
 
   </section>
