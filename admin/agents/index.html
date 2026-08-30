@@ -7298,7 +7298,7 @@ function renderReferralCommissions(){
 
             支付完成：
             ${escapeHtml(
-                formatDate(
+            formatDate(
                 row.completed_at
               )
             )}
@@ -7312,7 +7312,7 @@ function renderReferralCommissions(){
 
 
         ${
-          remaining > 0
+        remaining > 0 && row.round_status === 'settled'
           ?
           `
 
@@ -9373,7 +9373,11 @@ async function refreshWhenActive(){
     ||
     paymentReviewLoading
     ||
-    settlementLoading
+        settlementLoading
+    ||
+    referralCommissionBusy
+    ||
+    referralCommissionLoading
   ){
 
     return;
@@ -9423,7 +9427,12 @@ editQrFiles.size > 0;
   );
 
 
-  await loadSettlementData(
+    await loadSettlementData(
+    false
+  );
+
+
+  await loadReferralCommissions(
     false
   );
 
@@ -9571,7 +9580,7 @@ startPage();
 /*
   每 20 秒只自动刷新：
   - 代理付款申请
-  - 结款总账
+    - 结款总账 + 客户推荐佣金
 
   不重新渲染收款账户编辑区域，
   避免管理员正在选择二维码时
@@ -9590,7 +9599,11 @@ setInterval(
       &&
       !paymentReviewLoading
       &&
-      !settlementLoading
+            !settlementLoading
+      &&
+      !referralCommissionBusy
+      &&
+      !referralCommissionLoading
     ){
 
       refreshWhenActive();
