@@ -1835,6 +1835,111 @@
     try{
       applyReferralCard();
             applyCustomerRoundLive();
+            const betCard =
+      cardByChild(
+        'numberGrid'
+      );
+
+      if(betCard){
+
+        betCard.classList.remove(
+          'hidden'
+        );
+
+
+        const totalBox =
+        betCard.querySelector(
+          '.total'
+        );
+
+        if(totalBox){
+
+          totalBox.classList.add(
+            'hidden'
+          );
+
+        }
+
+
+        const submitButton =
+        $('submitBtn');
+
+        if(submitButton){
+
+          submitButton.classList.add(
+            'hidden'
+          );
+
+        }
+
+
+        const reloadButton =
+        betCard.querySelector(
+          '[data-i18n="reloadBtn"]'
+        );
+
+        if(reloadButton){
+
+          reloadButton.classList.add(
+            'hidden'
+          );
+
+        }
+
+
+        const submitMessage =
+        $('submitMsg');
+
+        if(submitMessage){
+
+          submitMessage.classList.add(
+            'hidden'
+          );
+
+        }
+
+
+        const editNote =
+        betCard.querySelector(
+          '[data-i18n="editNote"]'
+        );
+
+        if(editNote){
+
+          editNote.classList.add(
+            'hidden'
+          );
+
+        }
+
+
+        for(
+          let i=1;
+          i<=12;
+          i++
+        ){
+
+          const input =
+          $(
+            'n'
+            +
+            String(i)
+            .padStart(
+              2,
+              '0'
+            )
+          );
+
+          if(input){
+
+            input.disabled =
+            true;
+
+          }
+
+        }
+
+      }
             const roundStatusEl =
       $('roundStatus');
 
