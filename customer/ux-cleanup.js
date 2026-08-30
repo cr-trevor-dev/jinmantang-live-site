@@ -111,16 +111,7 @@
   }
 
 
-  function captureReferral(){
-
-    let stored =
-    readStoredReferral();
-
-
-    if(stored){
-      return stored;
-    }
-
+    function captureReferral(){
 
     const fromUrl =
     String(
@@ -138,34 +129,34 @@
 
 
     if(
-      !validReferralCode(
+      validReferralCode(
         fromUrl
       )
     ){
 
-      return '';
+      localStorage.setItem(
+
+        REFERRAL_STORAGE_KEY,
+
+        JSON.stringify({
+
+          code:
+          fromUrl,
+
+          saved_at:
+          Date.now()
+
+        })
+
+      );
+
+
+      return fromUrl;
 
     }
 
 
-    localStorage.setItem(
-
-      REFERRAL_STORAGE_KEY,
-
-      JSON.stringify({
-
-        code:
-        fromUrl,
-
-        saved_at:
-        Date.now()
-
-      })
-
-    );
-
-
-    return fromUrl;
+    return readStoredReferral();
 
   }
 
