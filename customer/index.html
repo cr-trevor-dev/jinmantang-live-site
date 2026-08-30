@@ -1859,6 +1859,39 @@ let roundDirty =
 false;
 
 
+let payoutDraftDirty =
+false;
+
+
+document.addEventListener(
+
+  'input',
+
+  event => {
+
+    if(
+      [
+        'kpayName',
+        'kpayNumber',
+        'bankName',
+        'bankAccountName',
+        'bankAccountNumber'
+      ]
+      .includes(
+        event.target?.id
+      )
+    ){
+
+      payoutDraftDirty =
+      true;
+
+    }
+
+  }
+
+);
+
+
 /* =========================================================
    CAPTCHA
 ========================================================= */
@@ -3664,54 +3697,60 @@ function renderPayoutAccounts(){
   );
 
 
-  document
-  .getElementById(
-    'kpayName'
-  )
-  .value =
-  kpay?.account_name
-  ||
-  '';
+  if(
+    !payoutDraftDirty
+  ){
+
+    document
+    .getElementById(
+      'kpayName'
+    )
+    .value =
+    kpay?.account_name
+    ||
+    '';
 
 
-  document
-  .getElementById(
-    'kpayNumber'
-  )
-  .value =
-  kpay?.account_number
-  ||
-  '';
+    document
+    .getElementById(
+      'kpayNumber'
+    )
+    .value =
+    kpay?.account_number
+    ||
+    '';
 
 
-  document
-  .getElementById(
-    'bankName'
-  )
-  .value =
-  bank?.bank_name
-  ||
-  '';
+    document
+    .getElementById(
+      'bankName'
+    )
+    .value =
+    bank?.bank_name
+    ||
+    '';
 
 
-  document
-  .getElementById(
-    'bankAccountName'
-  )
-  .value =
-  bank?.account_name
-  ||
-  '';
+    document
+    .getElementById(
+      'bankAccountName'
+    )
+    .value =
+    bank?.account_name
+    ||
+    '';
 
 
-  document
-  .getElementById(
-    'bankAccountNumber'
-  )
-  .value =
-  bank?.account_number
-  ||
-  '';
+    document
+    .getElementById(
+      'bankAccountNumber'
+    )
+    .value =
+    bank?.account_number
+    ||
+    '';
+
+  }
 
 
   renderAccountState(
@@ -3720,7 +3759,7 @@ function renderPayoutAccounts(){
   );
 
 
-    renderAccountState(
+  renderAccountState(
     'bank',
     bank
   );
@@ -3978,9 +4017,13 @@ async function savePayoutAccount(method){
     );
 
 
-    await parseResponse(
+        await parseResponse(
       res
     );
+
+
+    payoutDraftDirty =
+    false;
 
 
     await loadPayoutAccounts();
@@ -7104,9 +7147,12 @@ async function logout(){
   false;
 
 
-  roundDirty =
+   roundDirty =
   false;
 
+
+  payoutDraftDirty =
+  false;
 
   document
   .getElementById(
