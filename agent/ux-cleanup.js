@@ -1757,7 +1757,7 @@
 
     setCardHidden(
       'numberGrid',
-            true
+            false
     );
 
 
