@@ -1494,7 +1494,120 @@ button:disabled{
 
   </div>
 
+  <!-- REFERRAL COMMISSION -->
 
+  <div
+    class="card"
+    id="referralCommissionCard">
+
+    <div class="title">
+      💵 客户推荐佣金结算
+    </div>
+
+    <div class="roundFilter">
+
+      <select
+        id="referralCommissionRoundSelect"
+        onchange="renderReferralCommissions()">
+
+        <option value="">
+          全部历史期
+        </option>
+
+      </select>
+
+      <button
+        class="dark"
+        onclick="loadReferralCommissions(true)">
+
+        刷新
+
+      </button>
+
+    </div>
+
+    <div class="settlementStats">
+
+      <div class="settlementStat">
+
+        <small>
+          应付佣金
+        </small>
+
+        <strong id="referralCommissionDue">
+          0
+        </strong>
+
+      </div>
+
+      <div class="settlementStat">
+
+        <small>
+          已付佣金
+        </small>
+
+        <strong id="referralCommissionPaid">
+          0
+        </strong>
+
+      </div>
+
+      <div class="settlementStat">
+
+        <small>
+          待付佣金
+        </small>
+
+        <strong id="referralCommissionRemaining">
+          0
+        </strong>
+
+      </div>
+
+      <div class="settlementStat">
+
+        <small>
+          待结算记录
+        </small>
+
+        <strong id="referralCommissionPendingCount">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="hint">
+
+      这里统计代理直属客户产生的正式推荐佣金。
+
+      <br>
+
+      只有管理员已确认的客户有效金额才会计算佣金。
+
+      <br>
+
+      每一期使用当期已经锁定的佣金率快照，之后修改代理比例不会改变历史佣金。
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="referralCommissionList">
+
+      <div class="empty">
+        正在读取推荐佣金...
+      </div>
+
+    </div>
+
+    <div
+      class="msg"
+      id="referralCommissionMsg">
+    </div>
+
+  </div>
   <!-- AGENT LIST -->
 
   <div class="card">
