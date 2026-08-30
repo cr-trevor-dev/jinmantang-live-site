@@ -728,8 +728,8 @@
   let customerRoundLiveLoadedAt =
   0;
 
-    let customerRoundLiveRows =
-  [];
+      let customerRoundLiveRows =
+      [];
 
   let customerRoundCommission =
   null;
@@ -1040,7 +1040,7 @@
 
 
         let confirmedTotal =
-    0;
+        0;
 
     let pendingTotal =
     0;
