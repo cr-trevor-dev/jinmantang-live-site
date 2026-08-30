@@ -1610,6 +1610,879 @@
     }
 
   }
+    let referralCommissionHistoryLoading = false;
+  let referralCommissionHistoryLoadedAt = 0;
+  let referralCommissionHistoryRows = [];
+
+
+  const REFERRAL_HISTORY_I18N = {
+
+    zh:{
+      title:'我的佣金 · 历史记录',
+      due:'应付佣金',
+      paid:'已付佣金',
+      remaining:'待付佣金',
+      confirmed:'直属客户有效金额',
+      rate:'当期佣金率',
+      status:'状态',
+      account:'收款账户',
+      completed:'支付完成',
+      empty:'暂无历史佣金记录',
+      statusPaid:'已支付',
+      statusPending:'待支付',
+      statusVoid:'已作废',
+      statusNone:'无需支付'
+    },
+
+    my:{
+      title:'ကျွန်ုပ်၏ ကော်မရှင် · မှတ်တမ်း',
+      due:'ပေးရန် ကော်မရှင်',
+      paid:'ပေးချေပြီး ကော်မရှင်',
+      remaining:'ပေးရန်ကျန် ကော်မရှင်',
+      confirmed:'တိုက်ရိုက်ဖောက်သည် အတည်ပြုငွေ',
+      rate:'အကြိမ်ကော်မရှင်နှုန်း',
+      status:'အခြေအနေ',
+      account:'ငွေလက်ခံအကောင့်',
+      completed:'ပေးချေပြီးချိန်',
+      empty:'ကော်မရှင်မှတ်တမ်း မရှိသေးပါ',
+      statusPaid:'ပေးချေပြီး',
+      statusPending:'ပေးချေရန်စောင့်နေသည်',
+      statusVoid:'ပယ်ဖျက်ပြီး',
+      statusNone:'ပေးချေရန်မလို'
+    },
+
+    en:{
+      title:'My Commission · History',
+      due:'Commission Due',
+      paid:'Commission Paid',
+      remaining:'Commission Remaining',
+      confirmed:'Confirmed Customer Amount',
+      rate:'Round Commission Rate',
+      status:'Status',
+      account:'Payout Account',
+      completed:'Paid At',
+      empty:'No commission history yet',
+      statusPaid:'Paid',
+      statusPending:'Pending',
+      statusVoid:'Void',
+      statusNone:'No Payment Due'
+    },
+
+    th:{
+      title:'ค่าคอมมิชชั่นของฉัน · ประวัติ',
+      due:'ค่าคอมมิชชั่นที่ต้องจ่าย',
+      paid:'จ่ายแล้ว',
+      remaining:'คงเหลือที่ต้องจ่าย',
+      confirmed:'ยอดลูกค้าที่อนุมัติแล้ว',
+      rate:'อัตราคอมมิชชั่นรอบนั้น',
+      status:'สถานะ',
+      account:'บัญชีรับเงิน',
+      completed:'เวลาที่ชำระ',
+      empty:'ยังไม่มีประวัติค่าคอมมิชชั่น',
+      statusPaid:'จ่ายแล้ว',
+      statusPending:'รอจ่าย',
+      statusVoid:'ยกเลิก',
+      statusNone:'ไม่ต้องจ่าย'
+    },
+
+    ms:{
+      title:'Komisen Saya · Sejarah',
+      due:'Komisen Perlu Dibayar',
+      paid:'Komisen Dibayar',
+      remaining:'Baki Komisen',
+      confirmed:'Jumlah Pelanggan Disahkan',
+      rate:'Kadar Komisen Pusingan',
+      status:'Status',
+      account:'Akaun Pembayaran',
+      completed:'Dibayar Pada',
+      empty:'Tiada sejarah komisen',
+      statusPaid:'Dibayar',
+      statusPending:'Menunggu',
+      statusVoid:'Dibatalkan',
+      statusNone:'Tiada Bayaran'
+    },
+
+    vi:{
+      title:'Hoa hồng của tôi · Lịch sử',
+      due:'Hoa hồng phải trả',
+      paid:'Đã thanh toán',
+      remaining:'Còn phải trả',
+      confirmed:'Số tiền khách hàng đã xác nhận',
+      rate:'Tỷ lệ hoa hồng kỳ',
+      status:'Trạng thái',
+      account:'Tài khoản nhận tiền',
+      completed:'Thời gian thanh toán',
+      empty:'Chưa có lịch sử hoa hồng',
+      statusPaid:'Đã thanh toán',
+      statusPending:'Chờ thanh toán',
+      statusVoid:'Đã hủy',
+      statusNone:'Không cần thanh toán'
+    },
+
+    id:{
+      title:'Komisi Saya · Riwayat',
+      due:'Komisi Terutang',
+      paid:'Komisi Dibayar',
+      remaining:'Sisa Komisi',
+      confirmed:'Jumlah Pelanggan Terkonfirmasi',
+      rate:'Tarif Komisi Putaran',
+      status:'Status',
+      account:'Akun Pembayaran',
+      completed:'Waktu Pembayaran',
+      empty:'Belum ada riwayat komisi',
+      statusPaid:'Dibayar',
+      statusPending:'Menunggu',
+      statusVoid:'Dibatalkan',
+      statusNone:'Tidak Perlu Dibayar'
+    }
+
+  };
+
+
+  function referralHistoryText(key){
+
+    const lang =
+    REFERRAL_HISTORY_I18N[
+      currentLang
+    ]
+    ||
+    REFERRAL_HISTORY_I18N.zh;
+
+
+    return (
+      lang[key]
+      ||
+      REFERRAL_HISTORY_I18N.zh[key]
+      ||
+      key
+    );
+
+  }
+
+
+  function referralHistoryEscape(value){
+
+    return String(
+      value ?? ''
+    )
+    .replaceAll(
+      '&',
+      '&amp;'
+    )
+    .replaceAll(
+      '<',
+      '&lt;'
+    )
+    .replaceAll(
+      '>',
+      '&gt;'
+    )
+    .replaceAll(
+      '"',
+      '&quot;'
+    )
+    .replaceAll(
+      "'",
+      '&#039;'
+    );
+
+  }
+
+
+  function referralHistoryStatus(status){
+
+    if(status === 'paid'){
+      return referralHistoryText(
+        'statusPaid'
+      );
+    }
+
+
+    if(status === 'void'){
+      return referralHistoryText(
+        'statusVoid'
+      );
+    }
+
+
+    if(
+      status === 'pending'
+      ||
+      status === 'partial'
+    ){
+      return referralHistoryText(
+        'statusPending'
+      );
+    }
+
+
+    return referralHistoryText(
+      'statusNone'
+    );
+
+  }
+
+
+  function referralHistoryDate(value){
+
+    if(!value){
+      return '—';
+    }
+
+
+    const date =
+    new Date(
+      value
+    );
+
+
+    if(
+      Number.isNaN(
+        date.getTime()
+      )
+    ){
+      return '—';
+    }
+
+
+    return new Intl.DateTimeFormat(
+      currentLang === 'zh'
+      ?
+      'zh-CN'
+      :
+      'en-GB',
+      {
+        timeZone:'Asia/Yangon',
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit',
+        hour:'2-digit',
+        minute:'2-digit',
+        hour12:false
+      }
+    ).format(
+      date
+    );
+
+  }
+
+
+  function ensureReferralCommissionHistoryCard(){
+
+    let card =
+    $('agentReferralCommissionHistoryCard');
+
+
+    if(card){
+      return card;
+    }
+
+
+    const agentBox =
+    $('agentBox');
+
+
+    if(!agentBox){
+      return null;
+    }
+
+
+    card =
+    document.createElement(
+      'div'
+    );
+
+
+    card.id =
+    'agentReferralCommissionHistoryCard';
+
+
+    card.className =
+    'card hidden';
+
+
+    const liveCard =
+    $('agentCustomerRoundLiveCard');
+
+
+    if(
+      liveCard
+      &&
+      liveCard.parentNode
+      ===
+      agentBox
+    ){
+
+      liveCard.insertAdjacentElement(
+        'afterend',
+        card
+      );
+
+    }
+    else{
+
+      const referralCard =
+      $('agentReferralCard');
+
+
+      if(
+        referralCard
+        &&
+        referralCard.parentNode
+        ===
+        agentBox
+      ){
+
+        referralCard.insertAdjacentElement(
+          'afterend',
+          card
+        );
+
+      }
+      else{
+
+        agentBox.appendChild(
+          card
+        );
+
+      }
+
+    }
+
+
+    return card;
+
+  }
+
+
+  function renderReferralCommissionHistory(){
+
+    const card =
+    ensureReferralCommissionHistoryCard();
+
+
+    if(!card){
+      return;
+    }
+
+
+    const rows =
+    Array.isArray(
+      referralCommissionHistoryRows
+    )
+    ?
+    referralCommissionHistoryRows
+    :
+    [];
+
+
+    let totalDue = 0;
+    let totalPaid = 0;
+    let totalRemaining = 0;
+
+
+    rows.forEach(
+      row=>{
+
+        totalDue +=
+        number(
+          row.commission_due
+        );
+
+
+        totalPaid +=
+        number(
+          row.commission_paid
+        );
+
+
+        totalRemaining +=
+        number(
+          row.commission_remaining
+        );
+
+      }
+    );
+
+
+    const listHtml =
+    rows.length
+    ?
+    rows.map(
+      row=>{
+
+        const payout =
+        [
+          row.payout_bank_name_snapshot,
+          row.payout_account_name_snapshot,
+          row.payout_account_number_snapshot
+        ]
+        .filter(Boolean)
+        .join(
+          ' · '
+        )
+        ||
+        '—';
+
+
+        const roundTime =
+        row.round_code === '1030'
+        ?
+        '11:45'
+        :
+        row.round_code === '1530'
+        ?
+        '15:45'
+        :
+        (
+          row.round_code
+          ||
+          '—'
+        );
+
+
+        return `
+
+          <div
+            style="
+              background:#101011;
+              border:
+              1px solid rgba(214,168,63,.16);
+              border-radius:14px;
+              padding:13px;
+              margin-top:10px
+            ">
+
+            <div
+              style="
+                display:flex;
+                justify-content:space-between;
+                gap:10px;
+                align-items:flex-start
+              ">
+
+              <div
+                style="
+                  color:#efcf70;
+                  font-weight:900;
+                  font-size:14px
+                ">
+
+                ${referralHistoryEscape(
+                  row.round_date || '—'
+                )}
+
+                ·
+
+                ${referralHistoryEscape(
+                  roundTime
+                )}
+
+              </div>
+
+              <div
+                style="
+                  color:${
+                    row.status === 'paid'
+                    ?
+                    '#70d39d'
+                    :
+                    '#e8c86e'
+                  };
+                  font-size:10px;
+                  font-weight:900
+                ">
+
+                ${referralHistoryEscape(
+                  referralHistoryStatus(
+                    row.status
+                  )
+                )}
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="info"
+              style="margin-top:10px">
+
+              <div class="box">
+
+                <small>
+                  ${referralHistoryEscape(
+                    referralHistoryText(
+                      'confirmed'
+                    )
+                  )}
+                </small>
+
+                <strong>
+                  ${fmt(
+                    row.confirmed_customer_points
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="box">
+
+                <small>
+                  ${referralHistoryEscape(
+                    referralHistoryText(
+                      'rate'
+                    )
+                  )}
+                </small>
+
+                <strong>
+                  ${number(
+                    row.commission_rate_snapshot
+                  )}%
+                </strong>
+
+              </div>
+
+
+              <div class="box highlight">
+
+                <small>
+                  ${referralHistoryEscape(
+                    referralHistoryText(
+                      'due'
+                    )
+                  )}
+                </small>
+
+                <strong>
+                  ${fmt(
+                    row.commission_due
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="box">
+
+                <small>
+                  ${referralHistoryEscape(
+                    referralHistoryText(
+                      'paid'
+                    )
+                  )}
+                </small>
+
+                <strong>
+                  ${fmt(
+                    row.commission_paid
+                  )}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="note"
+              style="margin-top:10px">
+
+              ${referralHistoryEscape(
+                referralHistoryText(
+                  'account'
+                )
+              )}：
+
+              ${referralHistoryEscape(
+                payout
+              )}
+
+              ${
+                row.completed_at
+                ?
+                `
+
+                  <br>
+
+                  ${referralHistoryEscape(
+                    referralHistoryText(
+                      'completed'
+                    )
+                  )}：
+
+                  ${referralHistoryEscape(
+                    referralHistoryDate(
+                      row.completed_at
+                    )
+                  )}
+
+                `
+                :
+                ''
+              }
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join('')
+    :
+    `
+
+      <div class="settlementNotice">
+
+        ${referralHistoryEscape(
+          referralHistoryText(
+            'empty'
+          )
+        )}
+
+      </div>
+
+    `;
+
+
+    card.innerHTML = `
+
+      <div class="title">
+
+        ${referralHistoryEscape(
+          referralHistoryText(
+            'title'
+          )
+        )}
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="box highlight">
+
+          <small>
+            ${referralHistoryEscape(
+              referralHistoryText(
+                'due'
+              )
+            )}
+          </small>
+
+          <strong>
+            ${fmt(totalDue)}
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            ${referralHistoryEscape(
+              referralHistoryText(
+                'paid'
+              )
+            )}
+          </small>
+
+          <strong>
+            ${fmt(totalPaid)}
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            ${referralHistoryEscape(
+              referralHistoryText(
+                'remaining'
+              )
+            )}
+          </small>
+
+          <strong>
+            ${fmt(totalRemaining)}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div style="margin-top:12px">
+
+        ${listHtml}
+
+      </div>
+
+    `;
+
+
+    card.classList.remove(
+      'hidden'
+    );
+
+  }
+
+
+  async function loadReferralCommissionHistory(){
+
+    if(
+      referralCommissionHistoryLoading
+    ){
+      return;
+    }
+
+
+    if(
+      typeof agent
+      ===
+      'undefined'
+      ||
+      !agent
+    ){
+      return;
+    }
+
+
+    referralCommissionHistoryLoading =
+    true;
+
+
+    try{
+
+      const response =
+      await api(
+        '/rest/v1/rpc/get_agent_referral_commission_history',
+        {
+          method:'POST',
+
+          headers:{
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({})
+        }
+      );
+
+
+      if(!response.ok){
+
+        throw new Error(
+          'REFERRAL_COMMISSION_HISTORY_LOAD_FAILED'
+        );
+
+      }
+
+
+      const data =
+      await response.json();
+
+
+      referralCommissionHistoryRows =
+      Array.isArray(
+        data?.rows
+      )
+      ?
+      data.rows
+      :
+      [];
+
+
+      referralCommissionHistoryLoadedAt =
+      Date.now();
+
+
+      renderReferralCommissionHistory();
+
+    }
+    catch(error){
+
+      console.error(
+        'agent referral commission history',
+        error
+      );
+
+    }
+    finally{
+
+      referralCommissionHistoryLoading =
+      false;
+
+    }
+
+  }
+
+
+  function applyReferralCommissionHistory(){
+
+    const card =
+    ensureReferralCommissionHistoryCard();
+
+
+    if(!card){
+      return;
+    }
+
+
+    if(
+      typeof agent
+      ===
+      'undefined'
+      ||
+      !agent
+    ){
+
+      card.classList.add(
+        'hidden'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      referralCommissionHistoryLoadedAt
+      >
+      0
+    ){
+
+      renderReferralCommissionHistory();
+
+    }
+
+
+    const stale =
+    (
+      Date.now()
+      -
+      referralCommissionHistoryLoadedAt
+    )
+    >
+    10000;
+
+
+    if(
+      !referralCommissionHistoryLoading
+      &&
+      stale
+    ){
+
+      loadReferralCommissionHistory();
+
+    }
+
+  }
   function ensureSimpleCard(){
 
     let card =
@@ -2277,9 +3150,10 @@
   function applyAgentUx(){
 
     try{
-      applyReferralCard();
-            applyCustomerRoundLive();
-            translateAgentExtraUi();
+            applyReferralCard();
+      applyCustomerRoundLive();
+      applyReferralCommissionHistory();
+      translateAgentExtraUi();
             const betCard =
       cardByChild(
         'numberGrid'
