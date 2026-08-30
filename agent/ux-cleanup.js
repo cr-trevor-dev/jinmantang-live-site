@@ -1945,9 +1945,16 @@
 
       if(roundStatusEl){
 
-        roundStatusEl.textContent =
-        '仅供查看 · 不支持提交 / 修改';
-
+                roundStatusEl.textContent =
+        ({
+          zh:'仅供查看 · 不支持提交 / 修改',
+          my:'ကြည့်ရှုရန်သာ · တင်သွင်းခြင်း / ပြင်ဆင်ခြင်း မပြုနိုင်ပါ',
+          en:'View Only · Submission / Editing Disabled',
+          th:'ดูอย่างเดียว · ไม่รองรับการส่ง / แก้ไข',
+          ms:'Paparan Sahaja · Hantar / Ubah Tidak Dibenarkan',
+          vi:'Chỉ xem · Không thể gửi / chỉnh sửa',
+          id:'Hanya Lihat · Tidak Bisa Kirim / Ubah'
+        }[currentLang] || '仅供查看 · 不支持提交 / 修改');
         roundStatusEl.style.color =
         '#ff5b5b';
 
@@ -1961,9 +1968,16 @@
 
       if(serverNoteEl){
 
-        serverNoteEl.textContent =
-        '代理账号仅供查看直属客户数据，不支持提交或修改任何订单。';
-
+               serverNoteEl.textContent =
+        ({
+          zh:'代理账号仅供查看直属客户数据，不支持提交或修改任何订单。',
+          my:'ကိုယ်စားလှယ်အကောင့်သည် မိမိ၏ဖောက်သည်ဒေတာကို ကြည့်ရှုရန်သာဖြစ်ပြီး အော်ဒါများကို တင်သွင်းခြင်း သို့မဟုတ် ပြင်ဆင်ခြင်း မပြုနိုင်ပါ။',
+          en:'Agent accounts are for viewing assigned customer data only. Orders cannot be submitted or edited.',
+          th:'บัญชีตัวแทนใช้สำหรับดูข้อมูลลูกค้าในสังกัดเท่านั้น ไม่สามารถส่งหรือแก้ไขรายการได้',
+          ms:'Akaun ejen hanya untuk melihat data pelanggan sendiri. Pesanan tidak boleh dihantar atau diubah.',
+          vi:'Tài khoản đại lý chỉ dùng để xem dữ liệu khách hàng trực thuộc, không thể gửi hoặc chỉnh sửa đơn.',
+          id:'Akun agen hanya untuk melihat data pelanggan sendiri. Pesanan tidak dapat dikirim atau diubah.'
+        }[currentLang] || '代理账号仅供查看直属客户数据，不支持提交或修改任何订单。');
       }
       if(
         typeof currentRound
