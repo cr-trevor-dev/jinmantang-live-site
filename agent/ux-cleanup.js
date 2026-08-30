@@ -72,7 +72,299 @@
 
   }
 
+  function ensureReferralCard(){
 
+    let card =
+    $('agentReferralCard');
+
+
+    if(card){
+
+      return card;
+
+    }
+
+
+    const agentBox =
+    $('agentBox');
+
+
+    if(!agentBox){
+
+      return null;
+
+    }
+
+
+    card =
+    document.createElement(
+      'div'
+    );
+
+
+    card.id =
+    'agentReferralCard';
+
+
+    card.className =
+    'card hidden';
+
+
+    card.innerHTML = `
+
+      <div class="title">
+        我的专属推广链接
+      </div>
+
+
+      <div class="info">
+
+        <div
+          class="box highlight">
+
+          <small>
+            永久推广码
+          </small>
+
+          <strong
+            id="agentReferralCode">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        style="margin-top:12px">
+
+        <div
+          style="
+            color:#817b71;
+            font-size:10px;
+            margin-bottom:7px
+          ">
+          客户专属注册链接
+        </div>
+
+
+        <input
+          id="agentReferralLink"
+          type="text"
+          readonly>
+
+
+        <button
+          id="copyAgentReferralLink"
+          type="button">
+          复制专属注册链接
+        </button>
+
+
+        <div
+          id="agentReferralCopyMsg"
+          class="msg">
+        </div>
+
+      </div>
+
+
+      <div class="note">
+
+        此推广链接仅用于确认客户归属代理，
+        不包含代理佣金比例。
+
+      </div>
+
+    `;
+
+
+    const profileCard =
+    $('agentName')
+    ?.
+    closest(
+      '.card'
+    );
+
+
+    if(
+      profileCard
+      &&
+      profileCard.parentNode
+      ===
+      agentBox
+    ){
+
+      profileCard.insertAdjacentElement(
+        'afterend',
+        card
+      );
+
+    }
+    else{
+
+      agentBox.insertBefore(
+        card,
+        agentBox.firstChild
+      );
+
+    }
+
+
+    const copyButton =
+    $('copyAgentReferralLink');
+
+
+    if(copyButton){
+
+      copyButton.addEventListener(
+        'click',
+        async ()=>{
+
+          const linkInput =
+          $('agentReferralLink');
+
+          const msg =
+          $('agentReferralCopyMsg');
+
+
+          if(
+            !linkInput
+            ||
+            !linkInput.value
+          ){
+
+            return;
+
+          }
+
+
+          try{
+
+            await navigator.clipboard.writeText(
+              linkInput.value
+            );
+
+          }
+          catch(error){
+
+            linkInput.focus();
+
+            linkInput.select();
+
+            document.execCommand(
+              'copy'
+            );
+
+          }
+
+
+          if(msg){
+
+            msg.textContent =
+            '✓ 已复制专属注册链接';
+
+            msg.className =
+            'msg success';
+
+          }
+
+        }
+      );
+
+    }
+
+
+    return card;
+
+  }
+
+
+  function applyReferralCard(){
+
+    const card =
+    ensureReferralCard();
+
+
+    if(!card){
+
+      return;
+
+    }
+
+
+    if(
+      typeof agent
+      ===
+      'undefined'
+      ||
+      !agent
+    ){
+
+      card.classList.add(
+        'hidden'
+      );
+
+      return;
+
+    }
+
+
+    const code =
+    String(
+      agent.referral_code
+      ||
+      ''
+    )
+    .trim();
+
+
+    if(!code){
+
+      card.classList.add(
+        'hidden'
+      );
+
+      return;
+
+    }
+
+
+    const codeEl =
+    $('agentReferralCode');
+
+    const linkEl =
+    $('agentReferralLink');
+
+
+    if(codeEl){
+
+      codeEl.textContent =
+      code;
+
+    }
+
+
+    if(linkEl){
+
+      linkEl.value =
+      location.origin
+      +
+      '/customer/?ref='
+      +
+      encodeURIComponent(
+        code
+      );
+
+    }
+
+
+    card.classList.remove(
+      'hidden'
+    );
+
+  }
   function ensureSimpleCard(){
 
     let card =
@@ -740,7 +1032,7 @@
   function applyAgentUx(){
 
     try{
-
+      applyReferralCard();
       if(
         typeof currentRound
         ===
