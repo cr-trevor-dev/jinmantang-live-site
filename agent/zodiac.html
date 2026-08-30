@@ -3758,7 +3758,7 @@ async function startAgent(){
     const r =
     await api(
       '/rest/v1/agents'+
-      '?select=id,display_name,commission_rate,status'+
+            '?select=id,display_name,commission_rate,status,referral_code'+
       '&limit=1'
     );
 
