@@ -8783,8 +8783,9 @@ c=document.getElementById('countdown');
 
 if(left<=0||currentRound.status!=='open'){
 
-s.textContent=tr('closed');
+s.textContent='仅供查看 · 本期已截止';
 s.className='statusClosed';
+s.style.color='#ff5b5b';
 
 c.textContent=tr('closedShort');
 
@@ -8792,8 +8793,9 @@ disableInputs(true);
 return
 }
 
-s.textContent=tr('canSubmit');
-s.className='statusOpen';
+s.textContent='仅供查看 · 不支持提交 / 修改';
+s.className='statusClosed';
+s.style.color='#ff5b5b';
 
 let ts=Math.max(0,Math.floor(left/1000));
 
@@ -8811,8 +8813,7 @@ h>0
 ':'+String(sec).padStart(2,'0')
 :m+' '+tr('minutes')+' '+sec+' '+tr('seconds');
 
-if(agent&&agent.status==='active'&&!isSaving)
-disableInputs(false)
+disableInputs(true)
 }
 
 function disableInputs(disabled){
