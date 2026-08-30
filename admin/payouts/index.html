@@ -1,0 +1,1696 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<title>金满堂 · 客户派彩</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 38%,
+    #070708 100%
+  );
+  color:#f7f0df;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif;
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:22px 15px 55px;
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.mark{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:27px;
+  font-weight:900;
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:
+  linear-gradient(
+    145deg,
+    #382506,
+    #100d08
+  );
+}
+
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889;
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px;
+}
+
+.card{
+  background:
+  linear-gradient(
+    180deg,
+    #161616,
+    #0b0b0c
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.30);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.title{
+  font-size:17px;
+  font-weight:900;
+  color:#dfc575;
+  margin-bottom:14px;
+}
+
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:
+  repeat(3,1fr);
+  gap:9px;
+}
+
+.summaryBox{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:13px;
+}
+
+.summaryBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+.summaryBox strong{
+  display:block;
+  color:#ebcd72;
+  font-size:20px;
+}
+
+.notice{
+  margin-top:13px;
+  padding:13px;
+  border-radius:13px;
+  background:#15120b;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  color:#a99c79;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.item{
+  margin-top:12px;
+  padding:15px;
+  border-radius:16px;
+  background:#0e0e0f;
+  border:
+  1px solid
+  rgba(214,168,63,.20);
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:11px;
+}
+
+.name{
+  font-size:17px;
+  font-weight:900;
+  color:#efd477;
+}
+
+.meta{
+  color:#918878;
+  font-size:11px;
+  line-height:1.7;
+  margin-top:5px;
+}
+
+.badge{
+  padding:6px 9px;
+  border-radius:99px;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.badge.pending{
+  background:#352d13;
+  color:#e2c870;
+}
+
+.badge.partial{
+  background:#352d13;
+  color:#e2c870;
+}
+
+.badge.paid{
+  background:#153124;
+  color:#79d6a2;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:8px 0;
+  border-bottom:
+  1px solid
+  rgba(255,255,255,.05);
+  font-size:12px;
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.row span{
+  color:#777166;
+}
+
+.row strong{
+  color:#e9dfc7;
+  text-align:right;
+  word-break:break-all;
+}
+
+.row strong.amount{
+  color:#efd477;
+  font-size:20px;
+}
+
+.account{
+  margin-top:11px;
+  padding:11px;
+  border-radius:11px;
+  background:#15120d;
+  border:
+  1px solid
+  rgba(214,168,63,.14);
+  color:#a99a74;
+  font-size:11px;
+  line-height:1.7;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:13px;
+  margin-top:13px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  background:
+  linear-gradient(
+    180deg,
+    #f1d784,
+    #b47d20
+  );
+  color:#171109;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.empty{
+  text-align:center;
+  color:#7f786b;
+  padding:24px 10px;
+  font-size:12px;
+}
+
+.msg{
+  text-align:center;
+  min-height:18px;
+  margin-top:10px;
+  color:#aaa18d;
+  font-size:12px;
+}
+
+.msg.ok{
+  color:#70d49c;
+}
+
+.msg.err{
+  color:#e89191;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
+  font-size:10px;
+  margin-top:24px;
+}
+
+@media(max-width:650px){
+
+  .summary{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      CUSTOMER PAYOUT
+    </div>
+
+  </div>
+
+
+  <a
+    class="back"
+    href="/admin/">
+    ← 返回管理中心
+  </a>
+
+
+  <div
+    id="authError"
+    class="card hidden">
+
+    <div class="title">
+      无法进入客户派彩
+    </div>
+
+    <div class="msg err">
+      请先登录管理员账号并完成二次验证。
+    </div>
+
+  </div>
+
+
+  <main
+    id="mainBox"
+    class="hidden">
+
+
+    <section class="card">
+
+      <div class="title">
+        派彩概况
+      </div>
+
+
+      <div class="summary">
+
+        <div class="summaryBox">
+
+          <small>
+            待派彩人数
+          </small>
+
+          <strong id="pendingCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="summaryBox">
+
+          <small>
+            当前待派总额
+          </small>
+
+          <strong id="pendingAmount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="summaryBox">
+
+          <small>
+            已完成派彩
+          </small>
+
+          <strong id="paidCount">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="notice">
+
+        只有现实中已经完成 KPay / 银行转账后，
+        才点击“已完成实际派彩”。
+
+        点击后系统会正式记录派彩交易，
+        客户页面会自动从“待派彩”更新为“已派彩”。
+
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div class="title">
+        待派彩
+      </div>
+
+      <div id="pendingList">
+
+        <div class="empty">
+          正在读取...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div class="title">
+        已完成记录
+      </div>
+
+      <div id="historyList">
+
+        <div class="empty">
+          正在读取...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <div
+      id="pageMsg"
+      class="msg">
+    </div>
+
+  </main>
+
+
+  <div class="foot">
+    © JIN MANTANG · ADMIN CUSTOMER PAYOUT
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE =
+location.origin
++
+'/supabase';
+
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+let token =
+localStorage.getItem(
+  'jmt_access_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_access_token'
+)
+||
+'';
+
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
+
+
+let rows =
+[];
+
+
+let refreshPromise =
+null;
+
+
+const ZODIACS =
+[
+  '鼠',
+  '牛',
+  '虎',
+  '兔',
+  '龙',
+  '蛇',
+  '马',
+  '羊',
+  '猴',
+  '鸡',
+  '狗',
+  '猪'
+];
+
+
+function money(value){
+
+  return new Intl.NumberFormat(
+    'en-US',
+    {
+      maximumFractionDigits:0
+    }
+  )
+  .format(
+    Number(
+      value
+      ||
+      0
+    )
+  );
+
+}
+
+
+function esc(value){
+
+  return String(
+    value
+    ??
+    ''
+  )
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
+
+}
+
+
+function zodiacName(code){
+
+  return (
+    ZODIACS[
+      Number(
+        code
+        ||
+        0
+      )
+      -
+      1
+    ]
+    ||
+    '—'
+  );
+
+}
+
+
+function periodName(code){
+
+  if(code === '1030'){
+    return '上午 11:45';
+  }
+
+  if(code === '1530'){
+    return '下午 3:45';
+  }
+
+  return code || '—';
+
+}
+
+
+function jwt(){
+
+  try{
+
+    let p =
+    token
+    .split('.')[1]
+    .replace(/-/g,'+')
+    .replace(/_/g,'/');
+
+    while(
+      p.length % 4
+    ){
+      p += '=';
+    }
+
+    return JSON.parse(
+      decodeURIComponent(
+        atob(p)
+        .split('')
+        .map(
+          c =>
+          '%'
+          +
+          (
+            '00'
+            +
+            c
+            .charCodeAt(0)
+            .toString(16)
+          )
+          .slice(-2)
+        )
+        .join('')
+      )
+    );
+
+  }
+  catch{
+
+    return {};
+
+  }
+
+}
+
+
+async function refreshSession(){
+
+  if(!refreshToken){
+    return false;
+  }
+
+  if(refreshPromise){
+    return refreshPromise;
+  }
+
+  refreshPromise =
+  (
+    async()=>{
+
+      try{
+
+        const res =
+        await fetch(
+
+          BASE
+          +
+          '/auth/v1/token?grant_type=refresh_token',
+
+          {
+
+            method:'POST',
+
+            headers:{
+
+              apikey:
+              KEY,
+
+              'Content-Type':
+              'application/json'
+
+            },
+
+            body:
+            JSON.stringify({
+
+              refresh_token:
+              refreshToken
+
+            })
+
+          }
+
+        );
+
+
+        if(!res.ok){
+          return false;
+        }
+
+
+        const data =
+        await res.json();
+
+
+        if(!data.access_token){
+          return false;
+        }
+
+
+        token =
+        data.access_token;
+
+
+        localStorage.setItem(
+          'jmt_access_token',
+          token
+        );
+
+
+        sessionStorage.setItem(
+          'jmt_access_token',
+          token
+        );
+
+
+        if(data.refresh_token){
+
+          refreshToken =
+          data.refresh_token;
+
+
+          localStorage.setItem(
+            'jmt_refresh_token',
+            refreshToken
+          );
+
+
+          sessionStorage.setItem(
+            'jmt_refresh_token',
+            refreshToken
+          );
+
+        }
+
+
+        return true;
+
+      }
+      catch{
+
+        return false;
+
+      }
+      finally{
+
+        refreshPromise =
+        null;
+
+      }
+
+    }
+  )();
+
+
+  return refreshPromise;
+
+}
+
+
+async function api(
+  path,
+  options={}
+){
+
+  const request =
+  ()=>fetch(
+
+    BASE
+    +
+    path,
+
+    {
+
+      ...options,
+
+      headers:{
+
+        apikey:
+        KEY,
+
+        Authorization:
+        'Bearer '
+        +
+        token,
+
+        ...(
+          options.headers
+          ||
+          {}
+        )
+
+      }
+
+    }
+
+  );
+
+
+  let res =
+  await request();
+
+
+  if(
+    res.status
+    !==
+    401
+  ){
+    return res;
+  }
+
+
+  if(
+    !await refreshSession()
+  ){
+    return res;
+  }
+
+
+  return request();
+
+}
+
+
+async function verifyAdmin(){
+
+  if(!token){
+    return false;
+  }
+
+
+  if(
+    jwt().aal
+    !==
+    'aal2'
+  ){
+    return false;
+  }
+
+
+  try{
+
+    const userRes =
+    await api(
+      '/auth/v1/user'
+    );
+
+
+    if(!userRes.ok){
+      return false;
+    }
+
+
+    const user =
+    await userRes.json();
+
+
+    const adminRes =
+    await api(
+
+      '/rest/v1/admin_users'
+      +
+      '?auth_user_id=eq.'
+      +
+      encodeURIComponent(
+        user.id
+      )
+      +
+      '&select=auth_user_id'
+      +
+      '&limit=1'
+
+    );
+
+
+    if(!adminRes.ok){
+      return false;
+    }
+
+
+    const data =
+    await adminRes.json();
+
+
+    return (
+      Array.isArray(data)
+      &&
+      data.length > 0
+    );
+
+  }
+  catch{
+
+    return false;
+
+  }
+
+}
+
+
+async function parseResponse(res){
+
+  const text =
+  await res.text();
+
+
+  let data =
+  null;
+
+
+  try{
+
+    data =
+    text
+    ?
+    JSON.parse(text)
+    :
+    null;
+
+  }
+  catch{
+
+    data =
+    text;
+
+  }
+
+
+  if(!res.ok){
+
+    throw new Error(
+
+      data?.message
+      ||
+      data?.error
+      ||
+      text
+      ||
+      'REQUEST_FAILED'
+
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+function statusText(status){
+
+  if(status === 'paid'){
+    return '已派彩';
+  }
+
+  if(status === 'partial'){
+    return '部分派彩';
+  }
+
+  return '待派彩';
+
+}
+
+
+function payoutHtml(row){
+
+  const open =
+  row.payout_status
+  !==
+  'paid'
+  &&
+  Number(
+    row.payout_remaining
+    ||
+    0
+  )
+  >
+  0;
+
+
+  return `
+
+    <div class="item">
+
+      <div class="head">
+
+        <div>
+
+          <div class="name">
+            ${esc(row.display_name || '客户')}
+          </div>
+
+          <div class="meta">
+
+            ${esc(row.customer_code || '')}
+
+            ${
+              row.username
+              ?
+              ' · @'
+              +
+              esc(row.username)
+              :
+              ''
+            }
+
+            ${
+              row.phone
+              ?
+              ' · '
+              +
+              esc(row.phone)
+              :
+              ''
+            }
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="badge ${esc(row.payout_status)}">
+
+          ${esc(statusText(row.payout_status))}
+
+        </div>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          对应期数
+        </span>
+
+        <strong>
+
+          ${esc(row.round_date || '—')}
+          ·
+          ${esc(periodName(row.round_code))}
+
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          开奖生肖
+        </span>
+
+        <strong>
+          ${esc(zodiacName(row.result_number))}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          命中金额
+        </span>
+
+        <strong>
+          ${money(row.winning_points)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          应派彩
+        </span>
+
+        <strong>
+          ${money(row.payout_due)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          已派彩
+        </span>
+
+        <strong>
+          ${money(row.payout_paid)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          剩余待派
+        </span>
+
+        <strong class="amount">
+          ${money(row.payout_remaining)}
+        </strong>
+
+      </div>
+
+
+      <div class="account">
+
+        收款方式：
+        ${esc(
+          String(
+            row.payout_method_type_snapshot
+            ||
+            ''
+          )
+          .toUpperCase()
+          ||
+          '—'
+        )}
+
+        <br>
+
+        收款户名：
+        ${esc(
+          row.payout_account_name_snapshot
+          ||
+          '—'
+        )}
+
+        <br>
+
+        收款账号：
+        ${esc(
+          row.payout_account_number_snapshot
+          ||
+          '—'
+        )}
+
+        ${
+          row.payout_bank_name_snapshot
+          ?
+          '<br>银行：'
+          +
+          esc(
+            row.payout_bank_name_snapshot
+          )
+          :
+          ''
+        }
+
+      </div>
+
+
+      ${
+        open
+        ?
+        `
+
+          <button
+            type="button"
+            onclick="completePayout(
+              '${esc(row.settlement_id)}',
+              ${Number(row.payout_remaining || 0)}
+            )">
+
+            已完成实际派彩
+            ${money(row.payout_remaining)}
+
+          </button>
+
+        `
+        :
+        ''
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+function render(){
+
+  const pending =
+  rows.filter(
+    row =>
+    row.payout_status
+    !==
+    'paid'
+    &&
+    Number(
+      row.payout_remaining
+      ||
+      0
+    )
+    >
+    0
+  );
+
+
+  const paid =
+  rows.filter(
+    row =>
+    row.payout_status
+    ===
+    'paid'
+  );
+
+
+  document
+  .getElementById(
+    'pendingCount'
+  )
+  .textContent =
+  pending.length;
+
+
+  document
+  .getElementById(
+    'pendingAmount'
+  )
+  .textContent =
+  money(
+    pending.reduce(
+      (
+        sum,
+        row
+      ) =>
+      sum
+      +
+      Number(
+        row.payout_remaining
+        ||
+        0
+      ),
+      0
+    )
+  );
+
+
+  document
+  .getElementById(
+    'paidCount'
+  )
+  .textContent =
+  paid.length;
+
+
+  document
+  .getElementById(
+    'pendingList'
+  )
+  .innerHTML =
+  pending.length
+  ?
+  pending
+  .map(
+    payoutHtml
+  )
+  .join('')
+  :
+  `
+    <div class="empty">
+      当前没有待派彩客户
+    </div>
+  `;
+
+
+  document
+  .getElementById(
+    'historyList'
+  )
+  .innerHTML =
+  paid.length
+  ?
+  paid
+  .map(
+    payoutHtml
+  )
+  .join('')
+  :
+  `
+    <div class="empty">
+      暂无已完成派彩记录
+    </div>
+  `;
+
+}
+
+
+async function loadAll(){
+
+  setMessage(
+    '正在刷新...'
+  );
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_list_customer_payouts',
+
+      {
+
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:'{}'
+
+      }
+
+    );
+
+
+    const data =
+    await parseResponse(
+      res
+    );
+
+
+    rows =
+    Array.isArray(
+      data?.rows
+    )
+    ?
+    data.rows
+    :
+    [];
+
+
+    render();
+
+
+    setMessage(
+      '资料已更新',
+      'ok'
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    setMessage(
+      translateError(
+        error.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
+async function completePayout(
+  settlementId,
+  amount
+){
+
+  const row =
+  rows.find(
+    item =>
+    item.settlement_id
+    ===
+    settlementId
+  );
+
+
+  if(!row){
+    return;
+  }
+
+
+  const text =
+  '请再次确认：\n\n'
+  +
+  '客户：'
+  +
+  (
+    row.display_name
+    ||
+    row.customer_code
+  )
+  +
+  '\n'
+  +
+  '实际派彩金额：'
+  +
+  money(amount)
+  +
+  '\n'
+  +
+  '收款账户：'
+  +
+  (
+    row.payout_account_name_snapshot
+    ||
+    ''
+  )
+  +
+  ' · '
+  +
+  (
+    row.payout_account_number_snapshot
+    ||
+    ''
+  )
+  +
+  '\n\n'
+  +
+  '只有现实中已经完成转账后才能确认。';
+
+
+  if(
+    !window.confirm(
+      text
+    )
+  ){
+    return;
+  }
+
+
+  setMessage(
+    '正在登记派彩...'
+  );
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_record_customer_payout',
+
+      {
+
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+
+          p_settlement_id:
+          settlementId,
+
+          p_amount:
+          Number(amount),
+
+          p_admin_note:
+          '管理员确认实际派彩完成'
+
+        })
+
+      }
+
+    );
+
+
+    await parseResponse(
+      res
+    );
+
+
+    await loadAll();
+
+
+    setMessage(
+      '已正式记录为派彩完成。',
+      'ok'
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    setMessage(
+      translateError(
+        error.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
+function translateError(message){
+
+  const text =
+  String(
+    message
+    ||
+    ''
+  );
+
+
+  if(
+    text.includes(
+      'ADMIN_AAL2_REQUIRED'
+    )
+  ){
+
+    return '管理员二次验证已经失效，请返回管理中心重新验证。';
+
+  }
+
+
+  if(
+    text.includes(
+      'CUSTOMER_SETTLEMENT_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到这条客户结算。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYOUT_ALREADY_COMPLETED'
+    )
+  ){
+
+    return '这笔派彩已经完成，请刷新页面。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYOUT_METHOD_REQUIRED'
+    )
+  ){
+
+    return '客户尚未绑定可用收款方式，请先联系客服处理。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYOUT_EXCEEDS_REMAINING'
+    )
+  ){
+
+    return '派彩金额超过当前剩余应派金额。';
+
+  }
+
+
+  return (
+    text
+    ||
+    '操作失败，请重新尝试。'
+  );
+
+}
+
+
+function setMessage(
+  text,
+  type=''
+){
+
+  const el =
+  document.getElementById(
+    'pageMsg'
+  );
+
+
+  el.textContent =
+  text;
+
+
+  el.className =
+  'msg'
+  +
+  (
+    type
+    ?
+    ' '
+    +
+    type
+    :
+    ''
+  );
+
+}
+
+
+(async()=>{
+
+  if(
+    !await verifyAdmin()
+  ){
+
+    document
+    .getElementById(
+      'authError'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+    return;
+
+  }
+
+
+  document
+  .getElementById(
+    'mainBox'
+  )
+  .classList
+  .remove(
+    'hidden'
+  );
+
+
+  await loadAll();
+
+
+  setInterval(
+    loadAll,
+    15000
+  );
+
+})();
+
+</script>
+
+</body>
+
+</html>
