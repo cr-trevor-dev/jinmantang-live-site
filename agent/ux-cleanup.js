@@ -199,7 +199,23 @@
       'Số tiền chờ xác nhận',
       'Jumlah Menunggu'
     ],
+    '本期佣金率':[
+      'ယခုအကြိမ် ကော်မရှင်နှုန်း',
+      'Round Commission Rate',
+      'อัตราคอมมิชชั่นรอบนี้',
+      'Kadar Komisen Pusingan Ini',
+      'Tỷ lệ hoa hồng kỳ này',
+      'Tarif Komisi Putaran Ini'
+    ],
 
+    '当前正式佣金':[
+      'လက်ရှိ အတည်ပြုကော်မရှင်',
+      'Current Confirmed Commission',
+      'ค่าคอมมิชชั่นที่ยืนยันแล้ว',
+      'Komisen Sah Semasa',
+      'Hoa hồng chính thức hiện tại',
+      'Komisi Resmi Saat Ini'
+    ],
     '当前暂无直属客户。':[
       'လက်ရှိ တိုက်ရိုက်ဖောက်သည် မရှိသေးပါ။',
       'No direct customers yet.',
@@ -712,8 +728,11 @@
   let customerRoundLiveLoadedAt =
   0;
 
-  let customerRoundLiveRows =
+    let customerRoundLiveRows =
   [];
+
+  let customerRoundCommission =
+  null;
 
 
   function ensureCustomerRoundLiveCard(){
@@ -1020,11 +1039,23 @@
     );
 
 
-    let confirmedTotal =
+        let confirmedTotal =
     0;
 
     let pendingTotal =
     0;
+
+    const commissionRate =
+    number(
+      customerRoundCommission
+      ?.commission_rate_snapshot
+    );
+
+    const commissionDue =
+    number(
+      customerRoundCommission
+      ?.commission_due
+    );
 
 
     customers.forEach(
@@ -1090,7 +1121,32 @@
             </strong>
 
           </div>
+          <div
+            class="box">
 
+            <small>
+              本期佣金率
+            </small>
+
+            <strong>
+              ${commissionRate}%
+            </strong>
+
+          </div>
+
+
+          <div
+            class="box highlight">
+
+            <small>
+              当前正式佣金
+            </small>
+
+            <strong>
+              ${fmt(commissionDue)}
+            </strong>
+
+          </div>
         </div>
 
       `;
