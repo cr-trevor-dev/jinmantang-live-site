@@ -730,7 +730,7 @@ button:active{
   <div class="card">
 
        <div class="title">
-      本期代理财务状态
+      代理直属客户 · 本期财务状态
     </div>
 
     <div id="agentList">
@@ -1751,7 +1751,7 @@ function renderAgents(
 
     box.innerHTML =
     '<div class="empty">'+
-    '本期暂时没有代理数据'+
+    '本期暂时没有代理直属客户数据'+
     '</div>';
 
 
@@ -1839,7 +1839,7 @@ function renderAgents(
 
             <div class="rate">
 
-              代理比例：
+              本期佣金率：
               ${formatRate(rate)}%
 
             </div>
@@ -1899,7 +1899,7 @@ function renderAgents(
         <button
           class="dark detailButton"
           onclick="toggleAgentDetail('${a.agent_id}',this)">
-          查看十二生肖明细
+          查看直属客户十二生肖明细
         </button>
 
 
@@ -1988,7 +1988,7 @@ async function toggleAgentDetail(
 
 
     button.textContent =
-    '查看十二生肖明细';
+    '查看直属客户十二生肖明细';
 
 
     return;
@@ -2002,7 +2002,7 @@ async function toggleAgentDetail(
 
 
   button.textContent =
-  '收起十二生肖明细';
+  '收起直属客户十二生肖明细';
 
 
   if(
@@ -2023,19 +2023,26 @@ async function toggleAgentDetail(
 
   try{
 
-    const r =
+        const r =
     await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        currentRound.id
-      )+
-      '&agent_id=eq.'+
-      encodeURIComponent(
-        agentId
-      )+
-      '&select=number_code,points,pending_points,confirmed_points'+
-      '&order=number_code.asc'
+      '/rest/v1/rpc/admin_agent_customer_round_detail',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_round_id:
+          currentRound.id,
+
+          p_agent_id:
+          agentId
+        })
+      }
     );
 
 
@@ -2048,8 +2055,18 @@ async function toggleAgentDetail(
     }
 
 
-    const rows =
+    const data =
     await r.json();
+
+
+    const rows =
+    Array.isArray(
+      data?.rows
+    )
+    ?
+    data.rows
+    :
+    [];
 
 
     const rowMap =
