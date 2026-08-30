@@ -8803,6 +8803,10 @@ async function refreshFinance(
     paymentReviewLoading
     ||
     settlementLoading
+    ||
+    referralCommissionBusy
+    ||
+    referralCommissionLoading
   ){
 
     return;
@@ -8816,6 +8820,11 @@ async function refreshFinance(
 
 
   await loadSettlementData(
+    showMessage
+  );
+
+
+  await loadReferralCommissions(
     showMessage
   );
 
