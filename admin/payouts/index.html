@@ -388,7 +388,7 @@ button:disabled{
         <div class="summaryBox">
 
           <small>
-            待派彩人数
+            待派彩笔数
           </small>
 
           <strong id="pendingCount">
@@ -414,7 +414,7 @@ button:disabled{
         <div class="summaryBox">
 
           <small>
-            已完成派彩
+            已完成笔数
           </small>
 
           <strong id="paidCount">
@@ -429,7 +429,7 @@ button:disabled{
       <div class="notice">
 
         只有现实中已经完成 KPay / 银行转账后，
-        才点击“已完成实际派彩”。
+        才点击“我已实际转账 · 确认登记”。
 
         点击后系统会正式记录派彩交易，
         客户页面会自动从“待派彩”更新为“已派彩”。
@@ -1202,7 +1202,7 @@ function payoutHtml(row){
               ${Number(row.payout_remaining || 0)}
             )">
 
-            已完成实际派彩
+            我已实际转账 · 确认登记
             ${money(row.payout_remaining)}
 
           </button>
