@@ -1,4 +1,447 @@
 (()=>{
+    /* =========================================================
+     AGENT REFERRAL
+  ========================================================= */
+
+  const REFERRAL_STORAGE_KEY =
+  'jmt_customer_referral_v1';
+
+  const REFERRAL_MAX_AGE =
+  7
+  *
+  24
+  *
+  60
+  *
+  60
+  *
+  1000;
+
+
+  function validReferralCode(value){
+
+    return /^JMA-[A-F0-9]{10}$/
+    .test(
+      String(
+        value
+        ||
+        ''
+      )
+      .trim()
+      .toUpperCase()
+    );
+
+  }
+
+
+  function readStoredReferral(){
+
+    try{
+
+      const raw =
+      localStorage.getItem(
+        REFERRAL_STORAGE_KEY
+      );
+
+      if(!raw){
+        return '';
+      }
+
+
+      const data =
+      JSON.parse(
+        raw
+      );
+
+
+      const code =
+      String(
+        data?.code
+        ||
+        ''
+      )
+      .trim()
+      .toUpperCase();
+
+
+      const savedAt =
+      Number(
+        data?.saved_at
+        ||
+        0
+      );
+
+
+      if(
+        !validReferralCode(
+          code
+        )
+        ||
+        !savedAt
+        ||
+        Date.now()
+        -
+        savedAt
+        >
+        REFERRAL_MAX_AGE
+      ){
+
+        localStorage.removeItem(
+          REFERRAL_STORAGE_KEY
+        );
+
+        return '';
+
+      }
+
+
+      return code;
+
+    }
+    catch{
+
+      localStorage.removeItem(
+        REFERRAL_STORAGE_KEY
+      );
+
+      return '';
+
+    }
+
+  }
+
+
+  function captureReferral(){
+
+    let stored =
+    readStoredReferral();
+
+
+    if(stored){
+      return stored;
+    }
+
+
+    const fromUrl =
+    String(
+      new URLSearchParams(
+        location.search
+      )
+      .get(
+        'ref'
+      )
+      ||
+      ''
+    )
+    .trim()
+    .toUpperCase();
+
+
+    if(
+      !validReferralCode(
+        fromUrl
+      )
+    ){
+
+      return '';
+
+    }
+
+
+    localStorage.setItem(
+
+      REFERRAL_STORAGE_KEY,
+
+      JSON.stringify({
+
+        code:
+        fromUrl,
+
+        saved_at:
+        Date.now()
+
+      })
+
+    );
+
+
+    return fromUrl;
+
+  }
+
+
+  const referralCode =
+  captureReferral();
+
+
+  if(referralCode){
+
+    const referralFetch =
+    window.fetch.bind(
+      window
+    );
+
+
+    window.fetch =
+    async function(
+      input,
+      init={}
+    ){
+
+      const url =
+      typeof input
+      ===
+      'string'
+      ?
+      input
+      :
+      input?.url
+      ||
+      '';
+
+
+      let nextInit =
+      init;
+
+
+      let authAction =
+      '';
+
+
+      if(
+        url.includes(
+          '/functions/v1/customer-auth'
+        )
+        &&
+        typeof init?.body
+        ===
+        'string'
+      ){
+
+        try{
+
+          const body =
+          JSON.parse(
+            init.body
+          );
+
+
+          authAction =
+          String(
+            body?.action
+            ||
+            ''
+          );
+
+
+          if(
+            authAction
+            ===
+            'register'
+          ){
+
+            body.referral_code =
+            referralCode;
+
+
+            nextInit = {
+
+              ...init,
+
+              body:
+              JSON.stringify(
+                body
+              )
+
+            };
+
+          }
+
+        }
+        catch{}
+
+      }
+
+
+      const response =
+      await referralFetch(
+        input,
+        nextInit
+      );
+
+
+      if(
+        response.ok
+        &&
+        (
+          authAction
+          ===
+          'register'
+          ||
+          authAction
+          ===
+          'login'
+        )
+      ){
+
+        localStorage.removeItem(
+          REFERRAL_STORAGE_KEY
+        );
+
+      }
+
+
+      return response;
+
+    };
+
+
+    const oldTranslateError =
+    window.translateError;
+
+
+    if(
+      typeof oldTranslateError
+      ===
+      'function'
+    ){
+
+      window.translateError =
+      function(message){
+
+        const text =
+        String(
+          message
+          ||
+          ''
+        );
+
+
+        if(
+          text.includes(
+            'REFERRAL_INVALID'
+          )
+        ){
+
+          return '此代理推广链接无效，请重新获取正确链接。';
+
+        }
+
+
+        if(
+          text.includes(
+            'REFERRAL_INACTIVE'
+          )
+        ){
+
+          return '此代理推广链接当前不可用，请联系平台客服。';
+
+        }
+
+
+        return oldTranslateError(
+          message
+        );
+
+      };
+
+    }
+
+
+    window.addEventListener(
+
+      'load',
+
+      ()=>{
+
+        if(
+          typeof token
+          !==
+          'undefined'
+          &&
+          !token
+          &&
+          typeof showAuth
+          ===
+          'function'
+        ){
+
+          showAuth(
+            'register'
+          );
+
+        }
+
+
+        const panel =
+        document.getElementById(
+          'registerPanel'
+        );
+
+
+        if(
+          panel
+          &&
+          !document.getElementById(
+            'agentReferralNotice'
+          )
+        ){
+
+          const notice =
+          document.createElement(
+            'div'
+          );
+
+
+          notice.id =
+          'agentReferralNotice';
+
+
+          notice.className =
+          'note';
+
+
+          notice.style.margin =
+          '0 0 14px';
+
+
+          notice.textContent =
+          '已通过代理专属邀请进入。注册成功后，账户将自动绑定所属代理。';
+
+
+          const title =
+          panel.querySelector(
+            '.cardTitle'
+          );
+
+
+          if(
+            title
+            &&
+            title.nextSibling
+          ){
+
+            panel.insertBefore(
+              notice,
+              title.nextSibling
+            );
+
+          }
+          else{
+
+            panel.prepend(
+              notice
+            );
+
+          }
+
+        }
+
+      }
+
+    );
+
+  }
   const $ =
   id =>
   document.getElementById(id);
