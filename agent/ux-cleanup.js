@@ -71,7 +71,345 @@
     }
 
   }
+  const AGENT_EXTRA_LANG_INDEX = {
+    my:0,
+    en:1,
+    th:2,
+    ms:3,
+    vi:4,
+    id:5
+  };
 
+
+  const AGENT_EXTRA_TEXT = {
+
+    '我的专属推广链接':[
+      'ကျွန်ုပ်၏ သီးသန့်ဖိတ်ခေါ်လင့်ခ်',
+      'My Referral Link',
+      'ลิงก์แนะนำส่วนตัว',
+      'Pautan Rujukan Saya',
+      'Liên kết giới thiệu của tôi',
+      'Tautan Referral Saya'
+    ],
+
+    '永久推广码':[
+      'အမြဲတမ်းဖိတ်ခေါ်ကုဒ်',
+      'Permanent Referral Code',
+      'รหัสแนะนำถาวร',
+      'Kod Rujukan Kekal',
+      'Mã giới thiệu cố định',
+      'Kode Referral Permanen'
+    ],
+
+    '客户专属注册链接':[
+      'ဖောက်သည်စာရင်းသွင်းရန် သီးသန့်လင့်ခ်',
+      'Customer Registration Link',
+      'ลิงก์สมัครลูกค้า',
+      'Pautan Pendaftaran Pelanggan',
+      'Liên kết đăng ký khách hàng',
+      'Tautan Pendaftaran Pelanggan'
+    ],
+
+    '复制专属注册链接':[
+      'စာရင်းသွင်းလင့်ခ် ကူးယူရန်',
+      'Copy Registration Link',
+      'คัดลอกลิงก์สมัคร',
+      'Salin Pautan Pendaftaran',
+      'Sao chép liên kết đăng ký',
+      'Salin Tautan Pendaftaran'
+    ],
+
+    '✓ 已复制专属注册链接':[
+      '✓ စာရင်းသွင်းလင့်ခ်ကို ကူးယူပြီးပါပြီ',
+      '✓ Registration link copied',
+      '✓ คัดลอกลิงก์สมัครแล้ว',
+      '✓ Pautan pendaftaran disalin',
+      '✓ Đã sao chép liên kết đăng ký',
+      '✓ Tautan pendaftaran disalin'
+    ],
+
+    '此推广链接仅用于确认客户归属代理，':[
+      'ဤလင့်ခ်သည် ဖောက်သည်၏ ကိုယ်စားလှယ်အဖြစ် သတ်မှတ်ရန်သာ အသုံးပြုသည်။',
+      'This link is only used to assign the customer to the agent.',
+      'ลิงก์นี้ใช้เพื่อระบุว่าลูกค้าอยู่ภายใต้ตัวแทนเท่านั้น',
+      'Pautan ini hanya digunakan untuk menetapkan pelanggan kepada ejen.',
+      'Liên kết này chỉ dùng để xác định khách hàng thuộc đại lý.',
+      'Tautan ini hanya digunakan untuk menetapkan pelanggan ke agen.'
+    ],
+
+    '不包含代理佣金比例。':[
+      'ကော်မရှင်ရာခိုင်နှုန်း မပါဝင်ပါ။',
+      'It does not contain the commission rate.',
+      'ไม่รวมอัตราค่าคอมมิชชั่น',
+      'Ia tidak mengandungi kadar komisen.',
+      'Không chứa tỷ lệ hoa hồng.',
+      'Tidak berisi persentase komisi.'
+    ],
+
+    '我的客户 · 本期实时汇总':[
+      'ကျွန်ုပ်၏ဖောက်သည်များ · ယခုအကြိမ် အချိန်နှင့်တပြေးညီစုစုပေါင်း',
+      'My Customers · Live Round Summary',
+      'ลูกค้าของฉัน · สรุปรอบแบบเรียลไทม์',
+      'Pelanggan Saya · Ringkasan Langsung',
+      'Khách hàng của tôi · Tổng hợp trực tiếp',
+      'Pelanggan Saya · Ringkasan Langsung'
+    ],
+
+    '只统计直属客户本期数据。':[
+      'မိမိတိုက်ရိုက်ဖောက်သည်များ၏ ယခုအကြိမ်ဒေတာကိုသာ တွက်ချက်သည်။',
+      'Only directly assigned customers are included.',
+      'นับเฉพาะข้อมูลลูกค้าที่อยู่ภายใต้ตัวแทนโดยตรง',
+      'Hanya data pelanggan langsung dikira.',
+      'Chỉ tính dữ liệu khách hàng trực thuộc.',
+      'Hanya data pelanggan langsung yang dihitung.'
+    ],
+
+    '待确认金额不会计入正式有效金额。':[
+      'စစ်ဆေးရန်စောင့်နေသောငွေကို အတည်ပြုငွေအဖြစ် မတွက်ပါ။',
+      'Pending amounts are not included in confirmed valid amounts.',
+      'ยอดรอยืนยันจะไม่รวมในยอดที่มีผล',
+      'Jumlah menunggu tidak dikira sebagai jumlah sah.',
+      'Số tiền chờ xác nhận không được tính vào số tiền hợp lệ.',
+      'Jumlah menunggu tidak dihitung sebagai jumlah valid.'
+    ],
+
+    '直属客户':[
+      'တိုက်ရိုက်ဖောက်သည်',
+      'Direct Customers',
+      'ลูกค้าโดยตรง',
+      'Pelanggan Langsung',
+      'Khách hàng trực thuộc',
+      'Pelanggan Langsung'
+    ],
+
+    '本期有效金额':[
+      'ယခုအကြိမ် အတည်ပြုငွေ',
+      'Confirmed Amount',
+      'ยอดที่ยืนยันแล้ว',
+      'Jumlah Disahkan',
+      'Số tiền đã xác nhận',
+      'Jumlah Dikonfirmasi'
+    ],
+
+    '待确认金额':[
+      'စစ်ဆေးရန်စောင့်ငွေ',
+      'Pending Amount',
+      'ยอดรอยืนยัน',
+      'Jumlah Menunggu',
+      'Số tiền chờ xác nhận',
+      'Jumlah Menunggu'
+    ],
+
+    '当前暂无直属客户。':[
+      'လက်ရှိ တိုက်ရိုက်ဖောက်သည် မရှိသေးပါ။',
+      'No direct customers yet.',
+      'ยังไม่มีลูกค้าโดยตรง',
+      'Belum ada pelanggan langsung.',
+      'Hiện chưa có khách hàng trực thuộc.',
+      'Belum ada pelanggan langsung.'
+    ],
+
+    '本期暂无下注明细':[
+      'ယခုအကြိမ် လောင်းကြေးအသေးစိတ် မရှိသေးပါ',
+      'No betting details this round',
+      'ยังไม่มีรายละเอียดเดิมพันรอบนี้',
+      'Tiada butiran pertaruhan pusingan ini',
+      'Chưa có chi tiết cược kỳ này',
+      'Belum ada detail taruhan putaran ini'
+    ],
+
+    '有效':[
+      'အတည်ပြု',
+      'Confirmed',
+      'ยืนยันแล้ว',
+      'Disahkan',
+      'Đã xác nhận',
+      'Dikonfirmasi'
+    ],
+
+    '待确认':[
+      'စစ်ဆေးရန်စောင့်',
+      'Pending',
+      'รอยืนยัน',
+      'Menunggu',
+      'Chờ xác nhận',
+      'Menunggu'
+    ],
+
+    '鼠':['ကြွက်','Rat','หนู','Tikus','Chuột','Tikus'],
+    '牛':['နွား','Ox','วัว','Lembu','Trâu','Sapi'],
+    '虎':['ကျား','Tiger','เสือ','Harimau','Hổ','Harimau'],
+    '兔':['ယုန်','Rabbit','กระต่าย','Arnab','Thỏ','Kelinci'],
+    '龙':['နဂါး','Dragon','มังกร','Naga','Rồng','Naga'],
+    '蛇':['မြွေ','Snake','งู','Ular','Rắn','Ular'],
+    '马':['မြင်း','Horse','ม้า','Kuda','Ngựa','Kuda'],
+    '羊':['ဆိတ်','Goat','แพะ','Kambing','Dê','Kambing'],
+    '猴':['မျောက်','Monkey','ลิง','Monyet','Khỉ','Monyet'],
+    '鸡':['ကြက်','Rooster','ไก่','Ayam','Gà','Ayam'],
+    '狗':['ခွေး','Dog','สุนัข','Anjing','Chó','Anjing'],
+    '猪':['ဝက်','Pig','หมู','Babi','Heo','Babi']
+
+  };
+
+
+  function agentExtraTranslateValue(value){
+
+    let result =
+    String(
+      value
+      ??
+      ''
+    );
+
+
+    const entries =
+    Object.entries(
+      AGENT_EXTRA_TEXT
+    )
+    .sort(
+      (a,b)=>
+      b[0].length
+      -
+      a[0].length
+    );
+
+
+    entries.forEach(
+      ([zh, translations])=>{
+
+        const index =
+        AGENT_EXTRA_LANG_INDEX[
+          currentLang
+        ];
+
+        const target =
+        currentLang === 'zh'
+        ?
+        zh
+        :
+        (
+          translations[index]
+          ||
+          zh
+        );
+
+
+        const sources =
+        [
+          zh,
+          ...translations
+        ]
+        .filter(Boolean)
+        .sort(
+          (a,b)=>
+          b.length
+          -
+          a.length
+        );
+
+
+        sources.forEach(
+          source=>{
+
+            if(
+              source
+              &&
+              source !== target
+              &&
+              result.includes(
+                source
+              )
+            ){
+
+              result =
+              result
+              .split(source)
+              .join(target);
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    return result;
+
+  }
+
+
+  function translateAgentExtraUi(){
+
+    [
+      'agentReferralCard',
+      'agentCustomerRoundLiveCard'
+    ]
+    .forEach(
+      id=>{
+
+        const root =
+        document.getElementById(
+          id
+        );
+
+
+        if(!root){
+
+          return;
+
+        }
+
+
+        const walker =
+        document.createTreeWalker(
+          root,
+          NodeFilter.SHOW_TEXT
+        );
+
+
+        const nodes =
+        [];
+
+
+        while(
+          walker.nextNode()
+        ){
+
+          nodes.push(
+            walker.currentNode
+          );
+
+        }
+
+
+        nodes.forEach(
+          node=>{
+
+            const next =
+            agentExtraTranslateValue(
+              node.nodeValue
+            );
+
+
+            if(
+              next !==
+              node.nodeValue
+            ){
+
+              node.nodeValue =
+              next;
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
   function ensureReferralCard(){
 
     let card =
@@ -1835,6 +2173,7 @@
     try{
       applyReferralCard();
             applyCustomerRoundLive();
+            translateAgentExtraUi();
             const betCard =
       cardByChild(
         'numberGrid'
