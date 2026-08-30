@@ -365,6 +365,807 @@
     );
 
   }
+    let customerRoundLiveLoading =
+  false;
+
+  let customerRoundLiveRoundId =
+  null;
+
+  let customerRoundLiveLoadedAt =
+  0;
+
+  let customerRoundLiveRows =
+  [];
+
+
+  function ensureCustomerRoundLiveCard(){
+
+    let card =
+    $('agentCustomerRoundLiveCard');
+
+
+    if(card){
+
+      return card;
+
+    }
+
+
+    const agentBox =
+    $('agentBox');
+
+
+    if(!agentBox){
+
+      return null;
+
+    }
+
+
+    card =
+    document.createElement(
+      'div'
+    );
+
+
+    card.id =
+    'agentCustomerRoundLiveCard';
+
+
+    card.className =
+    'card hidden';
+
+
+    card.innerHTML = `
+
+      <div class="title">
+        我的客户 · 本期实时汇总
+      </div>
+
+
+      <div
+        id="agentCustomerRoundSummary">
+      </div>
+
+
+      <div
+        id="agentCustomerRoundList"
+        style="margin-top:12px">
+      </div>
+
+
+      <div
+        class="note">
+
+        只统计直属客户本期数据。
+
+        待确认金额不会计入正式有效金额。
+
+      </div>
+
+    `;
+
+
+    const referralCard =
+    $('agentReferralCard');
+
+
+    if(
+      referralCard
+      &&
+      referralCard.parentNode
+      ===
+      agentBox
+    ){
+
+      referralCard.insertAdjacentElement(
+        'afterend',
+        card
+      );
+
+    }
+    else{
+
+      const profileCard =
+      $('agentName')
+      ?.
+      closest(
+        '.card'
+      );
+
+
+      if(
+        profileCard
+        &&
+        profileCard.parentNode
+        ===
+        agentBox
+      ){
+
+        profileCard.insertAdjacentElement(
+          'afterend',
+          card
+        );
+
+      }
+      else{
+
+        agentBox.insertBefore(
+          card,
+          agentBox.firstChild
+        );
+
+      }
+
+    }
+
+
+    return card;
+
+  }
+
+
+  function customerRoundGrouped(rows){
+
+    const map =
+    new Map();
+
+
+    (
+      Array.isArray(rows)
+      ?
+      rows
+      :
+      []
+    )
+    .forEach(
+      row=>{
+
+        const customerId =
+        String(
+          row.customer_id
+          ||
+          ''
+        );
+
+
+        if(!customerId){
+
+          return;
+
+        }
+
+
+        if(
+          !map.has(
+            customerId
+          )
+        ){
+
+          map.set(
+            customerId,
+            {
+              customer_id:
+              customerId,
+
+              customer_code:
+              row.customer_code
+              ||
+              '—',
+
+              display_name:
+              row.display_name
+              ||
+              '—',
+
+              order_status:
+              row.order_status
+              ||
+              '',
+
+              submitted_total:
+              number(
+                row.submitted_total
+              ),
+
+              confirmed_total:
+              number(
+                row.confirmed_total
+              ),
+
+              pending_total:
+              number(
+                row.pending_total
+              ),
+
+              entries:[]
+            }
+          );
+
+        }
+
+
+        if(
+          row.number_code
+          !=
+          null
+        ){
+
+          map
+          .get(
+            customerId
+          )
+          .entries
+          .push({
+            number_code:
+            String(
+              row.number_code
+            ),
+
+            points:
+            number(
+              row.points
+            ),
+
+            confirmed_points:
+            number(
+              row.confirmed_points
+            ),
+
+            pending_points:
+            number(
+              row.pending_points
+            )
+          });
+
+        }
+
+      }
+    );
+
+
+    return [
+      ...map.values()
+    ];
+
+  }
+
+
+  function zodiacFromNumberCode(code){
+
+    const index =
+    Number(
+      code
+    )
+    -
+    1;
+
+
+    return (
+      zodiacNames[
+        index
+      ]
+      ||
+      String(
+        code
+        ||
+        '—'
+      )
+    );
+
+  }
+
+
+  function renderCustomerRoundLive(){
+
+    const card =
+    ensureCustomerRoundLiveCard();
+
+
+    if(!card){
+
+      return;
+
+    }
+
+
+    const summary =
+    $('agentCustomerRoundSummary');
+
+    const list =
+    $('agentCustomerRoundList');
+
+
+    const customers =
+    customerRoundGrouped(
+      customerRoundLiveRows
+    );
+
+
+    let confirmedTotal =
+    0;
+
+    let pendingTotal =
+    0;
+
+
+    customers.forEach(
+      customer=>{
+
+        confirmedTotal +=
+        number(
+          customer.confirmed_total
+        );
+
+        pendingTotal +=
+        number(
+          customer.pending_total
+        );
+
+      }
+    );
+
+
+    if(summary){
+
+      summary.innerHTML = `
+
+        <div class="info">
+
+          <div
+            class="box highlight">
+
+            <small>
+              直属客户
+            </small>
+
+            <strong>
+              ${fmt(customers.length)}
+            </strong>
+
+          </div>
+
+
+          <div
+            class="box highlight">
+
+            <small>
+              本期有效金额
+            </small>
+
+            <strong>
+              ${fmt(confirmedTotal)}
+            </strong>
+
+          </div>
+
+
+          <div
+            class="box">
+
+            <small>
+              待确认金额
+            </small>
+
+            <strong>
+              ${fmt(pendingTotal)}
+            </strong>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    if(list){
+
+      if(
+        customers.length
+        ===
+        0
+      ){
+
+        list.innerHTML = `
+
+          <div
+            class="settlementNotice">
+
+            当前暂无直属客户。
+
+          </div>
+
+        `;
+
+      }
+      else{
+
+        list.innerHTML =
+        customers
+        .map(
+          customer=>{
+
+            const entries =
+            customer.entries
+            .filter(
+              entry=>
+              (
+                entry.points > 0
+                ||
+                entry.confirmed_points > 0
+                ||
+                entry.pending_points > 0
+              )
+            )
+            .map(
+              entry=>`
+
+                <div
+                  style="
+                    display:flex;
+                    justify-content:space-between;
+                    gap:10px;
+                    padding:8px 0;
+                    border-bottom:
+                    1px solid rgba(255,255,255,.05)
+                  ">
+
+                  <div
+                    style="
+                      color:#dec372;
+                      font-weight:800
+                    ">
+                    ${zodiacFromNumberCode(
+                      entry.number_code
+                    )}
+                  </div>
+
+                  <div
+                    style="
+                      text-align:right;
+                      color:#918a7c;
+                      font-size:11px;
+                      line-height:1.6
+                    ">
+
+                    有效
+                    <strong
+                      style="color:#70d39d">
+                      ${fmt(
+                        entry.confirmed_points
+                      )}
+                    </strong>
+
+                    · 待确认
+                    <strong
+                      style="color:#e8c86e">
+                      ${fmt(
+                        entry.pending_points
+                      )}
+                    </strong>
+
+                  </div>
+
+                </div>
+
+              `
+            )
+            .join(
+              ''
+            );
+
+
+            return `
+
+              <div
+                style="
+                  background:#101011;
+                  border:
+                  1px solid rgba(214,168,63,.16);
+                  border-radius:14px;
+                  padding:13px;
+                  margin-top:10px
+                ">
+
+                <div
+                  style="
+                    display:flex;
+                    justify-content:space-between;
+                    gap:10px;
+                    align-items:flex-start
+                  ">
+
+                  <div>
+
+                    <div
+                      style="
+                        color:#efcf70;
+                        font-weight:900;
+                        font-size:14px
+                      ">
+                      ${customer.display_name}
+                    </div>
+
+                    <div
+                      style="
+                        color:#777166;
+                        font-size:10px;
+                        margin-top:4px
+                      ">
+                      ${customer.customer_code}
+                    </div>
+
+                  </div>
+
+
+                  <div
+                    style="
+                      text-align:right;
+                      font-size:10px;
+                      line-height:1.7
+                    ">
+
+                    <div
+                      style="color:#70d39d">
+
+                      有效
+                      ${fmt(
+                        customer.confirmed_total
+                      )}
+
+                    </div>
+
+                    <div
+                      style="color:#e8c86e">
+
+                      待确认
+                      ${fmt(
+                        customer.pending_total
+                      )}
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                ${
+                  entries
+                  ||
+                  `
+
+                    <div
+                      style="
+                        margin-top:10px;
+                        color:#777166;
+                        font-size:10px
+                      ">
+
+                      本期暂无下注明细
+
+                    </div>
+
+                  `
+                }
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join(
+          ''
+        );
+
+      }
+
+    }
+
+
+    card.classList.remove(
+      'hidden'
+    );
+
+  }
+
+
+  async function loadCustomerRoundLive(){
+
+    if(
+      customerRoundLiveLoading
+    ){
+
+      return;
+
+    }
+
+
+    if(
+      typeof currentRound
+      ===
+      'undefined'
+      ||
+      !currentRound
+      ||
+      !currentRound.id
+    ){
+
+      return;
+
+    }
+
+
+    customerRoundLiveLoading =
+    true;
+
+
+    try{
+
+      const response =
+      await api(
+        '/rest/v1/rpc/get_agent_customer_round_live',
+        {
+          method:'POST',
+
+          headers:{
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            p_round_id:
+            currentRound.id
+          })
+        }
+      );
+
+
+      if(
+        !response.ok
+      ){
+
+        throw new Error(
+          'CUSTOMER_ROUND_LIVE_LOAD_FAILED'
+        );
+
+      }
+
+
+      const rows =
+      await response.json();
+
+
+      customerRoundLiveRows =
+      Array.isArray(
+        rows
+      )
+      ?
+      rows
+      :
+      [];
+
+
+      customerRoundLiveRoundId =
+      currentRound.id;
+
+      customerRoundLiveLoadedAt =
+      Date.now();
+
+
+      renderCustomerRoundLive();
+
+    }
+    catch(error){
+
+      console.error(
+        'agent customer round live',
+        error
+      );
+
+    }
+    finally{
+
+      customerRoundLiveLoading =
+      false;
+
+    }
+
+  }
+
+
+  function applyCustomerRoundLive(){
+
+    const card =
+    ensureCustomerRoundLiveCard();
+
+
+    if(!card){
+
+      return;
+
+    }
+
+
+    if(
+      typeof agent
+      ===
+      'undefined'
+      ||
+      !agent
+      ||
+      typeof currentRound
+      ===
+      'undefined'
+      ||
+      !currentRound
+      ||
+      !currentRound.id
+    ){
+
+      card.classList.add(
+        'hidden'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      customerRoundLiveRoundId
+      !==
+      currentRound.id
+    ){
+
+      customerRoundLiveRows =
+      [];
+
+      customerRoundLiveRoundId =
+      null;
+
+      customerRoundLiveLoadedAt =
+      0;
+
+    }
+
+
+    if(
+      customerRoundLiveRoundId
+      ===
+      currentRound.id
+    ){
+
+      renderCustomerRoundLive();
+
+    }
+
+
+    const stale =
+    (
+      Date.now()
+      -
+      customerRoundLiveLoadedAt
+    )
+    >
+    5000;
+
+
+    if(
+      !customerRoundLiveLoading
+      &&
+      stale
+    ){
+
+      loadCustomerRoundLive();
+
+    }
+
+  }
   function ensureSimpleCard(){
 
     let card =
@@ -1033,6 +1834,7 @@
 
     try{
       applyReferralCard();
+            applyCustomerRoundLive();
       if(
         typeof currentRound
         ===
