@@ -1563,7 +1563,7 @@
       currentRound.id
     ){
 
-            customerRoundLiveRows =
+      customerRoundLiveRows =
       [];
 
       customerRoundCommission =
