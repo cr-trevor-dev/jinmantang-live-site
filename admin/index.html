@@ -662,17 +662,17 @@ button.danger{
         </div>
 
         <div class="summaryBox">
-          <small>已提交代理</small>
+          <small>有本期数据代理</small>
           <strong id="summaryAgents">0</strong>
         </div>
 
         <div class="summaryBox">
-          <small>未提交代理</small>
+          <small>无本期数据代理</small>
           <strong id="summaryMissing">0</strong>
         </div>
 
         <div class="summaryBox">
-          <small>本期总积分</small>
+          <small>本期总金额</small>
           <strong id="summaryTotal">0</strong>
         </div>
 
@@ -731,7 +731,7 @@ button.danger{
         <a class="menu" href="/admin/simulator.html">
           <div class="menuIcon">📊</div>
           <div class="menuTitle">本期汇总</div>
-          <div class="menuSub">查看当前期所有代理提交与十二生肖汇总</div>
+          <div class="menuSub">查看当前期全部客户与十二生肖汇总</div>
         </a>
 
         <a class="menu" href="/history/">
@@ -2069,7 +2069,7 @@ async function loadDashboardSummary(){
     );
 
 
-    const ar =
+        const ar =
     await api(
       '/rest/v1/agents'+
       '?status=eq.active'+
@@ -2108,12 +2108,21 @@ async function loadDashboardSummary(){
 
     const sr =
     await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        currentRound.id
-      )+
-      '&select=agent_id,points'
+      '/rest/v1/rpc/admin_round_finance_summary',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_round_id:
+          currentRound.id
+        })
+      }
     );
 
 
@@ -2124,46 +2133,53 @@ async function loadDashboardSummary(){
     }
 
 
-    const rows =
+    const summary =
     await sr.json();
 
 
-    let total =
-    0;
-
-
     const submittedSet =
-    new Set();
-
-
-    rows.forEach(
-      row=>{
-
-        const points =
-        Number(
-          row.points || 0
-        );
-
-
-        total +=
-        points;
-
-
-        if(
-          points>0
-          &&
-          activeAgentIds.has(
-            row.agent_id
+    new Set(
+      (
+        Array.isArray(
+          summary?.agents
+        )
+        ?
+        summary.agents
+        :
+        []
+      )
+      .filter(
+        row=>
+        activeAgentIds.has(
+          row.agent_id
+        )
+        &&
+        (
+          Number(
+            row.confirmed_total
+            ||
+            0
           )
-        ){
-
-          submittedSet.add(
-            row.agent_id
-          );
-
-        }
-
-      }
+          +
+          Number(
+            row.pending_total
+            ||
+            0
+          )
+          +
+          Number(
+            row.editable_total
+            ||
+            0
+          )
+        )
+        >
+        0
+      )
+      .map(
+        row=>
+        row.agent_id
+      )
     );
 
 
@@ -2176,6 +2192,26 @@ async function loadDashboardSummary(){
       0,
       activeTotal-
       submittedCount
+    );
+
+
+    const total =
+    Number(
+      summary?.confirmed_total
+      ||
+      0
+    )
+    +
+    Number(
+      summary?.pending_total
+      ||
+      0
+    )
+    +
+    Number(
+      summary?.editable_total
+      ||
+      0
     );
 
 
