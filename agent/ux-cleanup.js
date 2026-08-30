@@ -1757,7 +1757,7 @@
 
     setCardHidden(
       'numberGrid',
-      false
+            true
     );
 
 
@@ -1768,7 +1768,7 @@
 
     setCardHidden(
       'settlementSubmittedTotal',
-      !showFinance
+            true
     );
 
 
@@ -1780,7 +1780,7 @@
 
     setCardHidden(
       'paymentRequiredAmount',
-      !showPayment
+           true
     );
 
 
@@ -1835,6 +1835,31 @@
     try{
       applyReferralCard();
             applyCustomerRoundLive();
+            const roundStatusEl =
+      $('roundStatus');
+
+      if(roundStatusEl){
+
+        roundStatusEl.textContent =
+        '仅供查看 · 不支持提交 / 修改';
+
+        roundStatusEl.style.color =
+        '#ff5b5b';
+
+      }
+
+
+      const serverNoteEl =
+      document.querySelector(
+        '[data-i18n="serverNote"]'
+      );
+
+      if(serverNoteEl){
+
+        serverNoteEl.textContent =
+        '代理账号仅供查看直属客户数据，不支持提交或修改任何订单。';
+
+      }
       if(
         typeof currentRound
         ===
