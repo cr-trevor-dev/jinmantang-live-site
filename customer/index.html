@@ -4671,7 +4671,7 @@ function setRoundEditable(editable){
     savingRound;
 
 
-    button.textContent =
+    const text =
     !editable
     ?
     '本期已截止'
@@ -4682,6 +4682,12 @@ function setRoundEditable(editable){
       '正在保存...'
       :
       '保存本期'
+    );
+
+
+    button.textContent =
+    uiText(
+      text
     );
 
   }
@@ -4732,10 +4738,12 @@ function updateCountdown(){
   );
 
 
-  if(diff <= 0){
+    if(diff <= 0){
 
     el.textContent =
-    '已截止';
+    uiText(
+      '已截止'
+    );
 
 
     document
@@ -4743,7 +4751,9 @@ function updateCountdown(){
       'roundBadge'
     )
     .textContent =
-    '已截止';
+    uiText(
+      '已截止'
+    );
 
 
     setRoundEditable(
@@ -4817,12 +4827,14 @@ function updateCountdown(){
   );
 
 
-  document
+    document
   .getElementById(
     'roundBadge'
   )
   .textContent =
-  '开放中';
+  uiText(
+    '开放中'
+  );
 
 
   setRoundEditable(
@@ -5174,10 +5186,21 @@ async function loadRoundState(
   }
 
 
-  renderOrderStatus();
+    renderOrderStatus();
 
 
   renderPaymentArea();
+
+
+  if(
+    typeof window.applyCustomerLanguage
+    ===
+    'function'
+  ){
+
+    window.applyCustomerLanguage();
+
+  }
 
 }
 
