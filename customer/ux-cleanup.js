@@ -373,69 +373,7 @@
         }
 
 
-        const panel =
-        document.getElementById(
-          'registerPanel'
-        );
-
-
-        if(
-          panel
-          &&
-          !document.getElementById(
-            'agentReferralNotice'
-          )
-        ){
-
-          const notice =
-          document.createElement(
-            'div'
-          );
-
-
-          notice.id =
-          'agentReferralNotice';
-
-
-          notice.className =
-          'note';
-
-
-          notice.style.margin =
-          '0 0 14px';
-
-
-          notice.textContent =
-          '已通过代理专属邀请进入。注册成功后，账户将自动绑定所属代理。';
-
-
-          const title =
-          panel.querySelector(
-            '.cardTitle'
-          );
-
-
-          if(
-            title
-            &&
-            title.nextSibling
-          ){
-
-            panel.insertBefore(
-              notice,
-              title.nextSibling
-            );
-
-          }
-          else{
-
-            panel.prepend(
-              notice
-            );
-
-          }
-
-        }
+        
 
       }
 
