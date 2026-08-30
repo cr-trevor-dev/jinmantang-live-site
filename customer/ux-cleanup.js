@@ -929,20 +929,7 @@
   applyCustomerLanguage();
 
 
-  const customerLanguageObserver =
-  new MutationObserver(
-    scheduleCustomerLanguage
-  );
-
-
-  customerLanguageObserver.observe(
-    document.body,
-    {
-      childList:true,
-      subtree:true,
-      characterData:true
-    }
-  );
+  
   const $ =
   id =>
   document.getElementById(id);
