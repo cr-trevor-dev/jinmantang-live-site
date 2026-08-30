@@ -1430,8 +1430,43 @@
       }
 
 
-      const rows =
+            const rows =
       await response.json();
+
+
+      const commissionResponse =
+      await api(
+        '/rest/v1/rpc/get_agent_referral_commission_live',
+        {
+          method:'POST',
+
+          headers:{
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            p_round_id:
+            currentRound.id
+          })
+        }
+      );
+
+
+      if(
+        !commissionResponse.ok
+      ){
+
+        throw new Error(
+          'REFERRAL_COMMISSION_LOAD_FAILED'
+        );
+
+      }
+
+
+      const commission =
+      await commissionResponse.json();
 
 
       customerRoundLiveRows =
@@ -1442,6 +1477,18 @@
       rows
       :
       [];
+
+
+      customerRoundCommission =
+      commission
+      &&
+      typeof commission
+      ===
+      'object'
+      ?
+      commission
+      :
+      null;
 
 
       customerRoundLiveRoundId =
