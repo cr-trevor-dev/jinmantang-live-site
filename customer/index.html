@@ -2124,81 +2124,281 @@ function clearTokens(){
 }
 
 
+const nativeFetch =
+window.fetch.bind(
+  window
+);
+
+
+let customerRefreshPromise =
+null;
+
+
 async function refreshSession(){
 
   if(!refreshToken){
+
     return false;
+
   }
 
 
-  try{
+  if(customerRefreshPromise){
 
-    const res =
-    await fetch(
+    return customerRefreshPromise;
 
-      BASE
-      +
-      '/auth/v1/token?grant_type=refresh_token',
+  }
 
-      {
 
-        method:'POST',
+  customerRefreshPromise =
+  (
+    async()=>{
 
-        headers:{
+      try{
 
-          apikey:
-          KEY,
+        const res =
+        await nativeFetch(
 
-          'Content-Type':
-          'application/json'
+          BASE
+          +
+          '/auth/v1/token?grant_type=refresh_token',
 
-        },
+          {
 
-        body:
-        JSON.stringify({
+            method:'POST',
 
-          refresh_token:
-          refreshToken
+            headers:{
 
-        })
+              apikey:
+              KEY,
+
+              'Content-Type':
+              'application/json'
+
+            },
+
+            body:
+            JSON.stringify({
+
+              refresh_token:
+              refreshToken
+
+            })
+
+          }
+
+        );
+
+
+        if(!res.ok){
+
+          clearTokens();
+
+          return false;
+
+        }
+
+
+        const data =
+        await parseResponse(
+          res
+        );
+
+
+        if(!data?.access_token){
+
+          clearTokens();
+
+          return false;
+
+        }
+
+
+        token =
+        data.access_token;
+
+
+        refreshToken =
+        data.refresh_token
+        ||
+        refreshToken;
+
+
+        saveTokens();
+
+
+        return true;
+
+      }
+      catch{
+
+        clearTokens();
+
+
+        return false;
+
+      }
+      finally{
+
+        customerRefreshPromise =
+        null;
 
       }
 
-    );
+    }
+  )();
 
 
-    const data =
-    await parseResponse(
-      res
-    );
+  return customerRefreshPromise;
+
+}
 
 
-    token =
-    data.access_token;
+/* =========================================================
+   CUSTOMER SESSION AUTO REFRESH
+========================================================= */
+
+window.fetch =
+async function(
+  input,
+  init={}
+){
+
+  const requestUrl =
+  typeof input
+  ===
+  'string'
+  ?
+  input
+  :
+  input?.url
+  ||
+  '';
 
 
-    refreshToken =
-    data.refresh_token
+  const headers =
+  new Headers(
+
+    init.headers
     ||
-    refreshToken;
+    (
+      input instanceof Request
+      ?
+      input.headers
+      :
+      undefined
+    )
+
+  );
 
 
-    saveTokens();
+  const authorization =
+  headers.get(
+    'Authorization'
+  )
+  ||
+  '';
 
 
-    return true;
+  const isOurApi =
+  requestUrl.startsWith(
+    BASE
+  );
+
+
+  const hasCustomerJwt =
+  authorization.startsWith(
+    'Bearer '
+  );
+
+
+  const isRefreshRequest =
+  requestUrl.includes(
+    '/auth/v1/token?grant_type=refresh_token'
+  );
+
+
+  if(
+    !isOurApi
+    ||
+    !hasCustomerJwt
+    ||
+    isRefreshRequest
+  ){
+
+    return nativeFetch(
+      input,
+      init
+    );
 
   }
-  catch{
+
+
+  let response =
+  await nativeFetch(
+    input,
+    init
+  );
+
+
+  if(
+    response.status
+    !==
+    401
+  ){
+
+    return response;
+
+  }
+
+
+  const refreshed =
+  await refreshSession();
+
+
+  if(!refreshed){
 
     clearTokens();
 
-
-    return false;
+    return response;
 
   }
 
-}
+
+  const retryHeaders =
+  new Headers(
+    headers
+  );
+
+
+  retryHeaders.set(
+    'Authorization',
+    'Bearer '
+    +
+    token
+  );
+
+
+  response =
+  await nativeFetch(
+
+    input,
+
+    {
+
+      ...init,
+
+      headers:
+      retryHeaders
+
+    }
+
+  );
+
+
+  return response;
+
+};
 
 
 /* =========================================================
@@ -6786,7 +6986,23 @@ function translateError(message){
     ''
   );
 
+  if(
+    text.includes(
+      'JWT expired'
+    )
+    ||
+    text.includes(
+      'Invalid JWT'
+    )
+    ||
+    text.includes(
+      'SESSION_EXPIRED'
+    )
+  ){
 
+    return '登录状态已过期，请重新登录。';
+
+  }
   if(
     text.includes(
       'INVALID_LOGIN'
