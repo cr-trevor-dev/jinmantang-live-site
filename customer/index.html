@@ -2826,8 +2826,11 @@ async function registerCustomer(){
           display_name:
           name,
 
-          phone:
+                    phone:
           phone,
+
+          referral_code:
+          new URLSearchParams(location.search).get('ref'),
 
           captcha_token:
           captchaToken
