@@ -1155,7 +1155,32 @@ function money(value){
 
 }
 
+function customerSourceText(customer){
 
+  if(!customer?.referral_agent_id){
+    return '平台主管';
+  }
+
+
+  const agent =
+  customer.referral_agent
+  ||
+  null;
+
+
+  return (
+    '代理推荐 · '
+    +
+    (
+      agent?.display_name
+      ||
+      agent?.referral_code
+      ||
+      '未知代理'
+    )
+  );
+
+}
 function customerById(id){
 
   return customers.find(
@@ -1375,7 +1400,7 @@ async function loadAll(){
       api(
         '/rest/v1/customer_profiles'
         +
-        '?select=id,customer_code,username,display_name,phone,status,restriction_reason,status_changed_at,created_at'
+        '?select=id,customer_code,username,display_name,phone,status,restriction_reason,status_changed_at,created_at,referral_agent_id,referral_bound_at,referral_agent:agents!customer_profiles_referral_agent_id_fkey(display_name,referral_code)'
         +
         '&order=created_at.desc'
       ),
@@ -1711,7 +1736,9 @@ function customerIdentityHtml(customer){
 
         电话：
         ${esc(customer.phone || '—')}
-
+        <br>
+        来源：
+        ${esc(customerSourceText(customer))}
       </div>
 
     </div>
@@ -2560,7 +2587,9 @@ function renderCustomers(){
 
             电话：
             ${esc(customer.phone || '—')}
-
+            <br>
+            来源：
+            ${esc(customerSourceText(customer))}
           </div>
 
 
