@@ -32,7 +32,7 @@ body{
 }
 
 .wrap{
-  max-width:820px;
+  max-width:900px;
   margin:auto;
   min-height:100vh;
   padding:22px 15px 55px;
@@ -94,7 +94,7 @@ body{
 }
 
 .title{
-  font-size:16px;
+  font-size:17px;
   font-weight:900;
   color:#dfc575;
   margin-bottom:14px;
@@ -134,31 +134,44 @@ button.secondary{
   border:1px solid rgba(214,168,63,.22);
 }
 
+button.warning{
+  background:#20190d;
+  color:#e4c06b;
+  border:1px solid rgba(192,143,43,.28);
+}
+
 button.danger{
-  background:#1b1717;
-  color:#d9a4a4;
-  border:1px solid rgba(180,100,100,.22);
+  background:#1b1111;
+  color:#dfa7a2;
+  border:1px solid rgba(180,80,80,.26);
+}
+
+button.success{
+  background:#132016;
+  color:#9bd1a7;
+  border:1px solid rgba(76,146,91,.28);
 }
 
 button:disabled{
-  opacity:.45;
+  opacity:.4;
   cursor:not-allowed;
 }
 
-.toolbar{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:9px;
-}
-
-.refreshBtn{
-  width:auto;
-  min-width:94px;
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:1px solid rgba(214,168,63,.18);
 }
 
 .summary{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(5,1fr);
   gap:9px;
 }
 
@@ -182,10 +195,61 @@ button:disabled{
   font-size:20px;
 }
 
+.toolbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:9px;
+}
+
+.refreshBtn{
+  width:auto;
+  min-width:96px;
+}
+
+.pendingPayment{
+  border:1px solid rgba(218,171,55,.27);
+  border-radius:16px;
+  padding:15px;
+  margin-top:12px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(30,24,13,.95),
+      rgba(13,13,14,.98)
+    );
+}
+
+.identity{
+  border:1px solid rgba(214,168,63,.18);
+  border-radius:13px;
+  padding:12px;
+  margin-bottom:12px;
+  background:#0d0d0e;
+}
+
+.identityName{
+  color:#f1d16f;
+  font-weight:900;
+  font-size:17px;
+}
+
+.identityCode{
+  color:#af9d6b;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.identityMeta{
+  margin-top:8px;
+  color:#958c79;
+  font-size:12px;
+  line-height:1.7;
+}
+
 .customer{
   border:1px solid rgba(214,168,63,.19);
   border-radius:17px;
-  padding:14px;
+  padding:15px;
   margin-top:12px;
   background:#0e0e0f;
 }
@@ -195,12 +259,11 @@ button:disabled{
   align-items:flex-start;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:12px;
 }
 
 .customerName{
   color:#f0d077;
-  font-size:17px;
+  font-size:18px;
   font-weight:900;
 }
 
@@ -213,11 +276,12 @@ button:disabled{
 .customerMeta{
   color:#888174;
   font-size:12px;
-  line-height:1.7;
+  line-height:1.75;
+  margin-top:9px;
 }
 
 .status{
-  padding:6px 9px;
+  padding:6px 10px;
   border-radius:99px;
   font-size:10px;
   font-weight:900;
@@ -229,17 +293,22 @@ button:disabled{
   color:#89d09d;
 }
 
-.status.other{
-  background:rgba(163,100,64,.14);
-  color:#d0a07f;
+.status.suspended{
+  background:rgba(179,126,35,.15);
+  color:#e0bd68;
+}
+
+.status.blocked{
+  background:rgba(169,70,65,.15);
+  color:#e19d98;
 }
 
 .sectionLabel{
-  margin-top:16px;
+  margin-top:17px;
   margin-bottom:8px;
   color:#b7a46d;
   font-size:12px;
-  font-weight:800;
+  font-weight:900;
 }
 
 .account,
@@ -253,8 +322,8 @@ button:disabled{
 }
 
 .accountHead,
-.paymentHead,
-.orderHead{
+.orderHead,
+.paymentHead{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
@@ -263,15 +332,14 @@ button:disabled{
 }
 
 .accountType,
-.paymentTitle,
-.orderTitle{
+.orderTitle,
+.paymentTitle{
   color:#e5c96f;
   font-weight:900;
   font-size:14px;
 }
 
-.verify,
-.paymentStatus{
+.badge{
   padding:5px 8px;
   border-radius:99px;
   font-size:10px;
@@ -279,19 +347,27 @@ button:disabled{
   white-space:nowrap;
 }
 
-.verify.yes,
-.paymentStatus.approved{
+.badge.bound{
   background:rgba(64,145,88,.14);
   color:#86d19c;
 }
 
-.verify.no,
-.paymentStatus.pending{
+.badge.editable{
   background:rgba(172,126,42,.14);
   color:#ddbc65;
 }
 
-.paymentStatus.rejected{
+.badge.pending{
+  background:rgba(172,126,42,.14);
+  color:#ddbc65;
+}
+
+.badge.approved{
+  background:rgba(64,145,88,.14);
+  color:#86d19c;
+}
+
+.badge.rejected{
   background:rgba(169,73,66,.15);
   color:#e0a09a;
 }
@@ -300,7 +376,7 @@ button:disabled{
   display:flex;
   justify-content:space-between;
   gap:14px;
-  padding:6px 0;
+  padding:7px 0;
   font-size:12px;
   border-bottom:1px solid rgba(255,255,255,.045);
 }
@@ -317,17 +393,6 @@ button:disabled{
   color:#e9dfc7;
   text-align:right;
   word-break:break-all;
-}
-
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:12px;
-}
-
-.singleAction{
-  margin-top:10px;
 }
 
 .finance{
@@ -357,6 +422,32 @@ button:disabled{
   font-size:14px;
 }
 
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+.actions.three{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.singleAction{
+  margin-top:10px;
+}
+
+.restriction{
+  margin-top:11px;
+  padding:10px;
+  border-radius:11px;
+  border:1px solid rgba(170,85,72,.20);
+  background:rgba(145,60,52,.08);
+  color:#d3a7a0;
+  font-size:12px;
+  line-height:1.6;
+}
+
 .empty{
   text-align:center;
   color:#7f786b;
@@ -381,18 +472,6 @@ button:disabled{
   color:#e89191;
 }
 
-.back{
-  display:block;
-  text-decoration:none;
-  text-align:center;
-  padding:13px;
-  border-radius:13px;
-  margin-bottom:14px;
-  color:#d8bf73;
-  background:#121213;
-  border:1px solid rgba(214,168,63,.18);
-}
-
 .hidden{
   display:none!important;
 }
@@ -404,7 +483,7 @@ button:disabled{
   margin-top:24px;
 }
 
-@media(max-width:620px){
+@media(max-width:700px){
 
   .summary{
     grid-template-columns:1fr 1fr;
@@ -422,6 +501,10 @@ button:disabled{
     grid-template-columns:1fr;
   }
 
+  .actions.three{
+    grid-template-columns:1fr;
+  }
+
 }
 </style>
 </head>
@@ -431,9 +514,19 @@ button:disabled{
 <div class="wrap">
 
   <div class="brand">
-    <div class="mark">金</div>
-    <div class="cn">金满堂</div>
-    <div class="en">CUSTOMER MANAGEMENT</div>
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      CUSTOMER MANAGEMENT
+    </div>
+
   </div>
 
 
@@ -452,9 +545,7 @@ button:disabled{
       无法进入客户管理
     </div>
 
-    <div
-      id="authErrorText"
-      class="msg err">
+    <div class="msg err">
       请先登录管理员账号并完成二次验证。
     </div>
 
@@ -469,7 +560,7 @@ button:disabled{
     <section class="card">
 
       <div class="title">
-        客户概况
+        客户运营概况
       </div>
 
       <div class="summary">
@@ -485,13 +576,39 @@ button:disabled{
         </div>
 
         <div class="summaryBox">
-          <small>待确认收款方式</small>
-          <strong id="payoutPendingTotal">0</strong>
+          <small>限制客户</small>
+          <strong id="suspendedTotal">0</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>拉黑客户</small>
+          <strong id="blockedTotal">0</strong>
         </div>
 
         <div class="summaryBox">
           <small>待审核付款</small>
           <strong id="paymentPendingTotal">0</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div class="title">
+        待审核付款
+      </div>
+
+      <div class="msg">
+        每笔付款都会显示客户姓名、客户编号、用户名和电话，避免客户多以后认错人。
+      </div>
+
+      <div id="pendingPaymentList">
+
+        <div class="empty">
+          正在读取待审核付款...
         </div>
 
       </div>
@@ -515,6 +632,7 @@ button:disabled{
 
         <button
           class="secondary refreshBtn"
+          type="button"
           onclick="loadAll()">
           刷新
         </button>
@@ -532,7 +650,7 @@ button:disabled{
     <section class="card">
 
       <div class="title">
-        客户、下注与付款
+        客户管理
       </div>
 
       <div id="customerList">
@@ -591,15 +709,36 @@ sessionStorage.getItem(
 '';
 
 
-let customers = [];
-let payoutAccounts = [];
-let orders = [];
-let payments = [];
-let proofs = [];
-let rounds = [];
+let customers =
+[];
 
-let refreshPromise = null;
-let autoTimer = null;
+
+let payoutAccounts =
+[];
+
+
+let orders =
+[];
+
+
+let payments =
+[];
+
+
+let proofs =
+[];
+
+
+let rounds =
+[];
+
+
+let refreshPromise =
+null;
+
+
+let autoTimer =
+null;
 
 
 /* =========================================================
@@ -613,10 +752,12 @@ function saveSession(data){
     token =
     data.access_token;
 
+
     localStorage.setItem(
       'jmt_access_token',
       token
     );
+
 
     sessionStorage.setItem(
       'jmt_access_token',
@@ -631,10 +772,12 @@ function saveSession(data){
     refreshToken =
     data.refresh_token;
 
+
     localStorage.setItem(
       'jmt_refresh_token',
       refreshToken
     );
+
 
     sessionStorage.setItem(
       'jmt_refresh_token',
@@ -657,8 +800,14 @@ function getJwtPayload(){
     .replace(/_/g,'/');
 
 
-    while(part.length % 4){
+    while(
+      part.length
+      %
+      4
+    ){
+
       part += '=';
+
     }
 
 
@@ -669,6 +818,7 @@ function getJwtPayload(){
         atob(part)
         .split('')
         .map(
+
           c =>
           '%'
           +
@@ -679,6 +829,7 @@ function getJwtPayload(){
             .toString(16)
           )
           .slice(-2)
+
         )
         .join('')
 
@@ -699,12 +850,16 @@ function getJwtPayload(){
 async function refreshAdminSession(){
 
   if(!refreshToken){
+
     return false;
+
   }
 
 
   if(refreshPromise){
+
     return refreshPromise;
+
   }
 
 
@@ -749,7 +904,9 @@ async function refreshAdminSession(){
 
 
         if(!res.ok){
+
           return false;
+
         }
 
 
@@ -758,7 +915,9 @@ async function refreshAdminSession(){
 
 
         if(!data.access_token){
+
           return false;
+
         }
 
 
@@ -834,8 +993,14 @@ async function api(
   await request();
 
 
-  if(res.status !== 401){
+  if(
+    res.status
+    !==
+    401
+  ){
+
     return res;
+
   }
 
 
@@ -844,7 +1009,9 @@ async function api(
 
 
   if(!refreshed){
+
     return res;
+
   }
 
 
@@ -860,7 +1027,9 @@ async function api(
 async function verifyAdmin(){
 
   if(!token){
+
     return false;
+
   }
 
 
@@ -868,8 +1037,14 @@ async function verifyAdmin(){
   getJwtPayload();
 
 
-  if(payload.aal !== 'aal2'){
+  if(
+    payload.aal
+    !==
+    'aal2'
+  ){
+
     return false;
+
   }
 
 
@@ -882,7 +1057,9 @@ async function verifyAdmin(){
 
 
     if(!userRes.ok){
+
       return false;
+
     }
 
 
@@ -909,7 +1086,9 @@ async function verifyAdmin(){
 
 
     if(!adminRes.ok){
+
       return false;
+
     }
 
 
@@ -918,7 +1097,9 @@ async function verifyAdmin(){
 
 
     return (
-      Array.isArray(rows)
+      Array.isArray(
+        rows
+      )
       &&
       rows.length > 0
     );
@@ -956,10 +1137,13 @@ function esc(value){
 function money(value){
 
   return new Intl.NumberFormat(
+
     'en-US',
+
     {
       maximumFractionDigits:0
     }
+
   )
   .format(
     Number(
@@ -972,19 +1156,76 @@ function money(value){
 }
 
 
-function methodName(type){
+function customerById(id){
 
-  if(type === 'kpay'){
-    return 'KPay';
-  }
+  return customers.find(
+
+    customer =>
+    customer.id
+    ===
+    id
+
+  )
+  ||
+  null;
+
+}
 
 
-  if(type === 'bank'){
-    return '银行账户';
-  }
+function accountsForCustomer(id){
+
+  return payoutAccounts.filter(
+
+    account =>
+    account.customer_id
+    ===
+    id
+
+  );
+
+}
 
 
-  return type || '—';
+function ordersForCustomer(id){
+
+  return orders.filter(
+
+    order =>
+    order.customer_id
+    ===
+    id
+
+  );
+
+}
+
+
+function paymentsForCustomer(id){
+
+  return payments.filter(
+
+    payment =>
+    payment.customer_id
+    ===
+    id
+
+  );
+
+}
+
+
+function proofForSubmission(id){
+
+  return proofs.find(
+
+    proof =>
+    proof.payment_submission_id
+    ===
+    id
+
+  )
+  ||
+  null;
 
 }
 
@@ -993,13 +1234,19 @@ function roundName(roundId){
 
   const round =
   rounds.find(
-    x =>
-    x.id === roundId
+
+    item =>
+    item.id
+    ===
+    roundId
+
   );
 
 
   if(!round){
+
     return '—';
+
   }
 
 
@@ -1009,13 +1256,27 @@ function roundName(roundId){
   '';
 
 
-  if(round.round_code === '1030'){
-    label = '上午 11:45';
+  if(
+    round.round_code
+    ===
+    '1030'
+  ){
+
+    label =
+    '上午 11:45';
+
   }
 
 
-  if(round.round_code === '1530'){
-    label = '下午 3:45';
+  if(
+    round.round_code
+    ===
+    '1530'
+  ){
+
+    label =
+    '下午 3:45';
+
   }
 
 
@@ -1030,66 +1291,64 @@ function roundName(roundId){
 }
 
 
-function customerAccounts(customerId){
+function statusText(status){
 
-  return payoutAccounts.filter(
+  const map = {
 
-    item =>
-    item.customer_id
-    ===
-    customerId
+    active:
+    '正常',
 
-  );
+    suspended:
+    '已限制',
 
-}
+    blocked:
+    '已拉黑'
 
-
-function customerOrders(customerId){
-
-  return orders.filter(
-
-    item =>
-    item.customer_id
-    ===
-    customerId
-
-  );
-
-}
+  };
 
 
-function customerPayments(customerId){
-
-  return payments.filter(
-
-    item =>
-    item.customer_id
-    ===
-    customerId
-
-  );
-
-}
-
-
-function proofForSubmission(submissionId){
-
-  return proofs.find(
-
-    item =>
-    item.payment_submission_id
-    ===
-    submissionId
-
-  )
+  return map[
+    status
+  ]
   ||
-  null;
+  status
+  ||
+  '—';
+
+}
+
+
+function statusClass(status){
+
+  if(
+    status
+    ===
+    'active'
+  ){
+
+    return 'active';
+
+  }
+
+
+  if(
+    status
+    ===
+    'suspended'
+  ){
+
+    return 'suspended';
+
+  }
+
+
+  return 'blocked';
 
 }
 
 
 /* =========================================================
-   LOAD ALL
+   LOAD
 ========================================================= */
 
 async function loadAll(){
@@ -1116,7 +1375,7 @@ async function loadAll(){
       api(
         '/rest/v1/customer_profiles'
         +
-        '?select=id,customer_code,username,display_name,phone,status,created_at'
+        '?select=id,customer_code,username,display_name,phone,status,restriction_reason,status_changed_at,created_at'
         +
         '&order=created_at.desc'
       ),
@@ -1124,7 +1383,7 @@ async function loadAll(){
       api(
         '/rest/v1/customer_payout_accounts'
         +
-        '?select=id,customer_id,method_type,account_name,account_number,bank_name,is_verified,is_active,created_at,updated_at'
+        '?select=id,customer_id,method_type,account_name,account_number,bank_name,is_active,is_verified,customer_edit_locked,locked_at,unlocked_at,created_at,updated_at'
         +
         '&is_active=eq.true'
         +
@@ -1134,7 +1393,7 @@ async function loadAll(){
       api(
         '/rest/v1/customer_round_orders'
         +
-        '?select=id,round_id,customer_id,status,submitted_total,pending_total,confirmed_total,submitted_at,created_at,updated_at'
+        '?select=id,round_id,customer_id,status,submitted_total,pending_total,confirmed_total,created_at,updated_at'
         +
         '&order=created_at.desc'
         +
@@ -1168,18 +1427,23 @@ async function loadAll(){
         +
         '&order=created_at.desc'
         +
-        '&limit=100'
+        '&limit=200'
       )
 
     ]);
 
 
-    for(const res of responses){
+    for(
+      const res
+      of
+      responses
+    ){
 
       if(!res.ok){
 
         const text =
         await res.text();
+
 
         throw new Error(
           text
@@ -1193,30 +1457,39 @@ async function loadAll(){
 
 
     customers =
-    await responses[0].json();
+    await responses[0]
+    .json();
 
 
     payoutAccounts =
-    await responses[1].json();
+    await responses[1]
+    .json();
 
 
     orders =
-    await responses[2].json();
+    await responses[2]
+    .json();
 
 
     payments =
-    await responses[3].json();
+    await responses[3]
+    .json();
 
 
     proofs =
-    await responses[4].json();
+    await responses[4]
+    .json();
 
 
     rounds =
-    await responses[5].json();
+    await responses[5]
+    .json();
 
 
     updateSummary();
+
+
+    renderPendingPayments();
 
 
     renderCustomers();
@@ -1270,8 +1543,8 @@ function updateSummary(){
   .textContent =
   customers.filter(
 
-    item =>
-    item.status
+    customer =>
+    customer.status
     ===
     'active'
 
@@ -1281,15 +1554,31 @@ function updateSummary(){
 
   document
   .getElementById(
-    'payoutPendingTotal'
+    'suspendedTotal'
   )
   .textContent =
-  payoutAccounts.filter(
+  customers.filter(
 
-    item =>
-    item.is_verified
-    !==
-    true
+    customer =>
+    customer.status
+    ===
+    'suspended'
+
+  )
+  .length;
+
+
+  document
+  .getElementById(
+    'blockedTotal'
+  )
+  .textContent =
+  customers.filter(
+
+    customer =>
+    customer.status
+    ===
+    'blocked'
 
   )
   .length;
@@ -1302,8 +1591,8 @@ function updateSummary(){
   .textContent =
   payments.filter(
 
-    item =>
-    item.status
+    payment =>
+    payment.status
     ===
     'pending'
 
@@ -1314,15 +1603,339 @@ function updateSummary(){
 
 
 /* =========================================================
+   GLOBAL PENDING PAYMENTS
+========================================================= */
+
+function renderPendingPayments(){
+
+  const box =
+  document.getElementById(
+    'pendingPaymentList'
+  );
+
+
+  const pending =
+  payments.filter(
+
+    payment =>
+    payment.status
+    ===
+    'pending'
+
+  );
+
+
+  if(!pending.length){
+
+    box.innerHTML =
+    `
+      <div class="empty">
+        当前没有待审核付款
+      </div>
+    `;
+
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+  pending
+  .map(
+
+    payment => {
+
+      const customer =
+      customerById(
+        payment.customer_id
+      );
+
+
+      return `
+
+        <div class="pendingPayment">
+
+          ${customerIdentityHtml(customer)}
+
+          ${paymentDetailsHtml(payment,true)}
+
+        </div>
+
+      `;
+
+    }
+
+  )
+  .join('');
+
+}
+
+
+/* =========================================================
+   IDENTITY
+========================================================= */
+
+function customerIdentityHtml(customer){
+
+  if(!customer){
+
+    return `
+      <div class="identity">
+        <div class="identityName">
+          未知客户
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  return `
+
+    <div class="identity">
+
+      <div class="identityName">
+        ${esc(customer.display_name || '未填写姓名')}
+      </div>
+
+      <div class="identityCode">
+        ${esc(customer.customer_code || '—')}
+      </div>
+
+      <div class="identityMeta">
+
+        用户名：
+        ${esc(customer.username || '—')}
+        <br>
+
+        电话：
+        ${esc(customer.phone || '—')}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   CUSTOMER STATUS
+========================================================= */
+
+async function setCustomerStatus(
+  customerId,
+  newStatus
+){
+
+  const customer =
+  customerById(
+    customerId
+  );
+
+
+  if(!customer){
+
+    return;
+
+  }
+
+
+  let reason =
+  null;
+
+
+  if(
+    newStatus
+    ===
+    'suspended'
+  ){
+
+    reason =
+    window.prompt(
+
+      '请输入限制原因，客户登录后会看到这段说明：',
+
+      '账户暂时受限，请联系客服。'
+
+    );
+
+
+    if(reason === null){
+
+      return;
+
+    }
+
+
+    reason =
+    reason.trim()
+    ||
+    '账户暂时受限，请联系客服。';
+
+  }
+
+
+  if(
+    newStatus
+    ===
+    'blocked'
+  ){
+
+    reason =
+    window.prompt(
+
+      '请输入拉黑原因，客户登录后会看到这段说明：',
+
+      '账户已停用，请联系客服。'
+
+    );
+
+
+    if(reason === null){
+
+      return;
+
+    }
+
+
+    reason =
+    reason.trim()
+    ||
+    '账户已停用，请联系客服。';
+
+  }
+
+
+  const action =
+  newStatus
+  ===
+  'active'
+  ?
+  '恢复此客户为正常状态'
+  :
+  newStatus
+  ===
+  'suspended'
+  ?
+  '限制此客户'
+  :
+  '拉黑此客户';
+
+
+  const confirmed =
+  window.confirm(
+    action
+    +
+    '？'
+  );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  setPageMessage(
+    '正在更新客户状态...'
+  );
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_set_customer_status',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          p_customer_id:
+          customerId,
+
+          p_status:
+          newStatus,
+
+          p_reason:
+          reason
+
+        })
+
+      }
+
+    );
+
+
+    const data =
+    await parseAdminResponse(
+      res
+    );
+
+
+    await loadAll();
+
+
+    setPageMessage(
+
+      data?.status
+      ===
+      'active'
+      ?
+      '客户已经恢复正常。'
+      :
+      data?.status
+      ===
+      'suspended'
+      ?
+      '客户已经限制。'
+      :
+      '客户已经拉黑。',
+
+      'ok'
+
+    );
+
+  }
+  catch(err){
+
+    setPageMessage(
+      translateError(
+        err.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
    PAYOUT ACCOUNT
 ========================================================= */
 
 function accountHtml(account){
 
-  const verified =
-  account.is_verified
-  ===
-  true;
+  const locked =
+  account.customer_edit_locked
+  !==
+  false;
 
 
   return `
@@ -1332,18 +1945,33 @@ function accountHtml(account){
       <div class="accountHead">
 
         <div class="accountType">
-          ${esc(methodName(account.method_type))}
+          ${
+            account.method_type
+            ===
+            'kpay'
+            ?
+            'KPay'
+            :
+            '银行账户'
+          }
         </div>
 
+
         <div
-          class="verify ${verified ? 'yes' : 'no'}">
+          class="badge ${
+            locked
+            ?
+            'bound'
+            :
+            'editable'
+          }">
 
           ${
-            verified
+            locked
             ?
-            '已确认'
+            '已绑定'
             :
-            '待确认'
+            '已允许修改'
           }
 
         </div>
@@ -1369,45 +1997,32 @@ function accountHtml(account){
 
       <div class="infoRow">
         <span>户名</span>
-        <strong>${esc(account.account_name)}</strong>
+        <strong>${esc(account.account_name || '—')}</strong>
       </div>
 
 
       <div class="infoRow">
         <span>账号 / 手机</span>
-        <strong>${esc(account.account_number)}</strong>
+        <strong>${esc(account.account_number || '—')}</strong>
       </div>
 
 
-      <div class="actions">
+      <div class="singleAction">
 
         <button
-          ${verified ? 'disabled' : ''}
-          onclick="setPayoutVerification(
-            '${esc(account.id)}',
-            true
+          class="warning"
+          ${locked ? '' : 'disabled'}
+          onclick="unlockPayoutAccount(
+            '${esc(account.id)}'
           )">
 
           ${
-            verified
+            locked
             ?
-            '已经确认'
+            '允许客户修改一次'
             :
-            '确认此账户'
+            '等待客户重新保存'
           }
-
-        </button>
-
-
-        <button
-          class="danger"
-          ${verified ? '' : 'disabled'}
-          onclick="setPayoutVerification(
-            '${esc(account.id)}',
-            false
-          )">
-
-          取消确认
 
         </button>
 
@@ -1420,13 +2035,94 @@ function accountHtml(account){
 }
 
 
+async function unlockPayoutAccount(accountId){
+
+  const confirmed =
+  window.confirm(
+
+    '允许客户修改这个收款方式吗？客户修改并保存一次后，会再次自动锁定。'
+
+  );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  setPageMessage(
+    '正在开放修改权限...'
+  );
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_unlock_customer_payout_account',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          p_account_id:
+          accountId
+
+        })
+
+      }
+
+    );
+
+
+    await parseAdminResponse(
+      res
+    );
+
+
+    await loadAll();
+
+
+    setPageMessage(
+      '客户现在可以修改一次此收款方式。',
+      'ok'
+    );
+
+  }
+  catch(err){
+
+    setPageMessage(
+      translateError(
+        err.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
 /* =========================================================
    ORDER
 ========================================================= */
 
 function orderHtml(order){
 
-  const statusMap = {
+  const map = {
 
     draft:
     '待付款',
@@ -1435,7 +2131,7 @@ function orderHtml(order){
     '付款审核中',
 
     confirmed:
-    '已确认',
+    '付款已确认',
 
     locked:
     '已锁定',
@@ -1459,8 +2155,8 @@ function orderHtml(order){
           ${esc(roundName(order.round_id))}
         </div>
 
-        <div class="status active">
-          ${esc(statusMap[order.status] || order.status)}
+        <div class="badge bound">
+          ${esc(map[order.status] || order.status)}
         </div>
 
       </div>
@@ -1469,18 +2165,41 @@ function orderHtml(order){
       <div class="finance">
 
         <div class="financeBox">
-          <small>下注总额</small>
-          <strong>${money(order.submitted_total)}</strong>
+
+          <small>
+            下注总额
+          </small>
+
+          <strong>
+            ${money(order.submitted_total)}
+          </strong>
+
         </div>
 
-        <div class="financeBox">
-          <small>审核中</small>
-          <strong>${money(order.pending_total)}</strong>
-        </div>
 
         <div class="financeBox">
-          <small>已确认</small>
-          <strong>${money(order.confirmed_total)}</strong>
+
+          <small>
+            审核中
+          </small>
+
+          <strong>
+            ${money(order.pending_total)}
+          </strong>
+
+        </div>
+
+
+        <div class="financeBox">
+
+          <small>
+            已确认
+          </small>
+
+          <strong>
+            ${money(order.confirmed_total)}
+          </strong>
+
         </div>
 
       </div>
@@ -1496,7 +2215,10 @@ function orderHtml(order){
    PAYMENT
 ========================================================= */
 
-function paymentHtml(payment){
+function paymentDetailsHtml(
+  payment,
+  showIdentity=false
+){
 
   const proof =
   proofForSubmission(
@@ -1504,7 +2226,7 @@ function paymentHtml(payment){
   );
 
 
-  const statusText = {
+  const statusMap = {
 
     pending:
     '待审核',
@@ -1520,7 +2242,7 @@ function paymentHtml(payment){
 
   return `
 
-    <div class="payment">
+    <div class="${showIdentity ? '' : 'payment'}">
 
       <div class="paymentHead">
 
@@ -1536,10 +2258,11 @@ function paymentHtml(payment){
 
         </div>
 
-        <div
-          class="paymentStatus ${esc(payment.status)}">
 
-          ${esc(statusText[payment.status] || payment.status)}
+        <div
+          class="badge ${esc(payment.status)}">
+
+          ${esc(statusMap[payment.status] || payment.status)}
 
         </div>
 
@@ -1612,9 +2335,9 @@ function paymentHtml(payment){
         payment.rejection_reason
         ?
         `
-          <div class="infoRow">
-            <span>拒绝原因</span>
-            <strong>${esc(payment.rejection_reason)}</strong>
+          <div class="restriction">
+            拒绝原因：
+            ${esc(payment.rejection_reason)}
           </div>
         `
         :
@@ -1630,6 +2353,7 @@ function paymentHtml(payment){
 
             <button
               class="secondary"
+              type="button"
               onclick="viewProof(
                 '${esc(proof.storage_path)}'
               )">
@@ -1658,6 +2382,7 @@ function paymentHtml(payment){
           <div class="actions">
 
             <button
+              type="button"
               ${proof ? '' : 'disabled'}
               onclick="reviewPayment(
                 '${esc(payment.id)}',
@@ -1671,6 +2396,7 @@ function paymentHtml(payment){
 
             <button
               class="danger"
+              type="button"
               onclick="reviewPayment(
                 '${esc(payment.id)}',
                 'rejected'
@@ -1689,6 +2415,16 @@ function paymentHtml(payment){
     </div>
 
   `;
+
+}
+
+
+function paymentHtml(payment){
+
+  return paymentDetailsHtml(
+    payment,
+    false
+  );
 
 }
 
@@ -1764,24 +2500,25 @@ function renderCustomers(){
 
 
   list.innerHTML =
-  rows.map(
+  rows
+  .map(
 
     customer => {
 
       const accounts =
-      customerAccounts(
+      accountsForCustomer(
         customer.id
       );
 
 
-      const customerOrderRows =
-      customerOrders(
+      const customerOrders =
+      ordersForCustomer(
         customer.id
       );
 
 
-      const customerPaymentRows =
-      customerPayments(
+      const customerPayments =
+      paymentsForCustomer(
         customer.id
       );
 
@@ -1806,21 +2543,9 @@ function renderCustomers(){
 
 
             <div
-              class="status ${
-                customer.status === 'active'
-                ?
-                'active'
-                :
-                'other'
-              }">
+              class="status ${statusClass(customer.status)}">
 
-              ${
-                customer.status === 'active'
-                ?
-                '正常'
-                :
-                esc(customer.status)
-              }
+              ${esc(statusText(customer.status))}
 
             </div>
 
@@ -1839,6 +2564,129 @@ function renderCustomers(){
           </div>
 
 
+          ${
+            customer.status
+            !==
+            'active'
+            &&
+            customer.restriction_reason
+            ?
+            `
+              <div class="restriction">
+                平台说明：
+                ${esc(customer.restriction_reason)}
+              </div>
+            `
+            :
+            ''
+          }
+
+
+          <div class="sectionLabel">
+            客户状态管理
+          </div>
+
+
+          ${
+            customer.status
+            ===
+            'active'
+            ?
+            `
+              <div class="actions">
+
+                <button
+                  class="warning"
+                  type="button"
+                  onclick="setCustomerStatus(
+                    '${esc(customer.id)}',
+                    'suspended'
+                  )">
+
+                  限制客户
+
+                </button>
+
+
+                <button
+                  class="danger"
+                  type="button"
+                  onclick="setCustomerStatus(
+                    '${esc(customer.id)}',
+                    'blocked'
+                  )">
+
+                  拉黑客户
+
+                </button>
+
+              </div>
+            `
+            :
+            `
+              <div class="actions three">
+
+                <button
+                  class="success"
+                  type="button"
+                  onclick="setCustomerStatus(
+                    '${esc(customer.id)}',
+                    'active'
+                  )">
+
+                  恢复正常
+
+                </button>
+
+
+                <button
+                  class="warning"
+                  type="button"
+                  ${
+                    customer.status
+                    ===
+                    'suspended'
+                    ?
+                    'disabled'
+                    :
+                    ''
+                  }
+                  onclick="setCustomerStatus(
+                    '${esc(customer.id)}',
+                    'suspended'
+                  )">
+
+                  改为限制
+
+                </button>
+
+
+                <button
+                  class="danger"
+                  type="button"
+                  ${
+                    customer.status
+                    ===
+                    'blocked'
+                    ?
+                    'disabled'
+                    :
+                    ''
+                  }
+                  onclick="setCustomerStatus(
+                    '${esc(customer.id)}',
+                    'blocked'
+                  )">
+
+                  改为拉黑
+
+                </button>
+
+              </div>
+            `
+          }
+
+
           <div class="sectionLabel">
             收款方式
           </div>
@@ -1855,7 +2703,7 @@ function renderCustomers(){
             :
             `
               <div class="empty">
-                暂无客户收款方式
+                客户尚未绑定收款方式
               </div>
             `
           }
@@ -1867,10 +2715,10 @@ function renderCustomers(){
 
 
           ${
-            customerOrderRows.length
+            customerOrders.length
             ?
-            customerOrderRows
-            .slice(0,10)
+            customerOrders
+            .slice(0,12)
             .map(
               orderHtml
             )
@@ -1885,15 +2733,15 @@ function renderCustomers(){
 
 
           <div class="sectionLabel">
-            客户付款申请
+            付款记录
           </div>
 
 
           ${
-            customerPaymentRows.length
+            customerPayments.length
             ?
-            customerPaymentRows
-            .slice(0,10)
+            customerPayments
+            .slice(0,12)
             .map(
               paymentHtml
             )
@@ -1901,7 +2749,7 @@ function renderCustomers(){
             :
             `
               <div class="empty">
-                暂无付款申请
+                暂无付款记录
               </div>
             `
           }
@@ -1919,153 +2767,6 @@ function renderCustomers(){
 
 
 /* =========================================================
-   PAYOUT VERIFY
-========================================================= */
-
-async function setPayoutVerification(
-  accountId,
-  verified
-){
-
-  const ok =
-  window.confirm(
-
-    verified
-    ?
-    '确认此客户收款资料正确吗？'
-    :
-    '确定取消此客户收款方式的确认状态吗？'
-
-  );
-
-
-  if(!ok){
-    return;
-  }
-
-
-  const msg =
-  document.getElementById(
-    'pageMsg'
-  );
-
-
-  msg.textContent =
-  '处理中...';
-
-
-  msg.className =
-  'msg';
-
-
-  try{
-
-    const res =
-    await api(
-
-      '/rest/v1/rpc/admin_set_customer_payout_verification',
-
-      {
-
-        method:'POST',
-
-        headers:{
-
-          'Content-Type':
-          'application/json'
-
-        },
-
-        body:
-        JSON.stringify({
-
-          p_account_id:
-          accountId,
-
-          p_verified:
-          verified
-
-        })
-
-      }
-
-    );
-
-
-    const text =
-    await res.text();
-
-
-    let data = null;
-
-
-    try{
-      data =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      null;
-    }
-    catch{
-      data = text;
-    }
-
-
-    if(!res.ok){
-
-      throw new Error(
-
-        data?.message
-        ||
-        data?.error
-        ||
-        'VERIFY_FAILED'
-
-      );
-
-    }
-
-
-    await loadAll();
-
-
-    msg.textContent =
-    verified
-    ?
-    '客户收款方式已经确认。'
-    :
-    '客户收款方式已取消确认。';
-
-
-    msg.className =
-    'msg ok';
-
-  }
-  catch(err){
-
-    console.error(
-      err
-    );
-
-
-    msg.textContent =
-    translateError(
-      err.message
-    );
-
-
-    msg.className =
-    'msg err';
-
-  }
-
-}
-
-
-/* =========================================================
    PAYMENT REVIEW
 ========================================================= */
 
@@ -2078,16 +2779,24 @@ async function reviewPayment(
   null;
 
 
-  if(action === 'approved'){
+  if(
+    action
+    ===
+    'approved'
+  ){
 
-    const ok =
+    const confirmed =
     window.confirm(
-      '请确认您已经核对付款凭证，并且平台确实收到这笔款项。确认到账吗？'
+
+      '请确认已经核对付款凭证，并且平台确实收到这笔款项。确认到账吗？'
+
     );
 
 
-    if(!ok){
+    if(!confirmed){
+
       return;
+
     }
 
   }
@@ -2095,44 +2804,40 @@ async function reviewPayment(
 
     reason =
     window.prompt(
+
       '请输入拒绝原因：',
-      '付款凭证或金额不正确'
+
+      '付款凭证或付款金额不正确'
+
     );
 
 
     if(reason === null){
+
       return;
+
     }
 
 
     reason =
-    reason.trim();
-
-
-    if(!reason){
-      reason =
-      '付款未通过审核';
-    }
+    reason.trim()
+    ||
+    '付款未通过审核';
 
   }
 
 
-  const msg =
-  document.getElementById(
-    'pageMsg'
+  setPageMessage(
+
+    action
+    ===
+    'approved'
+    ?
+    '正在确认付款...'
+    :
+    '正在拒绝付款...'
+
   );
-
-
-  msg.textContent =
-  action === 'approved'
-  ?
-  '正在确认付款...'
-  :
-  '正在拒绝付款...';
-
-
-  msg.className =
-  'msg';
 
 
   try{
@@ -2163,7 +2868,9 @@ async function reviewPayment(
           action,
 
           p_rejection_reason:
-          action === 'rejected'
+          action
+          ===
+          'rejected'
           ?
           reason
           :
@@ -2176,73 +2883,37 @@ async function reviewPayment(
     );
 
 
-    const text =
-    await res.text();
-
-
-    let data = null;
-
-
-    try{
-      data =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      null;
-    }
-    catch{
-      data = text;
-    }
-
-
-    if(!res.ok){
-
-      throw new Error(
-
-        data?.message
-        ||
-        data?.error
-        ||
-        'REVIEW_FAILED'
-
-      );
-
-    }
+    await parseAdminResponse(
+      res
+    );
 
 
     await loadAll();
 
 
-    msg.textContent =
-    action === 'approved'
-    ?
-    '付款已经确认到账。'
-    :
-    '付款已拒绝，对应锁定金额已经释放。';
+    setPageMessage(
 
+      action
+      ===
+      'approved'
+      ?
+      '付款已经确认到账。'
+      :
+      '付款已拒绝，对应锁定金额已经释放。',
 
-    msg.className =
-    'msg ok';
+      'ok'
+
+    );
 
   }
   catch(err){
 
-    console.error(
-      err
+    setPageMessage(
+      translateError(
+        err.message
+      ),
+      'err'
     );
-
-
-    msg.textContent =
-    translateError(
-      err.message
-    );
-
-
-    msg.className =
-    'msg err';
 
   }
 
@@ -2250,7 +2921,7 @@ async function reviewPayment(
 
 
 /* =========================================================
-   PAYMENT PROOF
+   PROOF
 ========================================================= */
 
 async function viewProof(storagePath){
@@ -2317,36 +2988,124 @@ async function viewProof(storagePath){
 
 
     setTimeout(
+
       ()=>{
+
         URL.revokeObjectURL(
           url
         );
+
       },
+
       60000
+
     );
 
   }
   catch(err){
 
     if(newWindow){
+
       newWindow.close();
+
     }
 
 
-    const msg =
-    document.getElementById(
-      'pageMsg'
+    setPageMessage(
+      '付款凭证读取失败。',
+      'err'
     );
 
+  }
 
-    msg.textContent =
-    '付款凭证读取失败。';
+}
 
 
-    msg.className =
-    'msg err';
+/* =========================================================
+   RESPONSE
+========================================================= */
+
+async function parseAdminResponse(res){
+
+  const text =
+  await res.text();
+
+
+  let data =
+  null;
+
+
+  try{
+
+    data =
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    null;
 
   }
+  catch{
+
+    data =
+    text;
+
+  }
+
+
+  if(!res.ok){
+
+    throw new Error(
+
+      data?.message
+      ||
+      data?.error
+      ||
+      data?.hint
+      ||
+      text
+      ||
+      'REQUEST_FAILED'
+
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+function setPageMessage(
+  text,
+  type=''
+){
+
+  const msg =
+  document.getElementById(
+    'pageMsg'
+  );
+
+
+  msg.textContent =
+  text;
+
+
+  msg.className =
+  'msg'
+  +
+  (
+    type
+    ?
+    ' '
+    +
+    type
+    :
+    ''
+  );
 
 }
 
@@ -2376,6 +3135,39 @@ function translateError(message){
   ){
 
     return '管理员二次验证已经失效，请返回管理中心重新验证。';
+
+  }
+
+
+  if(
+    text.includes(
+      'INVALID_CUSTOMER_STATUS'
+    )
+  ){
+
+    return '客户状态不正确。';
+
+  }
+
+
+  if(
+    text.includes(
+      'CUSTOMER_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到这个客户。';
+
+  }
+
+
+  if(
+    text.includes(
+      'CUSTOMER_PAYOUT_ACCOUNT_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到这个客户收款账户。';
 
   }
 
@@ -2423,7 +3215,7 @@ function translateError(message){
     )
   ){
 
-    return '确认金额超过客户本期订单金额，操作已被阻止。';
+    return '确认金额超过客户本期下注总额，系统已经阻止操作。';
 
   }
 
