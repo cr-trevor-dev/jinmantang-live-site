@@ -1430,7 +1430,7 @@
       }
 
 
-            const rows =
+      const rows =
       await response.json();
 
 
@@ -1563,8 +1563,11 @@
       currentRound.id
     ){
 
-      customerRoundLiveRows =
+            customerRoundLiveRows =
       [];
+
+      customerRoundCommission =
+      null;
 
       customerRoundLiveRoundId =
       null;
