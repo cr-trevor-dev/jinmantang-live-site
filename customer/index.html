@@ -767,7 +767,57 @@ button:disabled{
 
   </div>
 
+  <div
+    id="customerLanguagePicker"
+    style="margin:0 0 14px">
 
+    <select
+      id="customerLangSelect"
+      onchange="changeCustomerLanguage(this.value)"
+      style="
+        width:100%;
+        padding:13px 14px;
+        border-radius:12px;
+        border:1px solid rgba(214,168,63,.28);
+        background:#101011;
+        color:#ecd277;
+        font-size:14px;
+        font-weight:800;
+        text-align:center;
+        outline:none;
+      ">
+
+      <option value="zh">
+        中文
+      </option>
+
+      <option value="my">
+        မြန်မာ
+      </option>
+
+      <option value="en">
+        English
+      </option>
+
+      <option value="th">
+        ไทย
+      </option>
+
+      <option value="ms">
+        Bahasa Melayu
+      </option>
+
+      <option value="vi">
+        Tiếng Việt
+      </option>
+
+      <option value="id">
+        Bahasa Indonesia
+      </option>
+
+    </select>
+
+  </div>
   <section
     id="authCard"
     class="card">
