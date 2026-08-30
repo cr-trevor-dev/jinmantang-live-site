@@ -6331,11 +6331,17 @@ async function submitPayment(){
   }
 
 
-  if(amount > remaining){
+    if(
+    amount
+    !==
+    Math.floor(
+      remaining
+    )
+  ){
 
     return showMessage(
       'paymentMsg',
-      '付款金额不能超过当前待付款金额。'
+      '本次必须支付当前全部待付款金额。'
     );
 
   }
