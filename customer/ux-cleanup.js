@@ -1793,7 +1793,7 @@
       );
 
     }
-
+    applyCustomerLanguage();
   }
 
 
