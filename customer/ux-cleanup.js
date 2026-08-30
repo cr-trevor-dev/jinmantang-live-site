@@ -380,6 +380,569 @@
     );
 
   }
+      /* =========================================================
+     CUSTOMER LANGUAGE
+  ========================================================= */
+
+  const CUSTOMER_LANG_KEY =
+  'jmt_customer_lang';
+
+
+  let customerLang =
+  localStorage.getItem(
+    CUSTOMER_LANG_KEY
+  )
+  ||
+  'zh';
+
+
+  const CUSTOMER_LANG_INDEX = {
+    my:0,
+    en:1,
+    th:2,
+    ms:3,
+    vi:4,
+    id:5
+  };
+
+
+  const CUSTOMER_UI_TEXT = {
+
+    '登录':['ဝင်ရောက်ရန်','Login','เข้าสู่ระบบ','Log Masuk','Đăng nhập','Login'],
+    '注册':['စာရင်းသွင်းရန်','Register','สมัคร','Daftar','Đăng ký','Daftar'],
+    '客户登录':['ဖောက်သည်ဝင်ရောက်ရန်','Customer Login','เข้าสู่ระบบลูกค้า','Log Masuk Pelanggan','Đăng nhập khách hàng','Login Pelanggan'],
+    '用户名':['အသုံးပြုသူအမည်','Username','ชื่อผู้ใช้','Nama Pengguna','Tên đăng nhập','Nama Pengguna'],
+    '密码':['စကားဝှက်','Password','รหัสผ่าน','Kata Laluan','Mật khẩu','Kata Sandi'],
+    '请输入用户名':['အသုံးပြုသူအမည်ထည့်ပါ','Enter username','กรอกชื่อผู้ใช้','Masukkan nama pengguna','Nhập tên đăng nhập','Masukkan nama pengguna'],
+    '请输入密码':['စကားဝှက်ထည့်ပါ','Enter password','กรอกรหัสผ่าน','Masukkan kata laluan','Nhập mật khẩu','Masukkan kata sandi'],
+
+    '创建客户账户':['ဖောက်သည်အကောင့်ဖန်တီးရန်','Create Customer Account','สร้างบัญชีลูกค้า','Cipta Akaun Pelanggan','Tạo tài khoản khách hàng','Buat Akun Pelanggan'],
+    '4–20 位字母、数字或下划线':['အက္ခရာ၊ နံပါတ် သို့မဟုတ် _ 4–20 လုံး','4–20 letters, numbers or underscores','4–20 ตัวอักษร ตัวเลข หรือขีดล่าง','4–20 huruf, nombor atau garis bawah','4–20 chữ cái, số hoặc dấu gạch dưới','4–20 huruf, angka atau garis bawah'],
+    '至少 8 位':['အနည်းဆုံး 8 လုံး','At least 8 characters','อย่างน้อย 8 ตัว','Sekurang-kurangnya 8 aksara','Ít nhất 8 ký tự','Minimal 8 karakter'],
+    '确认密码':['စကားဝှက်အတည်ပြုရန်','Confirm Password','ยืนยันรหัสผ่าน','Sahkan Kata Laluan','Xác nhận mật khẩu','Konfirmasi Kata Sandi'],
+    '请再次输入密码':['စကားဝှက်ကို ထပ်မံထည့်ပါ','Enter password again','กรอกรหัสผ่านอีกครั้ง','Masukkan kata laluan sekali lagi','Nhập lại mật khẩu','Masukkan kata sandi lagi'],
+    '真实姓名':['အမည်အပြည့်အစုံ','Full Name','ชื่อจริง','Nama Penuh','Họ tên','Nama Lengkap'],
+    '请输入真实姓名':['အမည်အပြည့်အစုံထည့်ပါ','Enter full name','กรอกชื่อจริง','Masukkan nama penuh','Nhập họ tên','Masukkan nama lengkap'],
+    '手机号码':['ဖုန်းနံပါတ်','Phone Number','หมายเลขโทรศัพท์','Nombor Telefon','Số điện thoại','Nomor Telepon'],
+    '请输入手机号码':['ဖုန်းနံပါတ်ထည့်ပါ','Enter phone number','กรอกหมายเลขโทรศัพท์','Masukkan nombor telefon','Nhập số điện thoại','Masukkan nomor telepon'],
+    '注册账户':['အကောင့်စာရင်းသွင်းရန်','Register Account','สมัครบัญชี','Daftar Akaun','Đăng ký tài khoản','Daftar Akun'],
+    '请牢记用户名和密码。注册成功后系统会自动生成金满堂客户编号。':[
+      'အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို မှတ်သားထားပါ။ စာရင်းသွင်းပြီးနောက် ဖောက်သည်နံပါတ်ကို စနစ်က အလိုအလျောက်ဖန်တီးပေးမည်။',
+      'Please remember your username and password. A customer ID will be generated automatically after registration.',
+      'โปรดจำชื่อผู้ใช้และรหัสผ่าน ระบบจะสร้างรหัสลูกค้าให้อัตโนมัติหลังสมัครสำเร็จ',
+      'Sila ingat nama pengguna dan kata laluan. ID pelanggan akan dijana secara automatik selepas pendaftaran.',
+      'Hãy ghi nhớ tên đăng nhập và mật khẩu. Mã khách hàng sẽ được tạo tự động sau khi đăng ký.',
+      'Harap ingat nama pengguna dan kata sandi. ID pelanggan akan dibuat otomatis setelah pendaftaran.'
+    ],
+
+    '正在安全连接，请稍候...':['လုံခြုံစွာချိတ်ဆက်နေသည်...','Connecting securely...','กำลังเชื่อมต่ออย่างปลอดภัย...','Menyambung dengan selamat...','Đang kết nối an toàn...','Menghubungkan dengan aman...'],
+
+    '我的账户':['ကျွန်ုပ်၏အကောင့်','My Account','บัญชีของฉัน','Akaun Saya','Tài khoản của tôi','Akun Saya'],
+    '正常':['ပုံမှန်','Active','ปกติ','Aktif','Hoạt động','Aktif'],
+    '姓名':['အမည်','Name','ชื่อ','Nama','Tên','Nama'],
+    '注册手机号':['စာရင်းသွင်းဖုန်းနံပါတ်','Registered Phone','เบอร์โทรที่ลงทะเบียน','Telefon Berdaftar','Số điện thoại đăng ký','Nomor Terdaftar'],
+    '注册手机号已绑定，不能自行修改；如需更换请联系客服。':[
+      'စာရင်းသွင်းဖုန်းနံပါတ်ကို ချိတ်ဆက်ထားပြီး ကိုယ်တိုင်မပြင်နိုင်ပါ။ ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+      'The registered phone number is locked. Contact support to change it.',
+      'เบอร์โทรที่ลงทะเบียนถูกผูกแล้ว ไม่สามารถแก้ไขเองได้ หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ',
+      'Nombor telefon berdaftar telah dikunci. Hubungi khidmat pelanggan untuk menukarnya.',
+      'Số điện thoại đăng ký đã được khóa. Liên hệ hỗ trợ nếu cần thay đổi.',
+      'Nomor telepon terdaftar sudah terkunci. Hubungi layanan pelanggan untuk menggantinya.'
+    ],
+    '保存个人资料':['ကိုယ်ရေးအချက်အလက်သိမ်းရန်','Save Profile','บันทึกข้อมูลส่วนตัว','Simpan Profil','Lưu thông tin','Simpan Profil'],
+
+    '联系客服':['ဝန်ဆောင်မှုကိုဆက်သွယ်ရန်','Contact Support','ติดต่อฝ่ายบริการ','Hubungi Sokongan','Liên hệ hỗ trợ','Hubungi Dukungan'],
+    '退出登录':['ထွက်ရန်','Logout','ออกจากระบบ','Log Keluar','Đăng xuất','Keluar'],
+
+    '我的收款方式':['ကျွန်ုပ်၏ငွေလက်ခံနည်း','My Payout Methods','ช่องทางรับเงินของฉัน','Kaedah Penerimaan Saya','Phương thức nhận tiền','Metode Penerimaan Saya'],
+    '未绑定':['မချိတ်ဆက်ရသေး','Not Linked','ยังไม่ผูก','Belum Dipautkan','Chưa liên kết','Belum Terhubung'],
+    '请仔细核对。首次保存成功后将不能自行修改。':[
+      'သေချာစစ်ဆေးပါ။ ပထမဆုံးသိမ်းပြီးနောက် ကိုယ်တိုင်ပြင်ဆင်၍ မရပါ။',
+      'Please check carefully. It cannot be edited after the first successful save.',
+      'กรุณาตรวจสอบให้ละเอียด หลังบันทึกครั้งแรกแล้วจะไม่สามารถแก้ไขเองได้',
+      'Sila semak dengan teliti. Selepas simpanan pertama, ia tidak boleh diubah sendiri.',
+      'Vui lòng kiểm tra kỹ. Sau lần lưu đầu tiên sẽ không thể tự chỉnh sửa.',
+      'Periksa dengan teliti. Setelah pertama kali disimpan tidak dapat diubah sendiri.'
+    ],
+    'KPay 户名':['KPay အကောင့်အမည်','KPay Account Name','ชื่อบัญชี KPay','Nama Akaun KPay','Tên tài khoản KPay','Nama Akun KPay'],
+    'KPay 手机号码':['KPay ဖုန်းနံပါတ်','KPay Phone Number','หมายเลข KPay','Nombor KPay','Số điện thoại KPay','Nomor KPay'],
+    '保存并绑定 KPay':['KPay သိမ်းပြီး ချိတ်ဆက်ရန်','Save & Link KPay','บันทึกและผูก KPay','Simpan & Paut KPay','Lưu và liên kết KPay','Simpan & Hubungkan KPay'],
+    '银行账户':['ဘဏ်အကောင့်','Bank Account','บัญชีธนาคาร','Akaun Bank','Tài khoản ngân hàng','Rekening Bank'],
+    '银行名称':['ဘဏ်အမည်','Bank Name','ชื่อธนาคาร','Nama Bank','Tên ngân hàng','Nama Bank'],
+    '银行户名':['ဘဏ်အကောင့်အမည်','Account Holder','ชื่อเจ้าของบัญชี','Nama Pemilik Akaun','Tên chủ tài khoản','Nama Pemilik Rekening'],
+    '银行账号':['ဘဏ်အကောင့်နံပါတ်','Account Number','เลขบัญชี','Nombor Akaun','Số tài khoản','Nomor Rekening'],
+    '保存并绑定银行账户':['ဘဏ်အကောင့်သိမ်းပြီး ချိတ်ဆက်ရန်','Save & Link Bank Account','บันทึกและผูกบัญชีธนาคาร','Simpan & Paut Akaun Bank','Lưu và liên kết tài khoản ngân hàng','Simpan & Hubungkan Rekening Bank'],
+
+    '参与本期':['ယခုအကြိမ် ပါဝင်ရန်','Current Round','เข้าร่วมรอบนี้','Pusingan Semasa','Tham gia kỳ này','Putaran Saat Ini'],
+    '读取中':['ဖတ်နေသည်','Loading','กำลังโหลด','Memuatkan','Đang tải','Memuat'],
+    '正在读取管理员当前开放期...':['လက်ရှိဖွင့်ထားသောအကြိမ်ကို ဖတ်နေသည်...','Loading current open round...','กำลังโหลดรอบปัจจุบัน...','Memuatkan pusingan semasa...','Đang tải kỳ hiện tại...','Memuat putaran saat ini...'],
+    '当前暂无可参与的开放期，请等待下一期开放。':['လက်ရှိပါဝင်နိုင်သောအကြိမ် မရှိသေးပါ။ နောက်တစ်ကြိမ်ကို စောင့်ပါ။','No open round is currently available. Please wait for the next round.','ขณะนี้ยังไม่มีรอบที่เปิด กรุณารอรอบถัดไป','Tiada pusingan terbuka sekarang. Sila tunggu pusingan seterusnya.','Hiện chưa có kỳ mở. Vui lòng chờ kỳ tiếp theo.','Belum ada putaran terbuka. Silakan tunggu putaran berikutnya.'],
+
+    '截止时间':['နောက်ဆုံးအချိန်','Deadline','เวลาปิดรับ','Masa Tutup','Hạn chót','Batas Waktu'],
+    '距离截止':['ကျန်ရှိချိန်','Time Remaining','เวลาที่เหลือ','Masa Baki','Thời gian còn lại','Sisa Waktu'],
+    '赔率':['အချိုး','Odds','อัตราจ่าย','Odds','Tỷ lệ','Odds'],
+    '1 : 10 总返还':['1 : 10 စုစုပေါင်းပြန်လည်ပေးချေ','1 : 10 Total Return','1 : 10 ยอดคืนรวม','1 : 10 Jumlah Pulangan','1 : 10 Tổng hoàn trả','1 : 10 Total Pengembalian'],
+    '状态':['အခြေအနေ','Status','สถานะ','Status','Trạng thái','Status'],
+    '未保存':['မသိမ်းရသေး','Not Saved','ยังไม่บันทึก','Belum Disimpan','Chưa lưu','Belum Disimpan'],
+    '本期合计':['ယခုအကြိမ်စုစုပေါင်း','Round Total','ยอดรวมรอบนี้','Jumlah Pusingan','Tổng kỳ này','Total Putaran'],
+    '保存本期':['ယခုအကြိမ်သိမ်းရန်','Save Round','บันทึกรอบนี้','Simpan Pusingan','Lưu kỳ này','Simpan Putaran'],
+
+    '本期付款':['ယခုအကြိမ်ငွေပေးချေမှု','Round Payment','การชำระรอบนี้','Bayaran Pusingan','Thanh toán kỳ này','Pembayaran Putaran'],
+    '下注合计':['လောင်းကြေးစုစုပေါင်း','Bet Total','ยอดเดิมพันรวม','Jumlah Pertaruhan','Tổng cược','Total Taruhan'],
+    '审核中':['စစ်ဆေးနေသည်','Pending Review','กำลังตรวจสอบ','Menunggu Semakan','Đang xét duyệt','Sedang Ditinjau'],
+    '已确认':['အတည်ပြုပြီး','Confirmed','ยืนยันแล้ว','Disahkan','Đã xác nhận','Dikonfirmasi'],
+    '现在还需付款':['ယခုပေးချေရန်ကျန်','Amount Remaining','ยอดที่ยังต้องชำระ','Baki Perlu Dibayar','Số tiền còn phải trả','Sisa yang Harus Dibayar'],
+    '付款到平台账户':['Platform အကောင့်သို့ပေးချေရန်','Pay to Platform Account','ชำระเข้าบัญชีแพลตฟอร์ม','Bayar ke Akaun Platform','Thanh toán vào tài khoản nền tảng','Bayar ke Akun Platform'],
+    '请选择平台收款方式':['Platform ငွေလက်ခံနည်းရွေးပါ','Select platform payment method','เลือกช่องทางรับเงินของแพลตฟอร์ม','Pilih kaedah pembayaran platform','Chọn phương thức thanh toán nền tảng','Pilih metode pembayaran platform'],
+    '本次付款金额':['ယခုပေးချေမည့်ငွေ','Payment Amount','ยอดชำระครั้งนี้','Jumlah Bayaran','Số tiền thanh toán','Jumlah Pembayaran'],
+    '请输入付款金额':['ပေးချေမည့်ငွေထည့်ပါ','Enter payment amount','กรอกยอดชำระ','Masukkan jumlah bayaran','Nhập số tiền thanh toán','Masukkan jumlah pembayaran'],
+    '付款截图 / 凭证':['ငွေပေးချေမှု Screenshot / အထောက်အထား','Payment Screenshot / Proof','ภาพ / หลักฐานการชำระ','Screenshot / Bukti Bayaran','Ảnh / chứng từ thanh toán','Screenshot / Bukti Pembayaran'],
+    '备注（可不填）':['မှတ်ချက် (မဖြည့်လည်းရသည်)','Note (Optional)','หมายเหตุ (ไม่บังคับ)','Nota (Pilihan)','Ghi chú (không bắt buộc)','Catatan (Opsional)'],
+    '提交付款审核':['ငွေပေးချေမှု စစ်ဆေးရန်တင်ရန်','Submit Payment for Review','ส่งการชำระเพื่อตรวจสอบ','Hantar Bayaran untuk Semakan','Gửi thanh toán để duyệt','Kirim Pembayaran untuk Ditinjau'],
+    '付款记录':['ငွေပေးချေမှုမှတ်တမ်း','Payment History','ประวัติการชำระ','Sejarah Bayaran','Lịch sử thanh toán','Riwayat Pembayaran'],
+    '暂无付款记录':['ငွေပေးချေမှုမှတ်တမ်း မရှိသေးပါ','No payment history','ยังไม่มีประวัติการชำระ','Tiada sejarah bayaran','Chưa có lịch sử thanh toán','Belum ada riwayat pembayaran'],
+
+    '最近一期结果':['နောက်ဆုံးအကြိမ်ရလဒ်','Latest Round Result','ผลรอบล่าสุด','Keputusan Pusingan Terkini','Kết quả kỳ gần nhất','Hasil Putaran Terbaru'],
+    '开奖生肖：':['ပေါက်သောရာသီခွင်：','Winning Zodiac: ','นักษัตรที่ออก: ','Zodiak Pemenang: ','Con giáp trúng: ','Shio Pemenang: '],
+    '我的有效下注':['ကျွန်ုပ်၏အတည်ပြုလောင်းကြေး','My Confirmed Bets','เดิมพันที่ยืนยันแล้ว','Pertaruhan Disahkan','Cược đã xác nhận','Taruhan Dikonfirmasi'],
+    '命中生肖金额':['ပေါက်ရာသီခွင်ငွေ','Winning Zodiac Amount','ยอดเดิมพันที่ถูกรางวัล','Jumlah Zodiak Menang','Tiền cược trúng con giáp','Jumlah Shio Menang'],
+    '本期赔率':['ယခုအကြိမ်အချိုး','Round Odds','อัตราจ่ายรอบนี้','Odds Pusingan','Tỷ lệ kỳ này','Odds Putaran'],
+    '中奖返还':['အနိုင်ရပြန်လည်ပေးချေငွေ','Winning Return','ยอดรางวัลคืน','Pulangan Menang','Tiền trúng trả lại','Pengembalian Menang'],
+    '未中奖 · 本期已结算':['မပေါက်ပါ · ယခုအကြိမ်ရှင်းပြီး','No Win · Round Settled','ไม่ถูกรางวัล · รอบนี้ปิดบัญชีแล้ว','Tidak Menang · Pusingan Selesai','Không trúng · Kỳ đã quyết toán','Tidak Menang · Putaran Selesai'],
+    '已派彩':['ပေးချေပြီး','Paid Out','จ่ายรางวัลแล้ว','Sudah Dibayar','Đã trả thưởng','Sudah Dibayar'],
+    '部分派彩 · 剩余 ':['တစ်စိတ်တစ်ပိုင်းပေးချေပြီး · ကျန် ','Partially Paid · Remaining ','จ่ายบางส่วน · คงเหลือ ','Bayaran Sebahagian · Baki ','Đã trả một phần · Còn ','Dibayar Sebagian · Sisa '],
+    '待派彩 · 平台应返还 ':['ဆုငွေပေးရန်စောင့် · Platform ပြန်ပေးရမည် ','Pending Payout · Platform Returns ','รอจ่ายรางวัล · แพลตฟอร์มต้องคืน ','Menunggu Bayaran · Platform Perlu Bayar ','Chờ trả thưởng · Nền tảng cần trả ','Menunggu Pembayaran · Platform Harus Membayar '],
+
+    '鼠':['ကြွက်','Rat','หนู','Tikus','Chuột','Tikus'],
+    '牛':['နွား','Ox','วัว','Lembu','Trâu','Sapi'],
+    '虎':['ကျား','Tiger','เสือ','Harimau','Hổ','Harimau'],
+    '兔':['ယုန်','Rabbit','กระต่าย','Arnab','Thỏ','Kelinci'],
+    '龙':['နဂါး','Dragon','มังกร','Naga','Rồng','Naga'],
+    '蛇':['မြွေ','Snake','งู','Ular','Rắn','Ular'],
+    '马':['မြင်း','Horse','ม้า','Kuda','Ngựa','Kuda'],
+    '羊':['ဆိတ်','Goat','แพะ','Kambing','Dê','Kambing'],
+    '猴':['မျောက်','Monkey','ลิง','Monyet','Khỉ','Monyet'],
+    '鸡':['ကြက်','Rooster','ไก่','Ayam','Gà','Ayam'],
+    '狗':['ခွေး','Dog','สุนัข','Anjing','Chó','Anjing'],
+    '猪':['ဝက်','Pig','หมู','Babi','Heo','Babi']
+
+  };
+
+
+  function customerTranslateValue(value){
+
+    let result =
+    String(
+      value
+      ??
+      ''
+    );
+
+
+    const entries =
+    Object.entries(
+      CUSTOMER_UI_TEXT
+    )
+    .sort(
+      (a,b)=>
+      b[0].length
+      -
+      a[0].length
+    );
+
+
+    entries.forEach(
+      ([zh, translations])=>{
+
+        const index =
+        CUSTOMER_LANG_INDEX[
+          customerLang
+        ];
+
+        const target =
+        customerLang === 'zh'
+        ?
+        zh
+        :
+        (
+          translations[index]
+          ||
+          zh
+        );
+
+
+        const sources =
+        [
+          zh,
+          ...translations
+        ]
+        .filter(Boolean)
+        .sort(
+          (a,b)=>
+          b.length
+          -
+          a.length
+        );
+
+
+        sources.forEach(
+          source=>{
+
+            if(
+              source
+              &&
+              source !== target
+              &&
+              result.includes(
+                source
+              )
+            ){
+
+              result =
+              result
+              .split(source)
+              .join(target);
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    return result;
+
+  }
+
+
+  let customerLanguageApplying =
+  false;
+
+
+  let customerLanguageTimer =
+  null;
+
+
+  function applyCustomerLanguage(){
+
+    if(
+      customerLanguageApplying
+    ){
+
+      return;
+
+    }
+
+
+    customerLanguageApplying =
+    true;
+
+
+    try{
+
+      document.documentElement.lang =
+      customerLang;
+
+
+      const walker =
+      document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT
+      );
+
+
+      const nodes =
+      [];
+
+
+      while(
+        walker.nextNode()
+      ){
+
+        const parent =
+        walker.currentNode
+        .parentElement;
+
+
+        if(
+          parent
+          &&
+          ![
+            'SCRIPT',
+            'STYLE'
+          ]
+          .includes(
+            parent.tagName
+          )
+        ){
+
+          nodes.push(
+            walker.currentNode
+          );
+
+        }
+
+      }
+
+
+      nodes.forEach(
+        node=>{
+
+          const next =
+          customerTranslateValue(
+            node.nodeValue
+          );
+
+
+          if(
+            next !==
+            node.nodeValue
+          ){
+
+            node.nodeValue =
+            next;
+
+          }
+
+        }
+      );
+
+
+      document
+      .querySelectorAll(
+        '[placeholder]'
+      )
+      .forEach(
+        el=>{
+
+          const next =
+          customerTranslateValue(
+            el.placeholder
+          );
+
+
+          if(
+            next !==
+            el.placeholder
+          ){
+
+            el.placeholder =
+            next;
+
+          }
+
+        }
+      );
+
+
+      const select =
+      document.getElementById(
+        'customerLangSelect'
+      );
+
+
+      if(select){
+
+        select.value =
+        customerLang;
+
+      }
+
+    }
+    finally{
+
+      customerLanguageApplying =
+      false;
+
+    }
+
+  }
+
+
+  function changeCustomerLanguage(
+    lang
+  ){
+
+    if(
+      ![
+        'zh',
+        'my',
+        'en',
+        'th',
+        'ms',
+        'vi',
+        'id'
+      ]
+      .includes(
+        lang
+      )
+    ){
+
+      lang =
+      'zh';
+
+    }
+
+
+    customerLang =
+    lang;
+
+
+    localStorage.setItem(
+      CUSTOMER_LANG_KEY,
+      lang
+    );
+
+
+    applyCustomerLanguage();
+
+  }
+
+
+  window.changeCustomerLanguage =
+  changeCustomerLanguage;
+
+
+  function ensureCustomerLanguagePicker(){
+
+    if(
+      document.getElementById(
+        'customerLangSelect'
+      )
+    ){
+
+      return;
+
+    }
+
+
+    const wrap =
+    document.createElement(
+      'div'
+    );
+
+
+    wrap.style.margin =
+    '0 0 14px';
+
+
+    wrap.innerHTML = `
+
+      <select
+        id="customerLangSelect"
+        onchange="changeCustomerLanguage(this.value)"
+        style="
+          text-align:center;
+          color:#ecd277;
+          font-weight:800;
+          background:#101011;
+          border:1px solid rgba(214,168,63,.25);
+          border-radius:12px;
+          padding:12px;
+          width:100%;
+        ">
+
+        <option value="zh">
+          中文
+        </option>
+
+        <option value="my">
+          မြန်မာ
+        </option>
+
+        <option value="en">
+          English
+        </option>
+
+        <option value="th">
+          ไทย
+        </option>
+
+        <option value="ms">
+          Bahasa Melayu
+        </option>
+
+        <option value="vi">
+          Tiếng Việt
+        </option>
+
+        <option value="id">
+          Bahasa Indonesia
+        </option>
+
+      </select>
+
+    `;
+
+
+    const brand =
+    document.querySelector(
+      '.brand'
+    );
+
+
+    if(
+      brand
+      &&
+      brand.parentNode
+    ){
+
+      brand.insertAdjacentElement(
+        'afterend',
+        wrap
+      );
+
+    }
+
+  }
+
+
+  function scheduleCustomerLanguage(){
+
+    if(
+      customerLanguageApplying
+    ){
+
+      return;
+
+    }
+
+
+    clearTimeout(
+      customerLanguageTimer
+    );
+
+
+    customerLanguageTimer =
+    setTimeout(
+      applyCustomerLanguage,
+      20
+    );
+
+  }
+
+
+  ensureCustomerLanguagePicker();
+
+  applyCustomerLanguage();
+
+
+  const customerLanguageObserver =
+  new MutationObserver(
+    scheduleCustomerLanguage
+  );
+
+
+  customerLanguageObserver.observe(
+    document.body,
+    {
+      childList:true,
+      subtree:true,
+      characterData:true
+    }
+  );
   const $ =
   id =>
   document.getElementById(id);
