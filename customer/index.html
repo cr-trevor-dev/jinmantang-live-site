@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080706">
+
 <title>金满堂 · 客户中心</title>
 
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  defer>
+</script>
 
 <style>
 *{
@@ -176,6 +181,10 @@ select:focus{
     0 0 0 3px rgba(221,169,49,.09);
 }
 
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
 button.primary{
   width:100%;
   border:0;
@@ -216,7 +225,7 @@ button.danger{
 }
 
 button:disabled{
-  opacity:.5;
+  opacity:.48;
 }
 
 .note{
@@ -296,6 +305,7 @@ button:disabled{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
   margin-bottom:12px;
 }
 
@@ -312,11 +322,17 @@ button:disabled{
 .verify.yes{
   background:rgba(69,141,87,.14);
   color:#9dd7aa;
+  border:1px solid rgba(69,141,87,.2);
 }
 
 .verify.no{
   background:rgba(170,126,43,.13);
   color:#d6b971;
+  border:1px solid rgba(170,126,43,.18);
+}
+
+.accountStatusBar{
+  margin-top:12px;
 }
 
 .divider{
@@ -332,7 +348,7 @@ button:disabled{
 }
 
 .hidden{
-  display:none !important;
+  display:none!important;
 }
 
 .loader{
@@ -411,19 +427,46 @@ button:disabled{
 }
 
 .zodiacImgWrap{
+  position:relative;
   aspect-ratio:1/1;
   border-radius:11px;
   overflow:hidden;
-  background:#080705;
-  border:1px solid rgba(212,169,59,.16);
   margin-bottom:8px;
+  border:1px solid rgba(212,169,59,.18);
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #2b200d,
+      #0a0906 68%
+    );
+}
+
+.zodiacFallback{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  font-weight:900;
+  color:#d5aa42;
+  text-shadow:
+    0 0 18px rgba(221,171,47,.22);
 }
 
 .zodiacImg{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
+.zodiacImg.loaded{
+  opacity:1;
 }
 
 .zodiacName{
@@ -521,6 +564,7 @@ button:disabled{
       <button
         id="loginTab"
         class="tab active"
+        type="button"
         onclick="showAuth('login')">
         登录
       </button>
@@ -528,6 +572,7 @@ button:disabled{
       <button
         id="registerTab"
         class="tab"
+        type="button"
         onclick="showAuth('register')">
         注册
       </button>
@@ -557,7 +602,7 @@ button:disabled{
 
       <div class="field">
 
-        <label>
+        <label for="loginUsername">
           用户名
         </label>
 
@@ -567,14 +612,14 @@ button:disabled{
           maxlength="20"
           autocomplete="username"
           autocapitalize="none"
+          spellcheck="false"
           placeholder="请输入用户名">
 
       </div>
 
-
       <div class="field">
 
-        <label>
+        <label for="loginPassword">
           密码
         </label>
 
@@ -586,14 +631,13 @@ button:disabled{
 
       </div>
 
-
       <button
         id="loginBtn"
         class="primary"
+        type="button"
         onclick="login()">
         登录
       </button>
-
 
       <div
         id="loginMsg"
@@ -611,10 +655,9 @@ button:disabled{
         创建客户账户
       </div>
 
-
       <div class="field">
 
-        <label>
+        <label for="regUsername">
           用户名
         </label>
 
@@ -624,14 +667,14 @@ button:disabled{
           maxlength="20"
           autocomplete="username"
           autocapitalize="none"
+          spellcheck="false"
           placeholder="4–20 位字母、数字或下划线">
 
       </div>
 
-
       <div class="field">
 
-        <label>
+        <label for="regPassword">
           密码
         </label>
 
@@ -644,10 +687,9 @@ button:disabled{
 
       </div>
 
-
       <div class="field">
 
-        <label>
+        <label for="regPasswordConfirm">
           确认密码
         </label>
 
@@ -660,10 +702,9 @@ button:disabled{
 
       </div>
 
-
       <div class="field">
 
-        <label>
+        <label for="regName">
           真实姓名
         </label>
 
@@ -676,10 +717,9 @@ button:disabled{
 
       </div>
 
-
       <div class="field">
 
-        <label>
+        <label for="regPhone">
           手机号码
         </label>
 
@@ -688,24 +728,23 @@ button:disabled{
           type="tel"
           maxlength="40"
           autocomplete="tel"
+          inputmode="tel"
           placeholder="请输入手机号码">
 
       </div>
 
-
       <button
         id="registerBtn"
         class="primary"
+        type="button"
         onclick="registerCustomer()">
         注册账户
       </button>
-
 
       <div
         id="registerMsg"
         class="msg">
       </div>
-
 
       <div class="note">
         请牢记您的用户名和密码。注册成功后，系统会自动生成金满堂客户编号。
@@ -731,6 +770,7 @@ button:disabled{
     id="dashboard"
     class="dashboard">
 
+
     <section class="card">
 
       <div class="profileTop">
@@ -753,22 +793,19 @@ button:disabled{
 
         </div>
 
-
         <div class="status">
           正常
         </div>
 
       </div>
 
-
       <div class="divider"></div>
-
 
       <div class="two">
 
         <div class="field">
 
-          <label>
+          <label for="profileNameInput">
             姓名
           </label>
 
@@ -779,30 +816,29 @@ button:disabled{
 
         </div>
 
-
         <div class="field">
 
-          <label>
+          <label for="profilePhoneInput">
             联系电话
           </label>
 
           <input
             id="profilePhoneInput"
             type="tel"
-            maxlength="40">
+            maxlength="40"
+            inputmode="tel">
 
         </div>
 
       </div>
 
-
       <button
         id="saveProfileBtn"
         class="secondary"
+        type="button"
         onclick="saveProfile()">
         保存个人资料
       </button>
-
 
       <div
         id="profileMsg"
@@ -818,9 +854,8 @@ button:disabled{
         我的收款方式
       </div>
 
-
       <div class="note">
-        可同时绑定 KPay 与银行账户。修改收款资料后需要重新确认。
+        可同时绑定 KPay 与银行账户。新绑定或修改资料后，需要管理员重新确认。
       </div>
 
 
@@ -840,10 +875,9 @@ button:disabled{
 
         </div>
 
-
         <div class="field">
 
-          <label>
+          <label for="kpayName">
             KPay 户名
           </label>
 
@@ -855,10 +889,9 @@ button:disabled{
 
         </div>
 
-
         <div class="field">
 
-          <label>
+          <label for="kpayNumber">
             KPay 手机号码
           </label>
 
@@ -866,14 +899,15 @@ button:disabled{
             id="kpayNumber"
             type="tel"
             maxlength="60"
+            inputmode="tel"
             placeholder="请输入 KPay 手机号码">
 
         </div>
 
-
         <button
           id="saveKpayBtn"
           class="secondary"
+          type="button"
           onclick="savePayoutAccount('kpay')">
           保存 KPay
         </button>
@@ -897,10 +931,9 @@ button:disabled{
 
         </div>
 
-
         <div class="field">
 
-          <label>
+          <label for="bankName">
             银行名称
           </label>
 
@@ -912,10 +945,9 @@ button:disabled{
 
         </div>
 
-
         <div class="field">
 
-          <label>
+          <label for="bankAccountName">
             银行户名
           </label>
 
@@ -927,10 +959,9 @@ button:disabled{
 
         </div>
 
-
         <div class="field">
 
-          <label>
+          <label for="bankAccountNumber">
             银行账号
           </label>
 
@@ -938,20 +969,33 @@ button:disabled{
             id="bankAccountNumber"
             type="text"
             maxlength="100"
+            inputmode="numeric"
             placeholder="请输入银行账号">
 
         </div>
 
-
         <button
           id="saveBankBtn"
           class="secondary"
+          type="button"
           onclick="savePayoutAccount('bank')">
           保存银行账户
         </button>
 
       </div>
 
+
+      <div class="accountStatusBar">
+
+        <button
+          id="refreshPayoutBtn"
+          class="secondary"
+          type="button"
+          onclick="refreshPayoutStatus()">
+          刷新确认状态
+        </button>
+
+      </div>
 
       <div
         id="accountMsg"
@@ -980,7 +1024,6 @@ button:disabled{
           </div>
 
         </div>
-
 
         <div
           id="roundBadge"
@@ -1100,16 +1143,15 @@ button:disabled{
         </div>
 
 
-        <div
-          id="roundLockedNote"
-          class="note">
-          截止时间前，可修改未进入付款确认的金额；已经锁定的金额不能减少。
+        <div class="note">
+          截止前可修改尚未锁定的金额。已经进入付款确认或已确认的金额不能减少。
         </div>
 
 
         <button
           id="saveRoundBtn"
           class="primary"
+          type="button"
           onclick="saveRoundEntries()">
           保存本期
         </button>
@@ -1129,6 +1171,7 @@ button:disabled{
 
       <button
         class="danger"
+        type="button"
         onclick="logout()">
         退出登录
       </button>
@@ -1278,6 +1321,14 @@ let countdownTimer =
 null;
 
 
+let zodiacObserver =
+null;
+
+
+let savingRound =
+false;
+
+
 /* =========================================================
    CAPTCHA
 ========================================================= */
@@ -1334,7 +1385,7 @@ function resetCaptcha(){
 function showMessage(
   id,
   text,
-  type = 'err'
+  type='err'
 ){
 
   const el =
@@ -1431,10 +1482,10 @@ function authHeaders(){
 
   return {
 
-    'apikey':
+    apikey:
     KEY,
 
-    'Authorization':
+    Authorization:
     'Bearer '
     +
     token,
@@ -1481,20 +1532,18 @@ async function parseResponse(res){
     !res.ok
   ){
 
-    const message =
-    data?.message
-    ||
-    data?.error_description
-    ||
-    data?.error
-    ||
-    data?.hint
-    ||
-    '请求失败';
-
-
     throw new Error(
-      message
+
+      data?.message
+      ||
+      data?.error_description
+      ||
+      data?.error
+      ||
+      data?.hint
+      ||
+      '请求失败'
+
     );
 
   }
@@ -1508,7 +1557,8 @@ async function parseResponse(res){
 function showAuth(mode){
 
   const login =
-  mode ===
+  mode
+  ===
   'login';
 
 
@@ -1628,7 +1678,7 @@ async function refreshSession(){
 
         headers:{
 
-          'apikey':
+          apikey:
           KEY,
 
           'Content-Type':
@@ -1844,7 +1894,7 @@ async function registerCustomer(){
 
         headers:{
 
-          'apikey':
+          apikey:
           KEY,
 
           'Content-Type':
@@ -1858,13 +1908,16 @@ async function registerCustomer(){
           action:
           'register',
 
+          username:
           username,
 
+          password:
           password,
 
           display_name:
           name,
 
+          phone:
           phone,
 
           captcha_token:
@@ -1891,12 +1944,6 @@ async function registerCustomer(){
     data.refresh_token
     ||
     '';
-
-
-    profile =
-    data.profile
-    ||
-    null;
 
 
     saveTokens();
@@ -2010,7 +2057,7 @@ async function login(){
 
         headers:{
 
-          'apikey':
+          apikey:
           KEY,
 
           'Content-Type':
@@ -2024,8 +2071,10 @@ async function login(){
           action:
           'login',
 
+          username:
           username,
 
+          password:
           password,
 
           captcha_token:
@@ -2052,12 +2101,6 @@ async function login(){
     data.refresh_token
     ||
     '';
-
-
-    profile =
-    data.profile
-    ||
-    null;
 
 
     saveTokens();
@@ -2110,10 +2153,8 @@ async function loadProfile(){
     '/rest/v1/customer_profiles?select=id,customer_code,display_name,phone,status&limit=1',
 
     {
-
       headers:
       authHeaders()
-
     }
 
   );
@@ -2328,10 +2369,8 @@ async function loadPayoutAccounts(){
     '/rest/v1/customer_payout_accounts?select=id,method_type,account_name,account_number,bank_name,is_verified,is_active&is_active=eq.true&order=method_type.asc',
 
     {
-
       headers:
       authHeaders()
-
     }
 
   );
@@ -2378,6 +2417,8 @@ function setVerifyBadge(
 
   if(
     account.is_verified
+    ===
+    true
   ){
 
     el.textContent =
@@ -2406,23 +2447,19 @@ function renderPayoutAccounts(){
 
   const kpay =
   payoutAccounts.find(
-
     item =>
     item.method_type
     ===
     'kpay'
-
   );
 
 
   const bank =
   payoutAccounts.find(
-
     item =>
     item.method_type
     ===
     'bank'
-
   );
 
 
@@ -2486,6 +2523,57 @@ function renderPayoutAccounts(){
     'bankVerify',
     bank
   );
+
+}
+
+
+async function refreshPayoutStatus(){
+
+  clearMessage(
+    'accountMsg'
+  );
+
+
+  setBusy(
+    'refreshPayoutBtn',
+    true,
+    '刷新确认状态',
+    '正在刷新...'
+  );
+
+
+  try{
+
+    await loadPayoutAccounts();
+
+
+    showMessage(
+      'accountMsg',
+      '收款方式状态已刷新。',
+      'ok'
+    );
+
+  }
+  catch(err){
+
+    showMessage(
+      'accountMsg',
+      translateError(
+        err.message
+      )
+    );
+
+  }
+  finally{
+
+    setBusy(
+      'refreshPayoutBtn',
+      false,
+      '刷新确认状态',
+      '正在刷新...'
+    );
+
+  }
 
 }
 
@@ -2702,9 +2790,9 @@ async function savePayoutAccount(method){
       ===
       'kpay'
       ?
-      'KPay 已保存，当前状态为待确认。'
+      'KPay 已保存，等待管理员确认。'
       :
-      '银行账户已保存，当前状态为待确认。',
+      '银行账户已保存，等待管理员确认。',
 
       'ok'
 
@@ -2741,25 +2829,18 @@ async function savePayoutAccount(method){
 
 function formatMoney(value){
 
-  const number =
-  Number(
-    value
-    ||
-    0
-  );
-
-
   return new Intl.NumberFormat(
-
     'en-US',
-
     {
       maximumFractionDigits:0
     }
-
   )
   .format(
-    number
+    Number(
+      value
+      ||
+      0
+    )
   );
 
 }
@@ -2826,7 +2907,9 @@ function roundDisplayName(round){
 
 
   let label =
-  round.round_code;
+  round.round_code
+  ||
+  '本期';
 
 
   if(
@@ -2870,8 +2953,6 @@ function chooseBestRound(rows){
     !Array.isArray(
       rows
     )
-    ||
-    !rows.length
   ){
 
     return null;
@@ -2883,32 +2964,32 @@ function chooseBestRound(rows){
   Date.now();
 
 
-  return (
+  return rows.find(
 
-    rows.find(
+    round =>
 
-      round =>
+    round.status
+    ===
+    'open'
 
-      round.status
-      ===
-      'open'
+    &&
 
-      &&
+    round.game_mode
+    ===
+    'zodiac'
 
-      new Date(
-        round.deadline_at
-      )
-      .getTime()
-      >
-      now
+    &&
 
+    new Date(
+      round.deadline_at
     )
+    .getTime()
+    >
+    now
 
-    ||
-
-    null
-
-  );
+  )
+  ||
+  null;
 
 }
 
@@ -2944,6 +3025,150 @@ function lockedAmount(entry){
       ||
       0
     )
+
+  );
+
+}
+
+
+/* =========================================================
+   ZODIAC IMAGE LOADING
+========================================================= */
+
+function loadZodiacImage(img){
+
+  if(
+    !img
+    ||
+    img.dataset.loaded
+    ===
+    '1'
+  ){
+
+    return;
+
+  }
+
+
+  const source =
+  img.dataset.src;
+
+
+  if(
+    !source
+  ){
+
+    return;
+
+  }
+
+
+  img.dataset.loaded =
+  '1';
+
+
+  img.onload =
+  ()=>{
+
+    img.classList.add(
+      'loaded'
+    );
+
+  };
+
+
+  img.onerror =
+  ()=>{
+
+    img.removeAttribute(
+      'src'
+    );
+
+  };
+
+
+  img.src =
+  source;
+
+}
+
+
+function setupZodiacObserver(){
+
+  if(
+    zodiacObserver
+  ){
+
+    zodiacObserver.disconnect();
+
+  }
+
+
+  const images =
+  document.querySelectorAll(
+    '.zodiacImg[data-src]'
+  );
+
+
+  if(
+    !('IntersectionObserver' in window)
+  ){
+
+    images.forEach(
+      loadZodiacImage
+    );
+
+    return;
+
+  }
+
+
+  zodiacObserver =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(
+
+        entry => {
+
+          if(
+            entry.isIntersecting
+          ){
+
+            loadZodiacImage(
+              entry.target
+            );
+
+
+            zodiacObserver.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+
+      );
+
+    },
+
+    {
+      rootMargin:'220px 0px'
+    }
+
+  );
+
+
+  images.forEach(
+
+    img => {
+
+      zodiacObserver.observe(
+        img
+      );
+
+    }
 
   );
 
@@ -3002,18 +3227,27 @@ function renderRoundGrid(){
 
       item.innerHTML =
       `
+
         <div class="zodiacImgWrap">
+
+          <div class="zodiacFallback">
+            ${zodiac.name}
+          </div>
 
           <img
             class="zodiacImg"
-            src="${zodiac.img}"
+            data-src="${zodiac.img}"
+            loading="lazy"
+            decoding="async"
             alt="${zodiac.name}">
 
         </div>
 
+
         <div class="zodiacName">
           ${zodiac.name}
         </div>
+
 
         <input
           class="zodiacInput"
@@ -3026,10 +3260,13 @@ function renderRoundGrid(){
           placeholder="金额"
           oninput="updateRoundTotal()">
 
+
         <div class="zodiacLocked">
 
           ${
-            locked > 0
+            locked
+            >
+            0
             ?
             '已锁定 '
             +
@@ -3041,6 +3278,7 @@ function renderRoundGrid(){
           }
 
         </div>
+
       `;
 
 
@@ -3054,6 +3292,9 @@ function renderRoundGrid(){
 
 
   updateRoundTotal();
+
+
+  setupZodiacObserver();
 
 }
 
@@ -3077,25 +3318,36 @@ function updateRoundTotal(){
 
 
       if(
-        input
+        !input
+      ){
+
+        return;
+
+      }
+
+
+      const value =
+      Math.floor(
+        Number(
+          input.value
+          ||
+          0
+        )
+      );
+
+
+      if(
+        Number.isFinite(
+          value
+        )
+        &&
+        value
+        >
+        0
       ){
 
         total +=
-        Math.max(
-
-          0,
-
-          Math.floor(
-
-            Number(
-              input.value
-              ||
-              0
-            )
-
-          )
-
-        );
+        value;
 
       }
 
@@ -3130,7 +3382,6 @@ function renderOrderStatus(){
 
     el.textContent =
     '未保存';
-
 
     return;
 
@@ -3206,16 +3457,30 @@ function setRoundEditable(editable){
   );
 
 
-  button.disabled =
-  !editable;
+  if(
+    button
+  ){
+
+    button.disabled =
+    !editable
+    ||
+    savingRound;
 
 
-  button.textContent =
-  editable
-  ?
-  '保存本期'
-  :
-  '本期已截止';
+    button.textContent =
+    editable
+    ?
+    (
+      savingRound
+      ?
+      '正在保存...'
+      :
+      '保存本期'
+    )
+    :
+    '本期已截止';
+
+  }
 
 }
 
@@ -3223,6 +3488,25 @@ function setRoundEditable(editable){
 /* =========================================================
    COUNTDOWN
 ========================================================= */
+
+function stopCountdown(){
+
+  if(
+    countdownTimer
+  ){
+
+    clearInterval(
+      countdownTimer
+    );
+
+
+    countdownTimer =
+    null;
+
+  }
+
+}
+
 
 function updateCountdown(){
 
@@ -3275,6 +3559,9 @@ function updateCountdown(){
     setRoundEditable(
       false
     );
+
+
+    stopCountdown();
 
 
     return;
@@ -3372,6 +3659,21 @@ async function loadCurrentRound(){
   );
 
 
+  stopCountdown();
+
+
+  currentRound =
+  null;
+
+
+  roundEntries =
+  [];
+
+
+  currentOrder =
+  null;
+
+
   document
   .getElementById(
     'roundLoading'
@@ -3407,13 +3709,19 @@ async function loadCurrentRound(){
 
     BASE
     +
-    '/rest/v1/rounds?select=id,round_date,round_code,deadline_at,status,game_mode,payout_multiplier,result_number,created_at&game_mode=eq.zodiac&order=created_at.desc&limit=20',
+    '/rest/v1/rounds'
+    +
+    '?select=id,round_date,round_code,deadline_at,status,game_mode,payout_multiplier,result_number,created_at'
+    +
+    '&game_mode=eq.zodiac'
+    +
+    '&order=created_at.desc'
+    +
+    '&limit=20',
 
     {
-
       headers:
       authHeaders()
-
     }
 
   );
@@ -3496,55 +3804,64 @@ async function loadCurrentRound(){
   );
 
 
-  const entryRes =
-  await fetch(
+  const [
+    entryRes,
+    orderRes
+  ] =
+  await Promise.all([
 
-    BASE
-    +
-    '/rest/v1/customer_round_entries?select=number_code,points,confirmed_points,pending_points&round_id=eq.'
-    +
-    encodeURIComponent(
-      currentRound.id
+    fetch(
+
+      BASE
+      +
+      '/rest/v1/customer_round_entries'
+      +
+      '?select=number_code,points,confirmed_points,pending_points'
+      +
+      '&round_id=eq.'
+      +
+      encodeURIComponent(
+        currentRound.id
+      )
+      +
+      '&order=number_code.asc',
+
+      {
+        headers:
+        authHeaders()
+      }
+
+    ),
+
+    fetch(
+
+      BASE
+      +
+      '/rest/v1/customer_round_orders'
+      +
+      '?select=id,status,submitted_total,confirmed_total,pending_total'
+      +
+      '&round_id=eq.'
+      +
+      encodeURIComponent(
+        currentRound.id
+      )
+      +
+      '&limit=1',
+
+      {
+        headers:
+        authHeaders()
+      }
+
     )
-    +
-    '&order=number_code.asc',
 
-    {
-
-      headers:
-      authHeaders()
-
-    }
-
-  );
+  ]);
 
 
   roundEntries =
   await parseResponse(
     entryRes
-  );
-
-
-  const orderRes =
-  await fetch(
-
-    BASE
-    +
-    '/rest/v1/customer_round_orders?select=id,status,submitted_total,confirmed_total,pending_total&round_id=eq.'
-    +
-    encodeURIComponent(
-      currentRound.id
-    )
-    +
-    '&limit=1',
-
-    {
-
-      headers:
-      authHeaders()
-
-    }
-
   );
 
 
@@ -3582,25 +3899,27 @@ async function loadCurrentRound(){
   );
 
 
-  if(
-    countdownTimer
-  ){
-
-    clearInterval(
-      countdownTimer
-    );
-
-  }
-
-
   updateCountdown();
 
 
-  countdownTimer =
-  setInterval(
-    updateCountdown,
-    1000
-  );
+  if(
+    currentRound
+    &&
+    Date.now()
+    <
+    new Date(
+      currentRound.deadline_at
+    )
+    .getTime()
+  ){
+
+    countdownTimer =
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
+  }
 
 }
 
@@ -3610,6 +3929,15 @@ async function loadCurrentRound(){
 ========================================================= */
 
 async function saveRoundEntries(){
+
+  if(
+    savingRound
+  ){
+
+    return;
+
+  }
+
 
   clearMessage(
     'roundMsg'
@@ -3640,6 +3968,11 @@ async function saveRoundEntries(){
     )
     .getTime()
   ){
+
+    setRoundEditable(
+      false
+    );
+
 
     return showMessage(
       'roundMsg',
@@ -3750,11 +4083,12 @@ async function saveRoundEntries(){
   }
 
 
-  setBusy(
-    'saveRoundBtn',
-    true,
-    '保存本期',
-    '正在保存...'
+  savingRound =
+  true;
+
+
+  setRoundEditable(
+    true
   );
 
 
@@ -3817,18 +4151,17 @@ async function saveRoundEntries(){
   }
   finally{
 
+    savingRound =
+    false;
+
+
     const editable =
-
     currentRound
-
     &&
-
     currentRound.status
     ===
     'open'
-
     &&
-
     Date.now()
     <
     new Date(
@@ -3837,32 +4170,11 @@ async function saveRoundEntries(){
     .getTime();
 
 
-    setBusy(
-
-      'saveRoundBtn',
-
-      false,
-
-      editable
-      ?
-      '保存本期'
-      :
-      '本期已截止',
-
-      '正在保存...'
-
+    setRoundEditable(
+      Boolean(
+        editable
+      )
     );
-
-
-    if(
-      !editable
-    ){
-
-      setRoundEditable(
-        false
-      );
-
-    }
 
   }
 
@@ -3906,13 +4218,18 @@ async function loadDashboard(){
 
 
   const run =
-  async () => {
+  async()=>{
 
     await loadProfile();
 
-    await loadPayoutAccounts();
 
-    await loadCurrentRound();
+    await Promise.all([
+
+      loadPayoutAccounts(),
+
+      loadCurrentRound()
+
+    ]);
 
 
     document
@@ -3942,7 +4259,12 @@ async function loadDashboard(){
     await run();
 
   }
-  catch{
+  catch(err){
+
+    console.error(
+      err
+    );
+
 
     const refreshed =
     await refreshSession();
@@ -3959,7 +4281,13 @@ async function loadDashboard(){
         return;
 
       }
-      catch{}
+      catch(err2){
+
+        console.error(
+          err2
+        );
+
+      }
 
     }
 
@@ -4041,13 +4369,18 @@ async function logout(){
   catch{}
 
 
+  stopCountdown();
+
+
   if(
-    countdownTimer
+    zodiacObserver
   ){
 
-    clearInterval(
-      countdownTimer
-    );
+    zodiacObserver.disconnect();
+
+
+    zodiacObserver =
+    null;
 
   }
 
@@ -4073,6 +4406,10 @@ async function logout(){
 
   currentOrder =
   null;
+
+
+  savingRound =
+  false;
 
 
   document
@@ -4295,6 +4632,17 @@ function translateError(message){
 
   if(
     text.includes(
+      'ORDER_LOCKED'
+    )
+  ){
+
+    return '本期已经锁定，不能再修改。';
+
+  }
+
+
+  if(
+    text.includes(
       'ZODIAC_ROUND_REQUIRED'
     )
   ){
@@ -4322,6 +4670,17 @@ function translateError(message){
   ){
 
     return '生肖数据不正确，请刷新后重试。';
+
+  }
+
+
+  if(
+    text.includes(
+      'DUPLICATE_NUMBER_CODE'
+    )
+  ){
+
+    return '生肖数据重复，请刷新后重试。';
 
   }
 
