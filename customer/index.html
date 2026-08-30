@@ -5858,7 +5858,7 @@ function renderPaymentArea(){
   }
 
 
-  if(remaining > 0){
+    if(remaining > 0){
 
     const amount =
     document.getElementById(
@@ -5866,28 +5866,26 @@ function renderPaymentArea(){
     );
 
 
-    if(
-      !amount.value
-      ||
-      Number(
-        amount.value
-      )
-      >
+    amount.value =
+    Math.floor(
       remaining
-    ){
+    );
 
-      amount.value =
-      Math.floor(
-        remaining
-      );
 
-    }
+    amount.min =
+    Math.floor(
+      remaining
+    );
 
 
     amount.max =
     Math.floor(
       remaining
     );
+
+
+    amount.readOnly =
+    true;
 
   }
 
