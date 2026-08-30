@@ -3156,24 +3156,26 @@ function renderProfile(){
   '';
 
 
-  document
+    document
   .getElementById(
     'profileStatus'
   )
   .textContent =
-  profile?.status
-  ===
-  'active'
-  ?
-  '正常'
-  :
-  profile?.status
-  ===
-  'suspended'
-  ?
-  '已限制'
-  :
-  '已停用';
+  uiText(
+    profile?.status
+    ===
+    'active'
+    ?
+    '正常'
+    :
+    profile?.status
+    ===
+    'suspended'
+    ?
+    '已限制'
+    :
+    '已停用'
+  );
 
 }
 
@@ -3718,10 +3720,21 @@ function renderPayoutAccounts(){
   );
 
 
-  renderAccountState(
+    renderAccountState(
     'bank',
     bank
   );
+
+
+  if(
+    typeof window.applyCustomerLanguage
+    ===
+    'function'
+  ){
+
+    window.applyCustomerLanguage();
+
+  }
 
 }
 
@@ -4047,6 +4060,33 @@ function formatMoney(value){
       0
     )
   );
+
+}
+
+}
+
+
+function uiText(value){
+
+  const text =
+  String(
+    value
+    ??
+    ''
+  );
+
+
+  return (
+    typeof window.customerTranslateValue
+    ===
+    'function'
+  )
+  ?
+  window.customerTranslateValue(
+    text
+  )
+  :
+  text;
 
 }
 
@@ -4588,7 +4628,9 @@ function renderOrderStatus(){
   if(!currentOrder){
 
     el.textContent =
-    '未保存';
+    uiText(
+      '未保存'
+    );
 
 
     return;
@@ -4619,7 +4661,7 @@ function renderOrderStatus(){
   };
 
 
-  el.textContent =
+  const text =
   map[
     currentOrder.status
   ]
@@ -4627,6 +4669,12 @@ function renderOrderStatus(){
   currentOrder.status
   ||
   '—';
+
+
+  el.textContent =
+  uiText(
+    text
+  );
 
 }
 
