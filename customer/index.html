@@ -1090,17 +1090,24 @@ button:disabled{
         </div>
 
 
-        <div class="field">
+                <div class="field">
 
           <label>
-            联系电话
+            注册手机号
           </label>
 
           <input
             id="profilePhoneInput"
             type="tel"
             maxlength="40"
-            inputmode="tel">
+            inputmode="tel"
+            disabled>
+
+          <div
+            class="note"
+            style="margin-top:7px">
+            注册手机号已绑定，不能自行修改；如需更换请联系客服。
+          </div>
 
         </div>
 
@@ -7118,7 +7125,53 @@ function translateError(message){
 
   }
 
+  if(
+    text.includes(
+      'PHONE_ALREADY_REGISTERED'
+    )
+    ||
+    text.includes(
+      'customer_profiles_phone_normalized_uidx'
+    )
+  ){
 
+    return '这个手机号码已经注册过，不能重复使用。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PHONE_LOCKED'
+    )
+    ||
+    text.includes(
+      'PHONE_ALREADY_BOUND_TO_OTHER_CUSTOMER'
+    )
+  ){
+
+    return '注册手机号已经绑定，如需更换请联系客服。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYOUT_ACCOUNT_ALREADY_BOUND'
+    )
+    ||
+    text.includes(
+      'customer_payout_accounts_kpay_number_uidx'
+    )
+    ||
+    text.includes(
+      'customer_payout_accounts_bank_number_uidx'
+    )
+  ){
+
+    return '这个收款号码或银行账号已经被其他客户绑定，不能重复使用。';
+
+  }
   if(
     text.includes(
       'PAYOUT_ACCOUNT_LOCKED'
