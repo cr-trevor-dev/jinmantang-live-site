@@ -983,7 +983,7 @@ button:disabled{
     class="card hidden">
 
     <div class="loader">
-      正在读取账户资料...
+            正在安全连接，请稍候...
     </div>
 
   </div>
@@ -6661,13 +6661,34 @@ async function loadDashboard(){
   );
 
 
-  document
-  .getElementById(
+   const loadingEl =
+  document.getElementById(
     'loading'
-  )
+  );
+
+
+  loadingEl
   .classList
-  .remove(
+  .add(
     'hidden'
+  );
+
+
+  const loadingRevealTimer =
+  setTimeout(
+
+    ()=>{
+
+      loadingEl
+      .classList
+      .remove(
+        'hidden'
+      );
+
+    },
+
+    2500
+
   );
 
 
@@ -6685,7 +6706,9 @@ async function loadDashboard(){
       !==
       'active'
     ){
-
+      clearTimeout(
+        loadingRevealTimer
+      );
       document
       .getElementById(
         'loading'
@@ -6718,7 +6741,9 @@ async function loadDashboard(){
 
     await loadCurrentRound();
 
-
+    clearTimeout(
+      loadingRevealTimer
+    );
     document
     .getElementById(
       'loading'
@@ -6783,7 +6808,9 @@ async function loadDashboard(){
 
     clearTokens();
 
-
+    clearTimeout(
+      loadingRevealTimer
+    );
     document
     .getElementById(
       'loading'
