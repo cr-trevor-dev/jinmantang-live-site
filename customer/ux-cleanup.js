@@ -542,6 +542,66 @@
     '上一笔付款未通过，请重新提交。':['ယခင်ငွေပေးချေမှု မအောင်မြင်ပါ။ ပြန်လည်တင်ပါ။','Previous payment was rejected. Please submit again.','การชำระก่อนหน้าไม่ผ่าน กรุณาส่งใหม่','Bayaran sebelumnya ditolak. Sila hantar semula.','Khoản thanh toán trước không được duyệt. Vui lòng gửi lại.','Pembayaran sebelumnya ditolak. Silakan kirim ulang.'],
     '原因：':['အကြောင်းရင်း：','Reason: ','เหตุผล: ','Sebab: ','Lý do: ','Alasan: '],
     '客服暂未配置':['ဝန်ဆောင်မှုကို မသတ်မှတ်ရသေးပါ','Support Not Configured','ยังไม่ได้ตั้งค่าฝ่ายบริการ','Sokongan Belum Ditetapkan','Chưa cấu hình hỗ trợ','Dukungan Belum Dikonfigurasi'],
+        '开放中':['ဖွင့်ထားသည်','Open','เปิดอยู่','Dibuka','Đang mở','Terbuka'],
+    '已截止':['ပိတ်ပြီး','Closed','ปิดแล้ว','Ditutup','Đã đóng','Ditutup'],
+    '本期已截止':['ယခုအကြိမ်ပိတ်ပြီး','Round Closed','รอบนี้ปิดแล้ว','Pusingan Ditutup','Kỳ đã đóng','Putaran Ditutup'],
+    '正在保存...':['သိမ်းနေသည်...','Saving...','กำลังบันทึก...','Sedang Menyimpan...','Đang lưu...','Sedang Menyimpan...'],
+
+    '待付款':['ငွေပေးချေရန်စောင့်','Awaiting Payment','รอชำระเงิน','Menunggu Bayaran','Chờ thanh toán','Menunggu Pembayaran'],
+    '付款审核中':['ငွေပေးချေမှုစစ်ဆေးနေသည်','Payment Under Review','กำลังตรวจสอบการชำระ','Bayaran Dalam Semakan','Thanh toán đang được duyệt','Pembayaran Sedang Ditinjau'],
+    '付款已确认':['ငွေပေးချေမှုအတည်ပြုပြီး','Payment Confirmed','ยืนยันการชำระแล้ว','Bayaran Disahkan','Thanh toán đã xác nhận','Pembayaran Dikonfirmasi'],
+    '已锁定':['လော့ခ်ချပြီး','Locked','ล็อกแล้ว','Dikunci','Đã khóa','Terkunci'],
+    '已结算':['ရှင်းတမ်းပြီး','Settled','ชำระบัญชีแล้ว','Selesai','Đã quyết toán','Diselesaikan'],
+    '已取消':['ပယ်ဖျက်ပြီး','Cancelled','ยกเลิกแล้ว','Dibatalkan','Đã hủy','Dibatalkan'],
+
+    '已限制':['ကန့်သတ်ထားသည်','Restricted','ถูกจำกัด','Disekat','Bị hạn chế','Dibatasi'],
+    '已停用':['ပိတ်ထားသည်','Disabled','ปิดใช้งาน','Dinyahaktifkan','Đã vô hiệu hóa','Dinonaktifkan'],
+    '暂无开放期':['ဖွင့်ထားသောအကြိမ် မရှိသေးပါ','No Open Round','ยังไม่มีรอบเปิด','Tiada Pusingan Terbuka','Chưa có kỳ mở','Belum Ada Putaran Terbuka'],
+
+    '此收款方式已经绑定。如需更换，请联系客服。':[
+      'ဤငွေလက်ခံနည်းကို ချိတ်ဆက်ပြီးပါပြီ။ ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+      'This payout method is already linked. Contact support to change it.',
+      'ช่องทางรับเงินนี้ถูกผูกแล้ว หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ',
+      'Kaedah penerimaan ini telah dipautkan. Hubungi sokongan untuk menukarnya.',
+      'Phương thức nhận tiền này đã được liên kết. Liên hệ hỗ trợ để thay đổi.',
+      'Metode penerimaan ini sudah terhubung. Hubungi dukungan untuk menggantinya.'
+    ],
+
+    '已绑定 · 联系客服修改':[
+      'ချိတ်ဆက်ပြီး · ပြင်ရန်ဝန်ဆောင်မှုကိုဆက်သွယ်ပါ',
+      'Linked · Contact Support to Change',
+      'ผูกแล้ว · ติดต่อฝ่ายบริการเพื่อแก้ไข',
+      'Dipautkan · Hubungi Sokongan untuk Ubah',
+      'Đã liên kết · Liên hệ hỗ trợ để sửa',
+      'Terhubung · Hubungi Dukungan untuk Mengubah'
+    ],
+
+    '平台已允许本次修改。请仔细核对，保存后会再次自动锁定。':[
+      'ပလက်ဖောင်းက ယခုတစ်ကြိမ်ပြင်ဆင်ခွင့်ပေးထားသည်။ သေချာစစ်ဆေးပါ။ သိမ်းပြီးနောက် ပြန်လည်လော့ခ်ချမည်။',
+      'The platform has allowed this change. Please check carefully. It will be locked again after saving.',
+      'แพลตฟอร์มอนุญาตให้แก้ไขครั้งนี้ กรุณาตรวจสอบให้ละเอียด หลังบันทึกจะถูกล็อกอีกครั้ง',
+      'Platform membenarkan perubahan ini. Sila semak dengan teliti. Ia akan dikunci semula selepas disimpan.',
+      'Nền tảng đã cho phép thay đổi lần này. Vui lòng kiểm tra kỹ. Sau khi lưu sẽ bị khóa lại.',
+      'Platform mengizinkan perubahan ini. Periksa dengan teliti. Setelah disimpan akan dikunci kembali.'
+    ],
+
+    '保存新 KPay 并重新绑定':[
+      'KPay အသစ်သိမ်းပြီး ပြန်ချိတ်ဆက်ရန်',
+      'Save New KPay & Relink',
+      'บันทึก KPay ใหม่และผูกอีกครั้ง',
+      'Simpan KPay Baharu & Paut Semula',
+      'Lưu KPay mới và liên kết lại',
+      'Simpan KPay Baru & Hubungkan Kembali'
+    ],
+
+    '保存新银行账户并重新绑定':[
+      'ဘဏ်အကောင့်အသစ်သိမ်းပြီး ပြန်ချိတ်ဆက်ရန်',
+      'Save New Bank Account & Relink',
+      'บันทึกบัญชีธนาคารใหม่และผูกอีกครั้ง',
+      'Simpan Akaun Bank Baharu & Paut Semula',
+      'Lưu tài khoản ngân hàng mới và liên kết lại',
+      'Simpan Rekening Bank Baru & Hubungkan Kembali'
+    ],
     '本期付款':['ယခုအကြိမ်ငွေပေးချေမှု','Round Payment','การชำระรอบนี้','Bayaran Pusingan','Thanh toán kỳ này','Pembayaran Putaran'],
     '下注合计':['လောင်းကြေးစုစုပေါင်း','Bet Total','ยอดเดิมพันรวม','Jumlah Pertaruhan','Tổng cược','Total Taruhan'],
     '审核中':['စစ်ဆေးနေသည်','Pending Review','กำลังตรวจสอบ','Menunggu Semakan','Đang xét duyệt','Sedang Ditinjau'],
@@ -667,13 +727,18 @@
     );
 
 
-    return result;
+        return result;
 
   }
 
 
+  window.customerTranslateValue =
+  customerTranslateValue;
+
+
   let customerLanguageApplying =
   false;
+    
 
 
   let customerLanguageTimer =
@@ -1818,13 +1883,15 @@
 
     ensureStyle();
 
-    compactPayout(
+        compactPayout(
       'kpay'
     );
 
     compactPayout(
       'bank'
     );
+
+    applyCustomerLanguage();
 
     polishFooter();
 
