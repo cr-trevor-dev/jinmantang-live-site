@@ -3,6 +3,7 @@
   id =>
   document.getElementById(id);
 
+
   const fmt =
   value =>
   new Intl.NumberFormat(
@@ -11,8 +12,11 @@
       maximumFractionDigits:0
     }
   ).format(
-    Number(value || 0)
+    Number(
+      value || 0
+    )
   );
+
 
   const zodiacNames =
   [
@@ -29,6 +33,44 @@
     '狗',
     '猪'
   ];
+
+
+  function cardByChild(id){
+
+    const el =
+    $(id);
+
+
+    return el
+    ?
+    el.closest(
+      '.card'
+    )
+    :
+    null;
+
+  }
+
+
+  function setCardHidden(
+    id,
+    hidden
+  ){
+
+    const card =
+    cardByChild(id);
+
+
+    if(card){
+
+      card.classList.toggle(
+        'hidden',
+        Boolean(hidden)
+      );
+
+    }
+
+  }
 
 
   function ensureSimpleCard(){
@@ -88,9 +130,7 @@
     $('agentBox');
 
 
-    if(
-      agentBox
-    ){
+    if(agentBox){
 
       agentBox.insertBefore(
         card,
@@ -105,45 +145,9 @@
   }
 
 
-  function setCardHiddenByChild(
-    childId,
-    hidden
-  ){
+  function periodName(round){
 
-    const child =
-    $(childId);
-
-
-    if(!child){
-
-      return;
-
-    }
-
-
-    const card =
-    child.closest(
-      '.card'
-    );
-
-
-    if(card){
-
-      card.classList.toggle(
-        'hidden',
-        hidden
-      );
-
-    }
-
-  }
-
-
-  function getPeriodName(){
-
-    if(
-      !currentRound
-    ){
+    if(!round){
 
       return '—';
 
@@ -151,7 +155,7 @@
 
 
     if(
-      currentRound.round_code
+      round.round_code
       ===
       '1030'
     ){
@@ -162,7 +166,7 @@
 
 
     if(
-      currentRound.round_code
+      round.round_code
       ===
       '1530'
     ){
@@ -173,7 +177,7 @@
 
 
     return (
-      currentRound.round_code
+      round.round_code
       ||
       '—'
     );
@@ -181,7 +185,559 @@
   }
 
 
-  function renderSimpleSettledView(){
+  function resultName(round){
+
+    if(
+      !round
+      ||
+      round.result_number
+      ==
+      null
+    ){
+
+      return '—';
+
+    }
+
+
+    return (
+      zodiacNames[
+        Number(
+          round.result_number
+        )
+        -
+        1
+      ]
+      ||
+      '—'
+    );
+
+  }
+
+
+  function number(value){
+
+    const n =
+    Number(
+      value || 0
+    );
+
+
+    return Number.isFinite(n)
+    ?
+    n
+    :
+    0;
+
+  }
+
+
+  function hasPaymentHistory(){
+
+    return (
+      typeof paymentSubmissions
+      !==
+      'undefined'
+      &&
+      Array.isArray(
+        paymentSubmissions
+      )
+      &&
+      paymentSubmissions.length
+      >
+      0
+    );
+
+  }
+
+
+  function settlementValue(key){
+
+    return (
+      typeof settlement
+      !==
+      'undefined'
+      &&
+      settlement
+    )
+    ?
+    number(
+      settlement[key]
+    )
+    :
+    0;
+
+  }
+
+
+  function currentSavedTotal(){
+
+    return (
+      typeof submittedTotal
+      !==
+      'undefined'
+    )
+    ?
+    number(
+      submittedTotal
+    )
+    :
+    0;
+
+  }
+
+
+  function currentConfirmedTotal(){
+
+    return settlementValue(
+      'submitted_total'
+    );
+
+  }
+
+
+  function hasFinancialActivity(){
+
+    return (
+
+      currentSavedTotal()
+      >
+      0
+
+      ||
+
+      currentConfirmedTotal()
+      >
+      0
+
+      ||
+
+      settlementValue(
+        'amount_due'
+      )
+      >
+      0
+
+      ||
+
+      settlementValue(
+        'amount_received'
+      )
+      >
+      0
+
+      ||
+
+      hasPaymentHistory()
+
+    );
+
+  }
+
+
+  function renderSettledCard(card){
+
+    const savedTotal =
+    currentSavedTotal();
+
+
+    const confirmedTotal =
+    currentConfirmedTotal();
+
+
+    const commission =
+    settlementValue(
+      'commission_amount'
+    );
+
+
+    const payout =
+    settlementValue(
+      'result_payout'
+    );
+
+
+    const finalBalance =
+    settlementValue(
+      'final_balance'
+    );
+
+
+    const noValidBet =
+    confirmedTotal
+    <=
+    0;
+
+
+    let financialHtml =
+    '';
+
+
+    if(noValidBet){
+
+      financialHtml = `
+
+        <div
+          class="settlementNotice"
+          style="margin-top:12px">
+
+          本期没有管理员确认的有效下注，
+          因此不参与中奖计算，
+          也无需结款。
+
+          ${
+            savedTotal > 0
+            ?
+            `
+
+              <br><br>
+
+              保存申报金额
+
+              <strong>
+                ${fmt(savedTotal)}
+              </strong>
+
+              仅作为历史记录。
+
+            `
+            :
+            ''
+          }
+
+        </div>
+
+      `;
+
+    }
+    else{
+
+      const balanceLabel =
+      finalBalance > 0
+      ?
+      '代理应付平台'
+      :
+      finalBalance < 0
+      ?
+      '平台应付代理'
+      :
+      '结算完成';
+
+
+      financialHtml = `
+
+        <div
+          class="info"
+          style="margin-top:10px">
+
+          <div
+            class="box commission highlight">
+
+            <small>
+              本期代理佣金
+            </small>
+
+            <strong>
+              ${fmt(commission)}
+            </strong>
+
+          </div>
+
+
+          <div
+            class="box highlight">
+
+            <small>
+              中奖返还
+            </small>
+
+            <strong>
+              ${fmt(payout)}
+            </strong>
+
+          </div>
+
+
+          <div
+            class="box highlight">
+
+            <small>
+              ${balanceLabel}
+            </small>
+
+            <strong>
+              ${fmt(
+                Math.abs(
+                  finalBalance
+                )
+              )}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="settlementNotice paid"
+          style="margin-top:12px">
+
+          只有开奖前由管理员确认的金额
+          才进入正式结算。
+
+          本期已经锁定，
+          不能再补交或修改。
+
+        </div>
+
+      `;
+
+    }
+
+
+    card.innerHTML = `
+
+      <div class="title">
+        最近一期结果
+      </div>
+
+
+      <div
+        class="settlementNotice paid"
+        style="margin-bottom:12px">
+
+        ✓ 本期已开奖 · 数据已锁定
+
+      </div>
+
+
+      <div class="info">
+
+        <div
+          class="box highlight">
+
+          <small>
+            期数
+          </small>
+
+          <strong>
+
+            ${
+              currentRound
+              ?.round_date
+              ||
+              '—'
+            }
+
+            ·
+
+            ${
+              periodName(
+                currentRound
+              )
+            }
+
+          </strong>
+
+        </div>
+
+
+        <div
+          class="box highlight">
+
+          <small>
+            开奖生肖
+          </small>
+
+          <strong>
+
+            ${
+              resultName(
+                currentRound
+              )
+            }
+
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            保存申报金额
+          </small>
+
+          <strong>
+            ${fmt(savedTotal)}
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            正式确认金额
+          </small>
+
+          <strong>
+            ${fmt(confirmedTotal)}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      ${financialHtml}
+
+    `;
+
+
+    card.classList.remove(
+      'hidden'
+    );
+
+  }
+
+
+  function renderOpenState(card){
+
+    card.classList.add(
+      'hidden'
+    );
+
+
+    const activity =
+    hasFinancialActivity();
+
+
+    const due =
+    (
+      typeof getPaymentAmountDue
+      ===
+      'function'
+    )
+    ?
+    number(
+      getPaymentAmountDue()
+    )
+    :
+    settlementValue(
+      'amount_due'
+    );
+
+
+    const remaining =
+    (
+      typeof getPaymentRemaining
+      ===
+      'function'
+    )
+    ?
+    number(
+      getPaymentRemaining()
+    )
+    :
+    0;
+
+
+    const showFinance =
+    activity;
+
+
+    const showPayment =
+    (
+      hasPaymentHistory()
+      ||
+      due > 0
+      ||
+      remaining > 0
+    );
+
+
+    /*
+      当前开放期：
+      下注区始终显示。
+    */
+
+    setCardHidden(
+      'numberGrid',
+      false
+    );
+
+
+    /*
+      没有下注、没有付款历史：
+      不显示整块结款。
+    */
+
+    setCardHidden(
+      'settlementSubmittedTotal',
+      !showFinance
+    );
+
+
+    /*
+      只有真正产生应付款
+      或已经有付款记录，
+      才显示付款中心。
+    */
+
+    setCardHidden(
+      'paymentRequiredAmount',
+      !showPayment
+    );
+
+
+    /*
+      开奖以前不显示
+      六个“等待开奖”的结果框。
+    */
+
+    setCardHidden(
+      'resultNumber',
+      true
+    );
+
+  }
+
+
+  function renderNoRoundState(card){
+
+    card.classList.add(
+      'hidden'
+    );
+
+
+    setCardHidden(
+      'numberGrid',
+      true
+    );
+
+
+    setCardHidden(
+      'settlementSubmittedTotal',
+      true
+    );
+
+
+    setCardHidden(
+      'paymentRequiredAmount',
+      true
+    );
+
+
+    setCardHidden(
+      'resultNumber',
+      true
+    );
+
+  }
+
+
+  function applyAgentUx(){
 
     try{
 
@@ -196,47 +752,72 @@
       }
 
 
+      const card =
+      ensureSimpleCard();
+
+
+      if(!currentRound){
+
+        renderNoRoundState(
+          card
+        );
+
+
+        return;
+
+      }
+
+
       const ended =
-      Boolean(
-        currentRound
-      )
-      &&
       (
         currentRound.status
         ===
         'settled'
+
         ||
+
         currentRound.result_number
         !=
         null
       );
 
 
-      const simpleCard =
-      ensureSimpleCard();
+      /*
+        已开奖：
+        旧下注、结款、付款、结果区
+        全部隐藏。
 
+        只保留一张最终摘要。
+      */
 
-      if(!ended){
+      if(ended){
 
-        simpleCard
-        .classList
-        .add(
-          'hidden'
+        setCardHidden(
+          'numberGrid',
+          true
         );
 
 
-        [
-          'numberGrid',
+        setCardHidden(
           'settlementSubmittedTotal',
+          true
+        );
+
+
+        setCardHidden(
           'paymentRequiredAmount',
-          'resultNumber'
-        ]
-        .forEach(
-          id =>
-          setCardHiddenByChild(
-            id,
-            false
-          )
+          true
+        );
+
+
+        setCardHidden(
+          'resultNumber',
+          true
+        );
+
+
+        renderSettledCard(
+          card
         );
 
 
@@ -246,307 +827,38 @@
 
 
       /*
-        开奖后：
-        把旧的复杂操作区收起来。
+        当前开放期。
       */
 
-      [
-        'numberGrid',
-        'settlementSubmittedTotal',
-        'paymentRequiredAmount',
-        'resultNumber'
-      ]
-      .forEach(
-        id =>
-        setCardHiddenByChild(
-          id,
-          true
-        )
-      );
-
-
-      const savedTotal =
-      typeof submittedTotal
-      !==
-      'undefined'
-      ?
-      Number(
-        submittedTotal || 0
-      )
-      :
-      0;
-
-
-      const confirmedTotal =
-      (
-        typeof settlement
-        !==
-        'undefined'
-        &&
-        settlement
-      )
-      ?
-      Number(
-        settlement
-        .submitted_total
-        ||
-        0
-      )
-      :
-      0;
-
-
-      const commission =
-      (
-        typeof settlement
-        !==
-        'undefined'
-        &&
-        settlement
-      )
-      ?
-      Number(
-        settlement
-        .commission_amount
-        ||
-        0
-      )
-      :
-      0;
-
-
-      const resultPayout =
-      (
-        typeof settlement
-        !==
-        'undefined'
-        &&
-        settlement
-      )
-      ?
-      Number(
-        settlement
-        .result_payout
-        ||
-        0
-      )
-      :
-      0;
-
-
-      const resultIndex =
-      Number(
-        currentRound
-        .result_number
-        ||
-        0
-      )
-      -
-      1;
-
-
-      const resultName =
-      zodiacNames[
-        resultIndex
-      ]
-      ||
-      '—';
-
-
-      const noValidBet =
-      confirmedTotal
-      <=
-      0;
-
-
-      let detailHtml =
-      '';
-
-
-      if(noValidBet){
-
-        detailHtml = `
-
-          <div
-            class="settlementNotice"
-            style="margin-top:12px">
-
-            本期没有管理员确认的有效下注，
-            因此无需付款，也不参与中奖计算。
-
-            <br><br>
-
-            保存申报金额
-            <strong>
-              ${fmt(savedTotal)}
-            </strong>
-            仅作为本期历史记录。
-
-          </div>
-
-        `;
-
-      }
-      else{
-
-        detailHtml = `
-
-          <div
-            class="info"
-            style="margin-top:10px">
-
-            <div
-              class="box commission highlight">
-
-              <small>
-                本期代理佣金
-              </small>
-
-              <strong>
-                ${fmt(commission)}
-              </strong>
-
-            </div>
-
-
-            <div
-              class="box highlight">
-
-              <small>
-                中奖返还
-              </small>
-
-              <strong>
-                ${fmt(resultPayout)}
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="settlementNotice"
-            style="margin-top:12px">
-
-            只有开奖前经管理员确认的金额，
-            才进入本期正式结算。
-
-            开奖以后，
-            本期不再接受新的付款或审核。
-
-          </div>
-
-        `;
-
-      }
-
-
-      simpleCard.innerHTML = `
-
-        <div class="title">
-
-          本期已结束
-
-        </div>
-
-
-        <div
-          class="settlementNotice paid"
-          style="margin-bottom:12px">
-
-          ✓ 开奖结果已经发布
-
-          <br>
-
-          本期数据已锁定，
-          不能再修改或补交付款。
-
-        </div>
-
-
-        <div class="info">
-
-          <div
-            class="box highlight">
-
-            <small>
-              期数
-            </small>
-
-            <strong>
-              ${
-                currentRound.round_date
-                ||
-                '—'
-              }
-              ·
-              ${getPeriodName()}
-            </strong>
-
-          </div>
-
-
-          <div
-            class="box highlight">
-
-            <small>
-              开奖生肖
-            </small>
-
-            <strong>
-              ${resultName}
-            </strong>
-
-          </div>
-
-
-          <div class="box">
-
-            <small>
-              保存申报金额
-            </small>
-
-            <strong>
-              ${fmt(savedTotal)}
-            </strong>
-
-          </div>
-
-
-          <div class="box">
-
-            <small>
-              正式确认金额
-            </small>
-
-            <strong>
-              ${fmt(confirmedTotal)}
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        ${detailHtml}
-
-      `;
-
-
-      simpleCard
-      .classList
-      .remove(
-        'hidden'
+      renderOpenState(
+        card
       );
 
     }
     catch(error){
 
       console.error(
-        'agent settled view',
+        'agent ux cleanup',
         error
       );
+
+    }
+
+  }
+
+
+  function polishFooter(){
+
+    const foot =
+    document.querySelector(
+      '.foot'
+    );
+
+
+    if(foot){
+
+      foot.textContent =
+      '© JIN MANTANG · AGENT SYSTEM';
 
     }
 
@@ -558,14 +870,34 @@
     ()=>{
 
       setTimeout(
-        renderSimpleSettledView,
+        ()=>{
+
+          polishFooter();
+
+          applyAgentUx();
+
+        },
         700
       );
 
 
+      /*
+        主页面自己会不断同步数据，
+        所以这里也周期检查显示状态。
+
+        不修改数据库，
+        只控制页面该显示什么。
+      */
+
       setInterval(
-        renderSimpleSettledView,
-        5000
+        ()=>{
+
+          polishFooter();
+
+          applyAgentUx();
+
+        },
+        2500
       );
 
     }
