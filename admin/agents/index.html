@@ -7345,6 +7345,308 @@ function renderReferralCommissions(){
   ).join('');
 
 }
+  async function confirmReferralCommissionPaid(
+  agentId,
+  roundId
+){
+
+  if(referralCommissionBusy){
+
+    return;
+
+  }
+
+
+  const row =
+  referralCommissionRows.find(
+    item =>
+    item.agent_id === agentId
+    &&
+    item.round_id === roundId
+  );
+
+
+  if(!row){
+
+    alert(
+      '没有找到这笔推荐佣金记录'
+    );
+
+    return;
+
+  }
+
+
+  const remaining =
+  Number(
+    row.commission_remaining
+    ||
+    0
+  );
+
+
+  if(
+    !Number.isFinite(
+      remaining
+    )
+    ||
+    remaining <= 0
+  ){
+
+    alert(
+      '这笔佣金目前没有待支付金额'
+    );
+
+    return;
+
+  }
+
+
+  const ok =
+  confirm(
+    '请确认你已经真实向代理支付这笔佣金。\n\n'+
+    '代理：'+
+    (
+      row.display_name
+      ||
+      '未知代理'
+    )+
+    '\n期号：'+
+    (
+      row.round_date
+      ||
+      ''
+    )+
+    (
+      row.round_code
+      ?
+      ' · '+
+      row.round_code
+      :
+      ''
+    )+
+    '\n应付佣金：'+
+    formatNumber(
+      row.commission_due
+      ||
+      0
+    )+
+    '\n已付佣金：'+
+    formatNumber(
+      row.commission_paid
+      ||
+      0
+    )+
+    '\n本次待付：'+
+    formatNumber(
+      remaining
+    )+
+    '\n\n确认后，这一期会正式标记为“已支付”。'
+  );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  referralCommissionBusy =
+  true;
+
+
+  const msg =
+  document.getElementById(
+    'referralCommissionMsg'
+  );
+
+
+  msg.className =
+  'msg';
+
+
+  msg.textContent =
+  '正在确认推荐佣金已支付...';
+
+
+  try{
+
+    const response =
+    await api(
+      '/rest/v1/rpc/admin_mark_agent_referral_commission_paid',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_round_id:
+          roundId,
+
+          p_agent_id:
+          agentId
+        })
+      }
+    );
+
+
+    const text =
+    await response.text();
+
+
+    if(!response.ok){
+
+      let errorMessage =
+      text
+      ||
+      '确认佣金支付失败';
+
+
+      if(
+        errorMessage.includes(
+          'ROUND_NOT_SETTLED'
+        )
+      ){
+
+        errorMessage =
+        '本期还没有正式开奖结算，暂时不能结算代理佣金';
+
+      }
+      else if(
+        errorMessage.includes(
+          'NO_COMMISSION_DUE'
+        )
+      ){
+
+        errorMessage =
+        '这笔记录目前没有需要支付的佣金';
+
+      }
+      else if(
+        errorMessage.includes(
+          'COMMISSION_SETTLEMENT_NOT_FOUND'
+        )
+      ){
+
+        errorMessage =
+        '没有找到对应的推荐佣金结算记录';
+
+      }
+      else if(
+        errorMessage.includes(
+          'COMMISSION_SETTLEMENT_VOID'
+        )
+      ){
+
+        errorMessage =
+        '这笔佣金记录已经作废，不能支付';
+
+      }
+      else if(
+        errorMessage.includes(
+          'AGENT_NOT_FOUND'
+        )
+      ){
+
+        errorMessage =
+        '没有找到对应代理';
+
+      }
+      else if(
+        errorMessage.includes(
+          'ADMIN_AAL2_REQUIRED'
+        )
+      ){
+
+        errorMessage =
+        '管理员身份验证已失效，请重新登录';
+
+      }
+
+
+      throw new Error(
+        errorMessage
+      );
+
+    }
+
+
+    const result =
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    {};
+
+
+    msg.className =
+    'msg success';
+
+
+    msg.textContent =
+    result.already_paid
+    ?
+    '✓ 这笔佣金之前已经支付'
+    :
+    '✓ 已确认佣金支付完成：'+
+    (
+      row.display_name
+      ||
+      '代理'
+    )+
+    ' · '+
+    formatNumber(
+      row.commission_due
+      ||
+      0
+    );
+
+
+    referralCommissionBusy =
+    false;
+
+
+    await loadReferralCommissions(
+      false
+    );
+
+  }
+  catch(e){
+
+    console.error(
+      'confirm referral commission paid',
+      e
+    );
+
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '确认失败：'+
+    (
+      e.message
+      ||
+      '未知错误'
+    );
+
+  }
+  finally{
+
+    referralCommissionBusy =
+    false;
+
+  }
+
+}
 /* =====================================
    SETTLEMENT
 ===================================== */
