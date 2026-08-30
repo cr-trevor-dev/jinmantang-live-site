@@ -477,7 +477,71 @@
     '未保存':['မသိမ်းရသေး','Not Saved','ยังไม่บันทึก','Belum Disimpan','Chưa lưu','Belum Disimpan'],
     '本期合计':['ယခုအကြိမ်စုစုပေါင်း','Round Total','ยอดรวมรอบนี้','Jumlah Pusingan','Tổng kỳ này','Total Putaran'],
     '保存本期':['ယခုအကြိမ်သိမ်းရန်','Save Round','บันทึกรอบนี้','Simpan Pusingan','Lưu kỳ này','Simpan Putaran'],
+        '金额':['ငွေပမာဏ','Amount','จำนวนเงิน','Jumlah','Số tiền','Jumlah'],
+    '已锁定 ':['လော့ခ်ချပြီး ','Locked ','ล็อกแล้ว ','Dikunci ','Đã khóa ','Terkunci '],
+    '可修改':['ပြင်ဆင်နိုင်သည်','Editable','แก้ไขได้','Boleh Diubah','Có thể sửa','Dapat Diubah'],
+    '已绑定':['ချိတ်ဆက်ပြီး','Linked','ผูกแล้ว','Dipautkan','Đã liên kết','Terhubung'],
+    '已拒绝':['ပယ်ချပြီး','Rejected','ปฏิเสธแล้ว','Ditolak','Đã từ chối','Ditolak'],
 
+    '收款资料用于平台派奖。首次保存后将自动绑定，客户不能自行修改；如需更换，请联系客服。':[
+      'ငွေလက်ခံအချက်အလက်ကို ပလက်ဖောင်းမှ ဆုငွေပေးချေရန် အသုံးပြုပါသည်။ ပထမဆုံးသိမ်းပြီးနောက် အလိုအလျောက်ချိတ်ဆက်မည်ဖြစ်ပြီး ကိုယ်တိုင်မပြင်နိုင်ပါ။ ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+      'Payout details are used for platform payouts. After the first save they will be linked and cannot be changed by the customer. Contact support if you need to replace them.',
+      'ข้อมูลรับเงินใช้สำหรับการจ่ายรางวัลของแพลตฟอร์ม หลังบันทึกครั้งแรกจะถูกผูกและลูกค้าไม่สามารถแก้ไขเองได้ หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ',
+      'Maklumat penerimaan digunakan untuk pembayaran platform. Selepas simpanan pertama ia akan dipautkan dan tidak boleh diubah sendiri. Hubungi sokongan jika perlu menukarnya.',
+      'Thông tin nhận tiền được dùng để nền tảng trả thưởng. Sau lần lưu đầu tiên thông tin sẽ được liên kết và khách hàng không thể tự sửa. Liên hệ hỗ trợ nếu cần thay đổi.',
+      'Data penerimaan digunakan untuk pembayaran platform. Setelah pertama kali disimpan akan terhubung dan tidak dapat diubah sendiri. Hubungi dukungan jika perlu menggantinya.'
+    ],
+
+    '已进入付款审核或已经确认的金额会锁定，不能减少；截止前仍可继续增加金额。':[
+      'ငွေပေးချေမှုစစ်ဆေးနေသော သို့မဟုတ် အတည်ပြုပြီးသော ငွေပမာဏကို လော့ခ်ချမည်ဖြစ်ပြီး လျှော့၍မရပါ။ ပိတ်ချိန်မတိုင်မီ ထပ်တိုးနိုင်ပါသည်။',
+      'Amounts under payment review or already confirmed are locked and cannot be reduced. You may still increase them before the deadline.',
+      'ยอดที่เข้าสู่การตรวจสอบการชำระหรือยืนยันแล้วจะถูกล็อกและลดไม่ได้ แต่ยังเพิ่มได้ก่อนเวลาปิดรับ',
+      'Jumlah yang sedang disemak atau telah disahkan akan dikunci dan tidak boleh dikurangkan. Ia masih boleh ditambah sebelum masa tutup.',
+      'Số tiền đang được duyệt thanh toán hoặc đã xác nhận sẽ bị khóa và không thể giảm. Vẫn có thể tăng trước thời hạn.',
+      'Jumlah yang sedang ditinjau atau sudah dikonfirmasi akan dikunci dan tidak dapat dikurangi. Masih dapat ditambah sebelum batas waktu.'
+    ],
+
+    'KPay 已绑定':['KPay ချိတ်ဆက်ပြီး','KPay Linked','ผูก KPay แล้ว','KPay Dipautkan','KPay đã liên kết','KPay Terhubung'],
+    '银行账户已绑定':['ဘဏ်အကောင့်ချိတ်ဆက်ပြီး','Bank Account Linked','ผูกบัญชีธนาคารแล้ว','Akaun Bank Dipautkan','Tài khoản ngân hàng đã liên kết','Rekening Bank Terhubung'],
+    '如需更换，请联系客服。':['ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။','Contact support if you need to change it.','หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ','Hubungi sokongan jika perlu menukarnya.','Liên hệ hỗ trợ nếu cần thay đổi.','Hubungi dukungan jika perlu menggantinya.'],
+
+    '下一期':['နောက်တစ်ကြိမ်','Next Round','รอบถัดไป','Pusingan Seterusnya','Kỳ tiếp theo','Putaran Berikutnya'],
+    '暂未开放':['မဖွင့်သေးပါ','Not Open Yet','ยังไม่เปิด','Belum Dibuka','Chưa mở','Belum Dibuka'],
+    '上一期已经结束，结果与结算见上方。下一期开放后会自动显示在这里。':[
+      'ယခင်အကြိမ်ပြီးဆုံးပါပြီ။ ရလဒ်နှင့်ရှင်းတမ်းကို အပေါ်တွင်ကြည့်ပါ။ နောက်တစ်ကြိမ်ဖွင့်လျှင် ဤနေရာတွင် အလိုအလျောက်ပြမည်။',
+      'The previous round has ended. See the result and settlement above. The next round will appear here automatically when it opens.',
+      'รอบก่อนหน้าสิ้นสุดแล้ว ดูผลและการชำระด้านบน รอบถัดไปจะแสดงที่นี่อัตโนมัติเมื่อเปิด',
+      'Pusingan sebelumnya telah tamat. Lihat keputusan dan penyelesaian di atas. Pusingan seterusnya akan muncul di sini secara automatik apabila dibuka.',
+      'Kỳ trước đã kết thúc. Xem kết quả và quyết toán ở phía trên. Kỳ tiếp theo sẽ tự động hiển thị tại đây khi mở.',
+      'Putaran sebelumnya telah berakhir. Lihat hasil dan penyelesaian di atas. Putaran berikutnya akan muncul otomatis di sini saat dibuka.'
+    ],
+    '当前暂无开放期，请等待下一期开放。':['လက်ရှိဖွင့်ထားသောအကြိမ် မရှိသေးပါ။ နောက်တစ်ကြိမ်ဖွင့်ရန် စောင့်ပါ။','There is currently no open round. Please wait for the next round.','ขณะนี้ยังไม่มีรอบเปิด กรุณารอรอบถัดไป','Tiada pusingan terbuka sekarang. Sila tunggu pusingan seterusnya.','Hiện chưa có kỳ mở. Vui lòng chờ kỳ tiếp theo.','Saat ini belum ada putaran terbuka. Silakan tunggu putaran berikutnya.'],
+
+    '当前账户已被限制':['လက်ရှိအကောင့်ကို ကန့်သတ်ထားသည်','Account Restricted','บัญชีถูกจำกัด','Akaun Disekat','Tài khoản bị hạn chế','Akun Dibatasi'],
+    '当前账户暂时无法使用参与及付款功能。如需了解原因或恢复账户，请联系平台客服。':[
+      'လက်ရှိအကောင့်သည် ပါဝင်ခြင်းနှင့် ငွေပေးချေမှုလုပ်ဆောင်ချက်များကို ယာယီအသုံးမပြုနိုင်ပါ။ အကြောင်းရင်းသိလိုပါက သို့မဟုတ် အကောင့်ပြန်ဖွင့်လိုပါက ပလက်ဖောင်းဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+      'This account temporarily cannot participate or make payments. Contact platform support for the reason or to restore the account.',
+      'บัญชีนี้ไม่สามารถเข้าร่วมหรือชำระเงินได้ชั่วคราว โปรดติดต่อฝ่ายบริการแพลตฟอร์มหากต้องการทราบสาเหตุหรือกู้คืนบัญชี',
+      'Akaun ini sementara tidak boleh menyertai atau membuat pembayaran. Hubungi sokongan platform untuk mengetahui sebab atau memulihkan akaun.',
+      'Tài khoản hiện tạm thời không thể tham gia hoặc thanh toán. Liên hệ hỗ trợ nền tảng để biết lý do hoặc khôi phục tài khoản.',
+      'Akun ini sementara tidak dapat berpartisipasi atau melakukan pembayaran. Hubungi dukungan platform untuk mengetahui alasan atau memulihkan akun.'
+    ],
+
+    '例如：KPay 转账':['ဥပမာ - KPay လွှဲငွေ','Example: KPay transfer','ตัวอย่าง: โอนผ่าน KPay','Contoh: pindahan KPay','Ví dụ: chuyển khoản KPay','Contoh: transfer KPay'],
+    '总返还':['စုစုပေါင်းပြန်လည်ပေးချေ','Total Return','ยอดคืนรวม','Jumlah Pulangan','Tổng hoàn trả','Total Pengembalian'],
+
+    '只有开奖前由管理员确认的金额，':['开奖မတိုင်မီ Admin အတည်ပြုထားသော ငွေပမာဏသာ ','Only amounts confirmed by Admin before the draw ','เฉพาะยอดที่ผู้ดูแลยืนยันก่อนออกรางวัลเท่านั้น ','Hanya jumlah yang disahkan Admin sebelum keputusan ','Chỉ số tiền được Admin xác nhận trước khi mở thưởng ','Hanya jumlah yang dikonfirmasi Admin sebelum hasil '],
+    '才属于本期有效下注。':['ယခုအကြိမ်အတွက် အကျုံးဝင်သောလောင်းကြေးဖြစ်သည်။','count as valid bets for this round.','จึงถือเป็นเดิมพันที่ถูกต้องของรอบนี้','dikira sebagai pertaruhan sah pusingan ini.','mới được tính là cược hợp lệ của kỳ này.','yang dihitung sebagai taruhan sah putaran ini.'],
+    '待审核、已拒绝或仅保存的金额，':['စစ်ဆေးရန်စောင့်နေသော၊ ပယ်ချထားသော သို့မဟုတ် သိမ်းထားရုံသာဖြစ်သော ငွေပမာဏများသည် ','Amounts pending review, rejected, or only saved ','ยอดที่รอตรวจสอบ ถูกปฏิเสธ หรือเพียงบันทึกไว้ ','Jumlah menunggu semakan, ditolak atau hanya disimpan ','Số tiền đang chờ duyệt, bị từ chối hoặc chỉ mới lưu ','Jumlah yang menunggu tinjauan, ditolak, atau hanya disimpan '],
+    '不会参与中奖计算。':['အနိုင်ရတွက်ချက်မှုတွင် မပါဝင်ပါ။','do not participate in winning calculations.','จะไม่นำไปคำนวณรางวัล','tidak akan digunakan dalam pengiraan kemenangan.','sẽ không tham gia tính tiền trúng thưởng.','tidak ikut dalam perhitungan kemenangan.'],
+
+    '本期付款已全部确认。':['ယခုအကြိမ်ငွေပေးချေမှုအားလုံး အတည်ပြုပြီးပါပြီ။','All payments for this round are confirmed.','การชำระรอบนี้ได้รับการยืนยันครบแล้ว','Semua bayaran pusingan ini telah disahkan.','Thanh toán kỳ này đã được xác nhận đầy đủ.','Semua pembayaran putaran ini telah dikonfirmasi.'],
+    '付款已提交，当前有 ':['ငွေပေးချေမှုတင်ပြီးပါပြီ။ လက်ရှိ ','Payment submitted. Currently ','ส่งการชำระแล้ว ขณะนี้มี ','Bayaran telah dihantar. Kini ','Đã gửi thanh toán. Hiện có ','Pembayaran telah dikirim. Saat ini '],
+    ' 正在等待管理员确认。':[' သည် Admin အတည်ပြုရန် စောင့်နေသည်။',' is awaiting Admin confirmation.',' กำลังรอผู้ดูแลยืนยัน',' sedang menunggu pengesahan Admin.',' đang chờ Admin xác nhận.',' sedang menunggu konfirmasi Admin.'],
+    '上一笔付款未通过：':['ယခင်ငွေပေးချေမှု မအောင်မြင်ပါ：','Previous payment was rejected: ','การชำระก่อนหน้าไม่ผ่าน: ','Bayaran sebelumnya ditolak: ','Khoản thanh toán trước không được duyệt: ','Pembayaran sebelumnya ditolak: '],
+    '上一笔付款未通过，请重新提交。':['ယခင်ငွေပေးချေမှု မအောင်မြင်ပါ။ ပြန်လည်တင်ပါ။','Previous payment was rejected. Please submit again.','การชำระก่อนหน้าไม่ผ่าน กรุณาส่งใหม่','Bayaran sebelumnya ditolak. Sila hantar semula.','Khoản thanh toán trước không được duyệt. Vui lòng gửi lại.','Pembayaran sebelumnya ditolak. Silakan kirim ulang.'],
+    '原因：':['အကြောင်းရင်း：','Reason: ','เหตุผล: ','Sebab: ','Lý do: ','Alasan: '],
+    '客服暂未配置':['ဝန်ဆောင်မှုကို မသတ်မှတ်ရသေးပါ','Support Not Configured','ยังไม่ได้ตั้งค่าฝ่ายบริการ','Sokongan Belum Ditetapkan','Chưa cấu hình hỗ trợ','Dukungan Belum Dikonfigurasi'],
     '本期付款':['ယခုအကြိမ်ငွေပေးချေမှု','Round Payment','การชำระรอบนี้','Bayaran Pusingan','Thanh toán kỳ này','Pembayaran Putaran'],
     '下注合计':['လောင်းကြေးစုစုပေါင်း','Bet Total','ยอดเดิมพันรวม','Jumlah Pertaruhan','Tổng cược','Total Taruhan'],
     '审核中':['စစ်ဆေးနေသည်','Pending Review','กำลังตรวจสอบ','Menunggu Semakan','Đang xét duyệt','Sedang Ditinjau'],
@@ -1788,6 +1852,14 @@
   }
 
 
+    window.refreshCustomerUx =
+  refresh;
+
+
+  window.applyCustomerLanguage =
+  applyCustomerLanguage;
+
+
   window.addEventListener(
     'load',
     ()=>{
@@ -1795,11 +1867,6 @@
       setTimeout(
         refresh,
         900
-      );
-
-      setInterval(
-        refresh,
-        10000
       );
 
     }
