@@ -32,7 +32,7 @@ body{
 }
 
 .wrap{
-  max-width:760px;
+  max-width:820px;
   margin:auto;
   min-height:100vh;
   padding:22px 15px 55px;
@@ -158,7 +158,7 @@ button:disabled{
 
 .summary{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:9px;
 }
 
@@ -234,46 +234,69 @@ button:disabled{
   color:#d0a07f;
 }
 
-.account{
-  margin-top:11px;
+.sectionLabel{
+  margin-top:16px;
+  margin-bottom:8px;
+  color:#b7a46d;
+  font-size:12px;
+  font-weight:800;
+}
+
+.account,
+.order,
+.payment{
+  margin-top:9px;
   padding:13px;
   border-radius:14px;
   background:#131314;
   border:1px solid rgba(255,255,255,.055);
 }
 
-.accountHead{
+.accountHead,
+.paymentHead,
+.orderHead{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
   gap:12px;
   margin-bottom:10px;
 }
 
-.accountType{
+.accountType,
+.paymentTitle,
+.orderTitle{
   color:#e5c96f;
   font-weight:900;
   font-size:14px;
 }
 
-.verify{
+.verify,
+.paymentStatus{
   padding:5px 8px;
   border-radius:99px;
   font-size:10px;
   font-weight:900;
+  white-space:nowrap;
 }
 
-.verify.yes{
+.verify.yes,
+.paymentStatus.approved{
   background:rgba(64,145,88,.14);
   color:#86d19c;
 }
 
-.verify.no{
+.verify.no,
+.paymentStatus.pending{
   background:rgba(172,126,42,.14);
   color:#ddbc65;
 }
 
-.accountRow{
+.paymentStatus.rejected{
+  background:rgba(169,73,66,.15);
+  color:#e0a09a;
+}
+
+.infoRow{
   display:flex;
   justify-content:space-between;
   gap:14px;
@@ -282,15 +305,15 @@ button:disabled{
   border-bottom:1px solid rgba(255,255,255,.045);
 }
 
-.accountRow:last-of-type{
+.infoRow:last-child{
   border-bottom:0;
 }
 
-.accountRow span{
+.infoRow span{
   color:#777166;
 }
 
-.accountRow strong{
+.infoRow strong{
   color:#e9dfc7;
   text-align:right;
   word-break:break-all;
@@ -303,11 +326,42 @@ button:disabled{
   margin-top:12px;
 }
 
+.singleAction{
+  margin-top:10px;
+}
+
+.finance{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.financeBox{
+  border:1px solid rgba(214,168,63,.14);
+  border-radius:12px;
+  padding:10px;
+  background:#0c0c0d;
+}
+
+.financeBox small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.financeBox strong{
+  display:block;
+  color:#ecd176;
+  font-size:14px;
+}
+
 .empty{
   text-align:center;
   color:#7f786b;
-  padding:28px 10px;
-  font-size:13px;
+  padding:20px 10px;
+  font-size:12px;
 }
 
 .msg{
@@ -350,7 +404,7 @@ button:disabled{
   margin-top:24px;
 }
 
-@media(max-width:560px){
+@media(max-width:620px){
 
   .summary{
     grid-template-columns:1fr 1fr;
@@ -364,6 +418,10 @@ button:disabled{
     width:100%;
   }
 
+  .finance{
+    grid-template-columns:1fr;
+  }
+
 }
 </style>
 </head>
@@ -373,19 +431,9 @@ button:disabled{
 <div class="wrap">
 
   <div class="brand">
-
-    <div class="mark">
-      金
-    </div>
-
-    <div class="cn">
-      金满堂
-    </div>
-
-    <div class="en">
-      CUSTOMER MANAGEMENT
-    </div>
-
+    <div class="mark">金</div>
+    <div class="cn">金满堂</div>
+    <div class="en">CUSTOMER MANAGEMENT</div>
   </div>
 
 
@@ -413,7 +461,10 @@ button:disabled{
   </div>
 
 
-  <main id="mainBox" class="hidden">
+  <main
+    id="mainBox"
+    class="hidden">
+
 
     <section class="card">
 
@@ -425,23 +476,22 @@ button:disabled{
 
         <div class="summaryBox">
           <small>客户总数</small>
-          <strong id="customerTotal">
-            0
-          </strong>
+          <strong id="customerTotal">0</strong>
         </div>
 
         <div class="summaryBox">
           <small>正常客户</small>
-          <strong id="activeTotal">
-            0
-          </strong>
+          <strong id="activeTotal">0</strong>
         </div>
 
         <div class="summaryBox">
           <small>待确认收款方式</small>
-          <strong id="pendingTotal">
-            0
-          </strong>
+          <strong id="payoutPendingTotal">0</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>待审核付款</small>
+          <strong id="paymentPendingTotal">0</strong>
         </div>
 
       </div>
@@ -465,7 +515,7 @@ button:disabled{
 
         <button
           class="secondary refreshBtn"
-          onclick="loadCustomers()">
+          onclick="loadAll()">
           刷新
         </button>
 
@@ -482,7 +532,7 @@ button:disabled{
     <section class="card">
 
       <div class="title">
-        客户与收款方式
+        客户、下注与付款
       </div>
 
       <div id="customerList">
@@ -541,16 +591,15 @@ sessionStorage.getItem(
 '';
 
 
-let customers =
-[];
+let customers = [];
+let payoutAccounts = [];
+let orders = [];
+let payments = [];
+let proofs = [];
+let rounds = [];
 
-
-let payoutAccounts =
-[];
-
-
-let refreshPromise =
-null;
+let refreshPromise = null;
+let autoTimer = null;
 
 
 /* =========================================================
@@ -559,19 +608,15 @@ null;
 
 function saveSession(data){
 
-  if(
-    data?.access_token
-  ){
+  if(data?.access_token){
 
     token =
     data.access_token;
-
 
     localStorage.setItem(
       'jmt_access_token',
       token
     );
-
 
     sessionStorage.setItem(
       'jmt_access_token',
@@ -581,19 +626,15 @@ function saveSession(data){
   }
 
 
-  if(
-    data?.refresh_token
-  ){
+  if(data?.refresh_token){
 
     refreshToken =
     data.refresh_token;
-
 
     localStorage.setItem(
       'jmt_refresh_token',
       refreshToken
     );
-
 
     sessionStorage.setItem(
       'jmt_refresh_token',
@@ -616,12 +657,8 @@ function getJwtPayload(){
     .replace(/_/g,'/');
 
 
-    while(
-      part.length % 4
-    ){
-
+    while(part.length % 4){
       part += '=';
-
     }
 
 
@@ -661,21 +698,13 @@ function getJwtPayload(){
 
 async function refreshAdminSession(){
 
-  if(
-    !refreshToken
-  ){
-
+  if(!refreshToken){
     return false;
-
   }
 
 
-  if(
-    refreshPromise
-  ){
-
+  if(refreshPromise){
     return refreshPromise;
-
   }
 
 
@@ -719,12 +748,8 @@ async function refreshAdminSession(){
         );
 
 
-        if(
-          !res.ok
-        ){
-
+        if(!res.ok){
           return false;
-
         }
 
 
@@ -732,12 +757,8 @@ async function refreshAdminSession(){
         await res.json();
 
 
-        if(
-          !data.access_token
-        ){
-
+        if(!data.access_token){
           return false;
-
         }
 
 
@@ -813,14 +834,8 @@ async function api(
   await request();
 
 
-  if(
-    res.status
-    !==
-    401
-  ){
-
+  if(res.status !== 401){
     return res;
-
   }
 
 
@@ -828,12 +843,8 @@ async function api(
   await refreshAdminSession();
 
 
-  if(
-    !refreshed
-  ){
-
+  if(!refreshed){
     return res;
-
   }
 
 
@@ -843,17 +854,13 @@ async function api(
 
 
 /* =========================================================
-   VERIFY ADMIN
+   ADMIN VERIFY
 ========================================================= */
 
 async function verifyAdmin(){
 
-  if(
-    !token
-  ){
-
+  if(!token){
     return false;
-
   }
 
 
@@ -861,14 +868,8 @@ async function verifyAdmin(){
   getJwtPayload();
 
 
-  if(
-    payload.aal
-    !==
-    'aal2'
-  ){
-
+  if(payload.aal !== 'aal2'){
     return false;
-
   }
 
 
@@ -880,12 +881,8 @@ async function verifyAdmin(){
     );
 
 
-    if(
-      !userRes.ok
-    ){
-
+    if(!userRes.ok){
       return false;
-
     }
 
 
@@ -911,12 +908,8 @@ async function verifyAdmin(){
     );
 
 
-    if(
-      !adminRes.ok
-    ){
-
+    if(!adminRes.ok){
       return false;
-
     }
 
 
@@ -951,25 +944,29 @@ function esc(value){
     ??
     ''
   )
-  .replace(
-    /&/g,
-    '&amp;'
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
+
+}
+
+
+function money(value){
+
+  return new Intl.NumberFormat(
+    'en-US',
+    {
+      maximumFractionDigits:0
+    }
   )
-  .replace(
-    /</g,
-    '&lt;'
-  )
-  .replace(
-    />/g,
-    '&gt;'
-  )
-  .replace(
-    /"/g,
-    '&quot;'
-  )
-  .replace(
-    /'/g,
-    '&#039;'
+  .format(
+    Number(
+      value
+      ||
+      0
+    )
   );
 
 }
@@ -977,34 +974,63 @@ function esc(value){
 
 function methodName(type){
 
-  if(
-    type ===
-    'kpay'
-  ){
-
+  if(type === 'kpay'){
     return 'KPay';
-
   }
 
 
-  if(
-    type ===
-    'bank'
-  ){
-
+  if(type === 'bank'){
     return '银行账户';
-
   }
 
 
-  return type;
+  return type || '—';
 
 }
 
 
-function customerAccounts(
-  customerId
-){
+function roundName(roundId){
+
+  const round =
+  rounds.find(
+    x =>
+    x.id === roundId
+  );
+
+
+  if(!round){
+    return '—';
+  }
+
+
+  let label =
+  round.round_code
+  ||
+  '';
+
+
+  if(round.round_code === '1030'){
+    label = '上午 11:45';
+  }
+
+
+  if(round.round_code === '1530'){
+    label = '下午 3:45';
+  }
+
+
+  return (
+    round.round_date
+    +
+    ' · '
+    +
+    label
+  );
+
+}
+
+
+function customerAccounts(customerId){
 
   return payoutAccounts.filter(
 
@@ -1017,6 +1043,279 @@ function customerAccounts(
 
 }
 
+
+function customerOrders(customerId){
+
+  return orders.filter(
+
+    item =>
+    item.customer_id
+    ===
+    customerId
+
+  );
+
+}
+
+
+function customerPayments(customerId){
+
+  return payments.filter(
+
+    item =>
+    item.customer_id
+    ===
+    customerId
+
+  );
+
+}
+
+
+function proofForSubmission(submissionId){
+
+  return proofs.find(
+
+    item =>
+    item.payment_submission_id
+    ===
+    submissionId
+
+  )
+  ||
+  null;
+
+}
+
+
+/* =========================================================
+   LOAD ALL
+========================================================= */
+
+async function loadAll(){
+
+  const msg =
+  document.getElementById(
+    'pageMsg'
+  );
+
+
+  msg.textContent =
+  '正在刷新...';
+
+
+  msg.className =
+  'msg';
+
+
+  try{
+
+    const responses =
+    await Promise.all([
+
+      api(
+        '/rest/v1/customer_profiles'
+        +
+        '?select=id,customer_code,username,display_name,phone,status,created_at'
+        +
+        '&order=created_at.desc'
+      ),
+
+      api(
+        '/rest/v1/customer_payout_accounts'
+        +
+        '?select=id,customer_id,method_type,account_name,account_number,bank_name,is_verified,is_active,created_at,updated_at'
+        +
+        '&is_active=eq.true'
+        +
+        '&order=updated_at.desc'
+      ),
+
+      api(
+        '/rest/v1/customer_round_orders'
+        +
+        '?select=id,round_id,customer_id,status,submitted_total,pending_total,confirmed_total,submitted_at,created_at,updated_at'
+        +
+        '&order=created_at.desc'
+        +
+        '&limit=1000'
+      ),
+
+      api(
+        '/rest/v1/customer_payment_submissions'
+        +
+        '?select=id,order_id,round_id,customer_id,payment_account_id,declared_amount,confirmed_amount,status,method_name_snapshot,method_type_snapshot,account_name_snapshot,account_number_snapshot,bank_name_snapshot,customer_note,submitted_at,reviewed_at,rejection_reason'
+        +
+        '&order=submitted_at.desc'
+        +
+        '&limit=1000'
+      ),
+
+      api(
+        '/rest/v1/customer_payment_proofs'
+        +
+        '?select=id,payment_submission_id,customer_id,storage_path,original_name,mime_type,file_size,created_at'
+        +
+        '&order=created_at.desc'
+        +
+        '&limit=1000'
+      ),
+
+      api(
+        '/rest/v1/rounds'
+        +
+        '?select=id,round_date,round_code,status,deadline_at,game_mode,created_at'
+        +
+        '&order=created_at.desc'
+        +
+        '&limit=100'
+      )
+
+    ]);
+
+
+    for(const res of responses){
+
+      if(!res.ok){
+
+        const text =
+        await res.text();
+
+        throw new Error(
+          text
+          ||
+          'LOAD_FAILED'
+        );
+
+      }
+
+    }
+
+
+    customers =
+    await responses[0].json();
+
+
+    payoutAccounts =
+    await responses[1].json();
+
+
+    orders =
+    await responses[2].json();
+
+
+    payments =
+    await responses[3].json();
+
+
+    proofs =
+    await responses[4].json();
+
+
+    rounds =
+    await responses[5].json();
+
+
+    updateSummary();
+
+
+    renderCustomers();
+
+
+    msg.textContent =
+    '资料已更新';
+
+
+    msg.className =
+    'msg ok';
+
+  }
+  catch(err){
+
+    console.error(
+      err
+    );
+
+
+    msg.textContent =
+    '读取客户资料失败，请返回管理中心重新登录后再试。';
+
+
+    msg.className =
+    'msg err';
+
+  }
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function updateSummary(){
+
+  document
+  .getElementById(
+    'customerTotal'
+  )
+  .textContent =
+  customers.length;
+
+
+  document
+  .getElementById(
+    'activeTotal'
+  )
+  .textContent =
+  customers.filter(
+
+    item =>
+    item.status
+    ===
+    'active'
+
+  )
+  .length;
+
+
+  document
+  .getElementById(
+    'payoutPendingTotal'
+  )
+  .textContent =
+  payoutAccounts.filter(
+
+    item =>
+    item.is_verified
+    !==
+    true
+
+  )
+  .length;
+
+
+  document
+  .getElementById(
+    'paymentPendingTotal'
+  )
+  .textContent =
+  payments.filter(
+
+    item =>
+    item.status
+    ===
+    'pending'
+
+  )
+  .length;
+
+}
+
+
+/* =========================================================
+   PAYOUT ACCOUNT
+========================================================= */
 
 function accountHtml(account){
 
@@ -1053,10 +1352,12 @@ function accountHtml(account){
 
 
       ${
-        account.method_type === 'bank'
+        account.method_type
+        ===
+        'bank'
         ?
         `
-          <div class="accountRow">
+          <div class="infoRow">
             <span>银行名称</span>
             <strong>${esc(account.bank_name || '—')}</strong>
           </div>
@@ -1066,13 +1367,13 @@ function accountHtml(account){
       }
 
 
-      <div class="accountRow">
+      <div class="infoRow">
         <span>户名</span>
         <strong>${esc(account.account_name)}</strong>
       </div>
 
 
-      <div class="accountRow">
+      <div class="infoRow">
         <span>账号 / 手机</span>
         <strong>${esc(account.account_number)}</strong>
       </div>
@@ -1082,7 +1383,7 @@ function accountHtml(account){
 
         <button
           ${verified ? 'disabled' : ''}
-          onclick="setVerification(
+          onclick="setPayoutVerification(
             '${esc(account.id)}',
             true
           )">
@@ -1101,7 +1402,7 @@ function accountHtml(account){
         <button
           class="danger"
           ${verified ? '' : 'disabled'}
-          onclick="setVerification(
+          onclick="setPayoutVerification(
             '${esc(account.id)}',
             false
           )">
@@ -1120,158 +1421,280 @@ function accountHtml(account){
 
 
 /* =========================================================
-   LOAD
+   ORDER
 ========================================================= */
 
-async function loadCustomers(){
+function orderHtml(order){
 
-  const msg =
-  document.getElementById(
-    'pageMsg'
-  );
+  const statusMap = {
 
+    draft:
+    '待付款',
 
-  msg.className =
-  'msg';
+    payment_pending:
+    '付款审核中',
 
+    confirmed:
+    '已确认',
 
-  msg.textContent =
-  '正在刷新...';
+    locked:
+    '已锁定',
 
+    settled:
+    '已结算',
 
-  try{
+    cancelled:
+    '已取消'
 
-    const [
-      customerRes,
-      accountRes
-    ] =
-    await Promise.all([
-
-      api(
-
-        '/rest/v1/customer_profiles'
-        +
-        '?select=id,customer_code,username,display_name,phone,status,created_at'
-        +
-        '&order=created_at.desc'
-
-      ),
-
-      api(
-
-        '/rest/v1/customer_payout_accounts'
-        +
-        '?select=id,customer_id,method_type,account_name,account_number,bank_name,is_verified,is_active,created_at,updated_at'
-        +
-        '&is_active=eq.true'
-        +
-        '&order=updated_at.desc'
-
-      )
-
-    ]);
+  };
 
 
-    if(
-      !customerRes.ok
-      ||
-      !accountRes.ok
-    ){
+  return `
 
-      throw new Error(
-        'LOAD_FAILED'
-      );
+    <div class="order">
 
-    }
+      <div class="orderHead">
 
+        <div class="orderTitle">
+          ${esc(roundName(order.round_id))}
+        </div>
 
-    customers =
-    await customerRes.json();
+        <div class="status active">
+          ${esc(statusMap[order.status] || order.status)}
+        </div>
 
-
-    payoutAccounts =
-    await accountRes.json();
+      </div>
 
 
-    updateSummary();
+      <div class="finance">
 
+        <div class="financeBox">
+          <small>下注总额</small>
+          <strong>${money(order.submitted_total)}</strong>
+        </div>
 
-    renderCustomers();
+        <div class="financeBox">
+          <small>审核中</small>
+          <strong>${money(order.pending_total)}</strong>
+        </div>
 
+        <div class="financeBox">
+          <small>已确认</small>
+          <strong>${money(order.confirmed_total)}</strong>
+        </div>
 
-    msg.textContent =
-    '资料已更新';
+      </div>
 
+    </div>
 
-    msg.className =
-    'msg ok';
-
-  }
-  catch(err){
-
-    console.error(
-      err
-    );
-
-
-    msg.textContent =
-    '读取客户资料失败，请重新登录管理员账号后再试。';
-
-
-    msg.className =
-    'msg err';
-
-  }
-
-}
-
-
-function updateSummary(){
-
-  document
-  .getElementById(
-    'customerTotal'
-  )
-  .textContent =
-  customers.length;
-
-
-  document
-  .getElementById(
-    'activeTotal'
-  )
-  .textContent =
-  customers.filter(
-
-    item =>
-    item.status
-    ===
-    'active'
-
-  )
-  .length;
-
-
-  document
-  .getElementById(
-    'pendingTotal'
-  )
-  .textContent =
-  payoutAccounts.filter(
-
-    item =>
-    item.is_verified
-    !==
-    true
-
-  )
-  .length;
+  `;
 
 }
 
 
 /* =========================================================
-   RENDER
+   PAYMENT
+========================================================= */
+
+function paymentHtml(payment){
+
+  const proof =
+  proofForSubmission(
+    payment.id
+  );
+
+
+  const statusText = {
+
+    pending:
+    '待审核',
+
+    approved:
+    '已确认',
+
+    rejected:
+    '已拒绝'
+
+  };
+
+
+  return `
+
+    <div class="payment">
+
+      <div class="paymentHead">
+
+        <div>
+
+          <div class="paymentTitle">
+            ${esc(roundName(payment.round_id))}
+          </div>
+
+          <div class="customerCode">
+            ${esc(payment.method_name_snapshot || '付款')}
+          </div>
+
+        </div>
+
+        <div
+          class="paymentStatus ${esc(payment.status)}">
+
+          ${esc(statusText[payment.status] || payment.status)}
+
+        </div>
+
+      </div>
+
+
+      <div class="infoRow">
+        <span>申报付款</span>
+        <strong>${money(payment.declared_amount)}</strong>
+      </div>
+
+
+      <div class="infoRow">
+        <span>已确认金额</span>
+        <strong>${money(payment.confirmed_amount)}</strong>
+      </div>
+
+
+      <div class="infoRow">
+        <span>付款方式</span>
+        <strong>${esc(payment.method_name_snapshot || '—')}</strong>
+      </div>
+
+
+      ${
+        payment.bank_name_snapshot
+        ?
+        `
+          <div class="infoRow">
+            <span>银行 / 钱包</span>
+            <strong>${esc(payment.bank_name_snapshot)}</strong>
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      <div class="infoRow">
+        <span>平台户名</span>
+        <strong>${esc(payment.account_name_snapshot || '—')}</strong>
+      </div>
+
+
+      <div class="infoRow">
+        <span>平台账号</span>
+        <strong>${esc(payment.account_number_snapshot || '—')}</strong>
+      </div>
+
+
+      ${
+        payment.customer_note
+        ?
+        `
+          <div class="infoRow">
+            <span>客户备注</span>
+            <strong>${esc(payment.customer_note)}</strong>
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        payment.status
+        ===
+        'rejected'
+        &&
+        payment.rejection_reason
+        ?
+        `
+          <div class="infoRow">
+            <span>拒绝原因</span>
+            <strong>${esc(payment.rejection_reason)}</strong>
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        proof
+        ?
+        `
+          <div class="singleAction">
+
+            <button
+              class="secondary"
+              onclick="viewProof(
+                '${esc(proof.storage_path)}'
+              )">
+
+              查看付款凭证
+
+            </button>
+
+          </div>
+        `
+        :
+        `
+          <div class="msg err">
+            尚未上传付款凭证
+          </div>
+        `
+      }
+
+
+      ${
+        payment.status
+        ===
+        'pending'
+        ?
+        `
+          <div class="actions">
+
+            <button
+              ${proof ? '' : 'disabled'}
+              onclick="reviewPayment(
+                '${esc(payment.id)}',
+                'approved'
+              )">
+
+              确认到账
+
+            </button>
+
+
+            <button
+              class="danger"
+              onclick="reviewPayment(
+                '${esc(payment.id)}',
+                'rejected'
+              )">
+
+              拒绝付款
+
+            </button>
+
+          </div>
+        `
+        :
+        ''
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   CUSTOMER RENDER
 ========================================================= */
 
 function renderCustomers(){
@@ -1296,21 +1719,19 @@ function renderCustomers(){
   customers;
 
 
-  if(
-    query
-  ){
+  if(query){
 
     rows =
     customers.filter(
 
-      item => {
+      customer => {
 
         const text =
         [
-          item.customer_code,
-          item.username,
-          item.display_name,
-          item.phone
+          customer.customer_code,
+          customer.username,
+          customer.display_name,
+          customer.phone
         ]
         .join(' ')
         .toLowerCase();
@@ -1327,9 +1748,7 @@ function renderCustomers(){
   }
 
 
-  if(
-    !rows.length
-  ){
+  if(!rows.length){
 
     list.innerHTML =
     `
@@ -1351,6 +1770,18 @@ function renderCustomers(){
 
       const accounts =
       customerAccounts(
+        customer.id
+      );
+
+
+      const customerOrderRows =
+      customerOrders(
+        customer.id
+      );
+
+
+      const customerPaymentRows =
+      customerPayments(
         customer.id
       );
 
@@ -1408,6 +1839,11 @@ function renderCustomers(){
           </div>
 
 
+          <div class="sectionLabel">
+            收款方式
+          </div>
+
+
           ${
             accounts.length
             ?
@@ -1419,7 +1855,53 @@ function renderCustomers(){
             :
             `
               <div class="empty">
-                暂无收款方式
+                暂无客户收款方式
+              </div>
+            `
+          }
+
+
+          <div class="sectionLabel">
+            客户下注
+          </div>
+
+
+          ${
+            customerOrderRows.length
+            ?
+            customerOrderRows
+            .slice(0,10)
+            .map(
+              orderHtml
+            )
+            .join('')
+            :
+            `
+              <div class="empty">
+                暂无客户下注
+              </div>
+            `
+          }
+
+
+          <div class="sectionLabel">
+            客户付款申请
+          </div>
+
+
+          ${
+            customerPaymentRows.length
+            ?
+            customerPaymentRows
+            .slice(0,10)
+            .map(
+              paymentHtml
+            )
+            .join('')
+            :
+            `
+              <div class="empty">
+                暂无付款申请
               </div>
             `
           }
@@ -1437,40 +1919,28 @@ function renderCustomers(){
 
 
 /* =========================================================
-   VERIFY ACCOUNT
+   PAYOUT VERIFY
 ========================================================= */
 
-async function setVerification(
+async function setPayoutVerification(
   accountId,
   verified
 ){
-
-  const actionText =
-  verified
-  ?
-  '确认'
-  :
-  '取消确认';
-
 
   const ok =
   window.confirm(
 
     verified
     ?
-    '确认此客户的收款资料正确吗？'
+    '确认此客户收款资料正确吗？'
     :
-    '确定取消此收款方式的确认状态吗？'
+    '确定取消此客户收款方式的确认状态吗？'
 
   );
 
 
-  if(
-    !ok
-  ){
-
+  if(!ok){
     return;
-
   }
 
 
@@ -1481,9 +1951,7 @@ async function setVerification(
 
 
   msg.textContent =
-  actionText
-  +
-  '中...';
+  '处理中...';
 
 
   msg.className =
@@ -1528,12 +1996,10 @@ async function setVerification(
     await res.text();
 
 
-    let data =
-    null;
+    let data = null;
 
 
     try{
-
       data =
       text
       ?
@@ -1542,19 +2008,13 @@ async function setVerification(
       )
       :
       null;
-
     }
     catch{
-
-      data =
-      text;
-
+      data = text;
     }
 
 
-    if(
-      !res.ok
-    ){
+    if(!res.ok){
 
       throw new Error(
 
@@ -1569,19 +2029,19 @@ async function setVerification(
     }
 
 
+    await loadAll();
+
+
     msg.textContent =
     verified
     ?
-    '收款方式已经确认。'
+    '客户收款方式已经确认。'
     :
-    '收款方式已取消确认。';
+    '客户收款方式已取消确认。';
 
 
     msg.className =
     'msg ok';
-
-
-    await loadCustomers();
 
   }
   catch(err){
@@ -1591,36 +2051,419 @@ async function setVerification(
     );
 
 
-    let text =
-    String(
-      err.message
-      ||
-      ''
-    );
-
-
-    if(
-      text.includes(
-        'ADMIN_AAL2_REQUIRED'
-      )
-    ){
-
-      text =
-      '管理员二次验证已经失效，请返回管理中心重新验证。';
-
-    }
-
-
     msg.textContent =
-    text
-    ||
-    '操作失败，请重试。';
+    translateError(
+      err.message
+    );
 
 
     msg.className =
     'msg err';
 
   }
+
+}
+
+
+/* =========================================================
+   PAYMENT REVIEW
+========================================================= */
+
+async function reviewPayment(
+  submissionId,
+  action
+){
+
+  let reason =
+  null;
+
+
+  if(action === 'approved'){
+
+    const ok =
+    window.confirm(
+      '请确认您已经核对付款凭证，并且平台确实收到这笔款项。确认到账吗？'
+    );
+
+
+    if(!ok){
+      return;
+    }
+
+  }
+  else{
+
+    reason =
+    window.prompt(
+      '请输入拒绝原因：',
+      '付款凭证或金额不正确'
+    );
+
+
+    if(reason === null){
+      return;
+    }
+
+
+    reason =
+    reason.trim();
+
+
+    if(!reason){
+      reason =
+      '付款未通过审核';
+    }
+
+  }
+
+
+  const msg =
+  document.getElementById(
+    'pageMsg'
+  );
+
+
+  msg.textContent =
+  action === 'approved'
+  ?
+  '正在确认付款...'
+  :
+  '正在拒绝付款...';
+
+
+  msg.className =
+  'msg';
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_review_customer_payment',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          p_submission_id:
+          submissionId,
+
+          p_action:
+          action,
+
+          p_rejection_reason:
+          action === 'rejected'
+          ?
+          reason
+          :
+          null
+
+        })
+
+      }
+
+    );
+
+
+    const text =
+    await res.text();
+
+
+    let data = null;
+
+
+    try{
+      data =
+      text
+      ?
+      JSON.parse(
+        text
+      )
+      :
+      null;
+    }
+    catch{
+      data = text;
+    }
+
+
+    if(!res.ok){
+
+      throw new Error(
+
+        data?.message
+        ||
+        data?.error
+        ||
+        'REVIEW_FAILED'
+
+      );
+
+    }
+
+
+    await loadAll();
+
+
+    msg.textContent =
+    action === 'approved'
+    ?
+    '付款已经确认到账。'
+    :
+    '付款已拒绝，对应锁定金额已经释放。';
+
+
+    msg.className =
+    'msg ok';
+
+  }
+  catch(err){
+
+    console.error(
+      err
+    );
+
+
+    msg.textContent =
+    translateError(
+      err.message
+    );
+
+
+    msg.className =
+    'msg err';
+
+  }
+
+}
+
+
+/* =========================================================
+   PAYMENT PROOF
+========================================================= */
+
+async function viewProof(storagePath){
+
+  const newWindow =
+  window.open(
+    '',
+    '_blank'
+  );
+
+
+  try{
+
+    const encoded =
+    storagePath
+    .split('/')
+    .map(
+      encodeURIComponent
+    )
+    .join('/');
+
+
+    const res =
+    await api(
+
+      '/storage/v1/object/authenticated/customer-payment-proofs/'
+      +
+      encoded
+
+    );
+
+
+    if(!res.ok){
+
+      throw new Error(
+        'PROOF_LOAD_FAILED'
+      );
+
+    }
+
+
+    const blob =
+    await res.blob();
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    if(newWindow){
+
+      newWindow.location =
+      url;
+
+    }
+    else{
+
+      window.location.href =
+      url;
+
+    }
+
+
+    setTimeout(
+      ()=>{
+        URL.revokeObjectURL(
+          url
+        );
+      },
+      60000
+    );
+
+  }
+  catch(err){
+
+    if(newWindow){
+      newWindow.close();
+    }
+
+
+    const msg =
+    document.getElementById(
+      'pageMsg'
+    );
+
+
+    msg.textContent =
+    '付款凭证读取失败。';
+
+
+    msg.className =
+    'msg err';
+
+  }
+
+}
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+function translateError(message){
+
+  const text =
+  String(
+    message
+    ||
+    ''
+  );
+
+
+  if(
+    text.includes(
+      'ADMIN_AAL2_REQUIRED'
+    )
+    ||
+    text.includes(
+      'NOT_ADMIN'
+    )
+  ){
+
+    return '管理员二次验证已经失效，请返回管理中心重新验证。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYMENT_SUBMISSION_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到这笔付款申请。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYMENT_ALREADY_REVIEWED'
+    )
+  ){
+
+    return '这笔付款已经被处理，请刷新页面。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYMENT_PROOF_REQUIRED_FOR_APPROVAL'
+    )
+  ){
+
+    return '客户还没有上传付款凭证，不能确认到账。';
+
+  }
+
+
+  if(
+    text.includes(
+      'CONFIRMED_AMOUNT_EXCEEDS_ORDER_TOTAL'
+    )
+    ||
+    text.includes(
+      'APPROVED_AMOUNT_EXCEEDS_ORDER'
+    )
+  ){
+
+    return '确认金额超过客户本期订单金额，操作已被阻止。';
+
+  }
+
+
+  return (
+    text
+    ||
+    '操作失败，请重新尝试。'
+  );
+
+}
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+function startAutoRefresh(){
+
+  if(autoTimer){
+
+    clearInterval(
+      autoTimer
+    );
+
+  }
+
+
+  autoTimer =
+  setInterval(
+
+    ()=>{
+
+      loadAll();
+
+    },
+
+    15000
+
+  );
 
 }
 
@@ -1635,9 +2478,7 @@ async function setVerification(
   await verifyAdmin();
 
 
-  if(
-    !isAdmin
-  ){
+  if(!isAdmin){
 
     document
     .getElementById(
@@ -1664,7 +2505,10 @@ async function setVerification(
   );
 
 
-  await loadCustomers();
+  await loadAll();
+
+
+  startAutoRefresh();
 
 })();
 
