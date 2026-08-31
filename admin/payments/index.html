@@ -1,0 +1,2492 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<title>金满堂 · 付款中心</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 38%,
+    #070708 100%
+  );
+  color:#f7f0df;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif;
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:22px 15px 55px;
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.mark{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:27px;
+  font-weight:900;
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:
+  linear-gradient(
+    145deg,
+    #382506,
+    #100d08
+  );
+  box-shadow:
+  0 0 28px
+  rgba(235,185,62,.22);
+}
+
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889;
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px;
+}
+
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+}
+
+.card{
+  background:
+  linear-gradient(
+    180deg,
+    rgba(22,22,22,.98),
+    rgba(11,11,12,.98)
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.30);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:
+  0 22px 60px
+  rgba(0,0,0,.32);
+}
+
+.title{
+  color:#dfc575;
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.summaryBox{
+  text-decoration:none;
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:14px;
+}
+
+.summaryBox.active{
+  border-color:
+  rgba(214,168,63,.55);
+  background:#17140d;
+}
+
+.summaryBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+.summaryBox strong{
+  display:block;
+  color:#ebcd72;
+  font-size:21px;
+}
+
+.summaryBox .count{
+  margin-top:7px;
+  color:#aaa18d;
+  font-size:11px;
+}
+
+.refundLink{
+  display:block;
+  text-decoration:none;
+  margin-top:10px;
+  padding:14px;
+  border-radius:14px;
+  text-align:center;
+  color:#e0c46d;
+  background:#171718;
+  border:
+  1px solid
+  rgba(214,168,63,.22);
+  font-size:13px;
+  font-weight:900;
+}
+
+.notice{
+  margin-top:13px;
+  padding:13px;
+  border-radius:13px;
+  background:#15120b;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  color:#a99c79;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:9px;
+}
+
+input{
+  width:100%;
+  border:
+  1px solid
+  rgba(214,168,63,.24);
+  background:#101011;
+  color:#fff;
+  border-radius:13px;
+  padding:14px;
+  font-size:15px;
+  outline:none;
+}
+
+button{
+  border:0;
+  border-radius:13px;
+  padding:13px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  background:
+  linear-gradient(
+    180deg,
+    #f1d784,
+    #b47d20
+  );
+  color:#171109;
+}
+
+button.secondary{
+  background:#171718;
+  color:#d9c37c;
+  border:
+  1px solid
+  rgba(214,168,63,.22);
+}
+
+button.danger{
+  background:#1b1111;
+  color:#dfa7a2;
+  border:
+  1px solid
+  rgba(180,80,80,.26);
+}
+
+button:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.payment{
+  margin-top:12px;
+  padding:15px;
+  border-radius:16px;
+  background:#0e0e0f;
+  border:
+  1px solid
+  rgba(214,168,63,.19);
+}
+
+.paymentHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.customerName{
+  color:#efd477;
+  font-size:17px;
+  font-weight:900;
+}
+
+.customerCode{
+  color:#a99b75;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.customerMeta{
+  color:#888174;
+  font-size:11px;
+  line-height:1.7;
+  margin-top:7px;
+}
+
+.badge{
+  padding:6px 9px;
+  border-radius:99px;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.badge.pending{
+  background:#352d13;
+  color:#e2c870;
+}
+
+.badge.approved{
+  background:#153124;
+  color:#79d6a2;
+}
+
+.badge.late{
+  background:#34280e;
+  color:#e9c661;
+}
+
+.badge.rejected{
+  background:#311919;
+  color:#dda09a;
+}
+
+.round{
+  color:#e5c96f;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:8px 0;
+  border-bottom:
+  1px solid
+  rgba(255,255,255,.05);
+  font-size:12px;
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.row span{
+  color:#777166;
+}
+
+.row strong{
+  color:#e9dfc7;
+  text-align:right;
+  word-break:break-all;
+}
+
+.row strong.amount{
+  color:#efd477;
+  font-size:18px;
+}
+
+.reason{
+  margin-top:11px;
+  padding:11px;
+  border-radius:11px;
+  background:#15120d;
+  color:#b6a575;
+  font-size:11px;
+  line-height:1.65;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:13px;
+}
+
+.singleAction{
+  margin-top:11px;
+}
+
+.singleAction button{
+  width:100%;
+}
+
+.empty{
+  text-align:center;
+  color:#7f786b;
+  padding:28px 10px;
+  font-size:12px;
+}
+
+.msg{
+  min-height:18px;
+  margin-top:10px;
+  text-align:center;
+  color:#aaa18d;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.msg.ok{
+  color:#70d49c;
+}
+
+.msg.err{
+  color:#e89191;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
+  font-size:10px;
+  margin-top:24px;
+}
+
+@media(max-width:650px){
+
+  .toolbar{
+    grid-template-columns:1fr;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      PAYMENT CENTER
+    </div>
+
+  </div>
+
+
+  <a
+    class="back"
+    href="/admin/">
+    ← 返回管理中心
+  </a>
+
+
+  <div
+    id="authError"
+    class="card hidden">
+
+    <div class="title">
+      无法进入付款中心
+    </div>
+
+    <div class="msg err">
+      请先登录管理员账号并完成二次验证。
+    </div>
+
+  </div>
+
+
+  <main
+    id="mainBox"
+    class="hidden">
+
+
+    <section class="card">
+
+      <div class="title">
+        付款分类
+      </div>
+
+      <div class="summary">
+
+        <a
+          class="summaryBox"
+          id="tab-pending"
+          href="?view=pending">
+
+          <small>
+            待审核
+          </small>
+
+          <strong>
+            等待处理
+          </strong>
+
+          <div
+            class="count"
+            id="countPending">
+            0 笔
+          </div>
+
+        </a>
+
+
+        <a
+          class="summaryBox"
+          id="tab-approved"
+          href="?view=approved">
+
+          <small>
+            已通过
+          </small>
+
+          <strong>
+            已确认到账
+          </strong>
+
+          <div
+            class="count"
+            id="countApproved">
+            0 笔
+          </div>
+
+        </a>
+
+
+        <a
+          class="summaryBox"
+          id="tab-late"
+          href="?view=late">
+
+          <small>
+            超时未审核
+          </small>
+
+          <strong>
+            需核对资金
+          </strong>
+
+          <div
+            class="count"
+            id="countLate">
+            0 笔
+          </div>
+
+        </a>
+
+
+        <a
+          class="summaryBox"
+          id="tab-rejected"
+          href="?view=rejected">
+
+          <small>
+            管理员驳回
+          </small>
+
+          <strong>
+            人工拒绝
+          </strong>
+
+          <div
+            class="count"
+            id="countRejected">
+            0 笔
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <a
+        class="refundLink"
+        href="/admin/refunds/">
+
+        ↩️ 进入退款处理
+
+      </a>
+
+
+      <div class="notice">
+
+        “超时未审核”不是“客户没有付款”，
+        也不是“管理员拒绝”。
+        它代表客户已经提交付款凭证，
+        但开奖前没有完成审核。
+        如果实际款项已经到账，
+        请进入退款处理核对并完成退款。
+
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div
+        class="title"
+        id="currentTitle">
+
+        待审核付款
+
+      </div>
+
+
+      <div class="toolbar">
+
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="客户编号、用户名、姓名、电话"
+          oninput="renderPayments()">
+
+        <button
+          class="secondary"
+          type="button"
+          onclick="loadAll()">
+
+          刷新
+
+        </button>
+
+      </div>
+
+
+      <div id="paymentList">
+
+        <div class="empty">
+          正在读取...
+        </div>
+
+      </div>
+
+
+      <div
+        id="pageMsg"
+        class="msg">
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <div class="foot">
+    © JIN MANTANG · ADMIN PAYMENT CENTER
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE =
+location.origin
++
+'/supabase';
+
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+let token =
+localStorage.getItem(
+  'jmt_access_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_access_token'
+)
+||
+'';
+
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
+
+
+let refreshPromise =
+null;
+
+
+let customers =
+[];
+
+
+let payments =
+[];
+
+
+let proofs =
+[];
+
+
+let rounds =
+[];
+
+
+const params =
+new URLSearchParams(
+  location.search
+);
+
+
+const allowedViews =
+[
+  'pending',
+  'approved',
+  'late',
+  'rejected'
+];
+
+
+let currentView =
+params.get(
+  'view'
+);
+
+
+if(
+  !allowedViews.includes(
+    currentView
+  )
+){
+
+  currentView =
+  'pending';
+
+}
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+function saveSession(data){
+
+  if(data?.access_token){
+
+    token =
+    data.access_token;
+
+
+    localStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+  }
+
+
+  if(data?.refresh_token){
+
+    refreshToken =
+    data.refresh_token;
+
+
+    localStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+function getJwtPayload(){
+
+  try{
+
+    let part =
+    token
+    .split('.')[1]
+    .replace(/-/g,'+')
+    .replace(/_/g,'/');
+
+
+    while(
+      part.length
+      %
+      4
+    ){
+
+      part += '=';
+
+    }
+
+
+    return JSON.parse(
+
+      decodeURIComponent(
+
+        atob(part)
+        .split('')
+        .map(
+
+          c =>
+          '%'
+          +
+          (
+            '00'
+            +
+            c.charCodeAt(0)
+            .toString(16)
+          )
+          .slice(-2)
+
+        )
+        .join('')
+
+      )
+
+    );
+
+  }
+  catch{
+
+    return {};
+
+  }
+
+}
+
+
+async function refreshAdminSession(){
+
+  if(!refreshToken){
+
+    return false;
+
+  }
+
+
+  if(refreshPromise){
+
+    return refreshPromise;
+
+  }
+
+
+  refreshPromise =
+  (
+    async()=>{
+
+      try{
+
+        const res =
+        await fetch(
+
+          BASE
+          +
+          '/auth/v1/token?grant_type=refresh_token',
+
+          {
+
+            method:'POST',
+
+            headers:{
+
+              apikey:
+              KEY,
+
+              'Content-Type':
+              'application/json'
+
+            },
+
+            body:
+            JSON.stringify({
+
+              refresh_token:
+              refreshToken
+
+            })
+
+          }
+
+        );
+
+
+        if(!res.ok){
+
+          return false;
+
+        }
+
+
+        const data =
+        await res.json();
+
+
+        if(!data.access_token){
+
+          return false;
+
+        }
+
+
+        saveSession(
+          data
+        );
+
+
+        return true;
+
+      }
+      catch{
+
+        return false;
+
+      }
+      finally{
+
+        refreshPromise =
+        null;
+
+      }
+
+    }
+  )();
+
+
+  return refreshPromise;
+
+}
+
+
+async function api(
+  path,
+  options={}
+){
+
+  const request =
+  ()=>fetch(
+
+    BASE
+    +
+    path,
+
+    {
+
+      ...options,
+
+      headers:{
+
+        apikey:
+        KEY,
+
+        Authorization:
+        'Bearer '
+        +
+        token,
+
+        ...(
+          options.headers
+          ||
+          {}
+        )
+
+      }
+
+    }
+
+  );
+
+
+  let res =
+  await request();
+
+
+  if(
+    res.status
+    !==
+    401
+  ){
+
+    return res;
+
+  }
+
+
+  const refreshed =
+  await refreshAdminSession();
+
+
+  if(!refreshed){
+
+    return res;
+
+  }
+
+
+  return request();
+
+}
+
+
+/* =========================================================
+   ADMIN VERIFY
+========================================================= */
+
+async function verifyAdmin(){
+
+  if(!token){
+
+    return false;
+
+  }
+
+
+  const payload =
+  getJwtPayload();
+
+
+  if(
+    payload.aal
+    !==
+    'aal2'
+  ){
+
+    return false;
+
+  }
+
+
+  try{
+
+    const userRes =
+    await api(
+      '/auth/v1/user'
+    );
+
+
+    if(!userRes.ok){
+
+      return false;
+
+    }
+
+
+    const user =
+    await userRes.json();
+
+
+    const adminRes =
+    await api(
+
+      '/rest/v1/admin_users'
+      +
+      '?auth_user_id=eq.'
+      +
+      encodeURIComponent(
+        user.id
+      )
+      +
+      '&select=auth_user_id'
+      +
+      '&limit=1'
+
+    );
+
+
+    if(!adminRes.ok){
+
+      return false;
+
+    }
+
+
+    const rows =
+    await adminRes.json();
+
+
+    return (
+      Array.isArray(
+        rows
+      )
+      &&
+      rows.length > 0
+    );
+
+  }
+  catch{
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function esc(value){
+
+  return String(
+    value
+    ??
+    ''
+  )
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
+
+}
+
+
+function money(value){
+
+  return new Intl.NumberFormat(
+    'en-US',
+    {
+      maximumFractionDigits:0
+    }
+  )
+  .format(
+    Number(
+      value
+      ||
+      0
+    )
+  );
+
+}
+
+
+function customerById(id){
+
+  return customers.find(
+    customer =>
+    customer.id
+    ===
+    id
+  )
+  ||
+  null;
+
+}
+
+
+function proofForSubmission(id){
+
+  return proofs.find(
+    proof =>
+    proof.payment_submission_id
+    ===
+    id
+  )
+  ||
+  null;
+
+}
+
+
+function roundName(roundId){
+
+  const round =
+  rounds.find(
+    item =>
+    item.id
+    ===
+    roundId
+  );
+
+
+  if(!round){
+
+    return '—';
+
+  }
+
+
+  let label =
+  round.round_code
+  ||
+  '';
+
+
+  if(
+    round.round_code
+    ===
+    '1030'
+  ){
+
+    label =
+    '上午 11:45';
+
+  }
+
+
+  if(
+    round.round_code
+    ===
+    '1530'
+  ){
+
+    label =
+    '下午 3:45';
+
+  }
+
+
+  return (
+    round.round_date
+    +
+    ' · '
+    +
+    label
+  );
+
+}
+
+
+function isLatePayment(
+  payment
+){
+
+  return (
+    payment.status
+    ===
+    'rejected'
+    &&
+    String(
+      payment.rejection_reason
+      ||
+      ''
+    )
+    .includes(
+      'ROUND_RESULT_PUBLISHED_BEFORE_PAYMENT_APPROVAL'
+    )
+  );
+
+}
+
+
+function paymentGroup(
+  payment
+){
+
+  if(
+    payment.status
+    ===
+    'pending'
+  ){
+
+    return 'pending';
+
+  }
+
+
+  if(
+    payment.status
+    ===
+    'approved'
+  ){
+
+    return 'approved';
+
+  }
+
+
+  if(
+    isLatePayment(
+      payment
+    )
+  ){
+
+    return 'late';
+
+  }
+
+
+  return 'rejected';
+
+}
+
+
+function titleForView(){
+
+  const map = {
+
+    pending:
+    '待审核付款',
+
+    approved:
+    '已通过付款',
+
+    late:
+    '超时未审核',
+
+    rejected:
+    '管理员驳回'
+
+  };
+
+
+  return map[
+    currentView
+  ];
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function loadAll(){
+
+  setPageMessage(
+    '正在刷新...'
+  );
+
+
+  try{
+
+    const responses =
+    await Promise.all([
+
+      api(
+        '/rest/v1/customer_profiles'
+        +
+        '?select=id,customer_code,username,display_name,phone'
+        +
+        '&order=created_at.desc'
+      ),
+
+      api(
+        '/rest/v1/customer_payment_submissions'
+        +
+        '?select=id,order_id,round_id,customer_id,payment_account_id,declared_amount,confirmed_amount,status,method_name_snapshot,method_type_snapshot,account_name_snapshot,account_number_snapshot,bank_name_snapshot,customer_note,submitted_at,reviewed_at,rejection_reason'
+        +
+        '&order=submitted_at.desc'
+        +
+        '&limit=2000'
+      ),
+
+      api(
+        '/rest/v1/customer_payment_proofs'
+        +
+        '?select=id,payment_submission_id,customer_id,storage_path,original_name,mime_type,file_size,created_at'
+        +
+        '&order=created_at.desc'
+        +
+        '&limit=2000'
+      ),
+
+      api(
+        '/rest/v1/rounds'
+        +
+        '?select=id,round_date,round_code,status,deadline_at'
+        +
+        '&order=created_at.desc'
+        +
+        '&limit=300'
+      )
+
+    ]);
+
+
+    for(
+      const res
+      of
+      responses
+    ){
+
+      if(!res.ok){
+
+        throw new Error(
+          await res.text()
+        );
+
+      }
+
+    }
+
+
+    customers =
+    await responses[0]
+    .json();
+
+
+    payments =
+    await responses[1]
+    .json();
+
+
+    proofs =
+    await responses[2]
+    .json();
+
+
+    rounds =
+    await responses[3]
+    .json();
+
+
+    updateCounts();
+
+
+    renderTabs();
+
+
+    renderPayments();
+
+
+    setPageMessage(
+      '资料已更新',
+      'ok'
+    );
+
+  }
+  catch(err){
+
+    console.error(
+      err
+    );
+
+
+    setPageMessage(
+      '付款资料读取失败，请返回管理中心重新登录后再试。',
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   COUNTS
+========================================================= */
+
+function updateCounts(){
+
+  const counts = {
+
+    pending:0,
+    approved:0,
+    late:0,
+    rejected:0
+
+  };
+
+
+  payments.forEach(
+    payment => {
+
+      counts[
+        paymentGroup(
+          payment
+        )
+      ]++;
+
+    }
+  );
+
+
+  document
+  .getElementById(
+    'countPending'
+  )
+  .textContent =
+  counts.pending
+  +
+  ' 笔';
+
+
+  document
+  .getElementById(
+    'countApproved'
+  )
+  .textContent =
+  counts.approved
+  +
+  ' 笔';
+
+
+  document
+  .getElementById(
+    'countLate'
+  )
+  .textContent =
+  counts.late
+  +
+  ' 笔';
+
+
+  document
+  .getElementById(
+    'countRejected'
+  )
+  .textContent =
+  counts.rejected
+  +
+  ' 笔';
+
+}
+
+
+function renderTabs(){
+
+  allowedViews.forEach(
+    view => {
+
+      const el =
+      document.getElementById(
+        'tab-'
+        +
+        view
+      );
+
+
+      if(!el){
+
+        return;
+
+      }
+
+
+      el.classList.toggle(
+        'active',
+        view
+        ===
+        currentView
+      );
+
+    }
+  );
+
+
+  document
+  .getElementById(
+    'currentTitle'
+  )
+  .textContent =
+  titleForView();
+
+}
+
+
+/* =========================================================
+   PAYMENT RENDER
+========================================================= */
+
+function renderPayments(){
+
+  const list =
+  document.getElementById(
+    'paymentList'
+  );
+
+
+  const query =
+  document
+  .getElementById(
+    'searchInput'
+  )
+  .value
+  .trim()
+  .toLowerCase();
+
+
+  let rows =
+  payments.filter(
+
+    payment =>
+    paymentGroup(
+      payment
+    )
+    ===
+    currentView
+
+  );
+
+
+  if(query){
+
+    rows =
+    rows.filter(
+      payment => {
+
+        const customer =
+        customerById(
+          payment.customer_id
+        );
+
+
+        const text =
+        [
+          customer?.customer_code,
+          customer?.username,
+          customer?.display_name,
+          customer?.phone
+        ]
+        .join(' ')
+        .toLowerCase();
+
+
+        return text.includes(
+          query
+        );
+
+      }
+    );
+
+  }
+
+
+  if(!rows.length){
+
+    list.innerHTML =
+    `
+      <div class="empty">
+        这个分类目前没有记录
+      </div>
+    `;
+
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+  rows
+  .map(
+    paymentHtml
+  )
+  .join('');
+
+}
+
+
+function paymentHtml(
+  payment
+){
+
+  const customer =
+  customerById(
+    payment.customer_id
+  );
+
+
+  const proof =
+  proofForSubmission(
+    payment.id
+  );
+
+
+  const group =
+  paymentGroup(
+    payment
+  );
+
+
+  const labelMap = {
+
+    pending:
+    '待审核',
+
+    approved:
+    '已通过',
+
+    late:
+    '超时未审核',
+
+    rejected:
+    '管理员驳回'
+
+  };
+
+
+  return `
+
+    <div class="payment">
+
+      <div class="paymentHead">
+
+        <div>
+
+          <div class="customerName">
+            ${esc(
+              customer?.display_name
+              ||
+              '未填写姓名'
+            )}
+          </div>
+
+          <div class="customerCode">
+            ${esc(
+              customer?.customer_code
+              ||
+              '—'
+            )}
+          </div>
+
+          <div class="customerMeta">
+
+            用户名：
+            ${esc(
+              customer?.username
+              ||
+              '—'
+            )}
+
+            <br>
+
+            电话：
+            ${esc(
+              customer?.phone
+              ||
+              '—'
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="badge ${group}">
+
+          ${esc(
+            labelMap[
+              group
+            ]
+          )}
+
+        </div>
+
+      </div>
+
+
+      <div class="round">
+
+        ${esc(
+          roundName(
+            payment.round_id
+          )
+        )}
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          客户申报付款
+        </span>
+
+        <strong class="amount">
+          ${money(
+            payment.declared_amount
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          已确认到账
+        </span>
+
+        <strong>
+          ${money(
+            payment.confirmed_amount
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          付款方式
+        </span>
+
+        <strong>
+          ${esc(
+            payment.method_name_snapshot
+            ||
+            '—'
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          平台户名
+        </span>
+
+        <strong>
+          ${esc(
+            payment.account_name_snapshot
+            ||
+            '—'
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          平台账号
+        </span>
+
+        <strong>
+          ${esc(
+            payment.account_number_snapshot
+            ||
+            '—'
+          )}
+        </strong>
+
+      </div>
+
+
+      ${
+        payment.customer_note
+        ?
+        `
+          <div class="reason">
+
+            客户备注：
+            ${esc(
+              payment.customer_note
+            )}
+
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        group
+        ===
+        'late'
+        ?
+        `
+          <div class="reason">
+
+            系统状态：
+            开奖前未完成付款审核。
+            此状态不代表客户没有实际转账，
+            请进入退款处理核对真实到账情况。
+
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        group
+        ===
+        'rejected'
+        &&
+        payment.rejection_reason
+        ?
+        `
+          <div class="reason">
+
+            管理员驳回原因：
+            ${esc(
+              payment.rejection_reason
+            )}
+
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        proof
+        ?
+        `
+          <div class="singleAction">
+
+            <button
+              class="secondary"
+              type="button"
+              onclick="viewProof(
+                '${esc(
+                  proof.storage_path
+                )}'
+              )">
+
+              查看付款凭证
+
+            </button>
+
+          </div>
+        `
+        :
+        `
+          <div class="msg err">
+
+            尚未上传付款凭证
+
+          </div>
+        `
+      }
+
+
+      ${
+        group
+        ===
+        'pending'
+        ?
+        `
+          <div class="actions">
+
+            <button
+              type="button"
+              ${proof ? '' : 'disabled'}
+              onclick="reviewPayment(
+                '${esc(
+                  payment.id
+                )}',
+                'approved'
+              )">
+
+              确认到账
+
+            </button>
+
+
+            <button
+              class="danger"
+              type="button"
+              onclick="reviewPayment(
+                '${esc(
+                  payment.id
+                )}',
+                'rejected'
+              )">
+
+              管理员驳回
+
+            </button>
+
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        group
+        ===
+        'late'
+        ?
+        `
+          <div class="singleAction">
+
+            <button
+              class="secondary"
+              type="button"
+              onclick="location.href='/admin/refunds/'">
+
+              进入退款核对
+
+            </button>
+
+          </div>
+        `
+        :
+        ''
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   PAYMENT REVIEW
+========================================================= */
+
+async function reviewPayment(
+  submissionId,
+  action
+){
+
+  let reason =
+  null;
+
+
+  if(
+    action
+    ===
+    'approved'
+  ){
+
+    const confirmed =
+    window.confirm(
+
+      '请确认已经核对付款凭证，并且平台确实收到这笔款项。确认到账吗？'
+
+    );
+
+
+    if(!confirmed){
+
+      return;
+
+    }
+
+  }
+  else{
+
+    reason =
+    window.prompt(
+
+      '请输入管理员驳回原因：',
+
+      '付款凭证或付款金额不正确'
+
+    );
+
+
+    if(reason === null){
+
+      return;
+
+    }
+
+
+    reason =
+    reason.trim()
+    ||
+    '付款未通过人工审核';
+
+  }
+
+
+  setPageMessage(
+
+    action
+    ===
+    'approved'
+    ?
+    '正在确认付款...'
+    :
+    '正在处理管理员驳回...'
+
+  );
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_review_customer_payment',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          p_submission_id:
+          submissionId,
+
+          p_action:
+          action,
+
+          p_rejection_reason:
+          action
+          ===
+          'rejected'
+          ?
+          reason
+          :
+          null
+
+        })
+
+      }
+
+    );
+
+
+    await parseAdminResponse(
+      res
+    );
+
+
+    await loadAll();
+
+
+    setPageMessage(
+
+      action
+      ===
+      'approved'
+      ?
+      '付款已经确认到账。'
+      :
+      '这笔付款已经由管理员驳回。',
+
+      'ok'
+
+    );
+
+  }
+  catch(err){
+
+    setPageMessage(
+      translateError(
+        err.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PROOF
+========================================================= */
+
+async function viewProof(
+  storagePath
+){
+
+  const newWindow =
+  window.open(
+    '',
+    '_blank'
+  );
+
+
+  try{
+
+    const encoded =
+    storagePath
+    .split('/')
+    .map(
+      encodeURIComponent
+    )
+    .join('/');
+
+
+    const res =
+    await api(
+
+      '/storage/v1/object/authenticated/customer-payment-proofs/'
+      +
+      encoded
+
+    );
+
+
+    if(!res.ok){
+
+      throw new Error(
+        'PROOF_LOAD_FAILED'
+      );
+
+    }
+
+
+    const blob =
+    await res.blob();
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    if(newWindow){
+
+      newWindow.location =
+      url;
+
+    }
+    else{
+
+      window.location.href =
+      url;
+
+    }
+
+
+    setTimeout(
+
+      ()=>{
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+
+      60000
+
+    );
+
+  }
+  catch{
+
+    if(newWindow){
+
+      newWindow.close();
+
+    }
+
+
+    setPageMessage(
+      '付款凭证读取失败。',
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSE
+========================================================= */
+
+async function parseAdminResponse(
+  res
+){
+
+  const text =
+  await res.text();
+
+
+  let data =
+  null;
+
+
+  try{
+
+    data =
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    null;
+
+  }
+  catch{
+
+    data =
+    text;
+
+  }
+
+
+  if(!res.ok){
+
+    throw new Error(
+
+      data?.message
+      ||
+      data?.error
+      ||
+      data?.hint
+      ||
+      text
+      ||
+      'REQUEST_FAILED'
+
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+function setPageMessage(
+  text,
+  type=''
+){
+
+  const msg =
+  document.getElementById(
+    'pageMsg'
+  );
+
+
+  if(!msg){
+
+    return;
+
+  }
+
+
+  msg.textContent =
+  text;
+
+
+  msg.className =
+  'msg'
+  +
+  (
+    type
+    ?
+    ' '
+    +
+    type
+    :
+    ''
+  );
+
+}
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+function translateError(message){
+
+  const text =
+  String(
+    message
+    ||
+    ''
+  );
+
+
+  if(
+    text.includes(
+      'ADMIN_AAL2_REQUIRED'
+    )
+    ||
+    text.includes(
+      'NOT_ADMIN'
+    )
+  ){
+
+    return '管理员二次验证已经失效，请返回管理中心重新验证。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYMENT_ALREADY_REVIEWED'
+    )
+  ){
+
+    return '这笔付款已经处理，请刷新页面。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYMENT_PROOF_REQUIRED_FOR_APPROVAL'
+    )
+  ){
+
+    return '客户还没有上传付款凭证，不能确认到账。';
+
+  }
+
+
+  if(
+    text.includes(
+      'PAYMENT_SUBMISSION_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到这笔付款。';
+
+  }
+
+
+  return '操作失败，请重新尝试。';
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+(async function start(){
+
+  const isAdmin =
+  await verifyAdmin();
+
+
+  if(!isAdmin){
+
+    document
+    .getElementById(
+      'authError'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+    return;
+
+  }
+
+
+  document
+  .getElementById(
+    'mainBox'
+  )
+  .classList
+  .remove(
+    'hidden'
+  );
+
+
+  await loadAll();
+
+})();
+
+</script>
+
+</body>
+</html>
