@@ -1974,7 +1974,9 @@ function showMessage(
 
 
   el.textContent =
-  text;
+uiText(
+  text
+);
 
 
   el.className =
@@ -2031,11 +2033,13 @@ function setBusy(
 
 
   button.textContent =
+uiText(
   busy
   ?
   busyText
   :
-  normalText;
+  normalText
+);
 
 }
 
