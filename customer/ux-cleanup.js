@@ -475,6 +475,14 @@
   'Đang lưu...',
   'Sedang Menyimpan...'
 ],     
+      '请输入正确收款号码或账号。':[
+  'မှန်ကန်သော ငွေလက်ခံဖုန်းနံပါတ် သို့မဟုတ် အကောင့်နံပါတ်ကို ထည့်ပါ။',
+  'Please enter the correct payout number or account number.',
+  'กรุณากรอกหมายเลขรับเงินหรือเลขบัญชีให้ถูกต้อง',
+  'Sila masukkan nombor penerimaan atau nombor akaun yang betul.',
+  'Vui lòng nhập đúng số nhận tiền hoặc số tài khoản.',
+  'Masukkan nomor penerimaan atau nomor akun yang benar.'
+],
       
  '请输入正确收款户名。':[
   'မှန်ကန်သော ငွေလက်ခံအကောင့်အမည်ကို ထည့်ပါ။',
