@@ -3824,9 +3824,11 @@ async function savePayoutAccount(method){
   ){
 
     return showMessage(
-      'accountMsg',
-      '此收款方式已经绑定，如需修改请联系客服。'
-    );
+  'accountMsg',
+  uiText(
+    '此收款方式已经绑定，如需修改请联系客服。'
+  )
+);
 
   }
 
@@ -3896,20 +3898,24 @@ async function savePayoutAccount(method){
 
   if(accountName.length < 2){
 
-    return showMessage(
-      'accountMsg',
+  return showMessage(
+    'accountMsg',
+    uiText(
       '请输入正确收款户名。'
-    );
+    )
+  );
 
-  }
+}
 
 
   if(accountNumber.length < 5){
 
     return showMessage(
-      'accountMsg',
-      '请输入正确收款号码或账号。'
-    );
+  'accountMsg',
+  uiText(
+    '请输入正确收款号码或账号。'
+  )
+);
 
   }
 
@@ -3927,19 +3933,25 @@ async function savePayoutAccount(method){
   ){
 
     return showMessage(
-      'accountMsg',
-      '请输入银行名称。'
-    );
+  'accountMsg',
+  uiText(
+    '请输入银行名称。'
+  )
+);
 
   }
 
 
   const warning =
-  existing
-  ?
+existing
+?
+uiText(
   '请再次确认新的收款资料完全正确。保存后将再次自动锁定，客户不能自行修改。是否确认保存？'
-  :
-  '请仔细核对收款资料。保存后将自动绑定，客户不能自行修改，如需更换必须联系客服。是否确认保存？';
+)
+:
+uiText(
+  '请仔细核对收款资料。保存后将自动绑定，客户不能自行修改，如需更换必须联系客服。是否确认保存？'
+);
 
 
   const confirmed =
@@ -3954,9 +3966,11 @@ async function savePayoutAccount(method){
 
 
   const secondConfirm =
-  window.confirm(
+window.confirm(
+  uiText(
     '最后确认一次：账号、户名全部正确吗？'
-  );
+  )
+);
 
 
   if(!secondConfirm){
@@ -3975,21 +3989,27 @@ async function savePayoutAccount(method){
 
 
   const normalText =
-  method
-  ===
-  'kpay'
-  ?
+method
+===
+'kpay'
+?
+uiText(
   '保存并绑定 KPay'
-  :
-  '保存并绑定银行账户';
+)
+:
+uiText(
+  '保存并绑定银行账户'
+);
 
 
   setBusy(
-    buttonId,
-    true,
-    normalText,
+  buttonId,
+  true,
+  normalText,
+  uiText(
     '正在保存...'
-  );
+  )
+);
 
 
   try{
@@ -4049,10 +4069,12 @@ async function savePayoutAccount(method){
 
 
     showMessage(
-      'accountMsg',
-      '收款方式已成功绑定。如需修改，请联系客服。',
-      'ok'
-    );
+  'accountMsg',
+  uiText(
+    '收款方式已成功绑定。如需修改，请联系客服。'
+  ),
+  'ok'
+);
 
   }
   catch(err){
@@ -4087,11 +4109,13 @@ async function savePayoutAccount(method){
     ){
 
       setBusy(
-        buttonId,
-        false,
-        normalText,
-        '正在保存...'
-      );
+  buttonId,
+  false,
+  normalText,
+  uiText(
+    '正在保存...'
+  )
+);
 
     }
 
