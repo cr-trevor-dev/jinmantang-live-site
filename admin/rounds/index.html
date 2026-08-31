@@ -128,11 +128,7 @@ button{
   color:#efd477
 }
 
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
+
 
 .msg{
   min-height:20px;
@@ -294,31 +290,24 @@ select{
   </div>
 
 
-  <div class="card">
+    <div class="card">
 
     <div class="title">
-      本期操作
+      本期状态
     </div>
 
-    <div class="actions">
-
-      <button
-        class="gold"
-        onclick="closeRound()">
-        关闭当前期
-      </button>
-
-      <button
-        class="dark"
-        onclick="refreshRound()">
-        刷新当前状态
-      </button>
-
-    </div>
+    <button
+      class="dark"
+      onclick="refreshRound()">
+      刷新当前状态
+    </button>
 
     <div class="warning">
-      关闭当前期只会把当前期状态改成「已关闭」。
-      已经提交的代理数据不会删除，之后仍可在历史期数查看。
+      本期不需要管理员手动关闭。
+      <br><br>
+      到达截止时间后，系统会按照截止规则锁定本期数据。
+      <br><br>
+      正式开奖结果发布成功后，系统才会把本期完成结算并写入正式结算时间。
     </div>
 
     <div
@@ -327,8 +316,6 @@ select{
     </div>
 
   </div>
-
-
   <div class="card">
 
     <div class="title">
@@ -868,175 +855,6 @@ function renderRound(){
 
 }
 
-
-/* =========================
-   CLOSE ROUND
-========================= */
-
-async function closeRound(){
-
-  const msg =
-  document.getElementById(
-    'closeMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  try{
-
-    currentRound =
-    await getOpenRound();
-
-
-    if(!currentRound){
-
-      msg.textContent =
-      '目前已经没有开放中的期数';
-
-
-      msg.className =
-      'msg success';
-
-
-      await loadRound();
-
-
-      return;
-
-    }
-
-
-    const ok =
-    confirm(
-      '确定关闭当前期？\n\n'+
-      currentRound.round_date+
-      ' · '+
-      periodName(
-        currentRound.round_code
-      )+
-      '\n\n代理提交记录不会删除。'
-    );
-
-
-    if(!ok){
-
-      return;
-
-    }
-
-
-    msg.textContent =
-    '正在关闭当前期...';
-
-
-    const r =
-    await api(
-      '/rest/v1/rounds'+
-      '?id=eq.'+
-      encodeURIComponent(
-        currentRound.id
-      ),
-      {
-        method:'PATCH',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          status:'closed',
-          settled_at:
-          new Date()
-          .toISOString()
-        })
-      }
-    );
-
-
-    if(!r.ok){
-
-      throw new Error(
-        await r.text()
-      );
-
-    }
-
-
-    const changed =
-    await r.json();
-
-
-    if(
-      !changed.length
-      ||
-      changed[0].status !==
-      'closed'
-    ){
-
-      throw new Error(
-        '数据库没有确认当前期已关闭'
-      );
-
-    }
-
-
-    const stillOpen =
-    await getOpenRound();
-
-
-    if(
-      stillOpen
-      &&
-      stillOpen.id ===
-      currentRound.id
-    ){
-
-      throw new Error(
-        '数据库仍然显示当前期为开放中'
-      );
-
-    }
-
-
-    currentRound =
-    stillOpen;
-
-
-    msg.textContent =
-    '✓ 当前期已经关闭，数据已保留到历史记录';
-
-
-    msg.className =
-    'msg success';
-
-
-    renderRound();
-
-
-  }catch(e){
-
-    msg.textContent =
-    '关闭失败：'+
-    e.message;
-
-
-    msg.className =
-    'msg error';
-
-
-    await loadRound();
-
-  }
-
-}
 
 
 /* =========================
