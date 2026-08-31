@@ -1,404 +1,168 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-
-<meta
-  name="theme-color"
-  content="#09090a">
-
-<link
-  rel="manifest"
-  href="/agent/manifest.webmanifest">
-
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="/IMG_1428.png">
-
-<link
-  rel="icon"
-  type="image/png"
-  sizes="192x192"
-  href="/IMG_1429.png">
-
-<link
-  rel="icon"
-  type="image/png"
-  sizes="512x512"
-  href="/IMG_1430.png">
-
-<meta
-  name="apple-mobile-web-app-capable"
-  content="yes">
-
-<meta
-  name="apple-mobile-web-app-status-bar-style"
-  content="black">
-
-<meta
-  name="apple-mobile-web-app-title"
-  content="金满堂代理">
-
-<title>金满堂 · 代理中心</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090a">
+<link rel="manifest" href="/agent/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/IMG_1428.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/IMG_1429.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/IMG_1430.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>金满堂 · Agent Center</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
-html,
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
 body{
-  margin:0;
-  min-height:100%;
-}
-
-body{
-  background:
-    radial-gradient(
-      circle at top,
-      #251907 0,
-      #0d0c0a 40%,
-      #070708 100%
-    );
+  background:radial-gradient(circle at top,#251907 0,#0d0c0a 40%,#070708 100%);
   color:#f7f0df;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-  padding:
-    env(safe-area-inset-top)
-    14px
-    calc(35px + env(safe-area-inset-bottom));
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  padding:env(safe-area-inset-top) 14px calc(35px + env(safe-area-inset-bottom))
 }
-
-.wrap{
-  width:min(680px,100%);
-  margin:auto;
-}
-
-.brand{
-  text-align:center;
-  padding:18px 0 22px;
-}
-
+.wrap{width:min(680px,100%);margin:auto}
+.brand{text-align:center;padding:18px 0 18px}
 .logo{
-  width:82px;
-  height:82px;
-  margin:0 auto 11px;
-  overflow:hidden;
-  border-radius:22px;
-  border:1px solid #b98a2c;
-  background:#171109;
+  width:82px;height:82px;margin:0 auto 11px;overflow:hidden;border-radius:22px;
+  border:1px solid #b98a2c;background:#171109
 }
+.logo img{width:100%;height:100%;display:block;object-fit:cover}
+.brandName{font-size:24px;font-weight:900;letter-spacing:4px;color:#f1d47b}
+.brandSub{margin-top:5px;font-size:10px;letter-spacing:3px;color:#998b68}
 
-.logo img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-}
-
-.brandName{
-  font-size:24px;
-  font-weight:900;
-  letter-spacing:4px;
-  color:#f1d47b;
-}
-
-.brandSub{
-  margin-top:5px;
-  font-size:10px;
-  letter-spacing:3px;
-  color:#998b68;
+.langWrap{margin-bottom:14px}
+.langWrap select{
+  width:100%;padding:12px;border-radius:12px;border:1px solid rgba(214,168,63,.25);
+  background:#101011;color:#ecd277;font-weight:800;text-align:center;font-size:14px
 }
 
 .card{
-  background:
-    linear-gradient(
-      180deg,
-      #151515,
-      #0d0d0e
-    );
-  border:
-    1px solid
-    rgba(214,168,63,.30);
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:14px;
+  background:linear-gradient(180deg,#151515,#0d0d0e);
+  border:1px solid rgba(214,168,63,.30);
+  border-radius:20px;padding:18px;margin-bottom:14px
 }
+.title{font-size:16px;font-weight:900;color:#dec372;margin-bottom:14px}
+.hidden{display:none!important}
 
-.title{
-  font-size:16px;
-  font-weight:900;
-  color:#dec372;
-  margin-bottom:14px;
+input,select{
+  width:100%;padding:13px;border-radius:11px;
+  border:1px solid rgba(214,168,63,.25);
+  background:#101011;color:#fff;outline:none;font-size:15px
 }
-
-.hidden{
-  display:none!important;
-}
-
-input{
-  width:100%;
-  padding:13px;
-  border-radius:11px;
-  border:
-    1px solid
-    rgba(214,168,63,.25);
-  background:#101011;
-  color:#fff;
-  outline:none;
-  font-size:15px;
-}
-
 button{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:13px;
-  margin-top:10px;
-  font-weight:900;
-  font-size:14px;
-  cursor:pointer;
-  background:
-    linear-gradient(
-      180deg,
-      #efd47c,
-      #b87e1e
-    );
-  color:#171109;
+  width:100%;border:0;border-radius:12px;padding:13px;margin-top:10px;
+  font-weight:900;font-size:14px;cursor:pointer;
+  background:linear-gradient(180deg,#efd47c,#b87e1e);color:#171109
 }
-
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
+button:disabled{opacity:.45;cursor:not-allowed}
 .secondary{
-  background:#171718;
-  color:#dac477;
-  border:
-    1px solid
-    rgba(214,168,63,.23);
+  background:#171718;color:#dac477;border:1px solid rgba(214,168,63,.23)
 }
-
 .red{
-  background:#351616;
-  color:#e9a0a0;
-  border:
-    1px solid
-    rgba(220,90,90,.25);
+  background:#351616;color:#e9a0a0;border:1px solid rgba(220,90,90,.25)
 }
 
-.info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-}
-
+.info{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .box{
-  background:#101011;
-  border:
-    1px solid
-    rgba(255,255,255,.06);
-  border-radius:13px;
-  padding:13px;
-  min-height:88px;
+  background:#101011;border:1px solid rgba(255,255,255,.06);
+  border-radius:13px;padding:13px;min-height:88px
 }
-
-.box small{
-  display:block;
-  color:#817b71;
-  font-size:10px;
-  margin-bottom:6px;
-  line-height:1.4;
-}
-
-.box strong{
-  display:block;
-  color:#e7cb74;
-  font-size:16px;
-  line-height:1.4;
-  word-break:break-word;
-}
-
-.box.green strong{
-  color:#70d39d;
-}
-
-.box.main{
-  border-color:
-    rgba(214,168,63,.32);
-  background:#15130e;
-}
+.box small{display:block;color:#817b71;font-size:10px;margin-bottom:6px;line-height:1.4}
+.box strong{display:block;color:#e7cb74;font-size:16px;line-height:1.4;word-break:break-word}
+.box.green strong{color:#70d39d}
+.box.main{border-color:rgba(214,168,63,.32);background:#15130e}
 
 .linkBox{
-  background:#101011;
-  border:
-    1px solid
-    rgba(214,168,63,.18);
-  border-radius:13px;
-  padding:13px;
+  background:#101011;border:1px solid rgba(214,168,63,.18);
+  border-radius:13px;padding:13px
 }
+.linkLabel{color:#817b71;font-size:10px;margin-bottom:7px;line-height:1.5}
+.linkText{color:#ead17b;font-size:13px;line-height:1.55;word-break:break-all}
 
-.linkLabel{
-  color:#817b71;
-  font-size:10px;
-  margin-bottom:7px;
-}
-
-.linkText{
-  color:#ead17b;
-  font-size:13px;
-  line-height:1.55;
-  word-break:break-all;
-}
-
-.note{
-  font-size:11px;
-  color:#777166;
-  line-height:1.65;
-  margin-top:10px;
-}
-
+.note{font-size:11px;color:#777166;line-height:1.7;margin-top:10px}
 .msg{
-  min-height:20px;
-  text-align:center;
-  margin-top:11px;
-  font-size:12px;
-  color:#a49c8b;
-  line-height:1.6;
+  min-height:20px;text-align:center;margin-top:11px;font-size:12px;
+  color:#a49c8b;line-height:1.6;word-break:break-word
 }
+.msg.ok{color:#70d39d}
+.msg.error{color:#e58e8e}
+.statusGood{color:#70d39d!important}
+.statusBad{color:#e58e8e!important}
 
-.msg.ok{
-  color:#70d39d;
-}
-
-.msg.error{
-  color:#e58e8e;
-}
-
-.statusGood{
-  color:#70d39d!important;
-}
-
-.statusBad{
-  color:#e58e8e!important;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-}
-
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .zodiac{
-  background:#101011;
-  border:
-    1px solid
-    rgba(255,255,255,.06);
-  border-radius:14px;
-  padding:13px;
+  overflow:hidden;background:#101011;border:1px solid rgba(255,255,255,.06);
+  border-radius:16px
 }
-
 .zodiac.active{
-  border-color:
-    rgba(214,168,63,.38);
-  background:#15130e;
+  border-color:rgba(214,168,63,.45);
+  background:#15130e
 }
-
-.zodiacTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
+.zodiacVisual{
+  width:100%;aspect-ratio:1/1;background:#09090a;overflow:hidden
 }
-
-.zodiacName{
-  color:#e7c96d;
-  font-weight:900;
-  font-size:17px;
-}
-
-.zodiacCode{
-  color:#766f62;
-  font-size:10px;
-}
-
-.zodiacAmount{
-  margin-top:10px;
-  color:#e8dfc9;
-  font-size:17px;
-  font-weight:900;
-}
-
-.zodiac.active .zodiacAmount{
-  color:#efd47d;
-}
-
-.empty{
-  text-align:center;
-  color:#777166;
-  font-size:13px;
-  padding:22px 8px;
-}
+.zodiacVisual img{width:100%;height:100%;display:block;object-fit:cover}
+.zodiacBody{padding:11px 12px 13px}
+.zodiacTop{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.zodiacName{color:#e7c96d;font-weight:900;font-size:16px}
+.zodiacCode{color:#766f62;font-size:10px}
+.zodiacLabel{margin-top:9px;color:#777166;font-size:9px}
+.zodiacAmount{margin-top:3px;color:#e8dfc9;font-size:18px;font-weight:900}
+.zodiac.active .zodiacAmount{color:#efd47d}
 
 .readOnly{
-  border:
-    1px solid
-    rgba(80,200,130,.18);
-  background:#101713;
-  color:#8dd8ad;
-  border-radius:12px;
-  padding:12px;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:12px;
+  border:1px solid rgba(80,200,130,.18);background:#101713;color:#8dd8ad;
+  border-radius:12px;padding:12px;font-size:11px;line-height:1.7;margin-top:12px
 }
 
-.refreshRow{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+.payoutAccount{
+  background:#101011;border:1px solid rgba(214,168,63,.18);
+  border-radius:14px;padding:14px;margin-bottom:10px
+}
+.payoutHead{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px
+}
+.payoutName{color:#efd47d;font-size:16px;font-weight:900}
+.badge{
+  flex:none;padding:5px 9px;border-radius:30px;font-size:9px;font-weight:900
+}
+.badge.locked{background:#173326;color:#7bdba8}
+.badge.unlocked{background:#352d13;color:#e0c46c}
+.payoutGrid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px
+}
+.payoutDetail{
+  background:#0d0d0e;border:1px solid rgba(255,255,255,.05);
+  border-radius:11px;padding:10px
+}
+.payoutDetail small{display:block;color:#777166;font-size:9px}
+.payoutDetail strong{
+  display:block;color:#e9cd75;margin-top:5px;font-size:13px;
+  line-height:1.45;word-break:break-word
+}
+.formBox{
+  margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07)
+}
+.formLabel{color:#8e8677;font-size:10px;margin:10px 0 6px}
+.methodTabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.methodTabs button{
+  margin:0;background:#171718;color:#9d9279;border:1px solid rgba(214,168,63,.15)
+}
+.methodTabs button.active{
+  background:#29200d;color:#efd47d;border-color:rgba(214,168,63,.45)
 }
 
-.foot{
-  text-align:center;
-  color:#6f6a61;
-  font-size:10px;
-  padding:20px 0 6px;
-}
+.refreshRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.empty{text-align:center;color:#777166;font-size:13px;padding:22px 8px}
+.foot{text-align:center;color:#6f6a61;font-size:10px;padding:20px 0 6px}
 
 @media(max-width:420px){
-
-  .info{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-
+  .info,.grid,.payoutGrid{grid-template-columns:1fr 1fr}
 }
-
 </style>
 
-<script
-  src="https://js.hcaptcha.com/1/api.js"
-  async
-  defer>
-</script>
-
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 
 <body>
@@ -406,36 +170,32 @@ button:disabled{
 <div class="wrap">
 
   <div class="brand">
-
-    <div class="logo">
-      <img
-        src="/IMG_1430.png"
-        alt="金满堂">
-    </div>
-
-    <div class="brandName">
-      金满堂
-    </div>
-
-    <div class="brandSub">
-      AGENT CENTER
-    </div>
-
+    <div class="logo"><img src="/IMG_1430.png" alt="金满堂"></div>
+    <div class="brandName">金满堂</div>
+    <div class="brandSub">AGENT CENTER</div>
   </div>
 
+  <div class="langWrap">
+    <select id="languageSelect" onchange="changeLanguage(this.value)">
+      <option value="zh">中文</option>
+      <option value="my">မြန်မာ</option>
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+      <option value="ms">Bahasa Melayu</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="id">Bahasa Indonesia</option>
+    </select>
+  </div>
 
-  <div
-    class="card"
-    id="loginCard">
+  <div class="card" id="loginCard">
 
-    <div class="title">
-      代理登录
-    </div>
+    <div class="title" data-i18n="loginTitle">代理登录</div>
 
     <input
       id="email"
       type="email"
       autocomplete="username"
+      data-ph="email"
       placeholder="代理邮箱">
 
     <div style="height:9px"></div>
@@ -444,6 +204,7 @@ button:disabled{
       id="password"
       type="password"
       autocomplete="current-password"
+      data-ph="password"
       placeholder="密码">
 
     <div style="height:12px"></div>
@@ -453,82 +214,41 @@ button:disabled{
       data-sitekey="a71ac782-e490-452a-8e7c-825e176e9098">
     </div>
 
-    <button
-      id="loginBtn"
-      onclick="signIn()">
+    <button id="loginBtn" onclick="signIn()" data-i18n="loginBtn">
       登录代理中心
     </button>
 
-    <div
-      class="msg"
-      id="loginMsg">
-    </div>
+    <div class="msg" id="loginMsg"></div>
 
   </div>
 
 
-  <div
-    id="dashboard"
-    class="hidden">
-
+  <div id="dashboard" class="hidden">
 
     <div class="card">
 
-      <div class="title">
-        我的代理资料
-      </div>
+      <div class="title" data-i18n="agentInfo">我的代理资料</div>
 
       <div class="info">
 
         <div class="box main">
-
-          <small>
-            代理名称
-          </small>
-
-          <strong id="agentName">
-            —
-          </strong>
-
+          <small data-i18n="agentName">代理名称</small>
+          <strong id="agentName">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            账号状态
-          </small>
-
-          <strong id="agentStatus">
-            —
-          </strong>
-
+          <small data-i18n="accountStatus">账号状态</small>
+          <strong id="agentStatus">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            当前佣金比例
-          </small>
-
-          <strong id="agentRate">
-            —
-          </strong>
-
+          <small data-i18n="currentRate">当前佣金比例</small>
+          <strong id="agentRate">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            推荐码
-          </small>
-
-          <strong id="referralCode">
-            —
-          </strong>
-
+          <small data-i18n="referralCode">推荐码</small>
+          <strong id="referralCode">—</strong>
         </div>
 
       </div>
@@ -538,95 +258,51 @@ button:disabled{
 
     <div class="card">
 
-      <div class="title">
-        我的专属推荐链接
-      </div>
+      <div class="title" data-i18n="referralTitle">我的专属推荐链接</div>
 
       <div class="linkBox">
 
-        <div class="linkLabel">
+        <div class="linkLabel" data-i18n="referralIntro">
           客户通过此链接注册后，会自动绑定到你的代理账号
         </div>
 
-        <div
-          class="linkText"
-          id="referralLink">
-          —
-        </div>
+        <div class="linkText" id="referralLink">—</div>
 
       </div>
 
-      <button onclick="copyReferralLink()">
+      <button onclick="copyReferralLink()" data-i18n="copyReferral">
         复制我的推荐链接
       </button>
 
-      <div
-        class="msg"
-        id="copyMsg">
-      </div>
+      <div class="msg" id="copyMsg"></div>
 
     </div>
 
 
     <div class="card">
 
-      <div class="title">
-        当前期
-      </div>
+      <div class="title" data-i18n="currentRound">当前期</div>
 
-      <div
-        class="info"
-        id="roundInfo">
+      <div class="info">
 
         <div class="box">
-
-          <small>
-            本期
-          </small>
-
-          <strong id="roundName">
-            —
-          </strong>
-
+          <small data-i18n="round">本期</small>
+          <strong id="roundName">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            当前状态
-          </small>
-
-          <strong id="roundStatus">
-            —
-          </strong>
-
+          <small data-i18n="roundStatusLabel">当前状态</small>
+          <strong id="roundStatus">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            截止时间
-          </small>
-
-          <strong id="deadline">
-            —
-          </strong>
-
+          <small data-i18n="deadline">截止时间</small>
+          <strong id="deadline">—</strong>
         </div>
 
-
         <div class="box">
-
-          <small>
-            Myanmar Time
-          </small>
-
-          <strong id="mmtClock">
-            —
-          </strong>
-
+          <small data-i18n="myanmarTime">缅甸时间</small>
+          <strong id="mmtClock">—</strong>
         </div>
 
       </div>
@@ -636,68 +312,34 @@ button:disabled{
 
     <div class="card">
 
-      <div class="title">
-        本期业绩
-      </div>
+      <div class="title" data-i18n="performanceTitle">本期业绩</div>
 
       <div class="info">
 
         <div class="box main green">
-
-          <small>
-            直属客户已确认金额
-          </small>
-
-          <strong id="confirmedTotal">
-            0
-          </strong>
-
+          <small data-i18n="confirmedTotal">直属客户已确认金额</small>
+          <strong id="confirmedTotal">0</strong>
         </div>
-
 
         <div class="box">
-
-          <small>
-            本期已确认客户
-          </small>
-
-          <strong id="customerCount">
-            0
-          </strong>
-
+          <small data-i18n="confirmedCustomers">本期已确认客户</small>
+          <strong id="customerCount">0</strong>
         </div>
-
 
         <div class="box">
-
-          <small>
-            本期佣金比例
-          </small>
-
-          <strong id="roundRate">
-            0%
-          </strong>
-
+          <small data-i18n="roundRate">本期佣金比例</small>
+          <strong id="roundRate">0%</strong>
         </div>
-
 
         <div class="box green">
-
-          <small>
-            本期预计佣金
-          </small>
-
-          <strong id="commissionDue">
-            0
-          </strong>
-
+          <small data-i18n="commissionDue">本期预计佣金</small>
+          <strong id="commissionDue">0</strong>
         </div>
 
       </div>
 
-      <div class="readOnly">
-        本页所有业绩金额均为只读。
-        只有平台已经确认收款、正式生效的客户金额才会进入本期业绩和佣金计算。
+      <div class="readOnly" data-i18n="performanceNote">
+        本页所有业绩金额均为只读。只有平台已经确认收款、正式生效的客户金额才会进入本期业绩和佣金计算。
       </div>
 
     </div>
@@ -705,19 +347,101 @@ button:disabled{
 
     <div class="card">
 
-      <div class="title">
+      <div class="title" data-i18n="zodiacTitle">
         十二生肖 · 本期已确认金额
       </div>
 
-      <div
-        class="grid"
-        id="zodiacGrid">
+      <div class="grid" id="zodiacGrid"></div>
+
+      <div class="note" data-i18n="zodiacNote">
+        这里只显示通过你的专属推荐链接绑定到你名下客户的已确认金额。待审核、已驳回或仅保存的数据不会计入。
       </div>
 
-      <div class="note">
-        这里只显示通过你的专属推荐链接绑定到你名下客户的已确认金额。
-        待审核、已驳回或仅保存的数据不会计入。
+    </div>
+
+
+    <div class="card">
+
+      <div class="title" data-i18n="payoutTitle">
+        我的收款方式
       </div>
+
+      <div id="payoutAccounts">
+        <div class="empty" data-i18n="loadingPayout">
+          正在读取收款方式...
+        </div>
+      </div>
+
+      <div id="payoutForm" class="formBox hidden">
+
+        <div class="title" id="payoutFormTitle" data-i18n="bindPayout">
+          绑定收款方式
+        </div>
+
+        <div class="methodTabs">
+
+          <button
+            type="button"
+            id="methodKpay"
+            onclick="selectPayoutMethod('kpay')">
+            KPay
+          </button>
+
+          <button
+            type="button"
+            id="methodBank"
+            onclick="selectPayoutMethod('bank')"
+            data-i18n="bank">
+            银行
+          </button>
+
+        </div>
+
+        <div class="formLabel" data-i18n="accountName">
+          账户姓名
+        </div>
+
+        <input
+          id="payoutAccountName"
+          data-ph="accountNamePlaceholder"
+          placeholder="请输入账户姓名">
+
+        <div class="formLabel" data-i18n="accountNumber">
+          手机号 / 账号
+        </div>
+
+        <input
+          id="payoutAccountNumber"
+          data-ph="accountNumberPlaceholder"
+          placeholder="请输入手机号或账号">
+
+        <div id="bankNameWrap" class="hidden">
+
+          <div class="formLabel" data-i18n="bankName">
+            银行名称
+          </div>
+
+          <input
+            id="payoutBankName"
+            data-ph="bankNamePlaceholder"
+            placeholder="请输入银行名称">
+
+        </div>
+
+        <button
+          id="savePayoutBtn"
+          onclick="savePayoutAccount()"
+          data-i18n="savePayout">
+          保存并锁定
+        </button>
+
+        <div class="note" data-i18n="payoutLockNote">
+          保存后收款方式会立即锁定。如需更换，请联系管理员先解锁。
+        </div>
+
+      </div>
+
+      <div class="msg" id="payoutMsg"></div>
 
     </div>
 
@@ -726,34 +450,28 @@ button:disabled{
 
       <div class="refreshRow">
 
-        <button onclick="loadSummary(true)">
+        <button onclick="refreshAll(true)" data-i18n="refresh">
           刷新最新数据
         </button>
 
         <button
           class="secondary"
-          onclick="location.href='/agent/zodiac.html'">
+          onclick="location.href='/agent/zodiac.html'"
+          data-i18n="legacy">
           旧版记录页面
         </button>
 
       </div>
 
-      <div
-        class="msg"
-        id="mainMsg">
-      </div>
+      <div class="msg" id="mainMsg"></div>
 
-      <button
-        class="red"
-        onclick="logout()">
+      <button class="red" onclick="logout()" data-i18n="logout">
         退出登录
       </button>
 
     </div>
 
-
   </div>
-
 
   <div class="foot">
     © 2022 JIN MANTANG · AGENT SYSTEM
@@ -763,665 +481,771 @@ button:disabled{
 
 
 <script>
+const BASE=location.origin+'/supabase';
+const KEY='sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
-const BASE =
-location.origin +
-'/supabase';
+let token=
+localStorage.getItem('jmt_agent_token')||
+sessionStorage.getItem('jmt_agent_token')||'';
+
+let refreshToken=
+localStorage.getItem('jmt_agent_refresh_token')||
+sessionStorage.getItem('jmt_agent_refresh_token')||'';
+
+let currentLang=
+localStorage.getItem('jmt_agent_lang')||'zh';
+
+let summary=null;
+let payoutAccounts=[];
+let payoutMethod='kpay';
+let refreshPromise=null;
 
 
-const KEY =
-'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
-
-
-const ZODIAC = [
-  '鼠',
-  '牛',
-  '虎',
-  '兔',
-  '龙',
-  '蛇',
-  '马',
-  '羊',
-  '猴',
-  '鸡',
-  '狗',
-  '猪'
+const ZODIAC_IMAGES=[
+  '287422DA-463C-421B-9257-E9BC27BF4A36.png',
+  '1A0DF767-06F9-4C2D-95CE-84E62442D9D1.png',
+  '760CCCAD-C85A-4D2C-8D40-CEADC692BEC3.png',
+  '0BD607BF-D242-4DC7-8011-8F3BFD2B2F2E.png',
+  '61676ED4-E523-4AC1-902B-06B841546DC8.png',
+  '82112254-9DC3-4CAB-A010-2B753DAE4FF5.png',
+  'A20A3141-3290-4368-8914-D21B2DA34B81.png',
+  'EE289B75-3AB3-41DB-9497-F6142A4AC15B.png',
+  '9202793F-F959-488B-B1D3-6F8F000BF44B.png',
+  '3A4F6BEE-09E7-4DE1-8804-00A24EEFEB0A.png',
+  '32C90A85-8BBA-4DFF-8DFB-B358DCA7C999.png',
+  'AC5C521B-7627-4F4B-A563-C55A326C9244.png'
 ];
 
 
-let token =
-localStorage.getItem(
-  'jmt_agent_token'
-)
-||
-sessionStorage.getItem(
-  'jmt_agent_token'
-)
-||
-'';
+const T={
+
+zh:{
+loginTitle:'代理登录',email:'代理邮箱',password:'密码',loginBtn:'登录代理中心',
+agentInfo:'我的代理资料',agentName:'代理名称',accountStatus:'账号状态',
+currentRate:'当前佣金比例',referralCode:'推荐码',
+referralTitle:'我的专属推荐链接',
+referralIntro:'客户通过此链接注册后，会自动绑定到你的代理账号',
+copyReferral:'复制我的推荐链接',
+currentRound:'当前期',round:'本期',roundStatusLabel:'当前状态',
+deadline:'截止时间',myanmarTime:'缅甸时间',
+performanceTitle:'本期业绩',confirmedTotal:'直属客户已确认金额',
+confirmedCustomers:'本期已确认客户',roundRate:'本期佣金比例',
+commissionDue:'本期预计佣金',
+performanceNote:'本页所有业绩金额均为只读。只有平台已经确认收款、正式生效的客户金额才会进入本期业绩和佣金计算。',
+zodiacTitle:'十二生肖 · 本期已确认金额',
+zodiacNote:'这里只显示通过你的专属推荐链接绑定到你名下客户的已确认金额。待审核、已驳回或仅保存的数据不会计入。',
+confirmedAmount:'已确认金额',
+payoutTitle:'我的收款方式',loadingPayout:'正在读取收款方式...',
+bindPayout:'绑定收款方式',bank:'银行',accountName:'账户姓名',
+accountNumber:'手机号 / 账号',bankName:'银行名称',
+accountNamePlaceholder:'请输入账户姓名',
+accountNumberPlaceholder:'请输入手机号或账号',
+bankNamePlaceholder:'请输入银行名称',
+savePayout:'保存并锁定',
+payoutLockNote:'保存后收款方式会立即锁定。如需更换，请联系管理员先解锁。',
+locked:'已锁定',unlocked:'已解锁，可修改',method:'收款方式',
+noPayout:'尚未绑定收款方式',bindNow:'立即绑定收款方式',
+editPayout:'修改收款方式',
+refresh:'刷新最新数据',legacy:'旧版记录页面',logout:'退出登录',
+normal:'正常',suspended:'已暂停',blocked:'已限制',
+open:'开放中',closed:'已关闭',settled:'已结算',noRound:'暂无期数',
+morning:'上午 11:45',afternoon:'下午 15:45',
+loginMissing:'请输入代理邮箱和密码',
+captchaRequired:'请先完成人机验证',
+logging:'正在登录...',loginFail:'登录失败，请检查账号或密码',
+loading:'正在读取最新数据...',refreshSuccess:'✓ 已读取最新数据',
+copyEmpty:'当前没有可复制的推荐链接',
+copySuccess:'✓ 推荐链接已复制',
+copyFail:'复制失败，请长按链接手动复制',
+payoutLoading:'正在读取收款方式...',
+payoutLoadFail:'读取收款方式失败',
+payoutMissing:'请完整填写收款账户资料',
+bankMissing:'请输入银行名称',
+payoutSaving:'正在保存收款方式...',
+payoutSaved:'✓ 收款方式已保存并锁定',
+payoutLocked:'收款方式已锁定，如需修改请联系管理员解锁',
+payoutDuplicate:'这个收款账号已经绑定到其他代理',
+payoutInvalid:'收款账户资料不正确',
+payoutSaveFail:'保存收款方式失败',
+networkError:'网络连接失败，请稍后重试',
+sessionExpired:'登录已失效，请重新登录',
+zodiac:['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪']
+},
+
+my:{
+loginTitle:'အေးဂျင့် အကောင့်ဝင်ရန်',email:'အေးဂျင့် အီးမေးလ်',password:'စကားဝှက်',loginBtn:'အေးဂျင့်စင်တာ ဝင်ရန်',
+agentInfo:'ကျွန်ုပ်၏ အေးဂျင့်အချက်အလက်',agentName:'အေးဂျင့်အမည်',accountStatus:'အကောင့်အခြေအနေ',
+currentRate:'လက်ရှိ ကော်မရှင်နှုန်း',referralCode:'ညွှန်းကုဒ်',
+referralTitle:'ကျွန်ုပ်၏ ကိုယ်ပိုင်ညွှန်းလင့်ခ်',
+referralIntro:'ဤလင့်ခ်မှ စာရင်းသွင်းသော ဖောက်သည်များသည် သင့်အေးဂျင့်အကောင့်နှင့် အလိုအလျောက် ချိတ်ဆက်မည်။',
+copyReferral:'ညွှန်းလင့်ခ် ကူးယူရန်',
+currentRound:'လက်ရှိအကြိမ်',round:'အကြိမ်',roundStatusLabel:'လက်ရှိအခြေအနေ',
+deadline:'ပိတ်ချိန်',myanmarTime:'မြန်မာစံတော်ချိန်',
+performanceTitle:'ယခုအကြိမ် စွမ်းဆောင်ရည်',confirmedTotal:'တိုက်ရိုက်ဖောက်သည် အတည်ပြုပမာဏ',
+confirmedCustomers:'အတည်ပြုပြီး ဖောက်သည်',roundRate:'ယခုအကြိမ် ကော်မရှင်နှုန်း',
+commissionDue:'ခန့်မှန်း ကော်မရှင်',
+performanceNote:'ဤစာမျက်နှာရှိ စွမ်းဆောင်ရည်ငွေပမာဏအားလုံးသည် ကြည့်ရှုရန်သာဖြစ်သည်။ ပလက်ဖောင်းမှ အတည်ပြုပြီး အကျုံးဝင်သော ဖောက်သည်ငွေများသာ စွမ်းဆောင်ရည်နှင့် ကော်မရှင်တွင် ပါဝင်သည်။',
+zodiacTitle:'တရုတ် ၁၂ ရာသီခွင် · အတည်ပြုပမာဏ',
+zodiacNote:'သင့်ညွှန်းလင့်ခ်မှ ချိတ်ဆက်ထားသော ဖောက်သည်များ၏ အတည်ပြုပမာဏကိုသာ ပြသသည်။ စစ်ဆေးဆဲ၊ ပယ်ချထားသော သို့မဟုတ် သိမ်းထားရုံဒေတာ မပါဝင်ပါ။',
+confirmedAmount:'အတည်ပြုပမာဏ',
+payoutTitle:'ကျွန်ုပ်၏ ငွေလက်ခံနည်း',loadingPayout:'ငွေလက်ခံအချက်အလက် ဖတ်နေသည်...',
+bindPayout:'ငွေလက်ခံနည်း ချိတ်ဆက်ရန်',bank:'ဘဏ်',accountName:'အကောင့်အမည်',
+accountNumber:'ဖုန်း / အကောင့်နံပါတ်',bankName:'ဘဏ်အမည်',
+accountNamePlaceholder:'အကောင့်အမည် ထည့်ပါ',
+accountNumberPlaceholder:'ဖုန်း သို့မဟုတ် အကောင့်နံပါတ် ထည့်ပါ',
+bankNamePlaceholder:'ဘဏ်အမည် ထည့်ပါ',
+savePayout:'သိမ်းပြီး လော့ခ်ချရန်',
+payoutLockNote:'သိမ်းပြီးနောက် ငွေလက်ခံနည်းကို ချက်ချင်းလော့ခ်ချမည်။ ပြောင်းလိုပါက Admin ကို အရင်ဖွင့်ပေးရန် ဆက်သွယ်ပါ။',
+locked:'လော့ခ်ချထားသည်',unlocked:'ဖွင့်ထားသည် · ပြင်နိုင်သည်',method:'ငွေလက်ခံနည်း',
+noPayout:'ငွေလက်ခံနည်း မချိတ်ဆက်ရသေးပါ',bindNow:'ယခု ချိတ်ဆက်ရန်',
+editPayout:'ငွေလက်ခံနည်း ပြင်ရန်',
+refresh:'နောက်ဆုံးဒေတာ ပြန်ဖတ်ရန်',legacy:'မှတ်တမ်းဟောင်း စာမျက်နှာ',logout:'ထွက်ရန်',
+normal:'ပုံမှန်',suspended:'ယာယီရပ်ထားသည်',blocked:'ကန့်သတ်ထားသည်',
+open:'ဖွင့်ထားသည်',closed:'ပိတ်ထားသည်',settled:'စာရင်းရှင်းပြီး',noRound:'အကြိမ်မရှိသေးပါ',
+morning:'မနက် 11:45',afternoon:'နေ့လယ် 15:45',
+loginMissing:'အီးမေးလ်နှင့် စကားဝှက် ထည့်ပါ',
+captchaRequired:'လူဖြစ်ကြောင်း စစ်ဆေးမှုကို အရင်ပြီးပါ',
+logging:'ဝင်ရောက်နေသည်...',loginFail:'ဝင်ရောက်မရပါ။ အီးမေးလ် သို့မဟုတ် စကားဝှက် စစ်ပါ',
+loading:'နောက်ဆုံးဒေတာ ဖတ်နေသည်...',refreshSuccess:'✓ နောက်ဆုံးဒေတာ ဖတ်ပြီးပါပြီ',
+copyEmpty:'ကူးယူနိုင်သော ညွှန်းလင့်ခ် မရှိပါ',
+copySuccess:'✓ ညွှန်းလင့်ခ် ကူးယူပြီးပါပြီ',
+copyFail:'ကူးယူမရပါ။ လင့်ခ်ကို ဖိထားပြီး ကိုယ်တိုင်ကူးပါ',
+payoutLoading:'ငွေလက်ခံအချက်အလက် ဖတ်နေသည်...',
+payoutLoadFail:'ငွေလက်ခံအချက်အလက် ဖတ်မရပါ',
+payoutMissing:'ငွေလက်ခံအချက်အလက် အပြည့်အစုံ ဖြည့်ပါ',
+bankMissing:'ဘဏ်အမည် ထည့်ပါ',
+payoutSaving:'ငွေလက်ခံနည်း သိမ်းနေသည်...',
+payoutSaved:'✓ ငွေလက်ခံနည်း သိမ်းပြီး လော့ခ်ချထားပါပြီ',
+payoutLocked:'ငွေလက်ခံနည်း လော့ခ်ချထားသည်။ ပြင်လိုပါက Admin ကို ဆက်သွယ်ပါ',
+payoutDuplicate:'ဤငွေလက်ခံအကောင့်ကို အခြားအေးဂျင့်က ချိတ်ထားပြီးဖြစ်သည်',
+payoutInvalid:'ငွေလက်ခံအချက်အလက် မမှန်ပါ',
+payoutSaveFail:'ငွေလက်ခံနည်း သိမ်းမရပါ',
+networkError:'ကွန်ရက်ချိတ်ဆက်မှု မအောင်မြင်ပါ။ နောက်မှ ထပ်စမ်းပါ',
+sessionExpired:'အကောင့်ဝင်ချိန် ကုန်သွားပါပြီ။ ပြန်ဝင်ပါ',
+zodiac:['ကြွက်','နွား','ကျား','ယုန်','နဂါး','မြွေ','မြင်း','ဆိတ်','မျောက်','ကြက်','ခွေး','ဝက်']
+},
+
+en:{
+loginTitle:'Agent Login',email:'Agent Email',password:'Password',loginBtn:'Log In to Agent Center',
+agentInfo:'My Agent Profile',agentName:'Agent Name',accountStatus:'Account Status',
+currentRate:'Current Commission Rate',referralCode:'Referral Code',
+referralTitle:'My Referral Link',
+referralIntro:'Customers who register through this link will automatically be linked to your agent account.',
+copyReferral:'Copy My Referral Link',
+currentRound:'Current Round',round:'Round',roundStatusLabel:'Status',
+deadline:'Deadline',myanmarTime:'Myanmar Time',
+performanceTitle:'Current Performance',confirmedTotal:'Confirmed Direct Customer Amount',
+confirmedCustomers:'Confirmed Customers',roundRate:'Round Commission Rate',
+commissionDue:'Estimated Commission',
+performanceNote:'All performance amounts on this page are read-only. Only customer amounts confirmed and activated by the platform are included in performance and commission calculations.',
+zodiacTitle:'12 Chinese Zodiac · Confirmed Amount',
+zodiacNote:'Only confirmed amounts from customers linked through your referral link are shown. Pending, rejected or saved-only data is not included.',
+confirmedAmount:'Confirmed Amount',
+payoutTitle:'My Payout Method',loadingPayout:'Loading payout method...',
+bindPayout:'Bind Payout Method',bank:'Bank',accountName:'Account Name',
+accountNumber:'Phone / Account Number',bankName:'Bank Name',
+accountNamePlaceholder:'Enter account name',
+accountNumberPlaceholder:'Enter phone or account number',
+bankNamePlaceholder:'Enter bank name',
+savePayout:'Save & Lock',
+payoutLockNote:'The payout method will be locked immediately after saving. To change it, contact an admin to unlock it first.',
+locked:'Locked',unlocked:'Unlocked · Editable',method:'Payout Method',
+noPayout:'No payout method bound yet',bindNow:'Bind Payout Method',
+editPayout:'Edit Payout Method',
+refresh:'Refresh Latest Data',legacy:'Legacy Records',logout:'Log Out',
+normal:'Active',suspended:'Suspended',blocked:'Restricted',
+open:'Open',closed:'Closed',settled:'Settled',noRound:'No Round Available',
+morning:'Morning 11:45',afternoon:'Afternoon 15:45',
+loginMissing:'Enter your agent email and password',
+captchaRequired:'Please complete the human verification first',
+logging:'Logging in...',loginFail:'Login failed. Check your email or password',
+loading:'Loading latest data...',refreshSuccess:'✓ Latest data loaded',
+copyEmpty:'No referral link is available to copy',
+copySuccess:'✓ Referral link copied',
+copyFail:'Copy failed. Press and hold the link to copy it manually',
+payoutLoading:'Loading payout method...',
+payoutLoadFail:'Failed to load payout method',
+payoutMissing:'Please complete the payout account details',
+bankMissing:'Please enter the bank name',
+payoutSaving:'Saving payout method...',
+payoutSaved:'✓ Payout method saved and locked',
+payoutLocked:'Payout method is locked. Contact an admin to unlock it',
+payoutDuplicate:'This payout account is already bound to another agent',
+payoutInvalid:'Invalid payout account details',
+payoutSaveFail:'Failed to save payout method',
+networkError:'Network connection failed. Please try again later',
+sessionExpired:'Your session has expired. Please log in again',
+zodiac:['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig']
+},
+
+th:{
+loginTitle:'เข้าสู่ระบบตัวแทน',email:'อีเมลตัวแทน',password:'รหัสผ่าน',loginBtn:'เข้าสู่ศูนย์ตัวแทน',
+agentInfo:'ข้อมูลตัวแทนของฉัน',agentName:'ชื่อตัวแทน',accountStatus:'สถานะบัญชี',
+currentRate:'อัตราคอมมิชชั่นปัจจุบัน',referralCode:'รหัสแนะนำ',
+referralTitle:'ลิงก์แนะนำส่วนตัว',
+referralIntro:'ลูกค้าที่สมัครผ่านลิงก์นี้จะเชื่อมกับบัญชีตัวแทนของคุณโดยอัตโนมัติ',
+copyReferral:'คัดลอกลิงก์แนะนำ',
+currentRound:'รอบปัจจุบัน',round:'รอบ',roundStatusLabel:'สถานะ',
+deadline:'เวลาปิดรับ',myanmarTime:'เวลาเมียนมา',
+performanceTitle:'ผลงานรอบนี้',confirmedTotal:'ยอดยืนยันของลูกค้าโดยตรง',
+confirmedCustomers:'ลูกค้าที่ได้รับการยืนยัน',roundRate:'อัตราคอมมิชชั่นรอบนี้',
+commissionDue:'ค่าคอมมิชชั่นโดยประมาณ',
+performanceNote:'ยอดผลงานทั้งหมดในหน้านี้เป็นแบบอ่านอย่างเดียว เฉพาะยอดลูกค้าที่แพลตฟอร์มยืนยันและมีผลแล้วเท่านั้นที่จะถูกนำมาคำนวณผลงานและค่าคอมมิชชั่น',
+zodiacTitle:'12 นักษัตรจีน · ยอดยืนยัน',
+zodiacNote:'แสดงเฉพาะยอดที่ยืนยันแล้วของลูกค้าที่เชื่อมผ่านลิงก์แนะนำของคุณ ยอดรอตรวจสอบ ถูกปฏิเสธ หรือบันทึกไว้เฉยๆ จะไม่ถูกนับ',
+confirmedAmount:'ยอดยืนยัน',
+payoutTitle:'ช่องทางรับเงินของฉัน',loadingPayout:'กำลังโหลดช่องทางรับเงิน...',
+bindPayout:'ผูกช่องทางรับเงิน',bank:'ธนาคาร',accountName:'ชื่อบัญชี',
+accountNumber:'โทรศัพท์ / เลขบัญชี',bankName:'ชื่อธนาคาร',
+accountNamePlaceholder:'กรอกชื่อบัญชี',accountNumberPlaceholder:'กรอกโทรศัพท์หรือเลขบัญชี',
+bankNamePlaceholder:'กรอกชื่อธนาคาร',savePayout:'บันทึกและล็อก',
+payoutLockNote:'หลังบันทึก ช่องทางรับเงินจะถูกล็อกทันที หากต้องการเปลี่ยน กรุณาติดต่อผู้ดูแลเพื่อปลดล็อกก่อน',
+locked:'ล็อกแล้ว',unlocked:'ปลดล็อกแล้ว · แก้ไขได้',method:'ช่องทางรับเงิน',
+noPayout:'ยังไม่ได้ผูกช่องทางรับเงิน',bindNow:'ผูกช่องทางรับเงินตอนนี้',
+editPayout:'แก้ไขช่องทางรับเงิน',
+refresh:'รีเฟรชข้อมูลล่าสุด',legacy:'หน้าบันทึกเดิม',logout:'ออกจากระบบ',
+normal:'ปกติ',suspended:'ระงับชั่วคราว',blocked:'ถูกจำกัด',
+open:'เปิดอยู่',closed:'ปิดแล้ว',settled:'ชำระแล้ว',noRound:'ยังไม่มีรอบ',
+morning:'รอบเช้า 11:45',afternoon:'รอบบ่าย 15:45',
+loginMissing:'กรุณากรอกอีเมลและรหัสผ่านตัวแทน',
+captchaRequired:'กรุณายืนยันว่าคุณเป็นมนุษย์ก่อน',
+logging:'กำลังเข้าสู่ระบบ...',loginFail:'เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลหรือรหัสผ่าน',
+loading:'กำลังโหลดข้อมูลล่าสุด...',refreshSuccess:'✓ โหลดข้อมูลล่าสุดแล้ว',
+copyEmpty:'ไม่มีลิงก์แนะนำให้คัดลอก',
+copySuccess:'✓ คัดลอกลิงก์แนะนำแล้ว',
+copyFail:'คัดลอกไม่สำเร็จ กรุณากดลิงก์ค้างเพื่อคัดลอกเอง',
+payoutLoading:'กำลังโหลดช่องทางรับเงิน...',
+payoutLoadFail:'โหลดช่องทางรับเงินไม่สำเร็จ',
+payoutMissing:'กรุณากรอกข้อมูลบัญชีรับเงินให้ครบ',
+bankMissing:'กรุณากรอกชื่อธนาคาร',
+payoutSaving:'กำลังบันทึกช่องทางรับเงิน...',
+payoutSaved:'✓ บันทึกและล็อกช่องทางรับเงินแล้ว',
+payoutLocked:'ช่องทางรับเงินถูกล็อก กรุณาติดต่อผู้ดูแลเพื่อปลดล็อก',
+payoutDuplicate:'บัญชีรับเงินนี้ถูกผูกกับตัวแทนอื่นแล้ว',
+payoutInvalid:'ข้อมูลบัญชีรับเงินไม่ถูกต้อง',
+payoutSaveFail:'บันทึกช่องทางรับเงินไม่สำเร็จ',
+networkError:'การเชื่อมต่อเครือข่ายล้มเหลว กรุณาลองใหม่ภายหลัง',
+sessionExpired:'เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่',
+zodiac:['หนู','วัว','เสือ','กระต่าย','มังกร','งู','ม้า','แพะ','ลิง','ไก่','สุนัข','หมู']
+},
+
+ms:{
+loginTitle:'Log Masuk Ejen',email:'E-mel Ejen',password:'Kata Laluan',loginBtn:'Log Masuk Pusat Ejen',
+agentInfo:'Profil Ejen Saya',agentName:'Nama Ejen',accountStatus:'Status Akaun',
+currentRate:'Kadar Komisen Semasa',referralCode:'Kod Rujukan',
+referralTitle:'Pautan Rujukan Saya',
+referralIntro:'Pelanggan yang mendaftar melalui pautan ini akan dipautkan secara automatik kepada akaun ejen anda.',
+copyReferral:'Salin Pautan Rujukan',
+currentRound:'Pusingan Semasa',round:'Pusingan',roundStatusLabel:'Status',
+deadline:'Masa Tutup',myanmarTime:'Waktu Myanmar',
+performanceTitle:'Prestasi Pusingan Ini',confirmedTotal:'Jumlah Pelanggan Langsung Disahkan',
+confirmedCustomers:'Pelanggan Disahkan',roundRate:'Kadar Komisen Pusingan',
+commissionDue:'Anggaran Komisen',
+performanceNote:'Semua jumlah prestasi pada halaman ini adalah baca sahaja. Hanya jumlah pelanggan yang telah disahkan dan diaktifkan oleh platform akan dikira.',
+zodiacTitle:'12 Zodiak Cina · Jumlah Disahkan',
+zodiacNote:'Hanya jumlah disahkan daripada pelanggan yang dipautkan melalui pautan rujukan anda dipaparkan. Data menunggu, ditolak atau hanya disimpan tidak dikira.',
+confirmedAmount:'Jumlah Disahkan',
+payoutTitle:'Kaedah Bayaran Saya',loadingPayout:'Memuatkan kaedah bayaran...',
+bindPayout:'Ikat Kaedah Bayaran',bank:'Bank',accountName:'Nama Akaun',
+accountNumber:'Telefon / Nombor Akaun',bankName:'Nama Bank',
+accountNamePlaceholder:'Masukkan nama akaun',accountNumberPlaceholder:'Masukkan telefon atau nombor akaun',
+bankNamePlaceholder:'Masukkan nama bank',savePayout:'Simpan & Kunci',
+payoutLockNote:'Kaedah bayaran akan dikunci selepas disimpan. Untuk menukarnya, hubungi admin untuk membuka kunci dahulu.',
+locked:'Dikunci',unlocked:'Dibuka · Boleh Diubah',method:'Kaedah Bayaran',
+noPayout:'Belum ada kaedah bayaran',bindNow:'Ikat Kaedah Bayaran',
+editPayout:'Ubah Kaedah Bayaran',
+refresh:'Muat Semula Data',legacy:'Rekod Lama',logout:'Log Keluar',
+normal:'Aktif',suspended:'Digantung',blocked:'Disekat',
+open:'Dibuka',closed:'Ditutup',settled:'Selesai',noRound:'Tiada Pusingan',
+morning:'Pagi 11:45',afternoon:'Petang 15:45',
+loginMissing:'Masukkan e-mel dan kata laluan ejen',
+captchaRequired:'Sila lengkapkan pengesahan manusia dahulu',
+logging:'Sedang log masuk...',loginFail:'Log masuk gagal. Semak e-mel atau kata laluan',
+loading:'Memuatkan data terkini...',refreshSuccess:'✓ Data terkini dimuatkan',
+copyEmpty:'Tiada pautan rujukan untuk disalin',
+copySuccess:'✓ Pautan rujukan disalin',
+copyFail:'Gagal menyalin. Tekan dan tahan pautan untuk menyalin secara manual',
+payoutLoading:'Memuatkan kaedah bayaran...',
+payoutLoadFail:'Gagal memuatkan kaedah bayaran',
+payoutMissing:'Lengkapkan maklumat akaun bayaran',
+bankMissing:'Masukkan nama bank',
+payoutSaving:'Menyimpan kaedah bayaran...',
+payoutSaved:'✓ Kaedah bayaran disimpan dan dikunci',
+payoutLocked:'Kaedah bayaran dikunci. Hubungi admin untuk membuka kunci',
+payoutDuplicate:'Akaun bayaran ini telah diikat kepada ejen lain',
+payoutInvalid:'Maklumat akaun bayaran tidak sah',
+payoutSaveFail:'Gagal menyimpan kaedah bayaran',
+networkError:'Sambungan rangkaian gagal. Cuba lagi kemudian',
+sessionExpired:'Sesi telah tamat. Sila log masuk semula',
+zodiac:['Tikus','Lembu','Harimau','Arnab','Naga','Ular','Kuda','Kambing','Monyet','Ayam','Anjing','Babi']
+},
+
+vi:{
+loginTitle:'Đăng nhập đại lý',email:'Email đại lý',password:'Mật khẩu',loginBtn:'Đăng nhập trung tâm đại lý',
+agentInfo:'Thông tin đại lý của tôi',agentName:'Tên đại lý',accountStatus:'Trạng thái tài khoản',
+currentRate:'Tỷ lệ hoa hồng hiện tại',referralCode:'Mã giới thiệu',
+referralTitle:'Liên kết giới thiệu của tôi',
+referralIntro:'Khách hàng đăng ký qua liên kết này sẽ tự động được liên kết với tài khoản đại lý của bạn.',
+copyReferral:'Sao chép liên kết giới thiệu',
+currentRound:'Kỳ hiện tại',round:'Kỳ',roundStatusLabel:'Trạng thái',
+deadline:'Hạn chót',myanmarTime:'Giờ Myanmar',
+performanceTitle:'Hiệu suất kỳ này',confirmedTotal:'Số tiền khách trực tiếp đã xác nhận',
+confirmedCustomers:'Khách hàng đã xác nhận',roundRate:'Tỷ lệ hoa hồng kỳ này',
+commissionDue:'Hoa hồng dự kiến',
+performanceNote:'Tất cả số tiền hiệu suất trên trang này chỉ để xem. Chỉ số tiền khách hàng đã được nền tảng xác nhận và có hiệu lực mới được tính.',
+zodiacTitle:'12 Con Giáp · Số tiền đã xác nhận',
+zodiacNote:'Chỉ hiển thị số tiền đã xác nhận của khách hàng liên kết qua đường dẫn giới thiệu của bạn. Dữ liệu chờ duyệt, bị từ chối hoặc chỉ lưu sẽ không được tính.',
+confirmedAmount:'Số tiền đã xác nhận',
+payoutTitle:'Phương thức nhận tiền của tôi',loadingPayout:'Đang tải phương thức nhận tiền...',
+bindPayout:'Liên kết phương thức nhận tiền',bank:'Ngân hàng',accountName:'Tên tài khoản',
+accountNumber:'Điện thoại / Số tài khoản',bankName:'Tên ngân hàng',
+accountNamePlaceholder:'Nhập tên tài khoản',accountNumberPlaceholder:'Nhập điện thoại hoặc số tài khoản',
+bankNamePlaceholder:'Nhập tên ngân hàng',savePayout:'Lưu & Khóa',
+payoutLockNote:'Phương thức nhận tiền sẽ bị khóa ngay sau khi lưu. Muốn thay đổi, hãy liên hệ quản trị viên để mở khóa trước.',
+locked:'Đã khóa',unlocked:'Đã mở khóa · Có thể sửa',method:'Phương thức nhận tiền',
+noPayout:'Chưa liên kết phương thức nhận tiền',bindNow:'Liên kết ngay',
+editPayout:'Sửa phương thức nhận tiền',
+refresh:'Làm mới dữ liệu',legacy:'Trang dữ liệu cũ',logout:'Đăng xuất',
+normal:'Hoạt động',suspended:'Tạm dừng',blocked:'Bị hạn chế',
+open:'Đang mở',closed:'Đã đóng',settled:'Đã quyết toán',noRound:'Chưa có kỳ',
+morning:'Sáng 11:45',afternoon:'Chiều 15:45',
+loginMissing:'Vui lòng nhập email và mật khẩu đại lý',
+captchaRequired:'Vui lòng hoàn tất xác minh người dùng trước',
+logging:'Đang đăng nhập...',loginFail:'Đăng nhập thất bại. Kiểm tra email hoặc mật khẩu',
+loading:'Đang tải dữ liệu mới nhất...',refreshSuccess:'✓ Đã tải dữ liệu mới nhất',
+copyEmpty:'Không có liên kết giới thiệu để sao chép',
+copySuccess:'✓ Đã sao chép liên kết giới thiệu',
+copyFail:'Sao chép thất bại. Nhấn giữ liên kết để sao chép thủ công',
+payoutLoading:'Đang tải phương thức nhận tiền...',
+payoutLoadFail:'Không thể tải phương thức nhận tiền',
+payoutMissing:'Vui lòng điền đầy đủ thông tin tài khoản nhận tiền',
+bankMissing:'Vui lòng nhập tên ngân hàng',
+payoutSaving:'Đang lưu phương thức nhận tiền...',
+payoutSaved:'✓ Đã lưu và khóa phương thức nhận tiền',
+payoutLocked:'Phương thức nhận tiền đã bị khóa. Hãy liên hệ quản trị viên để mở khóa',
+payoutDuplicate:'Tài khoản nhận tiền này đã được liên kết với đại lý khác',
+payoutInvalid:'Thông tin tài khoản nhận tiền không hợp lệ',
+payoutSaveFail:'Không thể lưu phương thức nhận tiền',
+networkError:'Kết nối mạng thất bại. Vui lòng thử lại sau',
+sessionExpired:'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại',
+zodiac:['Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi','Thân','Dậu','Tuất','Hợi']
+},
+
+id:{
+loginTitle:'Login Agen',email:'Email Agen',password:'Kata Sandi',loginBtn:'Masuk ke Pusat Agen',
+agentInfo:'Profil Agen Saya',agentName:'Nama Agen',accountStatus:'Status Akun',
+currentRate:'Tarif Komisi Saat Ini',referralCode:'Kode Referal',
+referralTitle:'Tautan Referal Saya',
+referralIntro:'Pelanggan yang mendaftar melalui tautan ini akan otomatis terhubung ke akun agen Anda.',
+copyReferral:'Salin Tautan Referal',
+currentRound:'Putaran Saat Ini',round:'Putaran',roundStatusLabel:'Status',
+deadline:'Batas Waktu',myanmarTime:'Waktu Myanmar',
+performanceTitle:'Kinerja Putaran Ini',confirmedTotal:'Jumlah Pelanggan Langsung Terkonfirmasi',
+confirmedCustomers:'Pelanggan Terkonfirmasi',roundRate:'Tarif Komisi Putaran',
+commissionDue:'Perkiraan Komisi',
+performanceNote:'Semua jumlah kinerja pada halaman ini hanya dapat dilihat. Hanya jumlah pelanggan yang telah dikonfirmasi dan diaktifkan oleh platform yang dihitung.',
+zodiacTitle:'12 Shio · Jumlah Terkonfirmasi',
+zodiacNote:'Hanya jumlah terkonfirmasi dari pelanggan yang terhubung melalui tautan referal Anda yang ditampilkan. Data tertunda, ditolak, atau hanya disimpan tidak dihitung.',
+confirmedAmount:'Jumlah Terkonfirmasi',
+payoutTitle:'Metode Penerimaan Saya',loadingPayout:'Memuat metode penerimaan...',
+bindPayout:'Hubungkan Metode Penerimaan',bank:'Bank',accountName:'Nama Akun',
+accountNumber:'Telepon / Nomor Rekening',bankName:'Nama Bank',
+accountNamePlaceholder:'Masukkan nama akun',accountNumberPlaceholder:'Masukkan telepon atau nomor rekening',
+bankNamePlaceholder:'Masukkan nama bank',savePayout:'Simpan & Kunci',
+payoutLockNote:'Metode penerimaan akan langsung dikunci setelah disimpan. Untuk mengubahnya, hubungi admin agar dibuka terlebih dahulu.',
+locked:'Terkunci',unlocked:'Terbuka · Dapat Diubah',method:'Metode Penerimaan',
+noPayout:'Belum ada metode penerimaan',bindNow:'Hubungkan Sekarang',
+editPayout:'Ubah Metode Penerimaan',
+refresh:'Muat Ulang Data',legacy:'Halaman Catatan Lama',logout:'Keluar',
+normal:'Aktif',suspended:'Ditangguhkan',blocked:'Dibatasi',
+open:'Terbuka',closed:'Ditutup',settled:'Selesai',noRound:'Belum Ada Putaran',
+morning:'Pagi 11:45',afternoon:'Sore 15:45',
+loginMissing:'Masukkan email dan kata sandi agen',
+captchaRequired:'Selesaikan verifikasi manusia terlebih dahulu',
+logging:'Sedang masuk...',loginFail:'Login gagal. Periksa email atau kata sandi',
+loading:'Memuat data terbaru...',refreshSuccess:'✓ Data terbaru dimuat',
+copyEmpty:'Tidak ada tautan referal untuk disalin',
+copySuccess:'✓ Tautan referal disalin',
+copyFail:'Gagal menyalin. Tekan dan tahan tautan untuk menyalin manual',
+payoutLoading:'Memuat metode penerimaan...',
+payoutLoadFail:'Gagal memuat metode penerimaan',
+payoutMissing:'Lengkapi informasi akun penerimaan',
+bankMissing:'Masukkan nama bank',
+payoutSaving:'Menyimpan metode penerimaan...',
+payoutSaved:'✓ Metode penerimaan disimpan dan dikunci',
+payoutLocked:'Metode penerimaan terkunci. Hubungi admin untuk membukanya',
+payoutDuplicate:'Akun penerimaan ini sudah terhubung ke agen lain',
+payoutInvalid:'Informasi akun penerimaan tidak valid',
+payoutSaveFail:'Gagal menyimpan metode penerimaan',
+networkError:'Koneksi jaringan gagal. Silakan coba lagi nanti',
+sessionExpired:'Sesi telah berakhir. Silakan login kembali',
+zodiac:['Tikus','Kerbau','Harimau','Kelinci','Naga','Ular','Kuda','Kambing','Monyet','Ayam','Anjing','Babi']
+}
+
+};
 
 
-let refreshToken =
-localStorage.getItem(
-  'jmt_agent_refresh_token'
-)
-||
-sessionStorage.getItem(
-  'jmt_agent_refresh_token'
-)
-||
-'';
+function tr(key){
+  return T[currentLang]?.[key] ?? T.zh[key] ?? key;
+}
 
 
-let summary =
-null;
+function changeLanguage(lang){
 
+  if(!T[lang]) lang='zh';
 
-let refreshPromise =
-null;
+  currentLang=lang;
 
-
-function formatNumber(
-  value
-){
-
-  const n =
-  Number(
-    value || 0
+  localStorage.setItem(
+    'jmt_agent_lang',
+    lang
   );
 
+  document.documentElement.lang=lang;
 
-  if(
-    !Number.isFinite(n)
-  ){
+  document.getElementById(
+    'languageSelect'
+  ).value=lang;
 
-    return '0';
+  document
+  .querySelectorAll('[data-i18n]')
+  .forEach(el=>{
+    el.textContent=tr(
+      el.getAttribute('data-i18n')
+    );
+  });
 
+  document
+  .querySelectorAll('[data-ph]')
+  .forEach(el=>{
+    el.placeholder=tr(
+      el.getAttribute('data-ph')
+    );
+  });
+
+  if(summary){
+    renderSummary();
   }
 
+  renderPayoutAccounts();
+
+}
+
+
+function formatNumber(value){
+
+  const n=Number(value||0);
+
+  if(!Number.isFinite(n)){
+    return '0';
+  }
 
   return n.toLocaleString(
     'en-US',
-    {
-      maximumFractionDigits:2
-    }
+    {maximumFractionDigits:2}
   );
-
 }
 
 
-function normalizeRate(
-  value
-){
+function normalizeRate(value){
 
-  let rate =
-  Number(
-    value || 0
-  );
+  let rate=Number(value||0);
 
-
-  if(
-    !Number.isFinite(rate)
-  ){
-
+  if(!Number.isFinite(rate)){
     return 0;
-
   }
 
-
-  if(
-    rate>0
-    &&
-    rate<=1
-  ){
-
-    rate *= 100;
-
+  if(rate>0 && rate<=1){
+    rate*=100;
   }
-
 
   return rate;
-
 }
 
 
-function formatRate(
-  value
-){
+function formatRate(value){
 
-  const rate =
-  normalizeRate(
-    value
-  );
-
-
-  return rate.toLocaleString(
+  return normalizeRate(value)
+  .toLocaleString(
     'en-US',
-    {
-      maximumFractionDigits:2
-    }
+    {maximumFractionDigits:2}
   );
-
 }
 
 
-function formatMMT(
-  value
-){
+function formatMMT(value){
 
-  if(!value){
+  if(!value) return '—';
 
+  const d=new Date(value);
+
+  if(Number.isNaN(d.getTime())){
     return '—';
-
   }
-
-
-  const d =
-  new Date(
-    value
-  );
-
-
-  if(
-    Number.isNaN(
-      d.getTime()
-    )
-  ){
-
-    return '—';
-
-  }
-
 
   return d.toLocaleString(
     'en-GB',
     {
-      timeZone:
-      'Asia/Yangon',
-
-      year:
-      'numeric',
-
-      month:
-      '2-digit',
-
-      day:
-      '2-digit',
-
-      hour:
-      '2-digit',
-
-      minute:
-      '2-digit',
-
-      hour12:
-      false
+      timeZone:'Asia/Yangon',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      hour12:false
     }
   );
-
 }
 
 
-function periodName(
-  code
-){
+function periodName(code){
 
-  if(
-    code===
-    '1030'
-  ){
-
-    return '上午 11:45';
-
+  if(code==='1030'){
+    return tr('morning');
   }
 
-
-  if(
-    code===
-    '1530'
-  ){
-
-    return '下午 15:45';
-
+  if(code==='1530'){
+    return tr('afternoon');
   }
 
-
-  return code || '—';
-
+  return code||'—';
 }
 
 
-function statusName(
-  status
-){
+function statusName(status){
 
-  if(status==='open'){
+  if(status==='open') return tr('open');
+  if(status==='closed') return tr('closed');
+  if(status==='settled') return tr('settled');
 
-    return '开放中';
-
-  }
-
-
-  if(status==='closed'){
-
-    return '已关闭';
-
-  }
-
-
-  if(status==='settled'){
-
-    return '已结算';
-
-  }
-
-
-  return status || '—';
-
+  return status||'—';
 }
 
 
-function saveSession(
-  data
-){
+function saveSession(data){
 
-  if(
-    data?.access_token
-  ){
+  if(data?.access_token){
 
-    token =
-    data.access_token;
-
+    token=data.access_token;
 
     localStorage.setItem(
       'jmt_agent_token',
       token
     );
 
-
     sessionStorage.setItem(
       'jmt_agent_token',
       token
     );
-
   }
 
+  if(data?.refresh_token){
 
-  if(
-    data?.refresh_token
-  ){
-
-    refreshToken =
-    data.refresh_token;
-
+    refreshToken=data.refresh_token;
 
     localStorage.setItem(
       'jmt_agent_refresh_token',
       refreshToken
     );
 
-
     sessionStorage.setItem(
       'jmt_agent_refresh_token',
       refreshToken
     );
-
   }
-
 }
 
 
 function clearSession(){
 
-  token =
-  '';
-
-
-  refreshToken =
-  '';
-
+  token='';
+  refreshToken='';
 
   localStorage.removeItem(
     'jmt_agent_token'
   );
 
-
   localStorage.removeItem(
     'jmt_agent_refresh_token'
   );
-
 
   sessionStorage.removeItem(
     'jmt_agent_token'
   );
 
-
   sessionStorage.removeItem(
     'jmt_agent_refresh_token'
   );
-
 }
 
 
 async function refreshSession(){
 
   if(!refreshToken){
-
     return false;
-
   }
-
 
   if(refreshPromise){
-
     return refreshPromise;
-
   }
 
-
-  refreshPromise =
-  (async()=>{
+  refreshPromise=(async()=>{
 
     try{
 
-      const r =
-      await fetch(
-        BASE+
-        '/auth/v1/token?grant_type=refresh_token',
+      const r=await fetch(
+        BASE+'/auth/v1/token?grant_type=refresh_token',
         {
-          method:
-          'POST',
-
+          method:'POST',
           headers:{
-            apikey:
-            KEY,
-
-            'Content-Type':
-            'application/json'
+            apikey:KEY,
+            'Content-Type':'application/json'
           },
-
-          body:
-          JSON.stringify({
-            refresh_token:
-            refreshToken
+          body:JSON.stringify({
+            refresh_token:refreshToken
           })
         }
       );
 
-
       if(!r.ok){
-
         return false;
-
       }
 
+      const data=await r.json();
 
-      const data =
-      await r.json();
-
-
-      saveSession(
-        data
-      );
-
+      saveSession(data);
 
       return true;
-
 
     }catch(e){
 
       return false;
 
-
     }finally{
 
-      refreshPromise =
-      null;
-
+      refreshPromise=null;
     }
 
   })();
 
-
   return refreshPromise;
-
 }
 
 
-async function api(
-  path,
-  options={}
-){
+async function api(path,options={}){
 
-  let response =
-  await fetch(
+  const request=()=>fetch(
     BASE+path,
     {
       ...options,
-
       headers:{
-        apikey:
-        KEY,
-
-        Authorization:
-        'Bearer '+token,
-
-        ...(
-          options.headers
-          ||
-          {}
-        )
+        apikey:KEY,
+        Authorization:'Bearer '+token,
+        ...(options.headers||{})
       }
     }
   );
 
+  let response=await request();
 
-  if(
-    response.status===
-    401
-  ){
+  if(response.status===401){
 
-    const refreshed =
+    const refreshed=
     await refreshSession();
 
-
     if(refreshed){
-
-      response =
-      await fetch(
-        BASE+path,
-        {
-          ...options,
-
-          headers:{
-            apikey:
-            KEY,
-
-            Authorization:
-            'Bearer '+token,
-
-            ...(
-              options.headers
-              ||
-              {}
-            )
-          }
-        }
-      );
-
+      response=await request();
     }
-
   }
 
-
   return response;
-
 }
 
 
 async function signIn(){
 
-  const email =
-  document.getElementById(
-    'email'
-  ).value.trim();
+  const email=
+  document.getElementById('email').value.trim();
 
+  const password=
+  document.getElementById('password').value;
 
-  const password =
-  document.getElementById(
-    'password'
-  ).value;
+  const msg=
+  document.getElementById('loginMsg');
 
+  const btn=
+  document.getElementById('loginBtn');
 
-  const msg =
-  document.getElementById(
-    'loginMsg'
-  );
+  msg.className='msg';
 
+  if(!email||!password){
 
-  const btn =
-  document.getElementById(
-    'loginBtn'
-  );
-
-
-  if(
-    !email
-    ||
-    !password
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请输入代理邮箱和密码';
-
+    msg.className='msg error';
+    msg.textContent=tr('loginMissing');
 
     return;
-
   }
 
-
-  let captchaToken =
-  '';
-
+  let captchaToken='';
 
   try{
-
-    captchaToken =
-    hcaptcha.getResponse();
-
+    captchaToken=hcaptcha.getResponse();
   }catch(e){}
-
 
   if(!captchaToken){
 
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请先完成人机验证';
-
+    msg.className='msg error';
+    msg.textContent=tr('captchaRequired');
 
     return;
-
   }
 
-
-  btn.disabled =
-  true;
-
-
-  msg.className =
-  'msg';
-
-
-  msg.textContent =
-  '正在登录...';
-
+  btn.disabled=true;
+  msg.textContent=tr('logging');
 
   try{
 
-    const r =
-    await fetch(
-      BASE+
-      '/auth/v1/token?grant_type=password',
+    const r=await fetch(
+      BASE+'/auth/v1/token?grant_type=password',
       {
-        method:
-        'POST',
-
+        method:'POST',
         headers:{
-          apikey:
-          KEY,
-
-          'Content-Type':
-          'application/json'
+          apikey:KEY,
+          'Content-Type':'application/json'
         },
-
-        body:
-        JSON.stringify({
+        body:JSON.stringify({
           email,
           password,
-
           gotrue_meta_security:{
-            captcha_token:
-            captchaToken
+            captcha_token:captchaToken
           }
         })
       }
     );
 
+    const data=await r.json();
 
-    const data =
-    await r.json();
-
-
-    if(
-      !r.ok
-      ||
-      !data.access_token
-    ){
-
-      throw new Error(
-        'LOGIN_FAILED'
-      );
-
+    if(!r.ok||!data.access_token){
+      throw new Error('LOGIN_FAILED');
     }
 
-
-    saveSession(
-      data
-    );
-
+    saveSession(data);
 
     await startDashboard();
 
-
   }catch(e){
 
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '登录失败，请检查账号或密码';
-
+    msg.className='msg error';
+    msg.textContent=tr('loginFail');
 
     try{
       hcaptcha.reset();
     }catch(err){}
 
-
   }finally{
 
-    btn.disabled =
-    false;
-
+    btn.disabled=false;
   }
-
 }
 
 
@@ -1429,548 +1253,856 @@ async function startDashboard(){
 
   try{
 
-    await loadSummary(
-      false
-    );
+    await loadSummary(false);
+    await loadPayoutAccounts(false);
 
+    document
+    .getElementById('loginCard')
+    .classList.add('hidden');
 
-    document.getElementById(
-      'loginCard'
-    ).classList.add(
-      'hidden'
-    );
-
-
-    document.getElementById(
-      'dashboard'
-    ).classList.remove(
-      'hidden'
-    );
-
+    document
+    .getElementById('dashboard')
+    .classList.remove('hidden');
 
   }catch(e){
 
-    console.error(
-      e
-    );
-
+    console.error(e);
 
     clearSession();
 
+    document
+    .getElementById('loginCard')
+    .classList.remove('hidden');
 
-    document.getElementById(
-      'loginCard'
-    ).classList.remove(
-      'hidden'
-    );
-
-
-    document.getElementById(
-      'dashboard'
-    ).classList.add(
-      'hidden'
-    );
-
+    document
+    .getElementById('dashboard')
+    .classList.add('hidden');
   }
-
 }
 
 
-async function loadSummary(
-  showMessage=false
-){
+async function loadSummary(showMessage=false){
 
-  const msg =
-  document.getElementById(
-    'mainMsg'
-  );
-
+  const msg=
+  document.getElementById('mainMsg');
 
   if(showMessage){
 
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在读取最新数据...';
-
+    msg.className='msg';
+    msg.textContent=tr('loading');
   }
 
-
-  const r =
-  await api(
+  const r=await api(
     '/rest/v1/rpc/agent_my_round_summary',
     {
-      method:
-      'POST',
-
+      method:'POST',
       headers:{
-        'Content-Type':
-        'application/json'
+        'Content-Type':'application/json'
       },
-
-      body:
-      JSON.stringify({
-        p_round_id:
-        null
+      body:JSON.stringify({
+        p_round_id:null
       })
     }
   );
 
-
-  const text =
-  await r.text();
-
+  const text=await r.text();
 
   if(!r.ok){
 
-    throw new Error(
-      text
-      ||
-      'SUMMARY_FAILED'
-    );
+    if(r.status===401){
+      throw new Error('SESSION_EXPIRED');
+    }
 
+    throw new Error(
+      text||'SUMMARY_FAILED'
+    );
   }
 
-
-  summary =
-  text
-  ?
-  JSON.parse(
-    text
-  )
-  :
-  {};
-
+  summary=text?JSON.parse(text):{};
 
   renderSummary();
 
-
   if(showMessage){
 
-    msg.className =
-    'msg ok';
+    msg.className='msg ok';
+    msg.textContent=tr('refreshSuccess');
 
-
-    msg.textContent =
-    '✓ 已读取最新数据';
-
-
-    setTimeout(
-      ()=>{
-
-        if(
-          msg.textContent===
-          '✓ 已读取最新数据'
-        ){
-
-          msg.textContent =
-          '';
-
-        }
-
-      },
-      1600
-    );
-
+    setTimeout(()=>{
+      msg.textContent='';
+    },1600);
   }
-
 }
 
 
 function renderSummary(){
 
-  const agent =
-  summary?.agent
-  ||
-  {};
+  const agent=summary?.agent||{};
+  const round=summary?.round||null;
 
+  document
+  .getElementById('agentName')
+  .textContent=
+  agent.display_name||'—';
 
-  const round =
-  summary?.round
-  ||
-  null;
+  const statusEl=
+  document.getElementById('agentStatus');
 
+  if(agent.status==='active'){
 
-  document.getElementById(
-    'agentName'
-  ).textContent =
-  agent.display_name
-  ||
-  '—';
+    statusEl.textContent=tr('normal');
+    statusEl.className='statusGood';
 
+  }else if(agent.status==='suspended'){
 
-  const statusEl =
-  document.getElementById(
-    'agentStatus'
-  );
-
-
-  if(
-    agent.status===
-    'active'
-  ){
-
-    statusEl.textContent =
-    '正常';
-
-
-    statusEl.className =
-    'statusGood';
-
-  }else if(
-    agent.status===
-    'suspended'
-  ){
-
-    statusEl.textContent =
-    '已暂停';
-
-
-    statusEl.className =
-    'statusBad';
+    statusEl.textContent=tr('suspended');
+    statusEl.className='statusBad';
 
   }else{
 
-    statusEl.textContent =
-    '已限制';
-
-
-    statusEl.className =
-    'statusBad';
-
+    statusEl.textContent=tr('blocked');
+    statusEl.className='statusBad';
   }
 
+  document
+  .getElementById('agentRate')
+  .textContent=
+  formatRate(agent.commission_rate)+'%';
 
-  document.getElementById(
-    'agentRate'
-  ).textContent =
-  formatRate(
-    agent.commission_rate
-  )
-  +
-  '%';
+  document
+  .getElementById('referralCode')
+  .textContent=
+  agent.referral_code||'—';
 
-
-  document.getElementById(
-    'referralCode'
-  ).textContent =
-  agent.referral_code
-  ||
-  '—';
-
-
-  const referralLink =
+  const referralLink=
   agent.referral_code
   ?
-  (
-    location.origin+
-    '/customer/?ref='+
-    encodeURIComponent(
-      agent.referral_code
-    )
-  )
+  location.origin+
+  '/customer/?ref='+
+  encodeURIComponent(agent.referral_code)
   :
   '—';
 
-
-  document.getElementById(
-    'referralLink'
-  ).textContent =
+  document
+  .getElementById('referralLink')
+  .textContent=
   referralLink;
-
 
   if(round){
 
-    document.getElementById(
-      'roundName'
-    ).textContent =
+    document
+    .getElementById('roundName')
+    .textContent=
     round.round_date+
     ' · '+
-    periodName(
-      round.round_code
-    );
+    periodName(round.round_code);
 
+    document
+    .getElementById('roundStatus')
+    .textContent=
+    statusName(round.status);
 
-    document.getElementById(
-      'roundStatus'
-    ).textContent =
-    statusName(
-      round.status
-    );
-
-
-    document.getElementById(
-      'deadline'
-    ).textContent =
-    formatMMT(
-      round.deadline_at
-    );
+    document
+    .getElementById('deadline')
+    .textContent=
+    formatMMT(round.deadline_at);
 
   }else{
 
-    document.getElementById(
-      'roundName'
-    ).textContent =
-    '暂无期数';
+    document
+    .getElementById('roundName')
+    .textContent=
+    tr('noRound');
 
+    document
+    .getElementById('roundStatus')
+    .textContent='—';
 
-    document.getElementById(
-      'roundStatus'
-    ).textContent =
-    '—';
-
-
-    document.getElementById(
-      'deadline'
-    ).textContent =
-    '—';
-
+    document
+    .getElementById('deadline')
+    .textContent='—';
   }
 
+  document
+  .getElementById('confirmedTotal')
+  .textContent=
+  formatNumber(summary.confirmed_total);
 
-  document.getElementById(
-    'confirmedTotal'
-  ).textContent =
-  formatNumber(
-    summary.confirmed_total
-  );
-
-
-  document.getElementById(
-    'customerCount'
-  ).textContent =
+  document
+  .getElementById('customerCount')
+  .textContent=
   Number(
-    summary.confirmed_customer_count
-    ||
-    0
+    summary.confirmed_customer_count||0
   );
 
+  document
+  .getElementById('roundRate')
+  .textContent=
+  formatRate(summary.commission_rate)+'%';
 
-  document.getElementById(
-    'roundRate'
-  ).textContent =
-  formatRate(
-    summary.commission_rate
-  )
-  +
-  '%';
-
-
-  document.getElementById(
-    'commissionDue'
-  ).textContent =
-  formatNumber(
-    summary.commission_due
-  );
-
+  document
+  .getElementById('commissionDue')
+  .textContent=
+  formatNumber(summary.commission_due);
 
   renderZodiac(
-    summary.zodiac
-    ||
-    []
+    summary.zodiac||[]
   );
-
 }
 
 
-function renderZodiac(
-  rows
-){
+function renderZodiac(rows){
 
-  const box =
-  document.getElementById(
-    'zodiacGrid'
-  );
+  const box=
+  document.getElementById('zodiacGrid');
 
+  const map={};
 
-  const map =
-  {};
+  rows.forEach(row=>{
 
+    map[
+      String(row.number_code)
+      .padStart(2,'0')
+    ]=
+    Number(row.confirmed_points||0);
+  });
 
-  rows.forEach(
-    row=>{
+  let html='';
 
-      map[
-        String(
-          row.number_code
-        )
-        .padStart(
-          2,
-          '0'
-        )
-      ] =
-      Number(
-        row.confirmed_points
-        ||
-        0
-      );
+  for(let i=1;i<=12;i++){
 
-    }
-  );
+    const code=
+    String(i).padStart(2,'0');
 
+    const amount=
+    Number(map[code]||0);
 
-  let html =
-  '';
+    const name=
+    T[currentLang].zodiac[i-1];
 
-
-  for(
-    let i=1;
-    i<=12;
-    i++
-  ){
-
-    const code =
-    String(i)
-    .padStart(
-      2,
-      '0'
-    );
-
-
-    const amount =
-    Number(
-      map[code]
-      ||
-      0
-    );
-
-
-    html += `
-
+    html+=`
       <div class="zodiac${amount>0?' active':''}">
 
-        <div class="zodiacTop">
-
-          <div class="zodiacName">
-            ${ZODIAC[i-1]}
-          </div>
-
-          <div class="zodiacCode">
-            ${code}
-          </div>
-
+        <div class="zodiacVisual">
+          <img
+            src="${ZODIAC_IMAGES[i-1]}"
+            alt="${name}">
         </div>
 
-        <div class="zodiacAmount">
-          ${formatNumber(amount)}
+        <div class="zodiacBody">
+
+          <div class="zodiacTop">
+            <div class="zodiacName">${name}</div>
+            <div class="zodiacCode">${code}</div>
+          </div>
+
+          <div class="zodiacLabel">
+            ${tr('confirmedAmount')}
+          </div>
+
+          <div class="zodiacAmount">
+            ${formatNumber(amount)}
+          </div>
+
         </div>
 
       </div>
-
     `;
-
   }
 
-
-  box.innerHTML =
-  html;
-
+  box.innerHTML=html;
 }
 
 
 async function copyReferralLink(){
 
-  const text =
-  document.getElementById(
-    'referralLink'
-  ).textContent.trim();
+  const text=
+  document
+  .getElementById('referralLink')
+  .textContent.trim();
 
+  const msg=
+  document.getElementById('copyMsg');
 
-  const msg =
-  document.getElementById(
-    'copyMsg'
-  );
+  if(!text||text==='—'){
 
-
-  if(
-    !text
-    ||
-    text===
-    '—'
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '当前没有可复制的推荐链接';
-
+    msg.className='msg error';
+    msg.textContent=tr('copyEmpty');
 
     return;
-
   }
-
 
   try{
 
-    await navigator.clipboard.writeText(
-      text
-    );
+    await navigator.clipboard.writeText(text);
 
-
-    msg.className =
-    'msg ok';
-
-
-    msg.textContent =
-    '✓ 推荐链接已复制';
-
+    msg.className='msg ok';
+    msg.textContent=tr('copySuccess');
 
   }catch(e){
 
-    msg.className =
-    'msg error';
+    msg.className='msg error';
+    msg.textContent=tr('copyFail');
+  }
+}
 
 
-    msg.textContent =
-    '复制失败，请长按链接手动复制';
+async function loadPayoutAccounts(showMessage=false){
 
+  const msg=
+  document.getElementById('payoutMsg');
+
+  if(showMessage){
+
+    msg.className='msg';
+    msg.textContent=tr('payoutLoading');
   }
 
+  try{
+
+    const r=await api(
+      '/rest/v1/rpc/agent_my_payout_accounts',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:'{}'
+      }
+    );
+
+    const text=await r.text();
+
+    if(!r.ok){
+      throw new Error(
+        text||'PAYOUT_LOAD_FAILED'
+      );
+    }
+
+    const data=
+    text?JSON.parse(text):{};
+
+    payoutAccounts=
+    Array.isArray(data?.rows)
+    ?
+    data.rows
+    :
+    [];
+
+    renderPayoutAccounts();
+
+    if(showMessage){
+      msg.textContent='';
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+    payoutAccounts=[];
+
+    renderPayoutAccounts();
+
+    msg.className='msg error';
+    msg.textContent=tr('payoutLoadFail');
+  }
+}
+
+
+function renderPayoutAccounts(){
+
+  const box=
+  document.getElementById('payoutAccounts');
+
+  const form=
+  document.getElementById('payoutForm');
+
+  if(!box||!form){
+    return;
+  }
+
+  if(!payoutAccounts.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        ${tr('noPayout')}
+      </div>
+    `;
+
+    form.classList.remove('hidden');
+
+    document
+    .getElementById('payoutFormTitle')
+    .textContent=
+    tr('bindPayout');
+
+    selectPayoutMethod(
+      payoutMethod||'kpay'
+    );
+
+    return;
+  }
+
+  let html='';
+
+  payoutAccounts.forEach(row=>{
+
+    const locked=
+    row.agent_edit_locked!==false;
+
+    const methodName=
+    row.method_type==='bank'
+    ?
+    tr('bank')
+    :
+    'KPay';
+
+    html+=`
+      <div class="payoutAccount">
+
+        <div class="payoutHead">
+
+          <div class="payoutName">
+            ${methodName}
+          </div>
+
+          <div class="badge ${locked?'locked':'unlocked'}">
+            ${locked?tr('locked'):tr('unlocked')}
+          </div>
+
+        </div>
+
+        <div class="payoutGrid">
+
+          <div class="payoutDetail">
+            <small>${tr('accountName')}</small>
+            <strong>${escapeHtml(row.account_name||'—')}</strong>
+          </div>
+
+          <div class="payoutDetail">
+            <small>${tr('accountNumber')}</small>
+            <strong>${escapeHtml(row.account_number||'—')}</strong>
+          </div>
+
+          ${
+            row.method_type==='bank'
+            ?
+            `
+            <div class="payoutDetail">
+              <small>${tr('bankName')}</small>
+              <strong>${escapeHtml(row.bank_name||'—')}</strong>
+            </div>
+            `
+            :
+            ''
+          }
+
+          <div class="payoutDetail">
+            <small>${tr('method')}</small>
+            <strong>${methodName}</strong>
+          </div>
+
+        </div>
+
+        ${
+          !locked
+          ?
+          `
+          <button
+            class="secondary"
+            onclick="editPayoutAccount('${row.method_type}')">
+            ${tr('editPayout')}
+          </button>
+          `
+          :
+          ''
+        }
+
+      </div>
+    `;
+  });
+
+  box.innerHTML=html;
+
+  const editable=
+  payoutAccounts.find(
+    row=>row.agent_edit_locked===false
+  );
+
+  if(editable){
+
+    form.classList.remove('hidden');
+
+    document
+    .getElementById('payoutFormTitle')
+    .textContent=
+    tr('editPayout');
+
+    fillPayoutForm(editable);
+
+  }else{
+
+    form.classList.add('hidden');
+  }
+}
+
+
+function selectPayoutMethod(method){
+
+  payoutMethod=
+  method==='bank'
+  ?
+  'bank'
+  :
+  'kpay';
+
+  document
+  .getElementById('methodKpay')
+  .classList.toggle(
+    'active',
+    payoutMethod==='kpay'
+  );
+
+  document
+  .getElementById('methodBank')
+  .classList.toggle(
+    'active',
+    payoutMethod==='bank'
+  );
+
+  document
+  .getElementById('bankNameWrap')
+  .classList.toggle(
+    'hidden',
+    payoutMethod!=='bank'
+  );
+}
+
+
+function fillPayoutForm(row){
+
+  payoutMethod=
+  row.method_type==='bank'
+  ?
+  'bank'
+  :
+  'kpay';
+
+  selectPayoutMethod(payoutMethod);
+
+  document
+  .getElementById('payoutAccountName')
+  .value=
+  row.account_name||'';
+
+  document
+  .getElementById('payoutAccountNumber')
+  .value=
+  row.account_number||'';
+
+  document
+  .getElementById('payoutBankName')
+  .value=
+  row.bank_name||'';
+}
+
+
+function editPayoutAccount(method){
+
+  const row=
+  payoutAccounts.find(
+    item=>
+    item.method_type===method
+    &&
+    item.agent_edit_locked===false
+  );
+
+  if(!row){
+    return;
+  }
+
+  document
+  .getElementById('payoutForm')
+  .classList.remove('hidden');
+
+  document
+  .getElementById('payoutFormTitle')
+  .textContent=
+  tr('editPayout');
+
+  fillPayoutForm(row);
+
+  document
+  .getElementById('payoutForm')
+  .scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+}
+
+
+function payoutErrorKey(text){
+
+  const raw=
+  String(text||'').toUpperCase();
+
+  if(
+    raw.includes(
+      'PAYOUT_ACCOUNT_LOCKED'
+    )
+  ){
+    return 'payoutLocked';
+  }
+
+  if(
+    raw.includes(
+      'PAYOUT_ACCOUNT_ALREADY_BOUND'
+    )
+  ){
+    return 'payoutDuplicate';
+  }
+
+  if(
+    raw.includes('ACCOUNT_NAME_REQUIRED')
+    ||
+    raw.includes('ACCOUNT_NUMBER_REQUIRED')
+    ||
+    raw.includes('INVALID_PAYOUT_METHOD')
+  ){
+    return 'payoutInvalid';
+  }
+
+  if(
+    raw.includes('BANK_NAME_REQUIRED')
+  ){
+    return 'bankMissing';
+  }
+
+  return 'payoutSaveFail';
+}
+
+
+async function savePayoutAccount(){
+
+  const msg=
+  document.getElementById('payoutMsg');
+
+  const btn=
+  document.getElementById('savePayoutBtn');
+
+  const accountName=
+  document
+  .getElementById('payoutAccountName')
+  .value.trim();
+
+  const accountNumber=
+  document
+  .getElementById('payoutAccountNumber')
+  .value.trim();
+
+  const bankName=
+  document
+  .getElementById('payoutBankName')
+  .value.trim();
+
+  if(!accountName||!accountNumber){
+
+    msg.className='msg error';
+    msg.textContent=tr('payoutMissing');
+
+    return;
+  }
+
+  if(
+    payoutMethod==='bank'
+    &&
+    !bankName
+  ){
+
+    msg.className='msg error';
+    msg.textContent=tr('bankMissing');
+
+    return;
+  }
+
+  btn.disabled=true;
+
+  msg.className='msg';
+  msg.textContent=tr('payoutSaving');
+
+  try{
+
+    const r=await api(
+      '/rest/v1/rpc/agent_upsert_payout_account',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          p_method_type:payoutMethod,
+          p_account_name:accountName,
+          p_account_number:accountNumber,
+          p_bank_name:
+            payoutMethod==='bank'
+            ?
+            bankName
+            :
+            null
+        })
+      }
+    );
+
+    const text=await r.text();
+
+    if(!r.ok){
+
+      throw new Error(
+        payoutErrorKey(text)
+      );
+    }
+
+    msg.className='msg ok';
+    msg.textContent=tr('payoutSaved');
+
+    document
+    .getElementById('payoutAccountName')
+    .value='';
+
+    document
+    .getElementById('payoutAccountNumber')
+    .value='';
+
+    document
+    .getElementById('payoutBankName')
+    .value='';
+
+    await loadPayoutAccounts(false);
+
+  }catch(e){
+
+    console.error(e);
+
+    msg.className='msg error';
+
+    msg.textContent=
+    tr(
+      T[currentLang]?.[e.message]
+      ?
+      e.message
+      :
+      'payoutSaveFail'
+    );
+
+  }finally{
+
+    btn.disabled=false;
+  }
+}
+
+
+async function refreshAll(showMessage=false){
+
+  const msg=
+  document.getElementById('mainMsg');
+
+  if(showMessage){
+
+    msg.className='msg';
+    msg.textContent=tr('loading');
+  }
+
+  try{
+
+    await Promise.all([
+      loadSummary(false),
+      loadPayoutAccounts(false)
+    ]);
+
+    if(showMessage){
+
+      msg.className='msg ok';
+      msg.textContent=tr('refreshSuccess');
+
+      setTimeout(()=>{
+        msg.textContent='';
+      },1600);
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+    if(showMessage){
+
+      msg.className='msg error';
+      msg.textContent=tr('networkError');
+    }
+  }
+}
+
+
+function escapeHtml(value){
+
+  return String(value??'')
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;')
+  .replaceAll("'","&#039;");
 }
 
 
 function logout(){
 
   clearSession();
-
-
   location.reload();
-
 }
 
 
 function updateClock(){
 
-  document.getElementById(
-    'mmtClock'
-  ).textContent =
+  const el=
+  document.getElementById('mmtClock');
+
+  if(!el){
+    return;
+  }
+
+  el.textContent=
   new Date()
   .toLocaleTimeString(
     'en-GB',
     {
-      timeZone:
-      'Asia/Yangon',
-
-      hour:
-      '2-digit',
-
-      minute:
-      '2-digit',
-
-      second:
-      '2-digit',
-
-      hour12:
-      false
+      timeZone:'Asia/Yangon',
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+      hour12:false
     }
   );
-
 }
 
+
+document
+.getElementById('languageSelect')
+.value=
+T[currentLang]
+?
+currentLang
+:
+'zh';
+
+
+changeLanguage(
+  T[currentLang]
+  ?
+  currentLang
+  :
+  'zh'
+);
+
+
+updateClock();
 
 setInterval(
   updateClock,
@@ -1978,47 +2110,29 @@ setInterval(
 );
 
 
-updateClock();
+setInterval(()=>{
 
+  if(
+    token
+    &&
+    !document
+    .getElementById('dashboard')
+    .classList.contains('hidden')
+  ){
 
-setInterval(
-  ()=>{
+    refreshAll(false)
+    .catch(console.error);
+  }
 
-    if(
-      token
-      &&
-      !document.getElementById(
-        'dashboard'
-      ).classList.contains(
-        'hidden'
-      )
-    ){
-
-      loadSummary(
-        false
-      )
-      .catch(
-        console.error
-      );
-
-    }
-
-  },
-  20000
-);
+},20000);
 
 
 if(token){
 
   startDashboard()
-  .catch(
-    console.error
-  );
-
+  .catch(console.error);
 }
-
 </script>
 
 </body>
-
 </html>
