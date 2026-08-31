@@ -426,13 +426,16 @@ button:disabled{
       </div>
 
 
-      <div class="notice">
+            <div class="notice">
 
-        只有现实中已经完成 KPay / 银行转账后，
-        才点击“我已实际转账 · 确认登记”。
+        每次只登记现实中已经实际转出的金额，
+        可以分多次派彩，不需要一次全部派完。
 
-        点击后系统会正式记录派彩交易，
-        客户页面会自动从“待派彩”更新为“已派彩”。
+        每一次都必须填写真实转账备注，
+        有转账截图时可以同时上传凭证。
+
+        系统会保存每次金额、时间、备注和凭证；
+        剩余金额归零后才会变成“已派彩”。
 
       </div>
 
@@ -994,228 +997,175 @@ function statusText(status){
 }
 
 
-function payoutHtml(row){
+function payoutTransactionsHtml(row){
+  const transactions = Array.isArray(row.transactions)
+    ? row.transactions
+    : [];
 
-  const open =
-  row.payout_status
-  !==
-  'paid'
-  &&
-  Number(
-    row.payout_remaining
-    ||
-    0
-  )
-  >
-  0;
-
+  if(!transactions.length){
+    return '';
+  }
 
   return `
+    <div class="account">
+      <strong>派彩交易记录</strong>
+      <br><br>
 
+      ${transactions.map(transaction => {
+        const time = transaction.paid_at
+          ? new Date(transaction.paid_at).toLocaleString('zh-CN')
+          : '—';
+
+        return `
+          <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div class="row">
+              <span>本次派彩</span>
+              <strong>${money(transaction.amount)}</strong>
+            </div>
+
+            <div class="row">
+              <span>派彩时间</span>
+              <strong>${esc(time)}</strong>
+            </div>
+
+            <div class="row">
+              <span>派彩备注</span>
+              <strong>${esc(transaction.admin_note || '—')}</strong>
+            </div>
+
+            ${
+              transaction.proof_storage_path
+              ? `
+                <button
+                  type="button"
+                  style="margin-top:9px;padding:10px;background:#17140d;color:#d8bf73;border:1px solid rgba(214,168,63,.22)"
+                  onclick="viewPayoutProof('${esc(transaction.proof_storage_path)}')">
+                  查看派彩凭证
+                </button>
+              `
+              : ''
+            }
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+
+function payoutHtml(row){
+  const open =
+    row.payout_status !== 'paid'
+    &&
+    Number(row.payout_remaining || 0) > 0;
+
+  return `
     <div class="item">
 
       <div class="head">
-
         <div>
-
           <div class="name">
             ${esc(row.display_name || '客户')}
           </div>
 
           <div class="meta">
-
             ${esc(row.customer_code || '')}
-
             ${
               row.username
-              ?
-              ' · @'
-              +
-              esc(row.username)
-              :
-              ''
+              ? ' · @' + esc(row.username)
+              : ''
             }
-
             ${
               row.phone
-              ?
-              ' · '
-              +
-              esc(row.phone)
-              :
-              ''
+              ? ' · ' + esc(row.phone)
+              : ''
             }
-
           </div>
-
         </div>
 
-
-        <div
-          class="badge ${esc(row.payout_status)}">
-
+        <div class="badge ${esc(row.payout_status)}">
           ${esc(statusText(row.payout_status))}
-
         </div>
-
       </div>
 
 
       <div class="row">
-
-        <span>
-          对应期数
-        </span>
-
+        <span>对应期数</span>
         <strong>
-
           ${esc(row.round_date || '—')}
           ·
           ${esc(periodName(row.round_code))}
-
         </strong>
-
       </div>
 
-
       <div class="row">
-
-        <span>
-          开奖生肖
-        </span>
-
-        <strong>
-          ${esc(zodiacName(row.result_number))}
-        </strong>
-
+        <span>开奖生肖</span>
+        <strong>${esc(zodiacName(row.result_number))}</strong>
       </div>
 
-
       <div class="row">
-
-        <span>
-          命中金额
-        </span>
-
-        <strong>
-          ${money(row.winning_points)}
-        </strong>
-
+        <span>命中金额</span>
+        <strong>${money(row.winning_points)}</strong>
       </div>
 
-
       <div class="row">
-
-        <span>
-          应派彩
-        </span>
-
-        <strong>
-          ${money(row.payout_due)}
-        </strong>
-
+        <span>应派彩</span>
+        <strong>${money(row.payout_due)}</strong>
       </div>
 
-
       <div class="row">
-
-        <span>
-          已派彩
-        </span>
-
-        <strong>
-          ${money(row.payout_paid)}
-        </strong>
-
+        <span>已派彩</span>
+        <strong>${money(row.payout_paid)}</strong>
       </div>
 
-
       <div class="row">
-
-        <span>
-          剩余待派
-        </span>
-
-        <strong class="amount">
-          ${money(row.payout_remaining)}
-        </strong>
-
+        <span>剩余待派</span>
+        <strong class="amount">${money(row.payout_remaining)}</strong>
       </div>
 
 
       <div class="account">
-
         收款方式：
         ${esc(
-          String(
-            row.payout_method_type_snapshot
-            ||
-            ''
-          )
-          .toUpperCase()
-          ||
-          '—'
+          String(row.payout_method_type_snapshot || '').toUpperCase()
+          || '—'
         )}
 
         <br>
 
         收款户名：
-        ${esc(
-          row.payout_account_name_snapshot
-          ||
-          '—'
-        )}
+        ${esc(row.payout_account_name_snapshot || '—')}
 
         <br>
 
         收款账号：
-        ${esc(
-          row.payout_account_number_snapshot
-          ||
-          '—'
-        )}
+        ${esc(row.payout_account_number_snapshot || '—')}
 
         ${
           row.payout_bank_name_snapshot
-          ?
-          '<br>银行：'
-          +
-          esc(
-            row.payout_bank_name_snapshot
-          )
-          :
-          ''
+          ? '<br>银行：' + esc(row.payout_bank_name_snapshot)
+          : ''
         }
-
       </div>
+
+
+      ${payoutTransactionsHtml(row)}
 
 
       ${
         open
-        ?
-        `
-
+        ? `
           <button
             type="button"
-            onclick="completePayout(
-              '${esc(row.settlement_id)}',
-              ${Number(row.payout_remaining || 0)}
-            )">
-
-            我已实际转账 · 确认登记
-            ${money(row.payout_remaining)}
-
+            onclick="recordPayout('${esc(row.settlement_id)}')">
+            记录本次实际派彩
           </button>
-
         `
-        :
-        ''
+        : ''
       }
 
     </div>
-
   `;
-
 }
 
 
@@ -1402,218 +1352,397 @@ async function loadAll(){
 }
 
 
-async function completePayout(
-  settlementId,
-  amount
-){
+function pickPayoutProof(){
+  return new Promise(resolve => {
+    const input = document.createElement('input');
 
-  const row =
-  rows.find(
-    item =>
-    item.settlement_id
-    ===
+    input.type = 'file';
+    input.accept =
+      'image/jpeg,image/png,image/webp,image/heic,image/heif';
+
+    input.onchange = () => {
+      resolve(input.files?.[0] || null);
+    };
+
+    input.click();
+  });
+}
+
+
+async function uploadPayoutProof(settlementId,file){
+  if(!file){
+    return null;
+  }
+
+  const allowed = [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/heic',
+    'image/heif'
+  ];
+
+  if(!allowed.includes(file.type)){
+    throw new Error('PAYOUT_PROOF_TYPE_INVALID');
+  }
+
+  if(file.size > 10*1024*1024){
+    throw new Error('PAYOUT_PROOF_TOO_LARGE');
+  }
+
+  const safeName = String(file.name || 'payout-proof')
+    .replace(/[^a-zA-Z0-9._-]/g,'_');
+
+  const uniqueId = crypto.randomUUID
+    ? crypto.randomUUID()
+    : String(Date.now());
+
+  const storagePath =
     settlementId
+    + '/'
+    + uniqueId
+    + '-'
+    + safeName;
+
+  const encoded = storagePath
+    .split('/')
+    .map(encodeURIComponent)
+    .join('/');
+
+  const res = await api(
+    '/storage/v1/object/customer-payout-proofs/' + encoded,
+    {
+      method:'POST',
+      headers:{
+        'Content-Type':file.type,
+        'x-upsert':'false'
+      },
+      body:file
+    }
   );
 
+  if(!res.ok){
+    throw new Error('PAYOUT_PROOF_UPLOAD_FAILED');
+  }
+
+  return storagePath;
+}
+
+
+async function deletePayoutProof(storagePath){
+  if(!storagePath){
+    return;
+  }
+
+  try{
+    const encoded = storagePath
+      .split('/')
+      .map(encodeURIComponent)
+      .join('/');
+
+    await api(
+      '/storage/v1/object/customer-payout-proofs/' + encoded,
+      {
+        method:'DELETE'
+      }
+    );
+  }
+  catch{
+  }
+}
+
+
+async function viewPayoutProof(storagePath){
+  const newWindow = window.open('','_blank');
+
+  try{
+    const encoded = storagePath
+      .split('/')
+      .map(encodeURIComponent)
+      .join('/');
+
+    const res = await api(
+      '/storage/v1/object/authenticated/customer-payout-proofs/'
+      + encoded
+    );
+
+    if(!res.ok){
+      throw new Error();
+    }
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+
+    if(newWindow){
+      newWindow.location = url;
+    }
+    else{
+      location.href = url;
+    }
+
+    setTimeout(
+      () => URL.revokeObjectURL(url),
+      60000
+    );
+  }
+  catch{
+    if(newWindow){
+      newWindow.close();
+    }
+
+    setMessage(
+      '派彩凭证读取失败。',
+      'err'
+    );
+  }
+}
+
+
+async function recordPayout(settlementId){
+  if(recordPayout.busy){
+    setMessage(
+      '上一笔派彩正在处理中，请稍候。'
+    );
+    return;
+  }
+
+  const row = rows.find(
+    item => item.settlement_id === settlementId
+  );
 
   if(!row){
+    setMessage(
+      '没有找到这条客户结算。',
+      'err'
+    );
     return;
   }
 
+  const remaining = Math.max(
+    0,
+    Number(row.payout_remaining || 0)
+  );
 
-  const text =
-  '请再次确认：\n\n'
-  +
-  '客户：'
-  +
-  (
-    row.display_name
-    ||
-    row.customer_code
-  )
-  +
-  '\n'
-  +
-  '实际派彩金额：'
-  +
-  money(amount)
-  +
-  '\n'
-  +
-  '收款账户：'
-  +
-  (
-    row.payout_account_name_snapshot
-    ||
-    ''
-  )
-  +
-  ' · '
-  +
-  (
-    row.payout_account_number_snapshot
-    ||
-    ''
-  )
-  +
-  '\n\n'
-  +
-  '只有现实中已经完成转账后才能确认。';
+  if(remaining <= 0){
+    setMessage(
+      '这笔派彩已经没有剩余金额。',
+      'err'
+    );
+    return;
+  }
 
+  let inputAmount = window.prompt(
+    '请输入这一次现实中已经实际转出的派彩金额：',
+    String(remaining)
+  );
+
+  if(inputAmount === null){
+    return;
+  }
+
+  inputAmount = inputAmount
+    .replace(/,/g,'')
+    .trim();
+
+  const amount = Number(inputAmount);
 
   if(
-    !window.confirm(
-      text
-    )
+    !Number.isFinite(amount)
+    ||
+    amount <= 0
+    ||
+    amount > remaining
   ){
+    setMessage(
+      '派彩金额不正确，不能超过当前剩余待派金额。',
+      'err'
+    );
     return;
   }
 
+  let note = window.prompt(
+    '请输入这一次真实转账备注，例如：KPay 已转账 / 银行转账 / 交易编号：',
+    ''
+  );
+
+  if(note === null){
+    return;
+  }
+
+  note = note.trim();
+
+  if(!note){
+    setMessage(
+      '必须填写派彩备注。',
+      'err'
+    );
+    return;
+  }
+
+  const remainingAfter = Math.max(
+    0,
+    remaining - amount
+  );
+
+  const text =
+    '请再次确认：\n\n'
+    + '客户：'
+    + (row.display_name || row.customer_code)
+    + '\n'
+    + '本次实际派彩：'
+    + money(amount)
+    + '\n'
+    + '派彩后剩余：'
+    + money(remainingAfter)
+    + '\n'
+    + '收款账户：'
+    + (row.payout_account_name_snapshot || '')
+    + ' · '
+    + (row.payout_account_number_snapshot || '')
+    + '\n'
+    + '备注：'
+    + note
+    + '\n\n'
+    + '只有现实中已经完成这一次转账后才能确认。';
+
+  if(!window.confirm(text)){
+    return;
+  }
+
+  const wantProof = window.confirm(
+    '是否上传这一次转账凭证截图？\n\n'
+    + '有截图建议选择“确定”；'
+    + '没有截图可以选择“取消”继续。'
+  );
+
+  let proofStoragePath = null;
+
+  recordPayout.busy = true;
 
   setMessage(
     '正在登记派彩...'
   );
 
-
   try{
+    if(wantProof){
+      const file = await pickPayoutProof();
 
-    const res =
-    await api(
-
-      '/rest/v1/rpc/admin_record_customer_payout',
-
-      {
-
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
-
-        body:
-        JSON.stringify({
-
-          p_settlement_id:
-          settlementId,
-
-          p_amount:
-          Number(amount),
-
-          p_admin_note:
-          '管理员确认实际派彩完成'
-
-        })
-
+      if(file){
+        proofStoragePath =
+          await uploadPayoutProof(
+            settlementId,
+            file
+          );
       }
+    }
 
+    const res = await api(
+      '/rest/v1/rpc/admin_record_customer_payout',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          p_settlement_id:settlementId,
+          p_amount:amount,
+          p_admin_note:note,
+          p_proof_storage_path:proofStoragePath
+        })
+      }
     );
 
-
-    await parseResponse(
-      res
-    );
-
+    const result = await parseResponse(res);
 
     await loadAll();
 
-
-    setMessage(
-      '已正式记录为派彩完成。',
-      'ok'
-    );
-
+    if(result?.payout_status === 'paid'){
+      setMessage(
+        '本次派彩已保存，这笔应派金额已经全部完成。',
+        'ok'
+      );
+    }
+    else{
+      setMessage(
+        '本次派彩已保存，剩余待派 '
+        + money(result?.payout_remaining)
+        + '。',
+        'ok'
+      );
+    }
   }
   catch(error){
+    if(proofStoragePath){
+      await deletePayoutProof(
+        proofStoragePath
+      );
+    }
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     setMessage(
-      translateError(
-        error.message
-      ),
+      translateError(error.message),
       'err'
     );
-
   }
-
+  finally{
+    recordPayout.busy = false;
+  }
 }
 
 
 function translateError(message){
+  const text = String(message || '');
 
-  const text =
-  String(
-    message
-    ||
-    ''
-  );
-
-
-  if(
-    text.includes(
-      'ADMIN_AAL2_REQUIRED'
-    )
-  ){
-
+  if(text.includes('ADMIN_AAL2_REQUIRED')){
     return '管理员二次验证已经失效，请返回管理中心重新验证。';
-
   }
 
-
-  if(
-    text.includes(
-      'CUSTOMER_SETTLEMENT_NOT_FOUND'
-    )
-  ){
-
+  if(text.includes('CUSTOMER_SETTLEMENT_NOT_FOUND')){
     return '没有找到这条客户结算。';
-
   }
 
+  if(text.includes('NO_PAYOUT_DUE')){
+    return '这笔结算没有应派彩金额。';
+  }
 
-  if(
-    text.includes(
-      'PAYOUT_ALREADY_COMPLETED'
-    )
-  ){
-
+  if(text.includes('PAYOUT_ALREADY_COMPLETED')){
     return '这笔派彩已经完成，请刷新页面。';
-
   }
 
-
-  if(
-    text.includes(
-      'PAYOUT_METHOD_REQUIRED'
-    )
-  ){
-
+  if(text.includes('PAYOUT_METHOD_REQUIRED')){
     return '客户尚未绑定可用收款方式，请先联系客服处理。';
-
   }
 
+  if(text.includes('INVALID_PAYOUT_AMOUNT')){
+    return '派彩金额必须大于 0。';
+  }
 
-  if(
-    text.includes(
-      'PAYOUT_EXCEEDS_REMAINING'
-    )
-  ){
-
+  if(text.includes('PAYOUT_EXCEEDS_REMAINING')){
     return '派彩金额超过当前剩余应派金额。';
-
   }
 
+  if(text.includes('PAYOUT_NOTE_REQUIRED')){
+    return '必须填写派彩备注。';
+  }
 
-  return (
-    text
-    ||
-    '操作失败，请重新尝试。'
-  );
+  if(text.includes('PAYOUT_PROOF_PATH_INVALID')){
+    return '派彩凭证路径不正确，请重新上传。';
+  }
 
+  if(text.includes('PAYOUT_PROOF_TOO_LARGE')){
+    return '派彩凭证不能超过 10MB。';
+  }
+
+  if(text.includes('PAYOUT_PROOF_TYPE_INVALID')){
+    return '派彩凭证只支持 JPG、PNG、WEBP、HEIC、HEIF 图片。';
+  }
+
+  if(text.includes('PAYOUT_PROOF_UPLOAD_FAILED')){
+    return '派彩凭证上传失败，请重新尝试。';
+  }
+
+  return text || '操作失败，请重新尝试。';
 }
 
 
