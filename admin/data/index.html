@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<title>金满堂 · 数据中心</title>
+
+<style>
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 38%,
+    #070708 100%
+  );
+  color:#f7f0df;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  min-height:100vh;
+  padding:22px 15px 55px
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:20px
+}
+
+.mark{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:27px;
+  font-weight:900;
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:
+  linear-gradient(
+    145deg,
+    #382506,
+    #100d08
+  );
+  box-shadow:
+  0 0 28px
+  rgba(235,185,62,.22)
+}
+
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px
+}
+
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:
+  1px solid
+  rgba(214,168,63,.18)
+}
+
+.card{
+  background:
+  linear-gradient(
+    180deg,
+    rgba(22,22,22,.98),
+    rgba(11,11,12,.98)
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.30);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:
+  0 22px 60px
+  rgba(0,0,0,.32)
+}
+
+.title{
+  color:#dfc575;
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:14px
+}
+
+.scopeGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(4,1fr);
+  gap:8px
+}
+
+.scopeBtn{
+  width:100%;
+  min-height:56px;
+  border-radius:13px;
+  padding:10px 7px;
+  border:
+  1px solid
+  rgba(214,168,63,.20);
+  background:#111112;
+  color:#a99d7c;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer
+}
+
+.scopeBtn.active{
+  background:
+  linear-gradient(
+    180deg,
+    #2a2110,
+    #17140d
+  );
+  color:#efd477;
+  border-color:
+  rgba(214,168,63,.55)
+}
+
+.filterBox{
+  margin-top:15px;
+  padding:14px;
+  border-radius:15px;
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06)
+}
+
+.formGrid{
+  display:grid;
+  grid-template-columns:
+  1fr 1fr;
+  gap:9px
+}
+
+label{
+  display:block;
+  color:#8f8778;
+  font-size:10px;
+  margin-bottom:6px
+}
+
+input,
+select{
+  width:100%;
+  border:
+  1px solid
+  rgba(214,168,63,.22);
+  background:#0d0d0e;
+  color:#fff;
+  border-radius:12px;
+  padding:12px;
+  font-size:14px;
+  outline:none
+}
+
+.applyBtn{
+  width:100%;
+  margin-top:10px;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  color:#171109;
+  background:
+  linear-gradient(
+    180deg,
+    #f1d784,
+    #b47d20
+  )
+}
+
+.sectionName{
+  margin-top:3px;
+  margin-bottom:10px;
+  color:#b9a66f;
+  font-size:12px;
+  font-weight:900
+}
+
+.summaryGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(3,1fr);
+  gap:9px
+}
+
+.summaryBox{
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:13px
+}
+
+.summaryBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:6px
+}
+
+.summaryBox strong{
+  display:block;
+  color:#ebcd72;
+  font-size:18px;
+  word-break:break-word
+}
+
+.summaryBox.total{
+  border-color:
+  rgba(214,168,63,.28)
+}
+
+.summaryBox.green strong{
+  color:#78d5a0
+}
+
+.summaryBox.red strong{
+  color:#e49c96
+}
+
+.divider{
+  height:1px;
+  background:
+  rgba(255,255,255,.06);
+  margin:17px 0
+}
+
+.scopeTitle{
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  background:#121213;
+  color:#e5cd7c;
+  border:
+  1px solid
+  rgba(214,168,63,.16);
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:15px
+}
+
+.pending{
+  text-align:center;
+  padding:24px 14px;
+  border-radius:14px;
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.055);
+  color:#837b6d;
+  font-size:12px;
+  line-height:1.8
+}
+
+.note{
+  margin-top:13px;
+  padding:13px;
+  border-radius:13px;
+  background:#15120b;
+  border:
+  1px solid
+  rgba(214,168,63,.16);
+  color:#9e9275;
+  font-size:11px;
+  line-height:1.7
+}
+
+.hidden{
+  display:none!important
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
+  font-size:10px;
+  margin-top:24px
+}
+
+@media(max-width:650px){
+
+  .scopeGrid{
+    grid-template-columns:
+    1fr 1fr
+  }
+
+  .summaryGrid{
+    grid-template-columns:
+    1fr 1fr
+  }
+
+}
+
+@media(max-width:430px){
+
+  .formGrid{
+    grid-template-columns:1fr
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      DATA CENTER
+    </div>
+
+  </div>
+
+
+  <a
+    class="back"
+    href="/admin/">
+    ← 返回管理中心
+  </a>
+
+
+  <section class="card">
+
+    <div class="title">
+      数据中心
+    </div>
+
+    <div class="scopeGrid">
+
+      <button
+        class="scopeBtn active"
+        id="scopeRound"
+        type="button"
+        onclick="setScope('round')">
+        单期
+      </button>
+
+      <button
+        class="scopeBtn"
+        id="scopeDay"
+        type="button"
+        onclick="setScope('day')">
+        当天
+      </button>
+
+      <button
+        class="scopeBtn"
+        id="scopeMonth"
+        type="button"
+        onclick="setScope('month')">
+        本月
+      </button>
+
+      <button
+        class="scopeBtn"
+        id="scopeCustom"
+        type="button"
+        onclick="setScope('custom')">
+        自定义
+      </button>
+
+    </div>
+
+
+    <div class="filterBox">
+
+      <div
+        id="roundFilter"
+        class="formGrid">
+
+        <div>
+          <label>
+            日期
+          </label>
+
+          <input
+            id="roundDate"
+            type="date">
+        </div>
+
+        <div>
+          <label>
+            期数
+          </label>
+
+          <select id="roundCode">
+
+            <option value="1030">
+              上午 11:45
+            </option>
+
+            <option value="1530">
+              下午 15:45
+            </option>
+
+          </select>
+        </div>
+
+      </div>
+
+
+      <div
+        id="dayFilter"
+        class="hidden">
+
+        <label>
+          日期
+        </label>
+
+        <input
+          id="dayDate"
+          type="date">
+
+      </div>
+
+
+      <div
+        id="monthFilter"
+        class="hidden">
+
+        <label>
+          月份
+        </label>
+
+        <input
+          id="monthDate"
+          type="month">
+
+      </div>
+
+
+      <div
+        id="customFilter"
+        class="formGrid hidden">
+
+        <div>
+
+          <label>
+            开始日期
+          </label>
+
+          <input
+            id="customStart"
+            type="date">
+
+        </div>
+
+        <div>
+
+          <label>
+            结束日期
+          </label>
+
+          <input
+            id="customEnd"
+            type="date">
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="applyBtn"
+        type="button"
+        onclick="applyScope()">
+        查看数据
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <div class="title">
+      资金总览
+    </div>
+
+    <div
+      class="scopeTitle"
+      id="scopeTitle">
+      请选择需要查看的数据范围
+    </div>
+
+
+    <div class="sectionName">
+      平台确认收入
+    </div>
+
+    <div class="summaryGrid">
+
+      <div class="summaryBox">
+        <small>客户确认金额</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox">
+        <small>代理确认金额</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox total green">
+        <small>平台确认总金额</small>
+        <strong>—</strong>
+      </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="sectionName">
+      平台实际支出
+    </div>
+
+    <div class="summaryGrid">
+
+      <div class="summaryBox">
+        <small>已向客户派彩</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox">
+        <small>已向代理付款</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox total red">
+        <small>平台实际支出总额</small>
+        <strong>—</strong>
+      </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="sectionName">
+      待处理金额
+    </div>
+
+    <div class="summaryGrid">
+
+      <div class="summaryBox">
+        <small>客户待派彩</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox">
+        <small>代理待付款</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox">
+        <small>退款待处理</small>
+        <strong>—</strong>
+      </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="sectionName">
+      当前资金状态
+    </div>
+
+    <div class="summaryGrid">
+
+      <div class="summaryBox">
+        <small>平台确认总收入</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox">
+        <small>平台实际支出</small>
+        <strong>—</strong>
+      </div>
+
+      <div class="summaryBox total">
+        <small>当前净流入</small>
+        <strong>—</strong>
+      </div>
+
+    </div>
+
+
+    <div class="note">
+      当前页面为数据中心第一阶段结构。
+      金额暂不连接数据库，
+      避免在尚未核对客户付款、代理付款及资金流向之前产生重复统计。
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <div class="title">
+      数据明细
+    </div>
+
+    <div class="pending">
+      数据中心骨架已经建立。<br>
+      下一阶段确认真实数据来源后，
+      这里会显示对应日期、期数、客户、代理、
+      付款、下注、开奖结果、派彩与退款明细。
+    </div>
+
+  </section>
+
+
+  <div class="foot">
+    © JIN MANTANG · ADMIN DATA CENTER
+  </div>
+
+</div>
+
+
+<script>
+
+let currentScope =
+'round';
+
+
+function localDateString(){
+
+  const now =
+  new Date();
+
+  const offset =
+  now.getTimezoneOffset();
+
+  const local =
+  new Date(
+    now.getTime()
+    -
+    offset
+    *
+    60000
+  );
+
+  return local
+  .toISOString()
+  .slice(0,10);
+
+}
+
+
+function localMonthString(){
+
+  return localDateString()
+  .slice(0,7);
+
+}
+
+
+function initDates(){
+
+  const today =
+  localDateString();
+
+  document.getElementById(
+    'roundDate'
+  ).value =
+  today;
+
+  document.getElementById(
+    'dayDate'
+  ).value =
+  today;
+
+  document.getElementById(
+    'monthDate'
+  ).value =
+  localMonthString();
+
+  document.getElementById(
+    'customStart'
+  ).value =
+  today;
+
+  document.getElementById(
+    'customEnd'
+  ).value =
+  today;
+
+}
+
+
+function setScope(scope){
+
+  currentScope =
+  scope;
+
+
+  const scopes =
+  [
+    'round',
+    'day',
+    'month',
+    'custom'
+  ];
+
+
+  for(
+    const item
+    of
+    scopes
+  ){
+
+    const buttonId =
+    'scope'
+    +
+    item.charAt(0).toUpperCase()
+    +
+    item.slice(1);
+
+    const filterId =
+    item
+    +
+    'Filter';
+
+
+    document.getElementById(
+      buttonId
+    ).classList.toggle(
+      'active',
+      item === scope
+    );
+
+
+    document.getElementById(
+      filterId
+    ).classList.toggle(
+      'hidden',
+      item !== scope
+    );
+
+  }
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return '—';
+  }
+
+  const parts =
+  value.split('-');
+
+  if(parts.length !== 3){
+    return value;
+  }
+
+  return (
+    parts[0]
+    +
+    '-'
+    +
+    parts[1]
+    +
+    '-'
+    +
+    parts[2]
+  );
+
+}
+
+
+function applyScope(){
+
+  const title =
+  document.getElementById(
+    'scopeTitle'
+  );
+
+
+  if(
+    currentScope
+    ===
+    'round'
+  ){
+
+    const date =
+    document.getElementById(
+      'roundDate'
+    ).value;
+
+    const code =
+    document.getElementById(
+      'roundCode'
+    ).value;
+
+    const period =
+    code === '1030'
+    ?
+    '上午 11:45'
+    :
+    '下午 15:45';
+
+
+    title.textContent =
+    formatDate(date)
+    +
+    ' · '
+    +
+    period;
+
+    return;
+
+  }
+
+
+  if(
+    currentScope
+    ===
+    'day'
+  ){
+
+    const date =
+    document.getElementById(
+      'dayDate'
+    ).value;
+
+    title.textContent =
+    formatDate(date)
+    +
+    ' · 当天两期';
+
+    return;
+
+  }
+
+
+  if(
+    currentScope
+    ===
+    'month'
+  ){
+
+    const month =
+    document.getElementById(
+      'monthDate'
+    ).value;
+
+    title.textContent =
+    month
+    ?
+    month
+    +
+    ' · 本月'
+    :
+    '请选择月份';
+
+    return;
+
+  }
+
+
+  const start =
+  document.getElementById(
+    'customStart'
+  ).value;
+
+  const end =
+  document.getElementById(
+    'customEnd'
+  ).value;
+
+
+  if(
+    !start
+    ||
+    !end
+  ){
+
+    title.textContent =
+    '请选择完整日期范围';
+
+    return;
+
+  }
+
+
+  if(
+    start
+    >
+    end
+  ){
+
+    title.textContent =
+    '开始日期不能晚于结束日期';
+
+    return;
+
+  }
+
+
+  title.textContent =
+  formatDate(start)
+  +
+  ' ～ '
+  +
+  formatDate(end);
+
+}
+
+
+initDates();
+
+applyScope();
+
+</script>
+
+</body>
+
+</html>
