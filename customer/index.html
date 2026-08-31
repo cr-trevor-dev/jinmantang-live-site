@@ -7707,11 +7707,12 @@ function translateError(message){
   }
 
 
-  return (
-    text
-    ||
-    '操作失败，请稍后再试。'
-  );
+  console.error(
+  'CUSTOMER_ERROR',
+  text
+);
+
+return '操作失败，请稍后再试或联系客服。';
 
 }
 
