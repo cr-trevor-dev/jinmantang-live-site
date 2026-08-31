@@ -3181,6 +3181,10 @@ function renderProfile(){
   '—';
 
 
+  if(
+  !profileDraftDirty
+){
+
   document
   .getElementById(
     'profileNameInput'
@@ -3189,6 +3193,8 @@ function renderProfile(){
   profile?.display_name
   ||
   '';
+
+}
 
 
   document
