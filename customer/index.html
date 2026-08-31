@@ -6236,16 +6236,16 @@ uiText(
 
   const labels = {
 
-    pending:
-    '审核中',
+  pending:
+  uiText('审核中'),
 
-    approved:
-    '已确认',
+  approved:
+  uiText('已确认'),
 
-    rejected:
-    '已拒绝'
+  rejected:
+  uiText('已拒绝')
 
-  };
+};
 
 
   box.innerHTML =
@@ -6260,7 +6260,13 @@ uiText(
         <div class="platformRow">
 
           <span>
-            ${escapeHtml(payment.method_name_snapshot || '付款')}
+           ${
+  escapeHtml(
+    payment.method_name_snapshot
+    ||
+    uiText('付款')
+  )
+}
           </span>
 
           <b>
@@ -6273,8 +6279,8 @@ uiText(
         <div class="platformRow">
 
           <span>
-            状态
-          </span>
+  ${uiText('状态')}
+</span>
 
           <b
             class="payStatus ${escapeHtml(payment.status)}">
@@ -6303,9 +6309,9 @@ uiText(
           ?
           `
             <div class="note">
-              原因：
-              ${escapeHtml(payment.rejection_reason)}
-            </div>
+  ${uiText('原因：')}
+  ${escapeHtml(payment.rejection_reason)}
+</div>
           `
           :
           ''
