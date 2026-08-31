@@ -548,6 +548,32 @@
   'Thông tin cá nhân đã được lưu.',
   'Profil telah disimpan.'
 ],
+      '当前账户已停用':[
+  'လက်ရှိအကောင့်ကို ပိတ်ထားပါသည်',
+  'This account has been disabled',
+  'บัญชีนี้ถูกปิดใช้งานแล้ว',
+  'Akaun ini telah dinyahaktifkan',
+  'Tài khoản này đã bị vô hiệu hóa',
+  'Akun ini telah dinonaktifkan'
+],
+
+'当前账户已被限制':[
+  'လက်ရှိအကောင့်ကို ကန့်သတ်ထားပါသည်',
+  'This account has been restricted',
+  'บัญชีนี้ถูกจำกัดการใช้งาน',
+  'Akaun ini telah dihadkan',
+  'Tài khoản này đã bị hạn chế',
+  'Akun ini telah dibatasi'
+],
+
+'平台说明：':[
+  'ပလက်ဖောင်းရှင်းလင်းချက်：',
+  'Platform note: ',
+  'คำชี้แจงจากแพลตฟอร์ม: ',
+  'Keterangan platform: ',
+  'Ghi chú từ nền tảng: ',
+  'Keterangan platform: '
+],
     '联系客服':['ဝန်ဆောင်မှုကိုဆက်သွယ်ရန်','Contact Support','ติดต่อฝ่ายบริการ','Hubungi Sokongan','Liên hệ hỗ trợ','Hubungi Dukungan'],
     '退出登录':['ထွက်ရန်','Logout','ออกจากระบบ','Log Keluar','Đăng xuất','Keluar'],
 
