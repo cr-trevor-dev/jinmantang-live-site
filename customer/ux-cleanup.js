@@ -763,6 +763,7 @@
     '下午 3:45':['ညနေ 3:45','3:45 PM','15:45 น.','3:45 PTG','3:45 chiều','15:45'],
 
     '开放中':['ဖွင့်ထားသည်','Open','เปิดอยู่','Dibuka','Đang mở','Terbuka'],
+    '本期已截止':['ယခုအကြိမ်ပိတ်ပြီး','Round Closed','รอบนี้ปิดแล้ว','Pusingan Ditutup','Kỳ này đã đóng','Putaran Ditutup'],
     '已截止':['ပိတ်ပြီး','Closed','ปิดแล้ว','Ditutup','Đã đóng','Ditutup'],
     '待付款':['ငွေပေးရန်စောင့်','Payment Due','รอชำระเงิน','Menunggu Bayaran','Chờ thanh toán','Menunggu Pembayaran'],
     '付款审核中':['ငွေပေးချေမှုစစ်ဆေးနေသည်','Payment Under Review','กำลังตรวจสอบการชำระ','Bayaran Dalam Semakan','Thanh toán đang được duyệt','Pembayaran Sedang Ditinjau'],
