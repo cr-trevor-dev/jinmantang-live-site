@@ -1309,7 +1309,9 @@
 
       return {
         text:
-        '未中奖 · 本期已结算',
+        customerTranslateValue(
+  '未中奖 · 本期已结算'
+)
 
         kind:
         'none'
