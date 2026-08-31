@@ -3264,13 +3264,15 @@ function renderRestricted(){
 
 
   title.textContent =
+uiText(
   profile?.status
   ===
   'blocked'
   ?
   '当前账户已停用'
   :
-  '当前账户已被限制';
+  '当前账户已被限制'
+);
 
 
   const reason =
@@ -3284,9 +3286,11 @@ function renderRestricted(){
   ){
 
     reason.textContent =
-    '平台说明：'
-    +
-    profile.restriction_reason;
+uiText(
+  '平台说明：'
+)
++
+profile.restriction_reason;
 
 
     reason.classList
