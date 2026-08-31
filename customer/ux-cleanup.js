@@ -1250,13 +1250,13 @@
   function periodName(code){
 
   if(code === '1030'){
-    return uiText(
+    return customerTranslateValue(
       '上午 11:45'
     );
   }
 
   if(code === '1530'){
-    return uiText(
+    return customerTranslateValue(
       '下午 3:45'
     );
   }
