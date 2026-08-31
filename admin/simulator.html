@@ -707,7 +707,7 @@ button:active{
   <div class="card">
 
        <div class="title">
-      代理直属客户 · 本期财务状态
+      代理直属客户 · 本期业绩
     </div>
 
     <div id="agentList">
@@ -1654,58 +1654,21 @@ function renderAgents(
   [
     ...rows
   ]
+  .filter(
+    a=>
+    Number(
+      a.confirmed_total || 0
+    )>0
+  )
   .sort(
-    (a,b)=>{
-
-      const confirmedDiff =
-      Number(
-        b.confirmed_total || 0
-      )
-      -
-      Number(
-        a.confirmed_total || 0
-      );
-
-
-      if(
-        confirmedDiff!==0
-      ){
-
-        return confirmedDiff;
-
-      }
-
-
-      const pendingDiff =
-      Number(
-        b.pending_total || 0
-      )
-      -
-      Number(
-        a.pending_total || 0
-      );
-
-
-      if(
-        pendingDiff!==0
-      ){
-
-        return pendingDiff;
-
-      }
-
-
-      return (
-        Number(
-          b.editable_total || 0
-        )
-        -
-        Number(
-          a.editable_total || 0
-        )
-      );
-
-    }
+    (a,b)=>
+    Number(
+      b.confirmed_total || 0
+    )
+    -
+    Number(
+      a.confirmed_total || 0
+    )
   );
 
 
@@ -1713,7 +1676,7 @@ function renderAgents(
 
     box.innerHTML =
     '<div class="empty">'+
-    '本期暂时没有代理直属客户数据'+
+    '本期暂时没有代理直属客户已确认数据'+
     '</div>';
 
 
@@ -1733,52 +1696,18 @@ function renderAgents(
       );
 
 
-      const pending =
-      Number(
-        a.pending_total || 0
-      );
-
-
-      const editable =
-      Number(
-        a.editable_total || 0
-      );
-
-
       const rate =
       normalizeRate(
         a.commission_rate
       );
 
 
-      let badgeText =
-      '未确认';
-
-
-      if(
-        pending>0
-      ){
-
-        badgeText =
-        '待审核';
-
-      }else if(
-        confirmed>0
-        &&
-        editable>0
-      ){
-
-        badgeText =
-        '部分确认';
-
-      }else if(
-        confirmed>0
-      ){
-
-        badgeText =
-        '已确认';
-
-      }
+      const commission =
+      confirmed
+      *
+      rate
+      /
+      100;
 
 
       return `
@@ -1809,7 +1738,7 @@ function renderAgents(
           </div>
 
           <div class="badge">
-            ${escapeHtml(badgeText)}
+            已确认
           </div>
 
         </div>
@@ -1820,7 +1749,7 @@ function renderAgents(
           <div class="agentStat commission">
 
             <small>
-              已确认金额
+              直属客户已确认金额
             </small>
 
             <strong>
@@ -1833,24 +1762,24 @@ function renderAgents(
           <div class="agentStat">
 
             <small>
-              待审核金额
+              本期佣金率
             </small>
 
             <strong>
-              ${formatNumber(pending)}
+              ${formatRate(rate)}%
             </strong>
 
           </div>
 
 
-          <div class="agentStat">
+          <div class="agentStat commission">
 
             <small>
-              未确认 / 可修改
+              本期预计佣金
             </small>
 
             <strong>
-              ${formatNumber(editable)}
+              ${formatNumber(commission)}
             </strong>
 
           </div>
@@ -1877,7 +1806,7 @@ function renderAgents(
               '未命名代理'
             )}
 
-            · 本期十二生肖财务明细
+            · 本期十二生肖已确认明细
 
           </div>
 
@@ -1985,7 +1914,7 @@ async function toggleAgentDetail(
 
   try{
 
-        const r =
+    const r =
     await api(
       '/rest/v1/rpc/admin_agent_customer_round_detail',
       {
@@ -2077,43 +2006,14 @@ async function toggleAgentDetail(
       {};
 
 
-      const points =
-      Number(
-        row.points || 0
-      );
-
-
       const confirmed =
       Number(
         row.confirmed_points || 0
       );
 
 
-      const pending =
-      Number(
-        row.pending_points || 0
-      );
-
-
-      const editable =
-      Math.max(
-        points
-        -
-        confirmed
-        -
-        pending,
-        0
-      );
-
-
       const active =
-      (
-        confirmed>0
-        ||
-        pending>0
-        ||
-        editable>0
-      )
+      confirmed>0
       ?
       ' active'
       :
@@ -2131,9 +2031,7 @@ async function toggleAgentDetail(
           </span>
 
           <span>
-            确认 ${formatNumber(confirmed)}
-            · 待审 ${formatNumber(pending)}
-            · 可改 ${formatNumber(editable)}
+            已确认 ${formatNumber(confirmed)}
           </span>
 
         </div>
