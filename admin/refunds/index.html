@@ -1327,9 +1327,19 @@ function refundHtml(row){
         <strong class="amount">${money(row.amount)}</strong>
       </div>
 
-      <div class="row">
-        <span>实际到账状态</span>
-        <strong>待人工核实</strong>
+            <div class="row">
+        <span>资金处理结果</span>
+        <strong>
+          ${
+            row.status === 'refunded'
+            ? '已确认到账并完成退款'
+            :
+            row.status === 'cancelled'
+            ? '核对后确认未实际到账'
+            :
+            '待人工核实实际到账'
+          }
+        </strong>
       </div>
 
       <div class="row">
