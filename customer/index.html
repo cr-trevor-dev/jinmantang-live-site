@@ -4575,51 +4575,55 @@ function renderRoundGrid(){
         <div class="zodiacImgWrap">
 
           <div class="zodiacFallback">
-            ${zodiac.name}
-          </div>
+  ${uiText(zodiac.name)}
+</div>
 
-          <img
-            class="zodiacImg"
-            data-src="${zodiac.img}"
-            loading="lazy"
-            decoding="async"
-            alt="${zodiac.name}">
+<img
+  class="zodiacImg"
+  data-src="${zodiac.img}"
+  loading="lazy"
+  decoding="async"
+  alt="${uiText(zodiac.name)}">
 
-        </div>
-
-
-        <div class="zodiacName">
-          ${zodiac.name}
-        </div>
+</div>
 
 
-        <input
-          class="zodiacInput"
-          id="zodiac_${zodiac.code}"
-          type="number"
-          min="${locked}"
-          step="1"
-          inputmode="numeric"
-          value="${points || ''}"
-          placeholder="金额">
+<div class="zodiacName">
+  ${uiText(zodiac.name)}
+</div>
 
 
-        <div
-          class="zodiacLocked ${locked > 0 ? 'locked' : ''}">
+<input
+  class="zodiacInput"
+  id="zodiac_${zodiac.code}"
+  type="number"
+  min="${locked}"
+  step="1"
+  inputmode="numeric"
+  value="${points || ''}"
+  placeholder="${uiText('金额')}">
 
-          ${
-            locked > 0
-            ?
-            '已锁定 '
-            +
-            formatMoney(
-              locked
-            )
-            :
-            '可修改'
-          }
 
-        </div>
+<div
+  class="zodiacLocked ${locked > 0 ? 'locked' : ''}">
+
+  ${
+    locked > 0
+    ?
+    uiText(
+      '已锁定 '
+    )
+    +
+    formatMoney(
+      locked
+    )
+    :
+    uiText(
+      '可修改'
+    )
+  }
+
+</div>
 
       `;
 
@@ -5218,8 +5222,14 @@ function renderPlatformAccounts(){
 
 
   select.innerHTML =
-  '<option value="">请选择平台收款方式</option>'
-  +
+'<option value="">'
++
+uiText(
+  '请选择平台收款方式'
+)
++
+'</option>'
++
   platformAccounts
   .map(
 
@@ -5291,7 +5301,7 @@ function renderSelectedPlatformAccount(){
         ?
         `
           <div class="platformRow">
-            <span>银行 / 钱包</span>
+           <span>${uiText('银行 / 钱包')}</span>
             <b>${escapeHtml(account.bank_name)}</b>
           </div>
         `
@@ -5300,12 +5310,12 @@ function renderSelectedPlatformAccount(){
       }
 
       <div class="platformRow">
-        <span>平台户名</span>
+       <span>${uiText('平台户名')}</span>
         <b>${escapeHtml(account.account_name)}</b>
       </div>
 
       <div class="platformRow">
-        <span>平台账号</span>
+        <span>${uiText('平台账号')}</span>
         <b>${escapeHtml(account.account_number)}</b>
       </div>
 
@@ -5929,7 +5939,9 @@ function setPaymentState(
 
 
   box.textContent =
-  text;
+uiText(
+  text
+);
 
 
   box.className =
@@ -6208,7 +6220,13 @@ function renderPaymentHistory(){
   if(!paymentSubmissions.length){
 
     box.innerHTML =
-    '<div class="note">暂无付款记录</div>';
+'<div class="note">'
++
+uiText(
+  '暂无付款记录'
+)
++
+'</div>';
 
 
     return;
