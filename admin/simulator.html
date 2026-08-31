@@ -598,29 +598,7 @@ button:active{
 
       </div>
 
-      <div class="financeBox commission">
-
-        <small>
-         待审核金额
-        </small>
-
-        <strong id="commissionTotal">
-          0
-        </strong>
-
-      </div>
-
-      <div class="financeBox net">
-
-        <small>
-          未确认 / 可修改
-        </small>
-
-        <strong id="netTotal">
-          0
-        </strong>
-
-      </div>
+      
 
       <div class="financeBox">
 
@@ -698,11 +676,10 @@ button:active{
     </div>
 
 
-        <div class="note">
+            <div class="note">
       本页面每 20 秒自动同步一次。
-      只有管理员已批准的金额才进入正式汇总；
-      待审核金额单独显示；
-      已驳回或仅保存的数据不会计入正式汇总。
+      只有管理员已经确认收款、正式生效的金额才进入本期汇总；
+      待审核、已驳回或仅保存的数据不会计入本页正式盘面。
     </div>
 
   </div>
@@ -719,9 +696,9 @@ button:active{
       id="numberGrid">
     </div>
 
-        <div class="note">
-      「已确认金额」只统计管理员已经批准的金额；
-      「待审核金额」只统计仍在等待审核的付款。
+            <div class="note">
+      每个生肖只统计管理员已经确认收款、正式生效的金额；
+      预计派彩 = 已确认金额 × 10。
     </div>
 
   </div>
@@ -1060,10 +1037,10 @@ function buildNumberGrid(){
 
         </div>
 
-        <div class="numDataBox">
+                <div class="numDataBox">
 
           <small>
-                        待审核金额
+            1赔10预计派彩
           </small>
 
           <strong id="numPayout${n}">
@@ -1548,10 +1525,10 @@ function renderTotals(
     );
 
 
-    const pending =
-    Number(
-      row.pending_total || 0
-    );
+        const payout =
+    confirmed
+    *
+    MULTIPLIER;
 
 
     if(
@@ -1569,7 +1546,7 @@ function renderTotals(
     );
 
 
-    const pendingEl =
+        const payoutEl =
     document.getElementById(
       'numPayout'+code
     );
@@ -1591,11 +1568,11 @@ function renderTotals(
     }
 
 
-    if(pendingEl){
+        if(payoutEl){
 
-      pendingEl.textContent =
+      payoutEl.textContent =
       formatNumber(
-        pending
+        payout
       );
 
     }
@@ -1603,11 +1580,9 @@ function renderTotals(
 
     if(box){
 
-      box.classList.toggle(
+            box.classList.toggle(
         'nonzero',
         confirmed>0
-        ||
-        pending>0
       );
 
     }
@@ -1631,20 +1606,7 @@ function renderTotals(
   );
 
 
-  document.getElementById(
-    'commissionTotal'
-  ).textContent =
-  formatNumber(
-    pendingTotal
-  );
-
-
-  document.getElementById(
-    'netTotal'
-  ).textContent =
-  formatNumber(
-    editableTotal
-  );
+  
 
 
   document.getElementById(
