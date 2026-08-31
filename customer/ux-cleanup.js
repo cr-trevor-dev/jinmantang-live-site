@@ -532,6 +532,14 @@
   'Xác nhận lần cuối: số tài khoản và tên tài khoản đều chính xác chứ?',
   'Konfirmasi terakhir: apakah nomor akun dan nama akun semuanya sudah benar?'
 ],   
+   '收款方式已成功绑定。如需修改，请联系客服。':[
+  'ငွေလက်ခံနည်းကို အောင်မြင်စွာ ချိတ်ဆက်ပြီးပါပြီ။ ပြင်ဆင်လိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+  'Payout method linked successfully. Contact support if you need to change it.',
+  'ผูกช่องทางรับเงินสำเร็จแล้ว หากต้องการแก้ไขโปรดติดต่อฝ่ายบริการ',
+  'Kaedah penerimaan berjaya dipautkan. Hubungi sokongan jika perlu mengubahnya.',
+  'Phương thức nhận tiền đã được liên kết thành công. Nếu cần thay đổi, vui lòng liên hệ hỗ trợ.',
+  'Metode penerimaan berhasil dihubungkan. Hubungi dukungan jika perlu mengubahnya.'
+],   
 '个人资料已保存。':[
   'ကိုယ်ရေးအချက်အလက်ကို သိမ်းဆည်းပြီးပါပြီ။',
   'Profile saved.',
