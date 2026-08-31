@@ -420,7 +420,7 @@ button:disabled{
         </div>
 
         <div class="summaryBox">
-          <small>确认无需退款</small>
+          <small>核对后结案</small>
           <strong id="cancelledCount">0</strong>
         </div>
 
@@ -1013,7 +1013,7 @@ function statusText(status){
     '已完成退款',
 
     cancelled:
-    '无需退款'
+    '核对后结案'
 
   };
 
@@ -1243,6 +1243,153 @@ function render(){
 }
 
 
+function refundEventsHtml(row){
+
+  const events =
+  Array.isArray(
+    row.events
+  )
+  ?
+  row.events
+  :
+  [];
+
+
+  if(!events.length){
+
+    return '';
+
+  }
+
+
+  return `
+
+    <div class="reason">
+
+      <strong>
+        退款处理记录
+      </strong>
+
+      <br><br>
+
+      ${
+        events
+        .map(
+          event => {
+
+            const time =
+            event.created_at
+            ?
+            new Date(
+              event.created_at
+            )
+            .toLocaleString(
+              'zh-CN'
+            )
+            :
+            '—';
+
+
+            if(
+              event.action
+              ===
+              'refund'
+            ){
+
+              return `
+
+                <div
+                  style="
+                    padding:9px 0;
+                    border-bottom:1px solid rgba(255,255,255,.06)
+                  ">
+
+                  本次退款：
+                  <strong>
+                    ${money(event.amount)}
+                  </strong>
+
+                  <br>
+
+                  备注：
+                  ${esc(event.note || '—')}
+
+                  <br>
+
+                  时间：
+                  ${esc(time)}
+
+                  ${
+                    event.proof_storage_path
+                    ?
+                    `
+
+                      <div
+                        style="margin-top:8px">
+
+                        <button
+                          class="secondary"
+                          type="button"
+                          onclick="viewRefundProof(
+                            '${esc(
+                              event.proof_storage_path
+                            )}'
+                          )">
+
+                          查看退款凭证
+
+                        </button>
+
+                      </div>
+
+                    `
+                    :
+                    ''
+                  }
+
+                </div>
+
+              `;
+
+            }
+
+
+            return `
+
+              <div
+                style="
+                  padding:9px 0;
+                  border-bottom:1px solid rgba(255,255,255,.06)
+                ">
+
+                结案处理
+
+                <br>
+
+                备注：
+                ${esc(event.note || '—')}
+
+                <br>
+
+                时间：
+                ${esc(time)}
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join('')
+      }
+
+    </div>
+
+  `;
+
+}
+
+
 function refundHtml(row){
 
   const isOpen =
@@ -1253,6 +1400,73 @@ function refundHtml(row){
   row.status
   ===
   'partial';
+
+
+  const total =
+  Number(
+    row.amount
+    ||
+    0
+  );
+
+
+  const refunded =
+  Number(
+    row.refunded_amount
+    ||
+    0
+  );
+
+
+  const remaining =
+  Math.max(
+    0,
+    total-refunded
+  );
+
+
+  let resultText =
+  '待人工核实实际到账';
+
+
+  if(
+    row.status
+    ===
+    'partial'
+  ){
+
+    resultText =
+    '已部分退款，剩余待处理';
+
+  }
+
+
+  if(
+    row.status
+    ===
+    'refunded'
+  ){
+
+    resultText =
+    '已确认到账并完成全部退款';
+
+  }
+
+
+  if(
+    row.status
+    ===
+    'cancelled'
+  ){
+
+    resultText =
+    refunded > 0
+    ?
+    '已部分退款，剩余核对后结案'
+    :
+    '核对后确认未实际到账';
+
+  }
 
 
   return `
@@ -1317,34 +1531,86 @@ function refundHtml(row){
 
 
       <div class="row">
-        <span>对应期数</span>
-        <strong>${esc(roundName(row))}</strong>
-      </div>
 
+        <span>
+          对应期数
+        </span>
 
-            <div class="row">
-        <span>客户 / 代理申报金额</span>
-        <strong class="amount">${money(row.amount)}</strong>
-      </div>
-
-            <div class="row">
-        <span>资金处理结果</span>
         <strong>
-          ${
-            row.status === 'refunded'
-            ? '已确认到账并完成退款'
-            :
-            row.status === 'cancelled'
-            ? '核对后确认未实际到账'
-            :
-            '待人工核实实际到账'
-          }
+          ${esc(roundName(row))}
         </strong>
+
       </div>
+
 
       <div class="row">
-        <span>付款方式</span>
-        <strong>${esc(row.method_name || row.method_type || '—')}</strong>
+
+        <span>
+          客户 / 代理申报金额
+        </span>
+
+        <strong class="amount">
+          ${money(total)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          已实际退款
+        </span>
+
+        <strong>
+          ${money(refunded)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          剩余待处理
+        </span>
+
+        <strong>
+          ${money(remaining)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          资金处理结果
+        </span>
+
+        <strong>
+          ${esc(resultText)}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          付款方式
+        </span>
+
+        <strong>
+          ${esc(
+            row.method_name
+            ||
+            row.method_type
+            ||
+            '—'
+          )}
+        </strong>
+
       </div>
 
 
@@ -1352,10 +1618,19 @@ function refundHtml(row){
         row.platform_bank_name
         ?
         `
+
           <div class="row">
-            <span>银行 / 钱包</span>
-            <strong>${esc(row.platform_bank_name)}</strong>
+
+            <span>
+              银行 / 钱包
+            </span>
+
+            <strong>
+              ${esc(row.platform_bank_name)}
+            </strong>
+
           </div>
+
         `
         :
         ''
@@ -1363,20 +1638,47 @@ function refundHtml(row){
 
 
       <div class="row">
-        <span>平台收款户名</span>
-        <strong>${esc(row.platform_account_name || '—')}</strong>
-      </div>
 
+        <span>
+          平台收款户名
+        </span>
 
-      <div class="row">
-        <span>平台收款账号</span>
-        <strong>${esc(row.platform_account_number || '—')}</strong>
-      </div>
-
-
-      <div class="row">
-        <span>创建时间</span>
         <strong>
+          ${esc(
+            row.platform_account_name
+            ||
+            '—'
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          平台收款账号
+        </span>
+
+        <strong>
+          ${esc(
+            row.platform_account_number
+            ||
+            '—'
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          创建时间
+        </span>
+
+        <strong>
+
           ${esc(
             new Date(
               row.created_at
@@ -1385,7 +1687,9 @@ function refundHtml(row){
               'zh-CN'
             )
           )}
+
         </strong>
+
       </div>
 
 
@@ -1393,9 +1697,15 @@ function refundHtml(row){
         row.completed_at
         ?
         `
+
           <div class="row">
-            <span>处理时间</span>
+
+            <span>
+              处理时间
+            </span>
+
             <strong>
+
               ${esc(
                 new Date(
                   row.completed_at
@@ -1404,8 +1714,11 @@ function refundHtml(row){
                   'zh-CN'
                 )
               )}
+
             </strong>
+
           </div>
+
         `
         :
         ''
@@ -1415,10 +1728,20 @@ function refundHtml(row){
       <div class="reason">
 
         原因：开奖前付款仍未完成管理员确认。
-        请先核对现实中的收款账户是否真正到账，
-        再决定退款或无需退款。
+
+        <br>
+
+        请先核对现实中的收款账户是否真正到账。
+
+        <br>
+
+        实际退多少就记录多少，
+        系统会自动计算剩余金额。
 
       </div>
+
+
+      ${refundEventsHtml(row)}
 
 
       ${
@@ -1430,12 +1753,11 @@ function refundHtml(row){
 
             <button
               type="button"
-              onclick="resolveRefund(
-                '${esc(row.id)}',
-                'refunded'
+              onclick="recordRefund(
+                '${esc(row.id)}'
               )">
 
-              已完成实际退款
+              记录本次实际退款
 
             </button>
 
@@ -1443,12 +1765,17 @@ function refundHtml(row){
             <button
               class="secondary"
               type="button"
-              onclick="resolveRefund(
-                '${esc(row.id)}',
-                'cancelled'
+              onclick="closeRefund(
+                '${esc(row.id)}'
               )">
 
-              确认无需退款
+              ${
+                refunded > 0
+                ?
+                '确认剩余无需退款'
+                :
+                '确认无需退款'
+              }
 
             </button>
 
@@ -1467,27 +1794,500 @@ function refundHtml(row){
 
 
 /* =========================================================
-   RESOLVE
+   REFUND PROOF
 ========================================================= */
 
-async function resolveRefund(
+function pickRefundProof(){
+
+  return new Promise(
+    resolve => {
+
+      const input =
+      document.createElement(
+        'input'
+      );
+
+
+      input.type =
+      'file';
+
+
+      input.accept =
+      'image/jpeg,image/png,image/webp,image/heic,image/heif';
+
+
+      input.onchange =
+      ()=>{
+
+        resolve(
+          input.files?.[0]
+          ||
+          null
+        );
+
+      };
+
+
+      input.click();
+
+    }
+  );
+
+}
+
+
+async function uploadRefundProof(
   refundId,
-  action
+  file
 ){
 
-  const message =
-  action
-  ===
-  'refunded'
-  ?
-  '只有你已经在现实中完成 KPay / 银行退款后才能确认。确定已经实际退款吗？'
-  :
-  '请先核对平台收款账户。只有确认这笔钱现实中没有到账时，才选择无需退款。确定吗？';
+  if(!file){
+
+    return null;
+
+  }
+
+
+  const allowed =
+  [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/heic',
+    'image/heif'
+  ];
+
+
+  if(
+    !allowed.includes(
+      file.type
+    )
+  ){
+
+    throw new Error(
+      'REFUND_PROOF_TYPE_INVALID'
+    );
+
+  }
+
+
+  if(
+    file.size
+    >
+    10*1024*1024
+  ){
+
+    throw new Error(
+      'REFUND_PROOF_TOO_LARGE'
+    );
+
+  }
+
+
+  const safeName =
+  String(
+    file.name
+    ||
+    'refund-proof'
+  )
+  .replace(
+    /[^a-zA-Z0-9._-]/g,
+    '_'
+  );
+
+
+  const uniqueId =
+  (
+    crypto.randomUUID
+    ?
+    crypto.randomUUID()
+    :
+    String(
+      Date.now()
+    )
+  );
+
+
+  const storagePath =
+  refundId
+  +
+  '/'
+  +
+  uniqueId
+  +
+  '-'
+  +
+  safeName;
+
+
+  const encoded =
+  storagePath
+  .split('/')
+  .map(
+    encodeURIComponent
+  )
+  .join('/');
+
+
+  const res =
+  await api(
+
+    '/storage/v1/object/finance-refund-proofs/'
+    +
+    encoded,
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'Content-Type':
+        file.type,
+
+        'x-upsert':
+        'false'
+
+      },
+
+      body:
+      file
+
+    }
+
+  );
+
+
+  if(!res.ok){
+
+    throw new Error(
+      'REFUND_PROOF_UPLOAD_FAILED'
+    );
+
+  }
+
+
+  return {
+
+    storage_path:
+    storagePath,
+
+    original_name:
+    file.name,
+
+    mime_type:
+    file.type,
+
+    file_size:
+    file.size
+
+  };
+
+}
+
+
+async function deleteRefundProof(
+  storagePath
+){
+
+  if(!storagePath){
+
+    return;
+
+  }
+
+
+  try{
+
+    const encoded =
+    storagePath
+    .split('/')
+    .map(
+      encodeURIComponent
+    )
+    .join('/');
+
+
+    await api(
+
+      '/storage/v1/object/finance-refund-proofs/'
+      +
+      encoded,
+
+      {
+        method:'DELETE'
+      }
+
+    );
+
+  }
+  catch{
+
+  }
+
+}
+
+
+async function viewRefundProof(
+  storagePath
+){
+
+  const newWindow =
+  window.open(
+    '',
+    '_blank'
+  );
+
+
+  try{
+
+    const encoded =
+    storagePath
+    .split('/')
+    .map(
+      encodeURIComponent
+    )
+    .join('/');
+
+
+    const res =
+    await api(
+
+      '/storage/v1/object/authenticated/finance-refund-proofs/'
+      +
+      encoded
+
+    );
+
+
+    if(!res.ok){
+
+      throw new Error();
+
+    }
+
+
+    const blob =
+    await res.blob();
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    if(newWindow){
+
+      newWindow.location =
+      url;
+
+    }
+    else{
+
+      location.href =
+      url;
+
+    }
+
+
+    setTimeout(
+      ()=>{
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      60000
+    );
+
+  }
+  catch{
+
+    if(newWindow){
+
+      newWindow.close();
+
+    }
+
+
+    setPageMessage(
+      '退款凭证读取失败。',
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RECORD REFUND
+========================================================= */
+
+async function recordRefund(
+  refundId
+){
+
+  const row =
+  rows.find(
+    item =>
+    item.id
+    ===
+    refundId
+  );
+
+
+  if(!row){
+
+    setPageMessage(
+      '没有找到这条退款记录。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  const remaining =
+  Math.max(
+    0,
+    Number(
+      row.amount
+      ||
+      0
+    )
+    -
+    Number(
+      row.refunded_amount
+      ||
+      0
+    )
+  );
+
+
+  if(
+    remaining
+    <=
+    0
+  ){
+
+    setPageMessage(
+      '这条退款已经没有剩余金额。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  let inputAmount =
+  window.prompt(
+
+    '请输入这一次现实中已经实际退回的金额：',
+
+    String(
+      remaining
+    )
+
+  );
+
+
+  if(
+    inputAmount
+    ===
+    null
+  ){
+
+    return;
+
+  }
+
+
+  inputAmount =
+  inputAmount
+  .replace(
+    /,/g,
+    ''
+  )
+  .trim();
+
+
+  const amount =
+  Number(
+    inputAmount
+  );
+
+
+  if(
+    !Number.isFinite(
+      amount
+    )
+    ||
+    amount <= 0
+    ||
+    amount > remaining
+  ){
+
+    setPageMessage(
+      '退款金额不正确，不能超过剩余待处理金额。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  let note =
+  window.prompt(
+
+    '请输入退款备注，例如：KPay 已退回 / 银行转账退款 / 交易编号：',
+
+    '已核对实际到账并完成退款'
+
+  );
+
+
+  if(
+    note
+    ===
+    null
+  ){
+
+    return;
+
+  }
+
+
+  note =
+  note.trim();
+
+
+  if(!note){
+
+    setPageMessage(
+      '必须填写退款备注。',
+      'err'
+    );
+
+    return;
+
+  }
 
 
   const confirmed =
   window.confirm(
-    message
+
+    '请再次确认：现实中已经实际退款 '
+    +
+    money(amount)
+    +
+    '。\n\n确认后才可以写入系统。'
+
   );
 
 
@@ -1498,17 +2298,52 @@ async function resolveRefund(
   }
 
 
+  let proofInfo =
+  null;
+
+
+  const wantProof =
+  window.confirm(
+
+    '是否上传这次退款凭证截图？\n\n'
+    +
+    '建议有截图时选择“确定”；'
+    +
+    '没有截图可以选择“取消”继续。'
+
+  );
+
+
   setPageMessage(
-    '正在处理...'
+    '正在记录退款...'
   );
 
 
   try{
 
+    if(wantProof){
+
+      const file =
+      await pickRefundProof();
+
+
+      if(file){
+
+        proofInfo =
+        await uploadRefundProof(
+          refundId,
+          file
+        );
+
+      }
+
+    }
+
+
     const res =
     await api(
 
-      '/rest/v1/rpc/admin_resolve_finance_refund',
+      '/rest/v1/rpc/admin_record_finance_refund',
 
       {
 
@@ -1527,8 +2362,31 @@ async function resolveRefund(
           p_refund_id:
           refundId,
 
-          p_action:
-          action
+          p_amount:
+          amount,
+
+          p_note:
+          note,
+
+          p_proof_storage_path:
+          proofInfo?.storage_path
+          ||
+          null,
+
+          p_proof_original_name:
+          proofInfo?.original_name
+          ||
+          null,
+
+          p_proof_mime_type:
+          proofInfo?.mime_type
+          ||
+          null,
+
+          p_proof_file_size:
+          proofInfo?.file_size
+          ||
+          null
 
         })
 
@@ -1546,17 +2404,272 @@ async function resolveRefund(
 
 
     setPageMessage(
-
-      action
-      ===
-      'refunded'
-      ?
-      '已记录为实际退款完成。'
-      :
-      '已记录为确认无需退款。',
-
+      '退款记录已经保存。',
       'ok'
+    );
 
+  }
+  catch(err){
+
+    if(
+      proofInfo?.storage_path
+    ){
+
+      await deleteRefundProof(
+        proofInfo.storage_path
+      );
+
+    }
+
+
+    console.error(
+      err
+    );
+
+
+    const text =
+    String(
+      err.message
+      ||
+      ''
+    );
+
+
+    if(
+      text.includes(
+        'REFUND_AMOUNT_EXCEEDS_REMAINING'
+      )
+    ){
+
+      setPageMessage(
+        '退款金额超过剩余待处理金额，请刷新后重新操作。',
+        'err'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      text.includes(
+        'REFUND_NOTE_REQUIRED'
+      )
+    ){
+
+      setPageMessage(
+        '必须填写退款备注。',
+        'err'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      text.includes(
+        'REFUND_PROOF_TOO_LARGE'
+      )
+    ){
+
+      setPageMessage(
+        '退款凭证不能超过 10MB。',
+        'err'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      text.includes(
+        'REFUND_PROOF_TYPE_INVALID'
+      )
+    ){
+
+      setPageMessage(
+        '退款凭证只支持图片。',
+        'err'
+      );
+
+      return;
+
+    }
+
+
+    setPageMessage(
+      translateError(
+        err.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLOSE REFUND
+========================================================= */
+
+async function closeRefund(
+  refundId
+){
+
+  const row =
+  rows.find(
+    item =>
+    item.id
+    ===
+    refundId
+  );
+
+
+  if(!row){
+
+    setPageMessage(
+      '没有找到这条退款记录。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  const alreadyRefunded =
+  Number(
+    row.refunded_amount
+    ||
+    0
+  );
+
+
+  let note =
+  window.prompt(
+
+    alreadyRefunded > 0
+    ?
+    '请填写为什么剩余金额无需继续退款：'
+    :
+    '请填写为什么确认无需退款：',
+
+    alreadyRefunded > 0
+    ?
+    '已核对实际到账金额，剩余部分未实际到账'
+    :
+    '已核对平台收款账户，确认没有实际到账'
+
+  );
+
+
+  if(
+    note
+    ===
+    null
+  ){
+
+    return;
+
+  }
+
+
+  note =
+  note.trim();
+
+
+  if(!note){
+
+    setPageMessage(
+      '必须填写结案备注。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  const message =
+  alreadyRefunded > 0
+  ?
+  '当前已经实际退款 '
+  +
+  money(
+    alreadyRefunded
+  )
+  +
+  '。\n\n'
+  +
+  '请确认剩余金额现实中无需继续退款。'
+  :
+  '请确认已经核对平台收款账户，现实中没有收到这笔款项。';
+
+
+  if(
+    !window.confirm(
+      message
+    )
+  ){
+
+    return;
+
+  }
+
+
+  setPageMessage(
+    '正在结案...'
+  );
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_close_finance_refund',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          p_refund_id:
+          refundId,
+
+          p_note:
+          note
+
+        })
+
+      }
+
+    );
+
+
+    await parseAdminResponse(
+      res
+    );
+
+
+    await loadAll();
+
+
+    setPageMessage(
+      '这条退款核对已经结案。',
+      'ok'
     );
 
   }
