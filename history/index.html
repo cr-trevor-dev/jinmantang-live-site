@@ -1012,55 +1012,88 @@ async function loadRoundStats(
 
   try{
 
-    const r =
-    await api(
-      '/rest/v1/agent_submissions'+
-      '?round_id=eq.'+
-      encodeURIComponent(
-        roundId
-      )+
-      '&select=agent_id,points'
-    );
+    const [
+      agentRes,
+      customerRes
+    ] =
+    await Promise.all([
+
+      api(
+        '/rest/v1/agent_submissions'
+        +
+        '?round_id=eq.'
+        +
+        encodeURIComponent(
+          roundId
+        )
+        +
+        '&select=agent_id,points'
+      ),
+
+      api(
+        '/rest/v1/customer_round_entries'
+        +
+        '?round_id=eq.'
+        +
+        encodeURIComponent(
+          roundId
+        )
+        +
+        '&select=customer_id,points'
+      )
+
+    ]);
 
 
-    if(!r.ok){
+    if(
+      !agentRes.ok
+      ||
+      !customerRes.ok
+    ){
 
       throw new Error();
 
     }
 
 
-    const rows =
-    await r.json();
+    const agentRows =
+    await agentRes.json();
 
 
-    let total =
+    const customerRows =
+    await customerRes.json();
+
+
+    let agentTotal =
     0;
 
 
-    const set =
+    let customerTotal =
+    0;
+
+
+    const agentSet =
     new Set();
 
 
-    rows.forEach(
+    agentRows.forEach(
       row=>{
-
 
         const p =
         Number(
-          row.points || 0
+          row.points
+          ||
+          0
         );
 
 
-        total +=
+        agentTotal +=
         p;
 
 
-        if(
-          p>0
-        ){
+        if(p > 0){
 
-          set.add(
+          agentSet.add(
             row.agent_id
           );
 
@@ -1070,15 +1103,39 @@ async function loadRoundStats(
     );
 
 
+    customerRows.forEach(
+      row=>{
+
+        customerTotal +=
+        Number(
+          row.points
+          ||
+          0
+        );
+
+      }
+    );
+
+
+    const total =
+    agentTotal
+    +
+    customerTotal;
+
+
     const totalEl =
     document.getElementById(
-      'total-'+roundId
+      'total-'
+      +
+      roundId
     );
 
 
     const agentEl =
     document.getElementById(
-      'agents-'+roundId
+      'agents-'
+      +
+      roundId
     );
 
 
@@ -1095,12 +1152,21 @@ async function loadRoundStats(
     if(agentEl){
 
       agentEl.textContent =
-      set.size;
+      agentSet.size;
 
     }
 
 
-  }catch(e){}
+  }
+  catch(e){
+
+    console.warn(
+      'ROUND_STATS_FAILED',
+      roundId,
+      e
+    );
+
+  }
 
 }
 
@@ -1224,24 +1290,53 @@ async function loadDetailData(
   round
 ){
 
-  const r =
-  await api(
-    '/rest/v1/agent_submissions'+
-    '?round_id=eq.'+
-    encodeURIComponent(
-      round.id
-    )+
-    '&select=agent_id,number_code,points,submitted_at,updated_at'+
-    '&order=agent_id.asc,number_code.asc'
-  );
+  const [
+    agentRes,
+    customerRes
+  ] =
+  await Promise.all([
+
+    api(
+      '/rest/v1/agent_submissions'
+      +
+      '?round_id=eq.'
+      +
+      encodeURIComponent(
+        round.id
+      )
+      +
+      '&select=agent_id,number_code,points,submitted_at,updated_at'
+      +
+      '&order=agent_id.asc,number_code.asc'
+    ),
+
+    api(
+      '/rest/v1/customer_round_entries'
+      +
+      '?round_id=eq.'
+      +
+      encodeURIComponent(
+        round.id
+      )
+      +
+      '&select=customer_id,number_code,points,confirmed_points,pending_points'
+      +
+      '&order=customer_id.asc,number_code.asc'
+    )
+
+  ]);
 
 
-  if(!r.ok){
+  if(
+    !agentRes.ok
+    ||
+    !customerRes.ok
+  ){
 
     document.getElementById(
       'agentsList'
     ).innerHTML =
-    '<div class="empty">读取代理数据失败</div>';
+    '<div class="empty">读取本期数据失败</div>';
 
 
     return;
@@ -1249,8 +1344,12 @@ async function loadDetailData(
   }
 
 
-  const rows =
-  await r.json();
+  const agentRows =
+  await agentRes.json();
+
+
+  const customerRows =
+  await customerRes.json();
 
 
   let total =
@@ -1262,52 +1361,55 @@ async function loadDetailData(
 
 
   const startCode =
-round.game_mode ===
-'zodiac'
-?
-1
-:
-0;
-
-
-const endCode =
-round.game_mode ===
-'zodiac'
-?
-12
-:
-99;
-
-
-for(
-  let i=startCode;
-  i<=endCode;
-  i++
-){
-
-  numbers[
-    String(i)
-    .padStart(
-      2,
-      '0'
-    )
-  ] =
+  round.game_mode
+  ===
+  'zodiac'
+  ?
+  1
+  :
   0;
 
-}
+
+  const endCode =
+  round.game_mode
+  ===
+  'zodiac'
+  ?
+  12
+  :
+  99;
+
+
+  for(
+    let i = startCode;
+    i <= endCode;
+    i++
+  ){
+
+    numbers[
+      String(i)
+      .padStart(
+        2,
+        '0'
+      )
+    ] =
+    0;
+
+  }
 
 
   const grouped =
   {};
 
 
-  rows.forEach(
+  agentRows.forEach(
     row=>{
-
 
       const p =
       Number(
-        row.points || 0
+        row.points
+        ||
+        0
       );
 
 
@@ -1317,7 +1419,9 @@ for(
 
       const code =
       String(
-        row.number_code ?? ''
+        row.number_code
+        ??
+        ''
       )
       .padStart(
         2,
@@ -1326,13 +1430,12 @@ for(
 
 
       if(
-        numbers[code] !==
+        numbers[code]
+        !==
         undefined
       ){
 
-        numbers[
-          code
-        ] +=
+        numbers[code] +=
         p;
 
       }
@@ -1362,6 +1465,48 @@ for(
   );
 
 
+  customerRows.forEach(
+    row=>{
+
+      const p =
+      Number(
+        row.points
+        ||
+        0
+      );
+
+
+      total +=
+      p;
+
+
+      const code =
+      String(
+        row.number_code
+        ??
+        ''
+      )
+      .padStart(
+        2,
+        '0'
+      );
+
+
+      if(
+        numbers[code]
+        !==
+        undefined
+      ){
+
+        numbers[code] +=
+        p;
+
+      }
+
+    }
+  );
+
+
   document.getElementById(
     'detailTotal'
   ).textContent =
@@ -1380,8 +1525,12 @@ for(
     .some(
       row=>
       Number(
-        row.points || 0
-      )>0
+        row.points
+        ||
+        0
+      )
+      >
+      0
     )
   );
 
