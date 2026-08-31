@@ -1769,8 +1769,7 @@ fmt(due),
       ||
       '—';
 
-      compact.innerHTML = `
-
+    
         compact.innerHTML = `
 
   <b>
@@ -1810,9 +1809,7 @@ fmt(due),
       $('bankAccountNumber')?.value
       ||
       '—';
-
-      compact.innerHTML = `
-
+        
        compact.innerHTML = `
 
   <b>
