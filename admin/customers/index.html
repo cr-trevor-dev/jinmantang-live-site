@@ -432,7 +432,98 @@ button:disabled{
   font-size:10px;
   margin-top:24px;
 }
+.customerFilters{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:10px;
+}
 
+.filterBtn{
+  background:#141415;
+  color:#9f967f;
+  border:1px solid rgba(214,168,63,.16);
+  padding:11px 8px;
+  font-size:12px;
+}
+
+.filterBtn.active{
+  background:
+    linear-gradient(
+      180deg,
+      #2a210f,
+      #17130c
+    );
+  color:#f0d27a;
+  border-color:rgba(214,168,63,.52);
+}
+
+.customerCompact{
+  border:1px solid rgba(214,168,63,.19);
+  border-radius:17px;
+  padding:15px;
+  margin-top:12px;
+  background:#0e0e0f;
+}
+
+.customerSummaryGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+
+.customerSummaryItem{
+  padding:10px;
+  border-radius:12px;
+  background:#131314;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.customerSummaryItem small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.customerSummaryItem strong{
+  display:block;
+  color:#e9dfc7;
+  font-size:12px;
+  line-height:1.45;
+  word-break:break-word;
+}
+
+.customerFileAction{
+  margin-top:12px;
+}
+
+.customerDetailTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.customerDetailTop strong{
+  color:#e5c96f;
+  font-size:14px;
+}
+
+.customerBackBtn{
+  width:auto;
+  min-width:96px;
+}
+
+@media(max-width:700px){
+
+  .customerSummaryGrid{
+    grid-template-columns:1fr;
+  }
+
+}
 @media(max-width:700px){
 
   .summary{
@@ -544,6 +635,33 @@ button:disabled{
       <div class="title">
         客户搜索
       </div>
+            <div class="customerFilters">
+
+        <button
+          id="filterAllBtn"
+          class="filterBtn active"
+          type="button"
+          onclick="setCustomerFilter('all')">
+          全部客户
+        </button>
+
+        <button
+          id="filterDirectBtn"
+          class="filterBtn"
+          type="button"
+          onclick="setCustomerFilter('direct')">
+          平台直属
+        </button>
+
+        <button
+          id="filterAgentBtn"
+          class="filterBtn"
+          type="button"
+          onclick="setCustomerFilter('agent')">
+          代理客户
+        </button>
+
+      </div>
 
       <div class="toolbar">
 
@@ -650,7 +768,13 @@ let orders =
 let rounds =
 [];
 
+let customerFilter =
+'all';
 
+
+let selectedCustomerId =
+null;
+  
 let refreshPromise =
 null;
 
@@ -1076,7 +1200,7 @@ function money(value){
 function customerSourceText(customer){
 
   if(!customer?.referral_agent_id){
-    return '平台主管';
+    return '平台直属';
   }
 
 
@@ -1099,6 +1223,160 @@ function customerSourceText(customer){
   );
 
 }
+ function customerSourceKind(customer){
+
+  return customer?.referral_agent_id
+  ?
+  'agent'
+  :
+  'direct';
+
+}
+
+
+function customerAgentName(customer){
+
+  if(!customer?.referral_agent_id){
+
+    return '—';
+
+  }
+
+
+  return (
+    customer.referral_agent?.display_name
+    ||
+    customer.referral_agent?.referral_code
+    ||
+    '未知代理'
+  );
+
+}
+
+
+function customerPayoutState(customerId){
+
+  const accounts =
+  accountsForCustomer(
+    customerId
+  );
+
+
+  if(!accounts.length){
+
+    return '未绑定';
+
+  }
+
+
+  const editable =
+  accounts.some(
+
+    account =>
+    account.customer_edit_locked
+    ===
+    false
+
+  );
+
+
+  return editable
+  ?
+  '允许修改中'
+  :
+  '已绑定';
+
+}
+
+
+function setCustomerFilter(filter){
+
+  if(
+    ![
+      'all',
+      'direct',
+      'agent'
+    ]
+    .includes(
+      filter
+    )
+  ){
+
+    return;
+
+  }
+
+
+  customerFilter =
+  filter;
+
+
+  selectedCustomerId =
+  null;
+
+
+  const buttons = {
+
+    all:
+    'filterAllBtn',
+
+    direct:
+    'filterDirectBtn',
+
+    agent:
+    'filterAgentBtn'
+
+  };
+
+
+  Object
+  .entries(
+    buttons
+  )
+  .forEach(
+
+    ([key,id]) => {
+
+      document
+      .getElementById(
+        id
+      )
+      ?.classList
+      .toggle(
+        'active',
+        key === filter
+      );
+
+    }
+
+  );
+
+
+  renderCustomers();
+
+}
+
+
+function openCustomerFile(customerId){
+
+  selectedCustomerId =
+  customerId;
+
+
+  renderCustomers();
+
+}
+
+
+function closeCustomerFile(){
+
+  selectedCustomerId =
+  null;
+
+
+  renderCustomers();
+
+} 
 function customerById(id){
 
   return customers.find(
@@ -1966,6 +2244,267 @@ function orderHtml(order){
    CUSTOMER RENDER
 ========================================================= */
 
+function customerDetailHtml(customer){
+
+  const accounts =
+  accountsForCustomer(
+    customer.id
+  );
+
+
+  const customerOrders =
+  ordersForCustomer(
+    customer.id
+  );
+
+
+  return `
+
+    <div class="customerDetailTop">
+
+      <strong>
+        客户档案
+      </strong>
+
+      <button
+        class="secondary customerBackBtn"
+        type="button"
+        onclick="closeCustomerFile()">
+        ← 返回客户列表
+      </button>
+
+    </div>
+
+
+    <div class="customer">
+
+      <div class="customerHead">
+
+        <div>
+
+          <div class="customerName">
+            ${esc(customer.display_name || '未填写姓名')}
+          </div>
+
+          <div class="customerCode">
+            ${esc(customer.customer_code || '—')}
+          </div>
+
+        </div>
+
+
+        <div
+          class="status ${statusClass(customer.status)}">
+
+          ${esc(statusText(customer.status))}
+
+        </div>
+
+      </div>
+
+
+      <div class="customerMeta">
+
+        用户名：
+        ${esc(customer.username || '—')}
+        <br>
+
+        电话：
+        ${esc(customer.phone || '—')}
+        <br>
+
+        来源：
+        ${
+          customerSourceKind(customer)
+          ===
+          'direct'
+          ?
+          '平台直属'
+          :
+          '代理客户'
+        }
+        <br>
+
+        所属代理：
+        ${esc(customerAgentName(customer))}
+
+      </div>
+
+
+      ${
+        customer.status
+        !==
+        'active'
+        &&
+        customer.restriction_reason
+        ?
+        `
+          <div class="restriction">
+            平台说明：
+            ${esc(customer.restriction_reason)}
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      <div class="sectionLabel">
+        客户状态管理
+      </div>
+
+
+      ${
+        customer.status
+        ===
+        'active'
+        ?
+        `
+          <div class="actions">
+
+            <button
+              class="warning"
+              type="button"
+              onclick="setCustomerStatus(
+                '${esc(customer.id)}',
+                'suspended'
+              )">
+
+              限制客户
+
+            </button>
+
+
+            <button
+              class="danger"
+              type="button"
+              onclick="setCustomerStatus(
+                '${esc(customer.id)}',
+                'blocked'
+              )">
+
+              拉黑客户
+
+            </button>
+
+          </div>
+        `
+        :
+        `
+          <div class="actions three">
+
+            <button
+              class="success"
+              type="button"
+              onclick="setCustomerStatus(
+                '${esc(customer.id)}',
+                'active'
+              )">
+
+              恢复正常
+
+            </button>
+
+
+            <button
+              class="warning"
+              type="button"
+              ${
+                customer.status
+                ===
+                'suspended'
+                ?
+                'disabled'
+                :
+                ''
+              }
+              onclick="setCustomerStatus(
+                '${esc(customer.id)}',
+                'suspended'
+              )">
+
+              改为限制
+
+            </button>
+
+
+            <button
+              class="danger"
+              type="button"
+              ${
+                customer.status
+                ===
+                'blocked'
+                ?
+                'disabled'
+                :
+                ''
+              }
+              onclick="setCustomerStatus(
+                '${esc(customer.id)}',
+                'blocked'
+              )">
+
+              改为拉黑
+
+            </button>
+
+          </div>
+        `
+      }
+
+
+      <div class="sectionLabel">
+        收款方式
+      </div>
+
+
+      ${
+        accounts.length
+        ?
+        accounts
+        .map(
+          accountHtml
+        )
+        .join('')
+        :
+        `
+          <div class="empty">
+            客户尚未绑定收款方式
+          </div>
+        `
+      }
+
+
+      <div class="sectionLabel">
+        客户下注
+      </div>
+
+
+      ${
+        customerOrders.length
+        ?
+        customerOrders
+        .slice(0,12)
+        .map(
+          orderHtml
+        )
+        .join('')
+        :
+        `
+          <div class="empty">
+            暂无客户下注
+          </div>
+        `
+      }
+
+    </div>
+
+  `;
+
+}
+
+
 function renderCustomers(){
 
   const list =
@@ -1984,14 +2523,72 @@ function renderCustomers(){
   .toLowerCase();
 
 
+  if(selectedCustomerId){
+
+    const customer =
+    customerById(
+      selectedCustomerId
+    );
+
+
+    if(!customer){
+
+      selectedCustomerId =
+      null;
+
+
+      renderCustomers();
+
+
+      return;
+
+    }
+
+
+    list.innerHTML =
+    customerDetailHtml(
+      customer
+    );
+
+
+    return;
+
+  }
+
+
   let rows =
-  customers;
+  customers.filter(
+
+    customer => {
+
+      if(
+        customerFilter
+        ===
+        'all'
+      ){
+
+        return true;
+
+      }
+
+
+      return (
+        customerSourceKind(
+          customer
+        )
+        ===
+        customerFilter
+      );
+
+    }
+
+  );
 
 
   if(query){
 
     rows =
-    customers.filter(
+    rows.filter(
 
       customer => {
 
@@ -2038,22 +2635,33 @@ function renderCustomers(){
 
     customer => {
 
-      const accounts =
-      accountsForCustomer(
+      const source =
+      customerSourceKind(
+        customer
+      )
+      ===
+      'direct'
+      ?
+      '平台直属'
+      :
+      '代理客户';
+
+
+      const agentName =
+      customerAgentName(
+        customer
+      );
+
+
+      const payoutState =
+      customerPayoutState(
         customer.id
       );
 
 
-      const customerOrders =
-      ordersForCustomer(
-        customer.id
-      );
-
-
-      
       return `
 
-        <div class="customer">
+        <div class="customerCompact">
 
           <div class="customerHead">
 
@@ -2088,181 +2696,67 @@ function renderCustomers(){
 
             电话：
             ${esc(customer.phone || '—')}
-            <br>
-            来源：
-            ${esc(customerSourceText(customer))}
+
           </div>
 
 
-          ${
-            customer.status
-            !==
-            'active'
-            &&
-            customer.restriction_reason
-            ?
-            `
-              <div class="restriction">
-                平台说明：
-                ${esc(customer.restriction_reason)}
-              </div>
-            `
-            :
-            ''
-          }
+          <div class="customerSummaryGrid">
+
+            <div class="customerSummaryItem">
+
+              <small>
+                来源
+              </small>
+
+              <strong>
+                ${esc(source)}
+              </strong>
+
+            </div>
 
 
-          <div class="sectionLabel">
-            客户状态管理
+            <div class="customerSummaryItem">
+
+              <small>
+                所属代理
+              </small>
+
+              <strong>
+                ${esc(agentName)}
+              </strong>
+
+            </div>
+
+
+            <div class="customerSummaryItem">
+
+              <small>
+                收款方式状态
+              </small>
+
+              <strong>
+                ${esc(payoutState)}
+              </strong>
+
+            </div>
+
           </div>
 
 
-          ${
-            customer.status
-            ===
-            'active'
-            ?
-            `
-              <div class="actions">
+          <div class="customerFileAction">
 
-                <button
-                  class="warning"
-                  type="button"
-                  onclick="setCustomerStatus(
-                    '${esc(customer.id)}',
-                    'suspended'
-                  )">
+            <button
+              class="secondary"
+              type="button"
+              onclick="openCustomerFile(
+                '${esc(customer.id)}'
+              )">
 
-                  限制客户
+              查看客户档案
 
-                </button>
+            </button>
 
-
-                <button
-                  class="danger"
-                  type="button"
-                  onclick="setCustomerStatus(
-                    '${esc(customer.id)}',
-                    'blocked'
-                  )">
-
-                  拉黑客户
-
-                </button>
-
-              </div>
-            `
-            :
-            `
-              <div class="actions three">
-
-                <button
-                  class="success"
-                  type="button"
-                  onclick="setCustomerStatus(
-                    '${esc(customer.id)}',
-                    'active'
-                  )">
-
-                  恢复正常
-
-                </button>
-
-
-                <button
-                  class="warning"
-                  type="button"
-                  ${
-                    customer.status
-                    ===
-                    'suspended'
-                    ?
-                    'disabled'
-                    :
-                    ''
-                  }
-                  onclick="setCustomerStatus(
-                    '${esc(customer.id)}',
-                    'suspended'
-                  )">
-
-                  改为限制
-
-                </button>
-
-
-                <button
-                  class="danger"
-                  type="button"
-                  ${
-                    customer.status
-                    ===
-                    'blocked'
-                    ?
-                    'disabled'
-                    :
-                    ''
-                  }
-                  onclick="setCustomerStatus(
-                    '${esc(customer.id)}',
-                    'blocked'
-                  )">
-
-                  改为拉黑
-
-                </button>
-
-              </div>
-            `
-          }
-
-
-          <div class="sectionLabel">
-            收款方式
           </div>
-
-
-          ${
-            accounts.length
-            ?
-            accounts
-            .map(
-              accountHtml
-            )
-            .join('')
-            :
-            `
-              <div class="empty">
-                客户尚未绑定收款方式
-              </div>
-            `
-          }
-
-
-          <div class="sectionLabel">
-            客户下注
-          </div>
-
-
-          ${
-            customerOrders.length
-            ?
-            customerOrders
-            .slice(0,12)
-            .map(
-              orderHtml
-            )
-            .join('')
-            :
-            `
-              <div class="empty">
-                暂无客户下注
-              </div>
-            `
-          }
-
-
-          
 
         </div>
 
