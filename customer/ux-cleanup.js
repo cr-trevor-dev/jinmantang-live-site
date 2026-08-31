@@ -1249,17 +1249,21 @@
 
   function periodName(code){
 
-    if(code === '1030'){
-      return '上午 11:45';
-    }
-
-    if(code === '1530'){
-      return '下午 3:45';
-    }
-
-    return code || '—';
-
+  if(code === '1030'){
+    return uiText(
+      '上午 11:45'
+    );
   }
+
+  if(code === '1530'){
+    return uiText(
+      '下午 3:45'
+    );
+  }
+
+  return code || '—';
+
+}
 
 
   function zodiacName(code){
