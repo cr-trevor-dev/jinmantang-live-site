@@ -4612,7 +4612,130 @@ function renderRoundGrid(){
 
 }
 
+function refreshRoundGridState(){
 
+  ZODIACS.forEach(
+
+    zodiac => {
+
+      const entry =
+      entryByCode(
+        zodiac.code
+      );
+
+
+      const locked =
+      lockedAmount(
+        entry
+      );
+
+
+      const points =
+      Number(
+        entry?.points
+        ||
+        0
+      );
+
+
+      const input =
+      document.getElementById(
+        'zodiac_'
+        +
+        zodiac.code
+      );
+
+
+      if(!input){
+        return;
+      }
+
+
+      input.min =
+      String(
+        locked
+      );
+
+
+      if(
+        !roundDirty
+        &&
+        document.activeElement
+        !==
+        input
+      ){
+
+        const nextValue =
+        points > 0
+        ?
+        String(points)
+        :
+        '';
+
+
+        if(
+          input.value
+          !==
+          nextValue
+        ){
+
+          input.value =
+          nextValue;
+
+        }
+
+      }
+
+
+      const lockedEl =
+      input
+      .closest(
+        '.zodiacItem'
+      )
+      ?.querySelector(
+        '.zodiacLocked'
+      );
+
+
+      if(lockedEl){
+
+        lockedEl.classList.toggle(
+          'locked',
+          locked > 0
+        );
+
+
+        lockedEl.textContent =
+        locked > 0
+        ?
+        uiText(
+          '已锁定'
+        )
+        +
+        ' '
+        +
+        formatMoney(
+          locked
+        )
+        :
+        uiText(
+          '可修改'
+        );
+
+      }
+
+    }
+
+  );
+
+
+  if(!roundDirty){
+
+    updateRoundTotal();
+
+  }
+
+}
 function updateRoundTotal(){
 
   let total =
