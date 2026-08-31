@@ -171,7 +171,7 @@ button:disabled{
 
 .summary{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:9px;
 }
 
@@ -584,38 +584,11 @@ button:disabled{
           <small>拉黑客户</small>
           <strong id="blockedTotal">0</strong>
         </div>
-
-        <div class="summaryBox">
-          <small>待审核付款</small>
-          <strong id="paymentPendingTotal">0</strong>
-        </div>
-
+        
       </div>
 
     </section>
-
-
-    <section class="card">
-
-      <div class="title">
-        待审核付款
-      </div>
-
-      <div class="msg">
-        每笔付款都会显示客户姓名、客户编号、用户名和电话，避免客户多以后认错人。
-      </div>
-
-      <div id="pendingPaymentList">
-
-        <div class="empty">
-          正在读取待审核付款...
-        </div>
-
-      </div>
-
-    </section>
-
-
+        
     <section class="card">
 
       <div class="title">
@@ -721,12 +694,7 @@ let orders =
 [];
 
 
-let payments =
-[];
 
-
-let proofs =
-[];
 
 
 let rounds =
@@ -1225,35 +1193,6 @@ function ordersForCustomer(id){
 }
 
 
-function paymentsForCustomer(id){
-
-  return payments.filter(
-
-    payment =>
-    payment.customer_id
-    ===
-    id
-
-  );
-
-}
-
-
-function proofForSubmission(id){
-
-  return proofs.find(
-
-    proof =>
-    proof.payment_submission_id
-    ===
-    id
-
-  )
-  ||
-  null;
-
-}
-
 
 function roundName(roundId){
 
@@ -1426,26 +1365,6 @@ async function loadAll(){
       ),
 
       api(
-        '/rest/v1/customer_payment_submissions'
-        +
-        '?select=id,order_id,round_id,customer_id,payment_account_id,declared_amount,confirmed_amount,status,method_name_snapshot,method_type_snapshot,account_name_snapshot,account_number_snapshot,bank_name_snapshot,customer_note,submitted_at,reviewed_at,rejection_reason'
-        +
-        '&order=submitted_at.desc'
-        +
-        '&limit=1000'
-      ),
-
-      api(
-        '/rest/v1/customer_payment_proofs'
-        +
-        '?select=id,payment_submission_id,customer_id,storage_path,original_name,mime_type,file_size,created_at'
-        +
-        '&order=created_at.desc'
-        +
-        '&limit=1000'
-      ),
-
-      api(
         '/rest/v1/rounds'
         +
         '?select=id,round_date,round_code,status,deadline_at,game_mode,created_at'
@@ -1496,25 +1415,12 @@ async function loadAll(){
     .json();
 
 
-    payments =
+    rounds =
     await responses[3]
     .json();
 
 
-    proofs =
-    await responses[4]
-    .json();
-
-
-    rounds =
-    await responses[5]
-    .json();
-
-
     updateSummary();
-
-
-    renderPendingPayments();
 
 
     renderCustomers();
@@ -1609,143 +1515,10 @@ function updateSummary(){
   .length;
 
 
-  document
-  .getElementById(
-    'paymentPendingTotal'
-  )
-  .textContent =
-  payments.filter(
-
-    payment =>
-    payment.status
-    ===
-    'pending'
-
-  )
-  .length;
+  
 
 }
 
-
-/* =========================================================
-   GLOBAL PENDING PAYMENTS
-========================================================= */
-
-function renderPendingPayments(){
-
-  const box =
-  document.getElementById(
-    'pendingPaymentList'
-  );
-
-
-  const pending =
-  payments.filter(
-
-    payment =>
-    payment.status
-    ===
-    'pending'
-
-  );
-
-
-  if(!pending.length){
-
-    box.innerHTML =
-    `
-      <div class="empty">
-        当前没有待审核付款
-      </div>
-    `;
-
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-  pending
-  .map(
-
-    payment => {
-
-      const customer =
-      customerById(
-        payment.customer_id
-      );
-
-
-      return `
-
-        <div class="pendingPayment">
-
-          ${customerIdentityHtml(customer)}
-
-          ${paymentDetailsHtml(payment,true)}
-
-        </div>
-
-      `;
-
-    }
-
-  )
-  .join('');
-
-}
-
-
-/* =========================================================
-   IDENTITY
-========================================================= */
-
-function customerIdentityHtml(customer){
-
-  if(!customer){
-
-    return `
-      <div class="identity">
-        <div class="identityName">
-          未知客户
-        </div>
-      </div>
-    `;
-
-  }
-
-
-  return `
-
-    <div class="identity">
-
-      <div class="identityName">
-        ${esc(customer.display_name || '未填写姓名')}
-      </div>
-
-      <div class="identityCode">
-        ${esc(customer.customer_code || '—')}
-      </div>
-
-      <div class="identityMeta">
-
-        用户名：
-        ${esc(customer.username || '—')}
-        <br>
-
-        电话：
-        ${esc(customer.phone || '—')}
-        <br>
-        来源：
-        ${esc(customerSourceText(customer))}
-      </div>
-
-    </div>
-
-  `;
-
-}
 
 
 /* =========================================================
@@ -2238,223 +2011,6 @@ function orderHtml(order){
 }
 
 
-/* =========================================================
-   PAYMENT
-========================================================= */
-
-function paymentDetailsHtml(
-  payment,
-  showIdentity=false
-){
-
-  const proof =
-  proofForSubmission(
-    payment.id
-  );
-
-
-  const statusMap = {
-
-    pending:
-    '待审核',
-
-    approved:
-    '已确认',
-
-    rejected:
-    '已拒绝'
-
-  };
-
-
-  return `
-
-    <div class="${showIdentity ? '' : 'payment'}">
-
-      <div class="paymentHead">
-
-        <div>
-
-          <div class="paymentTitle">
-            ${esc(roundName(payment.round_id))}
-          </div>
-
-          <div class="customerCode">
-            ${esc(payment.method_name_snapshot || '付款')}
-          </div>
-
-        </div>
-
-
-        <div
-          class="badge ${esc(payment.status)}">
-
-          ${esc(statusMap[payment.status] || payment.status)}
-
-        </div>
-
-      </div>
-
-
-      <div class="infoRow">
-        <span>申报付款</span>
-        <strong>${money(payment.declared_amount)}</strong>
-      </div>
-
-
-      <div class="infoRow">
-        <span>已确认金额</span>
-        <strong>${money(payment.confirmed_amount)}</strong>
-      </div>
-
-
-      <div class="infoRow">
-        <span>付款方式</span>
-        <strong>${esc(payment.method_name_snapshot || '—')}</strong>
-      </div>
-
-
-      ${
-        payment.bank_name_snapshot
-        ?
-        `
-          <div class="infoRow">
-            <span>银行 / 钱包</span>
-            <strong>${esc(payment.bank_name_snapshot)}</strong>
-          </div>
-        `
-        :
-        ''
-      }
-
-
-      <div class="infoRow">
-        <span>平台户名</span>
-        <strong>${esc(payment.account_name_snapshot || '—')}</strong>
-      </div>
-
-
-      <div class="infoRow">
-        <span>平台账号</span>
-        <strong>${esc(payment.account_number_snapshot || '—')}</strong>
-      </div>
-
-
-      ${
-        payment.customer_note
-        ?
-        `
-          <div class="infoRow">
-            <span>客户备注</span>
-            <strong>${esc(payment.customer_note)}</strong>
-          </div>
-        `
-        :
-        ''
-      }
-
-
-      ${
-        payment.status
-        ===
-        'rejected'
-        &&
-        payment.rejection_reason
-        ?
-        `
-          <div class="restriction">
-            拒绝原因：
-            ${esc(payment.rejection_reason)}
-          </div>
-        `
-        :
-        ''
-      }
-
-
-      ${
-        proof
-        ?
-        `
-          <div class="singleAction">
-
-            <button
-              class="secondary"
-              type="button"
-              onclick="viewProof(
-                '${esc(proof.storage_path)}'
-              )">
-
-              查看付款凭证
-
-            </button>
-
-          </div>
-        `
-        :
-        `
-          <div class="msg err">
-            尚未上传付款凭证
-          </div>
-        `
-      }
-
-
-      ${
-        payment.status
-        ===
-        'pending'
-        ?
-        `
-          <div class="actions">
-
-            <button
-              type="button"
-              ${proof ? '' : 'disabled'}
-              onclick="reviewPayment(
-                '${esc(payment.id)}',
-                'approved'
-              )">
-
-              确认到账
-
-            </button>
-
-
-            <button
-              class="danger"
-              type="button"
-              onclick="reviewPayment(
-                '${esc(payment.id)}',
-                'rejected'
-              )">
-
-              拒绝付款
-
-            </button>
-
-          </div>
-        `
-        :
-        ''
-      }
-
-    </div>
-
-  `;
-
-}
-
-
-function paymentHtml(payment){
-
-  return paymentDetailsHtml(
-    payment,
-    false
-  );
-
-}
-
 
 /* =========================================================
    CUSTOMER RENDER
@@ -2544,12 +2100,7 @@ function renderCustomers(){
       );
 
 
-      const customerPayments =
-      paymentsForCustomer(
-        customer.id
-      );
-
-
+      
       return `
 
         <div class="customer">
@@ -2761,27 +2312,7 @@ function renderCustomers(){
           }
 
 
-          <div class="sectionLabel">
-            付款记录
-          </div>
-
-
-          ${
-            customerPayments.length
-            ?
-            customerPayments
-            .slice(0,12)
-            .map(
-              paymentHtml
-            )
-            .join('')
-            :
-            `
-              <div class="empty">
-                暂无付款记录
-              </div>
-            `
-          }
+          
 
         </div>
 
@@ -2794,260 +2325,6 @@ function renderCustomers(){
 
 }
 
-
-/* =========================================================
-   PAYMENT REVIEW
-========================================================= */
-
-async function reviewPayment(
-  submissionId,
-  action
-){
-
-  let reason =
-  null;
-
-
-  if(
-    action
-    ===
-    'approved'
-  ){
-
-    const confirmed =
-    window.confirm(
-
-      '请确认已经核对付款凭证，并且平台确实收到这笔款项。确认到账吗？'
-
-    );
-
-
-    if(!confirmed){
-
-      return;
-
-    }
-
-  }
-  else{
-
-    reason =
-    window.prompt(
-
-      '请输入拒绝原因：',
-
-      '付款凭证或付款金额不正确'
-
-    );
-
-
-    if(reason === null){
-
-      return;
-
-    }
-
-
-    reason =
-    reason.trim()
-    ||
-    '付款未通过审核';
-
-  }
-
-
-  setPageMessage(
-
-    action
-    ===
-    'approved'
-    ?
-    '正在确认付款...'
-    :
-    '正在拒绝付款...'
-
-  );
-
-
-  try{
-
-    const res =
-    await api(
-
-      '/rest/v1/rpc/admin_review_customer_payment',
-
-      {
-
-        method:'POST',
-
-        headers:{
-
-          'Content-Type':
-          'application/json'
-
-        },
-
-        body:
-        JSON.stringify({
-
-          p_submission_id:
-          submissionId,
-
-          p_action:
-          action,
-
-          p_rejection_reason:
-          action
-          ===
-          'rejected'
-          ?
-          reason
-          :
-          null
-
-        })
-
-      }
-
-    );
-
-
-    await parseAdminResponse(
-      res
-    );
-
-
-    await loadAll();
-
-
-    setPageMessage(
-
-      action
-      ===
-      'approved'
-      ?
-      '付款已经确认到账。'
-      :
-      '付款已拒绝，对应锁定金额已经释放。',
-
-      'ok'
-
-    );
-
-  }
-  catch(err){
-
-    setPageMessage(
-      translateError(
-        err.message
-      ),
-      'err'
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   PROOF
-========================================================= */
-
-async function viewProof(storagePath){
-
-  const newWindow =
-  window.open(
-    '',
-    '_blank'
-  );
-
-
-  try{
-
-    const encoded =
-    storagePath
-    .split('/')
-    .map(
-      encodeURIComponent
-    )
-    .join('/');
-
-
-    const res =
-    await api(
-
-      '/storage/v1/object/authenticated/customer-payment-proofs/'
-      +
-      encoded
-
-    );
-
-
-    if(!res.ok){
-
-      throw new Error(
-        'PROOF_LOAD_FAILED'
-      );
-
-    }
-
-
-    const blob =
-    await res.blob();
-
-
-    const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-    if(newWindow){
-
-      newWindow.location =
-      url;
-
-    }
-    else{
-
-      window.location.href =
-      url;
-
-    }
-
-
-    setTimeout(
-
-      ()=>{
-
-        URL.revokeObjectURL(
-          url
-        );
-
-      },
-
-      60000
-
-    );
-
-  }
-  catch(err){
-
-    if(newWindow){
-
-      newWindow.close();
-
-    }
-
-
-    setPageMessage(
-      '付款凭证读取失败。',
-      'err'
-    );
-
-  }
-
-}
 
 
 /* =========================================================
