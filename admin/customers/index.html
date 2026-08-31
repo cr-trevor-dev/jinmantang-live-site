@@ -206,45 +206,7 @@ button:disabled{
   min-width:96px;
 }
 
-.pendingPayment{
-  border:1px solid rgba(218,171,55,.27);
-  border-radius:16px;
-  padding:15px;
-  margin-top:12px;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(30,24,13,.95),
-      rgba(13,13,14,.98)
-    );
-}
 
-.identity{
-  border:1px solid rgba(214,168,63,.18);
-  border-radius:13px;
-  padding:12px;
-  margin-bottom:12px;
-  background:#0d0d0e;
-}
-
-.identityName{
-  color:#f1d16f;
-  font-weight:900;
-  font-size:17px;
-}
-
-.identityCode{
-  color:#af9d6b;
-  font-size:11px;
-  margin-top:3px;
-}
-
-.identityMeta{
-  margin-top:8px;
-  color:#958c79;
-  font-size:12px;
-  line-height:1.7;
-}
 
 .customer{
   border:1px solid rgba(214,168,63,.19);
@@ -312,8 +274,7 @@ button:disabled{
 }
 
 .account,
-.order,
-.payment{
+.order{
   margin-top:9px;
   padding:13px;
   border-radius:14px;
@@ -322,8 +283,7 @@ button:disabled{
 }
 
 .accountHead,
-.orderHead,
-.paymentHead{
+.orderHead{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
@@ -332,8 +292,7 @@ button:disabled{
 }
 
 .accountType,
-.orderTitle,
-.paymentTitle{
+.orderTitle{
   color:#e5c96f;
   font-weight:900;
   font-size:14px;
@@ -357,20 +316,11 @@ button:disabled{
   color:#ddbc65;
 }
 
-.badge.pending{
-  background:rgba(172,126,42,.14);
-  color:#ddbc65;
-}
 
-.badge.approved{
-  background:rgba(64,145,88,.14);
-  color:#86d19c;
-}
 
-.badge.rejected{
-  background:rgba(169,73,66,.15);
-  color:#e0a09a;
-}
+
+
+
 
 .infoRow{
   display:flex;
@@ -2478,52 +2428,7 @@ function translateError(message){
   }
 
 
-  if(
-    text.includes(
-      'PAYMENT_SUBMISSION_NOT_FOUND'
-    )
-  ){
-
-    return '没有找到这笔付款申请。';
-
-  }
-
-
-  if(
-    text.includes(
-      'PAYMENT_ALREADY_REVIEWED'
-    )
-  ){
-
-    return '这笔付款已经被处理，请刷新页面。';
-
-  }
-
-
-  if(
-    text.includes(
-      'PAYMENT_PROOF_REQUIRED_FOR_APPROVAL'
-    )
-  ){
-
-    return '客户还没有上传付款凭证，不能确认到账。';
-
-  }
-
-
-  if(
-    text.includes(
-      'CONFIRMED_AMOUNT_EXCEEDS_ORDER_TOTAL'
-    )
-    ||
-    text.includes(
-      'APPROVED_AMOUNT_EXCEEDS_ORDER'
-    )
-  ){
-
-    return '确认金额超过客户本期下注总额，系统已经阻止操作。';
-
-  }
+  
 
 
   return (
