@@ -3550,7 +3550,9 @@ function renderAccountState(
   if(!account){
 
     status.textContent =
-    '未绑定';
+uiText(
+  '未绑定'
+);
 
 
     status.className =
@@ -3558,7 +3560,9 @@ function renderAccountState(
 
 
     notice.textContent =
-    '请仔细核对。首次保存成功后将不能自行修改。';
+uiText(
+  '请仔细核对。首次保存成功后将不能自行修改。'
+);
 
 
     notice.className =
@@ -3586,11 +3590,15 @@ function renderAccountState(
 
 
     button.textContent =
-    isKpay
-    ?
-    '保存并绑定 KPay'
-    :
-    '保存并绑定银行账户';
+isKpay
+?
+uiText(
+  '保存并绑定 KPay'
+)
+:
+uiText(
+  '保存并绑定银行账户'
+);
 
 
     return;
@@ -3607,7 +3615,9 @@ function renderAccountState(
   if(locked){
 
     status.textContent =
-    '已绑定';
+uiText(
+  '已绑定'
+);
 
 
     status.className =
@@ -3615,7 +3625,9 @@ function renderAccountState(
 
 
     notice.textContent =
-    '此收款方式已经绑定。如需更换，请联系客服。';
+uiText(
+  '此收款方式已经绑定。如需更换，请联系客服。'
+);
 
 
     notice.className =
@@ -3643,13 +3655,17 @@ function renderAccountState(
 
 
     button.textContent =
-    '已绑定 · 联系客服修改';
+uiText(
+  '已绑定 · 联系客服修改'
+);
 
   }
   else{
 
     status.textContent =
-    '可修改';
+uiText(
+  '可修改'
+);
 
 
     status.className =
@@ -3657,7 +3673,9 @@ function renderAccountState(
 
 
     notice.textContent =
-    '平台已允许本次修改。请仔细核对，保存后会再次自动锁定。';
+uiText(
+  '平台已允许本次修改。请仔细核对，保存后会再次自动锁定。'
+);
 
 
     notice.className =
@@ -3685,11 +3703,15 @@ function renderAccountState(
 
 
     button.textContent =
-    isKpay
-    ?
-    '保存新 KPay 并重新绑定'
-    :
-    '保存新银行账户并重新绑定';
+isKpay
+?
+uiText(
+  '保存新 KPay 并重新绑定'
+)
+:
+uiText(
+  '保存新银行账户并重新绑定'
+);
 
   }
 
@@ -3788,15 +3810,12 @@ function renderPayoutAccounts(){
   );
 
 
-  if(
-    typeof window.applyCustomerLanguage
-    ===
-    'function'
-  ){
+  renderAccountState(
+  'bank',
+  bank
+);
 
-    window.applyCustomerLanguage();
-
-  }
+}
 
 }
 
