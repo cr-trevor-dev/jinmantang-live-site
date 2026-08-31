@@ -1,0 +1,2024 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<link
+  rel="manifest"
+  href="/agent/manifest.webmanifest">
+
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/IMG_1428.png">
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="192x192"
+  href="/IMG_1429.png">
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="512x512"
+  href="/IMG_1430.png">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black">
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="金满堂代理">
+
+<title>金满堂 · 代理中心</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+  background:
+    radial-gradient(
+      circle at top,
+      #251907 0,
+      #0d0c0a 40%,
+      #070708 100%
+    );
+  color:#f7f0df;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  padding:
+    env(safe-area-inset-top)
+    14px
+    calc(35px + env(safe-area-inset-bottom));
+}
+
+.wrap{
+  width:min(680px,100%);
+  margin:auto;
+}
+
+.brand{
+  text-align:center;
+  padding:18px 0 22px;
+}
+
+.logo{
+  width:82px;
+  height:82px;
+  margin:0 auto 11px;
+  overflow:hidden;
+  border-radius:22px;
+  border:1px solid #b98a2c;
+  background:#171109;
+}
+
+.logo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.brandName{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#f1d47b;
+}
+
+.brandSub{
+  margin-top:5px;
+  font-size:10px;
+  letter-spacing:3px;
+  color:#998b68;
+}
+
+.card{
+  background:
+    linear-gradient(
+      180deg,
+      #151515,
+      #0d0d0e
+    );
+  border:
+    1px solid
+    rgba(214,168,63,.30);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.title{
+  font-size:16px;
+  font-weight:900;
+  color:#dec372;
+  margin-bottom:14px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border-radius:11px;
+  border:
+    1px solid
+    rgba(214,168,63,.25);
+  background:#101011;
+  color:#fff;
+  outline:none;
+  font-size:15px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  margin-top:10px;
+  font-weight:900;
+  font-size:14px;
+  cursor:pointer;
+  background:
+    linear-gradient(
+      180deg,
+      #efd47c,
+      #b87e1e
+    );
+  color:#171109;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.secondary{
+  background:#171718;
+  color:#dac477;
+  border:
+    1px solid
+    rgba(214,168,63,.23);
+}
+
+.red{
+  background:#351616;
+  color:#e9a0a0;
+  border:
+    1px solid
+    rgba(220,90,90,.25);
+}
+
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.box{
+  background:#101011;
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px;
+  min-height:88px;
+}
+
+.box small{
+  display:block;
+  color:#817b71;
+  font-size:10px;
+  margin-bottom:6px;
+  line-height:1.4;
+}
+
+.box strong{
+  display:block;
+  color:#e7cb74;
+  font-size:16px;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.box.green strong{
+  color:#70d39d;
+}
+
+.box.main{
+  border-color:
+    rgba(214,168,63,.32);
+  background:#15130e;
+}
+
+.linkBox{
+  background:#101011;
+  border:
+    1px solid
+    rgba(214,168,63,.18);
+  border-radius:13px;
+  padding:13px;
+}
+
+.linkLabel{
+  color:#817b71;
+  font-size:10px;
+  margin-bottom:7px;
+}
+
+.linkText{
+  color:#ead17b;
+  font-size:13px;
+  line-height:1.55;
+  word-break:break-all;
+}
+
+.note{
+  font-size:11px;
+  color:#777166;
+  line-height:1.65;
+  margin-top:10px;
+}
+
+.msg{
+  min-height:20px;
+  text-align:center;
+  margin-top:11px;
+  font-size:12px;
+  color:#a49c8b;
+  line-height:1.6;
+}
+
+.msg.ok{
+  color:#70d39d;
+}
+
+.msg.error{
+  color:#e58e8e;
+}
+
+.statusGood{
+  color:#70d39d!important;
+}
+
+.statusBad{
+  color:#e58e8e!important;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.zodiac{
+  background:#101011;
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:13px;
+}
+
+.zodiac.active{
+  border-color:
+    rgba(214,168,63,.38);
+  background:#15130e;
+}
+
+.zodiacTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.zodiacName{
+  color:#e7c96d;
+  font-weight:900;
+  font-size:17px;
+}
+
+.zodiacCode{
+  color:#766f62;
+  font-size:10px;
+}
+
+.zodiacAmount{
+  margin-top:10px;
+  color:#e8dfc9;
+  font-size:17px;
+  font-weight:900;
+}
+
+.zodiac.active .zodiacAmount{
+  color:#efd47d;
+}
+
+.empty{
+  text-align:center;
+  color:#777166;
+  font-size:13px;
+  padding:22px 8px;
+}
+
+.readOnly{
+  border:
+    1px solid
+    rgba(80,200,130,.18);
+  background:#101713;
+  color:#8dd8ad;
+  border-radius:12px;
+  padding:12px;
+  font-size:11px;
+  line-height:1.7;
+  margin-top:12px;
+}
+
+.refreshRow{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.foot{
+  text-align:center;
+  color:#6f6a61;
+  font-size:10px;
+  padding:20px 0 6px;
+}
+
+@media(max-width:420px){
+
+  .info{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+</style>
+
+<script
+  src="https://js.hcaptcha.com/1/api.js"
+  async
+  defer>
+</script>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+
+    <div class="logo">
+      <img
+        src="/IMG_1430.png"
+        alt="金满堂">
+    </div>
+
+    <div class="brandName">
+      金满堂
+    </div>
+
+    <div class="brandSub">
+      AGENT CENTER
+    </div>
+
+  </div>
+
+
+  <div
+    class="card"
+    id="loginCard">
+
+    <div class="title">
+      代理登录
+    </div>
+
+    <input
+      id="email"
+      type="email"
+      autocomplete="username"
+      placeholder="代理邮箱">
+
+    <div style="height:9px"></div>
+
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="密码">
+
+    <div style="height:12px"></div>
+
+    <div
+      class="h-captcha"
+      data-sitekey="a71ac782-e490-452a-8e7c-825e176e9098">
+    </div>
+
+    <button
+      id="loginBtn"
+      onclick="signIn()">
+      登录代理中心
+    </button>
+
+    <div
+      class="msg"
+      id="loginMsg">
+    </div>
+
+  </div>
+
+
+  <div
+    id="dashboard"
+    class="hidden">
+
+
+    <div class="card">
+
+      <div class="title">
+        我的代理资料
+      </div>
+
+      <div class="info">
+
+        <div class="box main">
+
+          <small>
+            代理名称
+          </small>
+
+          <strong id="agentName">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            账号状态
+          </small>
+
+          <strong id="agentStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            当前佣金比例
+          </small>
+
+          <strong id="agentRate">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            推荐码
+          </small>
+
+          <strong id="referralCode">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        我的专属推荐链接
+      </div>
+
+      <div class="linkBox">
+
+        <div class="linkLabel">
+          客户通过此链接注册后，会自动绑定到你的代理账号
+        </div>
+
+        <div
+          class="linkText"
+          id="referralLink">
+          —
+        </div>
+
+      </div>
+
+      <button onclick="copyReferralLink()">
+        复制我的推荐链接
+      </button>
+
+      <div
+        class="msg"
+        id="copyMsg">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        当前期
+      </div>
+
+      <div
+        class="info"
+        id="roundInfo">
+
+        <div class="box">
+
+          <small>
+            本期
+          </small>
+
+          <strong id="roundName">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            当前状态
+          </small>
+
+          <strong id="roundStatus">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            截止时间
+          </small>
+
+          <strong id="deadline">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            Myanmar Time
+          </small>
+
+          <strong id="mmtClock">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        本期业绩
+      </div>
+
+      <div class="info">
+
+        <div class="box main green">
+
+          <small>
+            直属客户已确认金额
+          </small>
+
+          <strong id="confirmedTotal">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            本期已确认客户
+          </small>
+
+          <strong id="customerCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="box">
+
+          <small>
+            本期佣金比例
+          </small>
+
+          <strong id="roundRate">
+            0%
+          </strong>
+
+        </div>
+
+
+        <div class="box green">
+
+          <small>
+            本期预计佣金
+          </small>
+
+          <strong id="commissionDue">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="readOnly">
+        本页所有业绩金额均为只读。
+        只有平台已经确认收款、正式生效的客户金额才会进入本期业绩和佣金计算。
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="title">
+        十二生肖 · 本期已确认金额
+      </div>
+
+      <div
+        class="grid"
+        id="zodiacGrid">
+      </div>
+
+      <div class="note">
+        这里只显示通过你的专属推荐链接绑定到你名下客户的已确认金额。
+        待审核、已驳回或仅保存的数据不会计入。
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="refreshRow">
+
+        <button onclick="loadSummary(true)">
+          刷新最新数据
+        </button>
+
+        <button
+          class="secondary"
+          onclick="location.href='/agent/zodiac.html'">
+          旧版记录页面
+        </button>
+
+      </div>
+
+      <div
+        class="msg"
+        id="mainMsg">
+      </div>
+
+      <button
+        class="red"
+        onclick="logout()">
+        退出登录
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="foot">
+    © 2022 JIN MANTANG · AGENT SYSTEM
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE =
+location.origin +
+'/supabase';
+
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+const ZODIAC = [
+  '鼠',
+  '牛',
+  '虎',
+  '兔',
+  '龙',
+  '蛇',
+  '马',
+  '羊',
+  '猴',
+  '鸡',
+  '狗',
+  '猪'
+];
+
+
+let token =
+localStorage.getItem(
+  'jmt_agent_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_agent_token'
+)
+||
+'';
+
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_agent_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_agent_refresh_token'
+)
+||
+'';
+
+
+let summary =
+null;
+
+
+let refreshPromise =
+null;
+
+
+function formatNumber(
+  value
+){
+
+  const n =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(n)
+  ){
+
+    return '0';
+
+  }
+
+
+  return n.toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function normalizeRate(
+  value
+){
+
+  let rate =
+  Number(
+    value || 0
+  );
+
+
+  if(
+    !Number.isFinite(rate)
+  ){
+
+    return 0;
+
+  }
+
+
+  if(
+    rate>0
+    &&
+    rate<=1
+  ){
+
+    rate *= 100;
+
+  }
+
+
+  return rate;
+
+}
+
+
+function formatRate(
+  value
+){
+
+  const rate =
+  normalizeRate(
+    value
+  );
+
+
+  return rate.toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function formatMMT(
+  value
+){
+
+  if(!value){
+
+    return '—';
+
+  }
+
+
+  const d =
+  new Date(
+    value
+  );
+
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    return '—';
+
+  }
+
+
+  return d.toLocaleString(
+    'en-GB',
+    {
+      timeZone:
+      'Asia/Yangon',
+
+      year:
+      'numeric',
+
+      month:
+      '2-digit',
+
+      day:
+      '2-digit',
+
+      hour:
+      '2-digit',
+
+      minute:
+      '2-digit',
+
+      hour12:
+      false
+    }
+  );
+
+}
+
+
+function periodName(
+  code
+){
+
+  if(
+    code===
+    '1030'
+  ){
+
+    return '上午 11:45';
+
+  }
+
+
+  if(
+    code===
+    '1530'
+  ){
+
+    return '下午 15:45';
+
+  }
+
+
+  return code || '—';
+
+}
+
+
+function statusName(
+  status
+){
+
+  if(status==='open'){
+
+    return '开放中';
+
+  }
+
+
+  if(status==='closed'){
+
+    return '已关闭';
+
+  }
+
+
+  if(status==='settled'){
+
+    return '已结算';
+
+  }
+
+
+  return status || '—';
+
+}
+
+
+function saveSession(
+  data
+){
+
+  if(
+    data?.access_token
+  ){
+
+    token =
+    data.access_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_agent_token',
+      token
+    );
+
+  }
+
+
+  if(
+    data?.refresh_token
+  ){
+
+    refreshToken =
+    data.refresh_token;
+
+
+    localStorage.setItem(
+      'jmt_agent_refresh_token',
+      refreshToken
+    );
+
+
+    sessionStorage.setItem(
+      'jmt_agent_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+function clearSession(){
+
+  token =
+  '';
+
+
+  refreshToken =
+  '';
+
+
+  localStorage.removeItem(
+    'jmt_agent_token'
+  );
+
+
+  localStorage.removeItem(
+    'jmt_agent_refresh_token'
+  );
+
+
+  sessionStorage.removeItem(
+    'jmt_agent_token'
+  );
+
+
+  sessionStorage.removeItem(
+    'jmt_agent_refresh_token'
+  );
+
+}
+
+
+async function refreshSession(){
+
+  if(!refreshToken){
+
+    return false;
+
+  }
+
+
+  if(refreshPromise){
+
+    return refreshPromise;
+
+  }
+
+
+  refreshPromise =
+  (async()=>{
+
+    try{
+
+      const r =
+      await fetch(
+        BASE+
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:
+          'POST',
+
+          headers:{
+            apikey:
+            KEY,
+
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            refresh_token:
+            refreshToken
+          })
+        }
+      );
+
+
+      if(!r.ok){
+
+        return false;
+
+      }
+
+
+      const data =
+      await r.json();
+
+
+      saveSession(
+        data
+      );
+
+
+      return true;
+
+
+    }catch(e){
+
+      return false;
+
+
+    }finally{
+
+      refreshPromise =
+      null;
+
+    }
+
+  })();
+
+
+  return refreshPromise;
+
+}
+
+
+async function api(
+  path,
+  options={}
+){
+
+  let response =
+  await fetch(
+    BASE+path,
+    {
+      ...options,
+
+      headers:{
+        apikey:
+        KEY,
+
+        Authorization:
+        'Bearer '+token,
+
+        ...(
+          options.headers
+          ||
+          {}
+        )
+      }
+    }
+  );
+
+
+  if(
+    response.status===
+    401
+  ){
+
+    const refreshed =
+    await refreshSession();
+
+
+    if(refreshed){
+
+      response =
+      await fetch(
+        BASE+path,
+        {
+          ...options,
+
+          headers:{
+            apikey:
+            KEY,
+
+            Authorization:
+            'Bearer '+token,
+
+            ...(
+              options.headers
+              ||
+              {}
+            )
+          }
+        }
+      );
+
+    }
+
+  }
+
+
+  return response;
+
+}
+
+
+async function signIn(){
+
+  const email =
+  document.getElementById(
+    'email'
+  ).value.trim();
+
+
+  const password =
+  document.getElementById(
+    'password'
+  ).value;
+
+
+  const msg =
+  document.getElementById(
+    'loginMsg'
+  );
+
+
+  const btn =
+  document.getElementById(
+    'loginBtn'
+  );
+
+
+  if(
+    !email
+    ||
+    !password
+  ){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '请输入代理邮箱和密码';
+
+
+    return;
+
+  }
+
+
+  let captchaToken =
+  '';
+
+
+  try{
+
+    captchaToken =
+    hcaptcha.getResponse();
+
+  }catch(e){}
+
+
+  if(!captchaToken){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '请先完成人机验证';
+
+
+    return;
+
+  }
+
+
+  btn.disabled =
+  true;
+
+
+  msg.className =
+  'msg';
+
+
+  msg.textContent =
+  '正在登录...';
+
+
+  try{
+
+    const r =
+    await fetch(
+      BASE+
+      '/auth/v1/token?grant_type=password',
+      {
+        method:
+        'POST',
+
+        headers:{
+          apikey:
+          KEY,
+
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          email,
+          password,
+
+          gotrue_meta_security:{
+            captcha_token:
+            captchaToken
+          }
+        })
+      }
+    );
+
+
+    const data =
+    await r.json();
+
+
+    if(
+      !r.ok
+      ||
+      !data.access_token
+    ){
+
+      throw new Error(
+        'LOGIN_FAILED'
+      );
+
+    }
+
+
+    saveSession(
+      data
+    );
+
+
+    await startDashboard();
+
+
+  }catch(e){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '登录失败，请检查账号或密码';
+
+
+    try{
+      hcaptcha.reset();
+    }catch(err){}
+
+
+  }finally{
+
+    btn.disabled =
+    false;
+
+  }
+
+}
+
+
+async function startDashboard(){
+
+  try{
+
+    await loadSummary(
+      false
+    );
+
+
+    document.getElementById(
+      'loginCard'
+    ).classList.add(
+      'hidden'
+    );
+
+
+    document.getElementById(
+      'dashboard'
+    ).classList.remove(
+      'hidden'
+    );
+
+
+  }catch(e){
+
+    console.error(
+      e
+    );
+
+
+    clearSession();
+
+
+    document.getElementById(
+      'loginCard'
+    ).classList.remove(
+      'hidden'
+    );
+
+
+    document.getElementById(
+      'dashboard'
+    ).classList.add(
+      'hidden'
+    );
+
+  }
+
+}
+
+
+async function loadSummary(
+  showMessage=false
+){
+
+  const msg =
+  document.getElementById(
+    'mainMsg'
+  );
+
+
+  if(showMessage){
+
+    msg.className =
+    'msg';
+
+
+    msg.textContent =
+    '正在读取最新数据...';
+
+  }
+
+
+  const r =
+  await api(
+    '/rest/v1/rpc/agent_my_round_summary',
+    {
+      method:
+      'POST',
+
+      headers:{
+        'Content-Type':
+        'application/json'
+      },
+
+      body:
+      JSON.stringify({
+        p_round_id:
+        null
+      })
+    }
+  );
+
+
+  const text =
+  await r.text();
+
+
+  if(!r.ok){
+
+    throw new Error(
+      text
+      ||
+      'SUMMARY_FAILED'
+    );
+
+  }
+
+
+  summary =
+  text
+  ?
+  JSON.parse(
+    text
+  )
+  :
+  {};
+
+
+  renderSummary();
+
+
+  if(showMessage){
+
+    msg.className =
+    'msg ok';
+
+
+    msg.textContent =
+    '✓ 已读取最新数据';
+
+
+    setTimeout(
+      ()=>{
+
+        if(
+          msg.textContent===
+          '✓ 已读取最新数据'
+        ){
+
+          msg.textContent =
+          '';
+
+        }
+
+      },
+      1600
+    );
+
+  }
+
+}
+
+
+function renderSummary(){
+
+  const agent =
+  summary?.agent
+  ||
+  {};
+
+
+  const round =
+  summary?.round
+  ||
+  null;
+
+
+  document.getElementById(
+    'agentName'
+  ).textContent =
+  agent.display_name
+  ||
+  '—';
+
+
+  const statusEl =
+  document.getElementById(
+    'agentStatus'
+  );
+
+
+  if(
+    agent.status===
+    'active'
+  ){
+
+    statusEl.textContent =
+    '正常';
+
+
+    statusEl.className =
+    'statusGood';
+
+  }else if(
+    agent.status===
+    'suspended'
+  ){
+
+    statusEl.textContent =
+    '已暂停';
+
+
+    statusEl.className =
+    'statusBad';
+
+  }else{
+
+    statusEl.textContent =
+    '已限制';
+
+
+    statusEl.className =
+    'statusBad';
+
+  }
+
+
+  document.getElementById(
+    'agentRate'
+  ).textContent =
+  formatRate(
+    agent.commission_rate
+  )
+  +
+  '%';
+
+
+  document.getElementById(
+    'referralCode'
+  ).textContent =
+  agent.referral_code
+  ||
+  '—';
+
+
+  const referralLink =
+  agent.referral_code
+  ?
+  (
+    location.origin+
+    '/customer/?ref='+
+    encodeURIComponent(
+      agent.referral_code
+    )
+  )
+  :
+  '—';
+
+
+  document.getElementById(
+    'referralLink'
+  ).textContent =
+  referralLink;
+
+
+  if(round){
+
+    document.getElementById(
+      'roundName'
+    ).textContent =
+    round.round_date+
+    ' · '+
+    periodName(
+      round.round_code
+    );
+
+
+    document.getElementById(
+      'roundStatus'
+    ).textContent =
+    statusName(
+      round.status
+    );
+
+
+    document.getElementById(
+      'deadline'
+    ).textContent =
+    formatMMT(
+      round.deadline_at
+    );
+
+  }else{
+
+    document.getElementById(
+      'roundName'
+    ).textContent =
+    '暂无期数';
+
+
+    document.getElementById(
+      'roundStatus'
+    ).textContent =
+    '—';
+
+
+    document.getElementById(
+      'deadline'
+    ).textContent =
+    '—';
+
+  }
+
+
+  document.getElementById(
+    'confirmedTotal'
+  ).textContent =
+  formatNumber(
+    summary.confirmed_total
+  );
+
+
+  document.getElementById(
+    'customerCount'
+  ).textContent =
+  Number(
+    summary.confirmed_customer_count
+    ||
+    0
+  );
+
+
+  document.getElementById(
+    'roundRate'
+  ).textContent =
+  formatRate(
+    summary.commission_rate
+  )
+  +
+  '%';
+
+
+  document.getElementById(
+    'commissionDue'
+  ).textContent =
+  formatNumber(
+    summary.commission_due
+  );
+
+
+  renderZodiac(
+    summary.zodiac
+    ||
+    []
+  );
+
+}
+
+
+function renderZodiac(
+  rows
+){
+
+  const box =
+  document.getElementById(
+    'zodiacGrid'
+  );
+
+
+  const map =
+  {};
+
+
+  rows.forEach(
+    row=>{
+
+      map[
+        String(
+          row.number_code
+        )
+        .padStart(
+          2,
+          '0'
+        )
+      ] =
+      Number(
+        row.confirmed_points
+        ||
+        0
+      );
+
+    }
+  );
+
+
+  let html =
+  '';
+
+
+  for(
+    let i=1;
+    i<=12;
+    i++
+  ){
+
+    const code =
+    String(i)
+    .padStart(
+      2,
+      '0'
+    );
+
+
+    const amount =
+    Number(
+      map[code]
+      ||
+      0
+    );
+
+
+    html += `
+
+      <div class="zodiac${amount>0?' active':''}">
+
+        <div class="zodiacTop">
+
+          <div class="zodiacName">
+            ${ZODIAC[i-1]}
+          </div>
+
+          <div class="zodiacCode">
+            ${code}
+          </div>
+
+        </div>
+
+        <div class="zodiacAmount">
+          ${formatNumber(amount)}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  box.innerHTML =
+  html;
+
+}
+
+
+async function copyReferralLink(){
+
+  const text =
+  document.getElementById(
+    'referralLink'
+  ).textContent.trim();
+
+
+  const msg =
+  document.getElementById(
+    'copyMsg'
+  );
+
+
+  if(
+    !text
+    ||
+    text===
+    '—'
+  ){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '当前没有可复制的推荐链接';
+
+
+    return;
+
+  }
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      text
+    );
+
+
+    msg.className =
+    'msg ok';
+
+
+    msg.textContent =
+    '✓ 推荐链接已复制';
+
+
+  }catch(e){
+
+    msg.className =
+    'msg error';
+
+
+    msg.textContent =
+    '复制失败，请长按链接手动复制';
+
+  }
+
+}
+
+
+function logout(){
+
+  clearSession();
+
+
+  location.reload();
+
+}
+
+
+function updateClock(){
+
+  document.getElementById(
+    'mmtClock'
+  ).textContent =
+  new Date()
+  .toLocaleTimeString(
+    'en-GB',
+    {
+      timeZone:
+      'Asia/Yangon',
+
+      hour:
+      '2-digit',
+
+      minute:
+      '2-digit',
+
+      second:
+      '2-digit',
+
+      hour12:
+      false
+    }
+  );
+
+}
+
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+updateClock();
+
+
+setInterval(
+  ()=>{
+
+    if(
+      token
+      &&
+      !document.getElementById(
+        'dashboard'
+      ).classList.contains(
+        'hidden'
+      )
+    ){
+
+      loadSummary(
+        false
+      )
+      .catch(
+        console.error
+      );
+
+    }
+
+  },
+  20000
+);
+
+
+if(token){
+
+  startDashboard()
+  .catch(
+    console.error
+  );
+
+}
+
+</script>
+
+</body>
+
+</html>
