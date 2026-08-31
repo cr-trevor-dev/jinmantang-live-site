@@ -1073,6 +1073,8 @@
 
   let loading =
   false;
+  let latestResultSignature =
+null;
 
 
   function ensureStyle(){
@@ -1363,9 +1365,11 @@ fmt(
     return {
 
       text:
-      '待派彩 · 平台应返还 '
-      +
-      fmt(due),
+customerTranslateValue(
+  '待派彩 · 平台应返还 '
+)
++
+fmt(due),
 
       kind:
       'win'
@@ -1409,109 +1413,137 @@ fmt(
 
     card.innerHTML = `
 
-      <div class="cardTitle">
+  <div class="cardTitle">
 
-        最近一期结果
+    ${customerTranslateValue(
+      '最近一期结果'
+    )}
 
-      </div>
-
-
-      <div class="customerResultHero">
-
-        <small>
-
-          ${row.round_date || '—'}
-          ·
-          ${periodName(row.round_code)}
-
-        </small>
-
-        <strong>
-
-          开奖生肖：
-          ${zodiacName(row.result_number)}
-
-        </strong>
-
-      </div>
+  </div>
 
 
-      <div class="customerResultGrid">
+  <div class="customerResultHero">
 
-        <div class="customerResultBox">
+    <small>
 
-          <span>
-            我的有效下注
-          </span>
+      ${row.round_date || '—'}
+      ·
+      ${periodName(row.round_code)}
 
-          <b>
-            ${fmt(row.confirmed_total)}
-          </b>
+    </small>
 
-        </div>
+    <strong>
 
+      ${customerTranslateValue(
+        '开奖生肖：'
+      )}
+      ${customerTranslateValue(
+        zodiacName(
+          row.result_number
+        )
+      )}
 
-        <div class="customerResultBox">
+    </strong>
 
-          <span>
-            命中生肖金额
-          </span>
-
-          <b>
-            ${fmt(win)}
-          </b>
-
-        </div>
+  </div>
 
 
-        <div class="customerResultBox">
+  <div class="customerResultGrid">
 
-          <span>
-            本期赔率
-          </span>
+    <div class="customerResultBox">
 
-          <b>
-            1 : ${fmt(row.payout_multiplier_snapshot)}
-            总返还
-          </b>
+      <span>
+        ${customerTranslateValue(
+          '我的有效下注'
+        )}
+      </span>
 
-        </div>
+      <b>
+        ${fmt(row.confirmed_total)}
+      </b>
 
-
-        <div class="customerResultBox">
-
-          <span>
-            中奖返还
-          </span>
-
-          <b>
-            ${fmt(due)}
-          </b>
-
-        </div>
-
-      </div>
+    </div>
 
 
-      <div
-        class="customerResultState ${state.kind}">
+    <div class="customerResultBox">
 
-        ${state.text}
+      <span>
+        ${customerTranslateValue(
+          '命中生肖金额'
+        )}
+      </span>
 
-      </div>
+      <b>
+        ${fmt(win)}
+      </b>
+
+    </div>
 
 
-      <div class="note">
+    <div class="customerResultBox">
 
-        只有开奖前由管理员确认的金额，
-        才属于本期有效下注。
+      <span>
+        ${customerTranslateValue(
+          '本期赔率'
+        )}
+      </span>
 
-        待审核、已拒绝或仅保存的金额，
-        不会参与中奖计算。
+      <b>
+        1 : ${fmt(
+          row.payout_multiplier_snapshot
+        )}
+        ${customerTranslateValue(
+          '总返还'
+        )}
+      </b>
 
-      </div>
+    </div>
 
-    `;
+
+    <div class="customerResultBox">
+
+      <span>
+        ${customerTranslateValue(
+          '中奖返还'
+        )}
+      </span>
+
+      <b>
+        ${fmt(due)}
+      </b>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="customerResultState ${state.kind}">
+
+    ${state.text}
+
+  </div>
+
+
+  <div class="note">
+
+    ${customerTranslateValue(
+      '只有开奖前由管理员确认的金额，'
+    )}
+    ${customerTranslateValue(
+      '才属于本期有效下注。'
+    )}
+
+    ${customerTranslateValue(
+      '待审核、已拒绝或仅保存的金额，'
+    )}
+    ${customerTranslateValue(
+      '不会参与中奖计算。'
+    )}
+
+  </div>
+
+`;
 
     card.classList.remove(
       'hidden'
@@ -1739,21 +1771,27 @@ fmt(
 
       compact.innerHTML = `
 
-        <b>
-          KPay 已绑定
-        </b>
+        compact.innerHTML = `
 
-        <br>
+  <b>
+    ${customerTranslateValue(
+      'KPay 已绑定'
+    )}
+  </b>
 
-        ${name}
-        ·
-        ${number}
+  <br>
 
-        <br>
+  ${name}
+  ·
+  ${number}
 
-        如需更换，请联系客服。
+  <br>
 
-      `;
+  ${customerTranslateValue(
+    '如需更换，请联系客服。'
+  )}
+
+`;
 
     }
     else{
@@ -1775,25 +1813,31 @@ fmt(
 
       compact.innerHTML = `
 
-        <b>
-          银行账户已绑定
-        </b>
+       compact.innerHTML = `
 
-        <br>
+  <b>
+    ${customerTranslateValue(
+      '银行账户已绑定'
+    )}
+  </b>
 
-        ${bank}
-        ·
-        ${name}
+  <br>
 
-        <br>
+  ${bank}
+  ·
+  ${name}
 
-        ${number}
+  <br>
 
-        <br>
+  ${number}
 
-        如需更换，请联系客服。
+  <br>
 
-      `;
+  ${customerTranslateValue(
+    '如需更换，请联系客服。'
+  )}
+
+`;
 
     }
 
@@ -1828,14 +1872,18 @@ fmt(
     if(title){
 
       title.textContent =
-      '下一期';
+customerTranslateValue(
+  '下一期'
+);
 
     }
 
     if(badge){
 
       badge.textContent =
-      '暂未开放';
+customerTranslateValue(
+  '暂未开放'
+);
 
     }
 
@@ -1847,15 +1895,19 @@ fmt(
     if(box){
 
       box.textContent =
-      hasSettlement
+hasSettlement
 
-      ?
+?
 
-      '上一期已经结束，结果与结算见上方。下一期开放后会自动显示在这里。'
+customerTranslateValue(
+  '上一期已经结束，结果与结算见上方。下一期开放后会自动显示在这里。'
+)
 
-      :
+:
 
-      '当前暂无开放期，请等待下一期开放。';
+customerTranslateValue(
+  '当前暂无开放期，请等待下一期开放。'
+);
 
     }
 
@@ -1909,21 +1961,52 @@ fmt(
 
 
     if(
+  row
+  !==
+  undefined
+){
+
+  const signature =
+  JSON.stringify(
+    row
+    ?
+    [
+      row.round_date,
+      row.round_code,
+      row.result_number,
+      row.confirmed_total,
+      row.winning_points,
+      row.payout_multiplier_snapshot,
+      row.payout_due,
+      row.payout_paid,
+      row.payout_status
+    ]
+    :
+    null
+  );
+
+
+  if(
+    signature
+    !==
+    latestResultSignature
+  ){
+
+    latestResultSignature =
+    signature;
+
+    renderResult(
       row
-      !==
-      undefined
-    ){
+    );
 
-      renderResult(
-        row
-      );
+  }
 
-      simplifyNoOpenRound(
-        Boolean(row)
-      );
 
-    }
-    applyCustomerLanguage();
+  simplifyNoOpenRound(
+    Boolean(row)
+  );
+
+}
   }
 
 
