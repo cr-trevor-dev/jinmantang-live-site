@@ -441,7 +441,41 @@
       'Nomor telepon terdaftar sudah terkunci. Hubungi layanan pelanggan untuk menggantinya.'
     ],
     '保存个人资料':['ကိုယ်ရေးအချက်အလက်သိမ်းရန်','Save Profile','บันทึกข้อมูลส่วนตัว','Simpan Profil','Lưu thông tin','Simpan Profil'],
+     '正在登录...':[
+  'ဝင်ရောက်နေသည်...',
+  'Logging in...',
+  'กำลังเข้าสู่ระบบ...',
+  'Sedang Log Masuk...',
+  'Đang đăng nhập...',
+  'Sedang Login...'
+],
 
+'正在注册...':[
+  'စာရင်းသွင်းနေသည်...',
+  'Registering...',
+  'กำลังสมัคร...',
+  'Sedang Mendaftar...',
+  'Đang đăng ký...',
+  'Sedang Mendaftar...'
+],
+
+'正在提交...':[
+  'တင်သွင်းနေသည်...',
+  'Submitting...',
+  'กำลังส่ง...',
+  'Sedang Menghantar...',
+  'Đang gửi...',
+  'Sedang Mengirim...'
+],
+
+'个人资料已保存。':[
+  'ကိုယ်ရေးအချက်အလက်ကို သိမ်းဆည်းပြီးပါပြီ။',
+  'Profile saved.',
+  'บันทึกข้อมูลส่วนตัวแล้ว',
+  'Profil telah disimpan.',
+  'Thông tin cá nhân đã được lưu.',
+  'Profil telah disimpan.'
+],
     '联系客服':['ဝန်ဆောင်မှုကိုဆက်သွယ်ရန်','Contact Support','ติดต่อฝ่ายบริการ','Hubungi Sokongan','Liên hệ hỗ trợ','Hubungi Dukungan'],
     '退出登录':['ထွက်ရန်','Logout','ออกจากระบบ','Log Keluar','Đăng xuất','Keluar'],
 
