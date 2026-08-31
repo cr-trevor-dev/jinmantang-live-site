@@ -1327,7 +1327,9 @@
 
       return {
         text:
-        '已派彩',
+        customerTranslateValue(
+  '已派彩'
+),
 
         kind:
         'win'
