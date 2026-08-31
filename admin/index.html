@@ -671,9 +671,19 @@ button.danger{
           <strong id="summaryMissing">0</strong>
         </div>
 
+                <div class="summaryBox">
+          <small>已确认金额</small>
+          <strong id="summaryConfirmed">0</strong>
+        </div>
+
         <div class="summaryBox">
-          <small>本期提交总金额</small>
-          <strong id="summaryTotal">0</strong>
+          <small>待审核金额</small>
+          <strong id="summaryPending">0</strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>未确认金额</small>
+          <strong id="summaryEditable">0</strong>
         </div>
 
         <div class="summaryBox">
@@ -2203,19 +2213,23 @@ async function loadDashboardSummary(){
     );
 
 
-    const total =
+        const confirmedTotal =
     Number(
       summary?.confirmed_total
       ||
       0
-    )
-    +
+    );
+
+
+    const pendingTotal =
     Number(
       summary?.pending_total
       ||
       0
-    )
-    +
+    );
+
+
+    const editableTotal =
     Number(
       summary?.editable_total
       ||
@@ -2245,11 +2259,27 @@ async function loadDashboardSummary(){
     'green';
 
 
-    document.getElementById(
-      'summaryTotal'
+        document.getElementById(
+      'summaryConfirmed'
     ).textContent =
     formatNumber(
-      total
+      confirmedTotal
+    );
+
+
+    document.getElementById(
+      'summaryPending'
+    ).textContent =
+    formatNumber(
+      pendingTotal
+    );
+
+
+    document.getElementById(
+      'summaryEditable'
+    ).textContent =
+    formatNumber(
+      editableTotal
     );
 
 
@@ -2301,8 +2331,20 @@ function renderNoRound(){
   '0';
 
 
+    document.getElementById(
+    'summaryConfirmed'
+  ).textContent =
+  '0';
+
+
   document.getElementById(
-    'summaryTotal'
+    'summaryPending'
+  ).textContent =
+  '0';
+
+
+  document.getElementById(
+    'summaryEditable'
   ).textContent =
   '0';
 
