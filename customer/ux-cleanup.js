@@ -483,6 +483,14 @@
   'Vui lòng nhập đúng tên tài khoản nhận tiền.',
   'Masukkan nama akun penerimaan yang benar.'
 ],    
+ '请输入正确收款户名。':[
+  'မှန်ကန်သော ငွေလက်ခံအကောင့်အမည်ကို ထည့်ပါ။',
+  'Please enter the correct payout account name.',
+  'กรุณากรอกชื่อบัญชีรับเงินให้ถูกต้อง',
+  'Sila masukkan nama akaun penerimaan yang betul.',
+  'Vui lòng nhập đúng tên tài khoản nhận tiền.',
+  'Masukkan nama akun penerimaan yang benar.'
+],     
 '本期金额已安全保存。':[
   'ယခုအကြိမ် ငွေပမာဏကို လုံခြုံစွာ သိမ်းဆည်းပြီးပါပြီ။',
   'Round amount saved securely.',
@@ -491,6 +499,38 @@
   'Số tiền kỳ này đã được lưu an toàn.',
   'Jumlah putaran telah disimpan dengan aman.'
 ],
+   '请输入银行名称。':[
+  'ဘဏ်အမည်ကို ထည့်ပါ။',
+  'Please enter the bank name.',
+  'กรุณากรอกชื่อธนาคาร',
+  'Sila masukkan nama bank.',
+  'Vui lòng nhập tên ngân hàng.',
+  'Masukkan nama bank.'
+],
+  '请仔细核对收款资料。保存后将自动绑定，客户不能自行修改，如需更换必须联系客服。是否确认保存？':[
+  'ငွေလက်ခံအချက်အလက်ကို သေချာစစ်ဆေးပါ။ သိမ်းဆည်းပြီးနောက် အလိုအလျောက်ချိတ်ဆက်သွားမည်ဖြစ်ပြီး ကိုယ်တိုင်ပြင်ဆင်၍ မရပါ။ ပြောင်းလဲလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ရပါမည်။ သိမ်းဆည်းရန် အတည်ပြုပါသလား။',
+  'Please check the payout details carefully. After saving, they will be linked automatically and cannot be changed by the customer. Contact support if you need to change them. Confirm save?',
+  'กรุณาตรวจสอบข้อมูลรับเงินให้ละเอียด หลังบันทึกระบบจะผูกข้อมูลโดยอัตโนมัติและลูกค้าจะไม่สามารถแก้ไขเองได้ หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ ยืนยันการบันทึกหรือไม่',
+  'Sila semak maklumat penerimaan dengan teliti. Selepas disimpan, ia akan dipautkan secara automatik dan tidak boleh diubah sendiri. Hubungi sokongan jika perlu menukarnya. Sahkan simpanan?',
+  'Vui lòng kiểm tra kỹ thông tin nhận tiền. Sau khi lưu, thông tin sẽ tự động được liên kết và khách hàng không thể tự thay đổi. Nếu cần thay đổi, hãy liên hệ hỗ trợ. Xác nhận lưu?',
+  'Periksa data penerimaan dengan teliti. Setelah disimpan, data akan terhubung secara otomatis dan tidak dapat diubah sendiri. Hubungi dukungan jika perlu menggantinya. Konfirmasi simpan?'
+],
+   '请再次确认新的收款资料完全正确。保存后将再次自动锁定，客户不能自行修改。是否确认保存？':[
+  'ငွေလက်ခံအချက်အလက်အသစ်များ လုံးဝမှန်ကန်ကြောင်း ထပ်မံအတည်ပြုပါ။ သိမ်းဆည်းပြီးနောက် ထပ်မံအလိုအလျောက်လော့ခ်ချသွားမည်ဖြစ်ပြီး ကိုယ်တိုင်ပြင်ဆင်၍ မရပါ။ သိမ်းဆည်းရန် အတည်ပြုပါသလား။',
+  'Please confirm again that the new payout details are completely correct. After saving, they will be locked again automatically and cannot be changed by the customer. Confirm save?',
+  'กรุณายืนยันอีกครั้งว่าข้อมูลรับเงินใหม่ถูกต้องทั้งหมด หลังบันทึกระบบจะล็อกอีกครั้งโดยอัตโนมัติและลูกค้าจะไม่สามารถแก้ไขเองได้ ยืนยันการบันทึกหรือไม่',
+  'Sila sahkan sekali lagi bahawa maklumat penerimaan baharu adalah betul sepenuhnya. Selepas disimpan, ia akan dikunci semula secara automatik dan tidak boleh diubah sendiri. Sahkan simpanan?',
+  'Vui lòng xác nhận lại rằng thông tin nhận tiền mới hoàn toàn chính xác. Sau khi lưu, thông tin sẽ tự động bị khóa lại và khách hàng không thể tự thay đổi. Xác nhận lưu?',
+  'Konfirmasikan kembali bahwa data penerimaan baru sudah sepenuhnya benar. Setelah disimpan, data akan dikunci kembali secara otomatis dan tidak dapat diubah sendiri. Konfirmasi simpan?'
+],
+   '最后确认一次：账号、户名全部正确吗？':[
+  'နောက်ဆုံးတစ်ကြိမ် အတည်ပြုပါ။ အကောင့်နံပါတ်နှင့် အကောင့်အမည် အားလုံးမှန်ကန်ပါသလား။',
+  'Final confirmation: are the account number and account name both correct?',
+  'ยืนยันครั้งสุดท้าย: เลขบัญชีและชื่อบัญชีถูกต้องทั้งหมดหรือไม่',
+  'Pengesahan terakhir: adakah nombor akaun dan nama akaun semuanya betul?',
+  'Xác nhận lần cuối: số tài khoản và tên tài khoản đều chính xác chứ?',
+  'Konfirmasi terakhir: apakah nomor akun dan nama akun semuanya sudah benar?'
+],   
 '个人资料已保存。':[
   'ကိုယ်ရေးအချက်အလက်ကို သိမ်းဆည်းပြီးပါပြီ။',
   'Profile saved.',
