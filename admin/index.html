@@ -1132,6 +1132,8 @@ sessionStorage.getItem(
 
 let refreshSessionPromise =
 null; 
+  let isLoggingOut =
+false;
 
 
 let pendingLogo =
@@ -1156,6 +1158,10 @@ let mfaEnrollSecret = '';
 function saveAdminSession(
   data
 ){
+
+  if(isLoggingOut){
+    return;
+  }
 
   if(
     data
@@ -4415,10 +4421,20 @@ function clearSession(){
 
 function logout(){
 
+  isLoggingOut =
+  true;
+
+
   clearSession();
 
 
-  location.reload();
+  refreshSessionPromise =
+  null;
+
+
+  location.replace(
+    '/admin/'
+  );
 
 }
 
