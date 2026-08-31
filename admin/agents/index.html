@@ -13,1006 +13,556 @@
   name="theme-color"
   content="#09090a">
 
-<title>金满堂 · 代理管理</title>
+<title>金满堂 · 代理中心</title>
 
 <style>
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
+  min-height:100vh;
   background:
   radial-gradient(
     circle at top,
     #251907 0,
-    #0d0c0a 40%,
+    #0d0c0a 38%,
     #070708 100%
   );
-  color:#f5edd9;
+  color:#f7f0df;
   font-family:
   -apple-system,
   BlinkMacSystemFont,
   "Segoe UI",
   Arial,
-  sans-serif
+  sans-serif;
 }
 
 .wrap{
-  max-width:850px;
+  max-width:920px;
   margin:auto;
-  padding:20px 14px 60px
+  min-height:100vh;
+  padding:22px 15px 55px;
 }
 
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px
+.brand{
+  text-align:center;
+  margin-bottom:20px;
 }
 
-.logo{
-  font-size:21px;
+.mark{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:27px;
   font-weight:900;
-  color:#efd477
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:
+  linear-gradient(
+    145deg,
+    #382506,
+    #100d08
+  );
+  box-shadow:
+  0 0 28px
+  rgba(235,185,62,.22);
 }
 
-.sub{
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889;
+}
+
+.en{
   font-size:10px;
-  color:#817969;
-  margin-top:4px;
-  letter-spacing:1px
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px;
 }
 
 .card{
   background:
   linear-gradient(
     180deg,
-    #151515,
-    #0d0d0e
+    rgba(22,22,22,.98),
+    rgba(11,11,12,.98)
   );
   border:
   1px solid
-  rgba(214,168,63,.28);
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:14px
+  rgba(214,168,63,.30);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:
+  0 22px 60px
+  rgba(0,0,0,.32);
 }
 
 .title{
-  color:#dec372;
-  font-size:15px;
+  font-size:17px;
   font-weight:900;
-  margin-bottom:13px
+  color:#dfc575;
+  margin-bottom:14px;
 }
 
-input,
-select,
-textarea{
+input{
   width:100%;
-  background:#101011;
-  color:#fff;
   border:
   1px solid
-  rgba(214,168,63,.22);
-  border-radius:11px;
-  padding:12px;
-  outline:none;
+  rgba(214,168,63,.24);
+  background:#101011;
+  color:#fff;
+  border-radius:13px;
+  padding:13px;
   font-size:14px;
-  font-family:inherit
-}
-
-textarea{
-  min-height:96px;
-  resize:vertical
-}
-
-input[type="file"]{
-  padding:10px
+  outline:none;
 }
 
 button{
+  width:100%;
   border:0;
-  border-radius:10px;
-  padding:11px 14px;
-  font-weight:800;
+  border-radius:13px;
+  padding:12px 13px;
+  font-size:13px;
+  font-weight:900;
   cursor:pointer;
-  font-family:inherit
-}
-
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed
-}
-
-.gold{
   background:
   linear-gradient(
     180deg,
-    #efd47c,
-    #b87e1e
+    #f1d784,
+    #b47d20
   );
-  color:#171109
+  color:#171109;
 }
 
-.dark{
-  background:#191919;
-  color:#d9c77d;
+button.secondary{
+  background:#171718;
+  color:#d9c37c;
   border:
   1px solid
-  rgba(214,168,63,.2)
+  rgba(214,168,63,.22);
 }
 
-.red{
-  background:#351616;
-  color:#e9a0a0;
+button.warning{
+  background:#20190d;
+  color:#e4c06b;
   border:
   1px solid
-  rgba(220,90,90,.25)
+  rgba(192,143,43,.28);
 }
 
-.greenBtn{
-  background:#173326;
-  color:#7bdba8;
+button.danger{
+  background:#1b1111;
+  color:#dfa7a2;
   border:
   1px solid
-  rgba(80,200,130,.26)
+  rgba(180,80,80,.26);
 }
 
-.formGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px
+button.success{
+  background:#132016;
+  color:#9bd1a7;
+  border:
+  1px solid
+  rgba(76,146,91,.28);
 }
 
-.stats{
+button:disabled{
+  opacity:.42;
+  cursor:not-allowed;
+}
+
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+}
+
+.summary{
   display:grid;
   grid-template-columns:
-  repeat(3,1fr);
-  gap:8px
+  repeat(4,1fr);
+  gap:9px;
 }
 
-.stat{
-  background:#101011;
-  border-radius:12px;
-  padding:13px;
-  border:
-  1px solid
-  rgba(255,255,255,.05)
-}
-
-.stat small{
-  display:block;
-  color:#817a6d;
-  font-size:10px
-}
-
-.stat strong{
-  display:block;
-  color:#ebce73;
-  font-size:20px;
-  margin-top:5px
-}
-
-.agent{
+.summaryBox{
   background:#101011;
   border:
   1px solid
   rgba(255,255,255,.06);
   border-radius:14px;
-  padding:14px;
-  margin-bottom:9px
+  padding:13px;
 }
 
-.agentTop{
+.summaryBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+.summaryBox strong{
+  display:block;
+  color:#ebcd72;
+  font-size:20px;
+  word-break:break-word;
+}
+
+.formGrid{
+  display:grid;
+  grid-template-columns:
+  1fr 1fr;
+  gap:9px;
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns:
+  1fr auto;
+  gap:9px;
+}
+
+.toolbar button{
+  width:auto;
+  min-width:96px;
+}
+
+.agentCard,
+.detailBox,
+.customerItem,
+.accountItem,
+.commissionItem{
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  border-radius:16px;
+  padding:14px;
+  background:#0e0e0f;
+  margin-top:10px;
+}
+
+.agentHead,
+.detailHead,
+.rowHead{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
-  align-items:center;
-  gap:12px
+  gap:12px;
 }
 
 .name{
-  font-size:16px;
+  font-size:18px;
   font-weight:900;
-  color:#f0d27a
+  color:#f0d077;
+}
+
+.code{
+  color:#a99b75;
+  font-size:11px;
+  margin-top:4px;
 }
 
 .meta{
-  font-size:11px;
-  color:#8b8374;
-  margin-top:5px;
-  line-height:1.6
+  color:#888174;
+  font-size:12px;
+  line-height:1.75;
+  margin-top:9px;
 }
 
 .badge{
-  font-size:11px;
-  padding:5px 9px;
-  border-radius:20px;
-  white-space:nowrap
+  padding:6px 9px;
+  border-radius:99px;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
 .badge.active{
-  background:#153124;
-  color:#76d6a0
+  background:
+  rgba(68,143,87,.14);
+  color:#89d09d;
 }
 
 .badge.suspended{
-  background:#352d13;
-  color:#e0c46c
+  background:
+  rgba(179,126,35,.15);
+  color:#e0bd68;
 }
 
 .badge.blocked{
-  background:#371717;
-  color:#e79292
+  background:
+  rgba(169,70,65,.15);
+  color:#e19d98;
+}
+
+.badge.waiting{
+  background:
+  rgba(172,126,42,.14);
+  color:#ddbc65;
+}
+
+.badge.done{
+  background:
+  rgba(64,145,88,.14);
+  color:#86d19c;
+}
+
+.infoGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(4,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+
+.infoBox{
+  padding:10px;
+  border-radius:12px;
+  background:#131314;
+  border:
+  1px solid
+  rgba(255,255,255,.05);
+}
+
+.infoBox small{
+  display:block;
+  color:#777166;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.infoBox strong{
+  display:block;
+  color:#e9dfc7;
+  font-size:13px;
+  line-height:1.45;
+  word-break:break-word;
+}
+
+.infoBox.money strong{
+  color:#ecd176;
+  font-size:16px;
 }
 
 .actions{
   display:grid;
   grid-template-columns:
-  1fr 1fr 1fr;
-  gap:7px;
-  margin-top:12px
+  repeat(3,1fr);
+  gap:8px;
+  margin-top:12px;
 }
 
-.actions button{
-  font-size:11px;
-  padding:9px 4px
+.actions.two{
+  grid-template-columns:
+  1fr 1fr;
 }
 
-.msg{
-  text-align:center;
-  color:#9d9586;
-  font-size:12px;
-  min-height:18px;
+.actions.one{
+  grid-template-columns:1fr;
+}
+
+.detailTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.detailTop strong{
+  color:#e5c96f;
+  font-size:14px;
+}
+
+.detailTop button{
+  width:auto;
+  min-width:110px;
+}
+
+.linkBox{
   margin-top:10px;
-  line-height:1.6;
-  word-break:break-word
+  padding:12px;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  border-radius:12px;
+  background:#101011;
 }
 
-.success{
-  color:#76d6a0!important
+.linkBox small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:5px;
 }
 
-.error{
-  color:#e79292!important
+.linkBox strong{
+  display:block;
+  color:#e6cf88;
+  font-size:12px;
+  word-break:break-all;
+  line-height:1.5;
+}
+
+.sectionLabel{
+  margin-top:18px;
+  margin-bottom:8px;
+  color:#b7a46d;
+  font-size:12px;
+  font-weight:900;
 }
 
 .empty{
   text-align:center;
-  color:#777;
-  padding:25px 10px;
-  font-size:13px
-}
-
-.divider{
-  height:1px;
-  background:
-  rgba(255,255,255,.06);
-  margin:15px 0
+  color:#7f786b;
+  padding:20px 10px;
+  font-size:12px;
 }
 
 .hint{
+  color:#7f786b;
   font-size:11px;
-  color:#777166;
-  line-height:1.7;
-  margin-top:10px
-}
-
-.sessionBox{
-  background:#101011;
-  border:
-  1px solid
-  rgba(214,168,63,.16);
-  border-radius:13px;
-  padding:12px;
-  font-size:11px;
-  color:#8b8374;
-  line-height:1.6;
-  margin-bottom:14px
-}
-
-.sessionBox strong{
-  color:#76d6a0
-}
-
-.searchRow{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px
-}
-
-.searchRow button{
-  min-width:85px
-}
-.agentNav{
-  display:grid;
-  grid-template-columns:
-  repeat(2,1fr);
-  gap:9px;
-  margin-bottom:14px
-}
-
-.agentNavItem{
-  width:100%;
-  min-height:92px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  text-align:left;
-  gap:4px;
-  background:#101011;
-  color:#d9c77d;
-  border:
-  1px solid
-  rgba(214,168,63,.16);
-  border-radius:14px;
-  padding:13px
-}
-
-.agentNavItem span{
-  font-size:20px
-}
-
-.agentNavItem strong{
-  display:block;
-  color:#ebce73;
-  font-size:14px
-}
-
-.agentNavItem small{
-  display:block;
-  color:#81796b;
-  font-size:10px;
-  font-weight:500
-}
-
-.agentNavItem.active{
-  background:
-  linear-gradient(
-    180deg,
-    #211a0d,
-    #13120f
-  );
-  border-color:
-  rgba(214,168,63,.55)
-}
-
-@media(max-width:550px){
-
-  .agentNav{
-    grid-template-columns:
-    1fr 1fr
-  }
-
-}
-
-/* =====================================
-   PAYMENT ACCOUNTS
-===================================== */
-
-.paymentAccountForm{
-  display:grid;
-  gap:9px
-}
-
-.fileBox{
-  background:#101011;
-  border:
-  1px solid
-  rgba(214,168,63,.22);
-  border-radius:12px;
-  padding:12px
-}
-
-.fileState{
-  color:#827b6e;
-  font-size:11px;
-  line-height:1.6;
-  margin-top:8px;
-  word-break:break-word
-}
-
-.fileState.selected{
-  color:#79d6a2
-}
-
-.fileState.errorText{
-  color:#e79292
-}
-
-.qrPreview{
+  line-height:1.65;
   margin-top:10px;
-  background:#0b0b0c;
-  border:
-  1px solid
-  rgba(255,255,255,.06);
-  border-radius:13px;
-  padding:12px;
-  text-align:center
 }
 
-.qrPreview img{
-  max-width:100%;
-  width:auto;
-  max-height:320px;
-  display:block;
-  margin:auto;
-  border-radius:10px
-}
-
-.paymentAccountItem{
-  background:
-  linear-gradient(
-    180deg,
-    #121213,
-    #0e0e0f
-  );
-  border:
-  1px solid
-  rgba(214,168,63,.18);
-  border-radius:16px;
-  padding:15px;
-  margin-top:11px
-}
-
-.paymentAccountItem.disabledAccount{
-  opacity:.68
-}
-
-.paymentAccountHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px
-}
-
-.paymentAccountName{
-  color:#f0d27a;
-  font-size:18px;
-  font-weight:900
-}
-
-.paymentAccountSub{
-  color:#847c6e;
-  font-size:11px;
-  margin-top:5px;
-  line-height:1.6
-}
-
-.paymentGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:13px
-}
-
-.paymentBox{
-  background:#0d0d0e;
-  border:
-  1px solid
-  rgba(255,255,255,.05);
-  border-radius:12px;
-  padding:11px
-}
-
-.paymentBox small{
-  display:block;
-  color:#777166;
-  font-size:9px
-}
-
-.paymentBox strong{
-  display:block;
-  color:#ead077;
-  margin-top:5px;
-  font-size:14px;
-  word-break:break-word
-}
-
-.accountNote{
-  color:#81796b;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:12px;
-  word-break:break-word
-}
-
-.accountQr{
-  margin-top:13px;
-  padding:12px;
-  background:#0b0b0c;
-  border:
-  1px solid
-  rgba(255,255,255,.055);
-  border-radius:13px;
-  text-align:center
-}
-
-.accountQr img{
-  max-width:100%;
-  max-height:330px;
-  border-radius:10px;
-  display:block;
-  margin:auto
-}
-
-.accountQrLoading{
-  color:#777166;
-  padding:28px 10px;
-  font-size:12px
-}
-
-.editAccountBox{
-  margin-top:15px;
-  border-top:
-  1px solid
-  rgba(255,255,255,.07);
-  padding-top:15px
-}
-
-.editAccountTitle{
-  color:#dec372;
-  font-size:14px;
-  font-weight:900;
-  margin-bottom:10px
-}
-
-.accountButtons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:10px
-}
-
-.accountStatus{
-  padding:6px 10px;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:900;
-  white-space:nowrap
-}
-
-.accountStatus.on{
-  background:#153124;
-  color:#79d6a2
-}
-
-.accountStatus.off{
-  background:#371717;
-  color:#e79292
-}
-
-
-/* =====================================
-   PAYMENT REVIEW
-===================================== */
-
-.reviewStats{
-  display:grid;
-  grid-template-columns:
-  repeat(3,1fr);
-  gap:8px;
-  margin-bottom:14px
-}
-
-.reviewStat{
-  background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.055);
-  border-radius:13px;
-  padding:13px
-}
-
-.reviewStat small{
-  display:block;
-  color:#80796c;
-  font-size:10px
-}
-
-.reviewStat strong{
-  display:block;
-  margin-top:6px;
-  font-size:19px;
-  color:#ecd076
-}
-
-.paymentReviewItem{
-  background:
-  linear-gradient(
-    180deg,
-    #121213,
-    #0e0e0f
-  );
-  border:
-  1px solid
-  rgba(214,168,63,.18);
-  border-radius:16px;
-  padding:15px;
-  margin-bottom:12px
-}
-
-.paymentReviewItem.pendingReview{
-  border-color:
-  rgba(214,168,63,.34)
-}
-
-.paymentReviewItem.approvedReview{
-  border-color:
-  rgba(90,200,135,.25)
-}
-
-.paymentReviewItem.rejectedReview{
-  border-color:
-  rgba(215,99,99,.30)
-}
-
-.reviewHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px
-}
-
-.reviewName{
-  color:#f0d27a;
-  font-size:17px;
-  font-weight:900
-}
-
-.reviewMeta{
-  color:#847c6e;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:5px
-}
-
-.reviewBadge{
-  flex:none;
-  border-radius:99px;
-  padding:6px 10px;
-  font-size:10px;
-  font-weight:900
-}
-
-.reviewBadge.pending{
-  background:#352d13;
-  color:#e2c870
-}
-
-.reviewBadge.approved{
-  background:#153124;
-  color:#79d6a2
-}
-
-.reviewBadge.rejected{
-  background:#391818;
-  color:#ed9b9b
-}
-
-.reviewGrid{
-  display:grid;
-  grid-template-columns:
-  repeat(4,1fr);
-  gap:8px;
-  margin-top:13px
-}
-
-.reviewBox{
-  background:#0d0d0e;
-  border:
-  1px solid
-  rgba(255,255,255,.05);
-  border-radius:12px;
-  padding:11px
-}
-
-.reviewBox small{
-  display:block;
-  color:#777166;
-  font-size:9px;
-  line-height:1.4
-}
-
-.reviewBox strong{
-  display:block;
-  color:#ead077;
-  margin-top:5px;
-  font-size:14px;
-  line-height:1.4;
-  word-break:break-word
-}
-
-.reviewProofs{
-  margin-top:13px;
-  border-top:
-  1px solid
-  rgba(255,255,255,.06);
-  padding-top:13px
-}
-
-.reviewProofTitle{
-  font-size:11px;
-  color:#8b8374;
-  margin-bottom:8px
-}
-
-.proofGrid{
-  display:grid;
-  grid-template-columns:
-  repeat(2,1fr);
-  gap:8px
-}
-
-.proofItem{
-  background:#0b0b0c;
-  border:
-  1px solid
-  rgba(255,255,255,.055);
-  border-radius:12px;
-  overflow:hidden
-}
-
-.proofItem img{
-  width:100%;
-  display:block;
-  max-height:420px;
-  object-fit:contain;
-  background:#080809
-}
-
-.proofCaption{
-  padding:8px;
-  color:#777166;
-  font-size:9px;
-  line-height:1.5;
-  word-break:break-all
-}
-
-.reviewNote{
-  color:#81796b;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:11px;
-  word-break:break-word
-}
-
-.reviewButtons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:12px
-}
-
-
-/* =====================================
-   SETTLEMENT
-===================================== */
-
-.settlementStats{
-  display:grid;
-  grid-template-columns:
-  repeat(4,1fr);
-  gap:8px;
-  margin-bottom:14px
-}
-
-.settlementStat{
-  background:#101011;
-  border:
-  1px solid
-  rgba(255,255,255,.055);
-  border-radius:13px;
-  padding:13px
-}
-
-.settlementStat small{
-  display:block;
-  color:#80796c;
-  font-size:10px;
-  line-height:1.4
-}
-
-.settlementStat strong{
-  display:block;
-  margin-top:6px;
-  color:#ecd076;
-  font-size:18px;
-  line-height:1.35;
-  word-break:break-word
-}
-
-.settlementItem{
-  background:
-  linear-gradient(
-    180deg,
-    #121213,
-    #0e0e0f
-  );
-  border:
-  1px solid
-  rgba(214,168,63,.16);
-  border-radius:16px;
-  padding:15px;
-  margin-bottom:11px
-}
-
-.settlementItem.overdue{
-  border-color:
-  rgba(215,99,99,.32)
-}
-
-.settlementItem.settled{
-  border-color:
-  rgba(90,200,135,.22)
-}
-
-.settlementHead{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px
-}
-
-.settlementName{
-  color:#f0d27a;
-  font-size:16px;
-  font-weight:900
-}
-
-.settlementRound{
-  color:#8b8374;
-  font-size:11px;
+.msg{
+  min-height:18px;
+  margin-top:10px;
+  text-align:center;
+  color:#aaa18d;
+  font-size:12px;
   line-height:1.6;
-  margin-top:5px
 }
 
-.financeBadge{
-  flex:none;
-  padding:6px 9px;
-  border-radius:99px;
+.msg.ok{
+  color:#70d49c;
+}
+
+.msg.err{
+  color:#e89191;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
   font-size:10px;
-  font-weight:900
+  margin-top:24px;
 }
 
-.financeBadge.waiting{
-  background:#352d13;
-  color:#e2c870
-}
-
-.financeBadge.partial{
-  background:#2d2918;
-  color:#e6ca78
-}
-
-.financeBadge.overdue{
-  background:#391818;
-  color:#ed9b9b
-}
-
-.financeBadge.done{
-  background:#153124;
-  color:#79d6a2
-}
-
-.settlementGrid{
+.commissionGrid{
   display:grid;
   grid-template-columns:
-  repeat(4,1fr);
+  repeat(6,1fr);
   gap:8px;
-  margin-top:13px
+  margin-top:12px;
 }
 
-.financeBox{
-  background:#0d0d0e;
-  border:
+.commissionTop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.commissionRound{
+  color:#e5c96f;
+  font-weight:900;
+  font-size:13px;
+}
+
+.commissionMeta{
+  color:#817a6d;
+  font-size:10px;
+  line-height:1.6;
+  margin-top:4px;
+}
+
+.accountLine{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:6px 0;
+  border-bottom:
   1px solid
-  rgba(255,255,255,.05);
-  border-radius:12px;
-  padding:11px
+  rgba(255,255,255,.04);
+  font-size:12px;
 }
 
-.financeBox small{
-  display:block;
-  font-size:9px;
-  color:#787165;
-  line-height:1.4
+.accountLine:last-child{
+  border-bottom:0;
 }
 
-.financeBox strong{
-  display:block;
-  margin-top:5px;
-  color:#ead077;
-  font-size:15px;
-  line-height:1.4;
-  word-break:break-word
-}
-
-.financeBox.due strong{
-  color:#f0cb68;
-  font-size:18px
-}
-
-.financeBox.commission strong{
-  color:#79d6a2
-}
-
-.financeBox.received strong{
-  color:#7bdba8
-}
-
-.roundFilter{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px;
-  margin-bottom:14px
-}
-
-.roundFilter button{
-  min-width:90px
-}
-
-.settleTime{
-  font-size:10px;
+.accountLine span{
   color:#777166;
-  margin-top:9px;
-  line-height:1.6
 }
 
-.settlementNote{
-  color:#746e63;
-  font-size:10px;
-  line-height:1.7;
-  margin-top:10px
+.accountLine strong{
+  color:#e9dfc7;
+  text-align:right;
+  word-break:break-all;
 }
 
-@media(max-width:700px){
+@media(max-width:760px){
 
-  .settlementStats,
-  .reviewStats{
+  .summary,
+  .infoGrid{
     grid-template-columns:
-    1fr 1fr
+    1fr 1fr;
   }
 
-  .settlementGrid,
-  .reviewGrid{
+  .commissionGrid{
     grid-template-columns:
-    1fr 1fr
+    1fr 1fr;
   }
 
-}
-
-@media(max-width:550px){
-
-  .formGrid{
-    grid-template-columns:1fr
+  .formGrid,
+  .toolbar{
+    grid-template-columns:1fr;
   }
 
-  .stats{
-    grid-template-columns:1fr 1fr
+  .toolbar button{
+    width:100%;
   }
 
   .actions{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
-  .paymentGrid{
-    grid-template-columns:1fr 1fr
+  .actions.two{
+    grid-template-columns:
+    1fr 1fr;
   }
 
-  .accountButtons{
-    grid-template-columns:1fr
-  }
+}
 
-  .reviewButtons{
-    grid-template-columns:1fr
-  }
+@media(max-width:420px){
 
-  .proofGrid{
-    grid-template-columns:1fr
+  .summary,
+  .infoGrid,
+  .commissionGrid,
+  .actions.two{
+    grid-template-columns:1fr;
   }
 
 }
@@ -1025,836 +575,238 @@ button:disabled{
 
 <div class="wrap">
 
-  <div class="header">
+  <div class="brand">
 
-    <div>
-
-      <div class="logo">
-        金满堂 · 代理管理
-      </div>
-
-      <div class="sub">
-        ADMIN / AGENTS
-      </div>
-
+    <div class="mark">
+      金
     </div>
 
-    <button
-      class="dark"
-      onclick="location.href='/admin/'">
+    <div class="cn">
+      金满堂
+    </div>
 
-      返回总后台
-
-    </button>
+    <div class="en">
+      AGENT CENTER · ADMIN
+    </div>
 
   </div>
 
 
-  <div class="sessionBox">
+  <a
+    class="back"
+    href="/admin/">
+    ← 返回管理中心
+  </a>
 
-    管理员状态：
-
-    <strong id="adminSessionState">
-      正在验证...
-    </strong>
-
-    </div>
-
-
-  <div class="agentNav">
-
-    <button
-      class="agentNavItem"
-      data-view="manage"
-      type="button"
-      onclick="switchAgentView('manage')">
-
-      <span>👥</span>
-      <strong>代理管理</strong>
-      <small>创建、状态、比例</small>
-
-    </button>
-
-
-    <button
-      class="agentNavItem"
-      data-view="accounts"
-      type="button"
-      onclick="switchAgentView('accounts')">
-
-      <span>🏦</span>
-      <strong>收款账户</strong>
-      <small>平台收款方式</small>
-
-    </button>
-
-
-    <button
-      class="agentNavItem"
-      data-view="payments"
-      type="button"
-      onclick="switchAgentView('payments')">
-
-      <span>🧾</span>
-      <strong>付款审核</strong>
-      <small>到账确认、驳回</small>
-
-    </button>
-
-
-    <button
-      class="agentNavItem"
-      data-view="settlement"
-      type="button"
-      onclick="switchAgentView('settlement')">
-
-      <span>💰</span>
-      <strong>代理结款</strong>
-      <small>应交、到账、结清</small>
-
-    </button>
-
-
-    <button
-      class="agentNavItem"
-      data-view="commission"
-      type="button"
-      onclick="switchAgentView('commission')">
-
-      <span>💵</span>
-      <strong>推荐佣金</strong>
-      <small>应付、已付、待付</small>
-
-    </button>
-
-  </div>
-
-
-  <!-- CREATE AGENT -->
 
   <div
-  class="card"
-  data-agent-view="manage">
+    id="authError"
+    class="card hidden">
 
     <div class="title">
-      ＋ 创建新代理
+      无法进入代理中心
     </div>
 
-    <div class="formGrid">
-
-      <input
-        id="newName"
-        placeholder="代理名称，例如：小林代理">
-
-      <input
-        id="newEmail"
-        type="email"
-        autocomplete="off"
-        placeholder="代理登录邮箱">
-
-      <input
-        id="newPassword"
-        type="password"
-        autocomplete="new-password"
-        placeholder="初始密码，至少8位">
-
-      <input
-        id="newRate"
-        type="number"
-        min="0"
-        max="40"
-        step="0.5"
-        value="20"
-        placeholder="代理比例 %">
-
-    </div>
-
-    <button
-      id="createBtn"
-      class="gold"
-      style="width:100%;margin-top:10px"
-      onclick="createAgent()">
-
-      创建代理账号
-
-    </button>
-
-    <div
-      class="msg"
-      id="createMsg">
-    </div>
-
-    <div class="hint">
-
-      创建成功后，代理可以使用这里设置的邮箱和密码登录 Agent Center。
-
-      <br>
-
-      每个代理可以单独设置比例，范围为 0%–40%。
-
+    <div class="msg err">
+      请先登录管理员账号并完成二次验证。
     </div>
 
   </div>
 
 
-  <!-- STATS -->
+  <main
+    id="mainBox"
+    class="hidden">
 
-  <div
-  class="card"
-  data-agent-view="manage">
 
-    <div class="title">
-      代理概况
-    </div>
+    <section class="card">
 
-    <div class="stats">
-
-      <div class="stat">
-
-        <small>代理总数</small>
-
-        <strong id="totalAgents">
-          0
-        </strong>
-
+      <div class="title">
+        代理运营概况
       </div>
 
-      <div class="stat">
+      <div class="summary">
 
-        <small>正常</small>
+        <div class="summaryBox">
 
-        <strong id="activeAgents">
-          0
-        </strong>
+          <small>
+            代理总数
+          </small>
 
-      </div>
-
-      <div class="stat">
-
-        <small>暂停 / 限制</small>
-
-        <strong id="inactiveAgents">
-          0
-        </strong>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- PAYMENT ACCOUNTS -->
-
-  <div
-  class="card"
-  data-agent-view="accounts">
-
-    <div class="title">
-      🏦 平台收款账户管理
-    </div>
-
-    <div class="paymentAccountForm">
-
-      <input
-        id="paymentMethodName"
-        placeholder="支付方式，例如：K Pay">
-
-      <select id="paymentMethodType">
-
-        <option value="wallet">
-          电子钱包
-        </option>
-
-        <option value="bank">
-          银行卡 / 银行账户
-        </option>
-
-        <option value="other">
-          其他支付方式
-        </option>
-
-      </select>
-
-      <input
-        id="paymentAccountName"
-        placeholder="收款人姓名">
-
-      <input
-        id="paymentAccountNumber"
-        placeholder="电话号码 / 银行卡号 / 账号">
-
-      <input
-        id="paymentBankName"
-        placeholder="银行名称，可不填">
-
-      <input
-        id="paymentSortOrder"
-        type="number"
-        value="0"
-        step="1"
-        placeholder="排序数字">
-
-      <textarea
-        id="paymentNote"
-        placeholder="给代理看的备注，例如：代理每期付款请转入此账户"></textarea>
-
-      <div class="fileBox">
-
-        <input
-          id="paymentQrFile"
-          type="file"
-          accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
-          onchange="handleNewQrChange(this)">
-
-        <div
-          id="paymentQrFileState"
-          class="fileState">
-
-          尚未选择二维码图片
+          <strong id="totalAgents">
+            0
+          </strong>
 
         </div>
 
-        <div
-          id="newQrPreview"
-          class="qrPreview"
-          style="display:none">
 
-          <img
-            id="newQrPreviewImg"
-            alt="二维码预览">
+        <div class="summaryBox">
+
+          <small>
+            正常代理
+          </small>
+
+          <strong id="activeAgents">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="summaryBox">
+
+          <small>
+            代理客户
+          </small>
+
+          <strong id="referredCustomers">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="summaryBox">
+
+          <small>
+            当前待付佣金
+          </small>
+
+          <strong id="pendingCommission">
+            0
+          </strong>
 
         </div>
 
       </div>
+
 
       <div class="hint">
 
-        二维码单张最大 10MB。
+        这里只管理代理身份、推荐关系、佣金和代理自己的收款方式。
 
-        <br>
-
-        支持 JPG、JPEG、PNG、WEBP、HEIC、HEIF。
-
-        <br>
-
-        二维码不是必填，也可以只设置电话号码或银行卡号。
+        客户付款、客户下注、客户派彩继续使用客户体系，
+        不在这里建立第二套客户金额。
 
       </div>
 
-      <button
-        id="addPaymentAccountBtn"
-        class="gold"
-        onclick="addPaymentAccount()">
+    </section>
 
-        ＋ 添加收款账户
+
+    <section
+      id="createCard"
+      class="card">
+
+      <div class="title">
+        ＋ 创建新代理
+      </div>
+
+
+      <div class="formGrid">
+
+        <input
+          id="newName"
+          placeholder="代理名称，例如：小林代理">
+
+        <input
+          id="newEmail"
+          type="email"
+          autocomplete="off"
+          placeholder="代理登录邮箱">
+
+        <input
+          id="newPassword"
+          type="password"
+          autocomplete="new-password"
+          placeholder="初始密码，至少 8 位">
+
+        <input
+          id="newRate"
+          type="number"
+          min="0"
+          max="40"
+          step="0.5"
+          value="20"
+          placeholder="推荐佣金比例 %">
+
+      </div>
+
+
+      <button
+        id="createBtn"
+        style="margin-top:10px"
+        onclick="createAgent()">
+
+        创建代理账号
 
       </button>
 
+
       <div
-        id="paymentAccountMsg"
+        id="createMsg"
         class="msg">
       </div>
 
-    </div>
+    </section>
 
-    <div class="hint">
 
-      这里设置的是代理付款时看到的平台收款方式。
+    <section class="card">
 
-      <br>
-
-      可以同时启用多个收款方式。
-
-      <br>
-
-      账户资料修改后，只影响之后的付款；已经提交过的付款记录会保留当时的账户快照。
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="title">
-      当前收款账户
-    </div>
-
-    <div id="paymentAccountList">
-
-      <div class="empty">
-        正在读取收款账户...
+      <div class="title">
+        代理搜索
       </div>
 
-    </div>
 
-  </div>
+      <div class="toolbar">
 
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="代理名称、推荐码"
+          oninput="renderAgents()">
 
-  <!-- PAYMENT REVIEW -->
+        <button
+          class="secondary"
+          type="button"
+          onclick="loadAll(true)">
 
-  <div
-  class="card"
-  id="paymentReviewCard"
-  data-agent-view="payments">
+          刷新
 
-    <div class="title">
-      🧾 代理付款审核
-    </div>
-
-    <div class="reviewStats">
-
-      <div class="reviewStat">
-
-        <small>
-          待审核申请
-        </small>
-
-        <strong id="reviewPendingCount">
-          0
-        </strong>
+        </button>
 
       </div>
 
-      <div class="reviewStat">
 
-        <small>
-          待审核金额
-        </small>
+      <div
+        id="pageMsg"
+        class="msg">
+      </div>
 
-        <strong id="reviewPendingAmount">
-          0
-        </strong>
+    </section>
+
+
+    <section class="card">
+
+      <div class="title">
+        代理管理
+      </div>
+
+
+      <div id="agentList">
+
+        <div class="empty">
+          正在读取代理资料...
+        </div>
 
       </div>
 
-      <div class="reviewStat">
+    </section>
 
-        <small>
-          已批准金额
-        </small>
+  </main>
 
-        <strong id="reviewApprovedAmount">
-          0
-        </strong>
 
-      </div>
-
-    </div>
-
-    <div class="hint">
-
-      代理付款后，应由代理提交付款金额和付款截图。
-
-      <br>
-
-      管理员核对截图、收款账户和金额后，再点击「确认到账」。
-
-      <br>
-
-      只有管理员审核批准的付款，才会计入平台已确认到账金额。
-
-      <br>
-
-      如果代理分多次付款，可以提交多笔；全部批准金额达到本期应交金额后，系统才会正式标记为「已结款」。
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="roundFilter">
-
-      <select
-        id="paymentReviewStatusFilter"
-        onchange="renderPaymentReviews()">
-
-        <option value="pending">
-          只看待审核
-        </option>
-
-        <option value="all">
-          查看全部
-        </option>
-
-        <option value="approved">
-          只看已批准
-        </option>
-
-        <option value="rejected">
-          只看已驳回
-        </option>
-
-      </select>
-
-      <button
-        class="dark"
-        onclick="loadPaymentReviews(true)">
-
-        刷新
-
-      </button>
-
-    </div>
-
-    <div id="paymentReviewList">
-
-      <div class="empty">
-        正在读取付款申请...
-      </div>
-
-    </div>
-
-    <div
-      class="msg"
-      id="paymentReviewMsg">
-    </div>
-
-  </div>
-
-
-  <!-- SETTLEMENT -->
-
-  <div
-  class="card"
-  data-agent-view="settlement">
-
-    <div class="title">
-      💰 代理结款管理
-    </div>
-
-    <div class="roundFilter">
-
-      <select
-        id="settlementRoundSelect"
-        onchange="renderSettlements()">
-
-        <option value="">
-          正在读取期数...
-        </option>
-
-      </select>
-
-      <button
-        class="dark"
-        onclick="refreshFinance(true)">
-
-        刷新
-
-      </button>
-
-    </div>
-
-    <div class="settlementStats">
-
-      <div class="settlementStat">
-
-        <small>
-          本期提交总额
-        </small>
-
-        <strong id="settlementTotal">
-          0
-        </strong>
-
-      </div>
-
-      <div class="settlementStat">
-
-        <small>
-          当前剩余待到账
-        </small>
-
-        <strong id="settlementPending">
-          0
-        </strong>
-
-      </div>
-
-      <div class="settlementStat">
-
-        <small>
-          已确认到账
-        </small>
-
-        <strong id="settlementSettled">
-          0
-        </strong>
-
-      </div>
-
-      <div class="settlementStat">
-
-        <small>
-          未结清代理
-        </small>
-
-        <strong id="settlementPendingAgents">
-          0
-        </strong>
-
-      </div>
-
-    </div>
-
-    <div class="hint">
-
-      当前正式规则：代理需要先把本期收到的金额全部上交平台。
-
-      <br>
-
-      本期应交平台 = 本期提交总额。
-
-      <br>
-
-      代理佣金仍然独立计算并保存，但不会在代理付款时提前从应交金额里扣除。
-
-      <br>
-
-      平台已确认到账金额，只根据管理员批准的代理付款申请累计。
-
-      <br>
-
-      全部应交金额到账后，系统自动把该期标记为「已结款」。
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div id="settlementList">
-
-      <div class="empty">
-        正在读取结款资料...
-      </div>
-
-    </div>
-
-    <div
-      class="msg"
-      id="settlementMsg">
-    </div>
-
-  </div>
-
-  <!-- REFERRAL COMMISSION -->
-
-  <div
-  class="card"
-  id="referralCommissionCard"
-  data-agent-view="commission">
-
-    <div class="title">
-      💵 客户推荐佣金结算
-    </div>
-
-    <div class="roundFilter">
-
-      <select
-        id="referralCommissionRoundSelect"
-        onchange="renderReferralCommissions()">
-
-        <option value="">
-          全部历史期
-        </option>
-
-      </select>
-
-      <button
-        class="dark"
-        onclick="loadReferralCommissions(true)">
-
-        刷新
-
-      </button>
-
-    </div>
-
-    <div class="settlementStats">
-
-      <div class="settlementStat">
-
-        <small>
-          应付佣金
-        </small>
-
-        <strong id="referralCommissionDue">
-          0
-        </strong>
-
-      </div>
-
-      <div class="settlementStat">
-
-        <small>
-          已付佣金
-        </small>
-
-        <strong id="referralCommissionPaid">
-          0
-        </strong>
-
-      </div>
-
-      <div class="settlementStat">
-
-        <small>
-          待付佣金
-        </small>
-
-        <strong id="referralCommissionRemaining">
-          0
-        </strong>
-
-      </div>
-
-      <div class="settlementStat">
-
-        <small>
-          待结算记录
-        </small>
-
-        <strong id="referralCommissionPendingCount">
-          0
-        </strong>
-
-      </div>
-
-    </div>
-
-    <div class="hint">
-
-      这里统计代理直属客户产生的正式推荐佣金。
-
-      <br>
-
-      只有管理员已确认的客户有效金额才会计算佣金。
-
-      <br>
-
-      每一期使用当期已经锁定的佣金率快照，之后修改代理比例不会改变历史佣金。
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div id="referralCommissionList">
-
-      <div class="empty">
-        正在读取推荐佣金...
-      </div>
-
-    </div>
-
-    <div
-      class="msg"
-      id="referralCommissionMsg">
-    </div>
-
-  </div>
-  <!-- AGENT LIST -->
-
-  <div
-  class="card"
-  data-agent-view="manage">
-
-    <div class="title">
-      搜索代理
-    </div>
-
-    <div class="searchRow">
-
-      <input
-        id="searchInput"
-        placeholder="输入代理名字搜索"
-        oninput="renderAgents()">
-
-      <button
-        class="dark"
-        onclick="loadAgents(true)">
-
-        刷新
-
-      </button>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="title">
-      代理列表
-    </div>
-
-    <div id="agentList">
-
-      <div class="empty">
-        正在验证管理员身份...
-      </div>
-
-    </div>
-
-    <div
-      class="msg"
-      id="listMsg">
-    </div>
-
-  </div>
-
-
-  <!-- RATE -->
-
-  <div
-  class="card"
-  data-agent-view="manage">
-
-    <div class="title">
-      修改代理比例
-    </div>
-
-    <div class="formGrid">
-
-      <select id="agentSelect">
-
-        <option value="">
-          选择代理
-        </option>
-
-      </select>
-
-      <input
-        id="rateInput"
-        type="number"
-        min="0"
-        max="40"
-        step="0.5"
-        placeholder="新比例 %">
-
-    </div>
-
-    <button
-      class="gold"
-      style="width:100%;margin-top:10px"
-      onclick="updateRate()">
-
-      保存代理比例
-
-    </button>
-
-    <div
-      class="msg"
-      id="rateMsg">
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <button
-      class="dark"
-      style="width:100%"
-      onclick="location.href='/admin/'">
-
-      ← 返回 Admin 总后台
-
-    </button>
-
+  <div class="foot">
+    © JIN MANTANG · ADMIN AGENT CENTER
   </div>
 
 </div>
@@ -1870,14 +822,6 @@ const KEY =
 'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
 
 
-const QR_BUCKET =
-'payment-qr-codes';
-
-
-const PAYMENT_PROOF_BUCKET =
-'agent-payment-proofs';
-
-
 let token =
 localStorage.getItem(
   'jmt_access_token'
@@ -1888,6 +832,8 @@ sessionStorage.getItem(
 )
 ||
 '';
+
+
 let refreshToken =
 localStorage.getItem(
   'jmt_refresh_token'
@@ -1900,210 +846,500 @@ sessionStorage.getItem(
 '';
 
 
-let refreshSessionPromise =
+let refreshPromise =
 null;
+
 
 let agents =
 [];
 
 
-let adminUser =
+let customers =
+[];
+
+
+let payoutAccounts =
+[];
+
+
+let commissionRows =
+[];
+
+
+let selectedAgentId =
 null;
 
 
-let settlementRounds =
-[];
-
-
-let settlementRows =
-[];
-
-
-let settlementLoading =
+let busy =
 false;
-
-let referralCommissionRows =
-[];
-
-
-let referralCommissionLoading =
-false;
-
-
-let referralCommissionBusy =
-false;
-let paymentAccounts =
-[];
-
-
-let paymentAccountBusy =
-false;
-
-
-let paymentReviews =
-[];
-
-
-let paymentProofs =
-[];
-
-
-let paymentReviewLoading =
-false;
-
-
-let paymentReviewBusy =
-false;
-
-
-let newQrFile =
-null;
-
-
-const editQrFiles =
-new Map();
-
-
-const editQrPreviewUrls =
-new Map();
-
-
-const qrDisplayUrls =
-new Map();
-
-
-const proofDisplayUrls =
-new Map();
 
 
 /* =====================================
-   API
+   HELPERS
 ===================================== */
 
-async function refreshAdminChildSession(){
+function esc(value){
+
+  return String(
+    value
+    ??
+    ''
+  )
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
+
+}
+
+
+function escJs(value){
+
+  return String(
+    value
+    ??
+    ''
+  )
+  .replace(
+    /\\/g,
+    '\\\\'
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  );
+
+}
+
+
+function money(value){
+
+  return Number(
+    value
+    ||
+    0
+  )
+  .toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function formatRate(value){
+
+  return Number(
+    value
+    ||
+    0
+  )
+  .toLocaleString(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+
+    return '—';
+
+  }
+
+
+  const date =
+  new Date(
+    value
+  );
+
 
   if(
-    !refreshToken
+    Number.isNaN(
+      date.getTime()
+    )
   ){
+
+    return '—';
+
+  }
+
+
+  return new Intl.DateTimeFormat(
+    'zh-CN',
+    {
+      timeZone:
+      'Asia/Yangon',
+
+      year:
+      'numeric',
+
+      month:
+      '2-digit',
+
+      day:
+      '2-digit',
+
+      hour:
+      '2-digit',
+
+      minute:
+      '2-digit',
+
+      hour12:
+      false
+    }
+  )
+  .format(
+    date
+  )
+  +
+  ' MMT';
+
+}
+
+
+function periodName(code){
+
+  if(
+    code
+    ===
+    '1030'
+  ){
+
+    return '上午 11:45';
+
+  }
+
+
+  if(
+    code
+    ===
+    '1530'
+  ){
+
+    return '下午 3:45';
+
+  }
+
+
+  return (
+    code
+    ||
+    '—'
+  );
+
+}
+
+
+function statusName(status){
+
+  if(
+    status
+    ===
+    'active'
+  ){
+
+    return '正常';
+
+  }
+
+
+  if(
+    status
+    ===
+    'suspended'
+  ){
+
+    return '已暂停';
+
+  }
+
+
+  if(
+    status
+    ===
+    'blocked'
+  ){
+
+    return '已限制';
+
+  }
+
+
+  return (
+    status
+    ||
+    '—'
+  );
+
+}
+
+
+function statusClass(status){
+
+  if(
+    status
+    ===
+    'active'
+  ){
+
+    return 'active';
+
+  }
+
+
+  if(
+    status
+    ===
+    'suspended'
+  ){
+
+    return 'suspended';
+
+  }
+
+
+  return 'blocked';
+
+}
+
+
+function payoutMethodName(type){
+
+  if(
+    type
+    ===
+    'kpay'
+  ){
+
+    return 'KPay';
+
+  }
+
+
+  if(
+    type
+    ===
+    'bank'
+  ){
+
+    return '银行账户';
+
+  }
+
+
+  return (
+    type
+    ||
+    '—'
+  );
+
+}
+
+
+function getJwtPayload(){
+
+  try{
+
+    let part =
+    token
+    .split('.')[1]
+    .replace(/-/g,'+')
+    .replace(/_/g,'/');
+
+
+    while(
+      part.length
+      %
+      4
+    ){
+
+      part += '=';
+
+    }
+
+
+    return JSON.parse(
+
+      decodeURIComponent(
+
+        atob(part)
+        .split('')
+        .map(
+
+          char =>
+          '%'
+          +
+          (
+            '00'
+            +
+            char
+            .charCodeAt(0)
+            .toString(16)
+          )
+          .slice(-2)
+
+        )
+        .join('')
+
+      )
+
+    );
+
+  }
+  catch{
+
+    return {};
+
+  }
+
+}
+
+
+/* =====================================
+   SESSION / API
+===================================== */
+
+async function refreshAdminSession(){
+
+  if(!refreshToken){
 
     return false;
 
   }
 
 
-  if(
-    refreshSessionPromise
-  ){
+  if(refreshPromise){
 
-    return refreshSessionPromise;
+    return refreshPromise;
 
   }
 
 
-  refreshSessionPromise =
-  (async()=>{
+  refreshPromise =
+  (
+    async()=>{
 
-    try{
+      try{
 
-      const r =
-      await fetch(
-        BASE+
-        '/auth/v1/token?grant_type=refresh_token',
-        {
-          method:'POST',
+        const response =
+        await fetch(
 
-          headers:{
-            apikey:KEY,
-            'Content-Type':
-            'application/json'
-          },
+          BASE
+          +
+          '/auth/v1/token?grant_type=refresh_token',
 
-          body:
-          JSON.stringify({
-            refresh_token:
-            refreshToken
-          })
+          {
+
+            method:
+            'POST',
+
+            headers:{
+
+              apikey:
+              KEY,
+
+              'Content-Type':
+              'application/json'
+
+            },
+
+            body:
+            JSON.stringify({
+
+              refresh_token:
+              refreshToken
+
+            })
+
+          }
+
+        );
+
+
+        if(!response.ok){
+
+          return false;
+
         }
-      );
 
 
-      if(!r.ok){
-
-        return false;
-
-      }
+        const data =
+        await response.json();
 
 
-      const data =
-      await r.json();
+        if(!data.access_token){
+
+          return false;
+
+        }
 
 
-      if(
-        !data.access_token
-      ){
-
-        return false;
-
-      }
-
-
-      token =
-      data.access_token;
-
-
-      localStorage.setItem(
-        'jmt_access_token',
-        token
-      );
-
-
-      sessionStorage.setItem(
-        'jmt_access_token',
-        token
-      );
-
-
-      if(
-        data.refresh_token
-      ){
-
-        refreshToken =
-        data.refresh_token;
+        token =
+        data.access_token;
 
 
         localStorage.setItem(
-          'jmt_refresh_token',
-          refreshToken
+          'jmt_access_token',
+          token
         );
 
 
         sessionStorage.setItem(
-          'jmt_refresh_token',
-          refreshToken
+          'jmt_access_token',
+          token
         );
+
+
+        if(data.refresh_token){
+
+          refreshToken =
+          data.refresh_token;
+
+
+          localStorage.setItem(
+            'jmt_refresh_token',
+            refreshToken
+          );
+
+
+          sessionStorage.setItem(
+            'jmt_refresh_token',
+            refreshToken
+          );
+
+        }
+
+
+        return true;
+
+      }
+      catch{
+
+        return false;
+
+      }
+      finally{
+
+        refreshPromise =
+        null;
 
       }
 
-
-      return true;
-
-
-    }catch(e){
-
-      return false;
-
-
-    }finally{
-
-      refreshSessionPromise =
-      null;
-
     }
+  )();
 
-  })();
 
-
-  return refreshSessionPromise;
+  return refreshPromise;
 
 }
 
@@ -2115,17 +1351,35 @@ async function api(
 
   const request =
   ()=>fetch(
-    BASE+path,
+
+    BASE
+    +
+    path,
+
     {
+
       ...options,
 
       headers:{
-        apikey:KEY,
+
+        apikey:
+        KEY,
+
         Authorization:
-        'Bearer '+token,
-        ...(options.headers || {})
+        'Bearer '
+        +
+        token,
+
+        ...(
+          options.headers
+          ||
+          {}
+        )
+
       }
+
     }
+
   );
 
 
@@ -2134,20 +1388,18 @@ async function api(
 
 
   if(
-    response.status!==401
+    response.status
+    !==
+    401
   ){
 
     return response;
 
   }
-
-
-  const refreshed =
-  await refreshAdminChildSession();
 
 
   if(
-    !refreshed
+    !await refreshAdminSession()
   ){
 
     return response;
@@ -2155,11 +1407,61 @@ async function api(
   }
 
 
-  response =
-  await request();
+  return request();
+
+}
 
 
-  return response;
+async function parseResponse(response){
+
+  const text =
+  await response.text();
+
+
+  let data =
+  null;
+
+
+  try{
+
+    data =
+    text
+    ?
+    JSON.parse(
+      text
+    )
+    :
+    null;
+
+  }
+  catch{
+
+    data =
+    text;
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+
+      data?.message
+      ||
+      data?.error
+      ||
+      data?.hint
+      ||
+      text
+      ||
+      'REQUEST_FAILED'
+
+    );
+
+  }
+
+
+  return data;
 
 }
 
@@ -2170,16 +1472,22 @@ async function api(
 
 async function verifyAdmin(){
 
-  const state =
-  document.getElementById(
-    'adminSessionState'
-  );
-
-
   if(!token){
 
-    state.textContent =
-    '没有登录';
+    return false;
+
+  }
+
+
+  const payload =
+  getJwtPayload();
+
+
+  if(
+    payload.aal
+    !==
+    'aal2'
+  ){
 
     return false;
 
@@ -2196,9 +1504,7 @@ async function verifyAdmin(){
 
     if(!userRes.ok){
 
-      throw new Error(
-        'LOGIN_EXPIRED'
-      );
+      return false;
 
     }
 
@@ -2209,73 +1515,1758 @@ async function verifyAdmin(){
 
     const adminRes =
     await api(
-      '/rest/v1/admin_users'+
-      '?auth_user_id=eq.'+
+
+      '/rest/v1/admin_users'
+      +
+      '?auth_user_id=eq.'
+      +
       encodeURIComponent(
         user.id
-      )+
-      '&select=auth_user_id'+
+      )
+      +
+      '&select=auth_user_id'
+      +
       '&limit=1'
+
     );
 
 
     if(!adminRes.ok){
 
-      throw new Error(
-        'ADMIN_CHECK_FAILED'
-      );
+      return false;
 
     }
 
 
-    const admins =
+    const rows =
     await adminRes.json();
 
 
-    if(!admins.length){
+    return (
+      Array.isArray(
+        rows
+      )
+      &&
+      rows.length > 0
+    );
 
-      throw new Error(
-        'NOT_ADMIN'
+  }
+  catch{
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================
+   DATA HELPERS
+===================================== */
+
+function agentById(id){
+
+  return agents.find(
+
+    agent =>
+    agent.id
+    ===
+    id
+
+  )
+  ||
+  null;
+
+}
+
+
+function customersForAgent(id){
+
+  return customers.filter(
+
+    customer =>
+    customer.referral_agent_id
+    ===
+    id
+
+  );
+
+}
+
+
+function accountsForAgent(id){
+
+  return payoutAccounts.filter(
+
+    account =>
+    account.agent_id
+    ===
+    id
+
+  );
+
+}
+
+
+function commissionsForAgent(id){
+
+  return commissionRows.filter(
+
+    row =>
+    row.agent_id
+    ===
+    id
+
+  );
+
+}
+
+
+function commissionSummary(id){
+
+  return commissionsForAgent(
+    id
+  )
+  .reduce(
+
+    (
+      summary,
+      row
+    )=>{
+
+      summary.confirmed +=
+      Number(
+        row.confirmed_customer_points
+        ||
+        0
       );
+
+
+      summary.pending +=
+      Number(
+        row.pending_customer_points
+        ||
+        0
+      );
+
+
+      summary.due +=
+      Number(
+        row.commission_due
+        ||
+        0
+      );
+
+
+      summary.paid +=
+      Number(
+        row.commission_paid
+        ||
+        0
+      );
+
+
+      summary.remaining +=
+      Number(
+        row.commission_remaining
+        ||
+        0
+      );
+
+
+      return summary;
+
+    },
+
+    {
+      confirmed:0,
+      pending:0,
+      due:0,
+      paid:0,
+      remaining:0
+    }
+
+  );
+
+}
+
+
+function payoutState(agentId){
+
+  const rows =
+  accountsForAgent(
+    agentId
+  );
+
+
+  if(!rows.length){
+
+    return '未绑定';
+
+  }
+
+
+  const editable =
+  rows.some(
+
+    account =>
+    account.agent_edit_locked
+    ===
+    false
+
+  );
+
+
+  return editable
+  ?
+  '允许修改中'
+  :
+  '已绑定';
+
+}
+
+
+function referralLink(agent){
+
+  if(
+    !agent?.referral_code
+  ){
+
+    return '—';
+
+  }
+
+
+  return (
+    location.origin
+    +
+    '/customer/?ref='
+    +
+    encodeURIComponent(
+      agent.referral_code
+    )
+  );
+
+}
+
+
+/* =====================================
+   LOAD ALL
+===================================== */
+
+async function loadAll(
+  showMessage=false
+){
+
+  const msg =
+  document.getElementById(
+    'pageMsg'
+  );
+
+
+  if(showMessage){
+
+    msg.className =
+    'msg';
+
+
+    msg.textContent =
+    '正在刷新代理中心...';
+
+  }
+
+
+  try{
+
+    const responses =
+    await Promise.all([
+
+      api(
+        '/rest/v1/agents'
+        +
+        '?select=id,display_name,commission_rate,status,created_at,referral_code'
+        +
+        '&order=created_at.desc'
+      ),
+
+      api(
+        '/rest/v1/customer_profiles'
+        +
+        '?select=id,customer_code,username,display_name,phone,status,created_at,referral_agent_id,referral_bound_at'
+        +
+        '&referral_agent_id=not.is.null'
+        +
+        '&order=created_at.desc'
+      ),
+
+      api(
+        '/rest/v1/agent_payout_accounts'
+        +
+        '?select=id,agent_id,method_type,account_name,account_number,bank_name,is_verified,is_active,agent_edit_locked,locked_at,unlocked_at,created_at,updated_at'
+        +
+        '&is_active=eq.true'
+        +
+        '&order=created_at.asc'
+      ),
+
+      api(
+        '/rest/v1/rpc/admin_list_agent_referral_commissions',
+        {
+
+          method:
+          'POST',
+
+          headers:{
+
+            'Content-Type':
+            'application/json'
+
+          },
+
+          body:
+          JSON.stringify({
+
+            p_round_id:
+            null
+
+          })
+
+        }
+      )
+
+    ]);
+
+
+    for(
+      const response
+      of
+      responses
+    ){
+
+      if(!response.ok){
+
+        throw new Error(
+          await response.text()
+          ||
+          'LOAD_FAILED'
+        );
+
+      }
 
     }
 
 
-    adminUser =
-    user;
+    agents =
+    await responses[0]
+    .json();
 
 
-    localStorage.setItem(
-      'jmt_access_token',
-      token
-    );
+    customers =
+    await responses[1]
+    .json();
 
 
-    sessionStorage.setItem(
-      'jmt_access_token',
-      token
-    );
+    payoutAccounts =
+    await responses[2]
+    .json();
 
 
-    state.textContent =
-    '已登录';
+    const commissionData =
+    await responses[3]
+    .json();
 
 
-    return true;
+    commissionRows =
+    Array.isArray(
+      commissionData?.rows
+    )
+    ?
+    commissionData.rows
+    :
+    [];
 
 
-  }catch(e){
+    updateSummary();
+
+
+    renderAgents();
+
+
+    if(showMessage){
+
+      msg.className =
+      'msg ok';
+
+
+      msg.textContent =
+      '资料已更新';
+
+    }
+
+  }
+  catch(error){
 
     console.error(
-      e
+      error
     );
 
 
-    state.textContent =
-    '登录已失效';
+    msg.className =
+    'msg err';
 
 
-    return false;
+    msg.textContent =
+    '代理中心读取失败：'
+    +
+    translateError(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   SUMMARY
+===================================== */
+
+function updateSummary(){
+
+  document
+  .getElementById(
+    'totalAgents'
+  )
+  .textContent =
+  agents.length;
+
+
+  document
+  .getElementById(
+    'activeAgents'
+  )
+  .textContent =
+  agents.filter(
+
+    agent =>
+    agent.status
+    ===
+    'active'
+
+  )
+  .length;
+
+
+  document
+  .getElementById(
+    'referredCustomers'
+  )
+  .textContent =
+  customers.length;
+
+
+  const pending =
+  commissionRows.reduce(
+
+    (
+      total,
+      row
+    )=>
+    total
+    +
+    Number(
+      row.commission_remaining
+      ||
+      0
+    ),
+
+    0
+
+  );
+
+
+  document
+  .getElementById(
+    'pendingCommission'
+  )
+  .textContent =
+  money(
+    pending
+  );
+
+}
+
+
+/* =====================================
+   AGENT LIST
+===================================== */
+
+function renderAgents(){
+
+  const box =
+  document.getElementById(
+    'agentList'
+  );
+
+
+  if(selectedAgentId){
+
+    const agent =
+    agentById(
+      selectedAgentId
+    );
+
+
+    if(!agent){
+
+      selectedAgentId =
+      null;
+
+
+      renderAgents();
+
+
+      return;
+
+    }
+
+
+    box.innerHTML =
+    agentDetailHtml(
+      agent
+    );
+
+
+    return;
+
+  }
+
+
+  const keyword =
+  document
+  .getElementById(
+    'searchInput'
+  )
+  .value
+  .trim()
+  .toLowerCase();
+
+
+  let rows =
+  agents;
+
+
+  if(keyword){
+
+    rows =
+    agents.filter(
+
+      agent => {
+
+        const text =
+        [
+          agent.display_name,
+          agent.referral_code
+        ]
+        .join(' ')
+        .toLowerCase();
+
+
+        return text.includes(
+          keyword
+        );
+
+      }
+
+    );
+
+  }
+
+
+  if(!rows.length){
+
+    box.innerHTML =
+    `
+      <div class="empty">
+        没有找到代理
+      </div>
+    `;
+
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+  rows
+  .map(
+
+    agent => {
+
+      const customerRows =
+      customersForAgent(
+        agent.id
+      );
+
+
+      const summary =
+      commissionSummary(
+        agent.id
+      );
+
+
+      return `
+
+        <div class="agentCard">
+
+          <div class="agentHead">
+
+            <div>
+
+              <div class="name">
+                ${esc(agent.display_name || '未命名代理')}
+              </div>
+
+              <div class="code">
+                推荐码：
+                ${esc(agent.referral_code || '—')}
+              </div>
+
+            </div>
+
+
+            <div
+              class="badge ${statusClass(agent.status)}">
+
+              ${esc(statusName(agent.status))}
+
+            </div>
+
+          </div>
+
+
+          <div class="infoGrid">
+
+            <div class="infoBox">
+
+              <small>
+                名下客户
+              </small>
+
+              <strong>
+                ${customerRows.length}
+              </strong>
+
+            </div>
+
+
+            <div class="infoBox money">
+
+              <small>
+                有效业绩
+              </small>
+
+              <strong>
+                ${money(summary.confirmed)}
+              </strong>
+
+            </div>
+
+
+            <div class="infoBox money">
+
+              <small>
+                待付佣金
+              </small>
+
+              <strong>
+                ${money(summary.remaining)}
+              </strong>
+
+            </div>
+
+
+            <div class="infoBox">
+
+              <small>
+                代理收款方式
+              </small>
+
+              <strong>
+                ${esc(payoutState(agent.id))}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="actions one">
+
+            <button
+              class="secondary"
+              onclick="openAgentFile(
+                '${escJs(agent.id)}'
+              )">
+
+              查看代理档案
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+  )
+  .join('');
+
+}
+
+
+/* =====================================
+   AGENT DETAIL
+===================================== */
+
+function agentDetailHtml(agent){
+
+  const customerRows =
+  customersForAgent(
+    agent.id
+  );
+
+
+  const accountRows =
+  accountsForAgent(
+    agent.id
+  );
+
+
+  const commissionHistory =
+  commissionsForAgent(
+    agent.id
+  );
+
+
+  const summary =
+  commissionSummary(
+    agent.id
+  );
+
+
+  return `
+
+    <div class="detailTop">
+
+      <strong>
+        代理档案
+      </strong>
+
+      <button
+        class="secondary"
+        onclick="closeAgentFile()">
+
+        ← 返回代理列表
+
+      </button>
+
+    </div>
+
+
+    <div class="detailBox">
+
+      <div class="detailHead">
+
+        <div>
+
+          <div class="name">
+            ${esc(agent.display_name || '未命名代理')}
+          </div>
+
+          <div class="code">
+            推荐码：
+            ${esc(agent.referral_code || '—')}
+          </div>
+
+        </div>
+
+
+        <div
+          class="badge ${statusClass(agent.status)}">
+
+          ${esc(statusName(agent.status))}
+
+        </div>
+
+      </div>
+
+
+      <div class="infoGrid">
+
+        <div class="infoBox">
+
+          <small>
+            当前佣金比例
+          </small>
+
+          <strong>
+            ${formatRate(agent.commission_rate)}%
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox">
+
+          <small>
+            名下客户
+          </small>
+
+          <strong>
+            ${customerRows.length}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox">
+
+          <small>
+            创建时间
+          </small>
+
+          <strong>
+            ${esc(formatDate(agent.created_at))}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox">
+
+          <small>
+            收款方式状态
+          </small>
+
+          <strong>
+            ${esc(payoutState(agent.id))}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="linkBox">
+
+        <small>
+          专属推荐链接
+        </small>
+
+        <strong>
+          ${esc(referralLink(agent))}
+        </strong>
+
+      </div>
+
+
+      <div class="actions two">
+
+        <button
+          class="secondary"
+          onclick="copyReferralLink(
+            '${escJs(agent.id)}'
+          )">
+
+          复制推荐链接
+
+        </button>
+
+
+        <button
+          class="${
+            agent.status === 'active'
+            ?
+            'warning'
+            :
+            'success'
+          }"
+          onclick="toggleAgentPause(
+            '${escJs(agent.id)}'
+          )">
+
+          ${
+            agent.status === 'active'
+            ?
+            '暂停代理'
+            :
+            '恢复正常'
+          }
+
+        </button>
+
+      </div>
+
+
+      <div class="actions one">
+
+        <button
+          class="${
+            agent.status === 'blocked'
+            ?
+            'success'
+            :
+            'danger'
+          }"
+          onclick="toggleAgentBlock(
+            '${escJs(agent.id)}'
+          )">
+
+          ${
+            agent.status === 'blocked'
+            ?
+            '解除限制'
+            :
+            '限制代理'
+          }
+
+        </button>
+
+      </div>
+
+
+      <div class="sectionLabel">
+        推荐佣金比例
+      </div>
+
+
+      <input
+        id="rateInput"
+        type="number"
+        min="0"
+        max="40"
+        step="0.5"
+        value="${Number(agent.commission_rate || 0)}"
+        placeholder="佣金比例 %">
+
+
+      <button
+        style="margin-top:9px"
+        onclick="updateRate(
+          '${escJs(agent.id)}'
+        )">
+
+        保存新比例
+
+      </button>
+
+
+      <div class="hint">
+
+        修改这里只影响尚未锁定比例的未来期数。
+
+        已经产生快照的历史期，
+        继续使用当期保存的佣金比例。
+
+      </div>
+
+
+      <div class="sectionLabel">
+        代理收款方式
+      </div>
+
+
+      ${
+        accountRows.length
+        ?
+        accountRows
+        .map(
+          accountHtml
+        )
+        .join('')
+        :
+        `
+          <div class="empty">
+            代理尚未绑定收款方式
+          </div>
+        `
+      }
+
+
+      <div class="sectionLabel">
+        名下客户
+      </div>
+
+
+      ${
+        customerRows.length
+        ?
+        customerRows
+        .map(
+          customerHtml
+        )
+        .join('')
+        :
+        `
+          <div class="empty">
+            目前没有绑定到该代理的客户
+          </div>
+        `
+      }
+
+
+      <div class="sectionLabel">
+        业绩与佣金总览
+      </div>
+
+
+      <div class="infoGrid">
+
+        <div class="infoBox money">
+
+          <small>
+            客户已确认金额
+          </small>
+
+          <strong>
+            ${money(summary.confirmed)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            客户待确认金额
+          </small>
+
+          <strong>
+            ${money(summary.pending)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            累计应付佣金
+          </small>
+
+          <strong>
+            ${money(summary.due)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            剩余待付佣金
+          </small>
+
+          <strong>
+            ${money(summary.remaining)}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="sectionLabel">
+        历史佣金结算
+      </div>
+
+
+      ${
+        commissionHistory.length
+        ?
+        commissionHistory
+        .map(
+
+          row =>
+          commissionHtml(
+            row,
+            agent,
+            accountRows
+          )
+
+        )
+        .join('')
+        :
+        `
+          <div class="empty">
+            暂无佣金记录
+          </div>
+        `
+      }
+
+
+      <div class="hint">
+
+        推荐佣金只使用客户真正 confirmed 的金额计算。
+
+        当前“确认佣金已支付”继续沿用现有正式佣金结算 RPC。
+
+        付款凭证和转账流水会在后续资金流水阶段独立完善，
+        这里不会为了显示页面而伪造流水。
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function customerHtml(customer){
+
+  return `
+
+    <div class="customerItem">
+
+      <div class="rowHead">
+
+        <div>
+
+          <div
+            class="name"
+            style="font-size:15px">
+
+            ${esc(customer.display_name || '未填写姓名')}
+
+          </div>
+
+          <div class="code">
+            ${esc(customer.customer_code || '—')}
+          </div>
+
+        </div>
+
+
+        <div
+          class="badge ${statusClass(customer.status)}">
+
+          ${esc(statusName(customer.status))}
+
+        </div>
+
+      </div>
+
+
+      <div class="meta">
+
+        用户名：
+        ${esc(customer.username || '—')}
+
+        <br>
+
+        电话：
+        ${esc(customer.phone || '—')}
+
+        <br>
+
+        绑定时间：
+        ${esc(formatDate(customer.referral_bound_at))}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function accountHtml(account){
+
+  const locked =
+  account.agent_edit_locked
+  !==
+  false;
+
+
+  return `
+
+    <div class="accountItem">
+
+      <div class="rowHead">
+
+        <div
+          class="name"
+          style="font-size:15px">
+
+          ${esc(payoutMethodName(account.method_type))}
+
+        </div>
+
+
+        <div
+          class="badge ${
+            locked
+            ?
+            'done'
+            :
+            'waiting'
+          }">
+
+          ${
+            locked
+            ?
+            '已锁定'
+            :
+            '允许修改中'
+          }
+
+        </div>
+
+      </div>
+
+
+      ${
+        account.method_type
+        ===
+        'bank'
+        ?
+        `
+          <div class="accountLine">
+
+            <span>
+              银行
+            </span>
+
+            <strong>
+              ${esc(account.bank_name || '—')}
+            </strong>
+
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      <div class="accountLine">
+
+        <span>
+          户名
+        </span>
+
+        <strong>
+          ${esc(account.account_name || '—')}
+        </strong>
+
+      </div>
+
+
+      <div class="accountLine">
+
+        <span>
+          账号 / 手机
+        </span>
+
+        <strong>
+          ${esc(account.account_number || '—')}
+        </strong>
+
+      </div>
+
+
+      <div class="accountLine">
+
+        <span>
+          最近更新
+        </span>
+
+        <strong>
+          ${esc(formatDate(account.updated_at))}
+        </strong>
+
+      </div>
+
+
+      <button
+        class="warning"
+        style="margin-top:10px"
+        ${locked ? '' : 'disabled'}
+        onclick="unlockAgentPayout(
+          '${escJs(account.id)}'
+        )">
+
+        ${
+          locked
+          ?
+          '允许代理修改一次'
+          :
+          '等待代理重新保存'
+        }
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+function commissionHtml(
+  row,
+  agent,
+  accountRows
+){
+
+  const remaining =
+  Number(
+    row.commission_remaining
+    ||
+    0
+  );
+
+
+  const paid =
+  Number(
+    row.commission_paid
+    ||
+    0
+  );
+
+
+  const due =
+  Number(
+    row.commission_due
+    ||
+    0
+  );
+
+
+  const isPaid =
+  (
+    due > 0
+    &&
+    remaining <= 0
+  );
+
+
+  const accountSnapshotReady =
+  Boolean(
+    row.payout_account_number_snapshot
+  );
+
+
+  const currentAccountReady =
+  (
+    accountRows.length > 0
+    &&
+    accountRows.every(
+
+      account =>
+      account.agent_edit_locked
+      !==
+      false
+
+    )
+  );
+
+
+  const payoutReady =
+  (
+    accountSnapshotReady
+    ||
+    currentAccountReady
+  );
+
+
+  const roundSettled =
+  row.round_status
+  ===
+  'settled';
+
+
+  const canPay =
+  (
+    remaining > 0
+    &&
+    roundSettled
+    &&
+    payoutReady
+  );
+
+
+  let buttonText =
+  '确认佣金已支付';
+
+
+  if(!roundSettled){
+
+    buttonText =
+    '本期结算后才可支付';
+
+  }
+  else if(!payoutReady){
+
+    buttonText =
+    accountRows.some(
+
+      account =>
+      account.agent_edit_locked
+      ===
+      false
+
+    )
+    ?
+    '等待代理重新保存收款方式'
+    :
+    '代理尚未绑定收款方式';
+
+  }
+
+
+  return `
+
+    <div class="commissionItem">
+
+      <div class="commissionTop">
+
+        <div>
+
+          <div class="commissionRound">
+
+            ${esc(row.round_date || '')}
+
+            ·
+
+            ${esc(periodName(row.round_code))}
+
+          </div>
+
+
+          <div class="commissionMeta">
+
+            当期比例：
+            ${formatRate(row.commission_rate_snapshot)}%
+
+            ·
+
+            期数状态：
+            ${esc(row.round_status || '—')}
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="badge ${
+            isPaid
+            ?
+            'done'
+            :
+            'waiting'
+          }">
+
+          ${
+            isPaid
+            ?
+            '已支付'
+            :
+            remaining > 0
+            ?
+            '待支付'
+            :
+            '暂无应付'
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="commissionGrid">
+
+        <div class="infoBox money">
+
+          <small>
+            客户已确认
+          </small>
+
+          <strong>
+            ${money(row.confirmed_customer_points)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            客户待确认
+          </small>
+
+          <strong>
+            ${money(row.pending_customer_points)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            应付佣金
+          </small>
+
+          <strong>
+            ${money(due)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            已付佣金
+          </small>
+
+          <strong>
+            ${money(paid)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox money">
+
+          <small>
+            剩余待付
+          </small>
+
+          <strong>
+            ${money(remaining)}
+          </strong>
+
+        </div>
+
+
+        <div class="infoBox">
+
+          <small>
+            支付完成
+          </small>
+
+          <strong>
+            ${esc(formatDate(row.completed_at))}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      ${
+        row.payout_account_number_snapshot
+        ?
+        `
+          <div class="linkBox">
+
+            <small>
+              当期收款账户快照
+            </small>
+
+            <strong>
+
+              ${esc(payoutMethodName(row.payout_method_type_snapshot))}
+
+              ·
+
+              ${esc(row.payout_account_name_snapshot || '')}
+
+              ·
+
+              ${esc(row.payout_account_number_snapshot || '')}
+
+              ${
+                row.payout_bank_name_snapshot
+                ?
+                ' · '
+                +
+                esc(row.payout_bank_name_snapshot)
+                :
+                ''
+              }
+
+            </strong>
+
+          </div>
+        `
+        :
+        ''
+      }
+
+
+      ${
+        remaining > 0
+        ?
+        `
+          <button
+            class="success"
+            style="margin-top:10px"
+            ${canPay ? '' : 'disabled'}
+            onclick="markCommissionPaid(
+              '${escJs(agent.id)}',
+              '${escJs(row.round_id)}'
+            )">
+
+            ${buttonText}
+
+          </button>
+        `
+        :
+        ''
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================
+   OPEN / CLOSE FILE
+===================================== */
+
+function openAgentFile(agentId){
+
+  selectedAgentId =
+  agentId;
+
+
+  renderAgents();
+
+
+  window.scrollTo({
+
+    top:
+    document
+    .getElementById(
+      'agentList'
+    )
+    .offsetTop
+    -
+    10,
+
+    behavior:
+    'smooth'
+
+  });
+
+}
+
+
+function closeAgentFile(){
+
+  selectedAgentId =
+  null;
+
+
+  renderAgents();
+
+}
+
+
+/* =====================================
+   REFERRAL LINK
+===================================== */
+
+async function copyReferralLink(agentId){
+
+  const agent =
+  agentById(
+    agentId
+  );
+
+
+  const text =
+  referralLink(
+    agent
+  );
+
+
+  if(
+    text
+    ===
+    '—'
+  ){
+
+    setPageMessage(
+      '该代理暂时没有推荐码',
+      'err'
+    );
+
+
+    return;
+
+  }
+
+
+  try{
+
+    await navigator
+    .clipboard
+    .writeText(
+      text
+    );
+
+
+    setPageMessage(
+      '推荐链接已复制',
+      'ok'
+    );
+
+  }
+  catch{
+
+    const textarea =
+    document.createElement(
+      'textarea'
+    );
+
+
+    textarea.value =
+    text;
+
+
+    document.body
+    .appendChild(
+      textarea
+    );
+
+
+    textarea.select();
+
+
+    document.execCommand(
+      'copy'
+    );
+
+
+    textarea.remove();
+
+
+    setPageMessage(
+      '推荐链接已复制',
+      'ok'
+    );
 
   }
 
@@ -2288,29 +3279,48 @@ async function verifyAdmin(){
 
 async function createAgent(){
 
+  if(busy){
+
+    return;
+
+  }
+
+
   const name =
-  document.getElementById(
+  document
+  .getElementById(
     'newName'
-  ).value.trim();
+  )
+  .value
+  .trim();
 
 
   const email =
-  document.getElementById(
+  document
+  .getElementById(
     'newEmail'
-  ).value.trim();
+  )
+  .value
+  .trim();
 
 
   const password =
-  document.getElementById(
+  document
+  .getElementById(
     'newPassword'
-  ).value;
+  )
+  .value;
 
 
   const rate =
   Number(
-    document.getElementById(
+
+    document
+    .getElementById(
       'newRate'
-    ).value
+    )
+    .value
+
   );
 
 
@@ -2320,23 +3330,14 @@ async function createAgent(){
   );
 
 
-  const btn =
-  document.getElementById(
-    'createBtn'
-  );
-
-
-  msg.className =
-  'msg';
-
-
   if(!name){
 
-    msg.className =
-    'msg error';
+    setMsg(
+      msg,
+      '请输入代理名称',
+      'err'
+    );
 
-    msg.textContent =
-    '请输入代理名称';
 
     return;
 
@@ -2349,11 +3350,12 @@ async function createAgent(){
     !email.includes('@')
   ){
 
-    msg.className =
-    'msg error';
+    setMsg(
+      msg,
+      '请输入正确登录邮箱',
+      'err'
+    );
 
-    msg.textContent =
-    '请输入正确的登录邮箱';
 
     return;
 
@@ -2361,14 +3363,17 @@ async function createAgent(){
 
 
   if(
-    password.length < 8
+    password.length
+    <
+    8
   ){
 
-    msg.className =
-    'msg error';
+    setMsg(
+      msg,
+      '初始密码至少 8 位',
+      'err'
+    );
 
-    msg.textContent =
-    '初始密码至少需要8位';
 
     return;
 
@@ -2385,73 +3390,89 @@ async function createAgent(){
     rate > 40
   ){
 
-    msg.className =
-    'msg error';
+    setMsg(
+      msg,
+      '佣金比例必须在 0%–40%',
+      'err'
+    );
 
-    msg.textContent =
-    '代理比例必须在 0%–40% 之间';
 
     return;
 
   }
 
 
-  const ok =
-  confirm(
-    '确定创建这个代理？\n\n'+
-    '代理名称：'+name+
-    '\n登录邮箱：'+email+
-    '\n代理比例：'+rate+'%'
+  const confirmed =
+  window.confirm(
+
+    '确定创建代理？'
+    +
+    '\n\n代理：'
+    +
+    name
+    +
+    '\n邮箱：'
+    +
+    email
+    +
+    '\n佣金比例：'
+    +
+    rate
+    +
+    '%'
+
   );
 
 
-  if(!ok){
+  if(!confirmed){
 
     return;
 
   }
 
 
-  btn.disabled =
+  busy =
   true;
 
 
-  msg.textContent =
-  '正在创建代理账号...';
+  const button =
+  document.getElementById(
+    'createBtn'
+  );
+
+
+  button.disabled =
+  true;
+
+
+  setMsg(
+    msg,
+    '正在创建代理...'
+  );
 
 
   try{
 
-    const adminOK =
-    await verifyAdmin();
+    const response =
+    await api(
 
-
-    if(!adminOK){
-
-      throw new Error(
-        '管理员登录已失效'
-      );
-
-    }
-
-
-    const r =
-    await fetch(
-      BASE+
       '/functions/v1/create-agent',
+
       {
-        method:'POST',
+
+        method:
+        'POST',
 
         headers:{
-          apikey:KEY,
-          Authorization:
-          'Bearer '+token,
+
           'Content-Type':
           'application/json'
+
         },
 
         body:
         JSON.stringify({
+
           display_name:
           name,
 
@@ -2463,105 +3484,83 @@ async function createAgent(){
 
           commission_rate:
           rate
+
         })
+
       }
+
     );
 
 
-    const text =
-    await r.text();
+    await parseResponse(
+      response
+    );
 
 
-    let data =
-    {};
-
-
-    try{
-
-      data =
-      text
-      ?
-      JSON.parse(
-        text
-      )
-      :
-      {};
-
-    }catch(e){}
-
-
-    if(!r.ok){
-
-      throw new Error(
-        data.error
-        ||
-        data.message
-        ||
-        text
-        ||
-        '创建失败'
-      );
-
-    }
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    '✓ 代理「'+
-    name+
-    '」创建成功';
-
-
-    document.getElementById(
+    document
+    .getElementById(
       'newName'
-    ).value =
+    )
+    .value =
     '';
 
 
-    document.getElementById(
+    document
+    .getElementById(
       'newEmail'
-    ).value =
+    )
+    .value =
     '';
 
 
-    document.getElementById(
+    document
+    .getElementById(
       'newPassword'
-    ).value =
+    )
+    .value =
     '';
 
 
-    document.getElementById(
+    document
+    .getElementById(
       'newRate'
-    ).value =
+    )
+    .value =
     '20';
 
 
-    await loadAgents(
+    setMsg(
+      msg,
+      '代理创建成功',
+      'ok'
+    );
+
+
+    await loadAll(
       false
     );
 
+  }
+  catch(error){
 
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '创建失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
+    setMsg(
+      msg,
+      '创建失败：'
+      +
+      translateError(
+        error.message
+      ),
+      'err'
     );
 
+  }
+  finally{
 
-  }finally{
+    busy =
+    false;
 
-    btn.disabled =
+
+    button.disabled =
     false;
 
   }
@@ -2570,509 +3569,41 @@ async function createAgent(){
 
 
 /* =====================================
-   LOAD AGENTS
-===================================== */
-
-async function loadAgents(
-  showMessage=false
-){
-
-  const msg =
-  document.getElementById(
-    'listMsg'
-  );
-
-
-  if(showMessage){
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在读取最新代理资料...';
-
-  }
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/agents'+
-      '?select=id,display_name,commission_rate,status,created_at'+
-      '&order=created_at.desc'
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        text
-        ||
-        '读取失败'
-      );
-
-    }
-
-
-    const rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-
-    if(
-      !Array.isArray(
-        rows
-      )
-    ){
-
-      throw new Error(
-        '代理数据格式错误'
-      );
-
-    }
-
-
-    agents =
-    rows;
-
-
-    renderAgents();
-
-
-    updateStats();
-
-
-    buildSelect();
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      '✓ 已读取最新代理资料';
-
-    }
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '代理资料读取失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-    document.getElementById(
-      'agentList'
-    ).innerHTML =
-    '<div class="empty">'+
-    '代理资料暂时无法读取'+
-    '</div>';
-
-  }
-
-}
-
-
-/* =====================================
-   RENDER AGENTS
-===================================== */
-
-function renderAgents(){
-
-  const box =
-  document.getElementById(
-    'agentList'
-  );
-
-
-  const keyword =
-  document.getElementById(
-    'searchInput'
-  )
-  .value
-  .trim()
-  .toLowerCase();
-
-
-  const list =
-  agents.filter(
-    a =>
-    String(
-      a.display_name || ''
-    )
-    .toLowerCase()
-    .includes(
-      keyword
-    )
-  );
-
-
-  if(!list.length){
-
-    box.innerHTML =
-    '<div class="empty">'+
-    (
-      agents.length
-      ?
-      '没有找到符合搜索条件的代理'
-      :
-      '目前没有代理'
-    )+
-    '</div>';
-
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-  list.map(
-    a=>{
-
-      const rate =
-      normalizeRate(
-        a.commission_rate
-      );
-
-
-      return `
-
-      <div class="agent">
-
-        <div class="agentTop">
-
-          <div>
-
-            <div class="name">
-
-              ${escapeHtml(
-                a.display_name
-                ||
-                '未命名代理'
-              )}
-
-            </div>
-
-            <div class="meta">
-
-              当前比例：
-              ${formatRate(rate)}%
-
-              <br>
-
-              创建时间：
-              ${escapeHtml(
-                formatDate(
-                  a.created_at
-                )
-              )}
-
-            </div>
-
-          </div>
-
-          <div
-            class="badge ${escapeHtml(a.status || 'blocked')}">
-
-            ${escapeHtml(
-              statusName(
-                a.status
-              )
-            )}
-
-          </div>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="dark"
-            onclick="chooseAgent('${escapeJs(a.id)}')">
-
-            修改比例
-
-          </button>
-
-          <button
-            class="dark"
-            onclick="setStatus(
-              '${escapeJs(a.id)}',
-              '${
-                a.status === 'suspended'
-                ?
-                'active'
-                :
-                'suspended'
-              }'
-            )">
-
-            ${
-              a.status === 'suspended'
-              ?
-              '恢复代理'
-              :
-              '暂停代理'
-            }
-
-          </button>
-
-          <button
-            class="red"
-            onclick="setStatus(
-              '${escapeJs(a.id)}',
-              '${
-                a.status === 'blocked'
-                ?
-                'active'
-                :
-                'blocked'
-              }'
-            )">
-
-            ${
-              a.status === 'blocked'
-              ?
-              '解除限制'
-              :
-              '限制代理'
-            }
-
-          </button>
-
-        </div>
-
-      </div>
-
-      `;
-
-    }
-  )
-  .join('');
-
-}
-
-
-/* =====================================
-   AGENT STATS
-===================================== */
-
-function updateStats(){
-
-  const total =
-  agents.length;
-
-
-  const active =
-  agents.filter(
-    a =>
-    a.status ===
-    'active'
-  ).length;
-
-
-  document.getElementById(
-    'totalAgents'
-  ).textContent =
-  total;
-
-
-  document.getElementById(
-    'activeAgents'
-  ).textContent =
-  active;
-
-
-  document.getElementById(
-    'inactiveAgents'
-  ).textContent =
-  total-active;
-
-}
-
-
-/* =====================================
-   AGENT SELECT
-===================================== */
-
-function buildSelect(){
-
-  const select =
-  document.getElementById(
-    'agentSelect'
-  );
-
-
-  const oldValue =
-  select.value;
-
-
-  select.innerHTML =
-  '<option value="">选择代理</option>';
-
-
-  agents.forEach(
-    a=>{
-
-      const option =
-      document.createElement(
-        'option'
-      );
-
-
-      option.value =
-      a.id;
-
-
-      option.textContent =
-      (
-        a.display_name
-        ||
-        '未命名代理'
-      )
-      +
-      ' · '
-      +
-      formatRate(
-        normalizeRate(
-          a.commission_rate
-        )
-      )
-      +
-      '%';
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  if(
-    agents.some(
-      a =>
-      a.id === oldValue
-    )
-  ){
-
-    select.value =
-    oldValue;
-
-  }
-
-}
-
-
-function chooseAgent(
-  id
-){
-
-  const a =
-  agents.find(
-    x =>
-    x.id === id
-  );
-
-
-  if(!a){
-
-    return;
-
-  }
-
-
-  document.getElementById(
-    'agentSelect'
-  ).value =
-  a.id;
-
-
-  document.getElementById(
-    'rateInput'
-  ).value =
-  normalizeRate(
-    a.commission_rate
-  );
-
-
-  document.getElementById(
-    'rateInput'
-  ).scrollIntoView({
-    behavior:'smooth',
-    block:'center'
-  });
-
-}
-
-
-/* =====================================
    UPDATE RATE
 ===================================== */
 
-async function updateRate(){
+async function updateRate(agentId){
 
-  const id =
-  document.getElementById(
-    'agentSelect'
-  ).value;
+  if(busy){
+
+    return;
+
+  }
+
+
+  const agent =
+  agentById(
+    agentId
+  );
+
+
+  if(!agent){
+
+    return;
+
+  }
 
 
   const rate =
   Number(
-    document.getElementById(
+
+    document
+    .getElementById(
       'rateInput'
-    ).value
+    )
+    .value
+
   );
-
-
-  const msg =
-  document.getElementById(
-    'rateMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  if(!id){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请先选择代理';
-
-
-    return;
-
-  }
 
 
   if(
@@ -3085,12 +3616,10 @@ async function updateRate(){
     rate > 40
   ){
 
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '请输入 0%–40%';
+    setPageMessage(
+      '请输入 0%–40% 的正确比例',
+      'err'
+    );
 
 
     return;
@@ -3098,3769 +3627,111 @@ async function updateRate(){
   }
 
 
-  const agent =
-  agents.find(
-    a =>
-    a.id === id
-  );
+  const confirmed =
+  window.confirm(
 
-
-  if(!agent){
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      '确定修改代理比例？\n\n'+
-      (
-        agent.display_name
-        ||
-        '未命名代理'
-      )+
-      '\n新比例：'+
-      rate+
-      '%'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  msg.textContent =
-  '正在保存...';
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/agents'+
-      '?id=eq.'+
-      encodeURIComponent(
-        id
-      ),
-      {
-        method:'PATCH',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          commission_rate:
-          rate
-        })
-      }
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        text
-        ||
-        '保存失败'
-      );
-
-    }
-
-
-    const rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-
-    if(
-      !Array.isArray(
-        rows
-      )
-      ||
-      !rows.length
-    ){
-
-      throw new Error(
-        '数据库没有确认比例修改'
-      );
-
-    }
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    '✓ 代理比例已保存：'+
-    rate+
-    '%';
-
-
-    await loadAgents(
-      false
-    );
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '保存失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-  }
-
-}
-
-
-/* =====================================
-   STATUS
-===================================== */
-
-async function setStatus(
-  id,
-  status
-){
-
-  const agent =
-  agents.find(
-    a =>
-    a.id === id
-  );
-
-
-  if(!agent){
-
-    return;
-
-  }
-
-
-  let action =
-  '恢复';
-
-
-  if(status === 'blocked'){
-
-    action =
-    '限制';
-
-  }
-
-  else if(status === 'suspended'){
-
-    action =
-    '暂停';
-
-  }
-
-
-  if(
-    !confirm(
-      '确定'+
-      action+
-      '这个代理？\n\n'+
-      (
-        agent.display_name
-        ||
-        '未命名代理'
-      )
-    )
-  ){
-
-    return;
-
-  }
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/agents'+
-      '?id=eq.'+
-      encodeURIComponent(
-        id
-      ),
-      {
-        method:'PATCH',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          status:
-          status
-        })
-      }
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        text
-        ||
-        '操作失败'
-      );
-
-    }
-
-
-    await loadAgents(
-      false
-    );
-
-
-    renderSettlements();
-
-
-  }catch(e){
-
-    alert(
-      '操作失败：'+
-      (
-        e.message
-        ||
-        '未知错误'
-      )
-    );
-
-  }
-
-}
-
-
-/* =====================================
-   QR FILE
-===================================== */
-
-function validateQrFile(
-  file
-){
-
-  if(!file){
-
-    return;
-
-  }
-
-
-  const maxSize =
-  10*
-  1024*
-  1024;
-
-
-  if(file.size > maxSize){
-
-    throw new Error(
-      '二维码图片不能超过 10MB'
-    );
-
-  }
-
-
-  const name =
-  String(
-    file.name || ''
-  )
-  .toLowerCase();
-
-
-  const validExtension =
-  (
-    name.endsWith('.jpg')
-    ||
-    name.endsWith('.jpeg')
-    ||
-    name.endsWith('.png')
-    ||
-    name.endsWith('.webp')
-    ||
-    name.endsWith('.heic')
-    ||
-    name.endsWith('.heif')
-  );
-
-
-  const validType =
-  String(
-    file.type || ''
-  )
-  .startsWith(
-    'image/'
-  );
-
-
-  if(
-    !validType
-    &&
-    !validExtension
-  ){
-
-    throw new Error(
-      '请选择 JPG、PNG、WEBP、HEIC 或 HEIF 图片'
-    );
-
-  }
-
-}
-
-
-function handleNewQrChange(
-  input
-){
-
-  const state =
-  document.getElementById(
-    'paymentQrFileState'
-  );
-
-
-  const preview =
-  document.getElementById(
-    'newQrPreview'
-  );
-
-
-  const img =
-  document.getElementById(
-    'newQrPreviewImg'
-  );
-
-
-  try{
-
-    const file =
-    input.files?.[0]
-    ||
-    null;
-
-
-    if(!file){
-
-      newQrFile =
-      null;
-
-
-      state.className =
-      'fileState';
-
-
-      state.textContent =
-      '尚未选择二维码图片';
-
-
-      preview.style.display =
-      'none';
-
-
-      return;
-
-    }
-
-
-    validateQrFile(
-      file
-    );
-
-
-    newQrFile =
-    file;
-
-
-    state.className =
-    'fileState selected';
-
-
-    state.textContent =
-    '✓ 已选择：'+
-    file.name+
-    ' · '+
-    formatFileSize(
-      file.size
-    );
-
-
-    const url =
-    URL.createObjectURL(
-      file
-    );
-
-
-    img.onload =
-    ()=>{
-
-      try{
-
-        URL.revokeObjectURL(
-          url
-        );
-
-      }catch(e){}
-
-    };
-
-
-    img.onerror =
-    ()=>{
-
-      preview.style.display =
-      'none';
-
-    };
-
-
-    img.src =
-    url;
-
-
-    preview.style.display =
-    'block';
-
-
-  }catch(e){
-
-    newQrFile =
-    null;
-
-
-    input.value =
-    '';
-
-
-    state.className =
-    'fileState errorText';
-
-
-    state.textContent =
-    e.message
-    ||
-    '图片读取失败';
-
-
-    preview.style.display =
-    'none';
-
-  }
-
-}
-
-
-function handleEditQrChange(
-  accountId,
-  input
-){
-
-  const state =
-  document.getElementById(
-    'editQrState_'+
-    safeId(
-      accountId
-    )
-  );
-
-
-  try{
-
-    const file =
-    input.files?.[0]
-    ||
-    null;
-
-
-    if(!file){
-
-      editQrFiles.delete(
-        accountId
-      );
-
-
-      return;
-
-    }
-
-
-    validateQrFile(
-      file
-    );
-
-
-    editQrFiles.set(
-      accountId,
-      file
-    );
-
-
-    if(state){
-
-      state.className =
-      'fileState selected';
-
-
-      state.textContent =
-      '✓ 已选择新二维码：'+
-      file.name+
-      ' · '+
-      formatFileSize(
-        file.size
-      );
-
-    }
-
-
-    const oldPreview =
-    editQrPreviewUrls.get(
-      accountId
-    );
-
-
-    if(oldPreview){
-
-      try{
-
-        URL.revokeObjectURL(
-          oldPreview
-        );
-
-      }catch(e){}
-
-    }
-
-
-    const url =
-    URL.createObjectURL(
-      file
-    );
-
-
-    editQrPreviewUrls.set(
-      accountId,
-      url
-    );
-
-
-    const box =
-document.getElementById(
-  'accountQrBox_'+
-  safeId(
-    accountId
-  )
-);
-
-
-let img =
-document.getElementById(
-  'accountQrImg_'+
-  safeId(
-    accountId
-  )
-);
-
-
-if(
-  !img
-  &&
-  box
-){
-
-  box.innerHTML =
-  `
-    <img
-      id="accountQrImg_${safeId(accountId)}"
-      alt="收款二维码"
-      style="display:block">
-  `;
-
-
-  img =
-  document.getElementById(
-    'accountQrImg_'+
-    safeId(
-      accountId
-    )
-  );
-
-}
-
-
-if(img){
-
-  img.src =
-  url;
-
-
-  img.style.display =
-  'block';
-
-}
-
-  }catch(e){
-
-    editQrFiles.delete(
-      accountId
-    );
-
-
-    input.value =
-    '';
-
-
-    if(state){
-
-      state.className =
-      'fileState errorText';
-
-
-      state.textContent =
-      e.message
-      ||
-      '图片读取失败';
-
-    }
-
-  }
-
-}
-
-
-/* =====================================
-   STORAGE
-===================================== */
-
-function createQrStoragePath(
-  accountId,
-  file
-){
-
-  const originalName =
-  String(
-    file.name || 'qr'
-  );
-
-
-  let extension =
-  originalName.includes('.')
-  ?
-  originalName
-  .split('.')
-  .pop()
-  .toLowerCase()
-  :
-  'jpg';
-
-
-  extension =
-  extension.replace(
-    /[^a-z0-9]/g,
-    ''
-  );
-
-
-  if(!extension){
-
-    extension =
-    'jpg';
-
-  }
-
-
-  return (
-    'accounts/'
+    '确定修改 '
     +
-    accountId
+    (
+      agent.display_name
+      ||
+      '代理'
+    )
     +
-    '/'
+    ' 的推荐佣金比例为 '
     +
-    Date.now()
+    rate
     +
-    '-'
+    '%？'
     +
-    crypto.randomUUID()
-    +
-    '.'
-    +
-    extension
-  );
+    '\n\n已经锁定的历史期比例不会改变。'
 
-}
-
-
-async function uploadQrFile(
-  accountId,
-  file
-){
-
-  validateQrFile(
-    file
   );
 
 
-  const path =
-  createQrStoragePath(
-    accountId,
-    file
-  );
-
-
-  const r =
-  await api(
-    '/storage/v1/object/'+
-    QR_BUCKET+
-    '/'+
-    encodeStoragePath(
-      path
-    ),
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-        file.type
-        ||
-        'application/octet-stream',
-
-        'x-upsert':
-        'false'
-      },
-
-      body:
-      file
-    }
-  );
-
-
-  const text =
-  await r.text();
-
-
-  if(!r.ok){
-
-    throw new Error(
-      parseStorageError(
-        text
-      )
-    );
-
-  }
-
-
-  return path;
-
-}
-
-
-async function getPrivateObjectUrl(
-  bucket,
-  path,
-  cache
-){
-
-  if(!path){
-
-    return null;
-
-  }
-
-
-  if(
-    cache.has(
-      path
-    )
-  ){
-
-    return cache.get(
-      path
-    );
-
-  }
-
-
-  const r =
-  await api(
-    '/storage/v1/object/authenticated/'+
-    bucket+
-    '/'+
-    encodeStoragePath(
-      path
-    )
-  );
-
-
-  if(!r.ok){
-
-    throw new Error(
-      '图片读取失败'
-    );
-
-  }
-
-
-  const blob =
-  await r.blob();
-
-
-  const url =
-  URL.createObjectURL(
-    blob
-  );
-
-
-  cache.set(
-    path,
-    url
-  );
-
-
-  return url;
-
-}
-
-
-async function deleteQrFileQuietly(
-  path
-){
-
-  if(!path){
+  if(!confirmed){
 
     return;
 
   }
 
 
-  try{
-
-    await api(
-      '/storage/v1/object/'+
-      QR_BUCKET,
-      {
-        method:'DELETE',
-
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
-
-        body:
-        JSON.stringify({
-          prefixes:[
-            path
-          ]
-        })
-      }
-    );
-
-  }catch(e){
-
-    console.warn(
-      e
-    );
-
-  }
-
-}
-
-
-/* =====================================
-   ADD PAYMENT ACCOUNT
-===================================== */
-
-async function addPaymentAccount(){
-
-  if(paymentAccountBusy){
-
-    return;
-
-  }
-
-
-  const methodName =
-  document.getElementById(
-    'paymentMethodName'
-  ).value.trim();
-
-
-  const methodType =
-  document.getElementById(
-    'paymentMethodType'
-  ).value;
-
-
-  const accountName =
-  document.getElementById(
-    'paymentAccountName'
-  ).value.trim();
-
-
-  const accountNumber =
-  document.getElementById(
-    'paymentAccountNumber'
-  ).value.trim();
-
-
-  const bankName =
-  document.getElementById(
-    'paymentBankName'
-  ).value.trim();
-
-
-  const sortOrder =
-  Number(
-    document.getElementById(
-      'paymentSortOrder'
-    ).value || 0
-  );
-
-
-  const note =
-  document.getElementById(
-    'paymentNote'
-  ).value.trim();
-
-
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
-  );
-
-
-  const btn =
-  document.getElementById(
-    'addPaymentAccountBtn'
-  );
-
-
-  if(
-    !methodName
-    ||
-    !accountName
-    ||
-    !accountNumber
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '支付方式、收款人姓名和账号不能为空';
-
-
-    return;
-
-  }
-
-
-  if(
-    !Number.isFinite(
-      sortOrder
-    )
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '排序数字格式不正确';
-
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      '确定添加这个收款账户？\n\n'+
-      '方式：'+methodName+
-      '\n收款人：'+accountName+
-      '\n账号：'+accountNumber
-    )
-  ){
-
-    return;
-
-  }
-
-
-  paymentAccountBusy =
+  busy =
   true;
-
-
-  btn.disabled =
-  true;
-
-
-  let uploadedPath =
-  null;
-
-
-  try{
-
-    const accountId =
-    crypto.randomUUID();
-
-
-    if(newQrFile){
-
-      msg.className =
-      'msg';
-
-
-      msg.textContent =
-      '正在上传收款二维码...';
-
-
-      uploadedPath =
-      await uploadQrFile(
-        accountId,
-        newQrFile
-      );
-
-    }
-
-
-    msg.textContent =
-    '正在保存收款账户...';
-
-
-    const r =
-    await api(
-      '/rest/v1/payment_accounts',
-      {
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          id:
-          accountId,
-
-          method_name:
-          methodName,
-
-          method_type:
-          methodType,
-
-          account_name:
-          accountName,
-
-          account_number:
-          accountNumber,
-
-          bank_name:
-          bankName || null,
-
-          qr_storage_path:
-          uploadedPath,
-
-          note:
-          note || null,
-
-          is_active:
-          true,
-
-          sort_order:
-          Math.trunc(
-            sortOrder
-          ),
-
-          created_by:
-          adminUser?.id
-          ||
-          null,
-
-          updated_by:
-          adminUser?.id
-          ||
-          null
-        })
-      }
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        text
-        ||
-        '收款账户保存失败'
-      );
-
-    }
-
-
-    newQrFile =
-    null;
-
-
-    clearNewPaymentAccountForm();
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    '✓ 收款账户添加成功';
-
-
-    await loadPaymentAccounts(
-      false
-    );
-
-
-  }catch(e){
-
-    if(uploadedPath){
-
-      await deleteQrFileQuietly(
-        uploadedPath
-      );
-
-    }
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '保存失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    paymentAccountBusy =
-    false;
-
-
-    btn.disabled =
-    false;
-
-  }
-
-}
-
-
-function clearNewPaymentAccountForm(){
-
-  document.getElementById(
-    'paymentMethodName'
-  ).value =
-  '';
-
-
-  document.getElementById(
-    'paymentMethodType'
-  ).value =
-  'wallet';
-
-
-  document.getElementById(
-    'paymentAccountName'
-  ).value =
-  '';
-
-
-  document.getElementById(
-    'paymentAccountNumber'
-  ).value =
-  '';
-
-
-  document.getElementById(
-    'paymentBankName'
-  ).value =
-  '';
-
-
-  document.getElementById(
-    'paymentSortOrder'
-  ).value =
-  '0';
-
-
-  document.getElementById(
-    'paymentNote'
-  ).value =
-  '';
-
-
-  document.getElementById(
-    'paymentQrFile'
-  ).value =
-  '';
-
-
-  document.getElementById(
-    'paymentQrFileState'
-  ).className =
-  'fileState';
-
-
-  document.getElementById(
-    'paymentQrFileState'
-  ).textContent =
-  '尚未选择二维码图片';
-
-
-  document.getElementById(
-    'newQrPreview'
-  ).style.display =
-  'none';
-
-}
-
-
-/* =====================================
-   PAYMENT ACCOUNTS
-===================================== */
-
-async function loadPaymentAccounts(
-  showMessage=false,
-  force=false
-){
-
-  if(
-    paymentAccountBusy
-    &&
-    !force
-  ){
-
-    return;
-
-  }
-
-
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
-  );
-
-
-  if(showMessage){
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在读取最新收款账户...';
-
-  }
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/payment_accounts'+
-      '?select=id,method_name,method_type,account_name,account_number,bank_name,qr_storage_path,note,is_active,sort_order,created_at,updated_at'+
-      '&order=sort_order.asc,created_at.asc'
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        text
-        ||
-        '读取失败'
-      );
-
-    }
-
-
-    const rows =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    [];
-
-
-    paymentAccounts =
-    Array.isArray(
-      rows
-    )
-    ?
-    rows
-    :
-    [];
-
-
-    renderPaymentAccounts();
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      '✓ 收款账户已刷新';
-
-    }
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '读取失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-  }
-
-}
-
-
-function renderPaymentAccounts(){
-
-  const box =
-  document.getElementById(
-    'paymentAccountList'
-  );
-
-
-  if(!paymentAccounts.length){
-
-    box.innerHTML =
-    '<div class="empty">'+
-    '目前还没有设置平台收款账户'+
-    '</div>';
-
-
-    return;
-
-  }
-
-  const activeAccounts =
-  paymentAccounts.filter(
-    account =>
-    account.is_active
-  );
-
-
-  const inactiveAccounts =
-  paymentAccounts.filter(
-    account =>
-    !account.is_active
-  );
-
-
-  const visibleAccounts =
-  window.jmtShowInactivePaymentAccounts
-  ?
-  [
-    ...activeAccounts,
-    ...inactiveAccounts
-  ]
-  :
-  activeAccounts;
-  box.innerHTML =
-    visibleAccounts.map(
-    account=>{
-
-      const id =
-      safeId(
-        account.id
-      );
-
-
-      return `
-
-      <div
-        class="paymentAccountItem ${
-          account.is_active
-          ?
-          ''
-          :
-          'disabledAccount'
-        }">
-
-        <div class="paymentAccountHead">
-
-          <div>
-
-            <div class="paymentAccountName">
-
-              ${escapeHtml(
-                account.method_name
-              )}
-
-            </div>
-
-            <div class="paymentAccountSub">
-
-              ${escapeHtml(
-                paymentTypeName(
-                  account.method_type
-                )
-              )}
-
-              · 排序：
-              ${escapeHtml(
-                account.sort_order
-              )}
-
-            </div>
-
-          </div>
-
-          <div
-            class="accountStatus ${
-              account.is_active
-              ?
-              'on'
-              :
-              'off'
-            }">
-
-            ${
-              account.is_active
-              ?
-              '启用中'
-              :
-              '已停用'
-            }
-
-          </div>
-
-        </div>
-
-        <div class="paymentGrid">
-
-          <div class="paymentBox">
-
-            <small>
-              收款人
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                account.account_name
-              )}
-            </strong>
-
-          </div>
-
-          <div class="paymentBox">
-
-            <small>
-              收款号码 / 账号
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                account.account_number
-              )}
-            </strong>
-
-          </div>
-
-          <div class="paymentBox">
-
-            <small>
-              银行名称
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                account.bank_name
-                ||
-                '—'
-              )}
-            </strong>
-
-          </div>
-
-          <div class="paymentBox">
-
-            <small>
-              当前状态
-            </small>
-
-            <strong>
-              ${
-                account.is_active
-                ?
-                '代理可使用'
-                :
-                '代理不可使用'
-              }
-            </strong>
-
-          </div>
-
-        </div>
-
-        ${
-          account.note
-          ?
-          `
-
-          <div class="accountNote">
-
-            备注：
-            ${escapeHtml(
-              account.note
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-        <div
-          id="accountQrBox_${id}"
-          class="accountQr">
-
-          ${
-            account.qr_storage_path
-            ?
-            `
-
-            <div
-              id="accountQrLoading_${id}"
-              class="accountQrLoading">
-
-              正在读取二维码...
-
-            </div>
-
-            <img
-              id="accountQrImg_${id}"
-              alt="收款二维码"
-              style="display:none">
-
-            `
-            :
-            `
-
-            <div class="accountQrLoading">
-
-              暂未上传收款二维码
-
-            </div>
-
-            `
-          }
-
-        </div>
-
-        <div class="editAccountBox">
-
-          <div class="editAccountTitle">
-            修改此收款账户
-          </div>
-
-          <div class="paymentAccountForm">
-
-            <input
-              id="editMethodName_${id}"
-              value="${escapeHtmlAttr(account.method_name)}"
-              placeholder="支付方式">
-
-            <select id="editMethodType_${id}">
-
-              <option
-                value="wallet"
-                ${
-                  account.method_type === 'wallet'
-                  ?
-                  'selected'
-                  :
-                  ''
-                }>
-                电子钱包
-              </option>
-
-              <option
-                value="bank"
-                ${
-                  account.method_type === 'bank'
-                  ?
-                  'selected'
-                  :
-                  ''
-                }>
-                银行卡 / 银行账户
-              </option>
-
-              <option
-                value="other"
-                ${
-                  account.method_type === 'other'
-                  ?
-                  'selected'
-                  :
-                  ''
-                }>
-                其他支付方式
-              </option>
-
-            </select>
-
-            <input
-              id="editAccountName_${id}"
-              value="${escapeHtmlAttr(account.account_name)}"
-              placeholder="收款人姓名">
-
-            <input
-              id="editAccountNumber_${id}"
-              value="${escapeHtmlAttr(account.account_number)}"
-              placeholder="收款号码 / 账号">
-
-            <input
-              id="editBankName_${id}"
-              value="${escapeHtmlAttr(account.bank_name || '')}"
-              placeholder="银行名称，可不填">
-
-            <input
-              id="editSortOrder_${id}"
-              type="number"
-              value="${Number(account.sort_order || 0)}"
-              step="1"
-              placeholder="排序">
-
-            <textarea
-              id="editNote_${id}"
-              placeholder="给代理看的备注">${escapeHtml(account.note || '')}</textarea>
-
-            <div class="fileBox">
-
-              <input
-                id="editQrFile_${id}"
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
-                onchange="handleEditQrChange(
-                  '${escapeJs(account.id)}',
-                  this
-                )">
-
-              <div
-                id="editQrState_${id}"
-                class="fileState">
-
-                ${
-                  account.qr_storage_path
-                  ?
-                  '目前已有二维码。选择新图片即可更换。'
-                  :
-                  '目前没有二维码。可以选择图片上传。'
-                }
-
-              </div>
-
-            </div>
-
-            <div class="accountButtons">
-
-              <button
-                class="gold"
-                onclick="savePaymentAccount(
-                  '${escapeJs(account.id)}'
-                )">
-
-                保存修改
-
-              </button>
-
-              <button
-                class="${
-                  account.is_active
-                  ?
-                  'red'
-                  :
-                  'greenBtn'
-                }"
-                onclick="togglePaymentAccount(
-                  '${escapeJs(account.id)}',
-                  ${
-                    account.is_active
-                    ?
-                    'false'
-                    :
-                    'true'
-                  }
-                )">
-
-                ${
-                  account.is_active
-                  ?
-                  '停用此收款账户'
-                  :
-                  '重新启用此收款账户'
-                }
-
-              </button>
-
-            </div>
-
-            ${
-              account.qr_storage_path
-              ?
-              `
-
-              <button
-                class="dark"
-                onclick="removePaymentQr(
-                  '${escapeJs(account.id)}'
-                )">
-
-                删除当前二维码
-
-              </button>
-
-              `
-              :
-              ''
-            }
-
-          </div>
-
-        </div>
-
-      </div>
-
-      `;
-
-    }
-  )
-  .join('');
-
-  if(inactiveAccounts.length){
-
-    box.insertAdjacentHTML(
-      'beforeend',
-      `
-      <button
-        class="dark"
-        style="width:100%;margin-top:12px"
-        onclick="
-          window.jmtShowInactivePaymentAccounts =
-          !window.jmtShowInactivePaymentAccounts;
-          renderPaymentAccounts();
-        ">
-
-        ${
-          window.jmtShowInactivePaymentAccounts
-          ?
-          '收起已停用收款账户'
-          :
-          '已停用收款账户（'+inactiveAccounts.length+'）'
-        }
-
-      </button>
-      `
-    );
-
-  }
-  paymentAccounts.forEach(
-    account=>{
-
-      if(account.qr_storage_path){
-
-        loadQrIntoAccount(
-          account
-        );
-
-      }
-
-    }
-  );
-
-}
-
-
-async function loadQrIntoAccount(
-  account
-){
-
-  const id =
-  safeId(
-    account.id
-  );
-
-
-  const loading =
-  document.getElementById(
-    'accountQrLoading_'+id
-  );
-
-
-  const img =
-  document.getElementById(
-    'accountQrImg_'+id
-  );
-
-
-  if(!img){
-
-    return;
-
-  }
-
-
-  try{
-
-    const preview =
-    editQrPreviewUrls.get(
-      account.id
-    );
-
-
-    if(preview){
-
-      img.src =
-      preview;
-
-    }
-
-    else{
-
-      img.src =
-      await getPrivateObjectUrl(
-        QR_BUCKET,
-        account.qr_storage_path,
-        qrDisplayUrls
-      );
-
-    }
-
-
-    img.style.display =
-    'block';
-
-
-    if(loading){
-
-      loading.style.display =
-      'none';
-
-    }
-
-
-  }catch(e){
-
-    if(loading){
-
-      loading.textContent =
-      '二维码暂时无法读取';
-
-    }
-
-  }
-
-}
-
-
-async function savePaymentAccount(
-  accountId
-){
-
-  if(paymentAccountBusy){
-
-    return;
-
-  }
-
-
-  const account =
-  paymentAccounts.find(
-    x =>
-    x.id === accountId
-  );
-
-
-  if(!account){
-
-    return;
-
-  }
-
-
-  const id =
-  safeId(
-    accountId
-  );
-
-
-  const methodName =
-  document.getElementById(
-    'editMethodName_'+id
-  ).value.trim();
-
-
-  const methodType =
-  document.getElementById(
-    'editMethodType_'+id
-  ).value;
-
-
-  const accountName =
-  document.getElementById(
-    'editAccountName_'+id
-  ).value.trim();
-
-
-  const accountNumber =
-  document.getElementById(
-    'editAccountNumber_'+id
-  ).value.trim();
-
-
-  const bankName =
-  document.getElementById(
-    'editBankName_'+id
-  ).value.trim();
-
-
-  const sortOrder =
-  Number(
-    document.getElementById(
-      'editSortOrder_'+id
-    ).value || 0
-  );
-
-
-  const note =
-  document.getElementById(
-    'editNote_'+id
-  ).value.trim();
-
-
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
-  );
-
-
-  if(
-    !methodName
-    ||
-    !accountName
-    ||
-    !accountNumber
-  ){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '支付方式、收款人姓名、收款账号不能为空';
-
-
-    return;
-
-  }
-
-
-  const newFile =
-  editQrFiles.get(
-    accountId
-  )
-  ||
-  null;
-
-
-  if(
-    !confirm(
-      '确定保存修改？\n\n'+
-      '支付方式：'+methodName+
-      '\n收款人：'+accountName+
-      '\n账号：'+accountNumber
-    )
-  ){
-
-    return;
-
-  }
-
-
-  paymentAccountBusy =
-  true;
-
-
-  let uploadedPath =
-  null;
-
-
-  try{
-
-    let finalQrPath =
-    account.qr_storage_path
-    ||
-    null;
-
-
-    if(newFile){
-
-      msg.className =
-      'msg';
-
-
-      msg.textContent =
-      '正在上传新的收款二维码...';
-
-
-      uploadedPath =
-      await uploadQrFile(
-        accountId,
-        newFile
-      );
-
-
-      finalQrPath =
-      uploadedPath;
-
-    }
-
-
-    const r =
-    await api(
-      '/rest/v1/payment_accounts'+
-      '?id=eq.'+
-      encodeURIComponent(
-        accountId
-      ),
-      {
-        method:'PATCH',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          method_name:
-          methodName,
-
-          method_type:
-          methodType,
-
-          account_name:
-          accountName,
-
-          account_number:
-          accountNumber,
-
-          bank_name:
-          bankName || null,
-
-          note:
-          note || null,
-
-          sort_order:
-          Math.trunc(
-            sortOrder
-          ),
-
-          qr_storage_path:
-          finalQrPath,
-
-          updated_by:
-          adminUser?.id
-          ||
-          null,
-
-          updated_at:
-          new Date()
-          .toISOString()
-        })
-      }
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        text
-        ||
-        '修改保存失败'
-      );
-
-    }
-
-
-    const oldPath =
-    account.qr_storage_path;
-
-
-    editQrFiles.delete(
-      accountId
-    );
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    newFile
-    ?
-    '✓ 账户资料和新二维码已永久保存'
-    :
-    '✓ 收款账户修改已保存';
-
-
-    await loadPaymentAccounts(
-  false,
-  true
-);
-
-
-    if(
-      uploadedPath
-      &&
-      oldPath
-      &&
-      uploadedPath !== oldPath
-    ){
-
-      await deleteQrFileQuietly(
-        oldPath
-      );
-
-    }
-
-
-  }catch(e){
-
-    if(uploadedPath){
-
-      await deleteQrFileQuietly(
-        uploadedPath
-      );
-
-    }
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '保存失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    paymentAccountBusy =
-    false;
-
-  }
-
-}
-
-
-async function togglePaymentAccount(
-  accountId,
-  newState
-){
-
-  if(paymentAccountBusy){
-
-    return;
-
-  }
-
-
-  const account =
-  paymentAccounts.find(
-    x =>
-    x.id === accountId
-  );
-
-
-  if(!account){
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      '确定'+
-      (
-        newState
-        ?
-        '重新启用'
-        :
-        '停用'
-      )+
-      '这个收款账户？'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  paymentAccountBusy =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
-  );
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/payment_accounts'+
-      '?id=eq.'+
-      encodeURIComponent(
-        accountId
-      ),
-      {
-        method:'PATCH',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          is_active:
-          Boolean(
-            newState
-          ),
-
-          updated_by:
-          adminUser?.id
-          ||
-          null,
-
-          updated_at:
-          new Date()
-          .toISOString()
-        })
-      }
-    );
-
-
-    if(!r.ok){
-
-      throw new Error(
-        await r.text()
-      );
-
-    }
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    newState
-    ?
-    '✓ 收款账户已重新启用'
-    :
-    '✓ 收款账户已停用';
-
-
-    await loadPaymentAccounts(
-  false,
-  true
-);
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '操作失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    paymentAccountBusy =
-    false;
-
-  }
-
-}
-
-
-async function removePaymentQr(
-  accountId
-){
-
-  if(paymentAccountBusy){
-
-    return;
-
-  }
-
-
-  const account =
-  paymentAccounts.find(
-    x =>
-    x.id === accountId
-  );
-
-
-  if(
-    !account
-    ||
-    !account.qr_storage_path
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      '确定删除这个账户当前的二维码？'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  paymentAccountBusy =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'paymentAccountMsg'
-  );
-
-
-  const oldPath =
-  account.qr_storage_path;
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/payment_accounts'+
-      '?id=eq.'+
-      encodeURIComponent(
-        accountId
-      ),
-      {
-        method:'PATCH',
-
-        headers:{
-          'Content-Type':
-          'application/json',
-
-          Prefer:
-          'return=representation'
-        },
-
-        body:
-        JSON.stringify({
-          qr_storage_path:
-          null,
-
-          updated_by:
-          adminUser?.id
-          ||
-          null,
-
-          updated_at:
-          new Date()
-          .toISOString()
-        })
-      }
-    );
-
-
-    if(!r.ok){
-
-      throw new Error(
-        await r.text()
-      );
-
-    }
-
-
-    await deleteQrFileQuietly(
-      oldPath
-    );
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    '✓ 当前二维码已删除';
-
-
-    await loadPaymentAccounts(
-  false,
-  true
-);
-
-
-  }catch(e){
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '删除失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    paymentAccountBusy =
-    false;
-
-  }
-
-}
-
-
-/* =====================================
-   PAYMENT REVIEW
-===================================== */
-
-async function loadPaymentReviews(
-  showMessage=false
-){
-
-  if(
-    paymentReviewLoading
-    ||
-    paymentReviewBusy
-  ){
-
-    return;
-
-  }
-
-
-  paymentReviewLoading =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'paymentReviewMsg'
-  );
-
-
-  if(showMessage){
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在读取最新付款申请...';
-
-  }
-
-
-  try{
-
-    const paymentRes =
-    await api(
-      '/rest/v1/agent_payment_submissions'+
-      '?select=id,round_id,agent_id,payment_account_id,declared_amount,confirmed_amount,status,method_name_snapshot,method_type_snapshot,account_name_snapshot,account_number_snapshot,bank_name_snapshot,qr_storage_path_snapshot,account_note_snapshot,agent_note,submitted_at,reviewed_at,reviewed_by,rejection_reason,updated_at'+
-      '&order=submitted_at.desc'+
-      '&limit=300'
-    );
-
-
-    if(!paymentRes.ok){
-
-      throw new Error(
-        await paymentRes.text()
-      );
-
-    }
-
-
-    const proofRes =
-    await api(
-      '/rest/v1/agent_payment_proofs'+
-      '?select=id,payment_submission_id,agent_id,storage_path,original_name,mime_type,file_size,created_at'+
-      '&order=created_at.asc'+
-      '&limit=1000'
-    );
-
-
-    if(!proofRes.ok){
-
-      throw new Error(
-        await proofRes.text()
-      );
-
-    }
-
-
-    paymentReviews =
-    await paymentRes.json();
-
-
-    paymentProofs =
-    await proofRes.json();
-
-
-    if(
-      !Array.isArray(
-        paymentReviews
-      )
-    ){
-
-      paymentReviews =
-      [];
-
-    }
-
-
-    if(
-      !Array.isArray(
-        paymentProofs
-      )
-    ){
-
-      paymentProofs =
-      [];
-
-    }
-
-
-    updatePaymentReviewStats();
-
-
-    renderPaymentReviews();
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      '✓ 付款申请已刷新';
-
-    }
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '付款申请读取失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-    document.getElementById(
-      'paymentReviewList'
-    ).innerHTML =
-    '<div class="empty">'+
-    '暂时无法读取付款申请'+
-    '</div>';
-
-
-  }finally{
-
-    paymentReviewLoading =
-    false;
-
-  }
-
-}
-
-
-function updatePaymentReviewStats(){
-
-  let pendingCount =
-  0;
-
-
-  let pendingAmount =
-  0;
-
-
-  let approvedAmount =
-  0;
-
-
-  paymentReviews.forEach(
-    row=>{
-
-      if(row.status === 'pending'){
-
-        pendingCount++;
-
-
-        pendingAmount +=
-        Number(
-          row.declared_amount || 0
-        );
-
-      }
-
-
-      if(row.status === 'approved'){
-
-        approvedAmount +=
-        Number(
-          row.confirmed_amount || 0
-        );
-
-      }
-
-    }
-  );
-
-
-  document.getElementById(
-    'reviewPendingCount'
-  ).textContent =
-  pendingCount;
-
-
-  document.getElementById(
-    'reviewPendingAmount'
-  ).textContent =
-  formatNumber(
-    pendingAmount
-  );
-
-
-  document.getElementById(
-    'reviewApprovedAmount'
-  ).textContent =
-  formatNumber(
-    approvedAmount
-  );
-
-}
-
-
-function renderPaymentReviews(){
-
-  const filter =
-  document.getElementById(
-    'paymentReviewStatusFilter'
-  ).value;
-
-
-  const box =
-  document.getElementById(
-    'paymentReviewList'
-  );
-
-
-  let rows =
-  [...paymentReviews];
-
-
-  if(filter !== 'all'){
-
-    rows =
-    rows.filter(
-      row =>
-      row.status === filter
-    );
-
-  }
-
-
-  rows.sort(
-    (
-      a,
-      b
-    )=>{
-
-      if(
-        a.status === 'pending'
-        &&
-        b.status !== 'pending'
-      ){
-
-        return -1;
-
-      }
-
-
-      if(
-        b.status === 'pending'
-        &&
-        a.status !== 'pending'
-      ){
-
-        return 1;
-
-      }
-
-
-      return (
-        new Date(
-          b.submitted_at
-        ).getTime()
-        -
-        new Date(
-          a.submitted_at
-        ).getTime()
-      );
-
-    }
-  );
-
-
-  if(!rows.length){
-
-    box.innerHTML =
-    '<div class="empty">'+
-    (
-      filter === 'pending'
-      ?
-      '目前没有待审核付款申请'
-      :
-      '没有符合条件的付款申请'
-    )+
-    '</div>';
-
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-  rows.map(
-    row=>{
-
-      const agent =
-      agents.find(
-        x =>
-        x.id ===
-        row.agent_id
-      );
-
-
-      const round =
-      settlementRounds.find(
-        x =>
-        x.id ===
-        row.round_id
-      );
-
-
-      const proofs =
-      paymentProofs.filter(
-        x =>
-        x.payment_submission_id ===
-        row.id
-      );
-
-
-      const name =
-      agent?.display_name
-      ||
-      '未知代理';
-
-
-      const roundText =
-      round
-      ?
-      round.round_date+
-      ' · '+
-      periodName(
-        round.round_code
-      )
-      :
-      '未知期数';
-
-
-      return `
-
-      <div
-        id="paymentReview_${safeId(row.id)}"
-        class="paymentReviewItem ${
-          row.status === 'pending'
-          ?
-          'pendingReview'
-          :
-          row.status === 'approved'
-          ?
-          'approvedReview'
-          :
-          'rejectedReview'
-        }">
-
-        <div class="reviewHead">
-
-          <div>
-
-            <div class="reviewName">
-
-              ${escapeHtml(
-                name
-              )}
-
-            </div>
-
-            <div class="reviewMeta">
-
-              ${escapeHtml(
-                roundText
-              )}
-
-              <br>
-
-              提交时间：
-              ${escapeHtml(
-                formatDate(
-                  row.submitted_at
-                )
-              )}
-
-            </div>
-
-          </div>
-
-          <div
-            class="reviewBadge ${escapeHtml(row.status)}">
-
-            ${escapeHtml(
-              paymentReviewStatusName(
-                row.status
-              )
-            )}
-
-          </div>
-
-        </div>
-
-        <div class="reviewGrid">
-
-          <div class="reviewBox">
-
-            <small>
-              代理申报付款
-            </small>
-
-            <strong>
-              ${formatNumber(
-                row.declared_amount
-              )}
-            </strong>
-
-          </div>
-
-          <div class="reviewBox">
-
-            <small>
-              已确认金额
-            </small>
-
-            <strong>
-              ${formatNumber(
-                row.confirmed_amount
-              )}
-            </strong>
-
-          </div>
-
-          <div class="reviewBox">
-
-            <small>
-              支付方式
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                row.method_name_snapshot
-                ||
-                '—'
-              )}
-            </strong>
-
-          </div>
-
-          <div class="reviewBox">
-
-            <small>
-              付款到账号
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                row.account_number_snapshot
-                ||
-                '—'
-              )}
-            </strong>
-
-          </div>
-
-          <div class="reviewBox">
-
-            <small>
-              收款人
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                row.account_name_snapshot
-                ||
-                '—'
-              )}
-            </strong>
-
-          </div>
-
-          <div class="reviewBox">
-
-            <small>
-              银行 / 钱包
-            </small>
-
-            <strong>
-              ${escapeHtml(
-                row.bank_name_snapshot
-                ||
-                row.method_name_snapshot
-                ||
-                '—'
-              )}
-            </strong>
-
-          </div>
-
-        </div>
-
-        ${
-          row.agent_note
-          ?
-          `
-
-          <div class="reviewNote">
-
-            代理备注：
-            ${escapeHtml(
-              row.agent_note
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-        <div class="reviewProofs">
-
-          <div class="reviewProofTitle">
-
-            付款截图
-            ${
-              proofs.length
-              ?
-              ' · '+proofs.length+' 张'
-              :
-              ''
-            }
-
-          </div>
-
-          ${
-            proofs.length
-            ?
-            `
-
-            <div class="proofGrid">
-
-              ${
-                proofs.map(
-                  proof=>`
-
-                  <div class="proofItem">
-
-                    <div
-                      id="proofLoading_${safeId(proof.id)}"
-                      class="accountQrLoading">
-
-                      正在读取截图...
-
-                    </div>
-
-                    <img
-                      id="proofImg_${safeId(proof.id)}"
-                      alt="付款截图"
-                      style="display:none">
-
-                    <div class="proofCaption">
-
-                      ${escapeHtml(
-                        proof.original_name
-                        ||
-                        '付款截图'
-                      )}
-
-                    </div>
-
-                  </div>
-
-                  `
-                )
-                .join('')
-              }
-
-            </div>
-
-            `
-            :
-            `
-
-            <div class="empty">
-              本次付款申请暂时没有截图
-            </div>
-
-            `
-          }
-
-        </div>
-
-        ${
-          row.status === 'pending'
-          ?
-          `
-
-          <div class="reviewButtons">
-
-            <button
-              class="greenBtn"
-              onclick="reviewPaymentSubmission(
-                '${escapeJs(row.id)}',
-                'approved'
-              )">
-
-              ✓ 确认到账
-
-            </button>
-
-            <button
-              class="red"
-              onclick="reviewPaymentSubmission(
-                '${escapeJs(row.id)}',
-                'rejected'
-              )">
-
-              驳回付款申请
-
-            </button>
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-        ${
-          row.status === 'rejected'
-          &&
-          row.rejection_reason
-          ?
-          `
-
-          <div class="reviewNote">
-
-            驳回原因：
-            ${escapeHtml(
-              row.rejection_reason
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-        ${
-          row.reviewed_at
-          ?
-          `
-
-          <div class="reviewNote">
-
-            审核时间：
-            ${escapeHtml(
-              formatDate(
-                row.reviewed_at
-              )
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-      </div>
-
-      `;
-
-    }
-  )
-  .join('');
-
-
-  rows.forEach(
-    row=>{
-
-      paymentProofs
-      .filter(
-        proof =>
-        proof.payment_submission_id ===
-        row.id
-      )
-      .forEach(
-        proof =>
-        loadPaymentProof(
-          proof
-        )
-      );
-
-    }
-  );
-
-}
-
-
-async function loadPaymentProof(
-  proof
-){
-
-  const loading =
-  document.getElementById(
-    'proofLoading_'+
-    safeId(
-      proof.id
-    )
-  );
-
-
-  const img =
-  document.getElementById(
-    'proofImg_'+
-    safeId(
-      proof.id
-    )
-  );
-
-
-  if(!img){
-
-    return;
-
-  }
-
-
-  try{
-
-    const url =
-    await getPrivateObjectUrl(
-      PAYMENT_PROOF_BUCKET,
-      proof.storage_path,
-      proofDisplayUrls
-    );
-
-
-    img.src =
-    url;
-
-
-    img.style.display =
-    'block';
-
-
-    if(loading){
-
-      loading.style.display =
-      'none';
-
-    }
-
-
-  }catch(e){
-
-    if(loading){
-
-      loading.textContent =
-      '付款截图暂时无法读取';
-
-    }
-
-  }
-
-}
-
-
-async function reviewPaymentSubmission(
-  submissionId,
-  action
-){
-
-  if(paymentReviewBusy){
-
-    return;
-
-  }
-
-
-  const row =
-  paymentReviews.find(
-    x =>
-    x.id === submissionId
-  );
-
-
-  if(!row){
-
-    return;
-
-  }
-
-
-  const agent =
-  agents.find(
-    x =>
-    x.id === row.agent_id
-  );
-
-
-  const name =
-  agent?.display_name
-  ||
-  '未知代理';
-
-
-  let rejectionReason =
-  null;
-
-
-  if(action === 'approved'){
-
-    const ok =
-    confirm(
-      '请确认已经真实收到这笔付款。\n\n'+
-      '代理：'+name+
-      '\n申报金额：'+
-      formatNumber(
-        row.declared_amount
-      )+
-      '\n支付方式：'+
-      (
-        row.method_name_snapshot
-        ||
-        '—'
-      )+
-      '\n收款账号：'+
-      (
-        row.account_number_snapshot
-        ||
-        '—'
-      )+
-      '\n\n确认后，该金额会正式计入平台已到账。'
-    );
-
-
-    if(!ok){
-
-      return;
-
-    }
-
-  }
-
-  else{
-
-    rejectionReason =
-    prompt(
-      '请输入驳回原因：',
-      '付款资料或金额需要重新核对'
-    );
-
-
-    if(
-      rejectionReason === null
-    ){
-
-      return;
-
-    }
-
-
-    rejectionReason =
-    rejectionReason.trim();
-
-
-    if(!rejectionReason){
-
-      alert(
-        '请输入驳回原因'
-      );
-
-
-      return;
-
-    }
-
-  }
-
-
-  paymentReviewBusy =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'paymentReviewMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  msg.textContent =
-  action === 'approved'
-  ?
-  '正在确认到账...'
-  :
-  '正在驳回付款申请...';
-
-
-  try{
-
-    const r =
-    await api(
-      '/rest/v1/rpc/admin_review_agent_payment',
-      {
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
-
-        body:
-        JSON.stringify({
-          p_submission_id:
-          submissionId,
-
-          p_action:
-          action,
-
-          p_rejection_reason:
-          rejectionReason
-        })
-      }
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      let errorMessage =
-      text
-      ||
-      '审核失败';
-
-
-      if(
-        errorMessage.includes(
-          'PAYMENT_ALREADY_REVIEWED'
-        )
-      ){
-
-        errorMessage =
-        '这笔付款已经被审核，请刷新页面';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'APPROVED_AMOUNT_EXCEEDS_AMOUNT_DUE'
-        )
-      ){
-
-        errorMessage =
-        '批准后金额会超过本期应交金额，不能确认';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'ROUND_SETTLEMENT_NOT_FOUND'
-        )
-      ){
-
-        errorMessage =
-        '没有找到对应的本期结款记录';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'NOT_ADMIN'
-        )
-      ){
-
-        errorMessage =
-        '当前账号没有管理员权限';
-
-      }
-
-
-      throw new Error(
-        errorMessage
-      );
-
-    }
-
-
-    /*
-      关键修复：
-
-      先结束 busy 状态，
-      再重新读取付款申请和结款。
-
-      这样成功以后页面会立即更新，
-      不会再出现“按了确认但是页面没反应”。
-    */
-
-    paymentReviewBusy =
-    false;
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    action === 'approved'
-    ?
-    '✓ 已确认到账：'+
-    name+
-    ' · '+
-    formatNumber(
-      row.declared_amount
-    )
-    :
-    '✓ 已驳回付款申请';
-
-
-    await loadPaymentReviews(
-      false
-    );
-
-
-    await loadSettlementData(
-      false
-    );
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '审核失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    paymentReviewBusy =
-    false;
-
-  }
-
-}
-
-/* =====================================
-   REFERRAL COMMISSION
-===================================== */
-
-async function loadReferralCommissions(
-  showMessage=false
-){
-
-  if(referralCommissionLoading){
-
-    return;
-
-  }
-
-
-  referralCommissionLoading =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'referralCommissionMsg'
-  );
-
-
-  if(showMessage){
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在读取最新推荐佣金...';
-
-  }
 
 
   try{
 
     const response =
     await api(
-      '/rest/v1/rpc/admin_list_agent_referral_commissions',
+
+      '/rest/v1/agents'
+      +
+      '?id=eq.'
+      +
+      encodeURIComponent(
+        agentId
+      ),
+
       {
-        method:'POST',
+
+        method:
+        'PATCH',
 
         headers:{
+
           'Content-Type':
-          'application/json'
+          'application/json',
+
+          Prefer:
+          'return=representation'
+
         },
 
         body:
         JSON.stringify({
-          p_round_id:null
+
+          commission_rate:
+          rate
+
         })
+
       }
+
     );
 
 
-    const text =
-    await response.text();
+    await parseResponse(
+      response
+    );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        text
-        ||
-        '推荐佣金读取失败'
-      );
-
-    }
+    setPageMessage(
+      '代理佣金比例已更新',
+      'ok'
+    );
 
 
-    const data =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    {};
-
-
-    referralCommissionRows =
-    Array.isArray(
-      data.rows
-    )
-    ?
-    data.rows
-    :
-    [];
-
-
-    buildReferralCommissionRoundSelect();
-
-
-    renderReferralCommissions();
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      '✓ 推荐佣金已刷新';
-
-    }
+    await loadAll(
+      false
+    );
 
   }
-  catch(e){
+  catch(error){
 
-    console.error(
-      'referral commission',
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '推荐佣金读取失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
+    setPageMessage(
+      '保存失败：'
+      +
+      translateError(
+        error.message
+      ),
+      'err'
     );
 
   }
   finally{
 
-    referralCommissionLoading =
+    busy =
     false;
 
   }
@@ -6868,653 +3739,357 @@ async function loadReferralCommissions(
 }
 
 
-function buildReferralCommissionRoundSelect(){
+/* =====================================
+   AGENT STATUS
+===================================== */
 
-  const select =
-  document.getElementById(
-    'referralCommissionRoundSelect'
-  );
+async function setAgentStatus(
+  agentId,
+  status
+){
 
-
-  if(!select){
+  if(busy){
 
     return;
 
   }
 
 
-  const oldValue =
-  select.value;
-
-
-  const roundMap =
-  new Map();
-
-
-  referralCommissionRows.forEach(
-    row=>{
-
-      if(
-        !row
-        ||
-        !row.round_id
-      ){
-
-        return;
-
-      }
-
-
-      if(
-        !roundMap.has(
-          row.round_id
-        )
-      ){
-
-        roundMap.set(
-          row.round_id,
-          {
-            id:
-            row.round_id,
-
-            round_date:
-            row.round_date,
-
-            round_code:
-            row.round_code
-          }
-        );
-
-      }
-
-    }
+  const agent =
+  agentById(
+    agentId
   );
 
 
-  const rounds =
-  Array.from(
-    roundMap.values()
-  );
+  if(!agent){
+
+    return;
+
+  }
 
 
-  select.innerHTML =
-  '<option value="">全部历史期</option>';
-
-
-  rounds.forEach(
-    round=>{
-
-      const option =
-      document.createElement(
-        'option'
-      );
-
-
-      option.value =
-      round.id;
-
-
-      option.textContent =
-      (
-        round.round_date
-        ||
-        ''
-      )
-      +
-      (
-        round.round_code
-        ?
-        ' · '+
-        round.round_code
-        :
-        ''
-      );
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
+  const action =
+  status === 'active'
+  ?
+  '恢复代理'
+  :
+  status === 'suspended'
+  ?
+  '暂停代理'
+  :
+  '限制代理';
 
 
   if(
-    oldValue
-    &&
-    rounds.some(
-      round =>
-      round.id === oldValue
+    !window.confirm(
+      '确定'
+      +
+      action
+      +
+      '「'
+      +
+      (
+        agent.display_name
+        ||
+        '代理'
+      )
+      +
+      '」？'
     )
   ){
 
-    select.value =
-    oldValue;
-
-  }
-
-}
-
-
-function renderReferralCommissions(){
-
-  const list =
-  document.getElementById(
-    'referralCommissionList'
-  );
-
-
-  const select =
-  document.getElementById(
-    'referralCommissionRoundSelect'
-  );
-
-
-  if(
-    !list
-    ||
-    !select
-  ){
-
     return;
 
   }
 
 
-  const roundId =
-  select.value;
+  busy =
+  true;
 
 
-  const rows =
-  roundId
-  ?
-  referralCommissionRows.filter(
-    row =>
-    row.round_id === roundId
-  )
-  :
-  referralCommissionRows;
+  try{
 
+    const response =
+    await api(
 
-  let totalDue =
-  0;
+      '/rest/v1/agents'
+      +
+      '?id=eq.'
+      +
+      encodeURIComponent(
+        agentId
+      ),
 
+      {
 
-  let totalPaid =
-  0;
+        method:
+        'PATCH',
 
+        headers:{
 
-  let totalRemaining =
-  0;
+          'Content-Type':
+          'application/json',
 
+          Prefer:
+          'return=representation'
 
-  let pendingCount =
-  0;
+        },
 
+        body:
+        JSON.stringify({
 
-  rows.forEach(
-    row=>{
+          status:
+          status
 
-      const due =
-      Number(
-        row.commission_due
-        ||
-        0
-      );
-
-
-      const paid =
-      Number(
-        row.commission_paid
-        ||
-        0
-      );
-
-
-      const remaining =
-      Number(
-        row.commission_remaining
-        ||
-        0
-      );
-
-
-      totalDue +=
-      Number.isFinite(due)
-      ?
-      due
-      :
-      0;
-
-
-      totalPaid +=
-      Number.isFinite(paid)
-      ?
-      paid
-      :
-      0;
-
-
-      totalRemaining +=
-      Number.isFinite(remaining)
-      ?
-      remaining
-      :
-      0;
-
-
-      if(remaining > 0){
-
-        pendingCount++;
+        })
 
       }
 
-    }
+    );
+
+
+    await parseResponse(
+      response
+    );
+
+
+    setPageMessage(
+      '代理状态已更新',
+      'ok'
+    );
+
+
+    await loadAll(
+      false
+    );
+
+  }
+  catch(error){
+
+    setPageMessage(
+      '操作失败：'
+      +
+      translateError(
+        error.message
+      ),
+      'err'
+    );
+
+  }
+  finally{
+
+    busy =
+    false;
+
+  }
+
+}
+
+
+function toggleAgentPause(agentId){
+
+  const agent =
+  agentById(
+    agentId
   );
 
 
-  document.getElementById(
-    'referralCommissionDue'
-  ).textContent =
-  formatNumber(
-    totalDue
-  );
-
-
-  document.getElementById(
-    'referralCommissionPaid'
-  ).textContent =
-  formatNumber(
-    totalPaid
-  );
-
-
-  document.getElementById(
-    'referralCommissionRemaining'
-  ).textContent =
-  formatNumber(
-    totalRemaining
-  );
-
-
-  document.getElementById(
-    'referralCommissionPendingCount'
-  ).textContent =
-  pendingCount;
-
-
-  if(!rows.length){
-
-    list.innerHTML =
-    '<div class="empty">'+
-    '暂无推荐佣金记录'+
-    '</div>';
-
+  if(!agent){
 
     return;
 
   }
 
 
-  list.innerHTML =
-  rows.map(
-    row=>{
+  setAgentStatus(
 
-      const due =
-      Number(
-        row.commission_due
-        ||
-        0
-      );
+    agentId,
 
+    agent.status === 'active'
+    ?
+    'suspended'
+    :
+    'active'
 
-      const paid =
-      Number(
-        row.commission_paid
-        ||
-        0
-      );
-
-
-      const remaining =
-      Number(
-        row.commission_remaining
-        ||
-        0
-      );
-
-
-      const confirmed =
-      Number(
-        row.confirmed_customer_points
-        ||
-        0
-      );
-
-
-      const pending =
-      Number(
-        row.pending_customer_points
-        ||
-        0
-      );
-
-
-      const rate =
-      Number(
-        row.commission_rate_snapshot
-        ||
-        0
-      );
-
-
-      const status =
-      row.settlement_status
-      ||
-      (
-        remaining > 0
-        ?
-        'pending'
-        :
-        'none'
-      );
-
-
-      const statusText =
-      status === 'paid'
-      ?
-      '已支付'
-      :
-      (
-        remaining > 0
-        ?
-        '待支付'
-        :
-        '暂无应付'
-      );
-
-
-      const statusClass =
-      status === 'paid'
-      ?
-      'done'
-      :
-      (
-        remaining > 0
-        ?
-        'waiting'
-        :
-        'partial'
-      );
-
-
-      return `
-
-      <div
-        class="settlementItem ${
-          status === 'paid'
-          ?
-          'settled'
-          :
-          ''
-        }">
-
-        <div class="settlementHead">
-
-          <div>
-
-            <div class="settlementName">
-
-              ${escapeHtml(
-                row.display_name
-                ||
-                '未知代理'
-              )}
-
-            </div>
-
-            <div class="settlementRound">
-
-              ${escapeHtml(
-                row.round_date
-                ||
-                ''
-              )}
-
-              ${row.round_code
-                ?
-                ' · '+
-                escapeHtml(
-                  row.round_code
-                )
-                :
-                ''
-              }
-
-            </div>
-
-          </div>
-
-          <div
-            class="financeBadge ${statusClass}">
-
-            ${statusText}
-
-          </div>
-
-        </div>
-
-
-        <div class="settlementGrid">
-
-          <div class="financeBox">
-
-            <small>
-              客户已确认金额
-            </small>
-
-            <strong>
-              ${formatNumber(
-                confirmed
-              )}
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox">
-
-            <small>
-              客户待确认金额
-            </small>
-
-            <strong>
-              ${formatNumber(
-                pending
-              )}
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox">
-
-            <small>
-              当期佣金率
-            </small>
-
-            <strong>
-              ${rate}%
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox commission">
-
-            <small>
-              应付佣金
-            </small>
-
-            <strong>
-              ${formatNumber(
-                due
-              )}
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox received">
-
-            <small>
-              已付佣金
-            </small>
-
-            <strong>
-              ${formatNumber(
-                paid
-              )}
-            </strong>
-
-          </div>
-
-
-          <div class="financeBox due">
-
-            <small>
-              剩余待付
-            </small>
-
-            <strong>
-              ${formatNumber(
-                remaining
-              )}
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        ${
-          row.payout_account_number_snapshot
-          ?
-          `
-
-          <div class="settlementNote">
-
-            代理收款账户：
-            ${escapeHtml(
-              row.payout_method_type_snapshot
-              ||
-              ''
-            )}
-
-            ·
-
-            ${escapeHtml(
-              row.payout_account_name_snapshot
-              ||
-              ''
-            )}
-
-            ·
-
-            ${escapeHtml(
-              row.payout_account_number_snapshot
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-
-        ${
-          row.completed_at
-          ?
-          `
-
-          <div class="settleTime">
-
-            支付完成：
-            ${escapeHtml(
-            formatDate(
-                row.completed_at
-              )
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-
-        ${
-        remaining > 0 && row.round_status === 'settled'
-          ?
-          `
-
-          <button
-            class="greenBtn"
-            style="width:100%;margin-top:12px"
-            onclick="confirmReferralCommissionPaid(
-              '${escapeJs(
-                row.agent_id
-              )}',
-              '${escapeJs(
-                row.round_id
-              )}'
-            )">
-
-            确认佣金已支付
-
-          </button>
-
-          `
-          :
-          ''
-        }
-
-      </div>
-
-      `;
-
-    }
-  ).join('');
+  );
 
 }
-  async function confirmReferralCommissionPaid(
+
+
+function toggleAgentBlock(agentId){
+
+  const agent =
+  agentById(
+    agentId
+  );
+
+
+  if(!agent){
+
+    return;
+
+  }
+
+
+  setAgentStatus(
+
+    agentId,
+
+    agent.status === 'blocked'
+    ?
+    'active'
+    :
+    'blocked'
+
+  );
+
+}
+
+
+/* =====================================
+   PAYOUT ACCOUNT UNLOCK
+===================================== */
+
+async function unlockAgentPayout(
+  accountId
+){
+
+  if(busy){
+
+    return;
+
+  }
+
+
+  const confirmed =
+  window.confirm(
+
+    '允许代理修改这个收款方式一次吗？'
+    +
+    '\n\n代理重新保存以后会再次自动锁定。'
+
+  );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  busy =
+  true;
+
+
+  try{
+
+    const response =
+    await api(
+
+      '/rest/v1/rpc/admin_unlock_agent_payout_account',
+
+      {
+
+        method:
+        'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          p_account_id:
+          accountId
+
+        })
+
+      }
+
+    );
+
+
+    await parseResponse(
+      response
+    );
+
+
+    setPageMessage(
+      '代理现在可以修改一次该收款方式',
+      'ok'
+    );
+
+
+    await loadAll(
+      false
+    );
+
+  }
+  catch(error){
+
+    setPageMessage(
+      '解锁失败：'
+      +
+      translateError(
+        error.message
+      ),
+      'err'
+    );
+
+  }
+  finally{
+
+    busy =
+    false;
+
+  }
+
+}
+
+
+/* =====================================
+   COMMISSION PAID
+===================================== */
+
+async function markCommissionPaid(
   agentId,
   roundId
 ){
 
-  if(referralCommissionBusy){
+  if(busy){
 
     return;
 
   }
 
 
+  const agent =
+  agentById(
+    agentId
+  );
+
+
   const row =
-  referralCommissionRows.find(
+  commissionRows.find(
+
     item =>
     item.agent_id === agentId
     &&
     item.round_id === roundId
+
   );
 
 
-  if(!row){
-
-    alert(
-      '没有找到这笔推荐佣金记录'
-    );
+  if(
+    !agent
+    ||
+    !row
+  ){
 
     return;
 
@@ -7530,1983 +4105,347 @@ function renderReferralCommissions(){
 
 
   if(
-    !Number.isFinite(
-      remaining
-    )
-    ||
     remaining <= 0
   ){
-
-    alert(
-      '这笔佣金目前没有待支付金额'
-    );
 
     return;
 
   }
 
 
-  const ok =
-  confirm(
-    '请确认你已经真实向代理支付这笔佣金。\n\n'+
-    '代理：'+
+  const accounts =
+  accountsForAgent(
+    agentId
+  );
+
+
+  const snapshotReady =
+  Boolean(
+    row.payout_account_number_snapshot
+  );
+
+
+  const currentAccountsReady =
+  (
+    accounts.length > 0
+    &&
+    accounts.every(
+
+      account =>
+      account.agent_edit_locked
+      !==
+      false
+
+    )
+  );
+
+
+  if(
+    !snapshotReady
+    &&
+    !currentAccountsReady
+  ){
+
+    setPageMessage(
+      accounts.some(
+
+        account =>
+        account.agent_edit_locked
+        ===
+        false
+
+      )
+      ?
+      '代理收款方式正在开放修改，请等代理重新保存并锁定后再支付佣金。'
+      :
+      '代理尚未绑定收款方式，不能确认佣金支付。',
+      'err'
+    );
+
+
+    return;
+
+  }
+
+
+  if(
+    row.round_status
+    !==
+    'settled'
+  ){
+
+    setPageMessage(
+      '本期还没有正式结算，暂时不能支付佣金。',
+      'err'
+    );
+
+
+    return;
+
+  }
+
+
+  const confirmed =
+  window.confirm(
+
+    '请确认现实中已经向代理支付佣金。'
+    +
+    '\n\n代理：'
+    +
     (
-      row.display_name
+      agent.display_name
       ||
-      '未知代理'
-    )+
-    '\n期号：'+
+      '代理'
+    )
+    +
+    '\n期数：'
+    +
     (
       row.round_date
       ||
       ''
-    )+
-    (
+    )
+    +
+    ' · '
+    +
+    periodName(
       row.round_code
-      ?
-      ' · '+
-      row.round_code
-      :
-      ''
-    )+
-    '\n应付佣金：'+
-    formatNumber(
-      row.commission_due
-      ||
-      0
-    )+
-    '\n已付佣金：'+
-    formatNumber(
-      row.commission_paid
-      ||
-      0
-    )+
-    '\n本次待付：'+
-    formatNumber(
+    )
+    +
+    '\n本次待付：'
+    +
+    money(
       remaining
-    )+
-    '\n\n确认后，这一期会正式标记为“已支付”。'
+    )
+    +
+    '\n\n确认后该期会正式标记为“已支付”。'
+
   );
 
 
-  if(!ok){
+  if(!confirmed){
 
     return;
 
   }
 
 
-  referralCommissionBusy =
+  busy =
   true;
-
-
-  const msg =
-  document.getElementById(
-    'referralCommissionMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  msg.textContent =
-  '正在确认推荐佣金已支付...';
 
 
   try{
 
     const response =
     await api(
+
       '/rest/v1/rpc/admin_mark_agent_referral_commission_paid',
+
       {
-        method:'POST',
+
+        method:
+        'POST',
 
         headers:{
+
           'Content-Type':
           'application/json'
+
         },
 
         body:
         JSON.stringify({
+
           p_round_id:
           roundId,
 
           p_agent_id:
           agentId
+
         })
+
       }
+
     );
 
 
-    const text =
-    await response.text();
-
-
-    if(!response.ok){
-
-      let errorMessage =
-      text
-      ||
-      '确认佣金支付失败';
-
-
-      if(
-        errorMessage.includes(
-          'ROUND_NOT_SETTLED'
-        )
-      ){
-
-        errorMessage =
-        '本期还没有正式开奖结算，暂时不能结算代理佣金';
-
-      }
-      else if(
-        errorMessage.includes(
-          'NO_COMMISSION_DUE'
-        )
-      ){
-
-        errorMessage =
-        '这笔记录目前没有需要支付的佣金';
-
-      }
-      else if(
-        errorMessage.includes(
-          'COMMISSION_SETTLEMENT_NOT_FOUND'
-        )
-      ){
-
-        errorMessage =
-        '没有找到对应的推荐佣金结算记录';
-
-      }
-      else if(
-        errorMessage.includes(
-          'COMMISSION_SETTLEMENT_VOID'
-        )
-      ){
-
-        errorMessage =
-        '这笔佣金记录已经作废，不能支付';
-
-      }
-      else if(
-        errorMessage.includes(
-          'AGENT_NOT_FOUND'
-        )
-      ){
-
-        errorMessage =
-        '没有找到对应代理';
-
-      }
-      else if(
-        errorMessage.includes(
-          'ADMIN_AAL2_REQUIRED'
-        )
-      ){
-
-        errorMessage =
-        '管理员身份验证已失效，请重新登录';
-
-      }
-
-
-      throw new Error(
-        errorMessage
-      );
-
-    }
-
-
-    const result =
-    text
-    ?
-    JSON.parse(
-      text
-    )
-    :
-    {};
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    result.already_paid
-    ?
-    '✓ 这笔佣金之前已经支付'
-    :
-    '✓ 已确认佣金支付完成：'+
-    (
-      row.display_name
-      ||
-      '代理'
-    )+
-    ' · '+
-    formatNumber(
-      row.commission_due
-      ||
-      0
+    const data =
+    await parseResponse(
+      response
     );
 
 
-    referralCommissionBusy =
-    false;
+    setPageMessage(
+
+      data?.already_paid
+      ?
+      '这笔佣金之前已经支付'
+      :
+      '佣金已确认支付',
+
+      'ok'
+
+    );
 
 
-    await loadReferralCommissions(
+    await loadAll(
       false
     );
 
   }
-  catch(e){
+  catch(error){
 
-    console.error(
-      'confirm referral commission paid',
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '确认失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
+    setPageMessage(
+      '确认失败：'
+      +
+      translateError(
+        error.message
+      ),
+      'err'
     );
 
   }
   finally{
 
-    referralCommissionBusy =
+    busy =
     false;
 
   }
 
 }
+
+
 /* =====================================
-   SETTLEMENT
+   MESSAGE / ERROR
 ===================================== */
 
-function isMeaningfulSettlementRow(
-  row
+function setMsg(
+  element,
+  text,
+  type=''
 ){
 
-  if(!row){
-
-    return false;
-
-  }
+  element.textContent =
+  text;
 
 
-  const submittedTotal =
-  Number(
-    row.submitted_total || 0
-  );
-
-
-  return (
-    Number.isFinite(
-      submittedTotal
-    )
-    &&
-    submittedTotal > 0
-  );
-
-}
-
-
-async function loadSettlementData(
-  showMessage=false
-){
-
-  if(settlementLoading){
-
-    return;
-
-  }
-
-
-  settlementLoading =
-  true;
-
-
-  const msg =
-  document.getElementById(
-    'settlementMsg'
-  );
-
-
-  if(showMessage){
-
-    msg.className =
-    'msg';
-
-
-    msg.textContent =
-    '正在读取最新结款资料...';
-
-  }
-
-
-  try{
-
-    const roundRes =
-    await api(
-      '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at'+
-      '&order=created_at.desc'+
-      '&limit=60'
-    );
-
-
-    if(!roundRes.ok){
-
-      throw new Error(
-        await roundRes.text()
-      );
-
-    }
-
-
-    settlementRounds =
-    await roundRes.json();
-
-
-    const totalRes =
-    await api(
-      '/rest/v1/agent_round_totals'+
-      '?select=round_id,agent_id,submitted_total,commission_rate_snapshot,commission_amount,amount_due,amount_received,payment_status,payment_due_at,payment_confirmed_at,payment_confirmed_by,result_payout,final_balance,settlement_status,completed_at,updated_at'+
-      '&submitted_total=gt.0'+
-      '&order=updated_at.desc'
-    );
-
-
-    if(!totalRes.ok){
-
-      throw new Error(
-        await totalRes.text()
-      );
-
-    }
-
-
-    const rawRows =
-    await totalRes.json();
-
-
-    settlementRows =
-    Array.isArray(
-      rawRows
-    )
+  element.className =
+  'msg'
+  +
+  (
+    type
     ?
-    rawRows.filter(
-      isMeaningfulSettlementRow
-    )
-    :
-    [];
-
-
-    buildSettlementRoundSelect();
-
-
-    renderSettlements();
-
-
-    if(showMessage){
-
-      msg.className =
-      'msg success';
-
-
-      msg.textContent =
-      '✓ 已读取最新结款资料';
-
-    }
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '结款资料读取失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-
-  }finally{
-
-    settlementLoading =
-    false;
-
-  }
-
-}
-
-
-function buildSettlementRoundSelect(){
-
-  const select =
-  document.getElementById(
-    'settlementRoundSelect'
-  );
-
-
-  const oldValue =
-  select.value;
-
-
-  select.innerHTML =
-  '';
-
-
-  const relevantRounds =
-  settlementRounds.filter(
-    round =>
-    settlementRows.some(
-      row =>
-      row.round_id ===
-      round.id
-    )
-  );
-
-
-  if(!relevantRounds.length){
-
-    select.innerHTML =
-    '<option value="">暂无结款记录</option>';
-
-
-    resetSettlementStats();
-
-
-    document.getElementById(
-      'settlementList'
-    ).innerHTML =
-    '<div class="empty">'+
-    '暂无需要显示的结款记录'+
-    '</div>';
-
-
-    return;
-
-  }
-
-
-  relevantRounds.forEach(
-    round=>{
-
-      const option =
-      document.createElement(
-        'option'
-      );
-
-
-      option.value =
-      round.id;
-
-
-      option.textContent =
-      round.round_date+
-      ' · '+
-      periodName(
-        round.round_code
-      )+
-      ' · '+
-      roundStatusName(
-        round
-      );
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  if(
-    relevantRounds.some(
-      r =>
-      r.id === oldValue
-    )
-  ){
-
-    select.value =
-    oldValue;
-
-
-    return;
-
-  }
-
-
-  const pendingRound =
-  relevantRounds.find(
-    round =>
-    settlementRows.some(
-      row =>
-      row.round_id ===
-      round.id
-      &&
-      row.payment_status !==
-      'paid'
-    )
-  );
-
-
-  select.value =
-  pendingRound
-  ?
-  pendingRound.id
-  :
-  relevantRounds[0].id;
-
-}
-
-
-function renderSettlements(){
-
-  const roundId =
-  document.getElementById(
-    'settlementRoundSelect'
-  ).value;
-
-
-  const box =
-  document.getElementById(
-    'settlementList'
-  );
-
-
-  if(!roundId){
-
-    box.innerHTML =
-    '<div class="empty">'+
-    '暂无可显示的期数'+
-    '</div>';
-
-
-    resetSettlementStats();
-
-
-    return;
-
-  }
-
-
-  const round =
-  settlementRounds.find(
-    x =>
-    x.id === roundId
-  );
-
-
-  if(!round){
-
-    return;
-
-  }
-
-
-  const rows =
-  settlementRows
-  .filter(
-    row =>
-    row.round_id ===
-    roundId
-  )
-  .sort(
-    (
-      a,
-      b
-    )=>{
-
-      const aPaid =
-      a.payment_status ===
-      'paid';
-
-
-      const bPaid =
-      b.payment_status ===
-      'paid';
-
-
-      if(aPaid !== bPaid){
-
-        return aPaid
-        ?
-        1
-        :
-        -1;
-
-      }
-
-
-      return (
-        remainingAmount(
-          b
-        )
-        -
-        remainingAmount(
-          a
-        )
-      );
-
-    }
-  );
-
-
-  updateSettlementStats(
-    rows
-  );
-
-
-  if(!rows.length){
-
-    box.innerHTML =
-    '<div class="empty">'+
-    '本期暂无需要结款的代理'+
-    '</div>';
-
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-  rows.map(
-    row=>{
-
-      const agent =
-      agents.find(
-        x =>
-        x.id === row.agent_id
-      );
-
-
-      const name =
-      agent?.display_name
-      ||
-      '未知代理';
-
-
-      const submittedTotal =
-      Number(
-        row.submitted_total || 0
-      );
-
-
-      const rate =
-      Number(
-        row.commission_rate_snapshot
-        ??
-        normalizeRate(
-          agent?.commission_rate
-          ||
-          0
-        )
-      );
-
-
-      const commission =
-      Number(
-        row.commission_amount || 0
-      );
-
-
-      const amountDue =
-      Number(
-        row.amount_due || 0
-      );
-
-
-      const amountReceived =
-      Number(
-        row.amount_received || 0
-      );
-
-
-      const remaining =
-      Math.max(
-        amountDue-
-        amountReceived,
-        0
-      );
-
-
-      const isPaid =
-      row.payment_status ===
-      'paid';
-
-
-      const isPartial =
-      row.payment_status ===
-      'partial'
-      ||
-      (
-        !isPaid
-        &&
-        amountReceived > 0
-      );
-
-
-      const dueTime =
-      row.payment_due_at
-      ?
-      new Date(
-        row.payment_due_at
-      ).getTime()
-      :
-      NaN;
-
-
-      const isOverdue =
-      !isPaid
-      &&
-      Number.isFinite(
-        dueTime
-      )
-      &&
-      Date.now() >=
-      dueTime;
-
-
-      let financeClass =
-      'waiting';
-
-
-      let financeText =
-      '待结款';
-
-
-      let itemClass =
-      '';
-
-
-      if(isPaid){
-
-        financeClass =
-        'done';
-
-
-        financeText =
-        '已结款';
-
-
-        itemClass =
-        'settled';
-
-      }
-
-      else if(isOverdue){
-
-        financeClass =
-        'overdue';
-
-
-        financeText =
-        isPartial
-        ?
-        '部分到账 / 已逾期'
-        :
-        '逾期未结款';
-
-
-        itemClass =
-        'overdue';
-
-      }
-
-      else if(isPartial){
-
-        financeClass =
-        'partial';
-
-
-        financeText =
-        '部分到账';
-
-      }
-
-
-      const relatedPayments =
-      paymentReviews.filter(
-        p =>
-        p.round_id === row.round_id
-        &&
-        p.agent_id === row.agent_id
-      );
-
-
-      const pendingSubmissions =
-      relatedPayments.filter(
-        p =>
-        p.status === 'pending'
-      );
-
-
-      return `
-
-      <div
-        class="settlementItem ${itemClass}">
-
-        <div class="settlementHead">
-
-          <div>
-
-            <div class="settlementName">
-
-              ${escapeHtml(
-                name
-              )}
-
-            </div>
-
-            <div class="settlementRound">
-
-              ${escapeHtml(
-                round.round_date
-              )}
-
-              ·
-
-              ${escapeHtml(
-                periodName(
-                  round.round_code
-                )
-              )}
-
-              <br>
-
-              截止：
-              ${escapeHtml(
-                formatDate(
-                  round.deadline_at
-                )
-              )}
-
-              ${
-                row.payment_due_at
-                ?
-                '<br>付款截止：'+
-                escapeHtml(
-                  formatDate(
-                    row.payment_due_at
-                  )
-                )
-                :
-                ''
-              }
-
-            </div>
-
-          </div>
-
-          <div
-            class="financeBadge ${financeClass}">
-
-            ${escapeHtml(
-              financeText
-            )}
-
-          </div>
-
-        </div>
-
-        <div class="settlementGrid">
-
-          <div class="financeBox">
-
-            <small>
-              本期提交总额
-            </small>
-
-            <strong>
-              ${formatNumber(
-                submittedTotal
-              )}
-            </strong>
-
-          </div>
-
-          <div class="financeBox commission">
-
-            <small>
-              代理佣金 ${formatRate(rate)}%
-            </small>
-
-            <strong>
-              ${formatNumber(
-                commission
-              )}
-            </strong>
-
-          </div>
-
-          <div class="financeBox due">
-
-            <small>
-              本期应交平台
-            </small>
-
-            <strong>
-              ${formatNumber(
-                amountDue
-              )}
-            </strong>
-
-          </div>
-
-          <div class="financeBox received">
-
-            <small>
-              平台已确认到账
-            </small>
-
-            <strong>
-              ${formatNumber(
-                amountReceived
-              )}
-            </strong>
-
-          </div>
-
-        </div>
-
-        ${
-          !isPaid
-          ?
-          `
-
-          <div class="settlementNote">
-
-            当前剩余待到账：
-            ${formatNumber(
-              remaining
-            )}
-
-            <br>
-
-            ${
-              pendingSubmissions.length
-              ?
-              '该代理目前有 '+pendingSubmissions.length+' 笔付款申请等待管理员审核。'
-              :
-              '目前没有待审核付款申请。代理付款后，需要先提交付款资料和截图。'
-            }
-
-          </div>
-${isOverdue && remaining > 0
-  ? `
-    <button
-      class="greenBtn"
-      style="width:100%;margin-top:10px"
-      onclick="manualConfirmSettlement(
-        '${escapeJs(row.agent_id)}',
-        '${escapeJs(row.round_id)}',
-        ${remaining}
-      )">
-
-      ✓ 手动确认已收齐
-
-    </button>
-  `
-  : ''
-}
-          `
-          :
-          `
-
-          <div class="settlementNote">
-
-            ✓ 本期平台已经全额确认到账。
-
-          </div>
-
-          `
-        }
-
-        ${
-          row.payment_confirmed_at
-          ?
-          `
-
-          <div class="settleTime">
-
-            全额到账确认时间：
-            ${escapeHtml(
-              formatDate(
-                row.payment_confirmed_at
-              )
-            )}
-
-          </div>
-
-          `
-          :
-          ''
-        }
-
-      </div>
-
-      `;
-
-    }
-  )
-  .join('');
-
-}
-
-async function manualConfirmSettlement(
-  agentId,
-  roundId,
-  remaining
-){
-
-  const agent =
-  agents.find(
-    x =>
-    x.id === agentId
-  );
-
-
-  const name =
-  agent?.display_name
-  ||
-  '未知代理';
-
-
-  if(
-    !confirm(
-      '确定手动确认已经收到该代理本期全部剩余款项？\n\n'+
-      '代理：'+name+
-      '\n剩余金额：'+
-      formatNumber(
-        remaining
-      )+
-      '\n\n确认后，本期会直接标记为「已结款」。\n此操作只应在你已经真实收到款项时使用。'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  const msg =
-  document.getElementById(
-    'settlementMsg'
-  );
-
-
-  msg.className =
-  'msg';
-
-
-  msg.textContent =
-  '正在确认结款...';
-
-
-  try{
-
-    const row =
-    settlementRows.find(
-      x =>
-      x.agent_id === agentId
-      &&
-      x.round_id === roundId
-    );
-
-
-    if(!row){
-
-      throw new Error(
-        '没有找到对应的结款记录'
-      );
-
-    }
-
-
-    const amountDue =
-    Number(
-      row.amount_due || 0
-    );
-
-
-    if(
-      !Number.isFinite(
-        amountDue
-      )
-      ||
-      amountDue <= 0
-    ){
-
-      throw new Error(
-        '本期应交金额不正确'
-      );
-
-    }
-
-
-    const r =
-    await api(
-      '/rest/v1/rpc/admin_confirm_agent_settlement',
-      {
-        method:'POST',
-
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
-
-        body:
-        JSON.stringify({
-          p_agent_id:
-          agentId,
-
-          p_round_id:
-          roundId,
-
-          p_amount_received:
-          amountDue
-        })
-      }
-    );
-
-
-    const text =
-    await r.text();
-
-
-    if(!r.ok){
-
-      let errorMessage =
-      text
-      ||
-      '确认失败';
-
-
-      if(
-        errorMessage.includes(
-          'SETTLEMENT_ALREADY_PAID'
-        )
-      ){
-
-        errorMessage =
-        '这一期已经结清，请刷新页面';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'SETTLEMENT_AMOUNT_MISMATCH'
-        )
-      ){
-
-        errorMessage =
-        '结款金额与数据库应交金额不一致';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'SETTLEMENT_NOT_FOUND'
-        )
-      ){
-
-        errorMessage =
-        '没有找到这笔结款记录';
-
-      }
-
-      else if(
-        errorMessage.includes(
-          'NOT_ADMIN'
-        )
-      ){
-
-        errorMessage =
-        '当前账号没有管理员权限';
-
-      }
-
-
-      throw new Error(
-        errorMessage
-      );
-
-    }
-
-
-    msg.className =
-    'msg success';
-
-
-    msg.textContent =
-    '✓ 已手动确认收齐：'+
-    name;
-
-
-    await loadSettlementData(
-      false
-    );
-
-
-    await loadPaymentReviews(
-      false
-    );
-
-
-  }catch(e){
-
-    console.error(
-      e
-    );
-
-
-    msg.className =
-    'msg error';
-
-
-    msg.textContent =
-    '确认失败：'+
-    (
-      e.message
-      ||
-      '未知错误'
-    );
-
-  }
-
-}
-function remainingAmount(
-  row
-){
-
-  return Math.max(
-    Number(
-      row.amount_due || 0
-    )
-    -
-    Number(
-      row.amount_received || 0
-    ),
-    0
-  );
-
-}
-
-
-function updateSettlementStats(
-  rows
-){
-
-  let total =
-  0;
-
-
-  let pending =
-  0;
-
-
-  let received =
-  0;
-
-
-  let pendingAgents =
-  0;
-
-
-  rows.forEach(
-    row=>{
-
-      total +=
-      Number(
-        row.submitted_total || 0
-      );
-
-
-      received +=
-      Number(
-        row.amount_received || 0
-      );
-
-
-      const remaining =
-      remainingAmount(
-        row
-      );
-
-
-      pending +=
-      remaining;
-
-
-      if(remaining > 0){
-
-        pendingAgents++;
-
-      }
-
-    }
-  );
-
-
-  document.getElementById(
-    'settlementTotal'
-  ).textContent =
-  formatNumber(
-    total
-  );
-
-
-  document.getElementById(
-    'settlementPending'
-  ).textContent =
-  formatNumber(
-    pending
-  );
-
-
-  document.getElementById(
-    'settlementSettled'
-  ).textContent =
-  formatNumber(
-    received
-  );
-
-
-  document.getElementById(
-    'settlementPendingAgents'
-  ).textContent =
-  pendingAgents;
-
-}
-
-
-function resetSettlementStats(){
-
-  document.getElementById(
-    'settlementTotal'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'settlementPending'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'settlementSettled'
-  ).textContent =
-  '0';
-
-
-  document.getElementById(
-    'settlementPendingAgents'
-  ).textContent =
-  '0';
-
-}
-
-
-/* =====================================
-   REFRESH ALL FINANCE
-===================================== */
-
-async function refreshFinance(
-  showMessage=false
-){
-
-  if(
-    paymentReviewBusy
-    ||
-    paymentReviewLoading
-    ||
-    settlementLoading
-    ||
-    referralCommissionBusy
-    ||
-    referralCommissionLoading
-  ){
-
-    return;
-
-  }
-
-
-  await loadPaymentReviews(
-    showMessage
-  );
-
-
-  await loadSettlementData(
-    showMessage
-  );
-
-
-  await loadReferralCommissions(
-    showMessage
-  );
-
-}
-
-
-/* =====================================
-   HELPERS
-===================================== */
-
-function paymentReviewStatusName(
-  status
-){
-
-  if(status === 'pending'){
-
-    return '待审核';
-
-  }
-
-
-  if(status === 'approved'){
-
-    return '已确认到账';
-
-  }
-
-
-  if(status === 'rejected'){
-
-    return '已驳回';
-
-  }
-
-
-  return status || '—';
-
-}
-
-
-function periodName(
-  code
-){
-
-  if(code === '1030'){
-
-    return '上午 11:45';
-
-  }
-
-
-  if(code === '1530'){
-
-    return '下午 15:45';
-
-  }
-
-
-  return code || '—';
-
-}
-
-
-function roundStatusName(
-  round
-){
-
-  if(!round){
-
-    return '—';
-
-  }
-
-
-  if(
-    hasResult(
-      round.result_number
-    )
-  ){
-
-    return '已开奖';
-
-  }
-
-
-  if(
-    Date.now()
-    >=
-    new Date(
-      round.deadline_at
-    ).getTime()
-  ){
-
-    return '已截止';
-
-  }
-
-
-  if(round.status === 'open'){
-
-    return '开放中';
-
-  }
-
-
-  if(round.status === 'closed'){
-
-    return '已关闭';
-
-  }
-
-
-  if(round.status === 'settled'){
-
-    return '已结算';
-
-  }
-
-
-  return round.status || '—';
-
-}
-
-
-function paymentTypeName(
-  type
-){
-
-  if(type === 'wallet'){
-
-    return '电子钱包';
-
-  }
-
-
-  if(type === 'bank'){
-
-    return '银行卡 / 银行账户';
-
-  }
-
-
-  if(type === 'other'){
-
-    return '其他支付方式';
-
-  }
-
-
-  return type || '—';
-
-}
-
-
-function normalizeRate(
-  value
-){
-
-  let rate =
-  Number(
-    value || 0
-  );
-
-
-  if(
-    !Number.isFinite(
-      rate
-    )
-  ){
-
-    rate =
-    0;
-
-  }
-
-
-  if(
-    rate > 0
-    &&
-    rate <= 1
-  ){
-
-    rate *=
-    100;
-
-  }
-
-
-  return rate;
-
-}
-
-
-function statusName(
-  status
-){
-
-  if(status === 'active'){
-
-    return '正常';
-
-  }
-
-
-  if(status === 'suspended'){
-
-    return '已暂停';
-
-  }
-
-
-  if(status === 'blocked'){
-
-    return '已限制';
-
-  }
-
-
-  return status || '未知';
-
-}
-
-
-function hasResult(
-  value
-){
-
-  return (
-    value !== null
-    &&
-    value !== undefined
-    &&
-    value !== ''
-  );
-
-}
-
-
-function formatDate(
-  value
-){
-
-  if(!value){
-
-    return '—';
-
-  }
-
-
-  const d =
-  new Date(
-    value
-  );
-
-
-  if(
-    Number.isNaN(
-      d.getTime()
-    )
-  ){
-
-    return '—';
-
-  }
-
-
-  return new Intl.DateTimeFormat(
-    'zh-CN',
-    {
-      timeZone:
-      'Asia/Yangon',
-
-      year:'numeric',
-      month:'2-digit',
-      day:'2-digit',
-
-      hour:'2-digit',
-      minute:'2-digit',
-
-      hour12:false
-    }
-  )
-  .format(
-    d
-  )
-  +
-  ' MMT';
-
-}
-
-
-function formatRate(
-  value
-){
-
-  return Number(
-    value || 0
-  )
-  .toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits:2
-    }
-  );
-
-}
-
-
-function formatNumber(
-  value
-){
-
-  return Number(
-    value || 0
-  )
-  .toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits:2
-    }
-  );
-
-}
-
-
-function formatFileSize(
-  size
-){
-
-  const bytes =
-  Number(
-    size || 0
-  );
-
-
-  if(bytes < 1024){
-
-    return bytes+
-    ' B';
-
-  }
-
-
-  if(bytes < 1024*1024){
-
-    return (
-      bytes/
-      1024
-    )
-    .toFixed(
-      1
-    )
+    ' '
     +
-    ' KB';
+    type
+    :
+    ''
+  );
+
+}
+
+
+function setPageMessage(
+  text,
+  type=''
+){
+
+  setMsg(
+    document.getElementById(
+      'pageMsg'
+    ),
+    text,
+    type
+  );
+
+}
+
+
+function translateError(message){
+
+  const text =
+  String(
+    message
+    ||
+    ''
+  );
+
+
+  if(
+    text.includes(
+      'ADMIN_AAL2_REQUIRED'
+    )
+    ||
+    text.includes(
+      'NOT_ADMIN'
+    )
+  ){
+
+    return '管理员二次验证已失效，请返回管理中心重新验证。';
+
+  }
+
+
+  if(
+    text.includes(
+      'AGENT_PAYOUT_ACCOUNT_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到这个代理收款账户。';
+
+  }
+
+
+  if(
+    text.includes(
+      'ROUND_NOT_SETTLED'
+    )
+  ){
+
+    return '本期尚未正式结算，不能支付代理佣金。';
+
+  }
+
+
+  if(
+    text.includes(
+      'NO_COMMISSION_DUE'
+    )
+  ){
+
+    return '这笔记录目前没有需要支付的佣金。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_SETTLEMENT_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到对应的代理佣金结算记录。';
+
+  }
+
+
+  if(
+    text.includes(
+      'AGENT_NOT_FOUND'
+    )
+  ){
+
+    return '没有找到对应代理。';
 
   }
 
 
   return (
-    bytes/
-    1024/
-    1024
-  )
-  .toFixed(
-    2
-  )
-  +
-  ' MB';
-
-}
-
-
-function parseStorageError(
-  text
-){
-
-  try{
-
-    const data =
-    JSON.parse(
-      text
-    );
-
-
-    return (
-      data.message
-      ||
-      data.error
-      ||
-      text
-      ||
-      '二维码上传失败'
-    );
-
-  }catch(e){
-
-    return (
-      text
-      ||
-      '二维码上传失败'
-    );
-
-  }
-
-}
-
-
-function encodeStoragePath(
-  path
-){
-
-  return String(
-    path || ''
-  )
-  .split('/')
-  .map(
-    part =>
-    encodeURIComponent(
-      part
-    )
-  )
-  .join('/');
-
-}
-
-
-function safeId(
-  value
-){
-
-  return String(
-    value || ''
-  )
-  .replace(
-    /[^a-zA-Z0-9_-]/g,
-    '_'
+    text
+    ||
+    '操作失败，请重新尝试。'
   );
-
-}
-
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ''
-  )
-  .replaceAll(
-    '&',
-    '&amp;'
-  )
-  .replaceAll(
-    '<',
-    '&lt;'
-  )
-  .replaceAll(
-    '>',
-    '&gt;'
-  )
-  .replaceAll(
-    '"',
-    '&quot;'
-  )
-  .replaceAll(
-    "'",
-    '&#039;'
-  );
-
-}
-
-
-function escapeHtmlAttr(
-  value
-){
-
-  return escapeHtml(
-    value
-  )
-  .replaceAll(
-    '\n',
-    '&#10;'
-  )
-  .replaceAll(
-    '\r',
-    '&#13;'
-  );
-
-}
-
-
-function escapeJs(
-  value
-){
-
-  return String(
-    value ?? ''
-  )
-  .replaceAll(
-    '\\',
-    '\\\\'
-  )
-  .replaceAll(
-    "'",
-    "\\'"
-  );
-
-}
-
-
-/* =====================================
-   SESSION
-===================================== */
-
-function clearAdminSession(){
-
-  localStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_access_token'
-  );
-
-
-  localStorage.removeItem(
-    'jmt_token'
-  );
-
-
-  sessionStorage.removeItem(
-    'jmt_token'
-  );
-
-
-  token =
-  '';
 
 }
 
@@ -9515,387 +4454,120 @@ function clearAdminSession(){
    AUTO REFRESH
 ===================================== */
 
-async function refreshWhenActive(){
+function shouldSkipAutoRefresh(){
 
-  if(
-    !token
-    ||
-    !adminUser
-    ||
-    paymentReviewBusy
-    ||
-    paymentReviewLoading
-    ||
-        settlementLoading
-    ||
-    referralCommissionBusy
-    ||
-    referralCommissionLoading
-  ){
-
-    return;
-
-  }
-
-  await loadAgents(
-    false
-  );
-
-
-  const activeElement =
+  const element =
   document.activeElement;
 
 
-  const editingPaymentAccount =
-(
-  activeElement
-  &&
-  (
-    activeElement.closest?.(
-      '.paymentAccountForm'
-    )
+  return (
+    busy
     ||
-    activeElement.closest?.(
-      '.editAccountBox'
+    (
+      element
+      &&
+      [
+        'INPUT',
+        'SELECT',
+        'TEXTAREA'
+      ]
+      .includes(
+        element.tagName
+      )
     )
-  )
-)
-||
-editQrFiles.size > 0;
-
-
-  if(
-    !paymentAccountBusy
-    &&
-    !editingPaymentAccount
-  ){
-
-    await loadPaymentAccounts(
-      false
-    );
-
-  }
-  await loadPaymentReviews(
-    false
-  );
-
-
-    await loadSettlementData(
-    false
-  );
-
-
-  await loadReferralCommissions(
-    false
   );
 
 }
 
-
-document.addEventListener(
-  'visibilitychange',
-  ()=>{
-
-    if(
-      document.visibilityState ===
-      'visible'
-    ){
-
-      refreshWhenActive();
-
-    }
-
-  }
-);
-
-
-window.addEventListener(
-  'focus',
-  refreshWhenActive
-);
-
-
-window.addEventListener(
-  'pageshow',
-  refreshWhenActive
-);
-
-
-window.addEventListener(
-  'online',
-  refreshWhenActive
-);
-
-
-/* =====================================
-   CLEAN OBJECT URLS
-===================================== */
-
-window.addEventListener(
-  'beforeunload',
-  ()=>{
-
-    [
-      qrDisplayUrls,
-      proofDisplayUrls,
-      editQrPreviewUrls
-    ]
-    .forEach(
-      map=>{
-
-        map.forEach(
-          url=>{
-
-            try{
-
-              URL.revokeObjectURL(
-                url
-              );
-
-            }catch(e){}
-
-          }
-        );
-
-      }
-    );
-
-  }
-);
-
-/* =====================================
-   AGENT CENTER VIEW
-===================================== */
-
-const AGENT_VIEWS = [
-  'manage',
-  'accounts',
-  'payments',
-  'settlement',
-  'commission'
-];
-
-
-function applyAgentView(
-  requestedView=null
-){
-
-  const params =
-  new URLSearchParams(
-    location.search
-  );
-
-
-  let view =
-  requestedView
-  ||
-  params.get(
-    'view'
-  )
-  ||
-  'manage';
-
-
-  if(
-    !AGENT_VIEWS.includes(
-      view
-    )
-  ){
-
-    view =
-    'manage';
-
-  }
-
-
-  document
-  .querySelectorAll(
-    '[data-agent-view]'
-  )
-  .forEach(
-    element=>{
-
-      element.style.display =
-      element.dataset.agentView
-      ===
-      view
-      ?
-      ''
-      :
-      'none';
-
-    }
-  );
-
-
-  document
-  .querySelectorAll(
-    '.agentNavItem'
-  )
-  .forEach(
-    button=>{
-
-      button.classList.toggle(
-        'active',
-        button.dataset.view
-        ===
-        view
-      );
-
-    }
-  );
-
-}
-
-
-function switchAgentView(
-  view
-){
-
-  if(
-    !AGENT_VIEWS.includes(
-      view
-    )
-  ){
-
-    view =
-    'manage';
-
-  }
-
-
-  const url =
-  new URL(
-    location.href
-  );
-
-
-  url.searchParams.set(
-    'view',
-    view
-  );
-
-
-  history.replaceState(
-    null,
-    '',
-    url
-  );
-
-
-  applyAgentView(
-    view
-  );
-
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-}
-/* =====================================
-   START
-===================================== */
-
-async function startPage(){
-  applyAgentView();
-  const ok =
-  await verifyAdmin();
-
-
-  if(!ok){
-
-    clearAdminSession();
-
-
-    location.href =
-    '/admin/';
-
-
-    return;
-
-  }
-
-
-  await loadAgents(
-    false
-  );
-
-
-  await loadPaymentAccounts(
-    false
-  );
-
-
-  /*
-    先读取期数和总账，
-    付款审核才能正确显示代理对应期数。
-  */
-
-  await loadSettlementData(
-    false
-  );
-
-
-  await loadPaymentReviews(
-    false
-  );
-
-  await loadReferralCommissions(
-    false
-  );
-  /*
-    付款申请加载后，
-    再渲染一次结款，
-    这样结款卡片里可以显示
-    “有几笔付款正在等待审核”。
-  */
-
-  renderSettlements();
-
-}
-
-
-startPage();
-
-
-/*
-  每 20 秒只自动刷新：
-  - 代理付款申请
-    - 结款总账 + 客户推荐佣金
-
-  不重新渲染收款账户编辑区域，
-  避免管理员正在选择二维码时
-  iPhone 文件选择状态被刷新清空。
-*/
 
 setInterval(
+
   ()=>{
 
     if(
       token
       &&
-      adminUser
-      &&
-      !paymentReviewBusy
-      &&
-      !paymentReviewLoading
-      &&
-            !settlementLoading
-      &&
-      !referralCommissionBusy
-      &&
-      !referralCommissionLoading
+      !shouldSkipAutoRefresh()
     ){
 
-      refreshWhenActive();
+      loadAll(
+        false
+      );
 
     }
 
   },
+
   20000
+
 );
+
+
+window.addEventListener(
+
+  'focus',
+
+  ()=>{
+
+    if(
+      token
+      &&
+      !shouldSkipAutoRefresh()
+    ){
+
+      loadAll(
+        false
+      );
+
+    }
+
+  }
+
+);
+
+
+/* =====================================
+   START
+===================================== */
+
+(async function start(){
+
+  const isAdmin =
+  await verifyAdmin();
+
+
+  if(!isAdmin){
+
+    document
+    .getElementById(
+      'authError'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+    return;
+
+  }
+
+
+  document
+  .getElementById(
+    'mainBox'
+  )
+  .classList
+  .remove(
+    'hidden'
+  );
+
+
+  await loadAll(
+    false
+  );
+
+})();
 
 </script>
 
