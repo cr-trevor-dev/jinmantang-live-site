@@ -6133,7 +6133,21 @@ function renderPaymentArea(){
   document.getElementById(
     'paymentForm'
   );
-
+  const roundClosed =
+currentRound
+&&
+(
+  currentRound.status
+  !==
+  'open'
+  ||
+  Date.now()
+  >=
+  new Date(
+    currentRound.deadline_at
+  )
+  .getTime()
+);
 
   clearMessage(
     'paymentMsg'
