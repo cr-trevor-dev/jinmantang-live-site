@@ -475,14 +475,7 @@
   'Đang lưu...',
   'Sedang Menyimpan...'
 ],     
-  '请输入正确收款户名。':[
-  'မှန်ကန်သော ငွေလက်ခံအကောင့်အမည်ကို ထည့်ပါ။',
-  'Please enter the correct payout account name.',
-  'กรุณากรอกชื่อบัญชีรับเงินให้ถูกต้อง',
-  'Sila masukkan nama akaun penerimaan yang betul.',
-  'Vui lòng nhập đúng tên tài khoản nhận tiền.',
-  'Masukkan nama akun penerimaan yang benar.'
-],    
+      
  '请输入正确收款户名。':[
   'မှန်ကန်သော ငွေလက်ခံအကောင့်အမည်ကို ထည့်ပါ။',
   'Please enter the correct payout account name.',
