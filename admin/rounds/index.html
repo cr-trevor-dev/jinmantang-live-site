@@ -837,12 +837,41 @@ function renderRound(){
   );
 
 
-  status.textContent =
-  '开放中';
+  const deadlineTime =
+  new Date(
+    currentRound.deadline_at
+  ).getTime();
 
 
-  status.className =
-  'green';
+  const roundClosedByTime =
+  Number.isFinite(
+    deadlineTime
+  )
+  &&
+  Date.now() >=
+  deadlineTime;
+
+
+  if(roundClosedByTime){
+
+    status.textContent =
+    '已截止 · 等待开奖';
+
+
+    status.className =
+    '';
+
+  }
+  else{
+
+    status.textContent =
+    '开放中';
+
+
+    status.className =
+    'green';
+
+  }
 
 
   deadline.textContent =
@@ -854,7 +883,6 @@ function renderRound(){
   fillNextDefaults();
 
 }
-
 
 
 /* =========================
