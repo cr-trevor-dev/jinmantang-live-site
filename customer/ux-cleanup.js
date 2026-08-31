@@ -1342,9 +1342,11 @@
       return {
 
         text:
-        '部分派彩 · 剩余 '
-        +
-        fmt(
+customerTranslateValue(
+  '部分派彩 · 剩余 '
+)
++
+fmt(
           Math.max(
             due - paid,
             0
