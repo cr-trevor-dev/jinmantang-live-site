@@ -326,7 +326,68 @@ button:disabled{
 .searchRow button{
   min-width:85px
 }
+.agentNav{
+  display:grid;
+  grid-template-columns:
+  repeat(2,1fr);
+  gap:9px;
+  margin-bottom:14px
+}
 
+.agentNavItem{
+  width:100%;
+  min-height:92px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  text-align:left;
+  gap:4px;
+  background:#101011;
+  color:#d9c77d;
+  border:
+  1px solid
+  rgba(214,168,63,.16);
+  border-radius:14px;
+  padding:13px
+}
+
+.agentNavItem span{
+  font-size:20px
+}
+
+.agentNavItem strong{
+  display:block;
+  color:#ebce73;
+  font-size:14px
+}
+
+.agentNavItem small{
+  display:block;
+  color:#81796b;
+  font-size:10px;
+  font-weight:500
+}
+
+.agentNavItem.active{
+  background:
+  linear-gradient(
+    180deg,
+    #211a0d,
+    #13120f
+  );
+  border-color:
+  rgba(214,168,63,.55)
+}
+
+@media(max-width:550px){
+
+  .agentNav{
+    grid-template-columns:
+    1fr 1fr
+  }
+
+}
 
 /* =====================================
    PAYMENT ACCOUNTS
@@ -997,12 +1058,83 @@ button:disabled{
       正在验证...
     </strong>
 
+    </div>
+
+
+  <div class="agentNav">
+
+    <button
+      class="agentNavItem"
+      data-view="manage"
+      type="button"
+      onclick="switchAgentView('manage')">
+
+      <span>👥</span>
+      <strong>代理管理</strong>
+      <small>创建、状态、比例</small>
+
+    </button>
+
+
+    <button
+      class="agentNavItem"
+      data-view="accounts"
+      type="button"
+      onclick="switchAgentView('accounts')">
+
+      <span>🏦</span>
+      <strong>收款账户</strong>
+      <small>平台收款方式</small>
+
+    </button>
+
+
+    <button
+      class="agentNavItem"
+      data-view="payments"
+      type="button"
+      onclick="switchAgentView('payments')">
+
+      <span>🧾</span>
+      <strong>付款审核</strong>
+      <small>到账确认、驳回</small>
+
+    </button>
+
+
+    <button
+      class="agentNavItem"
+      data-view="settlement"
+      type="button"
+      onclick="switchAgentView('settlement')">
+
+      <span>💰</span>
+      <strong>代理结款</strong>
+      <small>应交、到账、结清</small>
+
+    </button>
+
+
+    <button
+      class="agentNavItem"
+      data-view="commission"
+      type="button"
+      onclick="switchAgentView('commission')">
+
+      <span>💵</span>
+      <strong>推荐佣金</strong>
+      <small>应付、已付、待付</small>
+
+    </button>
+
   </div>
 
 
   <!-- CREATE AGENT -->
 
-  <div class="card">
+  <div
+  class="card"
+  data-agent-view="manage">
 
     <div class="title">
       ＋ 创建新代理
@@ -1067,7 +1199,9 @@ button:disabled{
 
   <!-- STATS -->
 
-  <div class="card">
+  <div
+  class="card"
+  data-agent-view="manage">
 
     <div class="title">
       代理概况
@@ -1112,7 +1246,9 @@ button:disabled{
 
   <!-- PAYMENT ACCOUNTS -->
 
-  <div class="card">
+  <div
+  class="card"
+  data-agent-view="accounts">
 
     <div class="title">
       🏦 平台收款账户管理
@@ -1256,8 +1392,9 @@ button:disabled{
   <!-- PAYMENT REVIEW -->
 
   <div
-    class="card"
-    id="paymentReviewCard">
+  class="card"
+  id="paymentReviewCard"
+  data-agent-view="payments">
 
     <div class="title">
       🧾 代理付款审核
@@ -1375,7 +1512,9 @@ button:disabled{
 
   <!-- SETTLEMENT -->
 
-  <div class="card">
+  <div
+  class="card"
+  data-agent-view="settlement">
 
     <div class="title">
       💰 代理结款管理
@@ -1497,8 +1636,9 @@ button:disabled{
   <!-- REFERRAL COMMISSION -->
 
   <div
-    class="card"
-    id="referralCommissionCard">
+  class="card"
+  id="referralCommissionCard"
+  data-agent-view="commission">
 
     <div class="title">
       💵 客户推荐佣金结算
@@ -1610,7 +1750,9 @@ button:disabled{
   </div>
   <!-- AGENT LIST -->
 
-  <div class="card">
+  <div
+  class="card"
+  data-agent-view="manage">
 
     <div class="title">
       搜索代理
@@ -1657,7 +1799,9 @@ button:disabled{
 
   <!-- RATE -->
 
-  <div class="card">
+  <div
+  class="card"
+  data-agent-view="manage">
 
     <div class="title">
       修改代理比例
@@ -9519,13 +9663,143 @@ window.addEventListener(
   }
 );
 
+/* =====================================
+   AGENT CENTER VIEW
+===================================== */
 
+const AGENT_VIEWS = [
+  'manage',
+  'accounts',
+  'payments',
+  'settlement',
+  'commission'
+];
+
+
+function applyAgentView(
+  requestedView=null
+){
+
+  const params =
+  new URLSearchParams(
+    location.search
+  );
+
+
+  let view =
+  requestedView
+  ||
+  params.get(
+    'view'
+  )
+  ||
+  'manage';
+
+
+  if(
+    !AGENT_VIEWS.includes(
+      view
+    )
+  ){
+
+    view =
+    'manage';
+
+  }
+
+
+  document
+  .querySelectorAll(
+    '[data-agent-view]'
+  )
+  .forEach(
+    element=>{
+
+      element.style.display =
+      element.dataset.agentView
+      ===
+      view
+      ?
+      ''
+      :
+      'none';
+
+    }
+  );
+
+
+  document
+  .querySelectorAll(
+    '.agentNavItem'
+  )
+  .forEach(
+    button=>{
+
+      button.classList.toggle(
+        'active',
+        button.dataset.view
+        ===
+        view
+      );
+
+    }
+  );
+
+}
+
+
+function switchAgentView(
+  view
+){
+
+  if(
+    !AGENT_VIEWS.includes(
+      view
+    )
+  ){
+
+    view =
+    'manage';
+
+  }
+
+
+  const url =
+  new URL(
+    location.href
+  );
+
+
+  url.searchParams.set(
+    'view',
+    view
+  );
+
+
+  history.replaceState(
+    null,
+    '',
+    url
+  );
+
+
+  applyAgentView(
+    view
+  );
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
 /* =====================================
    START
 ===================================== */
 
 async function startPage(){
-
+  applyAgentView();
   const ok =
   await verifyAdmin();
 
