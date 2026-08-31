@@ -467,7 +467,30 @@
   'Đang gửi...',
   'Sedang Mengirim...'
 ],
-
+ '正在保存...':[
+  'သိမ်းဆည်းနေသည်...',
+  'Saving...',
+  'กำลังบันทึก...',
+  'Sedang Menyimpan...',
+  'Đang lưu...',
+  'Sedang Menyimpan...'
+],     
+  '请输入正确收款户名。':[
+  'မှန်ကန်သော ငွေလက်ခံအကောင့်အမည်ကို ထည့်ပါ။',
+  'Please enter the correct payout account name.',
+  'กรุณากรอกชื่อบัญชีรับเงินให้ถูกต้อง',
+  'Sila masukkan nama akaun penerimaan yang betul.',
+  'Vui lòng nhập đúng tên tài khoản nhận tiền.',
+  'Masukkan nama akun penerimaan yang benar.'
+],    
+'本期金额已安全保存。':[
+  'ယခုအကြိမ် ငွေပမာဏကို လုံခြုံစွာ သိမ်းဆည်းပြီးပါပြီ။',
+  'Round amount saved securely.',
+  'บันทึกยอดเงินรอบนี้อย่างปลอดภัยแล้ว',
+  'Jumlah pusingan telah disimpan dengan selamat.',
+  'Số tiền kỳ này đã được lưu an toàn.',
+  'Jumlah putaran telah disimpan dengan aman.'
+],
 '个人资料已保存。':[
   'ကိုယ်ရေးအချက်အလက်ကို သိမ်းဆည်းပြီးပါပြီ။',
   'Profile saved.',
