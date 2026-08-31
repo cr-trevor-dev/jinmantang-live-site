@@ -1891,9 +1891,7 @@
       'bank'
     );
 
-    applyCustomerLanguage();
-
-    polishFooter();
+     polishFooter();
 
 
     const row =
