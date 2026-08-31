@@ -1360,6 +1360,17 @@
     }
 
 
+        /*
+      本期客户数据每次重新 render 后，
+      必须立即按照当前语言重新翻译。
+
+      否则异步刷新会先把模板里的中文原文写回页面，
+      等下一轮 applyAgentUx 才翻译，
+      从而造成中文 / 当前语言来回闪动。
+    */
+    translateAgentExtraUi();
+
+
     card.classList.remove(
       'hidden'
     );
