@@ -4330,6 +4330,15 @@ function chooseBestRound(rows){
     >
     now
 
+    )
+  ||
+  rows.find(
+
+    round =>
+    round.game_mode
+    ===
+    'zodiac'
+
   )
   ||
   null;
@@ -5019,7 +5028,7 @@ function updateCountdown(){
   );
 
 
-    if(diff <= 0){
+    if(diff <= 0 || currentRound.status !== 'open'){
 
     el.textContent =
     uiText(
@@ -5607,7 +5616,69 @@ async function loadCurrentRound(){
     true
   );
 
+  const roundClosed =
+  currentRound.status
+  !==
+  'open'
+  ||
+  Date.now()
+  >=
+  new Date(
+    currentRound.deadline_at
+  )
+  .getTime();
 
+
+  if(
+    roundClosed
+    &&
+    !currentOrder
+  ){
+
+    document
+    .getElementById(
+      'roundBadge'
+    )
+    .textContent =
+    uiText(
+      '暂未开放'
+    );
+
+
+    document
+    .getElementById(
+      'roundEmpty'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+    return;
+
+  }
+
+
+  if(roundClosed){
+
+    const paymentForm =
+    document.getElementById(
+      'paymentForm'
+    );
+
+
+    if(paymentForm){
+
+      paymentForm
+      .classList
+      .add(
+        'hidden'
+      );
+
+    }
+
+  }
   document
   .getElementById(
     'roundContent'
