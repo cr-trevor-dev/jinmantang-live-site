@@ -375,7 +375,7 @@ input{
       <div class="stat">
 
         <small>
-          提交总积分
+          本期确认总金额
         </small>
 
         <strong id="detailTotal">
@@ -1027,7 +1027,7 @@ async function loadRoundStats(
           roundId
         )
         +
-        '&select=agent_id,points'
+        '&select=agent_id,points,confirmed_points'
       ),
 
       api(
@@ -1039,7 +1039,7 @@ async function loadRoundStats(
           roundId
         )
         +
-        '&select=customer_id,points'
+        '&select=customer_id,confirmed_points'
       )
 
     ]);
@@ -1079,19 +1079,23 @@ async function loadRoundStats(
     agentRows.forEach(
       row=>{
 
-        const p =
+        agentTotal +=
         Number(
-          row.points
+          row.confirmed_points
           ||
           0
         );
 
 
-        agentTotal +=
-        p;
-
-
-        if(p > 0){
+        if(
+          Number(
+            row.points
+            ||
+            0
+          )
+          >
+          0
+        ){
 
           agentSet.add(
             row.agent_id
@@ -1108,7 +1112,7 @@ async function loadRoundStats(
 
         customerTotal +=
         Number(
-          row.points
+          row.confirmed_points
           ||
           0
         );
@@ -1305,7 +1309,7 @@ async function loadDetailData(
         round.id
       )
       +
-      '&select=agent_id,number_code,points,submitted_at,updated_at'
+      '&select=agent_id,number_code,points,confirmed_points,submitted_at,updated_at'
       +
       '&order=agent_id.asc,number_code.asc'
     ),
@@ -1405,16 +1409,16 @@ async function loadDetailData(
   agentRows.forEach(
     row=>{
 
-      const p =
+      const confirmed =
       Number(
-        row.points
+        row.confirmed_points
         ||
         0
       );
 
 
       total +=
-      p;
+      confirmed;
 
 
       const code =
@@ -1436,7 +1440,7 @@ async function loadDetailData(
       ){
 
         numbers[code] +=
-        p;
+        confirmed;
 
       }
 
@@ -1468,16 +1472,16 @@ async function loadDetailData(
   customerRows.forEach(
     row=>{
 
-      const p =
+      const confirmed =
       Number(
-        row.points
+        row.confirmed_points
         ||
         0
       );
 
 
       total +=
-      p;
+      confirmed;
 
 
       const code =
@@ -1499,7 +1503,7 @@ async function loadDetailData(
       ){
 
         numbers[code] +=
-        p;
+        confirmed;
 
       }
 
@@ -1695,7 +1699,9 @@ function renderAgents(
 
           total +=
           Number(
-            r.points || 0
+            r.confirmed_points
+            ||
+            0
           );
 
         }
@@ -1739,7 +1745,7 @@ function renderAgents(
 
         <div class="agentMeta">
 
-          提交总积分：
+          已确认金额：
           ${formatNumber(total)}
 
           ${
@@ -1776,7 +1782,9 @@ function renderAgents(
       .filter(
         row=>
         Number(
-          row.points || 0
+          row.confirmed_points
+          ||
+          0
         )>0
       )
       .forEach(
@@ -1788,14 +1796,14 @@ function renderAgents(
 
               <span>
 
-               ${
-  escapeHtml(
-    formatGameCode(
-      row.number_code,
-      currentDetailGameMode
-    )
-  )
-}
+                ${
+                  escapeHtml(
+                    formatGameCode(
+                      row.number_code,
+                      currentDetailGameMode
+                    )
+                  )
+                }
 
               </span>
 
@@ -1803,7 +1811,7 @@ function renderAgents(
 
                 ${
                   formatNumber(
-                    row.points
+                    row.confirmed_points
                   )
                 }
 
