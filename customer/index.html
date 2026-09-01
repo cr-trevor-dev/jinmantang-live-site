@@ -1109,7 +1109,15 @@ button:disabled{
             class="customerCode">
             —
           </div>
-
+                   <div
+            style="margin-top:6px;color:#cab679;font-size:12px">
+            <span>用户名</span>：
+            <strong
+              id="profileUsername"
+              style="color:#f0c75c">
+              —
+            </strong>
+          </div>
         </div>
 
         <div
@@ -3199,7 +3207,14 @@ function renderProfile(){
   profile?.customer_code
   ||
   '—';
-
+  document
+  .getElementById(
+    'profileUsername'
+  )
+  .textContent =
+  profile?.username
+  ||
+  '—';
 
   if(
   !profileDraftDirty
