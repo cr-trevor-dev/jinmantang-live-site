@@ -3112,7 +3112,168 @@ function commissionHtml(
         ''
       }
 
+      ${
+        row.payment_transaction
+        ?
+        `
+          <div
+            class="accountItem"
+            style="margin-top:10px">
 
+            <div class="sectionLabel">
+              正式佣金付款记录
+            </div>
+
+            <div class="accountLine">
+
+              <span>
+                实际支付
+              </span>
+
+              <strong>
+                ${money(
+                  row.payment_transaction.amount
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="accountLine">
+
+              <span>
+                支付时间
+              </span>
+
+              <strong>
+                ${esc(
+                  formatDate(
+                    row.payment_transaction.paid_at
+                  )
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="accountLine">
+
+              <span>
+                收款方式
+              </span>
+
+              <strong>
+                ${esc(
+                  payoutMethodName(
+                    row.payment_transaction.method_type
+                  )
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="accountLine">
+
+              <span>
+                收款户名
+              </span>
+
+              <strong>
+                ${esc(
+                  row.payment_transaction.account_name
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+
+            <div class="accountLine">
+
+              <span>
+                收款账号
+              </span>
+
+              <strong>
+                ${esc(
+                  row.payment_transaction.account_number
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+
+            ${
+              row.payment_transaction.bank_name
+              ?
+              `
+                <div class="accountLine">
+
+                  <span>
+                    银行
+                  </span>
+
+                  <strong>
+                    ${esc(
+                      row.payment_transaction.bank_name
+                    )}
+                  </strong>
+
+                </div>
+              `
+              :
+              ''
+            }
+
+
+            <div class="accountLine">
+
+              <span>
+                Admin 备注
+              </span>
+
+              <strong>
+                ${esc(
+                  row.payment_transaction.admin_note
+                  ||
+                  '—'
+                )}
+              </strong>
+
+            </div>
+
+
+            ${
+              row.payment_transaction.proof_storage_path
+              ?
+              `
+                <button
+                  class="secondary"
+                  type="button"
+                  style="margin-top:10px"
+                  onclick="viewCommissionProof(
+                    '${escJs(
+                      row.payment_transaction.proof_storage_path
+                    )}'
+                  )">
+
+                  查看付款凭证
+
+                </button>
+              `
+              :
+              ''
+            }
+
+          </div>
+        `
+        :
+        ''
+      }
       ${
         remaining > 0
         ?
@@ -4056,15 +4217,330 @@ async function unlockAgentPayout(
    COMMISSION PAID
 ===================================== */
 
+function pickCommissionProof(){
+
+  return new Promise(
+    resolve => {
+
+      const input =
+      document.createElement(
+        'input'
+      );
+
+
+      input.type =
+      'file';
+
+
+      input.accept =
+      'image/jpeg,image/png,image/webp,image/heic,image/heif';
+
+
+      input.onchange =
+      ()=>{
+
+        resolve(
+          input.files?.[0]
+          ||
+          null
+        );
+
+      };
+
+
+      input.click();
+
+    }
+  );
+
+}
+
+
+async function uploadCommissionProof(
+  settlementId,
+  file
+){
+
+  if(!file){
+    throw new Error(
+      'COMMISSION_PAYMENT_PROOF_REQUIRED'
+    );
+  }
+
+
+  const allowed = [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/heic',
+    'image/heif'
+  ];
+
+
+  if(
+    !allowed.includes(
+      file.type
+    )
+  ){
+
+    throw new Error(
+      'COMMISSION_PAYMENT_PROOF_TYPE_INVALID'
+    );
+
+  }
+
+
+  if(
+    file.size
+    >
+    10
+    *
+    1024
+    *
+    1024
+  ){
+
+    throw new Error(
+      'COMMISSION_PAYMENT_PROOF_TOO_LARGE'
+    );
+
+  }
+
+
+  const safeName =
+  String(
+    file.name
+    ||
+    'commission-proof'
+  )
+  .replace(
+    /[^a-zA-Z0-9._-]/g,
+    '_'
+  );
+
+
+  const uniqueId =
+  crypto.randomUUID
+  ?
+  crypto.randomUUID()
+  :
+  String(
+    Date.now()
+  );
+
+
+  const storagePath =
+  settlementId
+  +
+  '/'
+  +
+  uniqueId
+  +
+  '-'
+  +
+  safeName;
+
+
+  const encoded =
+  storagePath
+  .split('/')
+  .map(
+    encodeURIComponent
+  )
+  .join('/');
+
+
+  const response =
+  await api(
+
+    '/storage/v1/object/agent-commission-proofs/'
+    +
+    encoded,
+
+    {
+
+      method:
+      'POST',
+
+      headers:{
+
+        'Content-Type':
+        file.type,
+
+        'x-upsert':
+        'false'
+
+      },
+
+      body:
+      file
+
+    }
+
+  );
+
+
+  if(!response.ok){
+
+    throw new Error(
+      'COMMISSION_PAYMENT_PROOF_UPLOAD_FAILED'
+    );
+
+  }
+
+
+  return storagePath;
+
+}
+
+
+async function deleteCommissionProof(
+  storagePath
+){
+
+  if(!storagePath){
+    return;
+  }
+
+
+  try{
+
+    const encoded =
+    storagePath
+    .split('/')
+    .map(
+      encodeURIComponent
+    )
+    .join('/');
+
+
+    await api(
+
+      '/storage/v1/object/agent-commission-proofs/'
+      +
+      encoded,
+
+      {
+        method:
+        'DELETE'
+      }
+
+    );
+
+  }
+  catch{}
+
+}
+
+
+async function viewCommissionProof(
+  storagePath
+){
+
+  if(!storagePath){
+    return;
+  }
+
+
+  const newWindow =
+  window.open(
+    '',
+    '_blank'
+  );
+
+
+  try{
+
+    const encoded =
+    storagePath
+    .split('/')
+    .map(
+      encodeURIComponent
+    )
+    .join('/');
+
+
+    const response =
+    await api(
+
+      '/storage/v1/object/authenticated/agent-commission-proofs/'
+      +
+      encoded
+
+    );
+
+
+    if(!response.ok){
+      throw new Error(
+        'COMMISSION_PAYMENT_PROOF_NOT_FOUND'
+      );
+    }
+
+
+    const blob =
+    await response.blob();
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    if(newWindow){
+
+      newWindow.location =
+      url;
+
+    }
+    else{
+
+      location.href =
+      url;
+
+    }
+
+
+    setTimeout(
+      ()=>{
+        URL.revokeObjectURL(
+          url
+        );
+      },
+      60000
+    );
+
+  }
+  catch(error){
+
+    if(newWindow){
+      newWindow.close();
+    }
+
+
+    setPageMessage(
+      translateError(
+        error.message
+      ),
+      'err'
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   COMMISSION PAYMENT
+===================================== */
+
 async function markCommissionPaid(
   agentId,
   roundId
 ){
 
   if(busy){
-
     return;
-
   }
 
 
@@ -4078,9 +4554,13 @@ async function markCommissionPaid(
   commissionRows.find(
 
     item =>
-    item.agent_id === agentId
+    item.agent_id
+    ===
+    agentId
     &&
-    item.round_id === roundId
+    item.round_id
+    ===
+    roundId
 
   );
 
@@ -4090,9 +4570,7 @@ async function markCommissionPaid(
     ||
     !row
   ){
-
     return;
-
   }
 
 
@@ -4105,8 +4583,31 @@ async function markCommissionPaid(
 
 
   if(
-    remaining <= 0
+    remaining
+    <=
+    0
   ){
+
+    setPageMessage(
+      '这笔佣金已经没有待付金额。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    row.round_status
+    !==
+    'settled'
+  ){
+
+    setPageMessage(
+      '本期还没有正式结算，暂时不能支付佣金。',
+      'err'
+    );
 
     return;
 
@@ -4127,7 +4628,9 @@ async function markCommissionPaid(
 
   const currentAccountsReady =
   (
-    accounts.length > 0
+    accounts.length
+    >
+    0
     &&
     accounts.every(
 
@@ -4147,6 +4650,7 @@ async function markCommissionPaid(
   ){
 
     setPageMessage(
+
       accounts.some(
 
         account =>
@@ -4158,8 +4662,10 @@ async function markCommissionPaid(
       ?
       '代理收款方式正在开放修改，请等代理重新保存并锁定后再支付佣金。'
       :
-      '代理尚未绑定收款方式，不能确认佣金支付。',
+      '代理尚未绑定收款方式，不能支付佣金。',
+
       'err'
+
     );
 
 
@@ -4168,17 +4674,70 @@ async function markCommissionPaid(
   }
 
 
+  /*
+    正常情况下 confirmed 金额进入时
+    已经自动生成 settlement。
+
+    没有 settlement_id 时绝不能先上传凭证，
+    避免形成无法关联的孤立文件。
+  */
   if(
-    row.round_status
-    !==
-    'settled'
+    !row.settlement_id
   ){
 
     setPageMessage(
-      '本期还没有正式结算，暂时不能支付佣金。',
+      '代理佣金结算尚未准备完成，请刷新页面后再试。',
       'err'
     );
 
+    return;
+
+  }
+
+
+  let note =
+  window.prompt(
+
+    '请输入本次真实付款备注，例如：'
+    +
+    'KPay 已转账 / 银行转账 / 交易编号：',
+
+    ''
+
+  );
+
+
+  if(note === null){
+    return;
+  }
+
+
+  note =
+  note.trim();
+
+
+  if(!note){
+
+    setPageMessage(
+      '必须填写本次佣金付款备注。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  const file =
+  await pickCommissionProof();
+
+
+  if(!file){
+
+    setPageMessage(
+      '必须选择本次佣金付款凭证截图。',
+      'err'
+    );
 
     return;
 
@@ -4188,7 +4747,7 @@ async function markCommissionPaid(
   const confirmed =
   window.confirm(
 
-    '请确认现实中已经向代理支付佣金。'
+    '请再次确认现实中已经向代理完成付款。'
     +
     '\n\n代理：'
     +
@@ -4212,21 +4771,31 @@ async function markCommissionPaid(
       row.round_code
     )
     +
-    '\n本次待付：'
+    '\n实际支付佣金：'
     +
     money(
       remaining
     )
     +
-    '\n\n确认后该期会正式标记为“已支付”。'
+    '\n付款备注：'
+    +
+    note
+    +
+    '\n付款凭证：'
+    +
+    (
+      file.name
+      ||
+      '已选择'
+    )
+    +
+    '\n\n确认后会生成永久佣金付款记录，不能重复支付。'
 
   );
 
 
   if(!confirmed){
-
     return;
-
   }
 
 
@@ -4234,12 +4803,28 @@ async function markCommissionPaid(
   true;
 
 
+  let proofStoragePath =
+  null;
+
+
+  setPageMessage(
+    '正在上传凭证并登记佣金付款...'
+  );
+
+
   try{
+
+    proofStoragePath =
+    await uploadCommissionProof(
+      row.settlement_id,
+      file
+    );
+
 
     const response =
     await api(
 
-      '/rest/v1/rpc/admin_mark_agent_referral_commission_paid',
+      '/rest/v1/rpc/admin_record_agent_referral_commission_payment',
 
       {
 
@@ -4260,7 +4845,13 @@ async function markCommissionPaid(
           roundId,
 
           p_agent_id:
-          agentId
+          agentId,
+
+          p_admin_note:
+          note,
+
+          p_proof_storage_path:
+          proofStoragePath
 
         })
 
@@ -4275,33 +4866,54 @@ async function markCommissionPaid(
     );
 
 
+    await loadAll(
+      false
+    );
+
+
     setPageMessage(
 
-      data?.already_paid
-      ?
-      '这笔佣金之前已经支付'
-      :
-      '佣金已确认支付',
+      '代理佣金付款已保存'
+      +
+      ' · 金额 '
+      +
+      money(
+        data?.commission_paid
+        ||
+        remaining
+      ),
 
       'ok'
 
     );
 
-
-    await loadAll(
-      false
-    );
-
   }
   catch(error){
 
+    if(proofStoragePath){
+
+      await deleteCommissionProof(
+        proofStoragePath
+      );
+
+    }
+
+
+    console.error(
+      error
+    );
+
+
     setPageMessage(
-      '确认失败：'
+
+      '佣金付款失败：'
       +
       translateError(
         error.message
       ),
+
       'err'
+
     );
 
   }
@@ -4440,7 +5052,96 @@ function translateError(message){
 
   }
 
+  if(
+    text.includes(
+      'PAYOUT_METHOD_REQUIRED'
+    )
+  ){
 
+    return '代理尚未绑定有效收款方式，暂时不能支付佣金。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_ALREADY_PAID'
+    )
+  ){
+
+    return '这笔代理佣金已经支付，请刷新页面。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_PAYMENT_NOTE_REQUIRED'
+    )
+  ){
+
+    return '必须填写本次佣金付款备注。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_PAYMENT_PROOF_REQUIRED'
+    )
+  ){
+
+    return '必须上传本次佣金付款凭证。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_PAYMENT_PROOF_PATH_INVALID'
+    )
+    ||
+    text.includes(
+      'COMMISSION_PAYMENT_PROOF_NOT_FOUND'
+    )
+  ){
+
+    return '佣金付款凭证无效，请重新上传。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_PAYMENT_PROOF_TYPE_INVALID'
+    )
+  ){
+
+    return '佣金付款凭证只支持 JPG、PNG、WEBP、HEIC、HEIF 图片。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_PAYMENT_PROOF_TOO_LARGE'
+    )
+  ){
+
+    return '佣金付款凭证不能超过 10MB。';
+
+  }
+
+
+  if(
+    text.includes(
+      'COMMISSION_PAYMENT_PROOF_UPLOAD_FAILED'
+    )
+  ){
+
+    return '佣金付款凭证上传失败，请重新尝试。';
+
+  }
   return (
     text
     ||
