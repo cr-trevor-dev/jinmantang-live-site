@@ -1056,9 +1056,9 @@ async function load(
     message='';
     messageType='';
 
-  }
+    render();
 
-  render();
+  }
 
   try{
 
@@ -1067,7 +1067,7 @@ async function load(
       'agent_my_payout_accounts'
     );
 
-    accounts=
+    const nextAccounts=
     Array.isArray(
       data?.rows
     )
@@ -1075,6 +1075,31 @@ async function load(
     data.rows
     :
     [];
+
+
+    const changed=
+    JSON.stringify(
+      accounts
+    )
+    !==
+    JSON.stringify(
+      nextAccounts
+    );
+
+
+    accounts=
+    nextAccounts;
+
+
+    if(
+      changed
+      ||
+      show
+    ){
+
+      render();
+
+    }
 
   }catch(error){
 
@@ -1092,12 +1117,12 @@ async function load(
     messageType=
     'err';
 
+    render();
+
   }finally{
 
     loading=
     false;
-
-    render();
 
   }
 
