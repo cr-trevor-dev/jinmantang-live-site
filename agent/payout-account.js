@@ -841,12 +841,41 @@ function render(){
 
   }
 
-  card.classList.remove(
-    'hidden'
-  );
+  
 
   card.innerHTML=`
+<div
+  style="
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px
+  ">
 
+  <div
+    class="title"
+    style="margin:0">
+    ${esc(t('title'))}
+  </div>
+
+  <button
+    type="button"
+    class="secondary"
+    style="
+      width:auto;
+      margin:0;
+      padding:8px 12px
+    "
+    onclick="
+      document
+      .getElementById('agentPayoutAccountCard')
+      ?.classList.add('hidden')
+    ">
+    ×
+  </button>
+
+</div>
 
 
 <div
