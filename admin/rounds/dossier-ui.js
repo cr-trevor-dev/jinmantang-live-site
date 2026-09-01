@@ -644,23 +644,7 @@ function buildUI(){
 
 function setTab(name){
 
-  document
-  .querySelectorAll(
-    '.rd-tab'
-  )
-  .forEach(
-    btn=>{
-
-      btn.classList.toggle(
-        'active',
-        btn.dataset.tab === name
-      );
-
-    }
-  );
-
-
-    const ids = {
+  const ids = {
 
     overview:
     'rdPanelOverview',
@@ -691,13 +675,14 @@ function setTab(name){
 
   document
   .querySelectorAll(
-    '.rd-panel'
+    '.rd-tab'
   )
   .forEach(
-    panel=>{
+    btn=>{
 
-      panel.classList.remove(
-        'active'
+      btn.classList.toggle(
+        'active',
+        btn.dataset.tab === name
       );
 
     }
@@ -705,11 +690,31 @@ function setTab(name){
 
 
   document
-  .getElementById(
-    ids[name]
+  .querySelectorAll(
+    '.rd-panel'
   )
-  ?.classList.add(
-    'active'
+  .forEach(
+    panel=>{
+
+      const active =
+      panel.id ===
+      ids[name];
+
+
+      panel.classList.toggle(
+        'active',
+        active
+      );
+
+
+      panel.style.display =
+      active
+      ?
+      'block'
+      :
+      'none';
+
+    }
   );
 
 }
