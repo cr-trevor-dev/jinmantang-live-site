@@ -745,6 +745,14 @@
     '请输入付款金额':['ပေးချေမည့်ငွေထည့်ပါ','Enter payment amount','กรอกยอดชำระ','Masukkan jumlah bayaran','Nhập số tiền thanh toán','Masukkan jumlah pembayaran'],
     '付款截图 / 凭证':['ငွေပေးချေမှု Screenshot / အထောက်အထား','Payment Screenshot / Proof','ภาพ / หลักฐานการชำระ','Screenshot / Bukti Bayaran','Ảnh / chứng từ thanh toán','Screenshot / Bukti Pembayaran'],
     '备注（可不填）':['မှတ်ချက် (မဖြည့်လည်းရသည်)','Note (Optional)','หมายเหตุ (ไม่บังคับ)','Nota (Pilihan)','Ghi chú (không bắt buộc)','Catatan (Opsional)'],
+    '重要：只有在本期截止前经平台确认到账的金额才计入本期。截止时仍在审核中的付款不参与本期开奖结果；如核实实际到账，将进入退款处理。':[
+      'အရေးကြီးသည်။ ယခုအကြိမ်ပိတ်ချိန်မတိုင်မီ Platform မှ ငွေလက်ခံရရှိကြောင်း အတည်ပြုပြီးသော ပမာဏသာ ယခုအကြိမ်တွင် အကျုံးဝင်ပါသည်။ ပိတ်ချိန်ရောက်သည့်အခါ စစ်ဆေးနေဆဲဖြစ်သော ငွေပေးချေမှုသည် ယခုအကြိမ်ရလဒ်တွင် မပါဝင်ပါ။ ငွေတကယ်ရောက်ရှိကြောင်း အတည်ပြုပါက ငွေပြန်အမ်းခြင်းလုပ်ငန်းစဉ်သို့ ဝင်ရောက်မည်။',
+      'Important: Only amounts confirmed as received by the platform before the round deadline will count for this round. Payments still under review at the deadline will not participate in this round result. If the funds are later verified as received, they will be handled through the refund process.',
+      'สำคัญ: เฉพาะยอดเงินที่แพลตฟอร์มยืนยันว่าได้รับก่อนเวลาปิดรับของรอบเท่านั้นที่จะนับในรอบนี้ การชำระเงินที่ยังอยู่ระหว่างตรวจสอบเมื่อถึงเวลาปิดรับจะไม่เข้าร่วมผลของรอบนี้ หากภายหลังตรวจสอบแล้วพบว่าเงินเข้าจริง จะดำเนินการผ่านขั้นตอนคืนเงิน',
+      'Penting: Hanya jumlah yang disahkan diterima oleh platform sebelum masa tutup pusingan akan dikira untuk pusingan ini. Bayaran yang masih dalam semakan apabila masa tutup tiba tidak akan menyertai keputusan pusingan ini. Jika dana kemudiannya disahkan telah diterima, ia akan diproses melalui prosedur bayaran balik.',
+      'Quan trọng: Chỉ số tiền được nền tảng xác nhận đã nhận trước thời hạn của kỳ mới được tính vào kỳ này. Khoản thanh toán vẫn đang được xét duyệt khi hết hạn sẽ không tham gia kết quả của kỳ này. Nếu sau đó xác minh tiền thực tế đã được nhận, khoản tiền sẽ được xử lý theo quy trình hoàn tiền.',
+      'Penting: Hanya jumlah yang dikonfirmasi telah diterima oleh platform sebelum batas waktu putaran yang akan dihitung untuk putaran ini. Pembayaran yang masih dalam peninjauan saat batas waktu tiba tidak akan ikut dalam hasil putaran ini. Jika dana kemudian terbukti benar-benar telah diterima, dana tersebut akan diproses melalui prosedur pengembalian dana.'
+    ],
     '提交付款审核':['ငွေပေးချေမှု စစ်ဆေးရန်တင်ရန်','Submit Payment for Review','ส่งการชำระเพื่อตรวจสอบ','Hantar Bayaran untuk Semakan','Gửi thanh toán để duyệt','Kirim Pembayaran untuk Ditinjau'],
     '付款记录':['ငွေပေးချေမှုမှတ်တမ်း','Payment History','ประวัติการชำระ','Sejarah Bayaran','Lịch sử thanh toán','Riwayat Pembayaran'],
     '暂无付款记录':['ငွေပေးချေမှုမှတ်တမ်း မရှိသေးပါ','No payment history','ยังไม่มีประวัติการชำระ','Tiada sejarah bayaran','Chưa có lịch sử thanh toán','Belum ada riwayat pembayaran'],
