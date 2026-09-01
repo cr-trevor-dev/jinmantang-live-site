@@ -28,7 +28,9 @@ let lastCustomerFilter = '';
 
 const CUSTOMER_PAGE_SIZE = 12;
 const ORDER_PAGE_SIZE = 8;
-
+const orderEntryCache = new Map();
+const orderEntryLoading = new Set();
+const expandedOrderEntries = new Set();
 
 /* =====================================
    STYLE
@@ -233,7 +235,18 @@ function installCustomerCompactStyle(){
   text-align:center;
   white-space:nowrap;
 }
-
+.customerOrderDetailAction{margin-top:9px}
+.customerOrderDetailAction button{margin-top:0}
+.customerOrderEntryPanel{margin-top:9px;padding:12px;border-radius:13px;background:#0c0c0d;border:1px solid rgba(214,168,63,.14)}
+.customerOrderEntryHead{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;color:#8d8577;font-size:10px}
+.customerOrderEntryRow{display:grid;grid-template-columns:64px 1fr 1fr 1fr;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.customerOrderEntryRow:last-child{border-bottom:0}
+.customerOrderEntryNumber{color:#efd477;font-size:14px;font-weight:900}
+.customerOrderEntryCell small{display:block;color:#777166;font-size:9px;margin-bottom:3px}
+.customerOrderEntryCell strong{display:block;color:#e9dfc7;font-size:11px}
+.customerOrderEntryCell strong.confirmed{color:#86d19c}
+.customerOrderEntryEmpty{padding:10px 0;text-align:center;color:#7f786b;font-size:11px}
+@media(max-width:560px){.customerOrderEntryRow{grid-template-columns:52px 1fr}.customerOrderEntryCell{padding:3px 0}}
 @media(max-width:500px){
 
   .customerTabs{
@@ -1248,7 +1261,7 @@ function customerOrdersTab(customer){
 
       visible
       .map(
-        orderHtml
+        customerOrderCardHtml
       )
       .join('')
 
@@ -1269,7 +1282,441 @@ function customerOrdersTab(customer){
   `;
 
 }
+function customerOrderCardHtml(order){
 
+  const expanded =
+  expandedOrderEntries.has(
+    order.id
+  );
+
+  const loading =
+  orderEntryLoading.has(
+    order.id
+  );
+
+  return `
+
+    ${orderHtml(order)}
+
+    <div class="customerOrderDetailAction">
+
+      <button
+        class="secondary"
+        type="button"
+        onclick="toggleOrderEntries(
+          '${esc(order.id)}'
+        )">
+
+        ${
+          expanded
+          ?
+          '收起本期下注明细'
+          :
+          '查看本期下注明细'
+        }
+
+      </button>
+
+    </div>
+
+    ${
+      expanded
+      ?
+      orderEntryPanelHtml(
+        order,
+        loading
+      )
+      :
+      ''
+    }
+
+  `;
+
+}
+
+
+window.toggleOrderEntries =
+async function(orderId){
+
+  if(
+    expandedOrderEntries.has(
+      orderId
+    )
+  ){
+
+    expandedOrderEntries.delete(
+      orderId
+    );
+
+    renderCustomers();
+
+    return;
+
+  }
+
+
+  expandedOrderEntries.add(
+    orderId
+  );
+
+
+  if(
+    orderEntryCache.has(
+      orderId
+    )
+    &&
+    orderEntryCache.get(
+      orderId
+    )
+    !==
+    null
+  ){
+
+    renderCustomers();
+
+    return;
+
+  }
+
+
+  orderEntryLoading.add(
+    orderId
+  );
+
+  renderCustomers();
+
+
+  try{
+
+    const res =
+    await api(
+
+      '/rest/v1/customer_round_entries'
+      +
+      '?select=id,order_id,round_id,customer_id,number_code,points,confirmed_points,pending_points'
+      +
+      '&order_id=eq.'
+      +
+      encodeURIComponent(
+        orderId
+      )
+      +
+      '&order=number_code.asc'
+
+    );
+
+
+    if(!res.ok){
+
+      throw new Error(
+        await res.text()
+      );
+
+    }
+
+
+    const data =
+    await res.json();
+
+
+    orderEntryCache.set(
+      orderId,
+      Array.isArray(data)
+      ?
+      data
+      :
+      []
+    );
+
+  }
+  catch(err){
+
+    console.error(
+      err
+    );
+
+    orderEntryCache.set(
+      orderId,
+      null
+    );
+
+  }
+  finally{
+
+    orderEntryLoading.delete(
+      orderId
+    );
+
+    renderCustomers();
+
+  }
+
+};
+
+
+function orderEntryPanelHtml(
+  order,
+  loading
+){
+
+  if(loading){
+
+    return `
+
+      <div class="customerOrderEntryPanel">
+
+        <div class="customerOrderEntryEmpty">
+          正在读取本期下注明细...
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  const cached =
+  orderEntryCache.get(
+    order.id
+  );
+
+
+  if(cached === null){
+
+    return `
+
+      <div class="customerOrderEntryPanel">
+
+        <div class="customerOrderEntryEmpty">
+          本期下注明细读取失败，请收起后重新打开。
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  const entries =
+  aggregateOrderEntries(
+    cached
+    ||
+    []
+  );
+
+
+  if(!entries.length){
+
+    return `
+
+      <div class="customerOrderEntryPanel">
+
+        <div class="customerOrderEntryEmpty">
+          本期暂无可显示的下注号码明细
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  return `
+
+    <div class="customerOrderEntryPanel">
+
+      <div class="customerOrderEntryHead">
+
+        <span>
+          本期下注号码
+        </span>
+
+        <span>
+          共 ${entries.length} 个号码
+        </span>
+
+      </div>
+
+
+      ${
+
+        entries
+        .map(
+          orderEntryRowHtml
+        )
+        .join('')
+
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+function aggregateOrderEntries(entries){
+
+  const map =
+  new Map();
+
+
+  entries.forEach(
+    entry => {
+
+      const code =
+      String(
+        entry.number_code
+        ??
+        ''
+      );
+
+
+      if(!map.has(code)){
+
+        map.set(
+          code,
+          {
+            number_code:code,
+            points:0,
+            pending_points:0,
+            confirmed_points:0
+          }
+        );
+
+      }
+
+
+      const item =
+      map.get(
+        code
+      );
+
+
+      item.points +=
+      Number(
+        entry.points
+        ||
+        0
+      );
+
+
+      item.pending_points +=
+      Number(
+        entry.pending_points
+        ||
+        0
+      );
+
+
+      item.confirmed_points +=
+      Number(
+        entry.confirmed_points
+        ||
+        0
+      );
+
+    }
+  );
+
+
+  return Array
+  .from(
+    map.values()
+  )
+  .sort(
+    (a,b) =>
+    String(a.number_code)
+    .localeCompare(
+      String(b.number_code),
+      undefined,
+      {
+        numeric:true
+      }
+    )
+  );
+
+}
+
+
+function orderEntryRowHtml(entry){
+
+  const rawCode =
+  String(
+    entry.number_code
+    ||
+    '—'
+  );
+
+
+  const numberCode =
+  /^\d+$/.test(
+    rawCode
+  )
+  ?
+  rawCode.padStart(
+    2,
+    '0'
+  )
+  :
+  rawCode;
+
+
+  return `
+
+    <div class="customerOrderEntryRow">
+
+      <div class="customerOrderEntryNumber">
+        ${esc(numberCode)}
+      </div>
+
+
+      <div class="customerOrderEntryCell">
+
+        <small>
+          下注
+        </small>
+
+        <strong>
+          ${money(entry.points)}
+        </strong>
+
+      </div>
+
+
+      <div class="customerOrderEntryCell">
+
+        <small>
+          审核中
+        </small>
+
+        <strong>
+          ${money(entry.pending_points)}
+        </strong>
+
+      </div>
+
+
+      <div class="customerOrderEntryCell">
+
+        <small>
+          已确认
+        </small>
+
+        <strong class="confirmed">
+          ${money(entry.confirmed_points)}
+        </strong>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
 
 /* =====================================
    OPEN / CLOSE
