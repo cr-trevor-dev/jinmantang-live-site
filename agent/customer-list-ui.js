@@ -4,14 +4,18 @@
   let listObserver = null;
   let installTimer = null;
 
+  let identityLoading = false;
+  let identityLoadedAt = 0;
+  let usernameByCode = new Map();
+
   const SEARCH_PLACEHOLDER = {
-    zh:'搜索客户姓名 / 客户编号',
-    my:'ဖောက်သည်အမည် / ကုဒ် ရှာရန်',
-    en:'Search customer name / code',
-    th:'ค้นหาชื่อลูกค้า / รหัส',
-    ms:'Cari nama / kod pelanggan',
-    vi:'Tìm tên / mã khách hàng',
-    id:'Cari nama / kode pelanggan'
+    zh:'搜索客户姓名 / 客户编号 / 用户名',
+    my:'ဖောက်သည်အမည် / ကုဒ် / အသုံးပြုသူအမည် ရှာရန်',
+    en:'Search name / customer code / username',
+    th:'ค้นหาชื่อ / รหัสลูกค้า / ชื่อผู้ใช้',
+    ms:'Cari nama / kod pelanggan / nama pengguna',
+    vi:'Tìm tên / mã khách hàng / tên đăng nhập',
+    id:'Cari nama / kode pelanggan / nama pengguna'
   };
 
   const NO_MATCH = {
@@ -22,6 +26,16 @@
     ms:'Tiada pelanggan sepadan',
     vi:'Không tìm thấy khách hàng phù hợp',
     id:'Tidak ada pelanggan yang cocok'
+  };
+
+  const USERNAME_LABEL = {
+    zh:'用户名',
+    my:'အသုံးပြုသူအမည်',
+    en:'Username',
+    th:'ชื่อผู้ใช้',
+    ms:'Nama pengguna',
+    vi:'Tên đăng nhập',
+    id:'Nama pengguna'
   };
 
   function lang(){
@@ -130,16 +144,228 @@
   }
 
   function applyListStyle(list){
-    /*
-      客户再多，也只占固定区域。
-      约显示 2～3 张客户卡。
-    */
     list.style.maxHeight = '430px';
     list.style.overflowY = 'auto';
     list.style.overflowX = 'hidden';
     list.style.webkitOverflowScrolling = 'touch';
     list.style.overscrollBehavior = 'contain';
     list.style.paddingRight = '2px';
+  }
+
+  function codeFromCard(card){
+    const match =
+    String(
+      card.textContent || ''
+    )
+    .match(
+      /JMT-C[0-9A-Z-]+/i
+    );
+
+    return match
+    ?
+    match[0].toUpperCase()
+    :
+    '';
+  }
+
+  function decorateUsernames(cards){
+    cards.forEach(
+      card=>{
+        const code =
+        codeFromCard(card);
+
+        if(!code){
+          return;
+        }
+
+        const username =
+        usernameByCode.get(code)
+        ||
+        '';
+
+        let row =
+        card.querySelector(
+          '[data-agent-customer-username]'
+        );
+
+        if(!username){
+          if(row){
+            row.remove();
+          }
+
+          return;
+        }
+
+        if(!row){
+          row =
+          document.createElement(
+            'div'
+          );
+
+          row.setAttribute(
+            'data-agent-customer-username',
+            '1'
+          );
+
+          row.style.cssText = `
+            color:#9d927c;
+            font-size:10px;
+            margin-top:5px;
+          `;
+
+          const codeEl =
+          Array
+          .from(
+            card.querySelectorAll('div')
+          )
+          .find(
+            el=>
+            el.children.length === 0
+            &&
+            String(
+              el.textContent || ''
+            )
+            .trim()
+            .toUpperCase()
+            ===
+            code
+          );
+
+          if(codeEl){
+            codeEl.insertAdjacentElement(
+              'afterend',
+              row
+            );
+          }else{
+            card.appendChild(row);
+          }
+        }
+
+        const nextText =
+        text(USERNAME_LABEL)
+        +
+        '：'
+        +
+        username;
+
+        if(
+          row.textContent
+          !==
+          nextText
+        ){
+          row.textContent =
+          nextText;
+        }
+      }
+    );
+  }
+
+  async function loadIdentities(
+    force = false
+  ){
+    if(identityLoading){
+      return;
+    }
+
+    if(
+      !force
+      &&
+      Date.now()
+      -
+      identityLoadedAt
+      <
+      5000
+    ){
+      return;
+    }
+
+    if(
+      typeof api
+      !==
+      'function'
+    ){
+      return;
+    }
+
+    identityLoading = true;
+
+    try{
+      const response =
+      await api(
+        '/rest/v1/rpc/get_agent_customer_login_identities',
+        {
+          method:'POST',
+          headers:{
+            'Content-Type':
+            'application/json'
+          },
+          body:'{}'
+        }
+      );
+
+      if(!response.ok){
+        throw new Error(
+          'AGENT_CUSTOMER_IDENTITIES_LOAD_FAILED'
+        );
+      }
+
+      const rows =
+      await response.json();
+
+      const next =
+      new Map();
+
+      (
+        Array.isArray(rows)
+        ?
+        rows
+        :
+        []
+      )
+      .forEach(
+        row=>{
+          const code =
+          String(
+            row.customer_code || ''
+          )
+          .trim()
+          .toUpperCase();
+
+          const username =
+          String(
+            row.username || ''
+          )
+          .trim();
+
+          if(
+            code
+            &&
+            username
+          ){
+            next.set(
+              code,
+              username
+            );
+          }
+        }
+      );
+
+      usernameByCode =
+      next;
+
+      identityLoadedAt =
+      Date.now();
+
+      applyFilter();
+
+    }catch(error){
+      console.error(
+        'agent customer identities',
+        error
+      );
+    }finally{
+      identityLoading = false;
+    }
   }
 
   function applyFilter(){
@@ -162,11 +388,17 @@
 
     if(input){
       input.placeholder =
-      text(SEARCH_PLACEHOLDER);
+      text(
+        SEARCH_PLACEHOLDER
+      );
     }
 
     const cards =
     customerCards(list);
+
+    decorateUsernames(
+      cards
+    );
 
     const noMatch =
     document.getElementById(
@@ -175,7 +407,8 @@
 
     if(cards.length === 0){
       if(noMatch){
-        noMatch.style.display = 'none';
+        noMatch.style.display =
+        'none';
       }
 
       return;
@@ -192,7 +425,9 @@
           card.textContent || ''
         )
         .toLowerCase()
-        .includes(searchQuery);
+        .includes(
+          searchQuery
+        );
 
         card.style.display =
         matched
@@ -216,7 +451,8 @@
       &&
       visibleCount === 0
     ){
-      noMatch.style.display = 'block';
+      noMatch.style.display =
+      'block';
 
       const nextText =
       text(NO_MATCH);
@@ -230,7 +466,8 @@
         nextText;
       }
     }else{
-      noMatch.style.display = 'none';
+      noMatch.style.display =
+      'none';
     }
   }
 
@@ -249,27 +486,22 @@
 
     if(installedList === list){
       applyFilter();
+      loadIdentities(false);
       return true;
     }
 
-    installedList = list;
+    installedList =
+    list;
 
     if(listObserver){
       listObserver.disconnect();
     }
 
-    /*
-      只监听客户列表自己的重新渲染。
-
-      不监听整个网页，
-      所以不会碰时钟、截止时间、
-      退出登录、代理资料、收款方式
-      或其他 Agent 功能。
-    */
     listObserver =
     new MutationObserver(
       ()=>{
         applyFilter();
+        loadIdentities(false);
       }
     );
 
@@ -281,6 +513,7 @@
     );
 
     applyFilter();
+    loadIdentities(true);
 
     return true;
   }
@@ -288,19 +521,16 @@
   function waitForCustomerList(){
     if(install()){
       if(installTimer){
-        clearInterval(installTimer);
-        installTimer = null;
+        clearInterval(
+          installTimer
+        );
+
+        installTimer =
+        null;
       }
     }
   }
 
-  /*
-    ux-cleanup.js 登录成功以后
-    才创建客户实时列表。
-
-    所以这里只短暂等待，
-    找到以后立即停止。
-  */
   installTimer =
   setInterval(
     waitForCustomerList,
@@ -310,8 +540,12 @@
   setTimeout(
     ()=>{
       if(installTimer){
-        clearInterval(installTimer);
-        installTimer = null;
+        clearInterval(
+          installTimer
+        );
+
+        installTimer =
+        null;
       }
     },
     30000
@@ -323,7 +557,9 @@
       if(
         event.target
         &&
-        event.target.id === 'langSelect'
+        event.target.id
+        ===
+        'langSelect'
       ){
         setTimeout(
           applyFilter,
@@ -337,6 +573,7 @@
     'pageshow',
     ()=>{
       waitForCustomerList();
+      loadIdentities(false);
     }
   );
 
