@@ -457,7 +457,7 @@ function(){
   }
 
 
-  let rows =
+    let rows =
   payments.filter(
     payment =>
     paymentGroup(
@@ -465,6 +465,12 @@ function(){
     )
     ===
     currentView
+  );
+
+
+  rows =
+  rows.filter(
+    paymentMatchesPaymentFilter
   );
 
 
@@ -773,7 +779,251 @@ function paymentDetailHtmlCompact(
 
 }
 
+/* =====================================
+   DATE / ROUND FILTER
+===================================== */
 
+function installPaymentFilters(){
+
+  if(
+    document.getElementById(
+      'paymentFilterBox'
+    )
+  ){
+    return;
+  }
+
+
+  const toolbar =
+  document.querySelector(
+    '.toolbar'
+  );
+
+
+  if(!toolbar){
+    return;
+  }
+
+
+  const box =
+  document.createElement(
+    'div'
+  );
+
+
+  box.id =
+  'paymentFilterBox';
+
+
+  box.innerHTML = `
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:1fr 1fr auto;
+        gap:8px;
+        margin-top:10px;
+      ">
+
+      <input
+        id="paymentDateFilter"
+        type="date"
+        onchange="resetPaymentFilterPage()">
+
+      <select
+        id="paymentRoundFilter"
+        onchange="resetPaymentFilterPage()"
+        style="
+          width:100%;
+          border:1px solid rgba(214,168,63,.24);
+          background:#101011;
+          color:#fff;
+          border-radius:13px;
+          padding:14px;
+          font-size:14px;
+          outline:none;
+        ">
+
+        <option value="">
+          全部期数
+        </option>
+
+        <option value="1030">
+          上午 11:45
+        </option>
+
+        <option value="1530">
+          下午 15:45
+        </option>
+
+      </select>
+
+      <button
+        class="secondary"
+        type="button"
+        onclick="clearPaymentFilters()">
+
+        清除
+
+      </button>
+
+    </div>
+
+    <div
+      style="
+        margin-top:7px;
+        color:#776f61;
+        font-size:10px;
+        line-height:1.5;
+      ">
+
+      可按日期和上午 / 下午期筛选付款记录
+
+    </div>
+
+  `;
+
+
+  toolbar.insertAdjacentElement(
+    'afterend',
+    box
+  );
+
+}
+
+
+window.resetPaymentFilterPage =
+function(){
+
+  paymentPage =
+  1;
+
+
+  selectedPaymentId =
+  null;
+
+
+  renderPayments();
+
+};
+
+
+window.clearPaymentFilters =
+function(){
+
+  const date =
+  document.getElementById(
+    'paymentDateFilter'
+  );
+
+
+  const round =
+  document.getElementById(
+    'paymentRoundFilter'
+  );
+
+
+  if(date){
+    date.value = '';
+  }
+
+
+  if(round){
+    round.value = '';
+  }
+
+
+  paymentPage =
+  1;
+
+
+  selectedPaymentId =
+  null;
+
+
+  renderPayments();
+
+};
+
+
+function paymentMatchesPaymentFilter(
+  payment
+){
+
+  const dateValue =
+  document.getElementById(
+    'paymentDateFilter'
+  )
+  ?.value
+  ||
+  '';
+
+
+  const roundCode =
+  document.getElementById(
+    'paymentRoundFilter'
+  )
+  ?.value
+  ||
+  '';
+
+
+  if(
+    !dateValue
+    &&
+    !roundCode
+  ){
+
+    return true;
+
+  }
+
+
+  const round =
+  rounds.find(
+    item =>
+    item.id
+    ===
+    payment.round_id
+  );
+
+
+  if(!round){
+
+    return false;
+
+  }
+
+
+  if(
+    dateValue
+    &&
+    round.round_date
+    !==
+    dateValue
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    roundCode
+    &&
+    round.round_code
+    !==
+    roundCode
+  ){
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
 /* =====================================
    INSTALL
 ===================================== */
@@ -781,6 +1031,8 @@ function paymentDetailHtmlCompact(
 function install(){
 
   installPaymentCompactStyle();
+
+  installPaymentFilters();
 
 
   lastPaymentView =
