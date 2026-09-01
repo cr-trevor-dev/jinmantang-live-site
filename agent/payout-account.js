@@ -847,9 +847,7 @@ function render(){
 
   card.innerHTML=`
 
-<div class="title">
-  ${esc(t('title'))}
-</div>
+
 
 <div
   class="note"
