@@ -703,7 +703,44 @@ button.danger{
       </div>
 
     </div>
+    <div
+      class="card"
+      id="roundZodiacSummaryCard">
 
+      <div class="title">
+        本期生肖汇总
+      </div>
+
+      <div class="summaryGrid">
+
+        <div class="summaryBox">
+          <small>正式有效总额</small>
+          <strong id="summaryZodiacConfirmed">
+            0
+          </strong>
+        </div>
+
+        <div class="summaryBox">
+          <small>本期赔率</small>
+          <strong id="summaryZodiacOdds">
+            —
+          </strong>
+        </div>
+
+      </div>
+
+      <div
+        id="summaryZodiacGrid"
+        class="summaryGrid"
+        style="margin-top:10px">
+      </div>
+
+      <div class="refreshLine">
+        只统计管理员已确认金额；
+        待审核和未确认金额不会进入正式本期汇总。
+      </div>
+
+    </div>
     <div class="card">
 
       <div class="title">
@@ -2005,7 +2042,7 @@ async function loadDashboardSummary(){
     const rr =
     await api(
       '/rest/v1/rounds'+
-      '?select=id,round_date,round_code,deadline_at,status,result_number,created_at'+
+           '?select=id,round_date,round_code,deadline_at,status,result_number,payout_multiplier,created_at'+
       '&order=created_at.desc'+
       '&limit=20'
     );
@@ -2293,7 +2330,116 @@ async function loadDashboardSummary(){
     formatNumber(
       editableTotal
     );
+    const payoutMultiplier =
+    Number(
+      currentRound?.payout_multiplier
+      ??
+      10
+    );
 
+    document.getElementById(
+      'summaryZodiacConfirmed'
+    ).textContent =
+    formatNumber(
+      confirmedTotal
+    );
+
+    document.getElementById(
+      'summaryZodiacOdds'
+    ).textContent =
+    '1 : '
+    +
+    formatNumber(
+      payoutMultiplier
+    )
+    +
+    ' 总返还';
+
+    const zodiacNames =
+    [
+      '鼠','牛','虎','兔','龙','蛇',
+      '马','羊','猴','鸡','狗','猪'
+    ];
+
+    const zodiacRows =
+    Array.isArray(
+      summary?.zodiac
+    )
+    ?
+    summary.zodiac
+    :
+    [];
+
+    const zodiacGrid =
+    document.getElementById(
+      'summaryZodiacGrid'
+    );
+
+    if(zodiacGrid){
+
+      zodiacGrid.innerHTML =
+      zodiacRows
+      .map(
+        row=>{
+
+          const index =
+          Number(
+            row.number_code
+          )
+          -
+          1;
+
+          const name =
+          zodiacNames[index]
+          ||
+          row.number_code
+          ||
+          '—';
+
+          const confirmed =
+          Number(
+            row.confirmed_total
+            ||
+            0
+          );
+
+          const estimatedPayout =
+          confirmed
+          *
+          payoutMultiplier;
+
+          return `
+            <div class="summaryBox">
+
+              <small>
+                ${name} · 已确认
+              </small>
+
+              <strong>
+                ${formatNumber(
+                  confirmed
+                )}
+              </strong>
+
+              <small
+                style="
+                  margin-top:9px;
+                  line-height:1.45
+                ">
+                若开出预计返还
+                ${formatNumber(
+                  estimatedPayout
+                )}
+              </small>
+
+            </div>
+          `;
+
+        }
+      )
+      .join('');
+
+    }
 
   }catch(e){
 
@@ -2365,7 +2511,25 @@ function renderNoRound(){
     'summaryDeadline'
   ).textContent =
   '—';
+  document.getElementById(
+    'summaryZodiacConfirmed'
+  ).textContent =
+  '0';
 
+  document.getElementById(
+    'summaryZodiacOdds'
+  ).textContent =
+  '—';
+
+  const zodiacGrid =
+  document.getElementById(
+    'summaryZodiacGrid'
+  );
+
+  if(zodiacGrid){
+    zodiacGrid.innerHTML =
+    '';
+  }
 }
 
 
