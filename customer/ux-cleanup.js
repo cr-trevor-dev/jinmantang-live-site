@@ -633,7 +633,14 @@
       'Số tiền đang được duyệt hoặc đã xác nhận sẽ bị khóa và không thể giảm. Bạn vẫn có thể tăng trước thời hạn. Vui lòng liên kết phương thức nhận tiền trước. Nếu trúng nhưng chưa có tài khoản nhận tiền hợp lệ, bạn phải bổ sung trước khi nền tảng có thể xử lý trả thưởng.',
       'Jumlah yang sedang ditinjau atau sudah dikonfirmasi akan dikunci dan tidak dapat dikurangi. Masih dapat ditambah sebelum batas waktu. Harap hubungkan metode penerimaan terlebih dahulu. Jika menang tetapi belum memiliki akun penerimaan yang valid, Anda harus menambahkannya sebelum platform dapat memproses pembayaran.'
     ],
-
+         '您本期已中奖，但尚未绑定有效收款方式。请先填写 KPay 或银行账户，平台才能为您处理派彩。':[
+      'ယခုအကြိမ်တွင် သင်အနိုင်ရထားသော်လည်း တရားဝင်ငွေလက်ခံနည်းကို မချိတ်ဆက်ရသေးပါ။ ပလက်ဖောင်းမှ ဆုငွေပေးချေနိုင်ရန် KPay သို့မဟုတ် ဘဏ်အကောင့်ကို အရင်ဖြည့်ပါ။',
+      'You won this round, but no valid payout method is linked yet. Please add KPay or a bank account before the platform can process your payout.',
+      'คุณถูกรางวัลในรอบนี้ แต่ยังไม่ได้ผูกช่องทางรับเงินที่ถูกต้อง กรุณาเพิ่ม KPay หรือบัญชีธนาคารก่อนที่แพลตฟอร์มจะดำเนินการจ่ายรางวัล',
+      'Anda menang pusingan ini tetapi belum memautkan kaedah penerimaan yang sah. Sila tambah KPay atau akaun bank sebelum platform boleh memproses pembayaran.',
+      'Bạn đã trúng kỳ này nhưng chưa liên kết phương thức nhận tiền hợp lệ. Vui lòng thêm KPay hoặc tài khoản ngân hàng trước khi nền tảng có thể xử lý trả thưởng.',
+      'Anda menang pada putaran ini tetapi belum menghubungkan metode penerimaan yang valid. Harap tambahkan KPay atau rekening bank sebelum platform dapat memproses pembayaran.'
+    ],
     'KPay 已绑定':['KPay ချိတ်ဆက်ပြီး','KPay Linked','ผูก KPay แล้ว','KPay Dipautkan','KPay đã liên kết','KPay Terhubung'],
     '银行账户已绑定':['ဘဏ်အကောင့်ချိတ်ဆက်ပြီး','Bank Account Linked','ผูกบัญชีธนาคารแล้ว','Akaun Bank Dipautkan','Tài khoản ngân hàng đã liên kết','Rekening Bank Terhubung'],
     '如需更换，请联系客服。':['ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။','Contact support if you need to change it.','หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ','Hubungi sokongan jika perlu menukarnya.','Liên hệ hỗ trợ nếu cần thay đổi.','Hubungi dukungan jika perlu menggantinya.'],
