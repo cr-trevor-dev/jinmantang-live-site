@@ -850,7 +850,7 @@ function roundRowHtml(row){
 
   return `
 
-    <div class="dcRoundRow">
+        <div class="dcRoundRow" role="button" tabindex="0" onclick="openDataRoundFile('${esc(row.round_id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDataRoundFile('${esc(row.round_id)}')}">
 
       <div class="dcRoundTop">
 
