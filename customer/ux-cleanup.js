@@ -775,8 +775,8 @@
     '已派彩':['ပေးချေပြီး','Paid Out','จ่ายรางวัลแล้ว','Sudah Dibayar','Đã trả thưởng','Sudah Dibayar'],
     '部分派彩 · 剩余 ':['တစ်စိတ်တစ်ပိုင်းပေးချေပြီး · ကျန် ','Partially Paid · Remaining ','จ่ายบางส่วน · คงเหลือ ','Bayaran Sebahagian · Baki ','Đã trả một phần · Còn ','Dibayar Sebagian · Sisa '],
     '待派彩 · 平台应返还 ':['ဆုငွေပေးရန်စောင့် · Platform ပြန်ပေးရမည် ','Pending Payout · Platform Returns ','รอจ่ายรางวัล · แพลตฟอร์มต้องคืน ','Menunggu Bayaran · Platform Perlu Bayar ','Chờ trả thưởng · Nền tảng cần trả ','Menunggu Pembayaran · Platform Harus Membayar '],
-    '上午 11:45':['မနက် 11:45','11:45 AM','11:45 น.','11:45 PG','11:45 sáng','11:45'],
-    '下午 3:45':['ညနေ 3:45','3:45 PM','15:45 น.','3:45 PTG','3:45 chiều','15:45'],
+    'AM 11:45':['AM 11:45','AM 11:45','AM 11:45','AM 11:45','AM 11:45','AM 11:45'],
+    'PM 3:45':['PM 3:45','PM 3:45','PM 3:45','PM 3:45','PM 3:45','PM 3:45'],
 
     '开放中':['ဖွင့်ထားသည်','Open','เปิดอยู่','Dibuka','Đang mở','Terbuka'],
     '本期已截止':['ယခုအကြိမ်ပိတ်ပြီး','Round Closed','รอบนี้ปิดแล้ว','Pusingan Ditutup','Kỳ này đã đóng','Putaran Ditutup'],
@@ -1501,13 +1501,13 @@ null;
 
   if(code === '1030'){
     return customerTranslateValue(
-      '上午 11:45'
+     'AM 11:45'
     );
   }
 
   if(code === '1530'){
     return customerTranslateValue(
-      '下午 3:45'
+      'PM 3:45'
     );
   }
 
