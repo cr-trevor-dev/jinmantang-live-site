@@ -399,26 +399,7 @@ select{
 
   </div>
 
-    <div class="card">
-
-    <div class="title">
-      期数档案
-    </div>
-
-    <a
-      class="history"
-      href="/admin/rounds/file.html">
-      📂 查看一期完整档案
-    </a>
-
-    <div class="warning">
-      按一期查看客户、平台主管 / 代理客户金额、
-      付款审核、生肖分布、中奖派彩、退款及代理佣金。
-      <br><br>
-      本页面仅用于查询，不会修改任何本期资金数据。
-    </div>
-
-  </div>
+      <div id="roundDossierMount"></div>
   <div class="card">
 
     <div class="title">
@@ -981,7 +962,7 @@ async function createRound(){
 
       msg.textContent =
       '请选择日期和截止时间';
-
+      
 
       msg.className =
       'msg error';
@@ -1702,6 +1683,6 @@ setInterval(
 );
 
 </script>
-
+<script src="/admin/rounds/dossier-ui.js"></script>
 </body>
 </html>
