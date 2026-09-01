@@ -1643,7 +1643,20 @@ function aggregateOrderEntries(entries){
 
 
 function orderEntryRowHtml(entry){
-
+  const zodiacMap = {
+    '01':'鼠',
+    '02':'牛',
+    '03':'虎',
+    '04':'兔',
+    '05':'龙',
+    '06':'蛇',
+    '07':'马',
+    '08':'羊',
+    '09':'猴',
+    '10':'鸡',
+    '11':'狗',
+    '12':'猪'
+  };
   const rawCode =
   String(
     entry.number_code
@@ -1663,14 +1676,30 @@ function orderEntryRowHtml(entry){
   )
   :
   rawCode;
+  const zodiacName =
+  zodiacMap[
+    numberCode
+  ]
+  ||
+  '';
 
+  const displayCode =
+  zodiacName
+  ?
+  numberCode
+  +
+  ' · '
+  +
+  zodiacName
+  :
+  numberCode;
 
   return `
 
     <div class="customerOrderEntryRow">
 
       <div class="customerOrderEntryNumber">
-        ${esc(numberCode)}
+        ${esc(displayCode)}
       </div>
 
 
