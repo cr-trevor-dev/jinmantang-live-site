@@ -3084,9 +3084,9 @@
     */
 
     setCardHidden(
-      'numberGrid',
-            false
-    );
+  'numberGrid',
+        true
+);
 
 
     /*
