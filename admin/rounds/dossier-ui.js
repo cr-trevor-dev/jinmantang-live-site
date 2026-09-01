@@ -929,8 +929,44 @@ async function loadDossier(){
     }
 
 
+        const normalizedData =
+
+    Array.isArray(data)
+    ?
+    (
+      data[0]?.admin_round_dossier
+      ||
+      data[0]?.dossier
+      ||
+      data[0]
+      ||
+      null
+    )
+    :
+    (
+      data?.admin_round_dossier
+      ||
+      data?.dossier
+      ||
+      data
+    );
+
+
+    if(
+      !normalizedData
+      ||
+      !normalizedData.round
+    ){
+
+      throw new Error(
+        'ROUND_DOSSIER_INVALID_RESPONSE'
+      );
+
+    }
+
+
     dossier =
-    data;
+    normalizedData;
 
 
     render();
