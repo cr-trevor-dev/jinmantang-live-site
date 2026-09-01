@@ -5,6 +5,7 @@
   let searchQuery = '';
   let installedList = null;
   let listObserver = null;
+  let installTimer = null;
 
   const SEARCH_PLACEHOLDER = {
     zh:'搜索客户姓名 / 客户编号',
@@ -55,7 +56,7 @@
     );
   }
 
-  function ensureTools(card,list){
+  function ensureTools(list){
     let tools =
     document.getElementById(
       'agentCustomerListTools'
@@ -71,9 +72,8 @@
     tools.id =
     'agentCustomerListTools';
 
-    tools.style.cssText = `
-      margin-top:14px;
-    `;
+    tools.style.cssText =
+    'margin-top:14px';
 
     tools.innerHTML = `
       <input
@@ -106,10 +106,7 @@
           id="agentCustomerPrev"
           type="button"
           class="secondary"
-          style="
-            margin:0;
-            padding:10px;
-          "
+          style="margin:0;padding:10px"
         >
           ‹
         </button>
@@ -121,17 +118,13 @@
             color:#8f8778;
             font-size:11px;
           "
-        >
-        </div>
+        ></div>
 
         <button
           id="agentCustomerNext"
           type="button"
           class="secondary"
-          style="
-            margin:0;
-            padding:10px;
-          "
+          style="margin:0;padding:10px"
         >
           ›
         </button>
@@ -146,8 +139,7 @@
           font-size:11px;
           padding:14px 4px 2px;
         "
-      >
-      </div>
+      ></div>
     `;
 
     list.insertAdjacentElement(
@@ -203,21 +195,16 @@
   }
 
   function applyPagination(){
-    const card =
-    document.getElementById(
-      'agentCustomerRoundLiveCard'
-    );
-
     const list =
     document.getElementById(
       'agentCustomerRoundList'
     );
 
-    if(!card || !list){
+    if(!list){
       return;
     }
 
-    ensureTools(card,list);
+    ensureTools(list);
 
     const input =
     document.getElementById(
@@ -232,22 +219,17 @@
     const allCards =
     customerCards(list);
 
-    /*
-      如果原页面当前显示的是
-      “暂无直属客户”，保持原页面自己的提示，
-      不做任何干预。
-    */
+    const pagination =
+    document.getElementById(
+      'agentCustomerPagination'
+    );
+
+    const noMatch =
+    document.getElementById(
+      'agentCustomerNoMatch'
+    );
+
     if(allCards.length === 0){
-      const pagination =
-      document.getElementById(
-        'agentCustomerPagination'
-      );
-
-      const noMatch =
-      document.getElementById(
-        'agentCustomerNoMatch'
-      );
-
       if(pagination){
         pagination.style.display = 'none';
       }
@@ -297,27 +279,66 @@
     const start =
     (currentPage - 1) * PAGE_SIZE;
 
-    const visible =
-    filtered.slice(
+    filtered
+    .slice(
       start,
       start + PAGE_SIZE
-    );
-
-    visible.forEach(
+    )
+    .forEach(
       card=>{
         card.style.display = '';
       }
     );
 
-    const pagination =
-    document.getElementById(
-      'agentCustomerPagination'
-    );
+    if(filtered.length === 0){
+      pagination.style.display = 'none';
+
+      noMatch.style.display = 'block';
+
+      const nextText =
+      text(NO_MATCH);
+
+      if(
+        noMatch.textContent
+        !==
+        nextText
+      ){
+        noMatch.textContent =
+        nextText;
+      }
+
+      return;
+    }
+
+    noMatch.style.display = 'none';
+
+    pagination.style.display =
+    totalPages > 1
+    ?
+    'grid'
+    :
+    'none';
 
     const pageInfo =
     document.getElementById(
       'agentCustomerPageInfo'
     );
+
+    const nextPageInfo =
+    currentPage +
+    ' / ' +
+    totalPages +
+    ' · ' +
+    filtered.length;
+
+    if(
+      pageInfo.textContent
+      !==
+      nextPageInfo
+    ){
+      pageInfo.textContent =
+      nextPageInfo;
+    }
 
     const prev =
     document.getElementById(
@@ -329,36 +350,6 @@
       'agentCustomerNext'
     );
 
-    const noMatch =
-    document.getElementById(
-      'agentCustomerNoMatch'
-    );
-
-    if(filtered.length === 0){
-      pagination.style.display = 'none';
-
-      noMatch.style.display = 'block';
-      noMatch.textContent =
-      text(NO_MATCH);
-
-      return;
-    }
-
-    noMatch.style.display = 'none';
-
-    if(totalPages > 1){
-      pagination.style.display = 'grid';
-    }else{
-      pagination.style.display = 'none';
-    }
-
-    pageInfo.textContent =
-    currentPage +
-    ' / ' +
-    totalPages +
-    ' · ' +
-    filtered.length;
-
     prev.disabled =
     currentPage <= 1;
 
@@ -367,25 +358,20 @@
   }
 
   function install(){
-    const card =
-    document.getElementById(
-      'agentCustomerRoundLiveCard'
-    );
-
     const list =
     document.getElementById(
       'agentCustomerRoundList'
     );
 
-    if(!card || !list){
-      return;
+    if(!list){
+      return false;
     }
 
-    ensureTools(card,list);
+    ensureTools(list);
 
     if(installedList === list){
       applyPagination();
-      return;
+      return true;
     }
 
     installedList = list;
@@ -401,6 +387,15 @@
       }
     );
 
+    /*
+      只监听“客户列表”本身。
+      原来的实时刷新重画客户列表时，
+      才重新执行分页。
+
+      不再监听整个网页，
+      所以不会影响时钟、截止时间、
+      登出按钮、收款账户等其他区域。
+    */
     listObserver.observe(
       list,
       {
@@ -409,21 +404,45 @@
     );
 
     applyPagination();
+
+    return true;
   }
 
-  const pageObserver =
-  new MutationObserver(
-    ()=>{
-      install();
+  function waitForCustomerList(){
+    if(install()){
+      if(installTimer){
+        clearInterval(installTimer);
+        installTimer = null;
+      }
     }
+  }
+
+  /*
+    客户实时卡片由 ux-cleanup.js
+    登录成功后动态创建。
+
+   这里只短暂等待它出现，
+    找到以后马上停止轮询。
+  */
+  installTimer =
+  setInterval(
+    waitForCustomerList,
+    400
   );
 
-  pageObserver.observe(
-    document.documentElement,
-    {
-      childList:true,
-      subtree:true
-    }
+  /*
+    最长等 30 秒。
+    即使登录失败或页面没有客户卡，
+    也不会永远运行。
+  */
+  setTimeout(
+    ()=>{
+      if(installTimer){
+        clearInterval(installTimer);
+        installTimer = null;
+      }
+    },
+    30000
   );
 
   document.addEventListener(
@@ -444,8 +463,10 @@
 
   window.addEventListener(
     'pageshow',
-    install
+    ()=>{
+      waitForCustomerList();
+    }
   );
 
-  install();
+  waitForCustomerList();
 })();
