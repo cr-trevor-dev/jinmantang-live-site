@@ -831,90 +831,153 @@
 
   function customerTranslateValue(value){
 
-    let result =
-    String(
-      value
-      ??
-      ''
-    );
+  const original =
+  String(
+    value
+    ??
+    ''
+  );
 
 
-    const entries =
-    Object.entries(
-      CUSTOMER_UI_TEXT
-    )
-    .sort(
-      (a,b)=>
-      b[0].length
-      -
-      a[0].length
-    );
+  const index =
+  CUSTOMER_LANG_INDEX[
+    customerLang
+  ];
 
 
-    entries.forEach(
-      ([zh, translations])=>{
+  const replacements =
+  [];
 
-        const index =
-        CUSTOMER_LANG_INDEX[
-          customerLang
-        ];
 
-        const target =
-        customerLang === 'zh'
-        ?
+  Object.entries(
+    CUSTOMER_UI_TEXT
+  )
+  .forEach(
+    ([zh, translations])=>{
+
+      const target =
+      customerLang === 'zh'
+      ?
+      zh
+      :
+      (
+        translations[index]
+        ||
         zh
-        :
-        (
-          translations[index]
-          ||
-          zh
-        );
+      );
 
 
-        const sources =
-        [
-          zh,
-          ...translations
-        ]
-        .filter(Boolean)
-        .sort(
-          (a,b)=>
-          b.length
-          -
-          a.length
-        );
+      [
+        zh,
+        ...translations
+      ]
+      .filter(Boolean)
+      .forEach(
+        source=>{
 
+          if(
+            source
+            !==
+            target
+          ){
 
-        sources.forEach(
-          source=>{
-
-            if(
-              source
-              &&
-              source !== target
-              &&
-              result.includes(
-                source
-              )
-            ){
-
-              result =
-              result
-              .split(source)
-              .join(target);
-
-            }
+            replacements.push({
+              source,
+              target
+            });
 
           }
-        );
+
+        }
+      );
+
+    }
+  );
+
+
+  replacements.sort(
+    (a,b)=>
+    b.source.length
+    -
+    a.source.length
+  );
+
+
+  let result =
+  original;
+
+
+  const tokens =
+  [];
+
+
+  replacements.forEach(
+    item=>{
+
+      if(
+        !result.includes(
+          item.source
+        )
+      ){
+
+        return;
 
       }
-    );
 
 
-        return result;
+      const token =
+      '\uE000'
+      +
+      tokens.length
+      +
+      '\uE001';
 
-  }
+
+      tokens.push(
+        item.target
+      );
+
+
+      result =
+      result
+      .split(
+        item.source
+      )
+      .join(
+        token
+      );
+
+    }
+  );
+
+
+  tokens.forEach(
+    (target,index)=>{
+
+      const token =
+      '\uE000'
+      +
+      index
+      +
+      '\uE001';
+
+
+      result =
+      result
+      .split(
+        token
+      )
+      .join(
+        target
+      );
+
+    }
+  );
+
+
+  return result;
+
+}
 
 
   window.customerTranslateValue =
