@@ -636,7 +636,7 @@ function buildUI(){
 
 
   return true;
-
+}
 
 /* =========================
    TABS
