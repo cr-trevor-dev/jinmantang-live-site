@@ -4,7 +4,15 @@
 <head>
 
 <meta charset="utf-8">
-
+<script>
+location.replace(
+  '/admin/payments/'
+  +
+  location.search
+  +
+  location.hash
+);
+</script>
 <meta
   name="viewport"
   content="width=device-width,initial-scale=1,maximum-scale=1">
