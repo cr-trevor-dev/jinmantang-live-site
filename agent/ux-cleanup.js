@@ -3172,9 +3172,9 @@
 
       if(betCard){
 
-        betCard.classList.remove(
-          'hidden'
-        );
+        betCard.classList.add(
+  'hidden'
+);
 
 
         const totalBox =
