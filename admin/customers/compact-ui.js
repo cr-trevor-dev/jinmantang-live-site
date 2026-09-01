@@ -1657,6 +1657,7 @@ function orderEntryRowHtml(entry){
     '11':'狗',
     '12':'猪'
   };
+  
   const rawCode =
   String(
     entry.number_code
@@ -1684,15 +1685,11 @@ function orderEntryRowHtml(entry){
   '';
 
   const displayCode =
-  zodiacName
-  ?
-  numberCode
-  +
-  ' · '
-  +
-  zodiacName
-  :
-  numberCode;
+zodiacName
+?
+zodiacName
+:
+numberCode;
 
   return `
 
