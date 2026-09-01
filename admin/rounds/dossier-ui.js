@@ -997,12 +997,18 @@ function render(){
 
 
   renderOverview();
+
   splitOverviewSections();
+
   renderZodiac();
 
   renderCustomers();
 
   renderAgents();
+
+  setTab(
+    'overview'
+  );
 
 }
 
