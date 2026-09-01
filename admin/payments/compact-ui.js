@@ -815,63 +815,84 @@ function installPaymentFilters(){
   'paymentFilterBox';
 
 
-  box.innerHTML = `
+    box.innerHTML = `
 
     <div
       style="
         display:grid;
-        grid-template-columns:1fr 1fr auto;
-        gap:8px;
+        grid-template-columns:1fr;
+        gap:9px;
         margin-top:10px;
       ">
 
       <input
         id="paymentDateFilter"
         type="date"
-        onchange="resetPaymentFilterPage()">
-
-      <select
-        id="paymentRoundFilter"
         onchange="resetPaymentFilterPage()"
         style="
           width:100%;
-          border:1px solid rgba(214,168,63,.24);
-          background:#101011;
-          color:#fff;
-          border-radius:13px;
-          padding:14px;
-          font-size:14px;
-          outline:none;
         ">
 
-        <option value="">
-          全部期数
-        </option>
 
-        <option value="1030">
-          上午 11:45
-        </option>
+      <div
+        style="
+          display:grid;
+          grid-template-columns:1fr auto;
+          gap:9px;
+        ">
 
-        <option value="1530">
-          下午 15:45
-        </option>
+        <select
+          id="paymentRoundFilter"
+          onchange="resetPaymentFilterPage()"
+          style="
+            width:100%;
+            min-width:0;
+            border:1px solid rgba(214,168,63,.24);
+            background:#101011;
+            color:#fff;
+            border-radius:13px;
+            padding:14px;
+            font-size:14px;
+            outline:none;
+          ">
 
-      </select>
+          <option value="">
+            全部期数
+          </option>
 
-      <button
-        class="secondary"
-        type="button"
-        onclick="clearPaymentFilters()">
+          <option value="1030">
+            上午 11:45
+          </option>
 
-        清除
+          <option value="1530">
+            下午 15:45
+          </option>
 
-      </button>
+        </select>
+
+
+        <button
+          class="secondary"
+          type="button"
+          onclick="clearPaymentFilters()"
+          style="
+            min-width:82px;
+            padding-left:16px;
+            padding-right:16px;
+          ">
+
+          清除
+
+        </button>
+
+      </div>
 
     </div>
 
+
     <div
       style="
-        margin-top:7px;
+        margin-top:8px;
         color:#776f61;
         font-size:10px;
         line-height:1.5;
