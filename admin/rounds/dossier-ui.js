@@ -451,7 +451,7 @@ function buildUI(){
   }
 
 
-  mount.innerHTML = `
+    mount.innerHTML = `
 
     <div class="card">
 
@@ -496,7 +496,35 @@ function buildUI(){
             class="rd-tab active"
             data-tab="overview"
             type="button">
-            总览
+            本期
+          </button>
+
+          <button
+            class="rd-tab"
+            data-tab="payment"
+            type="button">
+            付款
+          </button>
+
+          <button
+            class="rd-tab"
+            data-tab="payout"
+            type="button">
+            派彩
+          </button>
+
+          <button
+            class="rd-tab"
+            data-tab="refund"
+            type="button">
+            退款
+          </button>
+
+          <button
+            class="rd-tab"
+            data-tab="commission"
+            type="button">
+            佣金
           </button>
 
           <button
@@ -526,6 +554,26 @@ function buildUI(){
         <div
           id="rdPanelOverview"
           class="rd-panel active">
+        </div>
+
+        <div
+          id="rdPanelPayment"
+          class="rd-panel">
+        </div>
+
+        <div
+          id="rdPanelPayout"
+          class="rd-panel">
+        </div>
+
+        <div
+          id="rdPanelRefund"
+          class="rd-panel">
+        </div>
+
+        <div
+          id="rdPanelCommission"
+          class="rd-panel">
         </div>
 
         <div
@@ -589,8 +637,6 @@ function buildUI(){
 
   return true;
 
-}
-
 
 /* =========================
    TABS
@@ -614,10 +660,22 @@ function setTab(name){
   );
 
 
-  const ids = {
+    const ids = {
 
     overview:
     'rdPanelOverview',
+
+    payment:
+    'rdPanelPayment',
+
+    payout:
+    'rdPanelPayout',
+
+    refund:
+    'rdPanelRefund',
+
+    commission:
+    'rdPanelCommission',
 
     zodiac:
     'rdPanelZodiac',
@@ -934,7 +992,7 @@ function render(){
 
 
   renderOverview();
-
+  splitOverviewSections();
   renderZodiac();
 
   renderCustomers();
@@ -1287,7 +1345,129 @@ function renderOverview(){
   `;
 
 }
+/* =========================
+   SPLIT OVERVIEW
+========================= */
 
+function splitOverviewSections(){
+
+  const overview =
+  document.getElementById(
+    'rdPanelOverview'
+  );
+
+
+  const payment =
+  document.getElementById(
+    'rdPanelPayment'
+  );
+
+
+  const payout =
+  document.getElementById(
+    'rdPanelPayout'
+  );
+
+
+  const refund =
+  document.getElementById(
+    'rdPanelRefund'
+  );
+
+
+  const commission =
+  document.getElementById(
+    'rdPanelCommission'
+  );
+
+
+  if(
+    !overview
+    ||
+    !payment
+    ||
+    !payout
+    ||
+    !refund
+    ||
+    !commission
+  ){
+    return;
+  }
+
+
+  const sections =
+  Array.from(
+    overview.querySelectorAll(
+      ':scope > .rd-section'
+    )
+  );
+
+
+  /*
+    renderOverview 当前顺序：
+
+    0 本期资料
+    1 客户金额
+    2 付款审核
+    3 中奖与派彩
+    4 退款
+    5 代理佣金
+  */
+
+
+  payment.innerHTML =
+  '';
+
+
+  payout.innerHTML =
+  '';
+
+
+  refund.innerHTML =
+  '';
+
+
+  commission.innerHTML =
+  '';
+
+
+  if(sections[2]){
+
+    payment.appendChild(
+      sections[2]
+    );
+
+  }
+
+
+  if(sections[3]){
+
+    payout.appendChild(
+      sections[3]
+    );
+
+  }
+
+
+  if(sections[4]){
+
+    refund.appendChild(
+      sections[4]
+    );
+
+  }
+
+
+  if(sections[5]){
+
+    commission.appendChild(
+      sections[5]
+    );
+
+  }
+
+}
 
 /* =========================
    ZODIAC
