@@ -491,17 +491,20 @@
               padding:10px 12px;
               font-size:11px
             "
-            onclick="
+                        onclick="
               const card=document.getElementById('agentPayoutAccountCard');
               if(card){
-                card.scrollIntoView({
-                  behavior:'smooth',
-                  block:'start'
-                });
+                card.classList.remove('hidden');
                 const refresh=card.querySelector('[data-jmt-pa-refresh]');
                 if(refresh){
                   refresh.click();
                 }
+                setTimeout(()=>{
+                  card.scrollIntoView({
+                    behavior:'smooth',
+                    block:'start'
+                  });
+                },0);
               }
             ">
             💳 收款方式
