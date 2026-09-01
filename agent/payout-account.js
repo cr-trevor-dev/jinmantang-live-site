@@ -1511,11 +1511,6 @@ ensureCard();
 tick();
 
 setInterval(
-  tick,
-  1200
-);
-
-setInterval(
   ()=>{
 
     if(
