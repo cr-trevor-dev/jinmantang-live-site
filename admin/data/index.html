@@ -533,7 +533,7 @@ select{
   </section>
 
 
-  <section class="card">
+   <section class="card">
 
     <div class="title">
       资金总览
@@ -553,18 +553,18 @@ select{
     <div class="summaryGrid">
 
       <div class="summaryBox">
-        <small>客户确认金额</small>
-        <strong>—</strong>
+        <small>平台主管客户确认</small>
+        <strong id="dcPlatformConfirmed">—</strong>
       </div>
 
       <div class="summaryBox">
-        <small>代理确认金额</small>
-        <strong>—</strong>
+        <small>代理客户确认</small>
+        <strong id="dcAgentConfirmed">—</strong>
       </div>
 
       <div class="summaryBox total green">
-        <small>平台确认总金额</small>
-        <strong>—</strong>
+        <small>平台确认总收入</small>
+        <strong id="dcConfirmedTotal">—</strong>
       </div>
 
     </div>
@@ -580,18 +580,23 @@ select{
     <div class="summaryGrid">
 
       <div class="summaryBox">
-        <small>已向客户派彩</small>
-        <strong>—</strong>
+        <small>客户实际派彩</small>
+        <strong id="dcPayoutPaid">—</strong>
       </div>
 
       <div class="summaryBox">
-        <small>已向代理付款</small>
-        <strong>—</strong>
+        <small>代理实际佣金</small>
+        <strong id="dcCommissionPaid">—</strong>
+      </div>
+
+      <div class="summaryBox">
+        <small>客户实际退款</small>
+        <strong id="dcRefundPaid">—</strong>
       </div>
 
       <div class="summaryBox total red">
         <small>平台实际支出总额</small>
-        <strong>—</strong>
+        <strong id="dcActualOutflow">—</strong>
       </div>
 
     </div>
@@ -608,17 +613,17 @@ select{
 
       <div class="summaryBox">
         <small>客户待派彩</small>
-        <strong>—</strong>
+        <strong id="dcPayoutRemaining">—</strong>
       </div>
 
       <div class="summaryBox">
         <small>代理待付款</small>
-        <strong>—</strong>
+        <strong id="dcCommissionRemaining">—</strong>
       </div>
 
       <div class="summaryBox">
-        <small>退款待处理</small>
-        <strong>—</strong>
+        <small>退款待核对</small>
+        <strong id="dcRefundRemaining">—</strong>
       </div>
 
     </div>
@@ -634,27 +639,28 @@ select{
     <div class="summaryGrid">
 
       <div class="summaryBox">
-        <small>平台确认总收入</small>
-        <strong>—</strong>
+        <small>统计期数</small>
+        <strong id="dcRoundCount">—</strong>
       </div>
 
       <div class="summaryBox">
-        <small>平台实际支出</small>
-        <strong>—</strong>
+        <small>客户参与人次</small>
+        <strong id="dcCustomerCount">—</strong>
       </div>
 
       <div class="summaryBox total">
         <small>当前净流入</small>
-        <strong>—</strong>
+        <strong id="dcNetInflow">—</strong>
       </div>
 
     </div>
 
 
     <div class="note">
-      当前页面为数据中心第一阶段结构。
-      金额暂不连接数据库，
-      避免在尚未核对客户付款、代理付款及资金流向之前产生重复统计。
+      平台确认收入只统计客户 confirmed 金额；
+      代理客户金额仍属于客户付款。
+      实际支出只统计已派彩、已付代理佣金及已实际退款，
+      退款候选金额不会计入真实资金流出。
     </div>
 
   </section>
@@ -666,11 +672,10 @@ select{
       数据明细
     </div>
 
-    <div class="pending">
-      数据中心骨架已经建立。<br>
-      下一阶段确认真实数据来源后，
-      这里会显示对应日期、期数、客户、代理、
-      付款、下注、开奖结果、派彩与退款明细。
+    <div
+      id="dcDetail"
+      class="pending">
+      请选择数据范围并点击“查看数据”。
     </div>
 
   </section>
@@ -980,7 +985,7 @@ initDates();
 applyScope();
 
 </script>
-
+<script src="/admin/data/data-ui.js"></script>
 </body>
 
 </html>
