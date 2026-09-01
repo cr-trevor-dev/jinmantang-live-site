@@ -484,7 +484,28 @@
             id="agentReferralCode">
             —
           </strong>
-
+          <button
+            type="button"
+            style="
+              margin-top:10px;
+              padding:10px 12px;
+              font-size:11px
+            "
+            onclick="
+              const card=document.getElementById('agentPayoutAccountCard');
+              if(card){
+                card.scrollIntoView({
+                  behavior:'smooth',
+                  block:'start'
+                });
+                const refresh=card.querySelector('[data-jmt-pa-refresh]');
+                if(refresh){
+                  refresh.click();
+                }
+              }
+            ">
+            💳 收款方式
+          </button>
         </div>
 
       </div>
