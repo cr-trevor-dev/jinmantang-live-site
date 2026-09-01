@@ -1123,7 +1123,7 @@ async function load(
 
     loading=
     false;
-
+    render();
   }
 
 }
