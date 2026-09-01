@@ -615,22 +615,23 @@
     '已绑定':['ချိတ်ဆက်ပြီး','Linked','ผูกแล้ว','Dipautkan','Đã liên kết','Terhubung'],
     '已拒绝':['ပယ်ချပြီး','Rejected','ปฏิเสธแล้ว','Ditolak','Đã từ chối','Ditolak'],
 
-    '收款资料用于平台派奖。首次保存后将自动绑定，客户不能自行修改；如需更换，请联系客服。':[
-      'ငွေလက်ခံအချက်အလက်ကို ပလက်ဖောင်းမှ ဆုငွေပေးချေရန် အသုံးပြုပါသည်။ ပထမဆုံးသိမ်းပြီးနောက် အလိုအလျောက်ချိတ်ဆက်မည်ဖြစ်ပြီး ကိုယ်တိုင်မပြင်နိုင်ပါ။ ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
-      'Payout details are used for platform payouts. After the first save they will be linked and cannot be changed by the customer. Contact support if you need to replace them.',
-      'ข้อมูลรับเงินใช้สำหรับการจ่ายรางวัลของแพลตฟอร์ม หลังบันทึกครั้งแรกจะถูกผูกและลูกค้าไม่สามารถแก้ไขเองได้ หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ',
-      'Maklumat penerimaan digunakan untuk pembayaran platform. Selepas simpanan pertama ia akan dipautkan dan tidak boleh diubah sendiri. Hubungi sokongan jika perlu menukarnya.',
-      'Thông tin nhận tiền được dùng để nền tảng trả thưởng. Sau lần lưu đầu tiên thông tin sẽ được liên kết và khách hàng không thể tự sửa. Liên hệ hỗ trợ nếu cần thay đổi.',
-      'Data penerimaan digunakan untuk pembayaran platform. Setelah pertama kali disimpan akan terhubung dan tidak dapat diubah sendiri. Hubungi dukungan jika perlu menggantinya.'
+        
+      '收款资料用于平台派彩。中奖后，平台只能向您已绑定的有效收款账户付款。请提前填写并仔细确认；首次保存后将自动绑定，如需更换请联系客服。':[
+      'ငွေလက်ခံအချက်အလက်ကို ပလက်ဖောင်းမှ ဆုငွေပေးချေရန် အသုံးပြုပါသည်။ အနိုင်ရပြီးနောက် ပလက်ဖောင်းသည် ချိတ်ဆက်ထားသော တရားဝင်ငွေလက်ခံအကောင့်သို့သာ ပေးချေနိုင်ပါသည်။ ကြိုတင်ဖြည့်သွင်းပြီး သေချာစစ်ဆေးပါ။ ပထမဆုံးသိမ်းပြီးနောက် အလိုအလျောက်ချိတ်ဆက်မည်ဖြစ်ပြီး ပြောင်းလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+      'Payout details are used for prize payments. After a win, the platform can only pay to your valid linked payout account. Please fill it in and check it carefully in advance. It will be linked after the first save; contact support if you need to change it.',
+      'ข้อมูลรับเงินใช้สำหรับการจ่ายรางวัล หลังถูกรางวัล แพลตฟอร์มสามารถจ่ายเงินได้เฉพาะไปยังบัญชีรับเงินที่ถูกผูกไว้อย่างถูกต้องเท่านั้น กรุณากรอกและตรวจสอบล่วงหน้า หลังบันทึกครั้งแรกข้อมูลจะถูกผูก หากต้องการเปลี่ยนโปรดติดต่อฝ่ายบริการ',
+      'Maklumat penerimaan digunakan untuk pembayaran hadiah. Selepas menang, platform hanya boleh membuat pembayaran ke akaun penerimaan sah yang telah dipautkan. Sila isi dan semak dengan teliti terlebih dahulu. Selepas simpanan pertama ia akan dipautkan; hubungi sokongan jika perlu menukarnya.',
+      'Thông tin nhận tiền được dùng để trả thưởng. Sau khi trúng, nền tảng chỉ có thể thanh toán vào tài khoản nhận tiền hợp lệ đã được liên kết. Vui lòng điền và kiểm tra kỹ trước. Sau lần lưu đầu tiên tài khoản sẽ được liên kết; liên hệ hỗ trợ nếu cần thay đổi.',
+      'Data penerimaan digunakan untuk pembayaran hadiah. Setelah menang, platform hanya dapat membayar ke akun penerimaan valid yang telah terhubung. Harap isi dan periksa dengan teliti terlebih dahulu. Setelah penyimpanan pertama akun akan terhubung; hubungi dukungan jika perlu menggantinya.'
     ],
 
-    '已进入付款审核或已经确认的金额会锁定，不能减少；截止前仍可继续增加金额。':[
-      'ငွေပေးချေမှုစစ်ဆေးနေသော သို့မဟုတ် အတည်ပြုပြီးသော ငွေပမာဏကို လော့ခ်ချမည်ဖြစ်ပြီး လျှော့၍မရပါ။ ပိတ်ချိန်မတိုင်မီ ထပ်တိုးနိုင်ပါသည်။',
-      'Amounts under payment review or already confirmed are locked and cannot be reduced. You may still increase them before the deadline.',
-      'ยอดที่เข้าสู่การตรวจสอบการชำระหรือยืนยันแล้วจะถูกล็อกและลดไม่ได้ แต่ยังเพิ่มได้ก่อนเวลาปิดรับ',
-      'Jumlah yang sedang disemak atau telah disahkan akan dikunci dan tidak boleh dikurangkan. Ia masih boleh ditambah sebelum masa tutup.',
-      'Số tiền đang được duyệt thanh toán hoặc đã xác nhận sẽ bị khóa và không thể giảm. Vẫn có thể tăng trước thời hạn.',
-      'Jumlah yang sedang ditinjau atau sudah dikonfirmasi akan dikunci dan tidak dapat dikurangi. Masih dapat ditambah sebelum batas waktu.'
+        '已进入付款审核或已经确认的金额会锁定，不能减少；截止前仍可继续增加金额。请提前绑定收款方式；若中奖但尚未填写有效收款账户，需补充收款方式后平台才能处理派彩。':[
+      'ငွေပေးချေမှုစစ်ဆေးနေသော သို့မဟုတ် အတည်ပြုပြီးသော ငွေပမာဏကို လော့ခ်ချမည်ဖြစ်ပြီး လျှော့၍မရပါ။ ပိတ်ချိန်မတိုင်မီ ထပ်တိုးနိုင်ပါသည်။ ငွေလက်ခံနည်းကို ကြိုတင်ချိတ်ဆက်ထားပါ။ အနိုင်ရသော်လည်း တရားဝင်ငွေလက်ခံအကောင့် မဖြည့်ထားပါက ဖြည့်သွင်းပြီးမှ ပလက်ဖောင်းက ဆုငွေပေးချေနိုင်ပါမည်။',
+      'Amounts under payment review or already confirmed are locked and cannot be reduced. You may still increase them before the deadline. Please link a payout method in advance. If you win without a valid payout account, you must add one before the platform can process your payout.',
+      'ยอดที่กำลังตรวจสอบหรือยืนยันแล้วจะถูกล็อกและลดไม่ได้ แต่ยังเพิ่มได้ก่อนเวลาปิดรับ กรุณาผูกช่องทางรับเงินล่วงหน้า หากถูกรางวัลแต่ยังไม่มีบัญชีรับเงินที่ถูกต้อง ต้องเพิ่มช่องทางรับเงินก่อนที่แพลตฟอร์มจะดำเนินการจ่ายรางวัล',
+      'Jumlah yang sedang disemak atau telah disahkan akan dikunci dan tidak boleh dikurangkan. Ia masih boleh ditambah sebelum masa tutup. Sila pautkan kaedah penerimaan terlebih dahulu. Jika anda menang tanpa akaun penerimaan yang sah, anda perlu menambahnya sebelum platform boleh memproses pembayaran.',
+      'Số tiền đang được duyệt hoặc đã xác nhận sẽ bị khóa và không thể giảm. Bạn vẫn có thể tăng trước thời hạn. Vui lòng liên kết phương thức nhận tiền trước. Nếu trúng nhưng chưa có tài khoản nhận tiền hợp lệ, bạn phải bổ sung trước khi nền tảng có thể xử lý trả thưởng.',
+      'Jumlah yang sedang ditinjau atau sudah dikonfirmasi akan dikunci dan tidak dapat dikurangi. Masih dapat ditambah sebelum batas waktu. Harap hubungkan metode penerimaan terlebih dahulu. Jika menang tetapi belum memiliki akun penerimaan yang valid, Anda harus menambahkannya sebelum platform dapat memproses pembayaran.'
     ],
 
     'KPay 已绑定':['KPay ချိတ်ဆက်ပြီး','KPay Linked','ผูก KPay แล้ว','KPay Dipautkan','KPay đã liên kết','KPay Terhubung'],
@@ -1700,7 +1701,40 @@ fmt(due),
     ${state.text}
 
   </div>
-
+    ${
+    due > 0
+    &&
+    Number(
+      row.payout_paid
+      ||
+      0
+    ) < due
+    &&
+    (
+      typeof payoutAccounts === 'undefined'
+      ||
+      !Array.isArray(
+        payoutAccounts
+      )
+      ||
+      !payoutAccounts.some(
+        account =>
+        account
+        &&
+        account.is_active === true
+      )
+    )
+    ?
+    `
+      <div class="editNotice">
+        ${customerTranslateValue(
+          '您本期已中奖，但尚未绑定有效收款方式。请先填写 KPay 或银行账户，平台才能为您处理派彩。'
+        )}
+      </div>
+    `
+    :
+    ''
+  }
 
   <div class="note">
 
