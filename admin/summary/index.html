@@ -275,7 +275,24 @@ body{
   color:#6f695e;
   font-size:9px
 }
+.zodiacVisual{
+  width:100%;
+  aspect-ratio:16/9;
+  margin-top:11px;
+  border-radius:13px;
+  overflow:hidden;
+  background:#09090a;
+  border:
+  1px solid
+  rgba(230,190,88,.24)
+}
 
+.zodiacVisual img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover
+}
 .zodiacMoneyGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -550,18 +567,18 @@ const KEY =
 
 const ZODIAC =
 [
-  ['01','鼠'],
-  ['02','牛'],
-  ['03','虎'],
-  ['04','兔'],
-  ['05','龙'],
-  ['06','蛇'],
-  ['07','马'],
-  ['08','羊'],
-  ['09','猴'],
-  ['10','鸡'],
-  ['11','狗'],
-  ['12','猪']
+    ['01','鼠','287422DA-463C-421B-9257-E9BC27BF4A36.png'],
+  ['02','牛','1A0DF767-06F9-4C2D-95CE-84E62442D9D1.png'],
+  ['03','虎','760CCCAD-C85A-4D2C-8D40-CEADC692BEC3.png'],
+  ['04','兔','0BD607BF-D242-4DC7-8011-8F3BFD2B2F2E.png'],
+  ['05','龙','61676ED4-E523-4AC1-902B-06B841546DC8.png'],
+  ['06','蛇','82112254-9DC3-4CAB-A010-2B753DAE4FF5.png'],
+  ['07','马','A20A3141-3290-4368-8914-D21B2DA34B81.png'],
+  ['08','羊','EE289B75-3AB3-41DB-9497-F6142A4AC15B.png'],
+  ['09','猴','9202793F-F959-488B-B1D3-6F8F000BF44B.png'],
+  ['10','鸡','3A4F6BEE-09E7-4DE1-8804-00A24EEFEB0A.png'],
+  ['11','狗','32C90A85-8BBA-4DFF-8DFB-B358DCA7C999.png'],
+  ['12','猪','AC5C521B-7627-4F4B-A563-C55A326C9244.png']
 ];
 
 
@@ -841,7 +858,7 @@ function renderEmpty(){
   ).innerHTML =
   ZODIAC
   .map(
-    ([code,name])=>
+   ([code,name,image])=>
     `
       <div class="zodiac">
 
@@ -856,7 +873,12 @@ function renderEmpty(){
           </div>
 
         </div>
-
+        <div class="zodiacVisual">
+          <img
+            src="/agent/${image}"
+            alt="${name}"
+            loading="lazy">
+        </div>
                 <div class="zodiacMoneyGrid">
 
           <div class="zodiacMoney">
@@ -924,7 +946,7 @@ function renderZodiac(
   ).innerHTML =
   ZODIAC
   .map(
-    ([code,name])=>{
+    ([code,name,image])=>{
 
       const row =
       map.get(code)
@@ -960,7 +982,13 @@ function renderZodiac(
             </div>
 
           </div>
-
+          <div class="zodiacVisual">
+            <img
+              src="${image}"
+              alt="${name}"
+              loading="lazy"
+            >
+          </div>
                     <div class="zodiacMoneyGrid">
 
             <div class="zodiacMoney">
