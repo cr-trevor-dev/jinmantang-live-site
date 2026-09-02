@@ -984,7 +984,185 @@
       'Không tải được lịch sử. Vui lòng làm mới và thử lại.',
       'Gagal memuat riwayat. Silakan muat ulang dan coba lagi.'
     ],
+       '上午 11:45':[
+      'မနက် 11:45',
+      'AM 11:45',
+      '11:45 น.',
+      '11:45 PG',
+      '11:45 SA',
+      '11:45 AM'
+    ],
 
+    '下午 3:45':[
+      'ညနေ 3:45',
+      'PM 3:45',
+      '15:45 น.',
+      '3:45 PTG',
+      '15:45 CH',
+      '3:45 PM'
+    ],
+
+    '有效下注':[
+      'အတည်ပြုလောင်းကြေး',
+      'Valid Bet',
+      'เดิมพันที่มีผล',
+      'Pertaruhan Sah',
+      'Cược hợp lệ',
+      'Taruhan Valid'
+    ],
+
+    '命中':[
+      'ပေါက်',
+      'Hit',
+      'ถูกรางวัล',
+      'Menang',
+      'Trúng',
+      'Menang'
+    ],
+
+    '应派':[
+      'ပေးရန်',
+      'Due',
+      'ต้องจ่าย',
+      'Perlu Dibayar',
+      'Phải trả',
+      'Harus Dibayar'
+    ],
+
+    '已派':[
+      'ပေးပြီး',
+      'Paid',
+      'จ่ายแล้ว',
+      'Telah Dibayar',
+      'Đã trả',
+      'Sudah Dibayar'
+    ],
+
+    '共':[
+      'စုစုပေါင်း',
+      'Total',
+      'ทั้งหมด',
+      'Jumlah',
+      'Tổng',
+      'Total'
+    ],
+
+    '条':[
+      'ခု',
+      'records',
+      'รายการ',
+      'rekod',
+      'mục',
+      'catatan'
+    ],
+
+    '平台未通过本次付款审核。':[
+      'ပလက်ဖောင်းမှ ဤငွေပေးချေမှုကို အတည်မပြုခဲ့ပါ။',
+      'The platform did not approve this payment.',
+      'แพลตฟอร์มไม่อนุมัติการชำระเงินครั้งนี้',
+      'Platform tidak meluluskan bayaran ini.',
+      'Nền tảng không duyệt khoản thanh toán này.',
+      'Platform tidak menyetujui pembayaran ini.'
+    ],
+
+    '本笔付款在期开奖前尚未完成审核，现已转入平台人工核对。':[
+      'ဤငွေပေးချေမှုသည် မဲမထွက်မီ စစ်ဆေးမှုမပြီးသေးသောကြောင့် ပလက်ဖောင်းမှ လူကိုယ်တိုင် စစ်ဆေးနေပါသည်။',
+      'This payment was not reviewed before the result and has been transferred to manual platform verification.',
+      'การชำระเงินนี้ยังตรวจสอบไม่เสร็จก่อนประกาศผล จึงเข้าสู่การตรวจสอบโดยแพลตฟอร์ม',
+      'Bayaran ini belum selesai disemak sebelum keputusan dan telah dipindahkan ke semakan manual platform.',
+      'Khoản thanh toán này chưa được duyệt trước khi mở thưởng và đã chuyển sang kiểm tra thủ công.',
+      'Pembayaran ini belum selesai diperiksa sebelum hasil dan dialihkan ke pemeriksaan manual platform.'
+    ],
+
+    '本次付款未通过审核，如需了解详情请联系平台客服。':[
+      'ဤငွေပေးချေမှုကို အတည်မပြုခဲ့ပါ။ အသေးစိတ်သိရှိလိုပါက ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။',
+      'This payment was not approved. Contact support for details.',
+      'การชำระเงินนี้ไม่ผ่านการตรวจสอบ หากต้องการรายละเอียดโปรดติดต่อฝ่ายบริการ',
+      'Bayaran ini tidak diluluskan. Hubungi khidmat pelanggan untuk maklumat lanjut.',
+      'Khoản thanh toán này không được duyệt. Liên hệ hỗ trợ để biết chi tiết.',
+      'Pembayaran ini tidak disetujui. Hubungi layanan pelanggan untuk detail.'
+    ],
+
+    '平台已确认本笔付款。':[
+      'ပလက်ဖောင်းမှ ဤငွေပေးချေမှုကို အတည်ပြုပြီးပါပြီ။',
+      'The platform has confirmed this payment.',
+      'แพลตฟอร์มยืนยันการชำระเงินนี้แล้ว',
+      'Platform telah mengesahkan bayaran ini.',
+      'Nền tảng đã xác nhận khoản thanh toán này.',
+      'Platform telah mengonfirmasi pembayaran ini.'
+    ],
+
+    '付款已经提交，正在等待平台审核。':[
+      'ငွေပေးချေမှုကို တင်သွင်းပြီး ပလက်ဖောင်းစစ်ဆေးမှုကို စောင့်ဆိုင်းနေပါသည်။',
+      'Payment submitted and waiting for platform review.',
+      'ส่งการชำระเงินแล้ว กำลังรอแพลตฟอร์มตรวจสอบ',
+      'Bayaran telah dihantar dan sedang menunggu semakan platform.',
+      'Thanh toán đã được gửi và đang chờ nền tảng xét duyệt.',
+      'Pembayaran telah diajukan dan sedang menunggu pemeriksaan platform.'
+    ],
+
+    '平台已完成实际退款 ':[
+      'ပလက်ဖောင်းမှ အမှန်တကယ် ပြန်အမ်းပြီး ',
+      'Platform refunded ',
+      'แพลตฟอร์มคืนเงินจริงแล้ว ',
+      'Platform telah memulangkan ',
+      'Nền tảng đã hoàn thực tế ',
+      'Platform telah mengembalikan '
+    ],
+
+    '已实际退回 ':[
+      'အမှန်တကယ် ပြန်အမ်းပြီး ',
+      'Actually refunded ',
+      'คืนเงินจริงแล้ว ',
+      'Sebenarnya dikembalikan ',
+      'Đã hoàn thực tế ',
+      'Benar-benar dikembalikan '
+    ],
+
+    '，剩余 ':[
+      '၊ ကျန်ရှိ ',
+      ', remaining ',
+      ' เหลือ ',
+      ', baki ',
+      ', còn lại ',
+      ', tersisa '
+    ],
+
+    ' 待处理。':[
+      ' ဆက်လက်ဆောင်ရွက်ရန် စောင့်ဆိုင်းနေသည်။',
+      ' pending processing.',
+      ' รอดำเนินการ',
+      ' menunggu diproses.',
+      ' đang chờ xử lý.',
+      ' menunggu diproses.'
+    ],
+
+    '平台已完成到账核对，本笔记录无需继续退款处理。':[
+      'ပလက်ဖောင်းမှ ငွေဝင်မှုကို စစ်ဆေးပြီးဖြစ်၍ ဤမှတ်တမ်းကို ထပ်မံပြန်အမ်းရန် မလိုပါ။',
+      'The platform completed the receipt check. No further refund is required for this record.',
+      'แพลตฟอร์มตรวจสอบยอดรับแล้ว รายการนี้ไม่ต้องดำเนินการคืนเงินต่อ',
+      'Platform telah menyelesaikan semakan penerimaan. Rekod ini tidak memerlukan bayaran balik lanjut.',
+      'Nền tảng đã hoàn tất kiểm tra tiền vào. Giao dịch này không cần tiếp tục hoàn tiền.',
+      'Platform telah menyelesaikan pemeriksaan dana masuk. Catatan ini tidak memerlukan refund lanjutan.'
+    ],
+
+    '本笔付款在期开奖前尚未完成审核。平台正在核对实际到账情况；确认实际到账后，会按核对结果继续处理。':[
+      'ဤငွေပေးချေမှုသည် မဲမထွက်မီ စစ်ဆေးမှုမပြီးသေးပါ။ ပလက်ဖောင်းမှ အမှန်တကယ်ငွေဝင်မှုကို စစ်ဆေးနေပြီး အတည်ပြုပြီးနောက် စစ်ဆေးမှုရလဒ်အတိုင်း ဆက်လက်ဆောင်ရွက်ပါမည်။',
+      'This payment was not reviewed before the result. The platform is checking the actual receipt and will continue processing after verification.',
+      'การชำระเงินนี้ยังตรวจสอบไม่เสร็จก่อนประกาศผล แพลตฟอร์มกำลังตรวจสอบยอดเงินจริงและจะดำเนินการตามผลตรวจสอบ',
+      'Bayaran ini belum selesai disemak sebelum keputusan. Platform sedang memeriksa penerimaan sebenar dan akan meneruskan pemprosesan selepas pengesahan.',
+      'Khoản thanh toán này chưa được duyệt trước khi mở thưởng. Nền tảng đang kiểm tra tiền thực nhận và sẽ xử lý tiếp theo kết quả.',
+      'Pembayaran ini belum selesai diperiksa sebelum hasil. Platform sedang memeriksa dana yang benar-benar masuk dan akan memproses sesuai hasil pemeriksaan.'
+    ],
+
+    '本笔付款在期开奖前尚未完成审核，平台正在核对实际到账情况。':[
+      'ဤငွေပေးချေမှုသည် မဲမထွက်မီ စစ်ဆေးမှုမပြီးသေးဘဲ ပလက်ဖောင်းမှ အမှန်တကယ်ငွေဝင်မှုကို စစ်ဆေးနေပါသည်။',
+      'This payment was not reviewed before the result. The platform is checking the actual receipt.',
+      'การชำระเงินนี้ยังตรวจสอบไม่เสร็จก่อนประกาศผล แพลตฟอร์มกำลังตรวจสอบยอดเงินจริง',
+      'Bayaran ini belum selesai disemak sebelum keputusan. Platform sedang memeriksa penerimaan sebenar.',
+      'Khoản thanh toán này chưa được duyệt trước khi mở thưởng. Nền tảng đang kiểm tra tiền thực nhận.',
+      'Pembayaran ini belum selesai diperiksa sebelum hasil. Platform sedang memeriksa dana yang benar-benar masuk.'
+    ],
     '只有开奖前由管理员确认的金额，':[
       'မဲမထွက်မီ Admin အတည်ပြုထားသောပမာဏသာ ',
       'Only amounts confirmed by an administrator before the result ',
