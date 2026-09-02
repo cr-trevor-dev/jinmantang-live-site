@@ -3175,13 +3175,28 @@ async function(){
   }
 
 
-    if(historyOpen){
+    const historyDetailOpen =
+Boolean(
+  h$(
+    'customerHistoryList'
+  )
+  ?.querySelector(
+    'details.customerHistoryItem[open]'
+  )
+);
 
-    await loadHistory(
-      false
-    );
 
-  }
+if(
+  historyOpen
+  &&
+  !historyDetailOpen
+){
+
+  await loadHistory(
+    false
+  );
+
+}
 
 
   return result;
