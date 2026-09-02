@@ -1052,7 +1052,356 @@ function payoutTransactionsHtml(row){
   `;
 }
 
+function payoutAccountMethodName(account){
 
+  if(
+    account?.method_type
+    ===
+    'kpay'
+  ){
+    return 'KPay';
+  }
+
+
+  if(
+    account?.method_type
+    ===
+    'bank'
+  ){
+    return (
+      account.bank_name
+      ||
+      '银行账户'
+    );
+  }
+
+
+  return (
+    account?.method_type
+    ||
+    '收款账户'
+  );
+
+}
+
+
+function currentPayoutAccountsHtml(row){
+
+  const snapshotReady =
+  Boolean(
+    row.payout_method_type_snapshot
+    &&
+    row.payout_account_name_snapshot
+    &&
+    row.payout_account_number_snapshot
+  );
+
+
+  /*
+    已经发生过首次派彩并锁定快照的历史记录，
+    永远优先显示当时真正使用的账户。
+    不使用客户后来修改的新账户覆盖历史。
+  */
+  if(snapshotReady){
+
+    return `
+      <div class="account">
+
+        <strong>
+          本期已锁定收款账户
+        </strong>
+
+        <br><br>
+
+        收款方式：
+        ${esc(
+          String(
+            row.payout_method_type_snapshot
+            ||
+            ''
+          )
+          .toUpperCase()
+          ||
+          '—'
+        )}
+
+        <br>
+
+        收款户名：
+        ${esc(
+          row.payout_account_name_snapshot
+          ||
+          '—'
+        )}
+
+        <br>
+
+        收款账号：
+        ${esc(
+          row.payout_account_number_snapshot
+          ||
+          '—'
+        )}
+
+        ${
+          row.payout_bank_name_snapshot
+          ?
+          '<br>银行：'
+          +
+          esc(
+            row.payout_bank_name_snapshot
+          )
+          :
+          ''
+        }
+
+        <br><br>
+
+        <span style="
+          color:#766f62;
+          font-size:10px;
+        ">
+          此账户为本期派彩历史快照，不会因客户以后修改收款方式而改变。
+        </span>
+
+      </div>
+    `;
+
+  }
+
+
+  const accounts =
+  Array.isArray(
+    row.current_payout_accounts
+  )
+  ?
+  row.current_payout_accounts
+  :
+  [];
+
+
+  if(!accounts.length){
+
+    return `
+      <div class="account">
+
+        <strong>
+          客户当前收款方式
+        </strong>
+
+        <br><br>
+
+        当前没有查询到有效收款账户。
+
+        <br><br>
+
+        <span style="
+          color:#d1ad5b;
+          font-size:10px;
+        ">
+          请先让客户完成 KPay 或银行账户绑定，再进行实际派彩。
+        </span>
+
+      </div>
+    `;
+
+  }
+
+
+  const ordered =
+  [
+    ...accounts
+  ]
+  .sort(
+    (
+      a,
+      b
+    )=>{
+
+      const aPriority =
+      a.method_type
+      ===
+      'kpay'
+      ?
+      0
+      :
+      1;
+
+      const bPriority =
+      b.method_type
+      ===
+      'kpay'
+      ?
+      0
+      :
+      1;
+
+
+      if(
+        aPriority
+        !==
+        bPriority
+      ){
+        return (
+          aPriority
+          -
+          bPriority
+        );
+      }
+
+
+      return String(
+        a.created_at
+        ||
+        ''
+      )
+      .localeCompare(
+        String(
+          b.created_at
+          ||
+          ''
+        )
+      );
+
+    }
+  );
+
+
+  const preferred =
+  ordered[0];
+
+
+  return `
+    <div class="account">
+
+      <strong>
+        客户当前已绑定收款方式
+      </strong>
+
+      <br><br>
+
+      ${
+        ordered
+        .map(
+          account=>`
+
+            <div style="
+              padding:9px 0;
+              border-bottom:
+              1px solid
+              rgba(255,255,255,.06);
+            ">
+
+              <div style="
+                color:#e6cb79;
+                font-weight:800;
+              ">
+                ${esc(
+                  payoutAccountMethodName(
+                    account
+                  )
+                )}
+
+                ·
+
+                ${
+                  account.is_verified
+                  ?
+                  '已验证'
+                  :
+                  '待验证'
+                }
+              </div>
+
+              <div style="
+                margin-top:5px;
+                color:#b3aa96;
+              ">
+                户名：
+                ${esc(
+                  account.account_name
+                  ||
+                  '—'
+                )}
+              </div>
+
+              <div style="
+                margin-top:3px;
+                color:#b3aa96;
+              ">
+                账号：
+                ${esc(
+                  account.account_number
+                  ||
+                  '—'
+                )}
+              </div>
+
+              ${
+                account.bank_name
+                ?
+                `
+                  <div style="
+                    margin-top:3px;
+                    color:#b3aa96;
+                  ">
+                    银行：
+                    ${esc(
+                      account.bank_name
+                    )}
+                  </div>
+                `
+                :
+                ''
+              }
+
+            </div>
+
+          `
+        )
+        .join('')
+      }
+
+      <div style="
+        margin-top:10px;
+        color:#8f8674;
+        font-size:10px;
+        line-height:1.65;
+      ">
+
+        本期目前尚未锁定派彩账户。
+
+        首次真正登记派彩时，
+        现有后台规则会优先使用：
+
+        <strong style="color:#d8bf73">
+          ${esc(
+            payoutAccountMethodName(
+              preferred
+            )
+          )}
+          ·
+          ${esc(
+            preferred?.account_name
+            ||
+            '—'
+          )}
+          ·
+          ${esc(
+            preferred?.account_number
+            ||
+            '—'
+          )}
+        </strong>
+
+        。请在现实转账前再次核对。
+
+      </div>
+
+    </div>
+  `;
+
+}
 function payoutHtml(row){
   const open =
     row.payout_status !== 'paid'
@@ -1124,29 +1473,7 @@ function payoutHtml(row){
       </div>
 
 
-      <div class="account">
-        收款方式：
-        ${esc(
-          String(row.payout_method_type_snapshot || '').toUpperCase()
-          || '—'
-        )}
-
-        <br>
-
-        收款户名：
-        ${esc(row.payout_account_name_snapshot || '—')}
-
-        <br>
-
-        收款账号：
-        ${esc(row.payout_account_number_snapshot || '—')}
-
-        ${
-          row.payout_bank_name_snapshot
-          ? '<br>银行：' + esc(row.payout_bank_name_snapshot)
-          : ''
-        }
-      </div>
+            ${currentPayoutAccountsHtml(row)}
 
 
       ${payoutTransactionsHtml(row)}
@@ -1287,34 +1614,52 @@ async function loadAll(){
 
   try{
 
-    const res =
-    await api(
+    const [
+      payoutRes,
+      accountRes
+    ] =
+    await Promise.all([
 
-      '/rest/v1/rpc/admin_list_customer_payouts',
+      api(
+        '/rest/v1/rpc/admin_list_customer_payouts',
+        {
+          method:'POST',
 
-      {
+          headers:{
+            'Content-Type':
+            'application/json'
+          },
 
-        method:'POST',
+          body:'{}'
+        }
+      ),
 
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
+      api(
+        '/rest/v1/customer_payout_accounts'
+        +
+        '?select=id,customer_id,method_type,account_name,account_number,bank_name,is_active,is_verified,created_at'
+        +
+        '&is_active=eq.true'
+        +
+        '&order=created_at.asc'
+      )
 
-        body:'{}'
-
-      }
-
-    );
+    ]);
 
 
     const data =
     await parseResponse(
-      res
+      payoutRes
     );
 
 
-    rows =
+    const accountData =
+    await parseResponse(
+      accountRes
+    );
+
+
+    const payoutRows =
     Array.isArray(
       data?.rows
     )
@@ -1322,6 +1667,34 @@ async function loadAll(){
     data.rows
     :
     [];
+
+
+    const currentAccounts =
+    Array.isArray(
+      accountData
+    )
+    ?
+    accountData
+    :
+    [];
+
+
+    rows =
+    payoutRows.map(
+      row=>({
+
+        ...row,
+
+        current_payout_accounts:
+        currentAccounts.filter(
+          account=>
+          account.customer_id
+          ===
+          row.customer_id
+        )
+
+      })
+    );
 
 
     render();
