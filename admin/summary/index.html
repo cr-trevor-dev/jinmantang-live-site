@@ -1003,7 +1003,37 @@ function renderZodiac(
               loading="lazy"
             >
           </div>
-           
+                    <div class="zodiacStats">
+
+            <div class="zodiacMain">
+
+              <small>
+                本期确认金额
+              </small>
+
+              <strong>
+                ${formatNumber(
+                  confirmed
+                )}
+              </strong>
+
+            </div>
+
+            <div class="zodiacReturn">
+
+              <span>
+                若开出返还
+              </span>
+
+              <strong>
+                ${formatNumber(
+                  estimatedPayout
+                )}
+              </strong>
+
+            </div>
+
+          </div> 
 
         </div>
       `;
