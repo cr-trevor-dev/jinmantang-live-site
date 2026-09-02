@@ -325,7 +325,185 @@ button:disabled{
   padding:25px 10px;
   font-size:12px;
 }
+.accountCard{
+  overflow:hidden;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
 
+.accountCard:hover{
+  border-color:
+    rgba(214,168,63,.34);
+}
+
+.accountCard:not(.open)
+> :not(.accountHead){
+  display:none;
+}
+
+.accountCard .accountHead{
+  margin-bottom:0;
+  cursor:pointer;
+  user-select:none;
+  align-items:center;
+}
+
+.accountCard.open .accountHead{
+  margin-bottom:15px;
+}
+
+.accountHead > div:first-child{
+  flex:1;
+  min-width:0;
+}
+
+.accountHead::after{
+  content:'⌄';
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#d9c37c;
+  background:
+    rgba(214,168,63,.08);
+  border:
+    1px solid
+    rgba(214,168,63,.16);
+  font-size:16px;
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+.accountCard.open
+.accountHead::after{
+  transform:rotate(180deg);
+  background:
+    rgba(214,168,63,.14);
+}
+
+.accountSummary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:18px;
+  margin-bottom:5px;
+}
+
+.accountSummaryTitle{
+  color:#e6d49e;
+  font-size:13px;
+  font-weight:900;
+}
+
+.countPill{
+  min-width:31px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  padding:0 9px;
+  border-radius:99px;
+  background:
+    rgba(214,168,63,.10);
+  border:
+    1px solid
+    rgba(214,168,63,.20);
+  color:#e4ca79;
+  font-size:11px;
+  font-weight:900;
+}
+
+.inactiveToggle{
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  padding:14px 15px;
+  border-radius:15px;
+  background:
+    linear-gradient(
+      180deg,
+      #151516,
+      #101011
+    );
+  border:
+    1px solid
+    rgba(214,168,63,.16);
+  color:#c9b783;
+  text-align:left;
+}
+
+.inactiveToggleMain{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+}
+
+.inactiveToggleTitle{
+  color:#d4c18c;
+  font-size:13px;
+  font-weight:900;
+}
+
+.inactiveToggleSub{
+  color:#787164;
+  font-size:10px;
+  margin-top:3px;
+  font-weight:500;
+}
+
+.inactiveArrow{
+  color:#cbb36b;
+  font-size:17px;
+  transition:transform .2s ease;
+}
+
+.inactiveToggle.open
+.inactiveArrow{
+  transform:rotate(180deg);
+}
+
+.inactivePanel{
+  padding-top:2px;
+}
+
+.reactivateButton{
+  margin-top:3px;
+  margin-bottom:10px;
+  background:
+    linear-gradient(
+      180deg,
+      #213a2b,
+      #14271d
+    )!important;
+  color:#8be0ae!important;
+  border:
+    1px solid
+    rgba(111,211,157,.24)!important;
+}
+
+.accountLimit{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:
+    rgba(214,168,63,.06);
+  border:
+    1px solid
+    rgba(214,168,63,.12);
+  color:#91866d;
+  font-size:10px;
+  line-height:1.6;
+  text-align:center;
+}
 .hidden{
   display:none!important;
 }
@@ -560,15 +738,15 @@ button:disabled{
     </section>
 
 
-    <section class="card">
+        <section class="card">
 
       <div class="title">
-        当前平台收款账户
+        平台收款账户
       </div>
 
       <div class="note">
-        “启用”的账户才会作为平台当前有效收款方式。
-        建议不要删除旧账户，需要停用时关闭“启用”后保存即可。
+        后台启用几个收款账户，客户付款时就可以看到并选择几个。
+        已停用账户不会删除，可作为备用账户随时重新启用。
       </div>
 
 
@@ -582,10 +760,82 @@ button:disabled{
       </button>
 
 
+      <div class="accountLimit">
+        最多保存 6 个平台收款账户 · 启用数量可自由选择
+      </div>
+
+
+      <div class="accountSummary">
+
+        <div class="accountSummaryTitle">
+          当前启用
+        </div>
+
+        <div
+          id="activeCount"
+          class="countPill">
+          0
+        </div>
+
+      </div>
+
+
       <div id="accountList">
 
         <div class="empty">
           正在读取...
+        </div>
+
+      </div>
+
+
+      <button
+        id="inactiveToggle"
+        type="button"
+        class="inactiveToggle"
+        onclick="toggleInactiveAccounts()">
+
+        <div class="inactiveToggleMain">
+
+          <div>
+
+            <div class="inactiveToggleTitle">
+              备用 / 已停用账户
+            </div>
+
+            <div
+              id="inactiveToggleSub"
+              class="inactiveToggleSub">
+              当前没有停用账户
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div style="display:flex;align-items:center;gap:10px;">
+
+          <div
+            id="inactiveCount"
+            class="countPill">
+            0
+          </div>
+
+          <div class="inactiveArrow">
+            ⌄
+          </div>
+
+        </div>
+
+      </button>
+
+
+      <div
+        id="inactivePanel"
+        class="inactivePanel hidden">
+
+        <div id="inactiveAccountList">
         </div>
 
       </div>
@@ -654,6 +904,10 @@ let adminUserId =
 
 let accounts =
 [];
+
+
+let inactiveExpanded =
+false;
 
 
 const qrUrls =
