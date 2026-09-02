@@ -840,29 +840,14 @@ button.danger{
           </div>
         </a>
         <a
-          class="menu"
-          href="#roundZodiacSummaryCard"
-          onclick="
-            const card=document.getElementById('roundZodiacSummaryCard');
-            if(card){
-              card.classList.toggle('hidden');
-              if(!card.classList.contains('hidden')){
-                setTimeout(()=>{
-                  card.scrollIntoView({
-                    behavior:'smooth',
-                    block:'start'
-                  });
-                },0);
-              }
-            }
-            return false;
-          ">
-          <div class="menuIcon">📈</div>
-          <div class="menuTitle">本期汇总</div>
-          <div class="menuSub">
-            总金额、代理金额、平台主管金额与生肖分布
-          </div>
-        </a>
+  class="menu"
+  href="/admin/summary/">
+  <div class="menuIcon">📈</div>
+  <div class="menuTitle">本期汇总</div>
+  <div class="menuSub">
+    本期金额、赔率、代理金额与生肖分布
+  </div>
+</a>
       </div>
 
     </div>
