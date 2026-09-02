@@ -293,39 +293,52 @@ body{
   display:block;
   object-fit:cover
 }
-.zodiacMoneyGrid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:9px;
-  margin-top:12px
+.zodiacStats{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:
+  1px solid
+  rgba(255,255,255,.06)
 }
 
-.zodiacMoney{
-  min-width:0;
-  padding:10px;
-  border-radius:12px;
-  background:#151516;
-  border:1px solid rgba(255,255,255,.05)
-}
-
-.zodiacMoney small{
+.zodiacMain small{
   display:block;
-  color:#827a6d;
+  color:#817a6d;
   font-size:9px;
-  margin-bottom:6px
+  margin-bottom:4px
 }
 
-.zodiacMoney strong{
+.zodiacMain strong{
   display:block;
   color:#f2d16f;
-  font-size:22px;
-  line-height:1.25;
-  white-space:nowrap;
-  word-break:normal
+  font-size:24px;
+  line-height:1.2;
+  white-space:nowrap
 }
 
-.zodiacMoney.payout strong{
-  color:#72c8e8
+.zodiacReturn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:11px;
+  padding-top:10px;
+  border-top:
+  1px solid
+  rgba(255,255,255,.05)
+}
+
+.zodiacReturn span{
+  color:#817a6d;
+  font-size:9px;
+  white-space:nowrap
+}
+
+.zodiacReturn strong{
+  color:#72c8e8;
+  font-size:17px;
+  line-height:1.2;
+  white-space:nowrap
 }
 
 .note{
@@ -880,12 +893,12 @@ function renderEmpty(){
             alt="${name}"
             loading="lazy">
         </div>
-                <div class="zodiacMoneyGrid">
+                  <div class="zodiacStats">
 
-          <div class="zodiacMoney">
+          <div class="zodiacMain">
 
             <small>
-              确认金额
+              本期确认金额
             </small>
 
             <strong>
@@ -894,11 +907,11 @@ function renderEmpty(){
 
           </div>
 
-          <div class="zodiacMoney payout">
+          <div class="zodiacReturn">
 
-            <small>
+            <span>
               若开出返还
-            </small>
+            </span>
 
             <strong>
               0
@@ -990,37 +1003,7 @@ function renderZodiac(
               loading="lazy"
             >
           </div>
-                    <div class="zodiacMoneyGrid">
-
-            <div class="zodiacMoney">
-
-              <small>
-                确认金额
-              </small>
-
-              <strong>
-                ${formatNumber(
-                  confirmed
-                )}
-              </strong>
-
-            </div>
-
-            <div class="zodiacMoney payout">
-
-              <small>
-                若开出返还
-              </small>
-
-              <strong>
-                ${formatNumber(
-                  estimatedPayout
-                )}
-              </strong>
-
-            </div>
-
-          </div>
+           
 
         </div>
       `;
