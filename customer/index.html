@@ -5851,35 +5851,7 @@ async function loadCurrentRound(){
   .getTime();
 
 
-  if(
-    roundClosed
-    &&
-    !currentOrder
-  ){
-
-    document
-    .getElementById(
-      'roundBadge'
-    )
-    .textContent =
-    uiText(
-      '暂未开放'
-    );
-
-
-    document
-    .getElementById(
-      'roundEmpty'
-    )
-    .classList
-    .remove(
-      'hidden'
-    );
-
-
-    return;
-
-  }
+  
 
 
   if(roundClosed){
