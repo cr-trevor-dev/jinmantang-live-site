@@ -111,7 +111,13 @@ body{
   box-shadow:
     0 0 28px rgba(218,170,51,.14);
 }
-
+.brandMark img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  border-radius:50%;
+}
 .brand h1{
   margin:0;
   font-size:31px;
@@ -791,9 +797,11 @@ button:disabled{
 
   <div class="brand">
 
-    <div class="brandMark">
-      金
-    </div>
+    <div
+  id="customerSiteLogo"
+  class="brandMark">
+  金
+</div>
 
     <h1>
       金满堂
@@ -1876,7 +1884,8 @@ null;
 
 let siteSettings =
 {
-  telegram_url:''
+  telegram_url:'',
+  logo_data_url:''
 };
 
 
