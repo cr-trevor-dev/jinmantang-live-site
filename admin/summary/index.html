@@ -276,18 +276,38 @@ body{
   font-size:9px
 }
 
-.zodiacAmount{
-  margin-top:10px;
-  color:#f2d16f;
-  font-size:21px;
-  font-weight:900
+.zodiacMoneyGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px
 }
 
-.zodiacPayout{
-  margin-top:8px;
-  color:#8c8475;
-  font-size:10px;
-  line-height:1.5
+.zodiacMoney{
+  min-width:0;
+  padding:10px;
+  border-radius:12px;
+  background:#151516;
+  border:1px solid rgba(255,255,255,.05)
+}
+
+.zodiacMoney small{
+  display:block;
+  color:#827a6d;
+  font-size:9px;
+  margin-bottom:6px
+}
+
+.zodiacMoney strong{
+  display:block;
+  color:#f2d16f;
+  font-size:18px;
+  line-height:1.25;
+  word-break:break-word
+}
+
+.zodiacMoney.payout strong{
+  color:#72c8e8
 }
 
 .note{
@@ -441,7 +461,7 @@ body{
       <div class="metric agent">
 
         <small>
-          代理客户金额
+          代理佣金总额
         </small>
 
         <strong id="agentAmount">
@@ -454,7 +474,7 @@ body{
       <div class="metric remaining">
 
         <small>
-          扣除代理后金额
+          扣除代理佣金后金额
         </small>
 
         <strong id="remainingAmount">
@@ -484,11 +504,11 @@ body{
       待审核金额、客户仅保存但尚未确认的金额，
       都不会进入正式本期汇总。
 
-      “扣除代理后金额”
+      “扣除代理佣金后金额”
       =
       本期总金额
       -
-      代理客户金额。
+      所有代理本期佣金总额。
 
     </div>
 
@@ -837,12 +857,32 @@ function renderEmpty(){
 
         </div>
 
-        <div class="zodiacAmount">
-          0
-        </div>
+                <div class="zodiacMoneyGrid">
 
-        <div class="zodiacPayout">
-          若开出预计返还 0
+          <div class="zodiacMoney">
+
+            <small>
+              确认金额
+            </small>
+
+            <strong>
+              0
+            </strong>
+
+          </div>
+
+          <div class="zodiacMoney payout">
+
+            <small>
+              若开出返还
+            </small>
+
+            <strong>
+              0
+            </strong>
+
+          </div>
+
         </div>
 
       </div>
@@ -921,17 +961,36 @@ function renderZodiac(
 
           </div>
 
-          <div class="zodiacAmount">
-            ${formatNumber(
-              confirmed
-            )}
-          </div>
+                    <div class="zodiacMoneyGrid">
 
-          <div class="zodiacPayout">
-            若开出预计返还
-            ${formatNumber(
-              estimatedPayout
-            )}
+            <div class="zodiacMoney">
+
+              <small>
+                确认金额
+              </small>
+
+              <strong>
+                ${formatNumber(
+                  confirmed
+                )}
+              </strong>
+
+            </div>
+
+            <div class="zodiacMoney payout">
+
+              <small>
+                若开出返还
+              </small>
+
+              <strong>
+                ${formatNumber(
+                  estimatedPayout
+                )}
+              </strong>
+
+            </div>
+
           </div>
 
         </div>
@@ -1103,7 +1162,7 @@ async function loadSummary(){
     );
 
 
-    const agentTotal =
+        const agentCommissionTotal =
     (
       Array.isArray(
         summary?.agents
@@ -1114,14 +1173,42 @@ async function loadSummary(){
       []
     )
     .reduce(
-      (sum,row)=>
-      sum
-      +
-      Number(
-        row.confirmed_total
-        ||
-        0
-      ),
+      (sum,row)=>{
+
+        const confirmed =
+        Number(
+          row.confirmed_total
+          ||
+          0
+        );
+
+        const rate =
+        Number(
+          row.commission_rate
+          ||
+          0
+        );
+
+        const commission =
+        Math.round(
+          confirmed
+          *
+          rate
+          *
+          100
+          /
+          100
+        )
+        /
+        100;
+
+        return (
+          sum
+          +
+          commission
+        );
+
+      },
       0
     );
 
@@ -1130,7 +1217,7 @@ async function loadSummary(){
     Math.max(
       total
       -
-      agentTotal,
+      agentCommissionTotal,
       0
     );
 
@@ -1165,7 +1252,7 @@ async function loadSummary(){
       'agentAmount'
     ).textContent =
     formatNumber(
-      agentTotal
+      agentCommissionTotal
     );
 
 
