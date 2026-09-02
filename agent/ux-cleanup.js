@@ -3299,20 +3299,51 @@
 
       if(roundStatusEl){
 
-                roundStatusEl.textContent =
-        ({
-          zh:'仅供查看 · 不支持提交 / 修改',
-          my:'ကြည့်ရှုရန်သာ · တင်သွင်းခြင်း / ပြင်ဆင်ခြင်း မပြုနိုင်ပါ',
-          en:'View Only · Submission / Editing Disabled',
-          th:'ดูอย่างเดียว · ไม่รองรับการส่ง / แก้ไข',
-          ms:'Paparan Sahaja · Hantar / Ubah Tidak Dibenarkan',
-          vi:'Chỉ xem · Không thể gửi / chỉnh sửa',
-          id:'Hanya Lihat · Tidak Bisa Kirim / Ubah'
-        }[currentLang] || '仅供查看 · 不支持提交 / 修改');
-        roundStatusEl.style.color =
-        '#ff5b5b';
+  const roundClosed =
+  typeof currentRound !==
+  'undefined'
+  &&
+  currentRound
+  &&
+  (
+    currentRound.status !==
+    'open'
+    ||
+    Date.now() >=
+    new Date(
+      currentRound.deadline_at
+    ).getTime()
+  );
 
-      }
+
+  roundStatusEl.textContent =
+  roundClosed
+  ?
+  ({
+    zh:'仅供查看 · 本期已截止',
+    my:'ကြည့်ရှုရန်သာ · ယခုအကြိမ် ပိတ်ပြီး',
+    en:'View Only · Round Closed',
+    th:'ดูอย่างเดียว · รอบนี้ปิดแล้ว',
+    ms:'Paparan Sahaja · Pusingan Ditutup',
+    vi:'Chỉ xem · Kỳ này đã đóng',
+    id:'Hanya Lihat · Putaran Ditutup'
+  }[currentLang] || '仅供查看 · 本期已截止')
+  :
+  ({
+    zh:'仅供查看 · 不支持提交 / 修改',
+    my:'ကြည့်ရှုရန်သာ · တင်သွင်းခြင်း / ပြင်ဆင်ခြင်း မပြုနိုင်ပါ',
+    en:'View Only · Submission / Editing Disabled',
+    th:'ดูอย่างเดียว · ไม่รองรับการส่ง / แก้ไข',
+    ms:'Paparan Sahaja · Hantar / Ubah Tidak Dibenarkan',
+    vi:'Chỉ xem · Không thể gửi / chỉnh sửa',
+    id:'Hanya Lihat · Tidak Bisa Kirim / Ubah'
+  }[currentLang] || '仅供查看 · 不支持提交 / 修改');
+
+
+  roundStatusEl.style.color =
+  '#ff5b5b';
+
+}
 
 
       const serverNoteEl =
