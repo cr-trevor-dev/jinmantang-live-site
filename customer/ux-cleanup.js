@@ -399,7 +399,68 @@
 
   const CUSTOMER_UI_TEXT = {
         /* CUSTOMER NAVIGATION + HISTORY */
+    '全部年份':[
+      'နှစ်အားလုံး',
+      'All Years',
+      'ทุกปี',
+      'Semua Tahun',
+      'Tất cả năm',
+      'Semua Tahun'
+    ],
 
+    '全部月份':[
+      'လအားလုံး',
+      'All Months',
+      'ทุกเดือน',
+      'Semua Bulan',
+      'Tất cả tháng',
+      'Semua Bulan'
+    ],
+
+    '全部日期':[
+      'ရက်အားလုံး',
+      'All Dates',
+      'ทุกวันที่',
+      'Semua Tarikh',
+      'Tất cả ngày',
+      'Semua Tanggal'
+    ],
+
+    '全部期别':[
+      'အကြိမ်အားလုံး',
+      'All Sessions',
+      'ทุกรอบ',
+      'Semua Sesi',
+      'Tất cả phiên',
+      'Semua Sesi'
+    ],
+
+    '上午期':[
+      'မနက်ပိုင်း',
+      'Morning',
+      'รอบเช้า',
+      'Sesi Pagi',
+      'Phiên sáng',
+      'Sesi Pagi'
+    ],
+
+    '下午期':[
+      'ညနေပိုင်း',
+      'Afternoon',
+      'รอบบ่าย',
+      'Sesi Petang',
+      'Phiên chiều',
+      'Sesi Sore'
+    ],
+
+    '重置筛选':[
+      'စစ်ထုတ်မှု ပြန်လည်သတ်မှတ်ရန်',
+      'Reset Filters',
+      'รีเซ็ตตัวกรอง',
+      'Tetapkan Semula',
+      'Đặt lại bộ lọc',
+      'Reset Filter'
+    ],
     '本期':[
       'ယခုအကြိမ်',
       'Current',
