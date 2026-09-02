@@ -398,7 +398,628 @@
 
 
   const CUSTOMER_UI_TEXT = {
+        /* CUSTOMER NAVIGATION + HISTORY */
 
+    '本期':[
+      'ယခုအကြိမ်',
+      'Current',
+      'รอบปัจจุบัน',
+      'Pusingan Semasa',
+      'Kỳ hiện tại',
+      'Periode Saat Ini'
+    ],
+
+    '历史':[
+      'မှတ်တမ်း',
+      'History',
+      'ประวัติ',
+      'Sejarah',
+      'Lịch sử',
+      'Riwayat'
+    ],
+
+    '收款':[
+      'ငွေလက်ခံ',
+      'Payout Account',
+      'รับเงิน',
+      'Akaun Terima',
+      'Nhận tiền',
+      'Penerimaan'
+    ],
+
+    '账户':[
+      'အကောင့်',
+      'Account',
+      'บัญชี',
+      'Akaun',
+      'Tài khoản',
+      'Akun'
+    ],
+
+    '下注 · 付款':[
+      'လောင်းကြေး · ငွေပေးချေမှု',
+      'Bet · Payment',
+      'เดิมพัน · ชำระเงิน',
+      'Pertaruhan · Bayaran',
+      'Cược · Thanh toán',
+      'Taruhan · Pembayaran'
+    ],
+
+    '结果 · 账本':[
+      'ရလဒ် · မှတ်တမ်း',
+      'Results · Records',
+      'ผลรางวัล · บันทึก',
+      'Keputusan · Rekod',
+      'Kết quả · Sổ ghi',
+      'Hasil · Catatan'
+    ],
+
+    '电子钱包 / 银行':[
+      'E-Wallet / ဘဏ်',
+      'E-Wallet / Bank',
+      'กระเป๋าเงินอิเล็กทรอนิกส์ / ธนาคาร',
+      'E-Wallet / Bank',
+      'Ví điện tử / Ngân hàng',
+      'Dompet Digital / Bank'
+    ],
+
+    '资料 · 客服':[
+      'အချက်အလက် · ဝန်ဆောင်မှု',
+      'Profile · Support',
+      'ข้อมูล · บริการลูกค้า',
+      'Profil · Khidmat Pelanggan',
+      'Hồ sơ · Hỗ trợ',
+      'Profil · Layanan'
+    ],
+
+    '本期参与':[
+      'ယခုအကြိမ် ပါဝင်မှု',
+      'Current Round',
+      'รอบปัจจุบัน',
+      'Pusingan Semasa',
+      'Kỳ hiện tại',
+      'Periode Saat Ini'
+    ],
+
+    '这里只显示当前开放期的下注、付款和审核状态。':[
+      'ဤနေရာတွင် လက်ရှိဖွင့်ထားသောအကြိမ်၏ လောင်းကြေး၊ ငွေပေးချေမှုနှင့် စစ်ဆေးမှုအခြေအနေကိုသာ ပြသပါသည်။',
+      'Only the current round bets, payments and review status are shown here.',
+      'ที่นี่จะแสดงเฉพาะการเดิมพัน การชำระเงิน และสถานะตรวจสอบของรอบปัจจุบัน',
+      'Hanya pertaruhan, bayaran dan status semakan pusingan semasa dipaparkan di sini.',
+      'Chỉ hiển thị cược, thanh toán và trạng thái xét duyệt của kỳ hiện tại.',
+      'Hanya taruhan, pembayaran, dan status pemeriksaan periode saat ini yang ditampilkan.'
+    ],
+
+    '历史记录':[
+      'မှတ်တမ်း',
+      'History Records',
+      'ประวัติรายการ',
+      'Rekod Sejarah',
+      'Lịch sử giao dịch',
+      'Riwayat'
+    ],
+
+    '查看已结算期数、付款记录和派彩记录。旧记录不会因为开启下一期而消失。':[
+      'ပြီးဆုံးပြီးသောအကြိမ်များ၊ ငွေပေးချေမှုနှင့် ဆုငွေပေးချေမှုမှတ်တမ်းများကို ကြည့်နိုင်ပါသည်။ အကြိမ်အသစ်ဖွင့်လှစ်သော်လည်း မှတ်တမ်းဟောင်းများ မပျောက်ပါ။',
+      'View settled rounds, payment records and payout records. Old records remain after a new round opens.',
+      'ดูรอบที่สรุปแล้ว ประวัติการชำระเงิน และประวัติการจ่ายรางวัล ประวัติเก่าจะไม่หายเมื่อเปิดรอบใหม่',
+      'Lihat pusingan selesai, rekod bayaran dan rekod pembayaran hadiah. Rekod lama kekal apabila pusingan baharu dibuka.',
+      'Xem các kỳ đã kết toán, lịch sử thanh toán và lịch sử trả thưởng. Dữ liệu cũ không mất khi mở kỳ mới.',
+      'Lihat periode yang telah selesai, riwayat pembayaran, dan riwayat pembayaran hadiah. Riwayat lama tetap tersimpan saat periode baru dibuka.'
+    ],
+
+    '我的收款方式':[
+      'ကျွန်ုပ်၏ ငွေလက်ခံနည်းလမ်း',
+      'My Payout Accounts',
+      'ช่องทางรับเงินของฉัน',
+      'Akaun Penerimaan Saya',
+      'Phương thức nhận tiền',
+      'Metode Penerimaan Saya'
+    ],
+
+    '集中管理您用于接收平台派彩的 KPay 与银行账户。':[
+      'ပလက်ဖောင်းမှ ဆုငွေလက်ခံရန် အသုံးပြုသော E-Wallet နှင့် ဘဏ်အကောင့်များကို ဤနေရာတွင် စီမံနိုင်ပါသည်။',
+      'Manage the e-wallet and bank accounts used to receive platform payouts.',
+      'จัดการกระเป๋าเงินอิเล็กทรอนิกส์และบัญชีธนาคารสำหรับรับเงินรางวัลจากแพลตฟอร์ม',
+      'Urus e-wallet dan akaun bank yang digunakan untuk menerima pembayaran hadiah.',
+      'Quản lý ví điện tử và tài khoản ngân hàng dùng để nhận tiền thưởng.',
+      'Kelola dompet digital dan rekening bank untuk menerima pembayaran hadiah.'
+    ],
+
+    '账户中心':[
+      'အကောင့်စင်တာ',
+      'Account Center',
+      'ศูนย์บัญชี',
+      'Pusat Akaun',
+      'Trung tâm tài khoản',
+      'Pusat Akun'
+    ],
+
+    '查看个人资料、客户编号、注册手机以及联系客服。':[
+      'ကိုယ်ရေးအချက်အလက်၊ ဖောက်သည်နံပါတ်၊ မှတ်ပုံတင်ဖုန်းနံပါတ်နှင့် ဝန်ဆောင်မှုကို ဤနေရာတွင် ကြည့်နိုင်ပါသည်။',
+      'View your profile, customer ID, registered phone number and support.',
+      'ดูข้อมูลส่วนตัว รหัสลูกค้า เบอร์โทรที่ลงทะเบียน และติดต่อฝ่ายบริการ',
+      'Lihat profil, ID pelanggan, telefon berdaftar dan khidmat pelanggan.',
+      'Xem hồ sơ, mã khách hàng, số điện thoại đăng ký và hỗ trợ.',
+      'Lihat profil, ID pelanggan, nomor terdaftar, dan layanan pelanggan.'
+    ],
+
+    '期数、付款与派彩记录都会保留在这里。':[
+      'အကြိမ်၊ ငွေပေးချေမှုနှင့် ဆုငွေပေးချေမှုမှတ်တမ်းများကို ဤနေရာတွင် သိမ်းဆည်းထားပါသည်။',
+      'Round, payment and payout records are kept here.',
+      'ประวัติรอบ การชำระเงิน และการจ่ายรางวัลจะถูกเก็บไว้ที่นี่',
+      'Rekod pusingan, bayaran dan pembayaran hadiah disimpan di sini.',
+      'Lịch sử kỳ, thanh toán và trả thưởng được lưu tại đây.',
+      'Riwayat periode, pembayaran, dan pembayaran hadiah disimpan di sini.'
+    ],
+
+    '开启下一期不会删除上一期记录。':[
+      'အကြိမ်အသစ်ဖွင့်လှစ်ခြင်းသည် အကြိမ်ဟောင်းမှတ်တမ်းကို မဖျက်ပါ။',
+      'Opening a new round will not delete previous records.',
+      'การเปิดรอบใหม่จะไม่ลบประวัติรอบก่อนหน้า',
+      'Membuka pusingan baharu tidak akan memadam rekod sebelumnya.',
+      'Mở kỳ mới sẽ không xóa dữ liệu kỳ trước.',
+      'Membuka periode baru tidak akan menghapus riwayat sebelumnya.'
+    ],
+
+    '查看':[
+      'ကြည့်ရန်',
+      'View',
+      'ดู',
+      'Lihat',
+      'Xem',
+      'Lihat'
+    ],
+
+    '收起':[
+      'သိမ်းရန်',
+      'Collapse',
+      'ย่อ',
+      'Tutup',
+      'Thu gọn',
+      'Tutup'
+    ],
+
+    '期数':[
+      'အကြိမ်',
+      'Rounds',
+      'รอบ',
+      'Pusingan',
+      'Kỳ',
+      'Periode'
+    ],
+
+    '付款':[
+      'ငွေပေးချေမှု',
+      'Payments',
+      'การชำระเงิน',
+      'Bayaran',
+      'Thanh toán',
+      'Pembayaran'
+    ],
+
+    '派彩':[
+      'ဆုငွေပေးချေမှု',
+      'Payouts',
+      'จ่ายรางวัล',
+      'Pembayaran Hadiah',
+      'Trả thưởng',
+      'Pembayaran Hadiah'
+    ],
+
+    '正在读取历史记录...':[
+      'မှတ်တမ်းကို ဖတ်နေသည်...',
+      'Loading history...',
+      'กำลังโหลดประวัติ...',
+      'Memuatkan sejarah...',
+      'Đang tải lịch sử...',
+      'Memuat riwayat...'
+    ],
+
+    '暂无已结算期数':[
+      'ပြီးဆုံးထားသောအကြိမ် မရှိသေးပါ',
+      'No settled rounds yet',
+      'ยังไม่มีรอบที่สรุปแล้ว',
+      'Tiada pusingan selesai',
+      'Chưa có kỳ đã kết toán',
+      'Belum ada periode selesai'
+    ],
+
+    '暂无付款历史':[
+      'ငွေပေးချေမှုမှတ်တမ်း မရှိသေးပါ',
+      'No payment history',
+      'ยังไม่มีประวัติการชำระเงิน',
+      'Tiada sejarah bayaran',
+      'Chưa có lịch sử thanh toán',
+      'Belum ada riwayat pembayaran'
+    ],
+
+    '暂无派彩历史':[
+      'ဆုငွေပေးချေမှုမှတ်တမ်း မရှိသေးပါ',
+      'No payout history',
+      'ยังไม่มีประวัติการจ่ายรางวัล',
+      'Tiada sejarah pembayaran hadiah',
+      'Chưa có lịch sử trả thưởng',
+      'Belum ada riwayat pembayaran hadiah'
+    ],
+
+    '未中奖':[
+      'မပေါက်ပါ',
+      'Not Won',
+      'ไม่ถูกรางวัล',
+      'Tidak Menang',
+      'Không trúng',
+      'Tidak Menang'
+    ],
+
+    '已完成':[
+      'ပြီးဆုံး',
+      'Completed',
+      'เสร็จสิ้น',
+      'Selesai',
+      'Đã hoàn tất',
+      'Selesai'
+    ],
+
+    '部分派彩':[
+      'တစ်စိတ်တစ်ပိုင်းပေးပြီး',
+      'Partially Paid',
+      'จ่ายบางส่วน',
+      'Dibayar Sebahagian',
+      'Đã trả một phần',
+      'Dibayar Sebagian'
+    ],
+
+    '待派彩':[
+      'ဆုငွေစောင့်ဆိုင်းနေသည်',
+      'Pending Payout',
+      'รอจ่ายรางวัล',
+      'Menunggu Pembayaran',
+      'Chờ trả thưởng',
+      'Menunggu Pembayaran'
+    ],
+
+    '已确认':[
+      'အတည်ပြုပြီး',
+      'Confirmed',
+      'ยืนยันแล้ว',
+      'Disahkan',
+      'Đã xác nhận',
+      'Terkonfirmasi'
+    ],
+
+    '审核中':[
+      'စစ်ဆေးနေသည်',
+      'Under Review',
+      'กำลังตรวจสอบ',
+      'Dalam Semakan',
+      'Đang xét duyệt',
+      'Sedang Diperiksa'
+    ],
+
+    '已退回':[
+      'ပြန်အမ်းပြီး',
+      'Refunded',
+      'คืนเงินแล้ว',
+      'Dikembalikan',
+      'Đã hoàn tiền',
+      'Dikembalikan'
+    ],
+
+    '部分退回':[
+      'တစ်စိတ်တစ်ပိုင်းပြန်အမ်းပြီး',
+      'Partially Refunded',
+      'คืนเงินบางส่วน',
+      'Dikembalikan Sebahagian',
+      'Hoàn một phần',
+      'Dikembalikan Sebagian'
+    ],
+
+    '待平台核对':[
+      'ပလက်ဖောင်းစစ်ဆေးရန် စောင့်ဆိုင်းနေသည်',
+      'Pending Platform Review',
+      'รอแพลตฟอร์มตรวจสอบ',
+      'Menunggu Semakan Platform',
+      'Chờ nền tảng kiểm tra',
+      'Menunggu Pemeriksaan Platform'
+    ],
+
+    '未通过':[
+      'မအောင်မြင်',
+      'Not Approved',
+      'ไม่ผ่าน',
+      'Tidak Diluluskan',
+      'Không được duyệt',
+      'Tidak Disetujui'
+    ],
+
+    '已结案':[
+      'အမှုပိတ်ပြီး',
+      'Closed',
+      'ปิดรายการแล้ว',
+      'Ditutup',
+      'Đã kết thúc',
+      'Ditutup'
+    ],
+
+    '开奖生肖':[
+      'ပေါက်သော ရာသီခွင်',
+      'Winning Zodiac',
+      'นักษัตรที่ออก',
+      'Zodiak Keputusan',
+      'Con giáp trúng',
+      'Shio Hasil'
+    ],
+
+    '本期有效下注':[
+      'ဤအကြိမ် အတည်ပြုလောင်းကြေး',
+      'Valid Bet',
+      'เดิมพันที่มีผล',
+      'Pertaruhan Sah',
+      'Cược hợp lệ',
+      'Taruhan Valid'
+    ],
+
+    '命中金额':[
+      'ပေါက်သောပမာဏ',
+      'Winning Amount',
+      'ยอดที่ถูกรางวัล',
+      'Jumlah Menang',
+      'Số tiền trúng',
+      'Jumlah Menang'
+    ],
+
+    '中奖应返还':[
+      'ပြန်လည်ပေးချေရမည့် ဆုငွေ',
+      'Payout Due',
+      'ยอดรางวัลที่ต้องจ่าย',
+      'Bayaran Perlu Dibayar',
+      'Tiền thưởng phải trả',
+      'Hadiah Harus Dibayar'
+    ],
+
+    '已派彩':[
+      'ဆုငွေပေးပြီး',
+      'Paid',
+      'จ่ายรางวัลแล้ว',
+      'Telah Dibayar',
+      'Đã trả thưởng',
+      'Sudah Dibayar'
+    ],
+
+    '剩余待派':[
+      'ကျန်ရှိပေးရန်',
+      'Remaining',
+      'ยอดคงเหลือ',
+      'Baki Belum Dibayar',
+      'Còn lại',
+      'Sisa Belum Dibayar'
+    ],
+
+    '结算时间':[
+      'တွက်ချက်ပြီးချိန်',
+      'Settlement Time',
+      'เวลาสรุปผล',
+      'Masa Penyelesaian',
+      'Thời gian kết toán',
+      'Waktu Penyelesaian'
+    ],
+
+    '完成时间':[
+      'ပြီးဆုံးချိန်',
+      'Completion Time',
+      'เวลาเสร็จสิ้น',
+      'Masa Selesai',
+      'Thời gian hoàn tất',
+      'Waktu Selesai'
+    ],
+
+    '提交金额':[
+      'တင်သွင်းငွေပမာဏ',
+      'Submitted Amount',
+      'ยอดที่ส่ง',
+      'Jumlah Dihantar',
+      'Số tiền gửi',
+      'Jumlah Diajukan'
+    ],
+
+    '已确认金额':[
+      'အတည်ပြုငွေပမာဏ',
+      'Confirmed Amount',
+      'ยอดยืนยันแล้ว',
+      'Jumlah Disahkan',
+      'Số tiền đã xác nhận',
+      'Jumlah Terkonfirmasi'
+    ],
+
+    '提交时间':[
+      'တင်သွင်းချိန်',
+      'Submitted At',
+      'เวลาส่ง',
+      'Masa Dihantar',
+      'Thời gian gửi',
+      'Waktu Diajukan'
+    ],
+
+    '审核时间':[
+      'စစ်ဆေးချိန်',
+      'Reviewed At',
+      'เวลาตรวจสอบ',
+      'Masa Semakan',
+      'Thời gian xét duyệt',
+      'Waktu Pemeriksaan'
+    ],
+
+    '已实际退回':[
+      'အမှန်တကယ် ပြန်အမ်းပြီး',
+      'Actually Refunded',
+      'คืนเงินจริงแล้ว',
+      'Sebenarnya Dikembalikan',
+      'Đã hoàn thực tế',
+      'Benar-benar Dikembalikan'
+    ],
+
+    '退款完成时间':[
+      'ပြန်အမ်းပြီးဆုံးချိန်',
+      'Refund Completed',
+      'เวลาคืนเงินเสร็จสิ้น',
+      'Masa Bayaran Balik Selesai',
+      'Thời gian hoàn tiền',
+      'Waktu Refund Selesai'
+    ],
+
+    '应派彩':[
+      'ပေးရန်ဆုငွေ',
+      'Payout Due',
+      'ยอดต้องจ่าย',
+      'Bayaran Perlu Dibayar',
+      'Tiền phải trả',
+      'Hadiah Harus Dibayar'
+    ],
+
+    '本次派彩：':[
+      'ယခုအကြိမ်ပေးချေမှု៖ ',
+      'This payout: ',
+      'การจ่ายครั้งนี้: ',
+      'Bayaran kali ini: ',
+      'Lần trả này: ',
+      'Pembayaran kali ini: '
+    ],
+
+    '时间：':[
+      'အချိန်៖ ',
+      'Time: ',
+      'เวลา: ',
+      'Masa: ',
+      'Thời gian: ',
+      'Waktu: '
+    ],
+
+    '收款方式：':[
+      'ငွေလက်ခံနည်းလမ်း៖ ',
+      'Receiving method: ',
+      'ช่องทางรับเงิน: ',
+      'Kaedah penerimaan: ',
+      'Phương thức nhận: ',
+      'Metode penerimaan: '
+    ],
+
+    '户名：':[
+      'အကောင့်အမည်៖ ',
+      'Account name: ',
+      'ชื่อบัญชี: ',
+      'Nama akaun: ',
+      'Tên tài khoản: ',
+      'Nama akun: '
+    ],
+
+    '账号：':[
+      'အကောင့်နံပါတ်៖ ',
+      'Account number: ',
+      'เลขบัญชี: ',
+      'Nombor akaun: ',
+      'Số tài khoản: ',
+      'Nomor akun: '
+    ],
+
+    '银行：':[
+      'ဘဏ်៖ ',
+      'Bank: ',
+      'ธนาคาร: ',
+      'Bank: ',
+      'Ngân hàng: ',
+      'Bank: '
+    ],
+
+    '平台备注：':[
+      'ပလက်ဖောင်းမှတ်ချက်៖ ',
+      'Platform note: ',
+      'หมายเหตุแพลตฟอร์ม: ',
+      'Nota platform: ',
+      'Ghi chú nền tảng: ',
+      'Catatan platform: '
+    ],
+
+    '当前仍在等待平台实际派彩。':[
+      'ပလက်ဖောင်းမှ အမှန်တကယ် ဆုငွေပေးချေရန် စောင့်ဆိုင်းနေပါသည်။',
+      'Waiting for the platform to complete the payout.',
+      'กำลังรอแพลตฟอร์มจ่ายรางวัลจริง',
+      'Menunggu platform menyelesaikan pembayaran.',
+      'Đang chờ nền tảng thực hiện trả thưởng.',
+      'Menunggu platform menyelesaikan pembayaran hadiah.'
+    ],
+
+    '本期没有派彩记录。':[
+      'ဤအကြိမ်တွင် ဆုငွေပေးချေမှုမှတ်တမ်း မရှိပါ။',
+      'There is no payout record for this round.',
+      'รอบนี้ไม่มีประวัติการจ่ายรางวัล',
+      'Tiada rekod pembayaran untuk pusingan ini.',
+      'Kỳ này không có lịch sử trả thưởng.',
+      'Tidak ada riwayat pembayaran hadiah untuk periode ini.'
+    ],
+
+    '上一页':[
+      'ယခင်စာမျက်နှာ',
+      'Previous',
+      'ก่อนหน้า',
+      'Sebelumnya',
+      'Trang trước',
+      'Sebelumnya'
+    ],
+
+    '下一页':[
+      'နောက်စာမျက်နှာ',
+      'Next',
+      'ถัดไป',
+      'Seterusnya',
+      'Trang sau',
+      'Berikutnya'
+    ],
+
+    '历史记录读取失败，请稍后刷新重试。':[
+      'မှတ်တမ်းဖတ်ရှုမှု မအောင်မြင်ပါ။ ခဏနောက် ပြန်လည်စမ်းသပ်ပါ။',
+      'Failed to load history. Please refresh and try again.',
+      'โหลดประวัติไม่สำเร็จ กรุณารีเฟรชแล้วลองใหม่',
+      'Gagal memuatkan sejarah. Sila muat semula dan cuba lagi.',
+      'Không tải được lịch sử. Vui lòng làm mới và thử lại.',
+      'Gagal memuat riwayat. Silakan muat ulang dan coba lagi.'
+    ],
+
+    '只有开奖前由管理员确认的金额，':[
+      'မဲမထွက်မီ Admin အတည်ပြုထားသောပမာဏသာ ',
+      'Only amounts confirmed by an administrator before the result ',
+      'เฉพาะยอดที่ผู้ดูแลยืนยันก่อนประกาศผล ',
+      'Hanya jumlah yang disahkan pentadbir sebelum keputusan ',
+      'Chỉ số tiền được quản trị viên xác nhận trước khi mở thưởng ',
+      'Hanya jumlah yang dikonfirmasi admin sebelum hasil '
+    ],
+
+    '才属于本期有效下注。':[
+      'ဤအကြိမ် အကျုံးဝင်သောလောင်းကြေး ဖြစ်ပါသည်။',
+      'count as valid bets for this round.',
+      'จึงถือเป็นเดิมพันที่ถูกต้องของรอบนี้',
+      'dikira sebagai pertaruhan sah pusingan ini.',
+      'mới được tính là cược hợp lệ của kỳ này.',
+      'yang dihitung sebagai taruhan valid periode ini.'
+    ],
+
+    '待审核、已拒绝或仅保存的金额，':[
+      'စစ်ဆေးဆဲ၊ ငြင်းပယ်ထားသော သို့မဟုတ် သိမ်းထားရုံပမာဏများသည် ',
+      'Amounts under review, rejected or only saved ',
+      'ยอดที่รอตรวจสอบ ถูกปฏิเสธ หรือเพียงบันทึกไว้ ',
+      'Jumlah dalam semakan, ditolak atau hanya disimpan ',
+      'Khoản đang xét duyệt, bị từ chối hoặc chỉ lưu ',
+      'Jumlah yang diperiksa, ditolak, atau hanya disimpan '
+    ],
+
+    '不会参与中奖计算。':[
+      'ဆုတွက်ချက်မှုတွင် မပါဝင်ပါ။',
+      'do not participate in prize calculations.',
+      'จะไม่ถูกนำไปคำนวณรางวัล',
+      'tidak akan dimasukkan dalam pengiraan hadiah.',
+      'sẽ không được tính vào kết quả trúng thưởng.',
+      'tidak akan ikut dihitung dalam perhitungan hadiah.'
+    ],
     '登录':['ဝင်ရောက်ရန်','Login','เข้าสู่ระบบ','Log Masuk','Đăng nhập','Login'],
     '注册':['စာရင်းသွင်းရန်','Register','สมัคร','Daftar','Đăng ký','Daftar'],
     '客户登录':['ဖောက်သည်ဝင်ရောက်ရန်','Customer Login','เข้าสู่ระบบลูกค้า','Log Masuk Pelanggan','Đăng nhập khách hàng','Login Pelanggan'],
