@@ -712,37 +712,7 @@ function applyCurrentView(){
   renderViewIntro();
 
 
-  if(
-    currentCustomerView
-    ===
-    'history'
-  ){
-
-    const body =
-    nav$(
-      'customerHistoryBody'
-    );
-
-
-    if(
-      body
-      &&
-      body.classList.contains(
-        'hidden'
-      )
-      &&
-      typeof window
-      .toggleCustomerHistory
-      ===
-      'function'
-    ){
-
-      window
-      .toggleCustomerHistory();
-
-    }
-
-  }
+  
 
 }
 
