@@ -1,0 +1,2691 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<title>金满堂 · 收款账户管理</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(
+      circle at top,
+      #251907 0,
+      #0d0c0a 38%,
+      #070708 100%
+    );
+  color:#f7f0df;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:22px 15px 55px;
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.mark{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:27px;
+  font-weight:900;
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:
+    linear-gradient(
+      145deg,
+      #382506,
+      #100d08
+    );
+  box-shadow:
+    0 0 28px
+    rgba(235,185,62,.22);
+}
+
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889;
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px;
+}
+
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:
+    1px solid
+    rgba(214,168,63,.18);
+}
+
+.card{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(22,22,22,.98),
+      rgba(11,11,12,.98)
+    );
+  border:
+    1px solid
+    rgba(214,168,63,.30);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:
+    0 22px 60px
+    rgba(0,0,0,.32);
+}
+
+.title{
+  color:#dfc575;
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+
+.note{
+  color:#8f8778;
+  font-size:11px;
+  line-height:1.7;
+  margin-bottom:14px;
+}
+
+.field{
+  margin-bottom:12px;
+}
+
+label.fieldLabel{
+  display:block;
+  color:#a59a82;
+  font-size:11px;
+  margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:
+    1px solid
+    rgba(214,168,63,.24);
+  background:#101011;
+  color:#fff;
+  border-radius:13px;
+  padding:13px;
+  font-size:14px;
+  outline:none;
+}
+
+textarea{
+  min-height:78px;
+  resize:vertical;
+  line-height:1.55;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.switchRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:#101011;
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:13px 14px;
+  margin-bottom:13px;
+}
+
+.switchRow span{
+  color:#e7ddc6;
+  font-size:13px;
+}
+
+.switchRow input{
+  width:22px;
+  height:22px;
+  margin:0;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  background:
+    linear-gradient(
+      180deg,
+      #f1d784,
+      #b47d20
+    );
+  color:#171109;
+}
+
+button.secondary{
+  background:#171718;
+  color:#d9c37c;
+  border:
+    1px solid
+    rgba(214,168,63,.22);
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.accountCard{
+  background:#0e0e0f;
+  border:
+    1px solid
+    rgba(214,168,63,.19);
+  border-radius:17px;
+  padding:15px;
+  margin-top:13px;
+}
+
+.accountHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.accountName{
+  color:#efd477;
+  font-size:17px;
+  font-weight:900;
+}
+
+.accountMeta{
+  color:#888174;
+  font-size:10px;
+  margin-top:5px;
+  word-break:break-all;
+}
+
+.badge{
+  padding:6px 9px;
+  border-radius:99px;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.badge.active{
+  background:#153124;
+  color:#79d6a2;
+}
+
+.badge.inactive{
+  background:#311919;
+  color:#dda09a;
+}
+
+.qrBox{
+  border:
+    1px solid
+    rgba(214,168,63,.16);
+  background:#101011;
+  border-radius:14px;
+  padding:13px;
+  margin-bottom:13px;
+  text-align:center;
+}
+
+.qrPreview{
+  width:min(260px,100%);
+  aspect-ratio:1/1;
+  object-fit:contain;
+  border-radius:12px;
+  background:#fff;
+  display:none;
+  margin:0 auto 10px;
+}
+
+.qrText{
+  color:#8f8778;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.msg{
+  min-height:18px;
+  margin-top:10px;
+  text-align:center;
+  color:#aaa18d;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.msg.ok{
+  color:#70d49c;
+}
+
+.msg.err{
+  color:#e89191;
+}
+
+.empty{
+  text-align:center;
+  color:#7f786b;
+  padding:25px 10px;
+  font-size:12px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
+  font-size:10px;
+  margin-top:24px;
+}
+
+@media(max-width:600px){
+
+  .two{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      PAYMENT ACCOUNT MANAGEMENT
+    </div>
+
+  </div>
+
+
+  <a
+    class="back"
+    href="/admin/">
+    ← 返回管理中心
+  </a>
+
+
+  <div
+    id="authError"
+    class="card hidden">
+
+    <div class="title">
+      无法进入收款账户管理
+    </div>
+
+    <div class="msg err" id="authErrorText">
+      请先登录管理员账号并完成二次验证。
+    </div>
+
+  </div>
+
+
+  <main
+    id="mainBox"
+    class="hidden">
+
+
+    <section class="card">
+
+      <div class="title">
+        新增平台收款账户
+      </div>
+
+      <div class="note">
+        这里只管理平台提供给客户付款使用的 K Pay / 银行账户。
+        不会修改客户下注、金额、期数、审核、派彩或代理数据。
+      </div>
+
+
+      <div class="two">
+
+        <div class="field">
+
+          <label class="fieldLabel">
+            收款类型
+          </label>
+
+          <select id="newMethodType">
+            <option value="wallet">K Pay / 钱包</option>
+            <option value="bank">银行账户</option>
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label class="fieldLabel">
+            显示名称
+          </label>
+
+          <input
+            id="newMethodName"
+            placeholder="例如：K Pay">
+
+        </div>
+
+      </div>
+
+
+      <div class="two">
+
+        <div class="field">
+
+          <label class="fieldLabel">
+            收款人姓名
+          </label>
+
+          <input
+            id="newAccountName"
+            placeholder="请输入真实收款人姓名">
+
+        </div>
+
+
+        <div class="field">
+
+          <label class="fieldLabel">
+            手机号 / 银行账号
+          </label>
+
+          <input
+            id="newAccountNumber"
+            placeholder="请输入收款账号">
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label class="fieldLabel">
+          银行名称
+        </label>
+
+        <input
+          id="newBankName"
+          placeholder="例如：KBZ Bank；K Pay 可留空">
+
+      </div>
+
+
+      <div class="field">
+
+        <label class="fieldLabel">
+          客户看到的说明
+        </label>
+
+        <textarea
+          id="newNote"
+          placeholder="例如：请按本期应付金额转账"></textarea>
+
+      </div>
+
+
+      <div class="field">
+
+        <label class="fieldLabel">
+          收款二维码
+        </label>
+
+        <input
+          id="newQrFile"
+          type="file"
+          accept="image/png,image/jpeg,image/webp">
+
+      </div>
+
+
+      <div class="two">
+
+        <div class="field">
+
+          <label class="fieldLabel">
+            排序
+          </label>
+
+          <input
+            id="newSortOrder"
+            type="number"
+            value="0">
+
+        </div>
+
+
+        <div class="switchRow">
+
+          <span>
+            新建后立即启用
+          </span>
+
+          <input
+            id="newIsActive"
+            type="checkbox"
+            checked>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="createButton"
+        type="button"
+        onclick="createAccount()">
+
+        新增收款账户
+
+      </button>
+
+      <div
+        id="createMsg"
+        class="msg">
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <div class="title">
+        当前平台收款账户
+      </div>
+
+      <div class="note">
+        “启用”的账户才会作为平台当前有效收款方式。
+        建议不要删除旧账户，需要停用时关闭“启用”后保存即可。
+      </div>
+
+
+      <button
+        type="button"
+        class="secondary"
+        onclick="loadAccounts()">
+
+        刷新账户列表
+
+      </button>
+
+
+      <div id="accountList">
+
+        <div class="empty">
+          正在读取...
+        </div>
+
+      </div>
+
+
+      <div
+        id="pageMsg"
+        class="msg">
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <div class="foot">
+    © JIN MANTANG · PAYMENT ACCOUNT MANAGEMENT
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE =
+location.origin
++
+'/supabase';
+
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+let token =
+localStorage.getItem(
+  'jmt_access_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_access_token'
+)
+||
+'';
+
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
+
+
+let refreshPromise =
+null;
+
+
+let adminUserId =
+'';
+
+
+let accounts =
+[];
+
+
+const qrUrls =
+new Map();
+
+
+function saveSession(data){
+
+  if(data?.access_token){
+
+    token =
+    data.access_token;
+
+    localStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+    sessionStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+  }
+
+
+  if(data?.refresh_token){
+
+    refreshToken =
+    data.refresh_token;
+
+    localStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+    sessionStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+function jwtPayload(){
+
+  try{
+
+    let part =
+    token
+    .split('.')[1]
+    .replace(/-/g,'+')
+    .replace(/_/g,'/');
+
+
+    while(
+      part.length
+      %
+      4
+    ){
+
+      part += '=';
+
+    }
+
+
+    return JSON.parse(
+      decodeURIComponent(
+        atob(part)
+        .split('')
+        .map(
+          c =>
+          '%'
+          +
+          (
+            '00'
+            +
+            c.charCodeAt(0)
+            .toString(16)
+          )
+          .slice(-2)
+        )
+        .join('')
+      )
+    );
+
+  }
+  catch{
+
+    return {};
+
+  }
+
+}
+
+
+async function refreshAdminSession(){
+
+  if(!refreshToken){
+
+    return false;
+
+  }
+
+
+  if(refreshPromise){
+
+    return refreshPromise;
+
+  }
+
+
+  refreshPromise =
+  (async()=>{
+
+    try{
+
+      const res =
+      await fetch(
+        BASE
+        +
+        '/auth/v1/token?grant_type=refresh_token',
+        {
+          method:'POST',
+
+          headers:{
+            apikey:KEY,
+            'Content-Type':
+            'application/json'
+          },
+
+          body:
+          JSON.stringify({
+            refresh_token:
+            refreshToken
+          })
+        }
+      );
+
+
+      if(!res.ok){
+
+        return false;
+
+      }
+
+
+      const data =
+      await res.json();
+
+
+      if(!data.access_token){
+
+        return false;
+
+      }
+
+
+      saveSession(
+        data
+      );
+
+
+      return true;
+
+    }
+    catch{
+
+      return false;
+
+    }
+    finally{
+
+      refreshPromise =
+      null;
+
+    }
+
+  })();
+
+
+  return refreshPromise;
+
+}
+
+
+async function api(
+  path,
+  options={}
+){
+
+  const request =
+  ()=>fetch(
+    BASE
+    +
+    path,
+    {
+      ...options,
+
+      headers:{
+        apikey:KEY,
+        Authorization:
+        'Bearer '
+        +
+        token,
+        ...(options.headers || {})
+      }
+    }
+  );
+
+
+  let response =
+  await request();
+
+
+  if(
+    response.status
+    !==
+    401
+  ){
+
+    return response;
+
+  }
+
+
+  const refreshed =
+  await refreshAdminSession();
+
+
+  if(!refreshed){
+
+    return response;
+
+  }
+
+
+  response =
+  await request();
+
+
+  return response;
+
+}
+
+
+async function verifyAdmin(){
+
+  if(!token){
+
+    return false;
+
+  }
+
+
+  const userRes =
+  await api(
+    '/auth/v1/user'
+  );
+
+
+  if(!userRes.ok){
+
+    return false;
+
+  }
+
+
+  const user =
+  await userRes.json();
+
+
+  if(!user?.id){
+
+    return false;
+
+  }
+
+
+  adminUserId =
+  user.id;
+
+
+  const adminRes =
+  await api(
+    '/rest/v1/admin_users'
+    +
+    '?auth_user_id=eq.'
+    +
+    encodeURIComponent(
+      user.id
+    )
+    +
+    '&select=auth_user_id'
+    +
+    '&limit=1'
+  );
+
+
+  if(!adminRes.ok){
+
+    return false;
+
+  }
+
+
+  const rows =
+  await adminRes.json();
+
+
+  if(!rows.length){
+
+    return false;
+
+  }
+
+
+  const payload =
+  jwtPayload();
+
+
+  if(
+    payload.aal
+    !==
+    'aal2'
+  ){
+
+    document.getElementById(
+      'authErrorText'
+    ).textContent =
+    '管理员账号已登录，但当前没有完成二次验证。请返回管理中心完成验证后再进入。';
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+function setMsg(
+  id,
+  text='',
+  type=''
+){
+
+  const el =
+  document.getElementById(
+    id
+  );
+
+
+  if(!el){
+
+    return;
+
+  }
+
+
+  el.textContent =
+  text;
+
+
+  el.className =
+  'msg'
+  +
+  (
+    type
+    ?
+    ' '
+    +
+    type
+    :
+    ''
+  );
+
+}
+
+
+function field(
+  labelText,
+  element
+){
+
+  const wrap =
+  document.createElement(
+    'div'
+  );
+
+  wrap.className =
+  'field';
+
+
+  const label =
+  document.createElement(
+    'label'
+  );
+
+  label.className =
+  'fieldLabel';
+
+  label.textContent =
+  labelText;
+
+
+  wrap.appendChild(
+    label
+  );
+
+  wrap.appendChild(
+    element
+  );
+
+
+  return wrap;
+
+}
+
+
+function input(
+  value='',
+  placeholder=''
+){
+
+  const el =
+  document.createElement(
+    'input'
+  );
+
+  el.value =
+  value
+  ??
+  '';
+
+  el.placeholder =
+  placeholder;
+
+
+  return el;
+
+}
+
+
+function selectType(
+  value
+){
+
+  const el =
+  document.createElement(
+    'select'
+  );
+
+
+  const wallet =
+  document.createElement(
+    'option'
+  );
+
+  wallet.value =
+  'wallet';
+
+  wallet.textContent =
+  'K Pay / 钱包';
+
+
+  const bank =
+  document.createElement(
+    'option'
+  );
+
+  bank.value =
+  'bank';
+
+  bank.textContent =
+  '银行账户';
+
+
+  el.append(
+    wallet,
+    bank
+  );
+
+
+  el.value =
+  value
+  ===
+  'bank'
+  ?
+  'bank'
+  :
+  'wallet';
+
+
+  return el;
+
+}
+
+
+function safeFile(file){
+
+  if(!file){
+
+    return true;
+
+  }
+
+
+  const allowed =
+  [
+    'image/png',
+    'image/jpeg',
+    'image/webp'
+  ];
+
+
+  return (
+    allowed.includes(
+      file.type
+    )
+    &&
+    file.size
+    <=
+    8
+    *
+    1024
+    *
+    1024
+  );
+
+}
+
+
+function fileExtension(file){
+
+  if(
+    file.type
+    ===
+    'image/png'
+  ){
+
+    return 'png';
+
+  }
+
+
+  if(
+    file.type
+    ===
+    'image/webp'
+  ){
+
+    return 'webp';
+
+  }
+
+
+  return 'jpg';
+
+}
+
+
+function encodeStoragePath(
+  path
+){
+
+  return path
+  .split('/')
+  .map(
+    encodeURIComponent
+  )
+  .join('/');
+
+}
+
+
+async function uploadQr(
+  accountId,
+  file
+){
+
+  if(!file){
+
+    return null;
+
+  }
+
+
+  if(!safeFile(file)){
+
+    throw new Error(
+      'QR_FILE_INVALID'
+    );
+
+  }
+
+
+  const random =
+  crypto.randomUUID
+  ?
+  crypto.randomUUID()
+  :
+  String(
+    Date.now()
+  );
+
+
+  const path =
+  'accounts/'
+  +
+  accountId
+  +
+  '/'
+  +
+  Date.now()
+  +
+  '-'
+  +
+  random
+  +
+  '.'
+  +
+  fileExtension(
+    file
+  );
+
+
+  const res =
+  await api(
+    '/storage/v1/object/payment-qr-codes/'
+    +
+    encodeStoragePath(
+      path
+    ),
+    {
+      method:'POST',
+
+      headers:{
+        'Content-Type':
+        file.type,
+
+        'x-upsert':
+        'false'
+      },
+
+      body:
+      file
+    }
+  );
+
+
+  if(!res.ok){
+
+    throw new Error(
+      'QR_UPLOAD_FAILED'
+    );
+
+  }
+
+
+  return path;
+
+}
+
+
+async function cleanupQr(
+  path
+){
+
+  if(!path){
+
+    return;
+
+  }
+
+
+  try{
+
+    await api(
+      '/storage/v1/object/payment-qr-codes/'
+      +
+      encodeStoragePath(
+        path
+      ),
+      {
+        method:'DELETE'
+      }
+    );
+
+  }
+  catch{
+
+  }
+
+}
+
+
+async function loadQr(
+  path,
+  img,
+  text
+){
+
+  if(!path){
+
+    text.textContent =
+    '当前没有上传二维码';
+
+    return;
+
+  }
+
+
+  try{
+
+    const oldUrl =
+    qrUrls.get(
+      path
+    );
+
+
+    if(oldUrl){
+
+      img.src =
+      oldUrl;
+
+      img.style.display =
+      'block';
+
+      text.textContent =
+      '当前二维码';
+
+      return;
+
+    }
+
+
+    const res =
+    await api(
+      '/storage/v1/object/authenticated/payment-qr-codes/'
+      +
+      encodeStoragePath(
+        path
+      )
+    );
+
+
+    if(!res.ok){
+
+      throw new Error();
+
+    }
+
+
+    const blob =
+    await res.blob();
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    qrUrls.set(
+      path,
+      url
+    );
+
+
+    img.src =
+    url;
+
+    img.style.display =
+    'block';
+
+    text.textContent =
+    '当前二维码';
+
+  }
+  catch{
+
+    text.textContent =
+    '二维码读取失败，但账户资料仍然存在';
+
+  }
+
+}
+
+
+async function loadAccounts(){
+
+  setMsg(
+    'pageMsg',
+    '正在读取收款账户...'
+  );
+
+
+  const list =
+  document.getElementById(
+    'accountList'
+  );
+
+
+  list.innerHTML =
+  '<div class="empty">正在读取...</div>';
+
+
+  try{
+
+    const res =
+    await api(
+      '/rest/v1/payment_accounts'
+      +
+      '?select=id,method_name,method_type,account_name,account_number,bank_name,qr_storage_path,note,is_active,sort_order,created_at,updated_at'
+      +
+      '&order=sort_order.asc,created_at.asc'
+    );
+
+
+    if(!res.ok){
+
+      throw new Error();
+
+    }
+
+
+    accounts =
+    await res.json();
+
+
+    renderAccounts();
+
+
+    setMsg(
+      'pageMsg',
+      ''
+    );
+
+  }
+  catch{
+
+    list.innerHTML =
+    '<div class="empty">收款账户读取失败</div>';
+
+
+    setMsg(
+      'pageMsg',
+      '读取失败，请确认管理员登录状态。',
+      'err'
+    );
+
+  }
+
+}
+
+
+function renderAccounts(){
+
+  const list =
+  document.getElementById(
+    'accountList'
+  );
+
+
+  list.innerHTML =
+  '';
+
+
+  if(
+    !accounts.length
+  ){
+
+    list.innerHTML =
+    '<div class="empty">目前没有收款账户</div>';
+
+    return;
+
+  }
+
+
+  accounts.forEach(
+    account=>{
+
+      const card =
+      document.createElement(
+        'div'
+      );
+
+      card.className =
+      'accountCard';
+
+      card.dataset.id =
+      account.id;
+
+
+      const head =
+      document.createElement(
+        'div'
+      );
+
+      head.className =
+      'accountHead';
+
+
+      const left =
+      document.createElement(
+        'div'
+      );
+
+
+      const name =
+      document.createElement(
+        'div'
+      );
+
+      name.className =
+      'accountName';
+
+      name.textContent =
+      account.method_name
+      ||
+      '收款账户';
+
+
+      const meta =
+      document.createElement(
+        'div'
+      );
+
+      meta.className =
+      'accountMeta';
+
+      meta.textContent =
+      account.id;
+
+
+      left.append(
+        name,
+        meta
+      );
+
+
+      const badge =
+      document.createElement(
+        'div'
+      );
+
+      badge.className =
+      'badge '
+      +
+      (
+        account.is_active
+        ?
+        'active'
+        :
+        'inactive'
+      );
+
+      badge.textContent =
+      account.is_active
+      ?
+      '已启用'
+      :
+      '已停用';
+
+
+      head.append(
+        left,
+        badge
+      );
+
+
+      card.appendChild(
+        head
+      );
+
+
+      const two1 =
+      document.createElement(
+        'div'
+      );
+
+      two1.className =
+      'two';
+
+
+      const type =
+      selectType(
+        account.method_type
+      );
+
+      type.dataset.role =
+      'methodType';
+
+
+      const methodName =
+      input(
+        account.method_name,
+        '显示名称'
+      );
+
+      methodName.dataset.role =
+      'methodName';
+
+
+      two1.append(
+        field(
+          '收款类型',
+          type
+        ),
+        field(
+          '显示名称',
+          methodName
+        )
+      );
+
+
+      card.appendChild(
+        two1
+      );
+
+
+      const two2 =
+      document.createElement(
+        'div'
+      );
+
+      two2.className =
+      'two';
+
+
+      const accountName =
+      input(
+        account.account_name,
+        '收款人姓名'
+      );
+
+      accountName.dataset.role =
+      'accountName';
+
+
+      const accountNumber =
+      input(
+        account.account_number,
+        '手机号 / 银行账号'
+      );
+
+      accountNumber.dataset.role =
+      'accountNumber';
+
+
+      two2.append(
+        field(
+          '收款人姓名',
+          accountName
+        ),
+        field(
+          '手机号 / 银行账号',
+          accountNumber
+        )
+      );
+
+
+      card.appendChild(
+        two2
+      );
+
+
+      const bankName =
+      input(
+        account.bank_name,
+        '银行名称；K Pay 可留空'
+      );
+
+      bankName.dataset.role =
+      'bankName';
+
+
+      card.appendChild(
+        field(
+          '银行名称',
+          bankName
+        )
+      );
+
+
+      const note =
+      document.createElement(
+        'textarea'
+      );
+
+      note.value =
+      account.note
+      ??
+      '';
+
+      note.placeholder =
+      '客户看到的付款说明';
+
+      note.dataset.role =
+      'note';
+
+
+      card.appendChild(
+        field(
+          '客户付款说明',
+          note
+        )
+      );
+
+
+      const qrBox =
+      document.createElement(
+        'div'
+      );
+
+      qrBox.className =
+      'qrBox';
+
+
+      const qrImg =
+      document.createElement(
+        'img'
+      );
+
+      qrImg.className =
+      'qrPreview';
+
+      qrImg.alt =
+      '收款二维码';
+
+
+      const qrText =
+      document.createElement(
+        'div'
+      );
+
+      qrText.className =
+      'qrText';
+
+      qrText.textContent =
+      account.qr_storage_path
+      ?
+      '正在读取二维码...'
+      :
+      '当前没有上传二维码';
+
+
+      qrBox.append(
+        qrImg,
+        qrText
+      );
+
+
+      card.appendChild(
+        qrBox
+      );
+
+
+      loadQr(
+        account.qr_storage_path,
+        qrImg,
+        qrText
+      );
+
+
+      const file =
+      document.createElement(
+        'input'
+      );
+
+      file.type =
+      'file';
+
+      file.accept =
+      'image/png,image/jpeg,image/webp';
+
+      file.dataset.role =
+      'qrFile';
+
+
+      card.appendChild(
+        field(
+          '更换二维码（不选择文件则保留原二维码）',
+          file
+        )
+      );
+
+
+      const sort =
+      input(
+        account.sort_order,
+        '0'
+      );
+
+      sort.type =
+      'number';
+
+      sort.dataset.role =
+      'sortOrder';
+
+
+      card.appendChild(
+        field(
+          '排序',
+          sort
+        )
+      );
+
+
+      const switchRow =
+      document.createElement(
+        'div'
+      );
+
+      switchRow.className =
+      'switchRow';
+
+
+      const switchText =
+      document.createElement(
+        'span'
+      );
+
+      switchText.textContent =
+      '启用这个收款账户';
+
+
+      const active =
+      document.createElement(
+        'input'
+      );
+
+      active.type =
+      'checkbox';
+
+      active.checked =
+      Boolean(
+        account.is_active
+      );
+
+      active.dataset.role =
+      'isActive';
+
+
+      switchRow.append(
+        switchText,
+        active
+      );
+
+
+      card.appendChild(
+        switchRow
+      );
+
+
+      const save =
+      document.createElement(
+        'button'
+      );
+
+      save.type =
+      'button';
+
+      save.textContent =
+      '保存这个收款账户';
+
+
+      save.addEventListener(
+        'click',
+        ()=>saveAccount(
+          account,
+          card,
+          save
+        )
+      );
+
+
+      card.appendChild(
+        save
+      );
+
+
+      const msg =
+      document.createElement(
+        'div'
+      );
+
+      msg.className =
+      'msg';
+
+      msg.dataset.role =
+      'msg';
+
+
+      card.appendChild(
+        msg
+      );
+
+
+      list.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+function cardValue(
+  card,
+  role
+){
+
+  return card
+  .querySelector(
+    '[data-role="'
+    +
+    role
+    +
+    '"]'
+  );
+
+}
+
+
+async function saveAccount(
+  account,
+  card,
+  button
+){
+
+  const msg =
+  cardValue(
+    card,
+    'msg'
+  );
+
+
+  const methodType =
+  cardValue(
+    card,
+    'methodType'
+  ).value;
+
+
+  const methodName =
+  cardValue(
+    card,
+    'methodName'
+  ).value.trim();
+
+
+  const accountName =
+  cardValue(
+    card,
+    'accountName'
+  ).value.trim();
+
+
+  const accountNumber =
+  cardValue(
+    card,
+    'accountNumber'
+  ).value.trim();
+
+
+  const bankName =
+  cardValue(
+    card,
+    'bankName'
+  ).value.trim();
+
+
+  const note =
+  cardValue(
+    card,
+    'note'
+  ).value.trim();
+
+
+  const sortOrder =
+  Number(
+    cardValue(
+      card,
+      'sortOrder'
+    ).value
+    ||
+    0
+  );
+
+
+  const isActive =
+  cardValue(
+    card,
+    'isActive'
+  ).checked;
+
+
+  const file =
+  cardValue(
+    card,
+    'qrFile'
+  ).files?.[0]
+  ||
+  null;
+
+
+  if(
+    !methodName
+    ||
+    !accountName
+    ||
+    !accountNumber
+  ){
+
+    msg.className =
+    'msg err';
+
+    msg.textContent =
+    '请填写显示名称、收款人姓名和收款账号。';
+
+    return;
+
+  }
+
+
+  if(
+    methodType
+    ===
+    'bank'
+    &&
+    !bankName
+  ){
+
+    msg.className =
+    'msg err';
+
+    msg.textContent =
+    '银行账户必须填写银行名称。';
+
+    return;
+
+  }
+
+
+  if(!safeFile(file)){
+
+    msg.className =
+    'msg err';
+
+    msg.textContent =
+    '二维码只能使用 PNG、JPG 或 WEBP，并且不能超过 8MB。';
+
+    return;
+
+  }
+
+
+  if(
+    !window.confirm(
+      '确认保存这个平台收款账户吗？'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  button.disabled =
+  true;
+
+  msg.className =
+  'msg';
+
+  msg.textContent =
+  '正在保存...';
+
+
+  let newQrPath =
+  null;
+
+
+  try{
+
+    if(file){
+
+      newQrPath =
+      await uploadQr(
+        account.id,
+        file
+      );
+
+    }
+
+
+    const body = {
+      method_name:
+      methodName,
+
+      method_type:
+      methodType,
+
+      account_name:
+      accountName,
+
+      account_number:
+      accountNumber,
+
+      bank_name:
+      bankName
+      ||
+      null,
+
+      note:
+      note
+      ||
+      null,
+
+      is_active:
+      isActive,
+
+      sort_order:
+      Number.isFinite(
+        sortOrder
+      )
+      ?
+      sortOrder
+      :
+      0,
+
+      updated_at:
+      new Date()
+      .toISOString(),
+
+      updated_by:
+      adminUserId
+    };
+
+
+    if(newQrPath){
+
+      body.qr_storage_path =
+      newQrPath;
+
+    }
+
+
+    const res =
+    await api(
+      '/rest/v1/payment_accounts'
+      +
+      '?id=eq.'
+      +
+      encodeURIComponent(
+        account.id
+      ),
+      {
+        method:'PATCH',
+
+        headers:{
+          'Content-Type':
+          'application/json',
+
+          Prefer:
+          'return=representation'
+        },
+
+        body:
+        JSON.stringify(
+          body
+        )
+      }
+    );
+
+
+    if(!res.ok){
+
+      throw new Error(
+        'UPDATE_FAILED'
+      );
+
+    }
+
+
+    msg.className =
+    'msg ok';
+
+    msg.textContent =
+    '✓ 已保存';
+
+
+    await loadAccounts();
+
+  }
+  catch{
+
+    if(newQrPath){
+
+      await cleanupQr(
+        newQrPath
+      );
+
+    }
+
+
+    msg.className =
+    'msg err';
+
+    msg.textContent =
+    '保存失败，原来的账户资料没有被删除。';
+
+  }
+  finally{
+
+    button.disabled =
+    false;
+
+  }
+
+}
+
+
+async function createAccount(){
+
+  const button =
+  document.getElementById(
+    'createButton'
+  );
+
+
+  const methodType =
+  document.getElementById(
+    'newMethodType'
+  ).value;
+
+
+  const methodName =
+  document.getElementById(
+    'newMethodName'
+  ).value.trim();
+
+
+  const accountName =
+  document.getElementById(
+    'newAccountName'
+  ).value.trim();
+
+
+  const accountNumber =
+  document.getElementById(
+    'newAccountNumber'
+  ).value.trim();
+
+
+  const bankName =
+  document.getElementById(
+    'newBankName'
+  ).value.trim();
+
+
+  const note =
+  document.getElementById(
+    'newNote'
+  ).value.trim();
+
+
+  const sortOrder =
+  Number(
+    document.getElementById(
+      'newSortOrder'
+    ).value
+    ||
+    0
+  );
+
+
+  const isActive =
+  document.getElementById(
+    'newIsActive'
+  ).checked;
+
+
+  const file =
+  document.getElementById(
+    'newQrFile'
+  ).files?.[0]
+  ||
+  null;
+
+
+  if(
+    !methodName
+    ||
+    !accountName
+    ||
+    !accountNumber
+  ){
+
+    setMsg(
+      'createMsg',
+      '请填写显示名称、收款人姓名和收款账号。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    methodType
+    ===
+    'bank'
+    &&
+    !bankName
+  ){
+
+    setMsg(
+      'createMsg',
+      '银行账户必须填写银行名称。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  if(!safeFile(file)){
+
+    setMsg(
+      'createMsg',
+      '二维码只能使用 PNG、JPG 或 WEBP，并且不能超过 8MB。',
+      'err'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !window.confirm(
+      '确认新增这个平台收款账户吗？'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  button.disabled =
+  true;
+
+
+  setMsg(
+    'createMsg',
+    '正在新增...'
+  );
+
+
+  const accountId =
+  crypto.randomUUID();
+
+
+  let qrPath =
+  null;
+
+
+  try{
+
+    if(file){
+
+      qrPath =
+      await uploadQr(
+        accountId,
+        file
+      );
+
+    }
+
+
+    const now =
+    new Date()
+    .toISOString();
+
+
+    const res =
+    await api(
+      '/rest/v1/payment_accounts',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json',
+
+          Prefer:
+          'return=representation'
+        },
+
+        body:
+        JSON.stringify({
+
+          id:
+          accountId,
+
+          method_name:
+          methodName,
+
+          method_type:
+          methodType,
+
+          account_name:
+          accountName,
+
+          account_number:
+          accountNumber,
+
+          bank_name:
+          bankName
+          ||
+          null,
+
+          qr_storage_path:
+          qrPath,
+
+          note:
+          note
+          ||
+          null,
+
+          is_active:
+          isActive,
+
+          sort_order:
+          Number.isFinite(
+            sortOrder
+          )
+          ?
+          sortOrder
+          :
+          0,
+
+          created_at:
+          now,
+
+          updated_at:
+          now,
+
+          created_by:
+          adminUserId,
+
+          updated_by:
+          adminUserId
+
+        })
+      }
+    );
+
+
+    if(!res.ok){
+
+      throw new Error(
+        'CREATE_FAILED'
+      );
+
+    }
+
+
+    document.getElementById(
+      'newMethodName'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newAccountName'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newAccountNumber'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newBankName'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newNote'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newQrFile'
+    ).value =
+    '';
+
+
+    document.getElementById(
+      'newSortOrder'
+    ).value =
+    '0';
+
+
+    setMsg(
+      'createMsg',
+      '✓ 收款账户已经新增',
+      'ok'
+    );
+
+
+    await loadAccounts();
+
+  }
+  catch{
+
+    if(qrPath){
+
+      await cleanupQr(
+        qrPath
+      );
+
+    }
+
+
+    setMsg(
+      'createMsg',
+      '新增失败，没有覆盖任何现有收款账户。',
+      'err'
+    );
+
+  }
+  finally{
+
+    button.disabled =
+    false;
+
+  }
+
+}
+
+
+async function init(){
+
+  try{
+
+    const ok =
+    await verifyAdmin();
+
+
+    if(!ok){
+
+      document
+      .getElementById(
+        'authError'
+      )
+      .classList.remove(
+        'hidden'
+      );
+
+      return;
+
+    }
+
+
+    document
+    .getElementById(
+      'mainBox'
+    )
+    .classList.remove(
+      'hidden'
+    );
+
+
+    await loadAccounts();
+
+  }
+  catch{
+
+    document
+    .getElementById(
+      'authError'
+    )
+    .classList.remove(
+      'hidden'
+    );
+
+  }
+
+}
+
+
+window.addEventListener(
+  'beforeunload',
+  ()=>{
+
+    for(
+      const url
+      of
+      qrUrls.values()
+    ){
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    }
+
+  }
+);
+
+
+init();
+
+</script>
+
+</body>
+
+</html>
