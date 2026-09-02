@@ -2588,7 +2588,71 @@ async function(
 /* =========================================================
    SITE SETTINGS / SUPPORT
 ========================================================= */
+async function loadSiteSettings(){
 
+  try{
+
+    const res =
+    await fetch(
+
+      BASE
+      +
+      '/rest/v1/site_settings?select=telegram_url,logo_data_url&id=eq.1&limit=1',
+
+      {
+
+        headers:{
+
+          apikey:
+          KEY
+
+        }
+
+      }
+
+    );
+
+
+    const rows =
+    await parseResponse(
+      res
+    );
+
+
+    siteSettings =
+    Array.isArray(rows)
+    &&
+    rows.length
+    ?
+    rows[0]
+    :
+    {
+      telegram_url:'',
+      logo_data_url:''
+    };
+
+
+    renderSupportLinks();
+
+    renderCustomerSiteLogo();
+
+  }
+  catch{
+
+    siteSettings =
+    {
+      telegram_url:'',
+      logo_data_url:''
+    };
+
+
+    renderSupportLinks();
+
+    renderCustomerSiteLogo();
+
+  }
+
+}
 function renderCustomerSiteLogo(){
 
   const logo =
