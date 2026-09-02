@@ -1593,7 +1593,18 @@ button:disabled{
 
         </div>
 
-
+        <div
+          id="kpayLimitNotice"
+          class="note hidden"
+          style="
+            margin:0 0 13px;
+            padding:12px;
+            border:1px solid rgba(214,168,63,.28);
+            border-radius:11px;
+            background:rgba(160,112,24,.10);
+            color:#e1c66f;
+          ">
+        </div>
         <div id="selectedPlatformAccount"></div>
 
 
@@ -5279,7 +5290,191 @@ uiText(
   renderSelectedPlatformAccount();
 
 }
+const KPAY_SINGLE_LIMIT =
+1000000;
 
+
+function isKPayPlatformAccount(
+  account
+){
+
+  if(!account){
+    return false;
+  }
+
+
+  const accountText =
+  (
+    String(
+      account.method_name
+      ||
+      ''
+    )
+    +
+    ' '
+    +
+    String(
+      account.bank_name
+      ||
+      ''
+    )
+  )
+  .toLowerCase()
+  .replace(
+    /[^a-z0-9]/g,
+    ''
+  );
+
+
+  return (
+    account.method_type
+    ===
+    'wallet'
+    &&
+    accountText.includes(
+      'kpay'
+    )
+  );
+
+}
+
+
+function updatePaymentAccountAvailability(
+  remaining
+){
+
+  const select =
+  document.getElementById(
+    'platformAccountSelect'
+  );
+
+
+  const notice =
+  document.getElementById(
+    'kpayLimitNotice'
+  );
+
+
+  if(!select){
+    return;
+  }
+
+
+  const overLimit =
+  Number(
+    remaining
+    ||
+    0
+  )
+  >
+  KPAY_SINGLE_LIMIT;
+
+
+  let clearSelection =
+  false;
+
+
+  Array.from(
+    select.options
+  )
+  .forEach(
+    option => {
+
+      if(!option.value){
+        return;
+      }
+
+
+      const account =
+      platformAccounts.find(
+        item =>
+        item.id
+        ===
+        option.value
+      );
+
+
+      if(!account){
+        return;
+      }
+
+
+      const blocked =
+      overLimit
+      &&
+      isKPayPlatformAccount(
+        account
+      );
+
+
+      option.disabled =
+      blocked;
+
+
+      option.textContent =
+      account.method_name
+      +
+      (
+        blocked
+        ?
+        ' · MAX 1,000,000'
+        :
+        ''
+      );
+
+
+      if(
+        blocked
+        &&
+        option.selected
+      ){
+        clearSelection =
+        true;
+      }
+
+    }
+  );
+
+
+  if(clearSelection){
+
+    select.value =
+    '';
+
+  }
+
+
+  if(notice){
+
+    if(overLimit){
+
+      notice.textContent =
+      uiText(
+        'KPay 单笔最高 1,000,000。当前待付款金额超过限额，KPay 暂不可用。可选择银行账户一次付款；如仅使用 KPay，请返回调整本期下注至 1,000,000 以内，平台确认后可在截止时间前继续追加下注。'
+      );
+
+      notice.classList.remove(
+        'hidden'
+      );
+
+    }
+    else{
+
+      notice.textContent =
+      '';
+
+      notice.classList.add(
+        'hidden'
+      );
+
+    }
+
+  }
+
+
+  renderSelectedPlatformAccount();
+
+}
 
 function renderSelectedPlatformAccount(){
 
@@ -6114,7 +6309,9 @@ function renderPaymentArea(){
     confirmed,
     0
   );
-
+  updatePaymentAccountAvailability(
+    remaining
+  );
 
   document
   .getElementById(
@@ -6783,7 +6980,31 @@ async function submitPayment(){
     );
 
   }
+  const selectedAccount =
+  platformAccounts.find(
+    account =>
+    account.id
+    ===
+    accountId
+  );
 
+
+  if(
+    isKPayPlatformAccount(
+      selectedAccount
+    )
+    &&
+    amount
+    >
+    KPAY_SINGLE_LIMIT
+  ){
+
+    return showMessage(
+      'paymentMsg',
+      'KPay 单笔最高 1,000,000。当前待付款金额超过限额，KPay 暂不可用。可选择银行账户一次付款；如仅使用 KPay，请返回调整本期下注至 1,000,000 以内，平台确认后可在截止时间前继续追加下注。'
+    );
+
+  }
 
   if(!file){
 
@@ -7790,7 +8011,15 @@ function translateError(message){
     return '此平台收款方式当前不可用，请重新选择。';
 
   }
+  if(
+    text.includes(
+      'KPAY_AMOUNT_LIMIT_EXCEEDED'
+    )
+  ){
 
+    return 'KPay 单笔最高 1,000,000。当前待付款金额超过限额，KPay 暂不可用。可选择银行账户一次付款；如仅使用 KPay，请返回调整本期下注至 1,000,000 以内，平台确认后可在截止时间前继续追加下注。';
+
+  }
 
   if(
     text.includes(
