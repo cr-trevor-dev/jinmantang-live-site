@@ -38,6 +38,14 @@ let historyPages = {
 };
 
 
+let historyFilters = {
+  year:'',
+  month:'',
+  day:'',
+  period:''
+};
+
+
 let historyData = {
   settlements:[],
   orders:[],
@@ -346,7 +354,55 @@ function ensureHistoryStyle(){
 .customerHistoryBody{
   margin-top:14px;
 }
+.customerHistoryFilter{
+  margin-bottom:12px;
+  padding:11px;
+  border-radius:13px;
+  border:
+  1px solid
+  rgba(214,168,63,.14);
+  background:
+  rgba(15,14,11,.82);
+}
 
+.customerHistoryFilterGrid{
+  display:grid;
+  grid-template-columns:
+  repeat(4,minmax(0,1fr));
+  gap:7px;
+}
+
+.customerHistoryFilter select{
+  width:100%;
+  min-width:0;
+  margin:0;
+  padding:10px 8px;
+  border-radius:10px;
+  border:
+  1px solid
+  rgba(214,168,63,.18);
+  background:#101011;
+  color:#d8c687;
+  font-size:11px;
+  font-weight:800;
+  outline:none;
+}
+
+.customerHistoryReset{
+  width:100%;
+  margin:8px 0 0!important;
+  padding:9px!important;
+  font-size:10px!important;
+}
+
+@media(max-width:680px){
+
+  .customerHistoryFilterGrid{
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  }
+
+}
 .customerHistoryTabs{
   display:grid;
   grid-template-columns:
@@ -631,7 +687,74 @@ function ensureHistoryCard(){
     <div
       id="customerHistoryBody"
       class="customerHistoryBody hidden">
+      <div class="customerHistoryFilter">
 
+        <div class="customerHistoryFilterGrid">
+
+          <select
+            id="customerHistoryYear"
+            onchange="setCustomerHistoryFilter('year',this.value)">
+
+            <option value="">
+              全部年份
+            </option>
+
+          </select>
+
+
+          <select
+            id="customerHistoryMonth"
+            onchange="setCustomerHistoryFilter('month',this.value)">
+
+            <option value="">
+              全部月份
+            </option>
+
+          </select>
+
+
+          <select
+            id="customerHistoryDay"
+            onchange="setCustomerHistoryFilter('day',this.value)">
+
+            <option value="">
+              全部日期
+            </option>
+
+          </select>
+
+
+          <select
+            id="customerHistoryPeriod"
+            onchange="setCustomerHistoryFilter('period',this.value)">
+
+            <option value="">
+              全部期别
+            </option>
+
+            <option value="1030">
+              上午期
+            </option>
+
+            <option value="1530">
+              下午期
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="secondary customerHistoryReset"
+          onclick="resetCustomerHistoryFilter()">
+
+          重置筛选
+
+        </button>
+
+      </div>
       <div class="customerHistoryTabs">
 
         <button
@@ -1800,7 +1923,521 @@ function payoutItemHtml(
 
 }
 
+/* =========================================
+   HISTORY FILTER
+========================================= */
 
+function historyRoundParts(round){
+
+  const date =
+  String(
+    round?.round_date
+    ||
+    ''
+  );
+
+
+  const match =
+  date.match(
+    /^(\d{4})-(\d{2})-(\d{2})$/
+  );
+
+
+  if(!match){
+
+    return {
+      year:'',
+      month:'',
+      day:''
+    };
+
+  }
+
+
+  return {
+    year:
+    match[1],
+
+    month:
+    match[2],
+
+    day:
+    match[3]
+  };
+
+}
+
+
+function uniqueHistoryValues(values){
+
+  return [
+    ...new Set(
+      values.filter(
+        Boolean
+      )
+    )
+  ]
+  .sort();
+
+}
+
+
+function historyFilterMatch(round){
+
+  if(!round){
+
+    return false;
+
+  }
+
+
+  const parts =
+  historyRoundParts(
+    round
+  );
+
+
+  if(
+    historyFilters.year
+    &&
+    parts.year
+    !==
+    historyFilters.year
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    historyFilters.month
+    &&
+    parts.month
+    !==
+    historyFilters.month
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    historyFilters.day
+    &&
+    parts.day
+    !==
+    historyFilters.day
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    historyFilters.period
+    &&
+    String(
+      round.round_code
+      ||
+      ''
+    )
+    !==
+    historyFilters.period
+  ){
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+function filterHistoryItems(
+  items,
+  getRoundId
+){
+
+  const rounds =
+  roundMap();
+
+
+  return items.filter(
+    item=>{
+
+      const roundId =
+      getRoundId(
+        item
+      );
+
+
+      const round =
+      rounds.get(
+        roundId
+      );
+
+
+      return historyFilterMatch(
+        round
+      );
+
+    }
+  );
+
+}
+
+
+function historyOptionHtml(
+  value,
+  label,
+  selected
+){
+
+  return `
+    <option
+      value="${hEsc(value)}"
+      ${selected ? 'selected' : ''}>
+      ${hEsc(label)}
+    </option>
+  `;
+
+}
+
+
+function setHistorySelectOptions(
+  id,
+  firstLabel,
+  values,
+  selected,
+  labelFormatter
+){
+
+  const select =
+  h$(
+    id
+  );
+
+
+  if(!select){
+
+    return;
+
+  }
+
+
+  const html =
+  [
+    historyOptionHtml(
+      '',
+      firstLabel,
+      !selected
+    ),
+
+    ...values.map(
+      value=>
+      historyOptionHtml(
+        value,
+        labelFormatter(
+          value
+        ),
+        selected
+        ===
+        value
+      )
+    )
+  ];
+
+
+  select.innerHTML =
+  html.join('');
+
+}
+
+
+function renderHistoryFilterOptions(){
+
+  const allRounds =
+  historyData.rounds
+  .filter(
+    round=>
+    Boolean(
+      round?.round_date
+    )
+  );
+
+
+  const years =
+  uniqueHistoryValues(
+    allRounds.map(
+      round=>
+      historyRoundParts(
+        round
+      ).year
+    )
+  );
+
+
+  if(
+    historyFilters.year
+    &&
+    !years.includes(
+      historyFilters.year
+    )
+  ){
+
+    historyFilters.year =
+    '';
+
+  }
+
+
+  const yearRounds =
+  historyFilters.year
+  ?
+  allRounds.filter(
+    round=>
+    historyRoundParts(
+      round
+    ).year
+    ===
+    historyFilters.year
+  )
+  :
+  allRounds;
+
+
+  const months =
+  uniqueHistoryValues(
+    yearRounds.map(
+      round=>
+      historyRoundParts(
+        round
+      ).month
+    )
+  );
+
+
+  if(
+    historyFilters.month
+    &&
+    !months.includes(
+      historyFilters.month
+    )
+  ){
+
+    historyFilters.month =
+    '';
+
+  }
+
+
+  const monthRounds =
+  historyFilters.month
+  ?
+  yearRounds.filter(
+    round=>
+    historyRoundParts(
+      round
+    ).month
+    ===
+    historyFilters.month
+  )
+  :
+  yearRounds;
+
+
+  const days =
+  uniqueHistoryValues(
+    monthRounds.map(
+      round=>
+      historyRoundParts(
+        round
+      ).day
+    )
+  );
+
+
+  if(
+    historyFilters.day
+    &&
+    !days.includes(
+      historyFilters.day
+    )
+  ){
+
+    historyFilters.day =
+    '';
+
+  }
+
+
+  setHistorySelectOptions(
+    'customerHistoryYear',
+    '全部年份',
+    years,
+    historyFilters.year,
+    value=>
+    value
+  );
+
+
+  setHistorySelectOptions(
+    'customerHistoryMonth',
+    '全部月份',
+    months,
+    historyFilters.month,
+    value=>
+    value
+  );
+
+
+  setHistorySelectOptions(
+    'customerHistoryDay',
+    '全部日期',
+    days,
+    historyFilters.day,
+    value=>
+    value
+  );
+
+
+  const period =
+  h$(
+    'customerHistoryPeriod'
+  );
+
+
+  if(period){
+
+    period.innerHTML =
+    [
+      historyOptionHtml(
+        '',
+        '全部期别',
+        !historyFilters.period
+      ),
+
+      historyOptionHtml(
+        '1030',
+        '上午期',
+        historyFilters.period
+        ===
+        '1030'
+      ),
+
+      historyOptionHtml(
+        '1530',
+        '下午期',
+        historyFilters.period
+        ===
+        '1530'
+      )
+    ]
+    .join('');
+
+  }
+
+}
+
+
+window.setCustomerHistoryFilter =
+function(
+  key,
+  value
+){
+
+  if(
+    ![
+      'year',
+      'month',
+      'day',
+      'period'
+    ]
+    .includes(
+      key
+    )
+  ){
+
+    return;
+
+  }
+
+
+  historyFilters[
+    key
+  ] =
+  String(
+    value
+    ||
+    ''
+  );
+
+
+  if(
+    key
+    ===
+    'year'
+  ){
+
+    historyFilters.month =
+    '';
+
+    historyFilters.day =
+    '';
+
+  }
+
+
+  if(
+    key
+    ===
+    'month'
+  ){
+
+    historyFilters.day =
+    '';
+
+  }
+
+
+  historyPages = {
+    rounds:1,
+    payments:1,
+    payouts:1
+  };
+
+
+  renderHistory();
+
+};
+
+
+window.resetCustomerHistoryFilter =
+function(){
+
+  historyFilters = {
+    year:'',
+    month:'',
+    day:'',
+    period:''
+  };
+
+
+  historyPages = {
+    rounds:1,
+    payments:1,
+    payouts:1
+  };
+
+
+  renderHistory();
+
+};
 /* =========================================
    PAGING / RENDER
 ========================================= */
@@ -1925,10 +2562,16 @@ function renderHistory(){
   );
 
 
-  if(!list){
+    if(!list){
     return;
   }
+
+
+  renderHistoryFilterOptions();
+
+
   refreshHistoryLanguage();
+
 
   [
     'rounds',
@@ -1979,8 +2622,12 @@ function renderHistory(){
     refundMap();
 
 
-    const items =
-    historyData.payments;
+        const items =
+    filterHistoryItems(
+      historyData.payments,
+      item=>
+      item.round_id
+    );
 
 
     if(!items.length){
@@ -2028,17 +2675,24 @@ function renderHistory(){
     payoutMap();
 
 
-    const items =
-    historyData.settlements
-    .filter(
-      item=>
-      Number(
-        item.payout_due
-        ||
+        const items =
+    filterHistoryItems(
+
+      historyData.settlements
+      .filter(
+        item=>
+        Number(
+          item.payout_due
+          ||
+          0
+        )
+        >
         0
-      )
-      >
-      0
+      ),
+
+      item=>
+      item.round_id
+
     );
 
 
@@ -2081,8 +2735,12 @@ function renderHistory(){
   orderMap();
 
 
-  const items =
-  historyData.settlements;
+    const items =
+  filterHistoryItems(
+    historyData.settlements,
+    item=>
+    item.round_id
+  );
 
 
   if(!items.length){
