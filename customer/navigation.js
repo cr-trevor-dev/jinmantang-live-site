@@ -410,7 +410,7 @@ function installNavigation(){
         收款
 
         <span>
-          KPay · 银行
+          电子钱包 / 银行
         </span>
 
       </button>
