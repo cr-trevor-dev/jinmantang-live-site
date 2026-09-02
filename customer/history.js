@@ -2992,7 +2992,24 @@ async function loadHistory(
     Date.now();
 
 
-    renderHistory();
+    const hasOpenHistoryDetail =
+Boolean(
+  h$(
+    'customerHistoryList'
+  )
+  ?.querySelector(
+    'details.customerHistoryItem[open]'
+  )
+);
+
+
+if(
+  !hasOpenHistoryDetail
+){
+
+  renderHistory();
+
+}
 
   }
   catch(error){
