@@ -2589,63 +2589,59 @@ async function(
    SITE SETTINGS / SUPPORT
 ========================================================= */
 
-async function loadSiteSettings(){
+function renderCustomerSiteLogo(){
 
-  try{
-
-    const res =
-    await fetch(
-
-      BASE
-      +
-      '/rest/v1/site_settings?select=telegram_url&id=eq.1&limit=1',
-
-      {
-
-        headers:{
-
-          apikey:
-          KEY
-
-        }
-
-      }
-
-    );
+  const logo =
+  document.getElementById(
+    'customerSiteLogo'
+  );
 
 
-    const rows =
-    await parseResponse(
-      res
-    );
+  if(!logo){
+    return;
+  }
 
 
-    siteSettings =
-    Array.isArray(rows)
-    &&
-    rows.length
-    ?
-    rows[0]
-    :
-    {
-      telegram_url:''
-    };
+  const logoData =
+  String(
+    siteSettings?.logo_data_url
+    ||
+    ''
+  )
+  .trim();
 
 
-    renderSupportLinks();
+  if(!logoData){
+
+    logo.textContent =
+    '金';
+
+    return;
 
   }
-  catch{
-
-    siteSettings =
-    {
-      telegram_url:''
-    };
 
 
-    renderSupportLinks();
+  logo.innerHTML =
+  '';
 
-  }
+
+  const img =
+  document.createElement(
+    'img'
+  );
+
+
+  img.src =
+  logoData;
+
+
+  img.alt =
+  'JIN MANTANG';
+
+
+  logo.appendChild(
+    img
+  );
 
 }
 
