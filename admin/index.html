@@ -704,7 +704,7 @@ button.danger{
 
     </div>
     <div
-      class="card"
+            class="card hidden"
       id="roundZodiacSummaryCard">
 
       <div class="title">
@@ -714,7 +714,7 @@ button.danger{
       <div class="summaryGrid">
 
         <div class="summaryBox">
-          <small>正式有效总额</small>
+                    <small>本期总金额</small>
           <strong id="summaryZodiacConfirmed">
             0
           </strong>
@@ -726,7 +726,19 @@ button.danger{
             —
           </strong>
         </div>
+        <div class="summaryBox">
+          <small>代理客户金额</small>
+          <strong id="summaryAgentConfirmed">
+            0
+          </strong>
+        </div>
 
+        <div class="summaryBox">
+          <small>平台主管金额</small>
+          <strong id="summaryPlatformDirectConfirmed">
+            0
+          </strong>
+        </div>
       </div>
 
       <div
@@ -739,7 +751,16 @@ button.danger{
         只统计管理员已确认金额；
         待审核和未确认金额不会进入正式本期汇总。
       </div>
-
+      <button
+        type="button"
+        class="secondary"
+        onclick="
+          document
+          .getElementById('roundZodiacSummaryCard')
+          ?.classList.add('hidden')
+        ">
+        收起本期汇总
+      </button>
     </div>
     <div class="card">
 
@@ -818,7 +839,30 @@ button.danger{
             安全测试开奖流程，不修改正式数据
           </div>
         </a>
-
+        <a
+          class="menu"
+          href="#roundZodiacSummaryCard"
+          onclick="
+            const card=document.getElementById('roundZodiacSummaryCard');
+            if(card){
+              card.classList.toggle('hidden');
+              if(!card.classList.contains('hidden')){
+                setTimeout(()=>{
+                  card.scrollIntoView({
+                    behavior:'smooth',
+                    block:'start'
+                  });
+                },0);
+              }
+            }
+            return false;
+          ">
+          <div class="menuIcon">📈</div>
+          <div class="menuTitle">本期汇总</div>
+          <div class="menuSub">
+            总金额、代理金额、平台主管金额与生肖分布
+          </div>
+        </a>
       </div>
 
     </div>
@@ -2336,14 +2380,54 @@ async function loadDashboardSummary(){
       ??
       10
     );
+    const agentConfirmedTotal =
+    (
+      Array.isArray(
+        summary?.agents
+      )
+      ?
+      summary.agents
+      :
+      []
+    )
+    .reduce(
+      (total,row)=>
+      total
+      +
+      Number(
+        row.confirmed_total
+        ||
+        0
+      ),
+      0
+    );
 
+    const platformDirectConfirmed =
+    Number(
+      summary?.platform_direct
+      ?.confirmed_total
+      ||
+      0
+    );
     document.getElementById(
       'summaryZodiacConfirmed'
     ).textContent =
     formatNumber(
       confirmedTotal
     );
+    document.getElementById(
+      'summaryAgentConfirmed'
+    ).textContent =
+    formatNumber(
+      agentConfirmedTotal
+    );
 
+    document.getElementById(
+      'summaryPlatformDirectConfirmed'
+    ).textContent =
+    formatNumber(
+      platformDirectConfirmed
+    );
     document.getElementById(
       'summaryZodiacOdds'
     ).textContent =
@@ -2513,6 +2597,15 @@ function renderNoRound(){
   '—';
   document.getElementById(
     'summaryZodiacConfirmed'
+  ).textContent =
+  '0';
+    document.getElementById(
+    'summaryAgentConfirmed'
+  ).textContent =
+  '0';
+
+  document.getElementById(
+    'summaryPlatformDirectConfirmed'
   ).textContent =
   '0';
 
