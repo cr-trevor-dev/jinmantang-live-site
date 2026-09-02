@@ -1,0 +1,22 @@
+{
+  "id": "/customer/",
+  "name": "金满堂客户",
+  "short_name": "金满堂客户",
+  "start_url": "/customer/",
+  "scope": "/customer/",
+  "display": "standalone",
+  "background_color": "#080706",
+  "theme_color": "#080706",
+  "icons": [
+    {
+      "src": "/IMG_1429.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/IMG_1430.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
