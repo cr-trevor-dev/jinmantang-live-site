@@ -763,7 +763,29 @@ function applyCurrentView(){
 
 
   renderViewIntro();
+  const languageSelect =
+  nav$(
+    'customerLangSelect'
+  );
 
+
+  if(
+    languageSelect
+    &&
+    typeof window
+    .changeCustomerLanguage
+    ===
+    'function'
+  ){
+
+    window
+    .changeCustomerLanguage(
+      languageSelect.value
+      ||
+      'zh'
+    );
+
+  }
 
   
 
