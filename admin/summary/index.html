@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<meta
+  name="theme-color"
+  content="#09090a">
+
+<title>金满堂 · 本期汇总</title>
+
+<style>
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+  radial-gradient(
+    circle at top,
+    #251907 0,
+    #0d0c0a 38%,
+    #070708 100%
+  );
+  color:#f7f0df;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  min-height:100vh;
+  padding:22px 15px 55px
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:20px
+}
+
+.mark{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  font-size:27px;
+  font-weight:900;
+  color:#f6da86;
+  border:1px solid #b98a2c;
+  background:
+  linear-gradient(
+    145deg,
+    #382506,
+    #100d08
+  );
+  box-shadow:
+  0 0 28px
+  rgba(235,185,62,.22)
+}
+
+.cn{
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:4px;
+  color:#f3d889
+}
+
+.en{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#9f916d;
+  margin-top:5px
+}
+
+.back{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:14px;
+  color:#d8bf73;
+  background:#121213;
+  border:
+  1px solid
+  rgba(214,168,63,.18)
+}
+
+.card{
+  background:
+  linear-gradient(
+    180deg,
+    rgba(22,22,22,.98),
+    rgba(11,11,12,.98)
+  );
+  border:
+  1px solid
+  rgba(214,168,63,.30);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:
+  0 22px 60px
+  rgba(0,0,0,.32)
+}
+
+.title{
+  color:#dfc575;
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:14px
+}
+
+.roundInfo{
+  padding:13px 14px;
+  border-radius:14px;
+  background:#101011;
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+  margin-bottom:14px
+}
+
+.roundInfo small{
+  display:block;
+  color:#817a6d;
+  font-size:10px;
+  margin-bottom:5px
+}
+
+.roundInfo strong{
+  display:block;
+  color:#ead078;
+  font-size:16px;
+  line-height:1.45
+}
+
+.topGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.metric{
+  min-height:112px;
+  border-radius:17px;
+  padding:16px;
+  background:#101011;
+  border:1px solid rgba(255,255,255,.07)
+}
+
+.metric small{
+  display:block;
+  font-size:11px;
+  margin-bottom:10px;
+  color:#8e877a
+}
+
+.metric strong{
+  display:block;
+  font-size:24px;
+  line-height:1.3;
+  word-break:break-word
+}
+
+.metric.total{
+  border-color:rgba(235,197,91,.40);
+  background:
+  linear-gradient(
+    145deg,
+    rgba(66,48,11,.55),
+    #101011
+  )
+}
+
+.metric.total strong{
+  color:#f2d16f
+}
+
+.metric.odds{
+  border-color:rgba(183,167,255,.28);
+  background:
+  linear-gradient(
+    145deg,
+    rgba(50,43,83,.40),
+    #101011
+  )
+}
+
+.metric.odds strong{
+  color:#b7a7ff
+}
+
+.metric.agent{
+  border-color:rgba(116,214,160,.28);
+  background:
+  linear-gradient(
+    145deg,
+    rgba(30,70,48,.40),
+    #101011
+  )
+}
+
+.metric.agent strong{
+  color:#74d6a0
+}
+
+.metric.remaining{
+  border-color:rgba(114,200,232,.28);
+  background:
+  linear-gradient(
+    145deg,
+    rgba(25,57,71,.42),
+    #101011
+  )
+}
+
+.metric.remaining strong{
+  color:#72c8e8
+}
+
+.sectionTitle{
+  margin:20px 0 11px;
+  color:#cbb46e;
+  font-size:13px;
+  font-weight:900
+}
+
+.zodiacGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.zodiac{
+  min-height:112px;
+  padding:15px;
+  border-radius:16px;
+  background:#0f0f10;
+  border:
+  1px solid
+  rgba(214,168,63,.16)
+}
+
+.zodiacTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px
+}
+
+.zodiacName{
+  color:#e8cd75;
+  font-weight:900;
+  font-size:16px
+}
+
+.zodiacCode{
+  color:#6f695e;
+  font-size:9px
+}
+
+.zodiacAmount{
+  margin-top:10px;
+  color:#f2d16f;
+  font-size:21px;
+  font-weight:900
+}
+
+.zodiacPayout{
+  margin-top:8px;
+  color:#8c8475;
+  font-size:10px;
+  line-height:1.5
+}
+
+.note{
+  margin-top:14px;
+  padding:13px;
+  border-radius:13px;
+  background:#15120b;
+  border:
+  1px solid
+  rgba(214,168,63,.16);
+  color:#9e9275;
+  font-size:11px;
+  line-height:1.7
+}
+
+.refresh{
+  width:100%;
+  margin-top:13px;
+  border:0;
+  border-radius:13px;
+  padding:13px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  color:#171109;
+  background:
+  linear-gradient(
+    180deg,
+    #f1d784,
+    #b47d20
+  )
+}
+
+.status{
+  min-height:20px;
+  text-align:center;
+  color:#817a6d;
+  font-size:11px;
+  margin-top:12px
+}
+
+.foot{
+  text-align:center;
+  color:#706b62;
+  font-size:10px;
+  margin-top:24px
+}
+
+@media(max-width:430px){
+
+  .metric{
+    min-height:105px;
+    padding:14px
+  }
+
+  .metric strong{
+    font-size:20px
+  }
+
+  .zodiac{
+    min-height:105px;
+    padding:13px
+  }
+
+  .zodiacAmount{
+    font-size:18px
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+
+    <div class="mark">
+      金
+    </div>
+
+    <div class="cn">
+      金满堂
+    </div>
+
+    <div class="en">
+      CURRENT ROUND SUMMARY
+    </div>
+
+  </div>
+
+
+  <a
+    class="back"
+    href="/admin/">
+    ← 返回管理中心
+  </a>
+
+
+  <section class="card">
+
+    <div class="title">
+      本期汇总
+    </div>
+
+    <div class="roundInfo">
+
+      <small>
+        当前期数
+      </small>
+
+      <strong id="roundName">
+        正在读取...
+      </strong>
+
+    </div>
+
+
+    <div class="topGrid">
+
+      <div class="metric total">
+
+        <small>
+          本期总金额
+        </small>
+
+        <strong id="totalAmount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="metric odds">
+
+        <small>
+          本期赔率
+        </small>
+
+        <strong id="roundOdds">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="metric agent">
+
+        <small>
+          代理客户金额
+        </small>
+
+        <strong id="agentAmount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="metric remaining">
+
+        <small>
+          扣除代理后金额
+        </small>
+
+        <strong id="remainingAmount">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="sectionTitle">
+      本期生肖确认金额
+    </div>
+
+
+    <div
+      class="zodiacGrid"
+      id="zodiacGrid">
+    </div>
+
+
+    <div class="note">
+
+      本页面只统计管理员已经确认的金额。
+
+      待审核金额、客户仅保存但尚未确认的金额，
+      都不会进入正式本期汇总。
+
+      “扣除代理后金额”
+      =
+      本期总金额
+      -
+      代理客户金额。
+
+    </div>
+
+
+    <button
+      class="refresh"
+      type="button"
+      onclick="loadSummary()">
+      刷新本期汇总
+    </button>
+
+
+    <div
+      class="status"
+      id="statusText">
+    </div>
+
+  </section>
+
+
+  <div class="foot">
+    © JIN MANTANG · ROUND SUMMARY
+  </div>
+
+</div>
+
+
+<script>
+
+const BASE =
+location.origin
++
+'/supabase';
+
+
+const KEY =
+'sb_publishable_mZe5EwSSrSubPL5K5yvJcw_J8LjdiXN';
+
+
+const ZODIAC =
+[
+  ['01','鼠'],
+  ['02','牛'],
+  ['03','虎'],
+  ['04','兔'],
+  ['05','龙'],
+  ['06','蛇'],
+  ['07','马'],
+  ['08','羊'],
+  ['09','猴'],
+  ['10','鸡'],
+  ['11','狗'],
+  ['12','猪']
+];
+
+
+let token =
+localStorage.getItem(
+  'jmt_access_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_access_token'
+)
+||
+'';
+
+
+let refreshToken =
+localStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+sessionStorage.getItem(
+  'jmt_refresh_token'
+)
+||
+'';
+
+
+let refreshPromise =
+null;
+
+
+function formatNumber(value){
+
+  return new Intl.NumberFormat(
+    'en-US',
+    {
+      maximumFractionDigits:2
+    }
+  )
+  .format(
+    Number(value || 0)
+  );
+
+}
+
+
+function periodName(code){
+
+  const value =
+  String(code || '');
+
+  if(value === '1030'){
+    return 'AM 11:45';
+  }
+
+  if(value === '1530'){
+    return 'PM 3:45';
+  }
+
+  return value || '—';
+
+}
+
+
+function saveSession(data){
+
+  if(data?.access_token){
+
+    token =
+    data.access_token;
+
+    localStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+    sessionStorage.setItem(
+      'jmt_access_token',
+      token
+    );
+
+  }
+
+
+  if(data?.refresh_token){
+
+    refreshToken =
+    data.refresh_token;
+
+    localStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+    sessionStorage.setItem(
+      'jmt_refresh_token',
+      refreshToken
+    );
+
+  }
+
+}
+
+
+async function refreshSession(){
+
+  if(!refreshToken){
+    return false;
+  }
+
+
+  if(refreshPromise){
+    return refreshPromise;
+  }
+
+
+  refreshPromise =
+  (
+    async()=>{
+
+      try{
+
+        const response =
+        await fetch(
+          BASE
+          +
+          '/auth/v1/token?grant_type=refresh_token',
+          {
+            method:'POST',
+
+            headers:{
+              apikey:KEY,
+              'Content-Type':
+              'application/json'
+            },
+
+            body:
+            JSON.stringify({
+              refresh_token:
+              refreshToken
+            })
+          }
+        );
+
+
+        if(!response.ok){
+          return false;
+        }
+
+
+        const data =
+        await response.json();
+
+
+        if(!data?.access_token){
+          return false;
+        }
+
+
+        saveSession(data);
+
+        return true;
+
+      }
+      catch(error){
+
+        return false;
+
+      }
+      finally{
+
+        refreshPromise =
+        null;
+
+      }
+
+    }
+  )();
+
+
+  return refreshPromise;
+
+}
+
+
+async function request(
+  path,
+  options={},
+  retry=true
+){
+
+  const headers =
+  {
+    apikey:KEY,
+    ...(options.headers || {})
+  };
+
+
+  if(token){
+
+    headers.Authorization =
+    'Bearer '
+    +
+    token;
+
+  }
+
+
+  let response =
+  await fetch(
+    BASE
+    +
+    path,
+    {
+      ...options,
+      headers
+    }
+  );
+
+
+  if(
+    response.status === 401
+    &&
+    retry
+    &&
+    await refreshSession()
+  ){
+
+    return request(
+      path,
+      options,
+      false
+    );
+
+  }
+
+
+  return response;
+
+}
+
+
+function renderEmpty(){
+
+  document.getElementById(
+    'roundName'
+  ).textContent =
+  '暂无开放期';
+
+
+  document.getElementById(
+    'totalAmount'
+  ).textContent =
+  '0';
+
+
+  document.getElementById(
+    'roundOdds'
+  ).textContent =
+  '—';
+
+
+  document.getElementById(
+    'agentAmount'
+  ).textContent =
+  '0';
+
+
+  document.getElementById(
+    'remainingAmount'
+  ).textContent =
+  '0';
+
+
+  document.getElementById(
+    'zodiacGrid'
+  ).innerHTML =
+  ZODIAC
+  .map(
+    ([code,name])=>
+    `
+      <div class="zodiac">
+
+        <div class="zodiacTop">
+
+          <div class="zodiacName">
+            ${name}
+          </div>
+
+          <div class="zodiacCode">
+            ${code}
+          </div>
+
+        </div>
+
+        <div class="zodiacAmount">
+          0
+        </div>
+
+        <div class="zodiacPayout">
+          若开出预计返还 0
+        </div>
+
+      </div>
+    `
+  )
+  .join('');
+
+}
+
+
+function renderZodiac(
+  rows,
+  multiplier
+){
+
+  const map =
+  new Map(
+    (
+      Array.isArray(rows)
+      ?
+      rows
+      :
+      []
+    )
+    .map(
+      row=>
+      [
+        String(
+          row.number_code || ''
+        ),
+        row
+      ]
+    )
+  );
+
+
+  document.getElementById(
+    'zodiacGrid'
+  ).innerHTML =
+  ZODIAC
+  .map(
+    ([code,name])=>{
+
+      const row =
+      map.get(code)
+      ||
+      {};
+
+
+      const confirmed =
+      Number(
+        row.confirmed_total
+        ||
+        0
+      );
+
+
+      const estimatedPayout =
+      confirmed
+      *
+      multiplier;
+
+
+      return `
+        <div class="zodiac">
+
+          <div class="zodiacTop">
+
+            <div class="zodiacName">
+              ${name}
+            </div>
+
+            <div class="zodiacCode">
+              ${code}
+            </div>
+
+          </div>
+
+          <div class="zodiacAmount">
+            ${formatNumber(
+              confirmed
+            )}
+          </div>
+
+          <div class="zodiacPayout">
+            若开出预计返还
+            ${formatNumber(
+              estimatedPayout
+            )}
+          </div>
+
+        </div>
+      `;
+
+    }
+  )
+  .join('');
+
+}
+
+
+async function loadSummary(){
+
+  const status =
+  document.getElementById(
+    'statusText'
+  );
+
+
+  status.textContent =
+  '正在读取本期数据...';
+
+
+  try{
+
+    if(
+      !token
+      &&
+      !refreshToken
+    ){
+
+      location.replace(
+        '/admin/'
+      );
+
+      return;
+
+    }
+
+
+    const roundResponse =
+    await request(
+      '/rest/v1/rounds'
+      +
+      '?select=id,round_date,round_code,deadline_at,status,result_number,payout_multiplier,created_at'
+      +
+      '&status=eq.open'
+      +
+      '&order=created_at.desc'
+      +
+      '&limit=1'
+    );
+
+
+    if(
+      roundResponse.status === 401
+      ||
+      roundResponse.status === 403
+    ){
+
+      location.replace(
+        '/admin/'
+      );
+
+      return;
+
+    }
+
+
+    if(!roundResponse.ok){
+
+      throw new Error(
+        await roundResponse.text()
+      );
+
+    }
+
+
+    const rounds =
+    await roundResponse.json();
+
+
+    const round =
+    Array.isArray(rounds)
+    ?
+    rounds[0]
+    :
+    null;
+
+
+    if(!round){
+
+      renderEmpty();
+
+      status.textContent =
+      '当前没有开放期';
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      'roundName'
+    ).textContent =
+    round.round_date
+    +
+    ' · '
+    +
+    periodName(
+      round.round_code
+    );
+
+
+    const summaryResponse =
+    await request(
+      '/rest/v1/rpc/admin_round_finance_summary',
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_round_id:
+          round.id
+        })
+      }
+    );
+
+
+    if(
+      summaryResponse.status === 401
+      ||
+      summaryResponse.status === 403
+    ){
+
+      location.replace(
+        '/admin/'
+      );
+
+      return;
+
+    }
+
+
+    if(!summaryResponse.ok){
+
+      throw new Error(
+        await summaryResponse.text()
+      );
+
+    }
+
+
+    const summary =
+    await summaryResponse.json();
+
+
+    const total =
+    Number(
+      summary?.confirmed_total
+      ||
+      0
+    );
+
+
+    const agentTotal =
+    (
+      Array.isArray(
+        summary?.agents
+      )
+      ?
+      summary.agents
+      :
+      []
+    )
+    .reduce(
+      (sum,row)=>
+      sum
+      +
+      Number(
+        row.confirmed_total
+        ||
+        0
+      ),
+      0
+    );
+
+
+    const remaining =
+    Math.max(
+      total
+      -
+      agentTotal,
+      0
+    );
+
+
+    const multiplier =
+    Number(
+      round.payout_multiplier
+      ??
+      10
+    );
+
+
+    document.getElementById(
+      'totalAmount'
+    ).textContent =
+    formatNumber(
+      total
+    );
+
+
+    document.getElementById(
+      'roundOdds'
+    ).textContent =
+    '1 : '
+    +
+    formatNumber(
+      multiplier
+    );
+
+
+    document.getElementById(
+      'agentAmount'
+    ).textContent =
+    formatNumber(
+      agentTotal
+    );
+
+
+    document.getElementById(
+      'remainingAmount'
+    ).textContent =
+    formatNumber(
+      remaining
+    );
+
+
+    renderZodiac(
+      summary?.zodiac,
+      multiplier
+    );
+
+
+    status.textContent =
+    '✓ 已读取数据库最新状态';
+
+  }
+  catch(error){
+
+    console.error(
+      'round summary',
+      error
+    );
+
+
+    status.textContent =
+    '读取失败，请返回管理中心后重新进入';
+
+  }
+
+}
+
+
+renderEmpty();
+
+loadSummary();
+
+
+setInterval(
+  loadSummary,
+  20000
+);
+
+</script>
+
+</body>
+
+</html>
