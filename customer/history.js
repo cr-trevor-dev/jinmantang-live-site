@@ -64,7 +64,82 @@ function h$(id){
   return document.getElementById(id);
 }
 
+function refreshHistoryLanguage(){
 
+  setTimeout(
+    ()=>{
+
+      const root =
+      h$(
+        'customerHistoryCard'
+      );
+
+
+      if(
+        !root
+        ||
+        typeof window
+        .customerTranslateValue
+        !==
+        'function'
+      ){
+
+        return;
+
+      }
+
+
+      const walker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT
+      );
+
+
+      const nodes =
+      [];
+
+
+      while(
+        walker.nextNode()
+      ){
+
+        nodes.push(
+          walker.currentNode
+        );
+
+      }
+
+
+      nodes.forEach(
+        node=>{
+
+          const next =
+          window
+          .customerTranslateValue(
+            node.nodeValue
+          );
+
+
+          if(
+            next
+            !==
+            node.nodeValue
+          ){
+
+            node.nodeValue =
+            next;
+
+          }
+
+        }
+      );
+
+    },
+    0
+  );
+
+}
 function hEsc(value){
 
   return String(
@@ -605,10 +680,13 @@ function ensureHistoryCard(){
   `;
 
 
-  roundCard.parentNode.insertBefore(
+    roundCard.parentNode.insertBefore(
     card,
     roundCard
   );
+
+
+  refreshHistoryLanguage();
 
 
   return card;
@@ -1850,7 +1928,7 @@ function renderHistory(){
   if(!list){
     return;
   }
-
+  refreshHistoryLanguage();
 
   [
     'rounds',
@@ -2279,7 +2357,7 @@ async function loadHistory(
       '<div class="customerHistoryEmpty">历史记录读取失败，请稍后刷新重试。</div>';
 
     }
-
+     refreshHistoryLanguage();
   }
   finally{
 
@@ -2336,7 +2414,7 @@ function(){
 
   }
 
-
+  refreshHistoryLanguage();
   if(historyOpen){
 
     loadHistory(
