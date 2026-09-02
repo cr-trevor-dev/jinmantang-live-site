@@ -1714,9 +1714,17 @@ async function loadAccounts(){
     'accountList'
   );
 
+  const inactiveList =
+  document.getElementById(
+    'inactiveAccountList'
+  );
+
 
   list.innerHTML =
   '<div class="empty">正在读取...</div>';
+
+  inactiveList.innerHTML =
+  '';
 
 
   try{
@@ -1768,456 +1776,822 @@ async function loadAccounts(){
 }
 
 
-function renderAccounts(){
+function updateInactiveVisibility(){
 
-  const list =
+  const panel =
   document.getElementById(
-    'accountList'
+    'inactivePanel'
+  );
+
+  const toggle =
+  document.getElementById(
+    'inactiveToggle'
   );
 
 
-  list.innerHTML =
-  '';
-
-
-  if(
-    !accounts.length
-  ){
-
-    list.innerHTML =
-    '<div class="empty">目前没有收款账户</div>';
+  if(!panel || !toggle){
 
     return;
 
   }
 
 
-  accounts.forEach(
-    account=>{
+  if(inactiveExpanded){
 
-      const card =
-      document.createElement(
-        'div'
-      );
+    panel.classList.remove(
+      'hidden'
+    );
 
-      card.className =
-      'accountCard';
+    toggle.classList.add(
+      'open'
+    );
 
-      card.dataset.id =
-      account.id;
+  }
+  else{
 
+    panel.classList.add(
+      'hidden'
+    );
 
-      const head =
-      document.createElement(
-        'div'
-      );
+    toggle.classList.remove(
+      'open'
+    );
 
-      head.className =
-      'accountHead';
+  }
 
-
-      const left =
-      document.createElement(
-        'div'
-      );
+}
 
 
-      const name =
-      document.createElement(
-        'div'
-      );
+function toggleInactiveAccounts(){
 
-      name.className =
-      'accountName';
-
-      name.textContent =
-      account.method_name
-      ||
-      '收款账户';
+  const inactiveAccounts =
+  accounts.filter(
+    account=>
+    !account.is_active
+  );
 
 
-      const meta =
-      document.createElement(
-        'div'
-      );
+  if(!inactiveAccounts.length){
 
-      meta.className =
-      'accountMeta';
+    return;
 
-      meta.textContent =
-      account.id;
+  }
 
 
-      left.append(
-        name,
-        meta
-      );
+  inactiveExpanded =
+  !inactiveExpanded;
 
 
-      const badge =
-      document.createElement(
-        'div'
-      );
+  updateInactiveVisibility();
 
-      badge.className =
-      'badge '
-      +
-      (
-        account.is_active
-        ?
-        'active'
-        :
-        'inactive'
-      );
+}
 
-      badge.textContent =
+
+function renderAccounts(){
+
+  const activeList =
+  document.getElementById(
+    'accountList'
+  );
+
+  const inactiveList =
+  document.getElementById(
+    'inactiveAccountList'
+  );
+
+  const activeCount =
+  document.getElementById(
+    'activeCount'
+  );
+
+  const inactiveCount =
+  document.getElementById(
+    'inactiveCount'
+  );
+
+  const inactiveToggleSub =
+  document.getElementById(
+    'inactiveToggleSub'
+  );
+
+  const createButton =
+  document.getElementById(
+    'createButton'
+  );
+
+
+  activeList.innerHTML =
+  '';
+
+  inactiveList.innerHTML =
+  '';
+
+
+  const activeAccounts =
+  accounts.filter(
+    account=>
+    Boolean(
       account.is_active
-      ?
-      '已启用'
-      :
-      '已停用';
+    )
+  );
 
 
-      head.append(
-        left,
-        badge
-      );
+  const inactiveAccounts =
+  accounts.filter(
+    account=>
+    !account.is_active
+  );
 
 
-      card.appendChild(
-        head
-      );
+  activeCount.textContent =
+  String(
+    activeAccounts.length
+  );
 
+  inactiveCount.textContent =
+  String(
+    inactiveAccounts.length
+  );
 
-      const two1 =
-      document.createElement(
-        'div'
-      );
 
-      two1.className =
-      'two';
+  inactiveToggleSub.textContent =
+  inactiveAccounts.length
+  ?
+  '点击展开查看 '
+  +
+  inactiveAccounts.length
+  +
+  ' 个备用账户'
+  :
+  '当前没有停用账户';
 
 
-      const type =
-      selectType(
-        account.method_type
-      );
+  if(createButton){
 
-      type.dataset.role =
-      'methodType';
+    const reachedLimit =
+    accounts.length
+    >=
+    6;
 
+    createButton.disabled =
+    reachedLimit;
 
-      const methodName =
-      input(
-        account.method_name,
-        '显示名称'
-      );
+    createButton.textContent =
+    reachedLimit
+    ?
+    '已达到最多 6 个账户'
+    :
+    '新增收款账户';
 
-      methodName.dataset.role =
-      'methodName';
+  }
 
 
-      two1.append(
-        field(
-          '收款类型',
-          type
-        ),
-        field(
-          '显示名称',
-          methodName
-        )
-      );
+  if(!activeAccounts.length){
 
+    activeList.innerHTML =
+    '<div class="empty">当前没有启用中的收款账户</div>';
 
-      card.appendChild(
-        two1
-      );
+  }
+  else{
 
-
-      const two2 =
-      document.createElement(
-        'div'
-      );
-
-      two2.className =
-      'two';
-
-
-      const accountName =
-      input(
-        account.account_name,
-        '收款人姓名'
-      );
-
-      accountName.dataset.role =
-      'accountName';
-
-
-      const accountNumber =
-      input(
-        account.account_number,
-        '手机号 / 银行账号'
-      );
-
-      accountNumber.dataset.role =
-      'accountNumber';
-
-
-      two2.append(
-        field(
-          '收款人姓名',
-          accountName
-        ),
-        field(
-          '手机号 / 银行账号',
-          accountNumber
-        )
-      );
-
-
-      card.appendChild(
-        two2
-      );
-
-
-      const bankName =
-      input(
-        account.bank_name,
-        '银行名称；K Pay 可留空'
-      );
-
-      bankName.dataset.role =
-      'bankName';
-
-
-      card.appendChild(
-        field(
-          '银行名称',
-          bankName
-        )
-      );
-
-
-      const note =
-      document.createElement(
-        'textarea'
-      );
-
-      note.value =
-      account.note
-      ??
-      '';
-
-      note.placeholder =
-      '客户看到的付款说明';
-
-      note.dataset.role =
-      'note';
-
-
-      card.appendChild(
-        field(
-          '客户付款说明',
-          note
-        )
-      );
-
-
-      const qrBox =
-      document.createElement(
-        'div'
-      );
-
-      qrBox.className =
-      'qrBox';
-
-
-      const qrImg =
-      document.createElement(
-        'img'
-      );
-
-      qrImg.className =
-      'qrPreview';
-
-      qrImg.alt =
-      '收款二维码';
-
-
-      const qrText =
-      document.createElement(
-        'div'
-      );
-
-      qrText.className =
-      'qrText';
-
-      qrText.textContent =
-      account.qr_storage_path
-      ?
-      '正在读取二维码...'
-      :
-      '当前没有上传二维码';
-
-
-      qrBox.append(
-        qrImg,
-        qrText
-      );
-
-
-      card.appendChild(
-        qrBox
-      );
-
-
-      loadQr(
-        account.qr_storage_path,
-        qrImg,
-        qrText
-      );
-
-
-      const file =
-      document.createElement(
-        'input'
-      );
-
-      file.type =
-      'file';
-
-      file.accept =
-      'image/png,image/jpeg,image/webp';
-
-      file.dataset.role =
-      'qrFile';
-
-
-      card.appendChild(
-        field(
-          '更换二维码（不选择文件则保留原二维码）',
-          file
-        )
-      );
-
-
-      const sort =
-      input(
-        account.sort_order,
-        '0'
-      );
-
-      sort.type =
-      'number';
-
-      sort.dataset.role =
-      'sortOrder';
-
-
-      card.appendChild(
-        field(
-          '排序',
-          sort
-        )
-      );
-
-
-      const switchRow =
-      document.createElement(
-        'div'
-      );
-
-      switchRow.className =
-      'switchRow';
-
-
-      const switchText =
-      document.createElement(
-        'span'
-      );
-
-      switchText.textContent =
-      '启用这个收款账户';
-
-
-      const active =
-      document.createElement(
-        'input'
-      );
-
-      active.type =
-      'checkbox';
-
-      active.checked =
-      Boolean(
-        account.is_active
-      );
-
-      active.dataset.role =
-      'isActive';
-
-
-      switchRow.append(
-        switchText,
-        active
-      );
-
-
-      card.appendChild(
-        switchRow
-      );
-
-
-      const save =
-      document.createElement(
-        'button'
-      );
-
-      save.type =
-      'button';
-
-      save.textContent =
-      '保存这个收款账户';
-
-
-      save.addEventListener(
-        'click',
-        ()=>saveAccount(
+    activeAccounts.forEach(
+      account=>{
+        renderAccountCard(
           account,
-          card,
-          save
-        )
+          activeList
+        );
+      }
+    );
+
+  }
+
+
+  if(!inactiveAccounts.length){
+
+    inactiveExpanded =
+    false;
+
+    inactiveList.innerHTML =
+    '<div class="empty">当前没有备用账户</div>';
+
+  }
+  else{
+
+    inactiveAccounts.forEach(
+      account=>{
+        renderAccountCard(
+          account,
+          inactiveList
+        );
+      }
+    );
+
+  }
+
+
+  updateInactiveVisibility();
+
+}
+
+
+function renderAccountCard(
+  account,
+  list
+){
+
+  const card =
+  document.createElement(
+    'div'
+  );
+
+  card.className =
+  'accountCard';
+
+  card.dataset.id =
+  account.id;
+
+
+  const head =
+  document.createElement(
+    'div'
+  );
+
+  head.className =
+  'accountHead';
+
+  head.title =
+  '点击展开 / 收起';
+
+
+  const left =
+  document.createElement(
+    'div'
+  );
+
+
+  const name =
+  document.createElement(
+    'div'
+  );
+
+  name.className =
+  'accountName';
+
+  name.textContent =
+  account.method_name
+  ||
+  '收款账户';
+
+
+  const meta =
+  document.createElement(
+    'div'
+  );
+
+  meta.className =
+  'accountMeta';
+
+
+  const metaParts =
+  [
+    account.bank_name,
+    account.account_name,
+    account.account_number
+  ]
+  .filter(
+    Boolean
+  );
+
+
+  meta.textContent =
+  metaParts.join(
+    ' · '
+  );
+
+
+  left.append(
+    name,
+    meta
+  );
+
+
+  const badge =
+  document.createElement(
+    'div'
+  );
+
+  badge.className =
+  'badge '
+  +
+  (
+    account.is_active
+    ?
+    'active'
+    :
+    'inactive'
+  );
+
+  badge.textContent =
+  account.is_active
+  ?
+  '已启用'
+  :
+  '已停用';
+
+
+  head.append(
+    left,
+    badge
+  );
+
+
+  head.addEventListener(
+    'click',
+    ()=>{
+      card.classList.toggle(
+        'open'
       );
+    }
+  );
 
 
-      card.appendChild(
-        save
-      );
+  card.appendChild(
+    head
+  );
 
 
-      const msg =
-      document.createElement(
-        'div'
-      );
+  const two1 =
+  document.createElement(
+    'div'
+  );
 
-      msg.className =
-      'msg';
-
-      msg.dataset.role =
-      'msg';
+  two1.className =
+  'two';
 
 
-      card.appendChild(
-        msg
-      );
+  const type =
+  selectType(
+    account.method_type
+  );
+
+  type.dataset.role =
+  'methodType';
 
 
-      list.appendChild(
-        card
+  const methodName =
+  input(
+    account.method_name,
+    '显示名称'
+  );
+
+  methodName.dataset.role =
+  'methodName';
+
+
+  two1.append(
+    field(
+      '收款类型',
+      type
+    ),
+    field(
+      '显示名称',
+      methodName
+    )
+  );
+
+
+  card.appendChild(
+    two1
+  );
+
+
+  const two2 =
+  document.createElement(
+    'div'
+  );
+
+  two2.className =
+  'two';
+
+
+  const accountName =
+  input(
+    account.account_name,
+    '收款人姓名'
+  );
+
+  accountName.dataset.role =
+  'accountName';
+
+
+  const accountNumber =
+  input(
+    account.account_number,
+    '手机号 / 银行账号'
+  );
+
+  accountNumber.dataset.role =
+  'accountNumber';
+
+
+  two2.append(
+    field(
+      '收款人姓名',
+      accountName
+    ),
+    field(
+      '手机号 / 银行账号',
+      accountNumber
+    )
+  );
+
+
+  card.appendChild(
+    two2
+  );
+
+
+  const bankName =
+  input(
+    account.bank_name,
+    '银行名称；K Pay 可留空'
+  );
+
+  bankName.dataset.role =
+  'bankName';
+
+
+  card.appendChild(
+    field(
+      '银行名称',
+      bankName
+    )
+  );
+
+
+  const note =
+  document.createElement(
+    'textarea'
+  );
+
+  note.value =
+  account.note
+  ??
+  '';
+
+  note.placeholder =
+  '客户看到的付款说明';
+
+  note.dataset.role =
+  'note';
+
+
+  card.appendChild(
+    field(
+      '客户付款说明',
+      note
+    )
+  );
+
+
+  const qrBox =
+  document.createElement(
+    'div'
+  );
+
+  qrBox.className =
+  'qrBox';
+
+
+  const qrImg =
+  document.createElement(
+    'img'
+  );
+
+  qrImg.className =
+  'qrPreview';
+
+  qrImg.alt =
+  '收款二维码';
+
+
+  const qrText =
+  document.createElement(
+    'div'
+  );
+
+  qrText.className =
+  'qrText';
+
+  qrText.textContent =
+  account.qr_storage_path
+  ?
+  '正在读取二维码...'
+  :
+  '当前没有上传二维码';
+
+
+  qrBox.append(
+    qrImg,
+    qrText
+  );
+
+
+  card.appendChild(
+    qrBox
+  );
+
+
+  loadQr(
+    account.qr_storage_path,
+    qrImg,
+    qrText
+  );
+
+
+  const file =
+  document.createElement(
+    'input'
+  );
+
+  file.type =
+  'file';
+
+  file.accept =
+  'image/png,image/jpeg,image/webp';
+
+  file.dataset.role =
+  'qrFile';
+
+
+  card.appendChild(
+    field(
+      '更换二维码（不选择文件则保留原二维码）',
+      file
+    )
+  );
+
+
+  const sort =
+  input(
+    account.sort_order,
+    '0'
+  );
+
+  sort.type =
+  'number';
+
+  sort.dataset.role =
+  'sortOrder';
+
+
+  card.appendChild(
+    field(
+      '排序',
+      sort
+    )
+  );
+
+
+  const switchRow =
+  document.createElement(
+    'div'
+  );
+
+  switchRow.className =
+  'switchRow';
+
+
+  const switchText =
+  document.createElement(
+    'span'
+  );
+
+  switchText.textContent =
+  '启用这个收款账户';
+
+
+  const active =
+  document.createElement(
+    'input'
+  );
+
+  active.type =
+  'checkbox';
+
+  active.checked =
+  Boolean(
+    account.is_active
+  );
+
+  active.dataset.role =
+  'isActive';
+
+
+  switchRow.append(
+    switchText,
+    active
+  );
+
+
+  card.appendChild(
+    switchRow
+  );
+
+
+  const msg =
+  document.createElement(
+    'div'
+  );
+
+  msg.className =
+  'msg';
+
+  msg.dataset.role =
+  'msg';
+
+
+  if(!account.is_active){
+
+    const reactivate =
+    document.createElement(
+      'button'
+    );
+
+    reactivate.type =
+    'button';
+
+    reactivate.className =
+    'secondary reactivateButton';
+
+    reactivate.textContent =
+    '重新启用此账户';
+
+
+    reactivate.addEventListener(
+      'click',
+      ()=>{
+        reactivateAccount(
+          account,
+          reactivate,
+          msg
+        );
+      }
+    );
+
+
+    card.appendChild(
+      reactivate
+    );
+
+  }
+
+
+  const save =
+  document.createElement(
+    'button'
+  );
+
+  save.type =
+  'button';
+
+  save.textContent =
+  '保存这个收款账户';
+
+
+  save.addEventListener(
+    'click',
+    ()=>saveAccount(
+      account,
+      card,
+      save
+    )
+  );
+
+
+  card.appendChild(
+    save
+  );
+
+
+  card.appendChild(
+    msg
+  );
+
+
+  list.appendChild(
+    card
+  );
+
+}
+
+
+async function reactivateAccount(
+  account,
+  button,
+  msg
+){
+
+  if(account.is_active){
+
+    return;
+
+  }
+
+
+  if(
+    !window.confirm(
+      '确认重新启用这个收款账户吗？启用后客户付款页面将可以再次选择此账户。'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  button.disabled =
+  true;
+
+  msg.className =
+  'msg';
+
+  msg.textContent =
+  '正在重新启用...';
+
+
+  try{
+
+    const res =
+    await api(
+      '/rest/v1/payment_accounts'
+      +
+      '?id=eq.'
+      +
+      encodeURIComponent(
+        account.id
+      ),
+      {
+        method:'PATCH',
+
+        headers:{
+          'Content-Type':
+          'application/json',
+
+          Prefer:
+          'return=representation'
+        },
+
+        body:
+        JSON.stringify({
+          is_active:
+          true,
+
+          updated_at:
+          new Date()
+          .toISOString(),
+
+          updated_by:
+          adminUserId
+        })
+      }
+    );
+
+
+    if(!res.ok){
+
+      throw new Error(
+        'REACTIVATE_FAILED'
       );
 
     }
-  );
+
+
+    msg.className =
+    'msg ok';
+
+    msg.textContent =
+    '✓ 已重新启用';
+
+
+    await loadAccounts();
+
+  }
+  catch{
+
+    msg.className =
+    'msg err';
+
+    msg.textContent =
+    '重新启用失败，原账户资料没有被修改。';
+
+  }
+  finally{
+
+    button.disabled =
+    false;
+
+  }
 
 }
 
@@ -2543,6 +2917,21 @@ async function createAccount(){
   document.getElementById(
     'createButton'
   );
+    if(
+    accounts.length
+    >=
+    6
+  ){
+
+    setMsg(
+      'createMsg',
+      '最多只能保存 6 个平台收款账户。需要使用其他账户时，请重新启用现有备用账户。',
+      'err'
+    );
+
+    return;
+
+  }
 
 
   const methodType =
