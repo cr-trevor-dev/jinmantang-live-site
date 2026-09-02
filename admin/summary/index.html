@@ -622,7 +622,8 @@ sessionStorage.getItem(
 
 let refreshPromise =
 null;
-
+let lastZodiacSignature =
+'';
 
 function formatNumber(value){
 
@@ -865,7 +866,17 @@ function renderEmpty(){
     'remainingAmount'
   ).textContent =
   '0';
+  if(
+    lastZodiacSignature
+    ===
+    'empty'
+  ){
+    return;
+  }
 
+
+  lastZodiacSignature =
+  'empty';
 
   document.getElementById(
     'zodiacGrid'
@@ -891,7 +902,7 @@ function renderEmpty(){
           <img
             src="/agent/${image}"
             alt="${name}"
-            loading="lazy">
+            >
         </div>
                   <div class="zodiacStats">
 
@@ -953,7 +964,39 @@ function renderZodiac(
       ]
     )
   );
+  const zodiacSignature =
+  JSON.stringify(
+    [
+      Number(
+        multiplier
+        ||
+        0
+      ),
 
+      ZODIAC.map(
+        ([code])=>
+        Number(
+          map.get(code)
+          ?.confirmed_total
+          ||
+          0
+        )
+      )
+    ]
+  );
+
+
+  if(
+    zodiacSignature
+    ===
+    lastZodiacSignature
+  ){
+    return;
+  }
+
+
+  lastZodiacSignature =
+  zodiacSignature;
 
   document.getElementById(
     'zodiacGrid'
@@ -1000,7 +1043,7 @@ function renderZodiac(
             <img
               src="/agent/${image}"
               alt="${name}"
-              loading="lazy"
+              
             >
           </div>
                     <div class="zodiacStats">
@@ -1332,7 +1375,7 @@ async function loadSummary(){
 }
 
 
-renderEmpty();
+
 
 loadSummary();
 
