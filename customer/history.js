@@ -2439,9 +2439,13 @@ async function(){
   }
 
 
-  await loadHistory(
-    false
-  );
+    if(historyOpen){
+
+    await loadHistory(
+      false
+    );
+
+  }
 
 
   return result;
@@ -2455,9 +2459,11 @@ window.addEventListener(
 
     setTimeout(
       ()=>{
-        loadHistory(
-          true
-        );
+
+        ensureHistoryStyle();
+
+        ensureHistoryCard();
+
       },
       1200
     );
