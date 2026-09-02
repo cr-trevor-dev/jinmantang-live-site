@@ -568,7 +568,60 @@ function renderViewIntro(){
     </div>
 
   `;
+  if(
+    typeof window
+    .customerTranslateValue
+    ===
+    'function'
+  ){
 
+    const walker =
+    document.createTreeWalker(
+      intro,
+      NodeFilter.SHOW_TEXT
+    );
+
+
+    const nodes =
+    [];
+
+
+    while(
+      walker.nextNode()
+    ){
+
+      nodes.push(
+        walker.currentNode
+      );
+
+    }
+
+
+    nodes.forEach(
+      node=>{
+
+        const translated =
+        window
+        .customerTranslateValue(
+          node.nodeValue
+        );
+
+
+        if(
+          translated
+          !==
+          node.nodeValue
+        ){
+
+          node.nodeValue =
+          translated;
+
+        }
+
+      }
+    );
+
+  }
 }
 
 
