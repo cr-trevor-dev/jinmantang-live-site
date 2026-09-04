@@ -500,7 +500,127 @@ select{
   0 18px 45px
   rgba(0,0,0,.42)
 }
+.zodiacLatest.goldReveal img{
+  animation:
+  zodiacGoldReveal
+  3.2s
+  cubic-bezier(.22,.75,.22,1)
+  both
+}
 
+.zodiacLatest.goldReveal .zodiacCaption{
+  animation:
+  zodiacCaptionGlow
+  3.2s
+  ease-out
+  both
+}
+
+@keyframes zodiacGoldReveal{
+
+  0%{
+    opacity:.25;
+    transform:scale(.92);
+    filter:
+    brightness(.72)
+    saturate(.9);
+    box-shadow:
+    0 0 0
+    rgba(238,190,71,0)
+  }
+
+  18%{
+    opacity:1;
+    transform:scale(1.025);
+    filter:
+    brightness(1.38)
+    saturate(1.18);
+    box-shadow:
+    0 0 22px
+    rgba(255,225,130,.48),
+    0 0 55px
+    rgba(222,164,45,.38),
+    0 20px 48px
+    rgba(0,0,0,.42)
+  }
+
+  35%{
+    transform:scale(.995);
+    filter:
+    brightness(1.04)
+    saturate(1.05);
+    box-shadow:
+    0 0 12px
+    rgba(255,223,124,.22),
+    0 18px 45px
+    rgba(0,0,0,.42)
+  }
+
+  52%{
+    transform:scale(1.012);
+    filter:
+    brightness(1.22)
+    saturate(1.1);
+    box-shadow:
+    0 0 18px
+    rgba(255,220,112,.34),
+    0 0 38px
+    rgba(213,157,38,.22),
+    0 18px 45px
+    rgba(0,0,0,.42)
+  }
+
+  72%{
+    transform:scale(1);
+    filter:
+    brightness(1.05)
+    saturate(1.03);
+    box-shadow:
+    0 0 8px
+    rgba(255,220,112,.15),
+    0 18px 45px
+    rgba(0,0,0,.42)
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1);
+    filter:none;
+    box-shadow:
+    0 18px 45px
+    rgba(0,0,0,.42)
+  }
+
+}
+
+@keyframes zodiacCaptionGlow{
+
+  0%{
+    opacity:.35;
+    text-shadow:none
+  }
+
+  25%{
+    opacity:1;
+    text-shadow:
+    0 0 10px
+    rgba(255,220,120,.72),
+    0 0 22px
+    rgba(218,165,55,.42)
+  }
+
+  60%{
+    text-shadow:
+    0 0 8px
+    rgba(255,220,120,.32)
+  }
+
+  100%{
+    opacity:1;
+    text-shadow:none
+  }
+
+}
 .zodiacCaption{
   margin-top:12px;
   text-align:center;
@@ -2416,7 +2536,8 @@ function getZodiacImage(
 
 
 function renderLatestResult(
-  item
+  item,
+  shouldCelebrate=false
 ){
 
   const latest =
@@ -2473,7 +2594,11 @@ function renderLatestResult(
 
 
   latest.className =
-  'number zodiacLatest';
+shouldCelebrate
+?
+'number zodiacLatest goldReveal'
+:
+'number zodiacLatest';
 
 
   const img =
