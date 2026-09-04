@@ -6522,12 +6522,20 @@ currentRound
       'rejected',
 
       latest.rejection_reason
-      ?
-      '上一笔付款未通过：'
-      +
-      latest.rejection_reason
-      :
-      '上一笔付款未通过，请重新提交。'
+?
+'上一笔付款未通过：'
++
+(
+  latest.rejection_reason
+  ===
+  'ROUND_RESULT_PUBLISHED_BEFORE_PAYMENT_APPROVAL'
+  ?
+  '审核金额请看历史/付款'
+  :
+  latest.rejection_reason
+)
+:
+'上一笔付款未通过，请重新提交。'
 
     );
 
@@ -6696,7 +6704,15 @@ uiText(
           `
             <div class="note">
   ${uiText('原因：')}
-  ${escapeHtml(payment.rejection_reason)}
+  ${escapeHtml(
+  payment.rejection_reason
+  ===
+  'ROUND_RESULT_PUBLISHED_BEFORE_PAYMENT_APPROVAL'
+  ?
+  '审核金额请看历史/付款'
+  :
+  payment.rejection_reason
+)}
 </div>
           `
           :
