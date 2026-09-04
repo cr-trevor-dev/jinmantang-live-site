@@ -1249,6 +1249,25 @@ function roundName(roundId){
 function isLatePayment(
   payment
 ){
+
+  return (
+    payment.status
+    ===
+    'rejected'
+    &&
+    String(
+      payment.rejection_reason
+      ||
+      ''
+    )
+    .includes(
+      'ROUND_RESULT_PUBLISHED_BEFORE_PAYMENT_APPROVAL'
+    )
+  );
+
+}
+
+
 function refundForPayment(
   paymentId
 ){
@@ -1301,23 +1320,6 @@ function isResolvedLatePayment(
       refund.status
       ===
       'cancelled'
-    )
-  );
-
-}
-
-  return (
-    payment.status
-    ===
-    'rejected'
-    &&
-    String(
-      payment.rejection_reason
-      ||
-      ''
-    )
-    .includes(
-      'ROUND_RESULT_PUBLISHED_BEFORE_PAYMENT_APPROVAL'
     )
   );
 
@@ -1546,12 +1548,13 @@ function updateCounts(){
 
   const counts = {
 
-    pending:0,
-    approved:0,
-    late:0,
-    rejected:0
+  pending:0,
+  approved:0,
+  late:0,
+  rejected:0,
+  resolved:0
 
-  };
+};
 
 
   payments.forEach(
