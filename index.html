@@ -1752,7 +1752,8 @@ localStorage.getItem(
 ||
 
 'zh';
-
+let lastRenderedResultId =
+null;
 
 let siteSettings = {
 
@@ -3367,16 +3368,32 @@ async function loadResults(
 
 
     const latest =
-    rows.length
-    ?
-    rows[0]
-    :
-    null;
+rows.length
+?
+rows[0]
+:
+null;
 
 
-    renderLatestResult(
-  latest
+const shouldCelebrate =
+!!latest
+&&
+latest.id !==
+lastRenderedResultId;
+
+
+renderLatestResult(
+  latest,
+  shouldCelebrate
 );
+
+
+lastRenderedResultId =
+latest
+?
+latest.id
+:
+null;
 
 
     document.getElementById(
