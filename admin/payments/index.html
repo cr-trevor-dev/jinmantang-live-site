@@ -711,6 +711,8 @@ let proofs =
 let rounds =
 [];
 
+let refunds =
+[];
 
 const params =
 new URLSearchParams(
@@ -1247,6 +1249,62 @@ function roundName(roundId){
 function isLatePayment(
   payment
 ){
+function refundForPayment(
+  paymentId
+){
+
+  return refunds.find(
+    refund =>
+    refund.source_type
+    ===
+    'customer_payment'
+    &&
+    refund.source_id
+    ===
+    paymentId
+  )
+  ||
+  null;
+
+}
+
+
+function isResolvedLatePayment(
+  payment
+){
+
+  if(
+    !isLatePayment(
+      payment
+    )
+  ){
+
+    return false;
+
+  }
+
+
+  const refund =
+  refundForPayment(
+    payment.id
+  );
+
+
+  return (
+    refund
+    &&
+    (
+      refund.status
+      ===
+      'refunded'
+      ||
+      refund.status
+      ===
+      'cancelled'
+    )
+  );
+
+}
 
   return (
     payment.status
@@ -1290,7 +1348,15 @@ function paymentGroup(
     return 'approved';
 
   }
+if(
+  isResolvedLatePayment(
+    payment
+  )
+){
 
+  return 'resolved';
+
+}
 
   if(
     isLatePayment(
@@ -1386,7 +1452,16 @@ async function loadAll(){
         '&order=created_at.desc'
         +
         '&limit=300'
-      )
+      ),
+      api(
+  '/rest/v1/finance_refunds'
+  +
+  '?select=id,source_type,source_id,status'
+  +
+  '&source_type=eq.customer_payment'
+  +
+  '&limit=2000'
+)
 
     ]);
 
@@ -1426,7 +1501,10 @@ async function loadAll(){
     rounds =
     await responses[3]
     .json();
-
+    
+    refunds =
+await responses[4]
+.json();
 
     updateCounts();
 
