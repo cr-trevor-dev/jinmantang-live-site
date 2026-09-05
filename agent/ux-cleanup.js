@@ -251,7 +251,140 @@
       'Chờ xác nhận',
       'Menunggu'
     ],
+    '最近一期结果':[
+      'နောက်ဆုံးအကြိမ် ရလဒ်',
+      'Latest Round Result',
+      'ผลรอบล่าสุด',
+      'Keputusan Pusingan Terkini',
+      'Kết quả kỳ gần nhất',
+      'Hasil Putaran Terbaru'
+    ],
 
+    '✓ 本期已开奖 · 数据已锁定':[
+      '✓ ယခုအကြိမ် ထွက်ပြီး · ဒေတာကို လော့ခ်ချထားသည်',
+      '✓ Round Drawn · Data Locked',
+      '✓ ออกรางวัลแล้ว · ล็อกข้อมูลแล้ว',
+      '✓ Pusingan Selesai · Data Dikunci',
+      '✓ Đã mở thưởng · Dữ liệu đã khóa',
+      '✓ Putaran Selesai · Data Dikunci'
+    ],
+
+    '期数':[
+      'အကြိမ်',
+      'Round',
+      'รอบ',
+      'Pusingan',
+      'Kỳ',
+      'Periode'
+    ],
+
+    '开奖生肖':[
+      'ထွက်သော生肖',
+      'Winning Zodiac',
+      'นักษัตรที่ออก',
+      'Zodiak Menang',
+      'Con giáp trúng',
+      'Shio Pemenang'
+    ],
+
+    '保存申报金额':[
+      'သိမ်းထားသော တင်ပြငွေ',
+      'Saved Submitted Amount',
+      'ยอดที่บันทึกไว้',
+      'Jumlah Disimpan',
+      'Số tiền đã lưu',
+      'Jumlah Tersimpan'
+    ],
+
+    '正式确认金额':[
+      'အတည်ပြုထားသော ငွေ',
+      'Confirmed Amount',
+      'ยอดที่ยืนยันแล้ว',
+      'Jumlah Disahkan',
+      'Số tiền đã xác nhận',
+      'Jumlah Terkonfirmasi'
+    ],
+
+    '本期代理佣金':[
+      'ယခုအကြိမ် ကိုယ်စားလှယ်ကော်မရှင်',
+      'Round Agent Commission',
+      'ค่าคอมมิชชั่นตัวแทนรอบนี้',
+      'Komisen Ejen Pusingan Ini',
+      'Hoa hồng đại lý kỳ này',
+      'Komisi Agen Putaran Ini'
+    ],
+
+    '中奖返还':[
+      'ဆုရငွေ ပြန်ပေးမှု',
+      'Winning Payout',
+      'เงินรางวัลคืน',
+      'Bayaran Kemenangan',
+      'Tiền trả thưởng',
+      'Pembayaran Kemenangan'
+    ],
+
+    '代理应付平台':[
+      'ကိုယ်စားလှယ်မှ Platform သို့ ပေးရန်',
+      'Agent Pays Platform',
+      'ตัวแทนต้องจ่ายแพลตฟอร์ม',
+      'Ejen Bayar Platform',
+      'Đại lý trả nền tảng',
+      'Agen Membayar Platform'
+    ],
+
+    '平台应付代理':[
+      'Platform မှ ကိုယ်စားလှယ်သို့ ပေးရန်',
+      'Platform Pays Agent',
+      'แพลตฟอร์มต้องจ่ายตัวแทน',
+      'Platform Bayar Ejen',
+      'Nền tảng trả đại lý',
+      'Platform Membayar Agen'
+    ],
+
+    '结算完成':[
+      'စာရင်းရှင်းပြီး',
+      'Settlement Complete',
+      'สรุปยอดแล้ว',
+      'Penyelesaian Selesai',
+      'Đã quyết toán',
+      'Penyelesaian Selesai'
+    ],
+
+    '上午 11:45':[
+      'မနက် 11:45',
+      '11:45 AM',
+      '11:45 น.',
+      '11:45 Pagi',
+      '11:45 sáng',
+      '11:45 Pagi'
+    ],
+
+    '下午 3:45':[
+      'ညနေ 3:45',
+      '3:45 PM',
+      '15:45 น.',
+      '3:45 Petang',
+      '3:45 chiều',
+      '3:45 Sore'
+    ],
+
+    '只有开奖前由管理员确认的金额才进入正式结算。':[
+      'ထွက်မတိုင်မီ Admin အတည်ပြုထားသော ငေွသာ တရားဝင်စာရင်းရှင်းမှုထဲ ဝင်ပါသည်။',
+      'Only amounts confirmed by admin before the draw enter final settlement.',
+      'เฉพาะยอดที่ผู้ดูแลยืนยันก่อนออกรางวัลเท่านั้นที่จะเข้าสู่การสรุปยอด',
+      'Hanya jumlah yang disahkan admin sebelum keputusan masuk ke penyelesaian rasmi.',
+      'Chỉ số tiền được quản trị viên xác nhận trước khi mở thưởng mới được quyết toán.',
+      'Hanya jumlah yang dikonfirmasi admin sebelum pengundian yang masuk penyelesaian resmi.'
+    ],
+
+    '本期已经锁定，不能再补交或修改。':[
+      'ယခုအကြိမ်ကို လော့ခ်ချပြီးဖြစ်၍ ထပ်မံတင်သွင်းခြင်း သို့မဟုတ် ပြင်ဆင်ခြင်း မပြုနိုင်ပါ။',
+      'This round is locked and can no longer be added to or modified.',
+      'รอบนี้ถูกล็อกแล้ว ไม่สามารถเพิ่มหรือแก้ไขได้',
+      'Pusingan ini telah dikunci dan tidak boleh ditambah atau diubah.',
+      'Kỳ này đã khóa, không thể bổ sung hoặc chỉnh sửa.',
+      'Putaran ini telah dikunci dan tidak dapat ditambah atau diubah.'
+    ],
     '鼠':['ကြွက်','Rat','หนู','Tikus','Chuột','Tikus'],
     '牛':['နွား','Ox','วัว','Lembu','Trâu','Sapi'],
     '虎':['ကျား','Tiger','เสือ','Harimau','Hổ','Harimau'],
