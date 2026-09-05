@@ -669,7 +669,7 @@ button:disabled{
         <div class="summaryBox">
 
           <small>
-            当前待付佣金
+            历史待付佣金
           </small>
 
           <strong id="pendingCommission">
@@ -1965,7 +1965,7 @@ function updateSummary(){
   customers.length;
 
 
-  const pending =
+    const pending =
   commissionRows.reduce(
 
     (
@@ -1974,9 +1974,17 @@ function updateSummary(){
     )=>
     total
     +
-    Number(
-      row.commission_remaining
-      ||
+    (
+      row.round_status
+      ===
+      'settled'
+      ?
+      Number(
+        row.commission_remaining
+        ||
+        0
+      )
+      :
       0
     ),
 
