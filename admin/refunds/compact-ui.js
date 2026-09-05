@@ -398,13 +398,17 @@ function isPendingRefund(row){
 
 function rowsForRefundView(){
 
+  let viewRows = [];
+
+
   if(
     refundView
     ===
     'refunded'
   ){
 
-    return rows.filter(
+    viewRows =
+    rows.filter(
       row =>
       row.status
       ===
@@ -412,15 +416,14 @@ function rowsForRefundView(){
     );
 
   }
-
-
-  if(
+  else if(
     refundView
     ===
     'cancelled'
   ){
 
-    return rows.filter(
+    viewRows =
+    rows.filter(
       row =>
       row.status
       ===
@@ -428,10 +431,96 @@ function rowsForRefundView(){
     );
 
   }
+  else{
+
+    return rows.filter(
+      isPendingRefund
+    );
+
+  }
 
 
-  return rows.filter(
-    isPendingRefund
+  const historyDate =
+  document.getElementById(
+    'historyDate'
+  )?.value
+  ||
+  '';
+
+
+  const historyPeriod =
+  document.getElementById(
+    'historyPeriod'
+  )?.value
+  ||
+  '';
+
+
+  const historyStatus =
+  document.getElementById(
+    'historyStatus'
+  )?.value
+  ||
+  '';
+
+
+  return viewRows.filter(
+    row => {
+
+      if(
+        historyDate
+        &&
+        String(
+          row.round_date
+          ||
+          ''
+        )
+        !==
+        historyDate
+      ){
+
+        return false;
+
+      }
+
+
+      if(
+        historyPeriod
+        &&
+        String(
+          row.round_code
+          ||
+          ''
+        )
+        !==
+        historyPeriod
+      ){
+
+        return false;
+
+      }
+
+
+      if(
+        historyStatus
+        &&
+        String(
+          row.status
+          ||
+          ''
+        )
+        !==
+        historyStatus
+      ){
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
   );
 
 }
