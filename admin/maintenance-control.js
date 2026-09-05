@@ -312,23 +312,39 @@ async function loadMaintenanceSettings(){
   try{
 
     const response =
-    await api(
+await fetch(
 
-      '/rest/v1/site_settings'
-      +
-      '?id=eq.1'
-      +
-      '&select='
-      +
-      'customer_maintenance_enabled,'
-      +
-      'agent_maintenance_enabled,'
-      +
-      'maintenance_type,'
-      +
-      'maintenance_restore_at'
+  BASE
+  +
+  '/rest/v1/site_settings'
+  +
+  '?id=eq.1'
+  +
+  '&select='
+  +
+  'customer_maintenance_enabled,'
+  +
+  'agent_maintenance_enabled,'
+  +
+  'maintenance_type,'
+  +
+  'maintenance_restore_at',
 
-    );
+  {
+
+    headers:{
+      apikey:KEY,
+      Authorization:
+      'Bearer '
+      +
+      KEY
+    },
+
+    cache:'no-store'
+
+  }
+
+);
 
 
     if(!response.ok){
