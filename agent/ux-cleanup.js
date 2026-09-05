@@ -3573,7 +3573,7 @@
           card
         );
 
-
+        translateAgentExtraUi();
         return;
 
       }
