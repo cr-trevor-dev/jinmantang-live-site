@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="theme-color"
+  content="#080706">
+
+<title>金满堂 · 代理使用指南</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+  background:
+    radial-gradient(
+      circle at top,
+      #271b07 0,
+      #0c0904 30%,
+      #050505 72%
+    );
+
+  color:#f4e5b8;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+
+  padding:
+    max(20px,env(safe-area-inset-top))
+    14px
+    calc(35px + env(safe-area-inset-bottom));
+}
+
+.wrap{
+  width:min(720px,100%);
+  margin:auto;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#d7bc72;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.lang{
+  border:1px solid rgba(214,168,63,.28);
+  background:#11100d;
+  color:#e7ce88;
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:13px;
+}
+
+.hero{
+  text-align:center;
+  padding:18px 10px 26px;
+}
+
+.heroMark{
+  width:64px;
+  height:64px;
+  margin:0 auto 12px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(218,174,62,.55);
+
+  background:
+    radial-gradient(
+      circle,
+      #392407,
+      #0a0804 70%
+    );
+
+  color:#efc65c;
+  font-size:27px;
+  font-weight:900;
+
+  box-shadow:
+    0 0 30px rgba(221,170,45,.14);
+}
+
+.hero h1{
+  margin:0;
+  color:#efc85f;
+  font-size:26px;
+  letter-spacing:2px;
+}
+
+.hero p{
+  margin:9px auto 0;
+  max-width:560px;
+  color:#9d8c62;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-bottom:18px;
+}
+
+.flowItem{
+  text-align:center;
+  padding:11px 5px;
+  background:rgba(24,20,13,.9);
+  border:1px solid rgba(214,168,63,.18);
+  border-radius:12px;
+  color:#c8ae69;
+  font-size:11px;
+  line-height:1.45;
+}
+
+.flowItem b{
+  display:block;
+  color:#e9c65e;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.guide{
+  margin-bottom:10px;
+  border:1px solid rgba(214,168,63,.26);
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(27,22,13,.98),
+      rgba(10,9,7,.98)
+    );
+
+  overflow:hidden;
+}
+
+.guide button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#ead38e;
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  text-align:left;
+}
+
+.icon{
+  width:38px;
+  height:38px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:rgba(205,151,37,.10);
+  font-size:20px;
+}
+
+.title{
+  flex:1;
+}
+
+.title strong{
+  display:block;
+  color:#edcf74;
+  font-size:15px;
+  margin-bottom:3px;
+}
+
+.title small{
+  color:#85775a;
+  font-size:11px;
+}
+
+.arrow{
+  color:#8e7946;
+  font-size:18px;
+}
+
+.content{
+  display:none;
+  padding:0 16px 17px 66px;
+  color:#bcae86;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.guide.open .content{
+  display:block;
+}
+
+.guide.open .arrow{
+  transform:rotate(90deg);
+}
+
+.step{
+  margin-bottom:9px;
+}
+
+.step b{
+  color:#e3c56d;
+}
+
+.notice{
+  margin-top:17px;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(214,168,63,.20);
+  background:rgba(170,121,26,.07);
+  color:#a9976d;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.foot{
+  text-align:center;
+  margin-top:28px;
+  color:#675b40;
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+
+@media(max-width:520px){
+
+  .flow{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .content{
+    padding-left:16px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+
+    <a
+      class="back"
+      href="/agent/zodiac.html">
+      ← <span id="backText"></span>
+    </a>
+
+    <select
+      class="lang"
+      id="languageSelect">
+
+      <option value="zh">中文</option>
+      <option value="my">မြန်မာ</option>
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+      <option value="ms">Melayu</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="id">Indonesia</option>
+
+    </select>
+
+  </div>
+
+
+  <div class="hero">
+
+    <div class="heroMark">
+      A
+    </div>
+
+    <h1 id="pageTitle"></h1>
+
+    <p id="pageDesc"></p>
+
+  </div>
+
+
+  <div class="flow">
+
+    <div class="flowItem">
+      <b>1</b>
+      <span id="flow1"></span>
+    </div>
+
+    <div class="flowItem">
+      <b>2</b>
+      <span id="flow2"></span>
+    </div>
+
+    <div class="flowItem">
+      <b>3</b>
+      <span id="flow3"></span>
+    </div>
+
+    <div class="flowItem">
+      <b>4</b>
+      <span id="flow4"></span>
+    </div>
+
+  </div>
+
+
+  <div id="guideList"></div>
+
+
+  <div
+    class="notice"
+    id="notice">
+  </div>
+
+
+  <div class="foot">
+    © JIN MANTANG · AGENT GUIDE
+  </div>
+
+</div>
+
+
+<script>
+
+const LANG_KEY =
+'jmt_agent_lang';
+
+
+const TEXT = {
+
+zh:{
+  back:'返回代理中心',
+  title:'金满堂代理指南',
+  desc:'这里说明代理中心目前正式使用的客户推广、佣金、历史记录和收款功能。',
+  flow:[
+    '推广客户',
+    '查看本期',
+    '查看佣金',
+    '设置收款'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'第一次使用',
+      sub:'快速了解代理中心',
+      body:[
+        '登录代理中心后，顶部可以进入「本期、历史、收款、账户、指南」。',
+        '「本期」用于查看当前期直属客户的有效金额、待确认金额和当前佣金。',
+        '「历史」用于查看已经产生的历史佣金和支付状态。',
+        '「收款」用于设置平台向你支付代理佣金时使用的账户。',
+        '「账户」可以查看代理资料、佣金比例、推广码和客户注册链接。'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'如何推广客户',
+      sub:'使用自己的推广码和注册链接',
+      body:[
+        '进入顶部「账户」。',
+        '查看你的永久推广码和客户注册链接。',
+        '把自己的注册链接发送给需要注册的客户。',
+        '客户通过你的推广关系注册后，平台会按照系统记录识别直属客户。',
+        '不要使用其他代理的推广链接替客户注册，否则客户关系可能归属其他代理。'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'本期客户与佣金',
+      sub:'查看当前期的正式数据',
+      body:[
+        '进入顶部「本期」。',
+        '这里主要显示当前期直属客户的数据。',
+        '有效金额代表当前已经确认并计入系统的客户金额。',
+        '待确认金额代表仍在等待平台确认的数据。',
+        '当前正式佣金由系统根据实际有效数据和你的代理佣金比例计算。',
+        '佣金请以系统最终记录为准，不需要代理自己手工计算或修改。'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'佣金如何产生',
+      sub:'以平台正式数据为准',
+      body:[
+        '你的佣金与直属客户在系统中形成的有效数据有关。',
+        '客户数据经过平台确认后，系统会按照你的当前代理佣金比例计算对应佣金。',
+        '未确认、无效或没有正式计入系统的数据不会作为最终佣金依据。',
+        '每一期结束后，已经产生的正式佣金会保留在历史记录中。',
+        '开启新一期不会删除上一期已经产生的历史佣金。'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'历史记录',
+      sub:'查看过去每一期的佣金',
+      body:[
+        '进入顶部「历史」。',
+        '可以查看不同日期和不同期别已经产生的代理佣金记录。',
+        '历史中会保留当期佣金、支付状态以及相关收款信息。',
+        '新一期开始后，旧记录仍然保留，不需要截图保存才能查询。',
+        '如果某一期还没有完成正式结算，对应状态可能仍会显示等待处理中。'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'收款账户',
+      sub:'设置接收代理佣金的账户',
+      body:[
+        '进入顶部「收款」。',
+        '按照页面要求添加或管理自己的 KPay 或银行收款账户。',
+        '填写账户时请确认账户名称和号码正确。',
+        '平台支付代理佣金时，会按照系统中的有效收款账户处理。',
+        '如果收款资料发生变化，请及时在系统中更新，避免支付到旧账户。'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'账户与推广资料',
+      sub:'查看自己的代理信息',
+      body:[
+        '进入顶部「账户」。',
+        '这里可以查看代理名称、账户状态和当前佣金比例。',
+        '还可以查看自己的永久推广码。',
+        '客户注册链接也会在账户页面提供，方便直接分享给客户。',
+        '推广码属于你的代理识别信息，不建议随意修改或使用其他人的推广码。'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'常见问题',
+      sub:'代理使用时需要知道的事项',
+      body:[
+        '为什么本期金额和客户刚提交的金额不同？部分数据可能仍在等待平台确认。',
+        '为什么佣金暂时没有增加？只有正式有效并满足系统条件的数据才会进入正式佣金。',
+        '换到下一期后旧佣金会消失吗？不会，已经形成的正式历史记录会继续保留。',
+        '代理需要自己提交下注吗？目前代理中心正式使用的是客户推广和佣金管理功能。',
+        '收款账户可以修改吗？可以通过「收款」页面按照系统提供的功能管理。',
+        '遇到金额或佣金异常时，不要自行修改记录，请联系平台管理员核对。'
+      ]
+    }
+
+  ],
+
+  notice:'重要：代理佣金、客户关系、有效金额和支付状态均以平台系统中的正式记录为准。请不要通过截图或手工计算代替系统记录。'
+},
+
+
+my:{
+  back:'ကိုယ်စားလှယ်စင်တာသို့ ပြန်ရန်',
+  title:'JIN MANTANG ကိုယ်စားလှယ်လမ်းညွှန်',
+  desc:'ဤလမ်းညွှန်တွင် ဖောက်သည်ဖိတ်ခေါ်မှု၊ ကော်မရှင်၊ မှတ်တမ်းနှင့် ငွေလက်ခံခြင်းလုပ်ဆောင်ချက်များကို ရှင်းပြထားပါသည်။',
+  flow:[
+    'ဖောက်သည်ဖိတ်ခေါ်',
+    'လက်ရှိအကြိမ်',
+    'ကော်မရှင်ကြည့်',
+    'ငွေလက်ခံအကောင့်'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'ပထမဆုံးအသုံးပြုခြင်း',
+      sub:'ကိုယ်စားလှယ်စင်တာကို အမြန်နားလည်ရန်',
+      body:[
+        'ဝင်ရောက်ပြီးနောက် အပေါ်ဘက်တွင် လက်ရှိအကြိမ်၊ မှတ်တမ်း၊ ငွေလက်ခံ၊ အကောင့်နှင့် လမ်းညွှန်ကို တွေ့နိုင်ပါသည်။',
+        'လက်ရှိအကြိမ်တွင် တိုက်ရိုက်ဖောက်သည်၏ အတည်ပြုငွေ၊ စောင့်ဆိုင်းငွေနှင့် ကော်မရှင်ကို ကြည့်နိုင်ပါသည်။',
+        'မှတ်တမ်းတွင် ယခင်ကော်မရှင်နှင့် ငွေပေးချေမှုအခြေအနေကို ကြည့်နိုင်ပါသည်။',
+        'ငွေလက်ခံတွင် ကော်မရှင်လက်ခံမည့်အကောင့်ကို စီမံနိုင်ပါသည်။',
+        'အကောင့်တွင် ကိုယ်စားလှယ်အချက်အလက်၊ ကော်မရှင်နှုန်း၊ ဖိတ်ခေါ်ကုဒ်နှင့် စာရင်းသွင်းလင့်ခ်ကို ကြည့်နိုင်ပါသည်။'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'ဖောက်သည်ဖိတ်ခေါ်နည်း',
+      sub:'ကိုယ်ပိုင်ကုဒ်နှင့် လင့်ခ်ကို အသုံးပြုရန်',
+      body:[
+        'အပေါ်ဘက်ရှိ အကောင့်ကို ဝင်ပါ။',
+        'ကိုယ်ပိုင်အမြဲတမ်းဖိတ်ခေါ်ကုဒ်နှင့် ဖောက်သည်စာရင်းသွင်းလင့်ခ်ကို ကြည့်ပါ။',
+        'စာရင်းသွင်းလိုသောဖောက်သည်ထံ ကိုယ်ပိုင်လင့်ခ်ကို ပေးပို့ပါ။',
+        'စနစ်သည် ကိုယ်ပိုင်ဖိတ်ခေါ်ဆက်နွယ်မှုအတိုင်း တိုက်ရိုက်ဖောက်သည်ကို မှတ်တမ်းတင်ပါမည်။',
+        'အခြားကိုယ်စားလှယ်၏ လင့်ခ်ကို မသုံးပါနှင့်။'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'လက်ရှိဖောက်သည်နှင့် ကော်မရှင်',
+      sub:'လက်ရှိတရားဝင်ဒေတာကို ကြည့်ရန်',
+      body:[
+        'အပေါ်ဘက် လက်ရှိအကြိမ်ကို ဝင်ပါ။',
+        'ဤနေရာတွင် လက်ရှိအကြိမ်၏ တိုက်ရိုက်ဖောက်သည်ဒေတာကို အဓိကပြသပါသည်။',
+        'အတည်ပြုငွေသည် စနစ်တွင် တရားဝင်ထည့်သွင်းပြီးသော ပမာဏဖြစ်ပါသည်။',
+        'စောင့်ဆိုင်းငွေသည် platform အတည်ပြုရန် စောင့်နေသောပမာဏဖြစ်ပါသည်။',
+        'တရားဝင်ကော်မရှင်ကို စနစ်မှ အလိုအလျောက်တွက်ချက်ပါသည်။'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'ကော်မရှင်ရရှိပုံ',
+      sub:'စနစ်တရားဝင်ဒေတာကို အခြေခံသည်',
+      body:[
+        'ကော်မရှင်သည် တိုက်ရိုက်ဖောက်သည်၏ တရားဝင်ဒေတာနှင့် ဆက်စပ်ပါသည်။',
+        'ဒေတာအတည်ပြုပြီးနောက် လက်ရှိကော်မရှင်နှုန်းအတိုင်း စနစ်ကတွက်ချက်ပါသည်။',
+        'မအတည်ပြုရသေးသော သို့မဟုတ် မမှန်ကန်သောဒေတာကို နောက်ဆုံးကော်မရှင်အဖြစ် မသတ်မှတ်ပါ။',
+        'ပြီးဆုံးသောအကြိမ်၏ ကော်မရှင်ကို မှတ်တမ်းတွင် ဆက်လက်သိမ်းထားပါသည်။'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'မှတ်တမ်း',
+      sub:'ယခင်အကြိမ်များ၏ ကော်မရှင်ကို ကြည့်ရန်',
+      body:[
+        'အပေါ်ဘက် မှတ်တမ်းကို ဝင်ပါ။',
+        'ရက်စွဲနှင့် အကြိမ်အလိုက် ကော်မရှင်ကို ကြည့်နိုင်ပါသည်။',
+        'ငွေပေးချေမှုအခြေအနေနှင့် ဆိုင်ရာငွေလက်ခံအချက်အလက်ကိုလည်း သိမ်းထားပါသည်။',
+        'အကြိမ်အသစ်ဖွင့်သော်လည်း အဟောင်းမှတ်တမ်း မပျောက်ပါ။'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'ငွေလက်ခံအကောင့်',
+      sub:'ကော်မရှင်လက်ခံရန် အကောင့်စီမံခြင်း',
+      body:[
+        'အပေါ်ဘက် ငွေလက်ခံကို ဝင်ပါ။',
+        'KPay သို့မဟုတ် ဘဏ်အကောင့်ကို စနစ်အတိုင်း ထည့်သွင်းပါ။',
+        'အကောင့်အမည်နှင့် နံပါတ်ကို သေချာစစ်ဆေးပါ။',
+        'အချက်အလက်ပြောင်းလဲပါက စနစ်ထဲတွင် အချိန်မီပြင်ဆင်ပါ။'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'အကောင့်နှင့် ဖိတ်ခေါ်အချက်အလက်',
+      sub:'ကိုယ်ပိုင်ကိုယ်စားလှယ်အချက်အလက်',
+      body:[
+        'အပေါ်ဘက် အကောင့်ကို ဝင်ပါ။',
+        'ကိုယ်စားလှယ်အမည်၊ အခြေအနေနှင့် ကော်မရှင်နှုန်းကို ကြည့်နိုင်ပါသည်။',
+        'အမြဲတမ်းဖိတ်ခေါ်ကုဒ်နှင့် ဖောက်သည်စာရင်းသွင်းလင့်ခ်ကိုလည်း ကြည့်နိုင်ပါသည်။'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'မေးလေ့ရှိသောမေးခွန်းများ',
+      sub:'အသုံးပြုရာတွင် သိထားသင့်သည်များ',
+      body:[
+        'ဖောက်သည်ပမာဏနှင့် လက်ရှိပြသပမာဏမတူနိုင်ပါက အချို့ဒေတာသည် အတည်ပြုရန် စောင့်နေနိုင်ပါသည်။',
+        'ကော်မရှင်မတိုးသေးပါက တရားဝင်ဒေတာမဖြစ်သေးနိုင်ပါသည်။',
+        'အကြိမ်အသစ်ဖွင့်သော်လည်း အဟောင်းကော်မရှင်မှတ်တမ်း မပျောက်ပါ။',
+        'လက်ရှိတရားဝင်ကိုယ်စားလှယ်စနစ်သည် ဖောက်သည်ဖိတ်ခေါ်မှုနှင့် ကော်မရှင်စီမံမှုကို အဓိကအသုံးပြုပါသည်။'
+      ]
+    }
+
+  ],
+
+  notice:'အရေးကြီးချက် - ကော်မရှင်၊ ဖောက်သည်ဆက်နွယ်မှု၊ အတည်ပြုငွေနှင့် ငွေပေးချေမှုအခြေအနေအားလုံးကို platform စနစ်၏ တရားဝင်မှတ်တမ်းအတိုင်းသာ သတ်မှတ်ပါသည်။'
+},
+
+
+en:{
+  back:'Back to Agent Center',
+  title:'JIN MANTANG Agent Guide',
+  desc:'This guide explains the official agent features for referrals, current customer data, commission, history and payout accounts.',
+  flow:[
+    'Refer Customers',
+    'View Current',
+    'Check Commission',
+    'Set Payout'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'First Time Using',
+      sub:'Understand the Agent Center quickly',
+      body:[
+        'After login, the top navigation provides Current, History, Payout, Account and Guide.',
+        'Current shows direct-customer confirmed amounts, pending amounts and current commission.',
+        'History shows previously generated commission records and payment status.',
+        'Payout is used to manage the account used to receive agent commission.',
+        'Account shows your profile, commission rate, permanent referral code and customer registration link.'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'How to Refer Customers',
+      sub:'Use your own referral code and link',
+      body:[
+        'Open Account from the top navigation.',
+        'Find your permanent referral code and customer registration link.',
+        'Share your own registration link with customers.',
+        'When a customer registers through your referral relationship, the system records the direct-customer relationship.',
+        'Do not use another agent’s referral link for your customer.'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'Current Customers & Commission',
+      sub:'View official data for the current round',
+      body:[
+        'Open Current from the top navigation.',
+        'This area mainly displays data for your direct customers in the current round.',
+        'Confirmed amount means customer data already confirmed and counted by the system.',
+        'Pending amount means data still waiting for platform confirmation.',
+        'Current official commission is calculated by the system from valid data and your current agent commission rate.'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'How Commission Is Generated',
+      sub:'Based on official platform records',
+      body:[
+        'Commission is related to valid system data generated by your direct customers.',
+        'After customer data is confirmed, the system calculates commission using your current agent rate.',
+        'Unconfirmed or invalid data is not treated as final commission.',
+        'Commission generated for completed rounds remains available in History.',
+        'Opening a new round does not remove completed commission records.'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'History',
+      sub:'Review commission from previous rounds',
+      body:[
+        'Open History from the top navigation.',
+        'You can review commission records by date and round.',
+        'History also keeps payment status and related payout-account information.',
+        'Old records remain available after a new round opens.',
+        'If a round has not completed final processing, its status may still show as pending.'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'Payout Account',
+      sub:'Manage where agent commission is received',
+      body:[
+        'Open Payout from the top navigation.',
+        'Add or manage your KPay or bank account using the available options.',
+        'Make sure the account holder name and account number are correct.',
+        'The platform uses the valid payout account saved in the system when processing commission payments.',
+        'Update your payout information promptly if your account changes.'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'Account & Referral Details',
+      sub:'View your agent information',
+      body:[
+        'Open Account from the top navigation.',
+        'You can view your agent name, account status and current commission rate.',
+        'Your permanent referral code is also displayed here.',
+        'Your customer registration link can be copied and shared with customers.'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'Frequently Asked Questions',
+      sub:'Important points for agents',
+      body:[
+        'Why does the displayed amount differ from a customer’s recent activity? Some data may still be pending confirmation.',
+        'Why has commission not increased yet? Only valid official data that meets system conditions becomes official commission.',
+        'Will old commission disappear when a new round opens? No. Completed historical records remain stored.',
+        'Does an agent need to place bets directly? The current official agent workflow focuses on customer referrals and commission management.',
+        'What should I do if an amount or commission looks incorrect? Contact the platform administrator for verification instead of manually changing records.'
+      ]
+    }
+
+  ],
+
+  notice:'Important: commission, customer relationships, confirmed amounts and payment status are determined by official platform records. System records should be used instead of screenshots or manual calculations.'
+},
+
+
+th:{
+  back:'กลับศูนย์ตัวแทน',
+  title:'คู่มือตัวแทน JIN MANTANG',
+  desc:'คู่มือนี้อธิบายการแนะนำลูกค้า ข้อมูลรอบปัจจุบัน ค่าคอมมิชชั่น ประวัติ และบัญชีรับเงินของตัวแทน',
+  flow:[
+    'แนะนำลูกค้า',
+    'ดูรอบปัจจุบัน',
+    'ดูค่าคอม',
+    'ตั้งค่ารับเงิน'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'เริ่มใช้งานครั้งแรก',
+      sub:'ทำความเข้าใจศูนย์ตัวแทนอย่างรวดเร็ว',
+      body:[
+        'หลังเข้าสู่ระบบ เมนูด้านบนมี รอบปัจจุบัน ประวัติ รับเงิน บัญชี และคู่มือ',
+        'รอบปัจจุบันใช้ดูยอดลูกค้าโดยตรง ยอดรอยืนยัน และค่าคอมมิชชั่นปัจจุบัน',
+        'ประวัติใช้ดูค่าคอมมิชชั่นที่ผ่านมาและสถานะการจ่าย',
+        'รับเงินใช้จัดการบัญชีสำหรับรับค่าคอมมิชชั่น',
+        'บัญชีใช้ดูข้อมูลตัวแทน อัตราค่าคอม รหัสแนะนำ และลิงก์สมัครลูกค้า'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'วิธีแนะนำลูกค้า',
+      sub:'ใช้รหัสและลิงก์ของตัวเอง',
+      body:[
+        'เข้าเมนูบัญชี',
+        'ดูรหัสแนะนำถาวรและลิงก์สมัครลูกค้าของคุณ',
+        'ส่งลิงก์ของคุณให้ลูกค้าที่ต้องการสมัคร',
+        'ระบบจะบันทึกความสัมพันธ์ลูกค้าโดยตรงตามข้อมูลการแนะนำ',
+        'ไม่ควรใช้ลิงก์ของตัวแทนคนอื่น'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'ลูกค้าและค่าคอมรอบปัจจุบัน',
+      sub:'ดูข้อมูลอย่างเป็นทางการ',
+      body:[
+        'เข้าเมนูรอบปัจจุบัน',
+        'ระบบจะแสดงข้อมูลลูกค้าโดยตรงของรอบนี้',
+        'ยอดยืนยันคือยอดที่ระบบรับรองแล้ว',
+        'ยอดรอยืนยันคือยอดที่ยังรอแพลตฟอร์มตรวจสอบ',
+        'ค่าคอมมิชชั่นอย่างเป็นทางการคำนวณจากข้อมูลที่ถูกต้องและอัตราค่าคอมของคุณ'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'ค่าคอมมิชชั่นเกิดขึ้นอย่างไร',
+      sub:'อ้างอิงข้อมูลระบบอย่างเป็นทางการ',
+      body:[
+        'ค่าคอมสัมพันธ์กับข้อมูลที่ถูกต้องของลูกค้าโดยตรง',
+        'เมื่อข้อมูลได้รับการยืนยัน ระบบจะคำนวณตามอัตราค่าคอมปัจจุบันของคุณ',
+        'ข้อมูลที่ยังไม่ยืนยันหรือไม่ถูกต้องจะไม่ถือเป็นค่าคอมสุดท้าย',
+        'ค่าคอมของรอบที่เสร็จแล้วจะถูกเก็บไว้ในประวัติ'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'ประวัติ',
+      sub:'ดูค่าคอมของรอบที่ผ่านมา',
+      body:[
+        'เข้าเมนูประวัติ',
+        'สามารถดูข้อมูลตามวันที่และรอบได้',
+        'ระบบเก็บสถานะการจ่ายและข้อมูลบัญชีรับเงินที่เกี่ยวข้อง',
+        'เมื่อเปิดรอบใหม่ ประวัติเก่ายังคงอยู่'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'บัญชีรับเงิน',
+      sub:'ตั้งค่าบัญชีรับค่าคอม',
+      body:[
+        'เข้าเมนูรับเงิน',
+        'เพิ่มหรือจัดการ KPay หรือบัญชีธนาคารตามตัวเลือกในระบบ',
+        'ตรวจสอบชื่อบัญชีและเลขบัญชีให้ถูกต้อง',
+        'หากข้อมูลบัญชีเปลี่ยน ให้แก้ไขในระบบทันที'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'บัญชีและข้อมูลแนะนำ',
+      sub:'ดูข้อมูลตัวแทนของคุณ',
+      body:[
+        'เข้าเมนูบัญชี',
+        'ดูชื่อตัวแทน สถานะบัญชี และอัตราค่าคอมปัจจุบัน',
+        'ดูรหัสแนะนำถาวรและลิงก์สมัครลูกค้าได้ที่นี่'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'คำถามที่พบบ่อย',
+      sub:'สิ่งสำคัญที่ตัวแทนควรรู้',
+      body:[
+        'ยอดที่แสดงอาจต่างจากข้อมูลล่าสุดของลูกค้า เพราะบางรายการยังรอยืนยัน',
+        'ค่าคอมจะเพิ่มเมื่อข้อมูลผ่านเงื่อนไขและเป็นข้อมูลอย่างเป็นทางการ',
+        'การเปิดรอบใหม่จะไม่ลบประวัติค่าคอมเก่า',
+        'ระบบตัวแทนปัจจุบันเน้นการแนะนำลูกค้าและการจัดการค่าคอมมิชชั่น'
+      ]
+    }
+
+  ],
+
+  notice:'สำคัญ: ค่าคอม ความสัมพันธ์ลูกค้า ยอดยืนยัน และสถานะการจ่าย ให้ยึดข้อมูลอย่างเป็นทางการในระบบแพลตฟอร์มเป็นหลัก'
+},
+
+
+ms:{
+  back:'Kembali ke Pusat Ejen',
+  title:'Panduan Ejen JIN MANTANG',
+  desc:'Panduan ini menerangkan rujukan pelanggan, data semasa, komisen, sejarah dan akaun penerimaan ejen.',
+  flow:[
+    'Rujuk Pelanggan',
+    'Lihat Semasa',
+    'Semak Komisen',
+    'Tetap Akaun'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'Penggunaan Pertama',
+      sub:'Fahami Pusat Ejen dengan cepat',
+      body:[
+        'Selepas log masuk, navigasi atas mempunyai Semasa, Sejarah, Terima, Akaun dan Panduan.',
+        'Semasa memaparkan jumlah pelanggan langsung yang disahkan, jumlah menunggu dan komisen semasa.',
+        'Sejarah memaparkan rekod komisen terdahulu dan status bayaran.',
+        'Terima digunakan untuk mengurus akaun penerimaan komisen.',
+        'Akaun memaparkan profil, kadar komisen, kod rujukan dan pautan pendaftaran pelanggan.'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'Cara Merujuk Pelanggan',
+      sub:'Gunakan kod dan pautan anda sendiri',
+      body:[
+        'Buka Akaun.',
+        'Cari kod rujukan kekal dan pautan pendaftaran pelanggan anda.',
+        'Kongsi pautan pendaftaran anda kepada pelanggan.',
+        'Sistem merekodkan hubungan pelanggan langsung berdasarkan rujukan.',
+        'Jangan gunakan pautan rujukan ejen lain.'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'Pelanggan & Komisen Semasa',
+      sub:'Lihat data rasmi pusingan semasa',
+      body:[
+        'Buka Semasa.',
+        'Bahagian ini memaparkan data pelanggan langsung bagi pusingan semasa.',
+        'Jumlah disahkan ialah data yang telah disahkan oleh sistem.',
+        'Jumlah menunggu masih menunggu pengesahan platform.',
+        'Komisen rasmi dikira oleh sistem berdasarkan data sah dan kadar komisen anda.'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'Bagaimana Komisen Dijana',
+      sub:'Berdasarkan rekod rasmi platform',
+      body:[
+        'Komisen berkaitan dengan data sah pelanggan langsung anda.',
+        'Selepas data disahkan, sistem mengira komisen mengikut kadar semasa anda.',
+        'Data belum disahkan atau tidak sah tidak dianggap komisen akhir.',
+        'Komisen pusingan yang telah selesai kekal dalam Sejarah.'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'Sejarah',
+      sub:'Semak komisen pusingan terdahulu',
+      body:[
+        'Buka Sejarah.',
+        'Anda boleh menyemak rekod mengikut tarikh dan pusingan.',
+        'Status bayaran dan maklumat akaun penerimaan berkaitan juga disimpan.',
+        'Rekod lama kekal walaupun pusingan baharu dibuka.'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'Akaun Penerimaan',
+      sub:'Urus akaun untuk menerima komisen',
+      body:[
+        'Buka Terima.',
+        'Tambah atau urus KPay atau akaun bank.',
+        'Pastikan nama pemegang dan nombor akaun adalah betul.',
+        'Kemas kini maklumat dengan segera jika akaun anda berubah.'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'Akaun & Maklumat Rujukan',
+      sub:'Lihat maklumat ejen anda',
+      body:[
+        'Buka Akaun.',
+        'Lihat nama ejen, status akaun dan kadar komisen semasa.',
+        'Kod rujukan kekal dan pautan pendaftaran pelanggan juga tersedia.'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'Soalan Lazim',
+      sub:'Perkara penting untuk ejen',
+      body:[
+        'Sesetengah jumlah mungkin masih menunggu pengesahan.',
+        'Komisen rasmi hanya dijana daripada data yang sah.',
+        'Rekod komisen lama tidak hilang apabila pusingan baharu dibuka.',
+        'Aliran kerja rasmi ejen kini memberi tumpuan kepada rujukan pelanggan dan pengurusan komisen.'
+      ]
+    }
+
+  ],
+
+  notice:'Penting: komisen, hubungan pelanggan, jumlah disahkan dan status bayaran hendaklah berdasarkan rekod rasmi sistem platform.'
+},
+
+
+vi:{
+  back:'Quay lại Trung tâm Đại lý',
+  title:'Hướng dẫn Đại lý JIN MANTANG',
+  desc:'Hướng dẫn này giải thích chức năng giới thiệu khách hàng, dữ liệu hiện tại, hoa hồng, lịch sử và tài khoản nhận tiền.',
+  flow:[
+    'Giới thiệu khách',
+    'Xem kỳ hiện tại',
+    'Xem hoa hồng',
+    'Cài tài khoản'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'Lần đầu sử dụng',
+      sub:'Hiểu nhanh Trung tâm Đại lý',
+      body:[
+        'Sau khi đăng nhập, thanh trên cùng có Kỳ hiện tại, Lịch sử, Nhận tiền, Tài khoản và Hướng dẫn.',
+        'Kỳ hiện tại hiển thị số tiền khách trực tiếp đã xác nhận, đang chờ và hoa hồng hiện tại.',
+        'Lịch sử hiển thị hoa hồng trước đây và trạng thái thanh toán.',
+        'Nhận tiền dùng để quản lý tài khoản nhận hoa hồng.',
+        'Tài khoản hiển thị hồ sơ, tỷ lệ hoa hồng, mã giới thiệu và liên kết đăng ký khách hàng.'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'Cách giới thiệu khách hàng',
+      sub:'Sử dụng mã và liên kết của bạn',
+      body:[
+        'Mở Tài khoản.',
+        'Xem mã giới thiệu cố định và liên kết đăng ký khách hàng.',
+        'Gửi liên kết của bạn cho khách hàng cần đăng ký.',
+        'Hệ thống sẽ ghi nhận quan hệ khách hàng trực tiếp theo thông tin giới thiệu.',
+        'Không sử dụng liên kết giới thiệu của đại lý khác.'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'Khách hàng & Hoa hồng hiện tại',
+      sub:'Xem dữ liệu chính thức của kỳ',
+      body:[
+        'Mở Kỳ hiện tại.',
+        'Khu vực này chủ yếu hiển thị dữ liệu khách hàng trực tiếp.',
+        'Số tiền xác nhận là dữ liệu đã được hệ thống xác nhận.',
+        'Số tiền chờ vẫn đang chờ nền tảng kiểm tra.',
+        'Hoa hồng chính thức được hệ thống tính từ dữ liệu hợp lệ và tỷ lệ hoa hồng hiện tại.'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'Hoa hồng được tạo như thế nào',
+      sub:'Dựa trên dữ liệu chính thức',
+      body:[
+        'Hoa hồng liên quan đến dữ liệu hợp lệ của khách hàng trực tiếp.',
+        'Sau khi dữ liệu được xác nhận, hệ thống tính theo tỷ lệ hoa hồng hiện tại.',
+        'Dữ liệu chưa xác nhận hoặc không hợp lệ không được xem là hoa hồng cuối cùng.',
+        'Hoa hồng của kỳ đã hoàn tất sẽ được giữ trong Lịch sử.'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'Lịch sử',
+      sub:'Xem hoa hồng các kỳ trước',
+      body:[
+        'Mở Lịch sử.',
+        'Có thể xem theo ngày và kỳ.',
+        'Trạng thái thanh toán và thông tin tài khoản nhận tiền liên quan cũng được lưu.',
+        'Mở kỳ mới không xóa lịch sử cũ.'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'Tài khoản nhận tiền',
+      sub:'Quản lý tài khoản nhận hoa hồng',
+      body:[
+        'Mở Nhận tiền.',
+        'Thêm hoặc quản lý KPay hay tài khoản ngân hàng.',
+        'Kiểm tra chính xác tên chủ tài khoản và số tài khoản.',
+        'Nếu thông tin thay đổi, hãy cập nhật kịp thời.'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'Tài khoản & Thông tin giới thiệu',
+      sub:'Xem thông tin đại lý',
+      body:[
+        'Mở Tài khoản.',
+        'Xem tên đại lý, trạng thái tài khoản và tỷ lệ hoa hồng.',
+        'Mã giới thiệu cố định và liên kết đăng ký khách hàng cũng có tại đây.'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'Câu hỏi thường gặp',
+      sub:'Điều đại lý cần biết',
+      body:[
+        'Một số số tiền có thể vẫn đang chờ nền tảng xác nhận.',
+        'Hoa hồng chính thức chỉ được tạo từ dữ liệu hợp lệ.',
+        'Lịch sử hoa hồng cũ không mất khi mở kỳ mới.',
+        'Quy trình đại lý chính thức hiện tập trung vào giới thiệu khách hàng và quản lý hoa hồng.'
+      ]
+    }
+
+  ],
+
+  notice:'Quan trọng: hoa hồng, quan hệ khách hàng, số tiền xác nhận và trạng thái thanh toán phải dựa trên hồ sơ chính thức của hệ thống.'
+},
+
+
+id:{
+  back:'Kembali ke Pusat Agen',
+  title:'Panduan Agen JIN MANTANG',
+  desc:'Panduan ini menjelaskan referral pelanggan, data saat ini, komisi, riwayat, dan akun penerimaan agen.',
+  flow:[
+    'Referral Pelanggan',
+    'Lihat Periode',
+    'Cek Komisi',
+    'Atur Penerimaan'
+  ],
+
+  sections:[
+
+    {
+      icon:'👋',
+      title:'Pertama Kali Menggunakan',
+      sub:'Pahami Pusat Agen dengan cepat',
+      body:[
+        'Setelah login, navigasi atas memiliki Periode Saat Ini, Riwayat, Penerimaan, Akun, dan Panduan.',
+        'Periode Saat Ini menampilkan jumlah pelanggan langsung yang dikonfirmasi, jumlah menunggu, dan komisi saat ini.',
+        'Riwayat menampilkan komisi sebelumnya dan status pembayaran.',
+        'Penerimaan digunakan untuk mengelola akun penerimaan komisi.',
+        'Akun menampilkan profil, tarif komisi, kode referral, dan tautan pendaftaran pelanggan.'
+      ]
+    },
+
+    {
+      icon:'🔗',
+      title:'Cara Referral Pelanggan',
+      sub:'Gunakan kode dan tautan Anda sendiri',
+      body:[
+        'Buka Akun.',
+        'Lihat kode referral permanen dan tautan pendaftaran pelanggan Anda.',
+        'Bagikan tautan Anda kepada pelanggan yang akan mendaftar.',
+        'Sistem mencatat hubungan pelanggan langsung berdasarkan referral.',
+        'Jangan menggunakan tautan referral agen lain.'
+      ]
+    },
+
+    {
+      icon:'👥',
+      title:'Pelanggan & Komisi Saat Ini',
+      sub:'Lihat data resmi periode saat ini',
+      body:[
+        'Buka Periode Saat Ini.',
+        'Bagian ini terutama menampilkan data pelanggan langsung.',
+        'Jumlah dikonfirmasi adalah data yang telah disahkan sistem.',
+        'Jumlah menunggu masih menunggu konfirmasi platform.',
+        'Komisi resmi dihitung sistem berdasarkan data valid dan tarif komisi Anda.'
+      ]
+    },
+
+    {
+      icon:'💰',
+      title:'Bagaimana Komisi Dihasilkan',
+      sub:'Berdasarkan catatan resmi platform',
+      body:[
+        'Komisi berkaitan dengan data valid pelanggan langsung Anda.',
+        'Setelah data dikonfirmasi, sistem menghitung komisi berdasarkan tarif Anda saat ini.',
+        'Data yang belum dikonfirmasi atau tidak valid tidak dianggap sebagai komisi akhir.',
+        'Komisi dari periode yang selesai tetap tersedia di Riwayat.'
+      ]
+    },
+
+    {
+      icon:'📜',
+      title:'Riwayat',
+      sub:'Lihat komisi periode sebelumnya',
+      body:[
+        'Buka Riwayat.',
+        'Anda dapat melihat catatan berdasarkan tanggal dan periode.',
+        'Status pembayaran dan informasi akun penerimaan terkait juga disimpan.',
+        'Riwayat lama tetap ada ketika periode baru dibuka.'
+      ]
+    },
+
+    {
+      icon:'🏦',
+      title:'Akun Penerimaan',
+      sub:'Kelola akun penerima komisi',
+      body:[
+        'Buka Penerimaan.',
+        'Tambahkan atau kelola KPay atau rekening bank.',
+        'Pastikan nama pemilik dan nomor akun benar.',
+        'Jika informasi berubah, segera perbarui di sistem.'
+      ]
+    },
+
+    {
+      icon:'👤',
+      title:'Akun & Informasi Referral',
+      sub:'Lihat informasi agen Anda',
+      body:[
+        'Buka Akun.',
+        'Lihat nama agen, status akun, dan tarif komisi saat ini.',
+        'Kode referral permanen dan tautan pendaftaran pelanggan juga tersedia.'
+      ]
+    },
+
+    {
+      icon:'❓',
+      title:'Pertanyaan Umum',
+      sub:'Hal penting untuk agen',
+      body:[
+        'Sebagian jumlah mungkin masih menunggu konfirmasi platform.',
+        'Komisi resmi hanya berasal dari data valid.',
+        'Riwayat komisi lama tidak hilang saat periode baru dibuka.',
+        'Alur agen resmi saat ini berfokus pada referral pelanggan dan pengelolaan komisi.'
+      ]
+    }
+
+  ],
+
+  notice:'Penting: komisi, hubungan pelanggan, jumlah dikonfirmasi, dan status pembayaran harus mengikuti catatan resmi sistem platform.'
+}
+
+};
+
+
+function getLang(){
+
+  const saved =
+  localStorage.getItem(
+    LANG_KEY
+  );
+
+  if(
+    TEXT[saved]
+  ){
+    return saved;
+  }
+
+  return 'zh';
+
+}
+
+
+function setLang(
+  lang
+){
+
+  if(
+    !TEXT[lang]
+  ){
+    lang = 'zh';
+  }
+
+  localStorage.setItem(
+    LANG_KEY,
+    lang
+  );
+
+  render(
+    lang
+  );
+
+}
+
+
+function render(
+  lang
+){
+
+  const data =
+  TEXT[lang]
+  ||
+  TEXT.zh;
+
+
+  document.documentElement.lang =
+  lang;
+
+
+  document.getElementById(
+    'languageSelect'
+  ).value =
+  lang;
+
+
+  document.getElementById(
+    'backText'
+  ).textContent =
+  data.back;
+
+
+  document.getElementById(
+    'pageTitle'
+  ).textContent =
+  data.title;
+
+
+  document.getElementById(
+    'pageDesc'
+  ).textContent =
+  data.desc;
+
+
+  data.flow.forEach(
+    (
+      value,
+      index
+    )=>{
+
+      const el =
+      document.getElementById(
+        'flow'+
+        (
+          index+1
+        )
+      );
+
+      if(el){
+        el.textContent =
+        value;
+      }
+
+    }
+  );
+
+
+  const list =
+  document.getElementById(
+    'guideList'
+  );
+
+
+  list.innerHTML =
+  '';
+
+
+  data.sections.forEach(
+    (
+      section,
+      index
+    )=>{
+
+      const item =
+      document.createElement(
+        'div'
+      );
+
+
+      item.className =
+      'guide';
+
+
+      const button =
+      document.createElement(
+        'button'
+      );
+
+
+      button.type =
+      'button';
+
+
+      button.innerHTML =
+
+        '<div class="icon">'
+        +
+        section.icon
+        +
+        '</div>'
+
+        +
+
+        '<div class="title">'
+        +
+        '<strong>'
+        +
+        escapeHtml(
+          section.title
+        )
+        +
+        '</strong>'
+        +
+        '<small>'
+        +
+        escapeHtml(
+          section.sub
+        )
+        +
+        '</small>'
+        +
+        '</div>'
+
+        +
+
+        '<div class="arrow">›</div>';
+
+
+      const content =
+      document.createElement(
+        'div'
+      );
+
+
+      content.className =
+      'content';
+
+
+      content.innerHTML =
+      section.body
+      .map(
+        (
+          text,
+          i
+        )=>
+        '<div class="step">'
+        +
+        '<b>'
+        +
+        (
+          i+1
+        )
+        +
+        '.</b> '
+        +
+        escapeHtml(
+          text
+        )
+        +
+        '</div>'
+      )
+      .join(
+        ''
+      );
+
+
+      button.addEventListener(
+        'click',
+        ()=>{
+
+          item.classList
+          .toggle(
+            'open'
+          );
+
+        }
+      );
+
+
+      item.appendChild(
+        button
+      );
+
+
+      item.appendChild(
+        content
+      );
+
+
+      list.appendChild(
+        item
+      );
+
+
+      if(
+        index===
+        0
+      ){
+        item.classList.add(
+          'open'
+        );
+      }
+
+    }
+  );
+
+
+  document.getElementById(
+    'notice'
+  ).textContent =
+  data.notice;
+
+}
+
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ''
+  )
+  .replace(
+    /&/g,
+    '&amp;'
+  )
+  .replace(
+    /</g,
+    '&lt;'
+  )
+  .replace(
+    />/g,
+    '&gt;'
+  )
+  .replace(
+    /"/g,
+    '&quot;'
+  )
+  .replace(
+    /'/g,
+    '&#039;'
+  );
+
+}
+
+
+document.getElementById(
+  'languageSelect'
+)
+.addEventListener(
+  'change',
+  event=>{
+
+    setLang(
+      event.target.value
+    );
+
+  }
+);
+
+
+render(
+  getLang()
+);
+
+</script>
+
+</body>
+</html>
