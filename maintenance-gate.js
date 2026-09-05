@@ -674,7 +674,7 @@ host.innerHTML = `
           <div class="jmtMImage">
 
             <img
-              src="/maintenance-illustration.webp"
+              src="/0E1A63FE-A0FD-400B-9E95-AB8EAF25E82E.png"
               alt=""
               onerror="
                 this.remove();
