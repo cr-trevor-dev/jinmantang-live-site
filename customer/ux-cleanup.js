@@ -504,6 +504,23 @@
       'Tài khoản',
       'Akun'
     ],
+          '指南':[
+      'လမ်းညွှန်',
+      'Guide',
+      'คู่มือ',
+      'Panduan',
+      'Hướng dẫn',
+      'Panduan'
+    ],
+
+    '使用说明':[
+      'အသုံးပြုနည်း',
+      'User Guide',
+      'วิธีใช้งาน',
+      'Panduan Penggunaan',
+      'Hướng dẫn sử dụng',
+      'Panduan Penggunaan'
+    ],
 
     '下注 · 付款':[
       'လောင်းကြေး · ငွေပေးချေမှု',
