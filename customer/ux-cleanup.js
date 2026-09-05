@@ -398,6 +398,14 @@
 
 
   const CUSTOMER_UI_TEXT = {
+          '📖 使用指南':[
+      '📖 အသုံးပြုလမ်းညွှန်',
+      '📖 User Guide',
+      '📖 คู่มือการใช้งาน',
+      '📖 Panduan Penggunaan',
+      '📖 Hướng dẫn sử dụng',
+      '📖 Panduan Penggunaan'
+    ],
         /* CUSTOMER NAVIGATION + HISTORY */
     '全部年份':[
       'နှစ်အားလုံး',
