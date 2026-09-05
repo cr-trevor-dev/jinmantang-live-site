@@ -2401,7 +2401,53 @@ null;
 
 
   function payoutState(row){
+    if(
+      row?.participated
+      ===
+      false
+    ){
 
+      const noBetText = {
+
+        zh:
+        '本期未参与下注',
+
+        my:
+        'ယခုအကြိမ်တွင် လောင်းကြေးမတင်ထားပါ',
+
+        en:
+        'No Bet This Round',
+
+        th:
+        'รอบนี้ไม่ได้เดิมพัน',
+
+        ms:
+        'Tiada Pertaruhan Pusingan Ini',
+
+        vi:
+        'Kỳ này không tham gia cược',
+
+        id:
+        'Tidak Bertaruh Pada Periode Ini'
+
+      };
+
+
+      return {
+
+        text:
+        noBetText[
+          customerLang
+        ]
+        ||
+        noBetText.zh,
+
+        kind:
+        'none'
+
+      };
+
+    }
     const due =
     Number(
       row?.payout_due
@@ -2701,7 +2747,7 @@ fmt(due),
   }
 
 
-  async function loadLatestResult(){
+    async function loadLatestResult(){
 
     if(
       !token
@@ -2715,49 +2761,245 @@ fmt(due),
 
     }
 
+
     loading =
     true;
 
+
     try{
 
-      const res =
+      /*
+        1. 永远先读取平台最新已结算期数。
+        不以客户有没有下注作为判断。
+      */
+      const roundRes =
       await fetch(
 
         BASE
         +
-        '/rest/v1/rpc/customer_latest_settlement_summary',
+        '/rest/v1/rounds'
+        +
+        '?status=eq.settled'
+        +
+        '&game_mode=eq.zodiac'
+        +
+        '&result_number=not.is.null'
+        +
+        '&select=id,round_date,round_code,result_number,payout_multiplier,settled_at'
+        +
+        '&order=settled_at.desc'
+        +
+        '&limit=1',
 
         {
-
-          method:'POST',
-
           headers:
-          authHeaders(),
-
-          body:'{}'
-
+          authHeaders()
         }
 
       );
 
-      const data =
+
+      const roundRows =
       await parseResponse(
-        res
+        roundRes
       );
 
-      return (
-        data?.settlement
+
+      const latestRound =
+      Array.isArray(
+        roundRows
+      )
+      ?
+      roundRows[0]
+      :
+      null;
+
+
+      if(!latestRound){
+
+        return null;
+
+      }
+
+
+      /*
+        2. 只查询“这个客户在最新一期”的
+        订单与结算数据。
+
+        没下注时这里允许为空，
+        但开奖结果依然显示最新一期。
+      */
+      const [
+        settlementRes,
+        orderRes
+      ] =
+      await Promise.all([
+
+        fetch(
+
+          BASE
+          +
+          '/rest/v1/customer_settlements'
+          +
+          '?round_id=eq.'
+          +
+          encodeURIComponent(
+            latestRound.id
+          )
+          +
+          '&select=winning_points,payout_multiplier_snapshot,payout_due,payout_paid,payout_status'
+          +
+          '&limit=1',
+
+          {
+            headers:
+            authHeaders()
+          }
+
+        ),
+
+
+        fetch(
+
+          BASE
+          +
+          '/rest/v1/customer_round_orders'
+          +
+          '?round_id=eq.'
+          +
+          encodeURIComponent(
+            latestRound.id
+          )
+          +
+          '&select=confirmed_total'
+          +
+          '&limit=1',
+
+          {
+            headers:
+            authHeaders()
+          }
+
+        )
+
+      ]);
+
+
+      const [
+        settlementRows,
+        orderRows
+      ] =
+      await Promise.all([
+
+        parseResponse(
+          settlementRes
+        ),
+
+        parseResponse(
+          orderRes
+        )
+
+      ]);
+
+
+      const settlement =
+      Array.isArray(
+        settlementRows
+      )
+      ?
+      settlementRows[0]
+      :
+      null;
+
+
+      const order =
+      Array.isArray(
+        orderRows
+      )
+      ?
+      orderRows[0]
+      :
+      null;
+
+
+      const confirmedTotal =
+      Number(
+        order?.confirmed_total
         ||
-        null
+        0
       );
+
+
+      /*
+        3. 合并“平台最新开奖结果”
+        与“客户自己的本期数据”。
+
+        这里只生成页面显示对象，
+        不写数据库。
+      */
+      return {
+
+        round_date:
+        latestRound.round_date,
+
+        round_code:
+        latestRound.round_code,
+
+        result_number:
+        latestRound.result_number,
+
+        confirmed_total:
+        confirmedTotal,
+
+        winning_points:
+        Number(
+          settlement?.winning_points
+          ||
+          0
+        ),
+
+        payout_multiplier_snapshot:
+        Number(
+          settlement
+          ?.payout_multiplier_snapshot
+          ??
+          latestRound.payout_multiplier
+          ??
+          0
+        ),
+
+        payout_due:
+        Number(
+          settlement?.payout_due
+          ||
+          0
+        ),
+
+        payout_paid:
+        Number(
+          settlement?.payout_paid
+          ||
+          0
+        ),
+
+        payout_status:
+        settlement?.payout_status
+        ||
+        '',
+
+        participated:
+        confirmedTotal > 0
+
+      };
 
     }
     catch(error){
 
       console.warn(
-        'CUSTOMER_LATEST_SETTLEMENT_FAILED',
+        'CUSTOMER_LATEST_RESULT_FAILED',
         error
       );
+
 
       return undefined;
 
