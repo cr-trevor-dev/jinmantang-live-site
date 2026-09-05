@@ -906,6 +906,10 @@ function applyView(){
     agentNavAccount:[
       translated('账户'),
       translated('资料 · 推广')
+    ],
+        agentNavGuide:[
+      translated('指南'),
+      translated('使用说明')
     ]
 
   };
