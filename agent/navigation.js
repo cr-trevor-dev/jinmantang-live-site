@@ -207,7 +207,7 @@ function installStyle(){
 .agentMainNavGrid{
   display:grid;
   grid-template-columns:
-  repeat(4,1fr);
+  repeat(5,1fr);
   gap:7px;
 }
 
@@ -300,7 +300,7 @@ function installStyle(){
   .agentMainNavGrid{
     grid-template-columns:
     repeat(
-      4,
+      5,
       minmax(0,1fr)
     );
     gap:5px;
@@ -423,7 +423,19 @@ function installNavigation(){
         </span>
 
       </button>
+      <button
+        id="agentNavGuide"
+        class="agentMainNavBtn"
+        type="button"
+        onclick="location.href='/agent/guide/'">
 
+        指南
+
+        <span>
+          使用说明
+        </span>
+
+      </button>
     </div>
 
   `;
@@ -539,7 +551,25 @@ function translated(value){
       vi:'Tài khoản',
       id:'Akun'
     },
+    '指南':{
+      zh:'指南',
+      my:'လမ်းညွှန်',
+      en:'Guide',
+      th:'คู่มือ',
+      ms:'Panduan',
+      vi:'Hướng dẫn',
+      id:'Panduan'
+    },
 
+    '使用说明':{
+      zh:'使用说明',
+      my:'အသုံးပြုနည်း',
+      en:'User Guide',
+      th:'วิธีใช้งาน',
+      ms:'Panduan Penggunaan',
+      vi:'Hướng dẫn sử dụng',
+      id:'Panduan Penggunaan'
+    },
     '客户 · 佣金':{
       zh:'客户 · 佣金',
       my:'ဖောက်သည် · ကော်မရှင်',
