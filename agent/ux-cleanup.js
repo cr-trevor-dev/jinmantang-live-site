@@ -491,9 +491,10 @@
 
   function translateAgentExtraUi(){
 
-    [
+       [
       'agentReferralCard',
-      'agentCustomerRoundLiveCard'
+      'agentCustomerRoundLiveCard',
+      'agentSimpleSettledCard'
     ]
     .forEach(
       id=>{
