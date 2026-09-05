@@ -4548,7 +4548,14 @@ async function markCommissionPaid(
 ){
 
   if(busy){
+
+    setPageMessage(
+      '当前正在处理其他操作，请稍候。',
+      'err'
+    );
+
     return;
+
   }
 
 
@@ -4578,7 +4585,14 @@ async function markCommissionPaid(
     ||
     !row
   ){
+
+    setPageMessage(
+      '没有找到这笔代理佣金记录。',
+      'err'
+    );
+
     return;
+
   }
 
 
@@ -4676,19 +4690,11 @@ async function markCommissionPaid(
 
     );
 
-
     return;
 
   }
 
 
-  /*
-    正常情况下 confirmed 金额进入时
-    已经自动生成 settlement。
-
-    没有 settlement_id 时绝不能先上传凭证，
-    避免形成无法关联的孤立文件。
-  */
   if(
     !row.settlement_id
   ){
@@ -4703,236 +4709,737 @@ async function markCommissionPaid(
   }
 
 
-  let note =
-  window.prompt(
-
-    '请输入本次真实付款备注，例如：'
-    +
-    'KPay 已转账 / 银行转账 / 交易编号：',
-
-    ''
-
+  const oldModal =
+  document.getElementById(
+    'agentCommissionPaymentModal'
   );
 
 
-  if(note === null){
-    return;
-  }
+  if(oldModal){
 
-
-  note =
-  note.trim();
-
-
-  if(!note){
-
-    setPageMessage(
-      '必须填写本次佣金付款备注。',
-      'err'
-    );
-
-    return;
+    oldModal.remove();
 
   }
 
 
-  const file =
-  await pickCommissionProof();
-
-
-  if(!file){
-
-    setPageMessage(
-      '必须选择本次佣金付款凭证截图。',
-      'err'
-    );
-
-    return;
-
-  }
-
-
-  const confirmed =
-  window.confirm(
-
-    '请再次确认现实中已经向代理完成付款。'
-    +
-    '\n\n代理：'
-    +
-    (
-      agent.display_name
-      ||
-      '代理'
-    )
-    +
-    '\n期数：'
-    +
-    (
-      row.round_date
-      ||
-      ''
-    )
-    +
-    ' · '
-    +
-    periodName(
-      row.round_code
-    )
-    +
-    '\n实际支付佣金：'
-    +
-    money(
-      remaining
-    )
-    +
-    '\n付款备注：'
-    +
-    note
-    +
-    '\n付款凭证：'
-    +
-    (
-      file.name
-      ||
-      '已选择'
-    )
-    +
-    '\n\n确认后会生成永久佣金付款记录，不能重复支付。'
-
-  );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  busy =
-  true;
-
-
-  let proofStoragePath =
-  null;
-
-
-  setPageMessage(
-    '正在上传凭证并登记佣金付款...'
-  );
-
-
-  try{
-
-    proofStoragePath =
-    await uploadCommissionProof(
-      row.settlement_id,
-      file
-    );
-
-
-    const response =
-    await api(
-
-      '/rest/v1/rpc/admin_record_agent_referral_commission_payment',
-
-      {
-
-        method:
-        'POST',
-
-        headers:{
-
-          'Content-Type':
-          'application/json'
-
-        },
-
-        body:
-        JSON.stringify({
-
-          p_round_id:
-          roundId,
-
-          p_agent_id:
-          agentId,
-
-          p_admin_note:
-          note,
-
-          p_proof_storage_path:
-          proofStoragePath
-
-        })
-
-      }
-
-    );
-
-
-    const data =
-    await parseResponse(
-      response
-    );
-
-
-    await loadAll(
-      false
-    );
-
-
-    setPageMessage(
-
-      '代理佣金付款已保存'
-      +
-      ' · 金额 '
-      +
-      money(
-        data?.commission_paid
-        ||
-        remaining
+  const payoutText =
+  snapshotReady
+  ?
+  [
+    payoutMethodName(
+      row.payout_method_type_snapshot
+    ),
+    row.payout_bank_name_snapshot,
+    row.payout_account_name_snapshot,
+    row.payout_account_number_snapshot
+  ]
+  .filter(Boolean)
+  .join(' · ')
+  :
+  accounts
+  .map(
+    account =>
+    [
+      payoutMethodName(
+        account.method_type
       ),
+      account.bank_name,
+      account.account_name,
+      account.account_number
+    ]
+    .filter(Boolean)
+    .join(' · ')
+  )
+  .join(' / ');
 
-      'ok'
 
-    );
+  const modal =
+  document.createElement(
+    'div'
+  );
 
-  }
-  catch(error){
 
-    if(proofStoragePath){
+  modal.id =
+  'agentCommissionPaymentModal';
 
-      await deleteCommissionProof(
-        proofStoragePath
-      );
 
+  modal.style.cssText = `
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  `;
+
+
+  modal.innerHTML = `
+
+    <div
+      style="
+        width:100%;
+        max-width:520px;
+        max-height:88vh;
+        overflow:auto;
+        background:
+          linear-gradient(
+            180deg,
+            #181611,
+            #0c0c0d
+          );
+        border:
+          1px solid
+          rgba(214,168,63,.42);
+        border-radius:22px;
+        padding:18px;
+        box-shadow:
+          0 25px 80px
+          rgba(0,0,0,.65);
+      ">
+
+
+      <div
+        style="
+          color:#efd075;
+          font-size:19px;
+          font-weight:900;
+          margin-bottom:5px;
+        ">
+
+        确认代理佣金付款
+
+      </div>
+
+
+      <div
+        style="
+          color:#81796c;
+          font-size:11px;
+          line-height:1.6;
+          margin-bottom:15px;
+        ">
+
+        请确认现实中已经完成转账，
+        再登记这笔正式佣金付款。
+
+      </div>
+
+
+      <div
+        style="
+          background:#101011;
+          border:
+            1px solid
+            rgba(255,255,255,.06);
+          border-radius:14px;
+          padding:13px;
+          margin-bottom:9px;
+        ">
+
+        <small
+          style="
+            color:#777166;
+            display:block;
+            margin-bottom:5px;
+          ">
+
+          代理
+
+        </small>
+
+        <strong
+          style="
+            color:#efd075;
+            font-size:16px;
+          ">
+
+          ${esc(
+            agent.display_name
+            ||
+            '代理'
+          )}
+
+        </strong>
+
+      </div>
+
+
+      <div
+        style="
+          background:#101011;
+          border:
+            1px solid
+            rgba(255,255,255,.06);
+          border-radius:14px;
+          padding:13px;
+          margin-bottom:9px;
+        ">
+
+        <small
+          style="
+            color:#777166;
+            display:block;
+            margin-bottom:5px;
+          ">
+
+          期数
+
+        </small>
+
+        <strong
+          style="
+            color:#e9dfc7;
+          ">
+
+          ${esc(
+            row.round_date
+            ||
+            ''
+          )}
+
+          ·
+
+          ${esc(
+            periodName(
+              row.round_code
+            )
+          )}
+
+        </strong>
+
+      </div>
+
+
+      <div
+        style="
+          background:#171407;
+          border:
+            1px solid
+            rgba(214,168,63,.30);
+          border-radius:14px;
+          padding:13px;
+          margin-bottom:9px;
+        ">
+
+        <small
+          style="
+            color:#97885e;
+            display:block;
+            margin-bottom:5px;
+          ">
+
+          本次支付佣金
+
+        </small>
+
+        <strong
+          style="
+            color:#f0d16e;
+            font-size:23px;
+          ">
+
+          ${money(
+            remaining
+          )}
+
+        </strong>
+
+      </div>
+
+
+      <div
+        style="
+          background:#101011;
+          border:
+            1px solid
+            rgba(255,255,255,.06);
+          border-radius:14px;
+          padding:13px;
+          margin-bottom:14px;
+        ">
+
+        <small
+          style="
+            color:#777166;
+            display:block;
+            margin-bottom:5px;
+          ">
+
+          代理收款方式
+
+        </small>
+
+        <strong
+          style="
+            color:#d7cba9;
+            font-size:12px;
+            line-height:1.6;
+            word-break:break-all;
+          ">
+
+          ${esc(
+            payoutText
+            ||
+            '—'
+          )}
+
+        </strong>
+
+      </div>
+
+
+      <div
+        style="
+          color:#a99a75;
+          font-size:11px;
+          margin-bottom:6px;
+          font-weight:800;
+        ">
+
+        付款备注
+
+      </div>
+
+
+      <input
+        id="agentCommissionPaymentNote"
+        type="text"
+        autocomplete="off"
+        placeholder="例如：KPay 已转账 / KBZ / 交易编号"
+        style="
+          margin-bottom:12px;
+        ">
+
+
+      <div
+        style="
+          color:#a99a75;
+          font-size:11px;
+          margin-bottom:6px;
+          font-weight:800;
+        ">
+
+        付款凭证截图
+
+      </div>
+
+
+      <input
+        id="agentCommissionPaymentProof"
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+        style="
+          margin-bottom:12px;
+        ">
+
+
+      <div
+        id="agentCommissionPaymentMsg"
+        style="
+          min-height:20px;
+          color:#948b7c;
+          text-align:center;
+          font-size:12px;
+          line-height:1.6;
+          margin-bottom:10px;
+        ">
+      </div>
+
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+            1fr 1fr;
+          gap:8px;
+        ">
+
+        <button
+          id="agentCommissionPaymentCancel"
+          type="button"
+          class="secondary">
+
+          取消
+
+        </button>
+
+
+        <button
+          id="agentCommissionPaymentConfirm"
+          type="button"
+          class="success">
+
+          确认并登记付款
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document.body
+  .appendChild(
+    modal
+  );
+
+
+  const oldOverflow =
+  document.body.style.overflow;
+
+
+  document.body.style.overflow =
+  'hidden';
+
+
+  const noteInput =
+  document.getElementById(
+    'agentCommissionPaymentNote'
+  );
+
+
+  const proofInput =
+  document.getElementById(
+    'agentCommissionPaymentProof'
+  );
+
+
+  const message =
+  document.getElementById(
+    'agentCommissionPaymentMsg'
+  );
+
+
+  const cancelButton =
+  document.getElementById(
+    'agentCommissionPaymentCancel'
+  );
+
+
+  const confirmButton =
+  document.getElementById(
+    'agentCommissionPaymentConfirm'
+  );
+
+
+  function closeModal(){
+
+    if(busy){
+      return;
     }
 
 
-    console.error(
-      error
-    );
+    document.body.style.overflow =
+    oldOverflow;
 
 
-    setPageMessage(
-
-      '佣金付款失败：'
-      +
-      translateError(
-        error.message
-      ),
-
-      'err'
-
-    );
+    modal.remove();
 
   }
-  finally{
 
-    busy =
-    false;
 
-  }
+  cancelButton
+  .addEventListener(
+    'click',
+    closeModal
+  );
+
+
+  modal
+  .addEventListener(
+    'click',
+    event => {
+
+      if(
+        event.target
+        ===
+        modal
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+  confirmButton
+  .addEventListener(
+    'click',
+    async ()=>{
+
+
+      if(busy){
+        return;
+      }
+
+
+      const note =
+      String(
+        noteInput.value
+        ||
+        ''
+      )
+      .trim();
+
+
+      const file =
+      proofInput.files?.[0]
+      ||
+      null;
+
+
+      if(!note){
+
+        message.style.color =
+        '#e89191';
+
+        message.textContent =
+        '请先填写付款备注。';
+
+        noteInput.focus();
+
+        return;
+
+      }
+
+
+      if(!file){
+
+        message.style.color =
+        '#e89191';
+
+        message.textContent =
+        '请选择本次付款凭证截图。';
+
+        return;
+
+      }
+
+
+      busy =
+      true;
+
+
+      confirmButton.disabled =
+      true;
+
+
+      cancelButton.disabled =
+      true;
+
+
+      noteInput.disabled =
+      true;
+
+
+      proofInput.disabled =
+      true;
+
+
+      confirmButton.textContent =
+      '正在处理，请勿重复点击…';
+
+
+      message.style.color =
+      '#e2c76f';
+
+
+      message.textContent =
+      '正在上传凭证并登记佣金付款，请不要关闭页面。';
+
+
+      let proofStoragePath =
+      null;
+
+
+      try{
+
+
+        proofStoragePath =
+        await uploadCommissionProof(
+          row.settlement_id,
+          file
+        );
+
+
+        const response =
+        await api(
+
+          '/rest/v1/rpc/admin_record_agent_referral_commission_payment',
+
+          {
+
+            method:
+            'POST',
+
+            headers:{
+
+              'Content-Type':
+              'application/json'
+
+            },
+
+            body:
+            JSON.stringify({
+
+              p_round_id:
+              roundId,
+
+              p_agent_id:
+              agentId,
+
+              p_admin_note:
+              note,
+
+              p_proof_storage_path:
+              proofStoragePath
+
+            })
+
+          }
+
+        );
+
+
+        const data =
+        await parseResponse(
+          response
+        );
+
+
+        await loadAll(
+          false
+        );
+
+
+        message.style.color =
+        '#70d49c';
+
+
+        message.textContent =
+        '✓ 代理佣金付款已保存 · 金额 '
+        +
+        money(
+          data?.commission_paid
+          ||
+          remaining
+        );
+
+
+        confirmButton.textContent =
+        '已完成';
+
+
+        setPageMessage(
+
+          '代理佣金付款已保存'
+          +
+          ' · 金额 '
+          +
+          money(
+            data?.commission_paid
+            ||
+            remaining
+          ),
+
+          'ok'
+
+        );
+
+
+        busy =
+        false;
+
+
+        cancelButton.disabled =
+        false;
+
+
+        cancelButton.textContent =
+        '关闭';
+
+
+      }
+      catch(error){
+
+
+        if(proofStoragePath){
+
+          await deleteCommissionProof(
+            proofStoragePath
+          );
+
+        }
+
+
+        console.error(
+          error
+        );
+
+
+        message.style.color =
+        '#e89191';
+
+
+        message.textContent =
+        '付款登记失败：'
+        +
+        translateError(
+          error.message
+        );
+
+
+        setPageMessage(
+
+          '佣金付款失败：'
+          +
+          translateError(
+            error.message
+          ),
+
+          'err'
+
+        );
+
+
+        busy =
+        false;
+
+
+        confirmButton.disabled =
+        false;
+
+
+        cancelButton.disabled =
+        false;
+
+
+        noteInput.disabled =
+        false;
+
+
+        proofInput.disabled =
+        false;
+
+
+        confirmButton.textContent =
+        '重新确认并登记付款';
+
+      }
+
+    }
+  );
 
 }
+  
 
 
 /* =====================================
