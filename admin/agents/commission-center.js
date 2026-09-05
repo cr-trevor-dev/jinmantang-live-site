@@ -1506,7 +1506,7 @@ function ccRender(){
       <div class="ccSummaryBox current">
 
         <small>
-          当前期正式佣金
+          本期代理佣金
         </small>
 
         <strong>
