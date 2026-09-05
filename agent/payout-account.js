@@ -840,7 +840,9 @@ function render(){
     return;
 
   }
-
+    card.classList.remove(
+    'hidden'
+  );
   
 
   card.innerHTML=`
