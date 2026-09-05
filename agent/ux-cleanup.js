@@ -2351,11 +2351,7 @@
       </div>
 
 
-      <div style="margin-top:12px">
-
-        ${listHtml}
-
-      </div>
+  
 
     `;
 
