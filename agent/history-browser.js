@@ -18,7 +18,192 @@ let loading = false;
 let rounds = [];
 let commissions = [];
 let expanded = false;
+const HISTORY_BROWSER_I18N = {
 
+  zh:{
+    title:'历史佣金查询',
+    expand:'展开查询',
+    collapse:'收起',
+    hint1:'可按年、月、日期和期数查看自己的佣金状态。',
+    hint2:'没有产生佣金的正式期数，也会明确显示“该期暂无佣金”。',
+    year:'年',
+    month:'月',
+    day:'日',
+    chooseRound:'请选择要查询的正式期数',
+    noCommission:'该期暂无佣金',
+    noCommissionText:'该期没有产生你的代理佣金。',
+    noCommissionReason:'只有直属客户实际提交付款，并由平台后台确认到账的有效金额才会产生代理佣金。',
+    confirmed:'直属客户有效金额',
+    rate:'当期佣金率',
+    due:'应付佣金',
+    paid:'已付佣金',
+    paidAt:'支付完成：',
+    statusPaid:'已支付',
+    statusPartial:'部分支付',
+    statusPending:'待支付'
+  },
+
+  my:{
+    title:'ကော်မရှင်မှတ်တမ်း ရှာဖွေရန်',
+    expand:'ရှာဖွေရန် ဖွင့်မည်',
+    collapse:'ပိတ်မည်',
+    hint1:'နှစ်၊ လ၊ ရက်နှင့် အကြိမ်အလိုက် ကော်မရှင်အခြေအနေကို ကြည့်နိုင်ပါသည်။',
+    hint2:'ကော်မရှင်မရှိသော တရားဝင်အကြိမ်များကိုလည်း “ဤအကြိမ် ကော်မရှင်မရှိပါ” ဟု ပြသပါမည်။',
+    year:'နှစ်',
+    month:'လ',
+    day:'ရက်',
+    chooseRound:'ကြည့်လိုသော တရားဝင်အကြိမ်ကို ရွေးပါ',
+    noCommission:'ဤအကြိမ် ကော်မရှင်မရှိပါ',
+    noCommissionText:'ဤအကြိမ်တွင် သင့်အတွက် ကိုယ်စားလှယ်ကော်မရှင် မရှိပါ။',
+    noCommissionReason:'တိုက်ရိုက်ဖောက်သည်မှ အမှန်တကယ်ငွေပေးချေပြီး Platform မှ အတည်ပြုထားသော ငွေပမာဏရှိမှသာ ကော်မရှင် ရရှိပါမည်။',
+    confirmed:'တိုက်ရိုက်ဖောက်သည် အတည်ပြုငွေ',
+    rate:'အကြိမ်ကော်မရှင်နှုန်း',
+    due:'ပေးရန် ကော်မရှင်',
+    paid:'ပေးချေပြီး ကော်မရှင်',
+    paidAt:'ပေးချေပြီးချိန်：',
+    statusPaid:'ပေးချေပြီး',
+    statusPartial:'တစ်စိတ်တစ်ပိုင်း ပေးချေပြီး',
+    statusPending:'ပေးချေရန်စောင့်နေသည်'
+  },
+
+  en:{
+    title:'Commission History Search',
+    expand:'Open Search',
+    collapse:'Collapse',
+    hint1:'View your commission status by year, month, date and round.',
+    hint2:'Settled rounds with no commission will also clearly show “No commission for this round”.',
+    year:'Year',
+    month:'Month',
+    day:'Day',
+    chooseRound:'Select a settled round to view',
+    noCommission:'No Commission This Round',
+    noCommissionText:'No agent commission was generated for this round.',
+    noCommissionReason:'Commission is generated only from valid payments submitted by direct customers and confirmed by the platform.',
+    confirmed:'Confirmed Customer Amount',
+    rate:'Round Commission Rate',
+    due:'Commission Due',
+    paid:'Commission Paid',
+    paidAt:'Paid At:',
+    statusPaid:'Paid',
+    statusPartial:'Partially Paid',
+    statusPending:'Pending'
+  },
+
+  th:{
+    title:'ค้นหาประวัติคอมมิชชั่น',
+    expand:'เปิดการค้นหา',
+    collapse:'ย่อ',
+    hint1:'ดูสถานะคอมมิชชั่นตามปี เดือน วันที่ และรอบได้',
+    hint2:'รอบที่ไม่มีคอมมิชชั่นจะแสดงอย่างชัดเจนว่า “รอบนี้ไม่มีคอมมิชชั่น”',
+    year:'ปี',
+    month:'เดือน',
+    day:'วัน',
+    chooseRound:'เลือกรอบที่ต้องการดู',
+    noCommission:'รอบนี้ไม่มีคอมมิชชั่น',
+    noCommissionText:'รอบนี้ไม่มีค่าคอมมิชชั่นตัวแทนของคุณ',
+    noCommissionReason:'ค่าคอมมิชชั่นจะเกิดขึ้นเมื่อมีการชำระเงินจริงจากลูกค้าโดยตรงและได้รับการยืนยันจากระบบแล้วเท่านั้น',
+    confirmed:'ยอดลูกค้าโดยตรงที่ยืนยันแล้ว',
+    rate:'อัตราคอมมิชชั่นรอบนั้น',
+    due:'ค่าคอมมิชชั่นที่ต้องจ่าย',
+    paid:'ค่าคอมมิชชั่นที่จ่ายแล้ว',
+    paidAt:'ชำระเสร็จเมื่อ:',
+    statusPaid:'จ่ายแล้ว',
+    statusPartial:'จ่ายบางส่วน',
+    statusPending:'รอจ่าย'
+  },
+
+  ms:{
+    title:'Carian Sejarah Komisen',
+    expand:'Buka Carian',
+    collapse:'Tutup',
+    hint1:'Lihat status komisen mengikut tahun, bulan, tarikh dan pusingan.',
+    hint2:'Pusingan tanpa komisen juga akan dipaparkan sebagai “Tiada komisen untuk pusingan ini”.',
+    year:'Tahun',
+    month:'Bulan',
+    day:'Hari',
+    chooseRound:'Pilih pusingan yang ingin dilihat',
+    noCommission:'Tiada Komisen Pusingan Ini',
+    noCommissionText:'Tiada komisen ejen dijana untuk pusingan ini.',
+    noCommissionReason:'Komisen hanya dijana daripada bayaran sah pelanggan langsung yang telah disahkan oleh platform.',
+    confirmed:'Jumlah Pelanggan Disahkan',
+    rate:'Kadar Komisen Pusingan',
+    due:'Komisen Perlu Dibayar',
+    paid:'Komisen Dibayar',
+    paidAt:'Dibayar Pada:',
+    statusPaid:'Dibayar',
+    statusPartial:'Dibayar Sebahagian',
+    statusPending:'Menunggu'
+  },
+
+  vi:{
+    title:'Tra cứu lịch sử hoa hồng',
+    expand:'Mở tra cứu',
+    collapse:'Thu gọn',
+    hint1:'Xem trạng thái hoa hồng theo năm, tháng, ngày và kỳ.',
+    hint2:'Kỳ không phát sinh hoa hồng cũng sẽ hiển thị rõ “Kỳ này không có hoa hồng”.',
+    year:'Năm',
+    month:'Tháng',
+    day:'Ngày',
+    chooseRound:'Chọn kỳ đã quyết toán để xem',
+    noCommission:'Kỳ này không có hoa hồng',
+    noCommissionText:'Kỳ này không phát sinh hoa hồng đại lý của bạn.',
+    noCommissionReason:'Hoa hồng chỉ phát sinh từ khoản thanh toán hợp lệ của khách hàng trực thuộc đã được nền tảng xác nhận.',
+    confirmed:'Số tiền khách hàng đã xác nhận',
+    rate:'Tỷ lệ hoa hồng kỳ',
+    due:'Hoa hồng phải trả',
+    paid:'Hoa hồng đã trả',
+    paidAt:'Hoàn tất thanh toán:',
+    statusPaid:'Đã thanh toán',
+    statusPartial:'Đã thanh toán một phần',
+    statusPending:'Chờ thanh toán'
+  },
+
+  id:{
+    title:'Pencarian Riwayat Komisi',
+    expand:'Buka Pencarian',
+    collapse:'Tutup',
+    hint1:'Lihat status komisi berdasarkan tahun, bulan, tanggal, dan periode.',
+    hint2:'Periode tanpa komisi juga akan menampilkan “Tidak ada komisi untuk periode ini”.',
+    year:'Tahun',
+    month:'Bulan',
+    day:'Hari',
+    chooseRound:'Pilih periode yang ingin dilihat',
+    noCommission:'Tidak Ada Komisi Periode Ini',
+    noCommissionText:'Tidak ada komisi agen yang dihasilkan untuk periode ini.',
+    noCommissionReason:'Komisi hanya dihasilkan dari pembayaran valid pelanggan langsung yang telah dikonfirmasi oleh platform.',
+    confirmed:'Jumlah Pelanggan Terkonfirmasi',
+    rate:'Tarif Komisi Periode',
+    due:'Komisi Terutang',
+    paid:'Komisi Dibayar',
+    paidAt:'Pembayaran Selesai:',
+    statusPaid:'Dibayar',
+    statusPartial:'Dibayar Sebagian',
+    statusPending:'Menunggu'
+  }
+
+};
+
+
+function historyText(key){
+
+  const lang =
+  typeof currentLang
+  !==
+  'undefined'
+  ?
+  currentLang
+  :
+  'zh';
+
+  return (
+    HISTORY_BROWSER_I18N[lang]?.[key]
+    ||
+    HISTORY_BROWSER_I18N.zh[key]
+    ||
+    key
+  );
+
+}
 
 /* =========================
    BASIC
