@@ -279,14 +279,48 @@
     ],
 
     '开奖生肖':[
-      'ထွက်သော生肖',
+      'ထွက်သော ရာသီခွင်တိရစ္ဆာန်',
       'Winning Zodiac',
       'นักษัตรที่ออก',
       'Zodiak Menang',
       'Con giáp trúng',
       'Shio Pemenang'
     ],
+    '本期没有管理员确认的有效下注，':[
+      'ယခုအကြိမ်တွင် Admin အတည်ပြုထားသော တရားဝင်လောင်းကြေး မရှိပါ။',
+      'There is no valid bet confirmed by admin for this round.',
+      'รอบนี้ไม่มีการเดิมพันที่ถูกต้องซึ่งผู้ดูแลยืนยันแล้ว',
+      'Tiada pertaruhan sah yang disahkan admin untuk pusingan ini.',
+      'Kỳ này không có cược hợp lệ được quản trị viên xác nhận.',
+      'Tidak ada taruhan valid yang dikonfirmasi admin untuk putaran ini.'
+    ],
 
+    '因此不参与中奖计算，':[
+      'ထို့ကြောင့် ဆုရလဒ်တွက်ချက်မှုတွင် မပါဝင်ပါ။',
+      'Therefore it is not included in winning calculations.',
+      'จึงไม่นำมาคำนวณผลรางวัล',
+      'Oleh itu ia tidak termasuk dalam pengiraan kemenangan.',
+      'Vì vậy không được tính vào kết quả trúng thưởng.',
+      'Karena itu tidak termasuk dalam perhitungan kemenangan.'
+    ],
+
+    '也无需结款。':[
+      'ငွေစာရင်းရှင်းရန်လည်း မလိုအပ်ပါ။',
+      'No settlement payment is required.',
+      'และไม่จำเป็นต้องชำระยอด',
+      'Tiada pembayaran penyelesaian diperlukan.',
+      'Cũng không cần thanh toán quyết toán.',
+      'Tidak perlu melakukan pembayaran penyelesaian.'
+    ],
+
+    '仅作为历史记录。':[
+      'မှတ်တမ်းအဖြစ်သာ သိမ်းဆည်းထားပါသည်။',
+      'Kept only as a historical record.',
+      'เก็บไว้เป็นประวัติเท่านั้น',
+      'Disimpan sebagai rekod sejarah sahaja.',
+      'Chỉ được lưu làm lịch sử.',
+      'Disimpan hanya sebagai catatan riwayat.'
+    ],
     '保存申报金额':[
       'သိမ်းထားသော တင်ပြငွေ',
       'Saved Submitted Amount',
