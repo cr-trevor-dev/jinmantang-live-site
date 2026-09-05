@@ -866,11 +866,95 @@ ms:{
 
 vi:{
   back:'Quay lại trung tâm khách hàng',
-  title:'Hướng dẫn JIN MANTANG',
-  desc:'Các bước đơn giản để cược, thanh toán, xem kết quả và trạng thái trả thưởng.',
+  title:'Hướng dẫn sử dụng JIN MANTANG',
+  desc:'Nếu đây là lần đầu sử dụng, hãy làm theo các bước đơn giản bên dưới để đặt cược, thanh toán, xem kết quả và kiểm tra trạng thái trả thưởng.',
   flow:['Chọn con giáp','Xác nhận cược','Thanh toán','Xem kết quả'],
-  sections:[],
-  notice:'Vui lòng lấy kỳ hiện tại, thời hạn, trạng thái duyệt thanh toán và số tiền đã xác nhận trên trang khách hàng làm chuẩn.'
+
+  sections:[
+    {
+      icon:'👋',
+      title:'Lần đầu sử dụng',
+      sub:'Tìm hiểu toàn bộ quy trình',
+      body:[
+        'Vào「Kỳ hiện tại」để xem kỳ đang mở và thời gian đóng cược.',
+        'Chọn một hoặc nhiều con giáp muốn cược và nhập số tiền.',
+        'Lưu cược của kỳ hiện tại, sau đó thanh toán theo thông tin hiển thị trên trang.',
+        'Sau khi gửi thanh toán, hãy chờ nền tảng kiểm tra và xác nhận.',
+        'Sau khi có kết quả, bạn có thể xem kết quả, tình trạng trúng thưởng và trạng thái trả thưởng.'
+      ]
+    },
+    {
+      icon:'🎯',
+      title:'Cách đặt cược',
+      sub:'Chọn con giáp và số tiền',
+      body:[
+        'Trong kỳ đang mở, chọn một hoặc nhiều con giáp mà bạn muốn cược.',
+        'Nhập số tiền cược tương ứng cho từng con giáp đã chọn.',
+        'Kiểm tra số tiền chính xác rồi nhấn「Lưu kỳ này」.',
+        'Số tiền đã được gửi để kiểm tra thanh toán hoặc đã được xác nhận sẽ không thể giảm. Trước thời gian đóng cược, bạn vẫn có thể tăng thêm số tiền.'
+      ]
+    },
+    {
+      icon:'💳',
+      title:'Cách thanh toán',
+      sub:'Thanh toán và trạng thái xét duyệt',
+      body:[
+        'Sau khi lưu cược, kiểm tra số tiền hiển thị tại「Số tiền còn phải thanh toán」.',
+        'Chọn tài khoản KPay hoặc tài khoản ngân hàng do nền tảng cung cấp.',
+        'Sau khi chuyển tiền, nhập số tiền đã thanh toán và tải lên bằng chứng thanh toán.',
+        'Gửi thông tin và chờ nền tảng kiểm tra, xác nhận.',
+        'Chỉ số tiền được nền tảng xác nhận đã nhận trước khi công bố kết quả mới được tính là cược hợp lệ của kỳ này.'
+      ]
+    },
+    {
+      icon:'🏆',
+      title:'Kết quả & Trúng thưởng',
+      sub:'Cách xem kết quả mới nhất',
+      body:[
+        'Sau khi công bố kết quả, mục「Kết quả kỳ gần nhất」sẽ hiển thị con giáp của kỳ mới nhất đã được chốt.',
+        'Ngay cả khi không cược trong kỳ này, bạn vẫn có thể xem kết quả mới nhất.',
+        'Nếu đã cược nhưng không trúng, hệ thống sẽ hiển thị kỳ đã được quyết toán và không trúng thưởng.',
+        'Nếu trúng thưởng, hệ thống sẽ hiển thị cược hợp lệ, số tiền trúng, số tiền hoàn trả và trạng thái trả thưởng.'
+      ]
+    },
+    {
+      icon:'💰',
+      title:'Nhận tiền & Trả thưởng',
+      sub:'Cách nhận tiền sau khi trúng',
+      body:[
+        'Hãy liên kết trước một tài khoản KPay hoặc tài khoản ngân hàng hợp lệ trong mục「Nhận tiền」.',
+        'Khi trúng thưởng, nền tảng sẽ xử lý trả thưởng theo phương thức nhận tiền hợp lệ đang được liên kết.',
+        'Trạng thái trả thưởng có thể hiển thị Chờ trả, Đã trả một phần hoặc Đã trả.',
+        'Bạn có thể xem lại các giao dịch trả thưởng thực tế trong mục「Lịch sử」.'
+      ]
+    },
+    {
+      icon:'📋',
+      title:'Lịch sử',
+      sub:'Kỳ, thanh toán và trả thưởng',
+      body:[
+        'Vào「Lịch sử」để xem các kỳ trước đã được quyết toán.',
+        'Bạn có thể xem kết quả từng kỳ và số tiền cược hợp lệ của mình.',
+        'Lịch sử thanh toán sẽ lưu trạng thái xét duyệt, số tiền và thời gian.',
+        'Lịch sử trả thưởng sẽ lưu số tiền phải trả, số tiền đã trả và thông tin nhận tiền.',
+        'Việc mở kỳ mới sẽ không xóa các lịch sử cũ.'
+      ]
+    },
+    {
+      icon:'❓',
+      title:'Câu hỏi thường gặp',
+      sub:'Xử lý các tình huống thường gặp',
+      body:[
+        'Không cược trong kỳ này: bạn vẫn có thể xem kết quả bình thường.',
+        'Thanh toán đang được xét duyệt: hãy chờ nền tảng xác nhận. Trước khi được xác nhận, số tiền đó chưa được tính là cược hợp lệ.',
+        'Nếu thanh toán chưa được xác nhận trước khi công bố kết quả, số tiền đó sẽ không tham gia kết quả của kỳ này.',
+        'Nếu có hoàn tiền hoặc kiểm tra tiền, hãy lấy trạng thái thực tế hiển thị trong lịch sử khách hàng làm căn cứ.',
+        'Nếu phát hiện bất thường, vui lòng liên hệ bộ phận hỗ trợ của nền tảng.'
+      ]
+    }
+  ],
+
+  notice:'Lưu ý quan trọng: Hãy lấy kỳ hiện tại, thời gian đóng cược, trạng thái xét duyệt thanh toán và số tiền được nền tảng xác nhận hiển thị trên trang khách hàng làm căn cứ.'
 },
 
 
