@@ -1609,7 +1609,7 @@ function ccRender(){
         type="search"
         autocomplete="off"
         placeholder="搜索代理名称 / 推荐码"
-        oninput="window.renderAgentCommissionCenter()">
+        oninput="window.filterAgentCommissionList()">
 
 
       <input
@@ -1761,7 +1761,20 @@ function ccRender(){
 
 }
 
+window.filterAgentCommissionList =
+function(){
 
+  const list =
+  cc$('ccList');
+
+  if(!list){
+    return;
+  }
+
+  list.innerHTML =
+  ccListHtml();
+
+};
 window.setAgentCommissionFilter =
 function(status){
 
