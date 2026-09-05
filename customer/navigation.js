@@ -215,7 +215,7 @@ function installNavigationStyle(){
 .customerMainNavGrid{
   display:grid;
   grid-template-columns:
-  repeat(4,1fr);
+  repeat(5,1fr);
   gap:7px;
 }
 
@@ -302,7 +302,7 @@ function installNavigationStyle(){
 
   .customerMainNavGrid{
     grid-template-columns:
-    repeat(4,minmax(0,1fr));
+    repeat(5,minmax(0,1fr));
     gap:5px;
   }
 
@@ -429,7 +429,19 @@ function installNavigation(){
         </span>
 
       </button>
+      <button
+        id="customerNavGuide"
+        class="customerMainNavBtn"
+        type="button"
+        onclick="location.href='/customer/guide/'">
 
+        指南
+
+        <span>
+          使用说明
+        </span>
+
+      </button>
     </div>
 
   `;
