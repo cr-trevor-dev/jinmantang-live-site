@@ -657,7 +657,12 @@ function renderMaintenance(
   const draw =
   ()=>{
 
-    document.body.innerHTML = `
+    const host =
+document.createElement(
+  'div'
+);
+
+host.innerHTML = `
 
       <div
         id="jmtMaintenanceOverlay"
@@ -721,6 +726,30 @@ function renderMaintenance(
       </div>
 
     `;
+        const nextOverlay =
+    host.firstElementChild;
+
+
+    const oldOverlay =
+    document.getElementById(
+      'jmtMaintenanceOverlay'
+    );
+
+
+    if(oldOverlay){
+
+      oldOverlay.replaceWith(
+        nextOverlay
+      );
+
+    }
+    else{
+
+      document.body.appendChild(
+        nextOverlay
+      );
+
+    }
 
   };
 
@@ -841,7 +870,24 @@ async function checkMaintenance(){
       return;
 
     }
+    const overlay =
+    document.getElementById(
+      'jmtMaintenanceOverlay'
+    );
 
+
+    if(overlay){
+
+      overlay.remove();
+
+    }
+
+
+    document.documentElement
+    .classList
+    .remove(
+      'jmtMaintenanceActive'
+    );
   }
   catch(error){
 
@@ -874,5 +920,30 @@ async function checkMaintenance(){
 
 
 checkMaintenance();
+
+
+setInterval(
+  checkMaintenance,
+  3000
+);
+
+
+document.addEventListener(
+  'visibilitychange',
+  ()=>{
+
+    if(
+      document.visibilityState
+      ===
+      'visible'
+    ){
+
+      checkMaintenance();
+
+    }
+
+  }
+);
+
 
 })();
