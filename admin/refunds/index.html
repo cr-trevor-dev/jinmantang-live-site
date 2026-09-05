@@ -463,7 +463,114 @@ button:disabled{
       <div class="title">
         处理记录
       </div>
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+          1fr 1fr 1fr;
+          gap:8px;
+          margin-bottom:10px;
+        ">
 
+        <input
+          id="historyDate"
+          type="date"
+          style="
+            width:100%;
+            border:1px solid rgba(214,168,63,.22);
+            border-radius:12px;
+            padding:12px;
+            background:#101011;
+            color:#f7f0df;
+            font-size:12px;
+          ">
+
+        <select
+          id="historyPeriod"
+          style="
+            width:100%;
+            border:1px solid rgba(214,168,63,.22);
+            border-radius:12px;
+            padding:12px;
+            background:#101011;
+            color:#f7f0df;
+            font-size:12px;
+          ">
+
+          <option value="">
+            全部期数
+          </option>
+
+          <option value="1030">
+            上午 11:45
+          </option>
+
+          <option value="1530">
+            下午 15:45
+          </option>
+
+        </select>
+
+        <select
+          id="historyStatus"
+          style="
+            width:100%;
+            border:1px solid rgba(214,168,63,.22);
+            border-radius:12px;
+            padding:12px;
+            background:#101011;
+            color:#f7f0df;
+            font-size:12px;
+          ">
+
+          <option value="">
+            全部状态
+          </option>
+
+          <option value="refunded">
+            已退款
+          </option>
+
+          <option value="cancelled">
+            已结案
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:8px;
+          margin-bottom:14px;
+        ">
+
+        <button
+          type="button"
+          onclick="render()">
+
+          查询
+
+        </button>
+
+        <button
+          type="button"
+          class="secondary"
+          onclick="
+            document.getElementById('historyDate').value='';
+            document.getElementById('historyPeriod').value='';
+            document.getElementById('historyStatus').value='';
+            render();
+          ">
+
+          重置
+
+        </button>
+
+      </div>
       <div id="historyList">
 
         <div class="empty">
@@ -1146,7 +1253,7 @@ function render(){
   );
 
 
-  const history =
+    let history =
   rows.filter(
 
     row =>
@@ -1158,6 +1265,79 @@ function render(){
     ===
     'cancelled'
 
+  );
+
+
+  const historyDate =
+  document.getElementById(
+    'historyDate'
+  )?.value
+  ||
+  '';
+
+
+  const historyPeriod =
+  document.getElementById(
+    'historyPeriod'
+  )?.value
+  ||
+  '';
+
+
+  const historyStatus =
+  document.getElementById(
+    'historyStatus'
+  )?.value
+  ||
+  '';
+
+
+  history =
+  history.filter(
+    row => {
+
+      if(
+        historyDate
+        &&
+        row.round_date
+        !==
+        historyDate
+      ){
+
+        return false;
+
+      }
+
+
+      if(
+        historyPeriod
+        &&
+        row.round_code
+        !==
+        historyPeriod
+      ){
+
+        return false;
+
+      }
+
+
+      if(
+        historyStatus
+        &&
+        row.status
+        !==
+        historyStatus
+      ){
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
   );
 
 
