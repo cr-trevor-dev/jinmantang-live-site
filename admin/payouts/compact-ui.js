@@ -389,23 +389,87 @@ function rowsForView(){
 
   if(
     payoutView
-    ===
+    !==
     'paid'
   ){
 
     return rows.filter(
-      row =>
-      row.payout_status
-      ===
-      'paid'
+      isPendingPayout
     );
 
   }
 
 
-  return rows.filter(
-    isPendingPayout
+  let paidRows =
+  rows.filter(
+    row =>
+    row.payout_status
+    ===
+    'paid'
   );
+
+
+  const historyDate =
+  document.getElementById(
+    'payoutHistoryDate'
+  )?.value
+  ||
+  '';
+
+
+  const historyPeriod =
+  document.getElementById(
+    'payoutHistoryPeriod'
+  )?.value
+  ||
+  '';
+
+
+  paidRows =
+  paidRows.filter(
+    row => {
+
+      if(
+        historyDate
+        &&
+        String(
+          row.round_date
+          ||
+          ''
+        )
+        !==
+        historyDate
+      ){
+
+        return false;
+
+      }
+
+
+      if(
+        historyPeriod
+        &&
+        String(
+          row.round_code
+          ||
+          ''
+        )
+        !==
+        historyPeriod
+      ){
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
+  );
+
+
+  return paidRows;
 
 }
 
