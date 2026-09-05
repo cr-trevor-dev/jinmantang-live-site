@@ -464,7 +464,97 @@ button:disabled{
       <div class="title">
         已完成记录
       </div>
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+          1fr 1fr;
+          gap:8px;
+          margin-bottom:10px;
+        ">
 
+        <input
+          id="payoutHistoryDate"
+          type="date"
+          style="
+            width:100%;
+            border:1px solid rgba(214,168,63,.22);
+            border-radius:12px;
+            padding:12px;
+            background:#101011;
+            color:#f7f0df;
+            font-size:12px;
+          ">
+
+        <select
+          id="payoutHistoryPeriod"
+          style="
+            width:100%;
+            border:1px solid rgba(214,168,63,.22);
+            border-radius:12px;
+            padding:12px;
+            background:#101011;
+            color:#f7f0df;
+            font-size:12px;
+          ">
+
+          <option value="">
+            全部期数
+          </option>
+
+          <option value="1030">
+            上午 11:45
+          </option>
+
+          <option value="1530">
+            下午 15:45
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:8px;
+          margin-bottom:14px;
+        ">
+
+        <button
+          type="button"
+          onclick="
+            payoutPage=1;
+            selectedPayoutId=null;
+            render();
+          ">
+
+          查询
+
+        </button>
+
+        <button
+          type="button"
+          onclick="
+            document.getElementById('payoutHistoryDate').value='';
+            document.getElementById('payoutHistoryPeriod').value='';
+            payoutPage=1;
+            selectedPayoutId=null;
+            render();
+          "
+          style="
+            background:#1b1717;
+            color:#d9a7a2;
+            border:1px solid rgba(180,80,80,.24);
+          ">
+
+          重置
+
+        </button>
+
+      </div>
       <div id="historyList">
 
         <div class="empty">
