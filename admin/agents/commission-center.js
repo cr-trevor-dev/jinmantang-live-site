@@ -1313,15 +1313,40 @@ function ccItemHtml(row){
 
           :
 
-          `
-            <button
-              type="button"
-              class="success"
-              disabled>
+                    `
+            ${
+              row.payment_transaction
+              &&
+              row.payment_transaction.proof_storage_path
+              ?
+              `
+                <button
+                  type="button"
+                  class="secondary"
+                  onclick="
+                    viewCommissionProof(
+                      '${ccEsc(
+                        row.payment_transaction.proof_storage_path
+                      )}'
+                    )
+                  ">
 
-              已完成
+                  查看付款凭证
 
-            </button>
+                </button>
+              `
+              :
+              `
+                <button
+                  type="button"
+                  class="success"
+                  disabled>
+
+                  已完成
+
+                </button>
+              `
+            }
           `
 
         }
