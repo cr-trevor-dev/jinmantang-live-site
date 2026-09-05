@@ -488,21 +488,176 @@ function ensureIntro(){
 
 function translated(value){
 
-  if(
-    typeof window
-    .agentExtraTranslateValue
-    ===
-    'function'
-  ){
+  const lang =
+  typeof currentLang
+  !==
+  'undefined'
+  ?
+  currentLang
+  :
+  'zh';
 
-    return window
-    .agentExtraTranslateValue(
-      value
-    );
 
-  }
+  const text = {
 
-  return value;
+    '本期':{
+      zh:'本期',
+      my:'ယခုအကြိမ်',
+      en:'Current',
+      th:'รอบปัจจุบัน',
+      ms:'Pusingan Semasa',
+      vi:'Kỳ hiện tại',
+      id:'Periode Saat Ini'
+    },
+
+    '历史':{
+      zh:'历史',
+      my:'မှတ်တမ်း',
+      en:'History',
+      th:'ประวัติ',
+      ms:'Sejarah',
+      vi:'Lịch sử',
+      id:'Riwayat'
+    },
+
+    '收款':{
+      zh:'收款',
+      my:'ငွေလက်ခံ',
+      en:'Payout',
+      th:'รับเงิน',
+      ms:'Terima',
+      vi:'Nhận tiền',
+      id:'Penerimaan'
+    },
+
+    '账户':{
+      zh:'账户',
+      my:'အကောင့်',
+      en:'Account',
+      th:'บัญชี',
+      ms:'Akaun',
+      vi:'Tài khoản',
+      id:'Akun'
+    },
+
+    '客户 · 佣金':{
+      zh:'客户 · 佣金',
+      my:'ဖောက်သည် · ကော်မရှင်',
+      en:'Customers · Commission',
+      th:'ลูกค้า · คอมมิชชั่น',
+      ms:'Pelanggan · Komisen',
+      vi:'Khách hàng · Hoa hồng',
+      id:'Pelanggan · Komisi'
+    },
+
+    '佣金 · 付款':{
+      zh:'佣金 · 付款',
+      my:'ကော်မရှင် · ငွေပေးချေမှု',
+      en:'Commission · Payment',
+      th:'คอมมิชชั่น · ชำระเงิน',
+      ms:'Komisen · Bayaran',
+      vi:'Hoa hồng · Thanh toán',
+      id:'Komisi · Pembayaran'
+    },
+
+    'KPay / 银行':{
+      zh:'KPay / 银行',
+      my:'KPay / ဘဏ်',
+      en:'KPay / Bank',
+      th:'KPay / ธนาคาร',
+      ms:'KPay / Bank',
+      vi:'KPay / Ngân hàng',
+      id:'KPay / Bank'
+    },
+
+    '资料 · 推广':{
+      zh:'资料 · 推广',
+      my:'အချက်အလက် · ဖိတ်ခေါ်မှု',
+      en:'Profile · Referral',
+      th:'ข้อมูล · แนะนำ',
+      ms:'Profil · Rujukan',
+      vi:'Hồ sơ · Giới thiệu',
+      id:'Profil · Referral'
+    },
+
+    '历史记录':{
+      zh:'历史记录',
+      my:'မှတ်တမ်း',
+      en:'History Records',
+      th:'ประวัติรายการ',
+      ms:'Rekod Sejarah',
+      vi:'Lịch sử giao dịch',
+      id:'Riwayat'
+    },
+
+    '我的收款方式':{
+      zh:'我的收款方式',
+      my:'ကျွန်ုပ်၏ ငွေလက်ခံနည်းလမ်း',
+      en:'My Payout Accounts',
+      th:'ช่องทางรับเงินของฉัน',
+      ms:'Akaun Penerimaan Saya',
+      vi:'Phương thức nhận tiền',
+      id:'Metode Penerimaan Saya'
+    },
+
+    '账户中心':{
+      zh:'账户中心',
+      my:'အကောင့်စင်တာ',
+      en:'Account Center',
+      th:'ศูนย์บัญชี',
+      ms:'Pusat Akaun',
+      vi:'Trung tâm tài khoản',
+      id:'Pusat Akun'
+    },
+
+    '这里只显示当前期直属客户的有效金额、待确认金额和当前正式佣金。':{
+      zh:'这里只显示当前期直属客户的有效金额、待确认金额和当前正式佣金。',
+      my:'ဤနေရာတွင် လက်ရှိအကြိမ်၏ တိုက်ရိုက်ဖောက်သည် အတည်ပြုငွေ၊ စစ်ဆေးရန်စောင့်ငွေနှင့် လက်ရှိကော်မရှင်ကိုသာ ပြသပါသည်။',
+      en:'Only confirmed customer amounts, pending amounts and current commission for this round are shown here.',
+      th:'แสดงเฉพาะยอดลูกค้าที่ได้รับการยืนยัน ยอดรอตรวจสอบ และค่าคอมมิชชั่นรอบปัจจุบัน',
+      ms:'Hanya jumlah pelanggan yang disahkan, jumlah menunggu dan komisen semasa dipaparkan.',
+      vi:'Chỉ hiển thị số tiền khách hàng đã xác nhận, số tiền chờ xác nhận và hoa hồng hiện tại.',
+      id:'Hanya jumlah pelanggan terkonfirmasi, jumlah menunggu, dan komisi saat ini yang ditampilkan.'
+    },
+
+    '查看每一期已经产生的代理佣金、支付状态与当期收款账户。开启下一期不会删除旧记录。':{
+      zh:'查看每一期已经产生的代理佣金、支付状态与当期收款账户。开启下一期不会删除旧记录。',
+      my:'အကြိမ်တိုင်း၏ ကော်မရှင်၊ ငွေပေးချေမှုအခြေအနေနှင့် ထိုအချိန်က ငွေလက်ခံအကောင့်ကို ကြည့်နိုင်ပါသည်။ အကြိမ်အသစ်ဖွင့်လှစ်သော်လည်း မှတ်တမ်းဟောင်းများ မပျောက်ပါ။',
+      en:'View commission, payment status and payout account for each settled round. Old records remain when a new round opens.',
+      th:'ดูค่าคอมมิชชั่น สถานะการจ่าย และบัญชีรับเงินของแต่ละรอบ ประวัติเก่าจะไม่หายเมื่อเปิดรอบใหม่',
+      ms:'Lihat komisen, status bayaran dan akaun penerimaan setiap pusingan. Rekod lama kekal apabila pusingan baharu dibuka.',
+      vi:'Xem hoa hồng, trạng thái thanh toán và tài khoản nhận tiền của từng kỳ. Dữ liệu cũ vẫn được giữ khi mở kỳ mới.',
+      id:'Lihat komisi, status pembayaran, dan akun penerimaan setiap periode. Riwayat lama tetap tersimpan saat periode baru dibuka.'
+    },
+
+    '管理平台向你支付代理佣金时使用的 KPay 与银行账户。':{
+      zh:'管理平台向你支付代理佣金时使用的 KPay 与银行账户。',
+      my:'Platform မှ ကိုယ်စားလှယ်ကော်မရှင်ပေးချေရာတွင် အသုံးပြုမည့် KPay နှင့် ဘဏ်အကောင့်ကို စီမံနိုင်ပါသည်။',
+      en:'Manage the KPay and bank accounts used to receive agent commission.',
+      th:'จัดการบัญชี KPay และธนาคารสำหรับรับค่าคอมมิชชั่นตัวแทน',
+      ms:'Urus akaun KPay dan bank untuk menerima komisen ejen.',
+      vi:'Quản lý KPay và tài khoản ngân hàng dùng để nhận hoa hồng đại lý.',
+      id:'Kelola KPay dan rekening bank untuk menerima komisi agen.'
+    },
+
+    '查看代理资料、当前佣金比例、永久推广码和客户注册链接。':{
+      zh:'查看代理资料、当前佣金比例、永久推广码和客户注册链接。',
+      my:'ကိုယ်စားလှယ်အချက်အလက်၊ လက်ရှိကော်မရှင်နှုန်း၊ အမြဲတမ်းဖိတ်ခေါ်ကုဒ်နှင့် ဖောက်သည်စာရင်းသွင်းလင့်ခ်ကို ကြည့်နိုင်ပါသည်။',
+      en:'View agent profile, current commission rate, permanent referral code and customer registration link.',
+      th:'ดูข้อมูลตัวแทน อัตราคอมมิชชั่นปัจจุบัน รหัสแนะนำถาวร และลิงก์สมัครลูกค้า',
+      ms:'Lihat profil ejen, kadar komisen semasa, kod rujukan kekal dan pautan pendaftaran pelanggan.',
+      vi:'Xem hồ sơ đại lý, tỷ lệ hoa hồng hiện tại, mã giới thiệu cố định và liên kết đăng ký khách hàng.',
+      id:'Lihat profil agen, tarif komisi saat ini, kode referral permanen, dan tautan pendaftaran pelanggan.'
+    }
+
+  };
+
+
+  return (
+    text[value]?.[lang]
+    ||
+    value
+  );
 
 }
 
@@ -701,7 +856,53 @@ function applyView(){
 
     }
   );
+  const navLabels = {
 
+    agentNavRound:[
+      translated('本期'),
+      translated('客户 · 佣金')
+    ],
+
+    agentNavHistory:[
+      translated('历史'),
+      translated('佣金 · 付款')
+    ],
+
+    agentNavPayout:[
+      translated('收款'),
+      translated('KPay / 银行')
+    ],
+
+    agentNavAccount:[
+      translated('账户'),
+      translated('资料 · 推广')
+    ]
+
+  };
+
+
+  Object.entries(
+    navLabels
+  )
+  .forEach(
+    ([id,label])=>{
+
+      const button =
+      nav$(id);
+
+      if(!button){
+        return;
+      }
+
+      button.innerHTML = `
+        ${label[0]}
+        <span>
+          ${label[1]}
+        </span>
+      `;
+
+    }
+  );
   renderIntro();
 
 }
