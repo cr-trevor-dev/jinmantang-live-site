@@ -262,7 +262,10 @@ function statusInfo(row){
   if(!row){
 
     return {
-      text:'该期暂无佣金',
+      text:
+      historyText(
+        'noCommission'
+      ),
       cls:'none'
     };
 
@@ -295,7 +298,10 @@ function statusInfo(row){
   ){
 
     return {
-      text:'已支付',
+      text:
+      historyText(
+        'statusPaid'
+      ),
       cls:'paid'
     };
 
@@ -308,7 +314,10 @@ function statusInfo(row){
   ){
 
     return {
-      text:'部分支付',
+      text:
+      historyText(
+        'statusPartial'
+      ),
       cls:'partial'
     };
 
@@ -317,14 +326,20 @@ function statusInfo(row){
   if(due > 0){
 
     return {
-      text:'待支付',
+      text:
+      historyText(
+        'statusPending'
+      ),
       cls:'pending'
     };
 
   }
 
   return {
-    text:'该期暂无佣金',
+    text:
+    historyText(
+      'noCommission'
+    ),
     cls:'none'
   };
 
@@ -823,7 +838,7 @@ function refreshMonths(
     month =>
     `
       <option value="${esc(month)}">
-        ${esc(month)} 月
+                ${esc(month)} ${historyText('month')}
       </option>
     `
   )
@@ -871,7 +886,7 @@ function refreshDays(
     day =>
     `
       <option value="${esc(day)}">
-        ${esc(day)} 日
+               ${esc(day)} ${historyText('day')}
       </option>
     `
   )
@@ -1015,7 +1030,7 @@ function renderResult(){
 
     box.innerHTML = `
       <div class="ahbNoCommission">
-        请选择要查询的正式期数
+                ${historyText('chooseRound')}
       </div>
     `;
 
@@ -1049,20 +1064,18 @@ function renderResult(){
         </div>
 
         <div class="ahbBadge none">
-          该期暂无佣金
+                    ${historyText('noCommission')}
         </div>
 
       </div>
 
       <div class="ahbNoCommission">
 
-        该期没有产生你的代理佣金。
+                ${historyText('noCommissionText')}
 
         <br>
 
-        只有直属客户实际提交付款，
-        并由平台后台确认到账的有效金额
-        才会产生代理佣金。
+                ${historyText('noCommissionReason')}
 
       </div>
 
@@ -1104,7 +1117,7 @@ function renderResult(){
       <div class="ahbBox">
 
         <small>
-          直属客户有效金额
+                    ${historyText('confirmed')}
         </small>
 
         <strong>
@@ -1119,7 +1132,7 @@ function renderResult(){
       <div class="ahbBox">
 
         <small>
-          当期佣金率
+                    ${historyText('rate')}
         </small>
 
         <strong>
@@ -1134,7 +1147,7 @@ function renderResult(){
       <div class="ahbBox">
 
         <small>
-          应付佣金
+                    ${historyText('due')}
         </small>
 
         <strong>
@@ -1149,7 +1162,7 @@ function renderResult(){
       <div class="ahbBox">
 
         <small>
-          已付佣金
+                   ${historyText('paid')}
         </small>
 
         <strong>
@@ -1169,7 +1182,7 @@ function renderResult(){
       `
         <div class="ahbPaidAt">
 
-          支付完成：
+                    ${historyText('paidAt')}
           ${esc(
             formatCompleted(
               row.completed_at
@@ -1208,7 +1221,7 @@ function render(){
     <div class="ahbHead">
 
       <div class="ahbTitle">
-        历史佣金查询
+               ${historyText('title')}
       </div>
 
       <button
@@ -1216,12 +1229,12 @@ function render(){
         class="ahbToggle"
         id="ahbToggle">
 
-        ${
+                ${
           expanded
           ?
-          '收起'
+          historyText('collapse')
           :
-          '展开查询'
+          historyText('expand')
         }
 
       </button>
@@ -1231,10 +1244,9 @@ function render(){
 
     <div class="ahbHint">
 
-      可按年、月、日期和期数查看自己的佣金状态。
+            ${historyText('hint1')}
 
-      没有产生佣金的正式期数，
-      也会明确显示“该期暂无佣金”。
+      ${historyText('hint2')}
 
     </div>
 
@@ -1253,7 +1265,7 @@ function render(){
             year =>
             `
               <option value="${esc(year)}">
-                ${esc(year)} 年
+                                ${esc(year)} ${historyText('year')}
               </option>
             `
           ).join('')}
@@ -1514,8 +1526,68 @@ function applyVisibility(){
     !isHistory
   );
 
-  if(isHistory){
+    if(isHistory){
     load();
+
+    const lang =
+    typeof currentLang
+    !==
+    'undefined'
+    ?
+    currentLang
+    :
+    'zh';
+
+    if(
+      loaded
+      &&
+      card.dataset.historyLang
+      !==
+      lang
+    ){
+
+      const year =
+      selectedYear();
+
+      const month =
+      selectedMonth();
+
+      const day =
+      selectedDay();
+
+      const period =
+      selectedPeriod();
+
+      card.dataset.historyLang =
+      lang;
+
+      render();
+
+      if(
+        expanded
+        &&
+        year
+      ){
+
+        h$('ahbYear').value =
+        year;
+
+        refreshMonths(
+          month
+        );
+
+        refreshDays(
+          day
+        );
+
+        refreshPeriods(
+          period
+        );
+
+      }
+
+    }
+
   }
 
 }
