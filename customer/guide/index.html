@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="theme-color"
+  content="#080706">
+
+<title>金满堂 · 使用指南</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+  background:
+    radial-gradient(
+      circle at top,
+      #271b07 0,
+      #0c0904 30%,
+      #050505 72%
+    );
+
+  color:#f4e5b8;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+
+  padding:
+    max(20px,env(safe-area-inset-top))
+    14px
+    calc(35px + env(safe-area-inset-bottom));
+}
+
+.wrap{
+  width:min(720px,100%);
+  margin:auto;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+
+  color:#d7bc72;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.lang{
+  border:1px solid rgba(214,168,63,.28);
+  background:#11100d;
+  color:#e7ce88;
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:13px;
+}
+
+.hero{
+  text-align:center;
+  padding:18px 10px 26px;
+}
+
+.heroMark{
+  width:64px;
+  height:64px;
+  margin:0 auto 12px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  border:
+  1px solid rgba(218,174,62,.55);
+
+  background:
+  radial-gradient(
+    circle,
+    #392407,
+    #0a0804 70%
+  );
+
+  color:#efc65c;
+
+  font-size:27px;
+  font-weight:900;
+
+  box-shadow:
+  0 0 30px rgba(221,170,45,.14);
+}
+
+.hero h1{
+  margin:0;
+  color:#efc85f;
+  font-size:26px;
+  letter-spacing:2px;
+}
+
+.hero p{
+  margin:9px auto 0;
+  max-width:520px;
+  color:#9d8c62;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-bottom:18px;
+}
+
+.flowItem{
+  text-align:center;
+  padding:11px 5px;
+
+  background:
+  rgba(24,20,13,.9);
+
+  border:
+  1px solid rgba(214,168,63,.18);
+
+  border-radius:12px;
+
+  color:#c8ae69;
+  font-size:11px;
+  line-height:1.45;
+}
+
+.flowItem b{
+  display:block;
+  color:#e9c65e;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.guide{
+  margin-bottom:10px;
+
+  border:
+  1px solid rgba(214,168,63,.26);
+
+  border-radius:16px;
+
+  background:
+  linear-gradient(
+    180deg,
+    rgba(27,22,13,.98),
+    rgba(10,9,7,.98)
+  );
+
+  overflow:hidden;
+}
+
+.guide button{
+  width:100%;
+  border:0;
+  background:transparent;
+
+  color:#ead38e;
+
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  text-align:left;
+}
+
+.icon{
+  width:38px;
+  height:38px;
+
+  flex:none;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:
+  rgba(205,151,37,.10);
+
+  font-size:20px;
+}
+
+.title{
+  flex:1;
+}
+
+.title strong{
+  display:block;
+  color:#edcf74;
+  font-size:15px;
+  margin-bottom:3px;
+}
+
+.title small{
+  color:#85775a;
+  font-size:11px;
+}
+
+.arrow{
+  color:#8e7946;
+  font-size:18px;
+}
+
+.content{
+  display:none;
+
+  padding:
+  0 16px 17px
+  66px;
+
+  color:#bcae86;
+
+  font-size:13px;
+  line-height:1.8;
+}
+
+.guide.open .content{
+  display:block;
+}
+
+.guide.open .arrow{
+  transform:rotate(90deg);
+}
+
+.step{
+  margin-bottom:9px;
+}
+
+.step b{
+  color:#e3c56d;
+}
+
+.notice{
+  margin-top:17px;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  border:
+  1px solid rgba(214,168,63,.20);
+
+  background:
+  rgba(170,121,26,.07);
+
+  color:#a9976d;
+
+  font-size:12px;
+  line-height:1.7;
+}
+
+.foot{
+  text-align:center;
+  margin-top:28px;
+  color:#675b40;
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+
+@media(max-width:520px){
+
+  .flow{
+    grid-template-columns:
+    1fr 1fr;
+  }
+
+  .content{
+    padding-left:16px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+
+    <a
+      class="back"
+      href="/customer/">
+      ← <span id="backText"></span>
+    </a>
+
+    <select
+      class="lang"
+      id="languageSelect">
+      <option value="zh">中文</option>
+      <option value="my">မြန်မာ</option>
+      <option value="en">English</option>
+      <option value="th">ไทย</option>
+      <option value="ms">Melayu</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="id">Indonesia</option>
+    </select>
+
+  </div>
+
+
+  <div class="hero">
+
+    <div class="heroMark">
+      ?
+    </div>
+
+    <h1 id="pageTitle"></h1>
+
+    <p id="pageDesc"></p>
+
+  </div>
+
+
+  <div class="flow">
+
+    <div class="flowItem">
+      <b>1</b>
+      <span id="flow1"></span>
+    </div>
+
+    <div class="flowItem">
+      <b>2</b>
+      <span id="flow2"></span>
+    </div>
+
+    <div class="flowItem">
+      <b>3</b>
+      <span id="flow3"></span>
+    </div>
+
+    <div class="flowItem">
+      <b>4</b>
+      <span id="flow4"></span>
+    </div>
+
+  </div>
+
+
+  <div id="guideList"></div>
+
+
+  <div
+    class="notice"
+    id="notice">
+  </div>
+
+
+  <div class="foot">
+    © JIN MANTANG · CUSTOMER GUIDE
+  </div>
+
+</div>
+
+
+<script>
+
+const LANG_KEY =
+'jmt_customer_lang';
+
+
+const TEXT = {
+
+zh:{
+  back:'返回客户中心',
+  title:'金满堂使用指南',
+  desc:'第一次使用也不用担心，按照下面的步骤即可完成下注、付款、查看开奖结果和派彩记录。',
+  flow:['选择生肖','确认下注','完成付款','等待开奖'],
+
+  sections:[
+    {
+      icon:'👋',
+      title:'第一次使用',
+      sub:'快速了解完整流程',
+      body:[
+        '进入「本期」查看当前开放期和截止时间。',
+        '选择想参与的生肖并输入金额。',
+        '保存本期后，根据页面显示完成付款。',
+        '付款提交后等待平台审核。',
+        '开奖后可以查看开奖结果、中奖情况和派彩状态。'
+      ]
+    },
+    {
+      icon:'🎯',
+      title:'如何下注',
+      sub:'选择生肖与金额',
+      body:[
+        '在当前开放期选择一个或多个生肖。',
+        '在对应生肖输入本期下注金额。',
+        '确认金额无误后点击「保存本期」。',
+        '已进入付款审核或已确认的金额不能减少；截止前仍可继续增加金额。'
+      ]
+    },
+    {
+      icon:'💳',
+      title:'如何付款',
+      sub:'付款与审核状态',
+      body:[
+        '保存下注后，查看「现在还需付款」金额。',
+        '选择平台提供的 KPay 或银行收款账户。',
+        '完成转账后输入付款金额并上传付款凭证。',
+        '提交后等待平台审核。',
+        '只有开奖前由平台确认到账的金额才属于本期有效下注。'
+      ]
+    },
+    {
+      icon:'🏆',
+      title:'开奖与中奖',
+      sub:'怎么看本期开奖结果',
+      body:[
+        '开奖后，「最近一期结果」会显示平台最新一期的开奖生肖。',
+        '即使本期没有下注，也可以看到最新开奖结果。',
+        '有下注但未中奖，会显示「未中奖 · 本期已结算」。',
+        '如果中奖，会显示有效下注、命中金额、中奖返还以及派彩状态。'
+      ]
+    },
+    {
+      icon:'💰',
+      title:'收款与派彩',
+      sub:'中奖后如何收款',
+      body:[
+        '请提前在「收款」页面绑定有效的 KPay 或银行账户。',
+        '中奖后平台会根据已绑定的有效收款方式处理派彩。',
+        '派彩状态可能显示待派彩、部分派彩或已派彩。',
+        '实际派彩记录可以在历史记录中查看。'
+      ]
+    },
+    {
+      icon:'📋',
+      title:'历史记录',
+      sub:'期数、付款和派彩',
+      body:[
+        '进入「历史」可以查看过去已结算的期数。',
+        '可以查看每一期的开奖结果和自己的有效下注情况。',
+        '付款历史会保留审核状态、金额和时间。',
+        '派彩历史会保留应派金额、已派金额和收款信息。',
+        '开启新一期不会删除旧记录。'
+      ]
+    },
+    {
+      icon:'❓',
+      title:'常见问题',
+      sub:'遇到问题时怎么看',
+      body:[
+        '本期没有下注：仍然可以正常查看开奖结果。',
+        '付款正在审核：等待平台确认，不代表已经成为有效下注。',
+        '开奖前未完成付款确认：该金额不会参与本期开奖结果。',
+        '需要退款或资金核对时：以客户历史中的实际处理状态为准。',
+        '如有异常，请联系平台客服。'
+      ]
+    }
+  ],
+
+  notice:
+  '重要提醒：请以客户页面实际显示的当前期数、截止时间、付款审核状态和平台确认金额为准。'
+},
+
+
+en:{
+  back:'Back to Customer Center',
+  title:'JIN MANTANG Guide',
+  desc:'Follow these simple steps to place bets, make payments, check results and view payouts.',
+  flow:['Choose Zodiac','Confirm Bet','Make Payment','View Result'],
+
+  sections:[
+    {
+      icon:'👋',
+      title:'Getting Started',
+      sub:'Understand the full process',
+      body:[
+        'Open Current Round to view the active round and deadline.',
+        'Choose one or more zodiac signs and enter an amount.',
+        'Save your round and complete payment.',
+        'Wait for the platform to review your payment.',
+        'After the draw, check the result and payout status.'
+      ]
+    },
+    {
+      icon:'🎯',
+      title:'How to Bet',
+      sub:'Choose zodiac and amount',
+      body:[
+        'Select one or more zodiac signs in the active round.',
+        'Enter the amount for each selected zodiac.',
+        'Check the amount and tap Save Round.',
+        'Amounts already under payment review or confirmed cannot be reduced.'
+      ]
+    },
+    {
+      icon:'💳',
+      title:'How to Pay',
+      sub:'Payment and review',
+      body:[
+        'Check the amount shown as Remaining Payment.',
+        'Select an available KPay or bank account.',
+        'Transfer the money and upload your payment proof.',
+        'Submit and wait for platform review.',
+        'Only amounts confirmed before the draw count as valid bets.'
+      ]
+    },
+    {
+      icon:'🏆',
+      title:'Results & Winnings',
+      sub:'Check the latest result',
+      body:[
+        'The Latest Result card always shows the newest settled round.',
+        'You can see the result even if you did not bet.',
+        'If you bet but did not win, the round will show as settled with no win.',
+        'If you win, your valid bet, winning amount, return and payout status will be shown.'
+      ]
+    },
+    {
+      icon:'💰',
+      title:'Payout Account',
+      sub:'How to receive winnings',
+      body:[
+        'Bind a valid KPay or bank account before the draw.',
+        'The platform uses your active payout account when processing winnings.',
+        'Payout status may show Pending, Partial or Paid.',
+        'Actual payout records remain in History.'
+      ]
+    },
+    {
+      icon:'📋',
+      title:'History',
+      sub:'Rounds, payments and payouts',
+      body:[
+        'History contains settled rounds.',
+        'You can review results and your valid bets.',
+        'Payment records keep review status, amount and time.',
+        'Payout records keep due, paid and receiving information.',
+        'Opening a new round does not delete old records.'
+      ]
+    },
+    {
+      icon:'❓',
+      title:'FAQ',
+      sub:'Common situations',
+      body:[
+        'No bet this round: you can still view the result.',
+        'Payment under review: it is not valid until confirmed.',
+        'Payment not confirmed before the draw does not participate.',
+        'Refund or fund verification status is shown in your history.',
+        'Contact platform support if something looks incorrect.'
+      ]
+    }
+  ],
+
+  notice:
+  'Important: Always follow the current round, deadline, payment review status and confirmed amount shown in your customer account.'
+},
+
+
+my:{
+  back:'ဖောက်သည်စင်တာသို့ ပြန်ရန်',
+  title:'JIN MANTANG အသုံးပြုလမ်းညွှန်',
+  desc:'လောင်းကြေးတင်ခြင်း၊ ငွေပေးချေခြင်း၊ ရလဒ်နှင့် ဆုငွေအခြေအနေကို လွယ်ကူစွာ ကြည့်ရှုနိုင်ပါသည်။',
+  flow:['ရာသီခွင်ရွေးရန်','လောင်းကြေးအတည်ပြုရန်','ငွေပေးချေရန်','ရလဒ်ကြည့်ရန်'],
+  sections:[],
+  notice:'အရေးကြီးချက်：လက်ရှိအကြိမ်၊ ပိတ်ချိန်၊ ငွေပေးချေမှုစစ်ဆေးမှုနှင့် အတည်ပြုငွေပမာဏကို ဖောက်သည်စာမျက်နှာအတိုင်း အတည်ယူပါ။'
+},
+
+
+th:{
+  back:'กลับศูนย์ลูกค้า',
+  title:'คู่มือการใช้งาน JIN MANTANG',
+  desc:'ขั้นตอนง่าย ๆ สำหรับการเดิมพัน ชำระเงิน ดูผล และตรวจสอบการจ่ายรางวัล',
+  flow:['เลือกนักษัตร','ยืนยันเดิมพัน','ชำระเงิน','ดูผล'],
+  sections:[],
+  notice:'โปรดยึดรอบปัจจุบัน เวลาปิดรับ สถานะตรวจสอบการชำระเงิน และยอดที่ยืนยันในหน้าลูกค้าเป็นหลัก'
+},
+
+
+ms:{
+  back:'Kembali ke Pusat Pelanggan',
+  title:'Panduan JIN MANTANG',
+  desc:'Panduan ringkas untuk pertaruhan, pembayaran, keputusan dan pembayaran hadiah.',
+  flow:['Pilih Zodiak','Sahkan Pertaruhan','Bayar','Lihat Keputusan'],
+  sections:[],
+  notice:'Sila rujuk pusingan semasa, masa tutup, status semakan bayaran dan jumlah disahkan pada halaman pelanggan.'
+},
+
+
+vi:{
+  back:'Quay lại trung tâm khách hàng',
+  title:'Hướng dẫn JIN MANTANG',
+  desc:'Các bước đơn giản để cược, thanh toán, xem kết quả và trạng thái trả thưởng.',
+  flow:['Chọn con giáp','Xác nhận cược','Thanh toán','Xem kết quả'],
+  sections:[],
+  notice:'Vui lòng lấy kỳ hiện tại, thời hạn, trạng thái duyệt thanh toán và số tiền đã xác nhận trên trang khách hàng làm chuẩn.'
+},
+
+
+id:{
+  back:'Kembali ke Pusat Pelanggan',
+  title:'Panduan JIN MANTANG',
+  desc:'Panduan singkat untuk taruhan, pembayaran, hasil dan pembayaran hadiah.',
+  flow:['Pilih Shio','Konfirmasi Taruhan','Bayar','Lihat Hasil'],
+  sections:[],
+  notice:'Gunakan periode aktif, batas waktu, status pemeriksaan pembayaran dan jumlah terkonfirmasi di halaman pelanggan sebagai acuan.'
+}
+
+};
+
+
+/*
+  其他语言先沿用英文详细步骤，
+  标题和主要界面仍使用对应语言。
+  后续可以继续补充完整本地化内容。
+*/
+[
+  'my',
+  'th',
+  'ms',
+  'vi',
+  'id'
+]
+.forEach(
+  code => {
+
+    TEXT[code].sections =
+    TEXT.en.sections;
+
+  }
+);
+
+
+function getLang(){
+
+  const saved =
+  localStorage.getItem(
+    LANG_KEY
+  );
+
+  return (
+    TEXT[saved]
+    ?
+    saved
+    :
+    'zh'
+  );
+
+}
+
+
+function render(){
+
+  const lang =
+  getLang();
+
+  const data =
+  TEXT[lang];
+
+  document
+  .documentElement
+  .lang =
+  lang;
+
+
+  document
+  .getElementById(
+    'languageSelect'
+  )
+  .value =
+  lang;
+
+
+  document
+  .getElementById(
+    'backText'
+  )
+  .textContent =
+  data.back;
+
+
+  document
+  .getElementById(
+    'pageTitle'
+  )
+  .textContent =
+  data.title;
+
+
+  document
+  .getElementById(
+    'pageDesc'
+  )
+  .textContent =
+  data.desc;
+
+
+  data.flow
+  .forEach(
+    (text,index)=>{
+
+      document
+      .getElementById(
+        'flow'
+        +
+        (index + 1)
+      )
+      .textContent =
+      text;
+
+    }
+  );
+
+
+  const list =
+  document.getElementById(
+    'guideList'
+  );
+
+
+  list.innerHTML =
+  data.sections
+  .map(
+    (section,index)=>{
+
+      return `
+
+        <div class="guide">
+
+          <button
+            type="button"
+            onclick="
+              this
+              .parentElement
+              .classList
+              .toggle('open')
+            ">
+
+            <div class="icon">
+              ${section.icon}
+            </div>
+
+            <div class="title">
+
+              <strong>
+                ${section.title}
+              </strong>
+
+              <small>
+                ${section.sub}
+              </small>
+
+            </div>
+
+            <div class="arrow">
+              ›
+            </div>
+
+          </button>
+
+
+          <div class="content">
+
+            ${
+              section.body
+              .map(
+                (item,stepIndex)=>`
+                  <div class="step">
+                    <b>
+                      ${stepIndex + 1}.
+                    </b>
+                    ${item}
+                  </div>
+                `
+              )
+              .join('')
+            }
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  )
+  .join('');
+
+
+  document
+  .getElementById(
+    'notice'
+  )
+  .textContent =
+  data.notice;
+
+}
+
+
+document
+.getElementById(
+  'languageSelect'
+)
+.addEventListener(
+  'change',
+  event => {
+
+    localStorage.setItem(
+      LANG_KEY,
+      event.target.value
+    );
+
+    render();
+
+  }
+);
+
+
+render();
+
+</script>
+
+</body>
+</html>
