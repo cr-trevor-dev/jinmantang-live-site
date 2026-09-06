@@ -707,7 +707,13 @@ button.danger{
               }
 
               msg.textContent =
-              '开启失败，请稍后重新尝试';
+'开启失败：'
++
+(
+  result.detail
+  ||
+  'UNKNOWN_ERROR'
+);
             }
           )()
         ">
