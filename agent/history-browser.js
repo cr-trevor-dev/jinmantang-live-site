@@ -24,7 +24,7 @@ const HISTORY_BROWSER_I18N = {
     title:'历史佣金查询',
     expand:'展开查询',
     collapse:'收起',
-    hint1:'可按年、月、日期和期数查看自己的佣金状态。',
+    hint1:'可按日期和期数查看自己的佣金状态。',
     hint2:'没有产生佣金的正式期数，也会明确显示“该期暂无佣金”。',
     year:'年',
     month:'月',
@@ -47,7 +47,7 @@ const HISTORY_BROWSER_I18N = {
     title:'ကော်မရှင်မှတ်တမ်း ရှာဖွေရန်',
     expand:'ရှာဖွေရန် ဖွင့်မည်',
     collapse:'ပိတ်မည်',
-    hint1:'နှစ်၊ လ၊ ရက်နှင့် အကြိမ်အလိုက် ကော်မရှင်အခြေအနေကို ကြည့်နိုင်ပါသည်။',
+    hint1:'ရက်စွဲနှင့် အကြိမ်အလိုက် ကော်မရှင်အခြေအနေကို ကြည့်နိုင်ပါသည်။',
     hint2:'ကော်မရှင်မရှိသော တရားဝင်အကြိမ်များကိုလည်း “ဤအကြိမ် ကော်မရှင်မရှိပါ” ဟု ပြသပါမည်။',
     year:'နှစ်',
     month:'လ',
@@ -70,7 +70,7 @@ const HISTORY_BROWSER_I18N = {
     title:'Commission History Search',
     expand:'Open Search',
     collapse:'Collapse',
-    hint1:'View your commission status by year, month, date and round.',
+    hint1:'View your commission status by date and round.',
     hint2:'Settled rounds with no commission will also clearly show “No commission for this round”.',
     year:'Year',
     month:'Month',
@@ -93,7 +93,7 @@ const HISTORY_BROWSER_I18N = {
     title:'ค้นหาประวัติคอมมิชชั่น',
     expand:'เปิดการค้นหา',
     collapse:'ย่อ',
-    hint1:'ดูสถานะคอมมิชชั่นตามปี เดือน วันที่ และรอบได้',
+    hint1:'ดูสถานะคอมมิชชั่นตามวันที่และรอบได้',
     hint2:'รอบที่ไม่มีคอมมิชชั่นจะแสดงอย่างชัดเจนว่า “รอบนี้ไม่มีคอมมิชชั่น”',
     year:'ปี',
     month:'เดือน',
@@ -116,7 +116,7 @@ const HISTORY_BROWSER_I18N = {
     title:'Carian Sejarah Komisen',
     expand:'Buka Carian',
     collapse:'Tutup',
-    hint1:'Lihat status komisen mengikut tahun, bulan, tarikh dan pusingan.',
+    hint1:'Lihat status komisen mengikut tarikh dan pusingan.',
     hint2:'Pusingan tanpa komisen juga akan dipaparkan sebagai “Tiada komisen untuk pusingan ini”.',
     year:'Tahun',
     month:'Bulan',
@@ -139,7 +139,7 @@ const HISTORY_BROWSER_I18N = {
     title:'Tra cứu lịch sử hoa hồng',
     expand:'Mở tra cứu',
     collapse:'Thu gọn',
-    hint1:'Xem trạng thái hoa hồng theo năm, tháng, ngày và kỳ.',
+    hint1:'Xem trạng thái hoa hồng theo ngày và kỳ.',
     hint2:'Kỳ không phát sinh hoa hồng cũng sẽ hiển thị rõ “Kỳ này không có hoa hồng”.',
     year:'Năm',
     month:'Tháng',
@@ -162,7 +162,7 @@ const HISTORY_BROWSER_I18N = {
     title:'Pencarian Riwayat Komisi',
     expand:'Buka Pencarian',
     collapse:'Tutup',
-    hint1:'Lihat status komisi berdasarkan tahun, bulan, tanggal, dan periode.',
+    hint1:'Lihat status komisi berdasarkan tanggal dan periode.',
     hint2:'Periode tanpa komisi juga akan menampilkan “Tidak ada komisi untuk periode ini”.',
     year:'Tahun',
     month:'Bulan',
@@ -645,129 +645,34 @@ function unique(values){
 }
 
 
-function selectedYear(){
-  return h$('ahbYear')?.value || '';
+function selectedDate(){
+  return h$('ahbDate')?.value || '';
 }
 
-function selectedMonth(){
-  return h$('ahbMonth')?.value || '';
-}
-
-function selectedDay(){
-  return h$('ahbDay')?.value || '';
-}
 
 function selectedPeriod(){
   return h$('ahbPeriod')?.value || '';
 }
 
 
-function yearOptions(){
-
-  return unique(
-    rounds.map(
-      round =>
-      String(
-        round.round_date || ''
-      ).slice(
-        0,
-        4
-      )
-    )
-    .filter(Boolean)
-  )
-  .sort(
-    (a,b)=>b.localeCompare(a)
-  );
-
-}
-
-
-function monthOptions(year){
-
-  return unique(
-    rounds
-    .filter(
-      round =>
-      String(
-        round.round_date || ''
-      ).startsWith(
-        year + '-'
-      )
-    )
-    .map(
-      round =>
-      String(
-        round.round_date
-      ).slice(
-        5,
-        7
-      )
-    )
-  )
-  .sort(
-    (a,b)=>b.localeCompare(a)
-  );
-
-}
-
-
-function dayOptions(year,month){
-
-  return unique(
-    rounds
-    .filter(
-      round =>
-      String(
-        round.round_date || ''
-      ).startsWith(
-        year
-        +
-        '-'
-        +
-        month
-        +
-        '-'
-      )
-    )
-    .map(
-      round =>
-      String(
-        round.round_date
-      ).slice(
-        8,
-        10
-      )
-    )
-  )
-  .sort(
-    (a,b)=>b.localeCompare(a)
-  );
-
-}
-
-
 function periodOptions(
-  year,
-  month,
-  day
+  date
 ){
 
-  const date =
-  [
-    year,
-    month,
-    day
-  ].join('-');
+  if(!date){
+    return [];
+  }
 
-  return rounds
-  .filter(
-    round =>
-    round.round_date === date
-  )
-  .map(
-    round =>
-    round.round_code
+  return unique(
+    rounds
+    .filter(
+      round =>
+      round.round_date === date
+    )
+    .map(
+      round =>
+      round.round_code
+    )
   );
 
 }
@@ -786,125 +691,21 @@ function resetFilterDefaults(){
   const latest =
   rounds[0];
 
-  const parts =
-  String(
-    latest.round_date
-  ).split('-');
+  const dateInput =
+  h$('ahbDate');
 
-  if(
-    parts.length !== 3
-  ){
-    return;
+  if(dateInput){
+
+    dateInput.value =
+    String(
+      latest.round_date || ''
+    );
+
   }
-
-  if(h$('ahbYear')){
-    h$('ahbYear').value =
-    parts[0];
-  }
-
-  refreshMonths(
-    parts[1]
-  );
-
-  refreshDays(
-    parts[2]
-  );
 
   refreshPeriods(
     latest.round_code
   );
-
-}
-
-
-function refreshMonths(
-  wanted=''
-){
-
-  const year =
-  selectedYear();
-
-  const months =
-  monthOptions(
-    year
-  );
-
-  const select =
-  h$('ahbMonth');
-
-  if(!select){
-    return;
-  }
-
-  select.innerHTML =
-  months.map(
-    month =>
-    `
-      <option value="${esc(month)}">
-                ${esc(month)} ${historyText('month')}
-      </option>
-    `
-  )
-  .join('');
-
-  if(
-    wanted
-    &&
-    months.includes(wanted)
-  ){
-
-    select.value =
-    wanted;
-
-  }
-
-}
-
-
-function refreshDays(
-  wanted=''
-){
-
-  const year =
-  selectedYear();
-
-  const month =
-  selectedMonth();
-
-  const days =
-  dayOptions(
-    year,
-    month
-  );
-
-  const select =
-  h$('ahbDay');
-
-  if(!select){
-    return;
-  }
-
-  select.innerHTML =
-  days.map(
-    day =>
-    `
-      <option value="${esc(day)}">
-               ${esc(day)} ${historyText('day')}
-      </option>
-    `
-  )
-  .join('');
-
-  if(
-    wanted
-    &&
-    days.includes(wanted)
-  ){
-
-    select.value =
-    wanted;
-
-  }
 
 }
 
@@ -915,9 +716,7 @@ function refreshPeriods(
 
   const periods =
   periodOptions(
-    selectedYear(),
-    selectedMonth(),
-    selectedDay()
+    selectedDate()
   );
 
   const select =
@@ -963,11 +762,7 @@ function refreshPeriods(
 function currentSelectedRound(){
 
   const date =
-  [
-    selectedYear(),
-    selectedMonth(),
-    selectedDay()
-  ].join('-');
+  selectedDate();
 
   return rounds.find(
     round =>
@@ -1216,8 +1011,7 @@ function render(){
     return;
   }
 
-  const years =
-  yearOptions();
+  
 
   card.innerHTML = `
 
@@ -1262,27 +1056,9 @@ function render(){
 
       <div class="ahbFilters">
 
-        <select id="ahbYear">
-
-          ${years.map(
-            year =>
-            `
-              <option value="${esc(year)}">
-                                ${esc(year)} ${historyText('year')}
-              </option>
-            `
-          ).join('')}
-
-        </select>
-
-
-        <select id="ahbMonth">
-        </select>
-
-
-        <select id="ahbDay">
-        </select>
-
+                <input
+          id="ahbDate"
+          type="date">
 
         <select id="ahbPeriod">
         </select>
@@ -1318,32 +1094,7 @@ function render(){
   );
 
 
-  h$('ahbYear')
-  ?.addEventListener(
-    'change',
-    ()=>{
-
-      refreshMonths();
-      refreshDays();
-      refreshPeriods();
-
-    }
-  );
-
-
-  h$('ahbMonth')
-  ?.addEventListener(
-    'change',
-    ()=>{
-
-      refreshDays();
-      refreshPeriods();
-
-    }
-  );
-
-
-  h$('ahbDay')
+    h$('ahbDate')
   ?.addEventListener(
     'change',
     ()=>{
