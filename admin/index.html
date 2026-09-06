@@ -637,7 +637,89 @@ button.danger{
 
 </div>
   <div id="adminBox" class="hidden">
+    <div class="card">
 
+      <div class="title">
+        桌面提醒
+      </div>
+
+      <div class="note">
+        开启后，金满堂管理桌面图标会显示
+        “等待处理 + 需核对资金”的待办数量。
+        只用于提醒，不修改任何付款或资金数据。
+      </div>
+
+      <button
+        type="button"
+        onclick="
+          (
+            async()=>{
+              const msg =
+              document.getElementById(
+                'pushMsg'
+              );
+
+              msg.className =
+              'msg';
+
+              msg.textContent =
+              '正在开启桌面提醒...';
+
+              const result =
+              await enableAdminPushNotifications();
+
+              if(result.ok){
+
+                msg.className =
+                'msg success';
+
+                msg.textContent =
+                '✓ 桌面提醒已开启';
+
+                return;
+              }
+
+              msg.className =
+              'msg error';
+
+              if(
+                result.reason
+                ===
+                'PERMISSION_NOT_GRANTED'
+              ){
+
+                msg.textContent =
+                '请允许金满堂管理发送通知';
+
+                return;
+              }
+
+              if(
+                result.reason
+                ===
+                'UNSUPPORTED'
+              ){
+
+                msg.textContent =
+                '当前设备或打开方式不支持桌面提醒';
+
+                return;
+              }
+
+              msg.textContent =
+              '开启失败，请稍后重新尝试';
+            }
+          )()
+        ">
+        开启桌面提醒
+      </button>
+
+      <div
+        class="msg"
+        id="pushMsg">
+      </div>
+
+    </div>
     <div class="card">
 
       <div class="title">
@@ -4715,5 +4797,6 @@ setInterval(
 
 </script>
 <script src="/admin/maintenance-control.js"></script>
+<script src="/admin/push-notifications.js"></script>
 </body>
 </html>
