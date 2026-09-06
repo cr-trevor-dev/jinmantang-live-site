@@ -2130,31 +2130,42 @@ function setHistorySelectOptions(
   }
 
 
-  const html =
-  [
-    historyOptionHtml(
-      '',
+    select.options.length =
+  0;
+
+
+  select.add(
+    new Option(
       firstLabel,
+      '',
+      !selected,
       !selected
-    ),
-
-    ...values.map(
-      value=>
-      historyOptionHtml(
-        value,
-        labelFormatter(
-          value
-        ),
-        selected
-        ===
-        value
-      )
     )
-  ];
+  );
 
 
-  select.innerHTML =
-  html.join('');
+  values.forEach(
+    value=>{
+
+      const isSelected =
+      selected
+      ===
+      value;
+
+
+      select.add(
+        new Option(
+          labelFormatter(
+            value
+          ),
+          value,
+          isSelected,
+          isSelected
+        )
+      );
+
+    }
+  );
 
 }
 
