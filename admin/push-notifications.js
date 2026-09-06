@@ -33,6 +33,19 @@ const KEY =
 
 function getAdminToken(){
 
+  if(
+    typeof token
+    ===
+    'string'
+    &&
+    token
+  ){
+
+    return token;
+
+  }
+
+
   return (
     localStorage.getItem(
       'jmt_access_token'
