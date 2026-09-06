@@ -49,6 +49,7 @@ let historyFilters = {
 let historyData = {
   settlements:[],
   orders:[],
+  entries:[],
   payments:[],
   payouts:[],
   refunds:[],
@@ -1226,7 +1227,36 @@ function roundItemHtml(
   )
   ||
   {};
-
+  const entries =
+  historyData.entries
+  .filter(
+    entry =>
+    entry.order_id
+    ===
+    settlement.order_id
+    &&
+    Number(
+      entry.confirmed_points
+      ||
+      0
+    )
+    >
+    0
+  )
+  .sort(
+    (a,b)=>
+    Number(
+      a.number_code
+      ||
+      0
+    )
+    -
+    Number(
+      b.number_code
+      ||
+      0
+    )
+  );
 
   const state =
   settlementState(
@@ -1357,7 +1387,41 @@ function roundItemHtml(
             )}
           </strong>
         </div>
+        ${
+          entries.length
+          ?
+          `
+            <div class="customerHistoryNote">
+              <strong>本期投注记录</strong>
+            </div>
 
+            ${entries
+              .map(
+                entry=>`
+                  <div class="customerHistoryRow">
+                    <span>
+                      ${hEsc(
+                        hZodiac(
+                          entry.number_code
+                        )
+                      )}
+                    </span>
+
+                    <strong>
+                      ${hMoney(
+                        entry.confirmed_points
+                        ||
+                        0
+                      )}
+                    </strong>
+                  </div>
+                `
+              )
+              .join('')}
+          `
+          :
+          ''
+        }
         <div class="customerHistoryRow">
           <span>命中金额</span>
           <strong>
@@ -2778,9 +2842,10 @@ async function loadHistory(
 
   try{
 
-    const [
+        const [
       settlements,
       orders,
+      entries,
       payments,
       payouts,
       refunds
@@ -2805,6 +2870,16 @@ async function loadHistory(
         '&order=created_at.desc'
         +
         '&limit=100'
+      ),
+
+      hFetch(
+        '/rest/v1/customer_round_entries'
+        +
+        '?select=id,order_id,round_id,number_code,points,confirmed_points,pending_points,created_at,updated_at'
+        +
+        '&order=created_at.desc'
+        +
+        '&limit=1200'
       ),
 
       hFetch(
@@ -2901,7 +2976,12 @@ async function loadHistory(
       orders
       :
       [],
-
+      entries:
+      Array.isArray(entries)
+      ?
+      entries
+      :
+      [],
       payments:
       Array.isArray(payments)
       ?
