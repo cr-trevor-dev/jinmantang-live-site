@@ -482,7 +482,7 @@ async function(){
     };
 
   }
-  catch(error){
+    catch(error){
 
     console.error(
       'ADMIN_PUSH_ENABLE_FAILED',
@@ -492,7 +492,15 @@ async function(){
 
     return {
       ok:false,
-      reason:'FAILED'
+      reason:'FAILED',
+      detail:
+      String(
+        error?.message
+        ||
+        error
+        ||
+        'UNKNOWN_ERROR'
+      )
     };
 
   }
