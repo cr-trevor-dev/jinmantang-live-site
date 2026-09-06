@@ -2130,41 +2130,126 @@ function setHistorySelectOptions(
   }
 
 
-    select.options.length =
-  0;
-
-
-  select.add(
-    new Option(
-      firstLabel,
-      '',
-      !selected,
-      !selected
+  const translate =
+  value=>
+  (
+    typeof window
+    .customerTranslateValue
+    ===
+    'function'
+    ?
+    window.customerTranslateValue(
+      String(value)
     )
+    :
+    String(value)
   );
 
 
-  values.forEach(
-    value=>{
+  const desired =
+  [
+    {
+      value:'',
+      label:
+      translate(
+        firstLabel
+      )
+    },
 
-      const isSelected =
+    ...values.map(
+      value=>({
+        value:
+        String(value),
+
+        label:
+        translate(
+          labelFormatter(
+            value
+          )
+        )
+      })
+    )
+  ];
+
+
+  const current =
+  Array.from(
+    select.options
+  );
+
+
+  const same =
+  current.length
+  ===
+  desired.length
+  &&
+  current.every(
+    (
+      option,
+      index
+    )=>
+    option.value
+    ===
+    desired[index].value
+    &&
+    option.text
+    ===
+    desired[index].label
+  );
+
+
+  if(same){
+
+    const nextValue =
+    String(
       selected
-      ===
-      value;
+      ||
+      ''
+    );
 
+
+    if(
+      select.value
+      !==
+      nextValue
+    ){
+
+      select.value =
+      nextValue;
+
+    }
+
+
+    return;
+
+  }
+
+
+  select.options.length =
+  0;
+
+
+  desired.forEach(
+    item=>{
 
       select.add(
         new Option(
-          labelFormatter(
-            value
-          ),
-          value,
-          isSelected,
-          isSelected
+          item.label,
+          item.value,
+          false,
+          false
         )
       );
 
     }
+  );
+
+
+  select.value =
+  String(
+    selected
+    ||
+    ''
   );
 
 }
@@ -2317,41 +2402,23 @@ function renderHistoryFilterOptions(){
   );
 
 
-  const period =
-  h$(
-    'customerHistoryPeriod'
-  );
-
-
-  if(period){
-
-    period.innerHTML =
+    setHistorySelectOptions(
+    'customerHistoryPeriod',
+    '全部期别',
     [
-      historyOptionHtml(
-        '',
-        '全部期别',
-        !historyFilters.period
-      ),
-
-      historyOptionHtml(
-        '1030',
-        '上午期',
-        historyFilters.period
-        ===
-        '1030'
-      ),
-
-      historyOptionHtml(
-        '1530',
-        '下午期',
-        historyFilters.period
-        ===
-        '1530'
-      )
-    ]
-    .join('');
-
-  }
+      '1030',
+      '1530'
+    ],
+    historyFilters.period,
+    value=>
+    value
+    ===
+    '1030'
+    ?
+    '上午期'
+    :
+    '下午期'
+  );
 
 }
 
