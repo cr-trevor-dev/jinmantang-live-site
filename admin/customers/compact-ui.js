@@ -1048,7 +1048,26 @@ function customerBasicTab(customer){
       ''
     }
 
+<div class="sectionLabel">
+  登录密码管理
+</div>
 
+
+<div class="singleAction">
+
+  <button
+    class="secondary"
+    type="button"
+    onclick="resetCustomerPassword(
+      '${esc(customer.id)}',
+      '${esc(customer.username || '')}'
+    )">
+
+    重置客户登录密码
+
+  </button>
+
+</div>
     <div class="sectionLabel">
       客户状态管理
     </div>
@@ -1793,7 +1812,248 @@ function(){
 
 };
 
+/* =====================================
+   CUSTOMER PASSWORD RESET
+===================================== */
 
+window.resetCustomerPassword =
+async function(
+  customerId,
+  username
+){
+
+  const password =
+  window.prompt(
+    '请输入客户 ' +
+    username +
+    ' 的新密码（至少 8 位）'
+  );
+
+
+  if(password === null){
+    return;
+  }
+
+
+  if(
+    password.length < 8
+    ||
+    password.length > 72
+  ){
+
+    window.alert(
+      '密码必须为 8–72 位。'
+    );
+
+    return;
+
+  }
+
+
+  const confirmPassword =
+  window.prompt(
+    '请再次输入新密码'
+  );
+
+
+  if(confirmPassword === null){
+    return;
+  }
+
+
+  if(
+    password
+    !==
+    confirmPassword
+  ){
+
+    window.alert(
+      '两次输入的密码不一致。'
+    );
+
+    return;
+
+  }
+
+
+  const confirmed =
+  window.confirm(
+    '确定要重置客户 ' +
+    username +
+    ' 的登录密码吗？\n\n'
+    +
+    '只会修改登录密码，不会修改客户资料、下注、付款、收款账户或代理归属。'
+  );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    setPageMessage(
+      '正在重置客户登录密码...'
+    );
+
+
+    const res =
+    await api(
+
+      '/functions/v1/admin-reset-customer-password',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          'Content-Type':
+          'application/json'
+
+        },
+
+        body:
+        JSON.stringify({
+
+          customer_id:
+          customerId,
+
+          new_password:
+          password
+
+        })
+
+      }
+
+    );
+
+
+    let data =
+    null;
+
+
+    try{
+
+      data =
+      await res.json();
+
+    }
+    catch{
+
+      data =
+      {};
+
+    }
+
+
+    if(!res.ok){
+
+      throw new Error(
+        data?.error
+        ||
+        'PASSWORD_RESET_FAILED'
+      );
+
+    }
+
+
+    setPageMessage(
+      '客户登录密码已经重置成功。',
+      'ok'
+    );
+
+
+    window.alert(
+      '密码重置成功。\n\n'
+      +
+      '用户名：'
+      +
+      username
+      +
+      '\n\n'
+      +
+      '请把新密码告知客户。'
+    );
+
+  }
+  catch(err){
+
+    console.error(
+      err
+    );
+
+
+    let message =
+    '密码重置失败，请稍后再试。';
+
+
+    if(
+      err.message
+      ===
+      'ADMIN_AAL2_REQUIRED'
+    ){
+
+      message =
+      '请先完成管理员二次验证。';
+
+    }
+
+
+    if(
+      err.message
+      ===
+      'AUTH_REQUIRED'
+      ||
+      err.message
+      ===
+      'NOT_ADMIN'
+    ){
+
+      message =
+      '管理员登录状态无效，请重新登录管理员后台。';
+
+    }
+
+
+    if(
+      err.message
+      ===
+      'CUSTOMER_NOT_FOUND'
+    ){
+
+      message =
+      '没有找到这个客户账号。';
+
+    }
+
+
+    if(
+      err.message
+      ===
+      'PASSWORD_FORMAT'
+    ){
+
+      message =
+      '新密码必须为 8–72 位。';
+
+    }
+
+
+    setPageMessage(
+      message,
+      'err'
+    );
+
+
+    window.alert(
+      message
+    );
+
+  }
+
+};
 /* =====================================
    INSTALL
 ===================================== */
