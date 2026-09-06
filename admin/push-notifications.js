@@ -8,7 +8,7 @@
   - 注册 /admin/sw.js
   - 请求通知权限
   - 创建 Web Push subscription
-  - 把当前管理员设备的 subscription 保存到独立通知表
+  - 通过独立 Edge Function 保存管理员设备订阅
   - 同步当前待办角标
 
   不修改：
@@ -103,8 +103,8 @@ function base64UrlToUint8Array(
 }
 
 
-async function adminApi(
-  path,
+async function functionApi(
+  action,
   options={}
 ){
 
@@ -126,12 +126,19 @@ async function adminApi(
 
     BASE
     +
-    path,
+    '/functions/v1/admin-payment-alert'
+    +
+    '?action='
+    +
+    encodeURIComponent(
+      action
+    ),
 
     {
       ...options,
 
       headers:{
+
         apikey:
         KEY,
 
@@ -148,6 +155,7 @@ async function adminApi(
           ||
           {}
         )
+
       }
     }
 
@@ -171,30 +179,24 @@ async function adminApi(
 async function loadPushPublicKey(){
 
   const res =
-  await adminApi(
-    '/rest/v1/admin_push_config'
-    +
-    '?select=vapid_public_key'
-    +
-    '&id=eq.1'
-    +
-    '&limit=1'
+  await functionApi(
+    'public-key',
+    {
+      method:'GET'
+    }
   );
 
 
-  const rows =
+  const data =
   await res.json();
 
 
   const key =
-  Array.isArray(
-    rows
-  )
-  ?
-  rows[0]
-  ?.vapid_public_key
-  :
-  '';
+  String(
+    data.publicKey
+    ||
+    ''
+  );
 
 
   if(!key){
@@ -220,7 +222,9 @@ async function saveSubscription(
 
 
   const endpoint =
-  json.endpoint;
+  json.endpoint
+  ||
+  '';
 
 
   const p256dh =
@@ -252,35 +256,26 @@ async function saveSubscription(
   }
 
 
-  await adminApi(
-
-    '/rest/v1/admin_push_subscriptions'
-    +
-    '?on_conflict=endpoint',
-
+  const res =
+  await functionApi(
+    'subscribe',
     {
       method:'POST',
-
-      headers:{
-        Prefer:
-        'resolution=merge-duplicates,return=minimal'
-      },
 
       body:
       JSON.stringify({
         endpoint,
-        p256dh,
-        auth,
-        user_agent:
-        navigator.userAgent,
-        active:true,
-        updated_at:
-        new Date()
-        .toISOString()
+
+        keys:{
+          p256dh,
+          auth
+        }
       })
     }
-
   );
+
+
+  return res.json();
 
 }
 
@@ -290,14 +285,10 @@ async function syncVisibleBadge(){
   try{
 
     const res =
-    await adminApi(
-      '/functions/v1/admin-payment-alert',
+    await functionApi(
+      'state',
       {
-        method:'POST',
-        body:
-        JSON.stringify({
-          mode:'count_only'
-        })
+        method:'GET'
       }
     );
 
@@ -310,7 +301,7 @@ async function syncVisibleBadge(){
     Math.max(
       0,
       Number(
-        data.count
+        data.total
         ||
         0
       )
@@ -344,6 +335,9 @@ async function syncVisibleBadge(){
 
     }
 
+
+    return count;
+
   }
   catch(error){
 
@@ -351,6 +345,9 @@ async function syncVisibleBadge(){
       'ADMIN_BADGE_SYNC_FAILED',
       error
     );
+
+
+    return 0;
 
   }
 
@@ -441,17 +438,20 @@ async function(){
       await registration
       .pushManager
       .subscribe({
+
         userVisibleOnly:true,
 
         applicationServerKey:
         base64UrlToUint8Array(
           publicKey
         )
+
       });
 
     }
 
 
+    const saved =
     await saveSubscription(
       subscription
     );
@@ -461,7 +461,11 @@ async function(){
 
 
     return {
-      ok:true
+      ok:true,
+      state:
+      saved.state
+      ||
+      null
     };
 
   }
