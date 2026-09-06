@@ -432,13 +432,15 @@ function installStyle(){
 #${CARD_ID} .ahbFilters{
   display:grid;
   grid-template-columns:
-  repeat(4,1fr);
+  repeat(2,minmax(0,1fr));
   gap:8px;
   margin-top:14px;
 }
 
-#${CARD_ID} select{
+#${CARD_ID} .ahbFilters select,
+#${CARD_ID} .ahbFilters input{
   width:100%;
+  min-width:0;
   padding:11px 9px;
   border-radius:11px;
   border:
@@ -448,6 +450,7 @@ function installStyle(){
   color:#e8deca;
   outline:none;
   font-size:12px;
+  color-scheme:dark;
 }
 
 #${CARD_ID} .ahbResult{
