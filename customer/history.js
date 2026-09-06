@@ -368,11 +368,12 @@ function ensureHistoryStyle(){
 .customerHistoryFilterGrid{
   display:grid;
   grid-template-columns:
-  repeat(4,minmax(0,1fr));
+  repeat(2,minmax(0,1fr));
   gap:7px;
 }
 
-.customerHistoryFilter select{
+.customerHistoryFilter select,
+.customerHistoryFilter input{
   width:100%;
   min-width:0;
   margin:0;
@@ -386,13 +387,14 @@ function ensureHistoryStyle(){
   font-size:11px;
   font-weight:800;
   outline:none;
+  color-scheme:dark;
 }
 
-.customerHistoryReset{
+.customerHistoryFilterAction{
   width:100%;
-  margin:8px 0 0!important;
-  padding:9px!important;
-  font-size:10px!important;
+  margin:0!important;
+  padding:10px!important;
+  font-size:11px!important;
 }
 
 @media(max-width:680px){
@@ -689,44 +691,15 @@ function ensureHistoryCard(){
       class="customerHistoryBody hidden">
       <div class="customerHistoryFilter">
 
-        <div class="customerHistoryFilterGrid">
+               <div class="customerHistoryFilterGrid">
 
-          <select
-            id="customerHistoryYear"
-            onchange="setCustomerHistoryFilter('year',this.value)">
-
-            <option value="">
-              全部年份
-            </option>
-
-          </select>
+          <input
+            id="customerHistoryDate"
+            type="date">
 
 
           <select
-            id="customerHistoryMonth"
-            onchange="setCustomerHistoryFilter('month',this.value)">
-
-            <option value="">
-              全部月份
-            </option>
-
-          </select>
-
-
-          <select
-            id="customerHistoryDay"
-            onchange="setCustomerHistoryFilter('day',this.value)">
-
-            <option value="">
-              全部日期
-            </option>
-
-          </select>
-
-
-          <select
-            id="customerHistoryPeriod"
-            onchange="setCustomerHistoryFilter('period',this.value)">
+            id="customerHistoryPeriod">
 
             <option value="">
               全部期别
@@ -742,17 +715,27 @@ function ensureHistoryCard(){
 
           </select>
 
+
+          <button
+            type="button"
+            class="customerHistoryFilterAction"
+            onclick="applyCustomerHistoryFilter()">
+
+            查看
+
+          </button>
+
+
+          <button
+            type="button"
+            class="secondary customerHistoryFilterAction"
+            onclick="resetCustomerHistoryFilter()">
+
+            重置筛选
+
+          </button>
+
         </div>
-
-
-        <button
-          type="button"
-          class="secondary customerHistoryReset"
-          onclick="resetCustomerHistoryFilter()">
-
-          重置筛选
-
-        </button>
 
       </div>
       <div class="customerHistoryTabs">
@@ -2257,152 +2240,7 @@ function setHistorySelectOptions(
 
 function renderHistoryFilterOptions(){
 
-  const allRounds =
-  historyData.rounds
-  .filter(
-    round=>
-    Boolean(
-      round?.round_date
-    )
-  );
-
-
-  const years =
-  uniqueHistoryValues(
-    allRounds.map(
-      round=>
-      historyRoundParts(
-        round
-      ).year
-    )
-  );
-
-
-  if(
-    historyFilters.year
-    &&
-    !years.includes(
-      historyFilters.year
-    )
-  ){
-
-    historyFilters.year =
-    '';
-
-  }
-
-
-  const yearRounds =
-  historyFilters.year
-  ?
-  allRounds.filter(
-    round=>
-    historyRoundParts(
-      round
-    ).year
-    ===
-    historyFilters.year
-  )
-  :
-  allRounds;
-
-
-  const months =
-  uniqueHistoryValues(
-    yearRounds.map(
-      round=>
-      historyRoundParts(
-        round
-      ).month
-    )
-  );
-
-
-  if(
-    historyFilters.month
-    &&
-    !months.includes(
-      historyFilters.month
-    )
-  ){
-
-    historyFilters.month =
-    '';
-
-  }
-
-
-  const monthRounds =
-  historyFilters.month
-  ?
-  yearRounds.filter(
-    round=>
-    historyRoundParts(
-      round
-    ).month
-    ===
-    historyFilters.month
-  )
-  :
-  yearRounds;
-
-
-  const days =
-  uniqueHistoryValues(
-    monthRounds.map(
-      round=>
-      historyRoundParts(
-        round
-      ).day
-    )
-  );
-
-
-  if(
-    historyFilters.day
-    &&
-    !days.includes(
-      historyFilters.day
-    )
-  ){
-
-    historyFilters.day =
-    '';
-
-  }
-
-
   setHistorySelectOptions(
-    'customerHistoryYear',
-    '全部年份',
-    years,
-    historyFilters.year,
-    value=>
-    value
-  );
-
-
-  setHistorySelectOptions(
-    'customerHistoryMonth',
-    '全部月份',
-    months,
-    historyFilters.month,
-    value=>
-    value
-  );
-
-
-  setHistorySelectOptions(
-    'customerHistoryDay',
-    '全部日期',
-    days,
-    historyFilters.day,
-    value=>
-    value
-  );
-
-
-    setHistorySelectOptions(
     'customerHistoryPeriod',
     '全部期别',
     [
@@ -2423,64 +2261,64 @@ function renderHistoryFilterOptions(){
 }
 
 
-window.setCustomerHistoryFilter =
-function(
-  key,
-  value
-){
+window.applyCustomerHistoryFilter =
+function(){
 
-  if(
-    ![
-      'year',
-      'month',
-      'day',
-      'period'
-    ]
-    .includes(
-      key
-    )
-  ){
-
-    return;
-
-  }
+  const dateInput =
+  h$(
+    'customerHistoryDate'
+  );
 
 
-  historyFilters[
-    key
-  ] =
+  const periodInput =
+  h$(
+    'customerHistoryPeriod'
+  );
+
+
+  const date =
   String(
-    value
+    dateInput?.value
     ||
     ''
   );
 
 
-  if(
-    key
-    ===
-    'year'
-  ){
-
-    historyFilters.month =
-    '';
-
-    historyFilters.day =
-    '';
-
-  }
+  const match =
+  date.match(
+    /^(\d{4})-(\d{2})-(\d{2})$/
+  );
 
 
-  if(
-    key
-    ===
-    'month'
-  ){
+  historyFilters = {
+    year:
+    match
+    ?
+    match[1]
+    :
+    '',
 
-    historyFilters.day =
-    '';
+    month:
+    match
+    ?
+    match[2]
+    :
+    '',
 
-  }
+    day:
+    match
+    ?
+    match[3]
+    :
+    '',
+
+    period:
+    String(
+      periodInput?.value
+      ||
+      ''
+    )
+  };
 
 
   historyPages = {
@@ -2504,6 +2342,34 @@ function(){
     day:'',
     period:''
   };
+
+
+  const dateInput =
+  h$(
+    'customerHistoryDate'
+  );
+
+
+  if(dateInput){
+
+    dateInput.value =
+    '';
+
+  }
+
+
+  const periodInput =
+  h$(
+    'customerHistoryPeriod'
+  );
+
+
+  if(periodInput){
+
+    periodInput.value =
+    '';
+
+  }
 
 
   historyPages = {
