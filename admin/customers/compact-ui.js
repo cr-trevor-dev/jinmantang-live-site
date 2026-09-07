@@ -1047,7 +1047,25 @@ function customerBasicTab(customer){
       :
       ''
     }
+<div class="sectionLabel">
+  手机号管理
+</div>
 
+<div class="singleAction">
+
+  <button
+    class="secondary"
+    type="button"
+    onclick="allowCustomerPhoneRebind(
+      '${esc(customer.id)}',
+      '${esc(customer.username || '')}'
+    )">
+
+    允许重新绑定手机号
+
+  </button>
+
+</div>
 <div class="sectionLabel">
   登录密码管理
 </div>
@@ -1811,7 +1829,146 @@ function(){
   renderCustomers();
 
 };
+/* =====================================
+   CUSTOMER PHONE REBIND
+===================================== */
 
+window.allowCustomerPhoneRebind =
+async function(
+  customerId,
+  username
+){
+
+  const confirmed =
+  window.confirm(
+    '确定允许客户 ' +
+    username +
+    ' 重新绑定手机号吗？\n\n'
+    +
+    '管理员不会直接修改手机号。\n'
+    +
+    '客户需要登录自己的账户后填写新的手机号。\n'
+    +
+    '修改成功后，本次权限会自动关闭。'
+  );
+
+  if(!confirmed){
+    return;
+  }
+
+  try{
+
+    setPageMessage(
+      '正在开放手机号重新绑定权限...'
+    );
+
+    const res =
+    await api(
+
+      '/rest/v1/rpc/admin_allow_customer_phone_rebind',
+
+      {
+
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+          'application/json'
+        },
+
+        body:
+        JSON.stringify({
+          p_customer_id:
+          customerId
+        })
+
+      }
+
+    );
+
+    let data =
+    null;
+
+    try{
+      data =
+      await res.json();
+    }
+    catch{
+      data =
+      {};
+    }
+
+    if(!res.ok){
+
+      throw new Error(
+        data?.message
+        ||
+        data?.error
+        ||
+        'PHONE_REBIND_ALLOW_FAILED'
+      );
+
+    }
+
+    setPageMessage(
+      '已允许该客户重新绑定手机号。',
+      'ok'
+    );
+
+    window.alert(
+      '操作成功。\n\n'
+      +
+      '客户：'
+      +
+      username
+      +
+      '\n\n'
+      +
+      '现在请客户登录自己的账户重新填写手机号。'
+    );
+
+  }
+  catch(err){
+
+    console.error(
+      err
+    );
+
+    let message =
+    '开放手机号重新绑定失败，请稍后再试。';
+
+    if(
+      String(err.message)
+      .includes(
+        'ADMIN_REQUIRED'
+      )
+    ){
+      message =
+      '管理员权限验证失败，请重新登录管理员后台。';
+    }
+
+    if(
+      String(err.message)
+      .includes(
+        'CUSTOMER_NOT_FOUND'
+      )
+    ){
+      message =
+      '没有找到这个客户。';
+    }
+
+    setPageMessage(
+      message,
+      'err'
+    );
+
+    window.alert(
+      message
+    );
+
+  }
+
+};
 /* =====================================
    CUSTOMER PASSWORD RESET
 ===================================== */
