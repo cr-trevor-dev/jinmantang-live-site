@@ -1213,7 +1213,44 @@ button:disabled{
 
       </div>
 
+      <div
+        id="phoneRebindBox"
+        class="field hidden"
+        style="
+          margin-top:12px;
+          padding:13px;
+          border-radius:12px;
+          border:1px solid rgba(214,168,63,.22);
+          background:#101011;
+        ">
 
+        <label>
+          重新绑定手机号
+        </label>
+
+        <div
+          class="note"
+          style="margin-bottom:10px">
+          平台已允许您重新绑定一次手机号。请输入新的手机号码，成功后本次修改权限将自动关闭。
+        </div>
+
+        <input
+          id="phoneRebindInput"
+          type="tel"
+          maxlength="40"
+          inputmode="tel"
+          autocomplete="tel"
+          placeholder="请输入新的手机号码">
+
+        <button
+          id="phoneRebindBtn"
+          class="secondary"
+          type="button"
+          onclick="rebindCustomerPhone()">
+          确认重新绑定手机号
+        </button>
+
+      </div>
       <button
         id="saveProfileBtn"
         class="secondary"
@@ -3257,7 +3294,7 @@ async function loadProfile(){
     +
     '/rest/v1/customer_profiles'
     +
-    '?select=id,customer_code,username,display_name,phone,status,restriction_reason'
+    '?select=id,customer_code,username,display_name,phone,phone_rebind_allowed,status,restriction_reason'
     +
     '&limit=1',
 
@@ -3354,7 +3391,42 @@ function renderProfile(){
   profile?.phone
   ||
   '';
+  const phoneRebindBox =
+  document.getElementById(
+    'phoneRebindBox'
+  );
 
+  const phoneRebindInput =
+  document.getElementById(
+    'phoneRebindInput'
+  );
+
+  const phoneRebindAllowed =
+  profile?.phone_rebind_allowed
+  ===
+  true;
+
+  if(phoneRebindBox){
+
+    phoneRebindBox
+    .classList
+    .toggle(
+      'hidden',
+      !phoneRebindAllowed
+    );
+
+  }
+
+  if(
+    !phoneRebindAllowed
+    &&
+    phoneRebindInput
+  ){
+
+    phoneRebindInput.value =
+    '';
+
+  }
 
     document
   .getElementById(
@@ -3587,7 +3659,180 @@ false;
 
 }
 
+/* =========================================================
+   PHONE REBIND
+========================================================= */
 
+async function rebindCustomerPhone(){
+
+  clearMessage(
+    'profileMsg'
+  );
+
+  if(
+    profile?.phone_rebind_allowed
+    !==
+    true
+  ){
+
+    return showMessage(
+      'profileMsg',
+      '当前没有重新绑定手机号的权限，请联系平台客服。'
+    );
+
+  }
+
+  const phone =
+  document
+  .getElementById(
+    'phoneRebindInput'
+  )
+  ?.value
+  .trim()
+  ||
+  '';
+
+  if(
+    phone.length < 6
+    ||
+    phone.length > 40
+  ){
+
+    return showMessage(
+      'profileMsg',
+      '请输入正确的手机号码。'
+    );
+
+  }
+
+  const confirmed =
+  window.confirm(
+    '确定把登录账户绑定手机号更换为：\n\n'
+    +
+    phone
+    +
+    '\n\n'
+    +
+    '修改成功后，本次重新绑定权限会自动关闭。'
+  );
+
+  if(!confirmed){
+    return;
+  }
+
+  setBusy(
+    'phoneRebindBtn',
+    true,
+    '确认重新绑定手机号',
+    '正在绑定...'
+  );
+
+  try{
+
+    const res =
+    await fetch(
+
+      BASE
+      +
+      '/rest/v1/rpc/customer_rebind_phone',
+
+      {
+
+        method:'POST',
+
+        headers:
+        authHeaders(),
+
+        body:
+        JSON.stringify({
+          p_phone:
+          phone
+        })
+
+      }
+
+    );
+
+    const data =
+    await parseResponse(
+      res
+    );
+
+    profile =
+    {
+      ...profile,
+      phone:
+      data?.phone
+      ||
+      phone,
+      phone_rebind_allowed:
+      false
+    };
+
+    renderProfile();
+
+    showMessage(
+      'profileMsg',
+      '手机号重新绑定成功。',
+      'ok'
+    );
+
+  }
+  catch(err){
+
+    let message =
+    translateError(
+      err.message
+    );
+
+    if(
+      String(err.message)
+      .includes(
+        'PHONE_REBIND_NOT_ALLOWED'
+      )
+    ){
+      message =
+      '重新绑定权限已经失效，请重新联系平台客服。';
+    }
+
+    if(
+      String(err.message)
+      .includes(
+        'PHONE_FORMAT'
+      )
+    ){
+      message =
+      '请输入正确的手机号码。';
+    }
+
+    if(
+      String(err.message)
+      .includes(
+        'CUSTOMER_NOT_ACTIVE'
+      )
+    ){
+      message =
+      '当前账户状态无法重新绑定手机号，请联系平台客服。';
+    }
+
+    showMessage(
+      'profileMsg',
+      message
+    );
+
+  }
+  finally{
+
+    setBusy(
+      'phoneRebindBtn',
+      false,
+      '确认重新绑定手机号',
+      '正在绑定...'
+    );
+
+  }
+
+}
 /* =========================================================
    PAYOUT ACCOUNTS
 ========================================================= */
