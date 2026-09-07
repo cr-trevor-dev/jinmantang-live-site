@@ -36,8 +36,10 @@ const HISTORY_BROWSER_I18N = {
     confirmed:'直属客户有效金额',
     rate:'当期佣金率',
     due:'应付佣金',
-    paid:'已付佣金',
+        paid:'已付佣金',
+    platformPaid:'平台已支付',
     paidAt:'支付完成：',
+    payoutAccount:'收款账户',
     statusPaid:'已支付',
     statusPartial:'部分支付',
     statusPending:'待支付'
@@ -546,7 +548,24 @@ function installStyle(){
   color:#81796b;
   font-size:10px;
 }
+#${CARD_ID} .ahbPaidDetail{
+  margin-top:10px;
+  padding:11px 12px;
+  border-radius:11px;
+  background:
+  rgba(61,142,89,.08);
+  border:
+  1px solid
+  rgba(61,142,89,.18);
+  color:#9ed7b3;
+  font-size:11px;
+  line-height:1.7;
+  word-break:break-word;
+}
 
+#${CARD_ID} .ahbPaidDetail strong{
+  color:#70d39d;
+}
 @media(max-width:600px){
 
   #${CARD_ID} .ahbFilters,
@@ -974,18 +993,48 @@ function renderResult(){
     </div>
 
 
-    ${
+        ${
       row.completed_at
       ?
       `
-        <div class="ahbPaidAt">
+        <div class="ahbPaidDetail">
 
-                    ${historyText('paidAt')}
-          ${esc(
-            formatCompleted(
-              row.completed_at
-            )
-          )}
+          <div>
+            <strong>
+              ${historyText('platformPaid')}
+            </strong>
+          </div>
+
+          <div>
+            ${historyText('paidAt')}
+            ${esc(
+              formatCompleted(
+                row.completed_at
+              )
+            )}
+          </div>
+
+          ${
+            row.payout_account_number_snapshot
+            ?
+            `
+              <div>
+                ${historyText('payoutAccount')}：
+                ${esc(
+                  [
+                    row.payout_method_type_snapshot,
+                    row.payout_bank_name_snapshot,
+                    row.payout_account_name_snapshot,
+                    row.payout_account_number_snapshot
+                  ]
+                  .filter(Boolean)
+                  .join(' · ')
+                )}
+              </div>
+            `
+            :
+            ''
+          }
 
         </div>
       `
