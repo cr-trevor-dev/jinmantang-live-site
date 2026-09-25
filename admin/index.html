@@ -1727,11 +1727,42 @@ async function verifySession(){
     await startAdminMfa();
 
 
-  }catch(e){
+    }catch(e){
+
+    console.error(
+      'ADMIN_SESSION_VERIFY_FAILED',
+      e
+    );
 
     clearSession();
 
-    location.reload();
+    document.getElementById(
+      'adminBox'
+    ).classList.add(
+      'hidden'
+    );
+
+    document.getElementById(
+      'mfaBox'
+    ).classList.add(
+      'hidden'
+    );
+
+    document.getElementById(
+      'loginBox'
+    ).classList.remove(
+      'hidden'
+    );
+
+    const msg =
+    document.getElementById(
+      'loginMsg'
+    );
+
+    if(msg){
+      msg.textContent =
+      '登录状态已失效，请重新登录';
+    }
 
   }
 
